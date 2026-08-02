@@ -7,9 +7,11 @@
 #include <cmath>
 #include <condition_variable>
 #include <cstddef>
+#include <limits>
 #include <mutex>
 #include <string>
 #include <thread>
+#include <utility>
 #include <vector>
 
 #include <lo/lo.h>
