@@ -47,10 +47,11 @@ jobs:
             -Ilibseq66/include \\
             libseq66/src/audio/audio_clip.cpp \\
             libseq66/src/audio/sooperlooper_client.cpp \\
-            libseq66/src/audio/sooperlooper_protocol.cpp \\\n            libseq66/src/audio/sooperlooper_protocol.cpp \\
+            libseq66/src/audio/sooperlooper_protocol.cpp \\
             tests/audio/audio_clip_test.cpp \\
             -llo \\
             -o .ci/bin/audio_clip_test
+
       - name: Compile headless OSC contract test
         run: |
           g++ \\
@@ -61,10 +62,11 @@ jobs:
             -Ilibseq66/include \\
             libseq66/src/audio/audio_clip.cpp \\
             libseq66/src/audio/sooperlooper_client.cpp \\
-            libseq66/src/audio/sooperlooper_protocol.cpp \\\n            libseq66/src/audio/sooperlooper_protocol.cpp \\
+            libseq66/src/audio/sooperlooper_protocol.cpp \\
             tests/audio/sooperlooper_osc_contract_test.cpp \\
             -llo \\
             -o .ci/bin/sooperlooper_osc_contract_test
+
       - name: Compile typed protocol test
         run: |
           g++ \\
@@ -79,6 +81,7 @@ jobs:
             tests/audio/sooperlooper_protocol_test.cpp \\
             -llo \\
             -o .ci/bin/sooperlooper_protocol_test
+
       - name: Run audio model test
         run: .ci/bin/audio_clip_test
 
