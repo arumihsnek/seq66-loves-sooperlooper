@@ -23,6 +23,8 @@ it alongside MIDI patterns without operating the SooperLooper GUI.
   criteria for audio clips, recording, sync, feedback and supervision.
 - [HEADLESS-TESTING.md](HEADLESS-TESTING.md) — unit, protocol, real-engine,
   negative-backend, fault-injection and soak-test strategy.
+- [TESTED-BEHAVIOUR.md](TESTED-BEHAVIOUR.md) — revision-specific evidence from
+  executable real-engine tests, including asynchronous control confirmation.
 - [DEVELOPMENT.md](DEVELOPMENT.md) — reproducible dependencies, focused builds,
   pinned engine, JACK dummy fixture and diagnostics.
 - [ROADMAP.md](ROADMAP.md) — staged implementation order and definition of done.
@@ -36,9 +38,10 @@ Repository-wide agent instructions live in [`/AGENTS.md`](../../AGENTS.md).
 When sources disagree, use this order:
 
 1. the actual SooperLooper source code for the pinned/tested revision;
-2. SooperLooper's `OSC` protocol document;
-3. this fork's normative specification;
-4. implementation comments and UI copy.
+2. executable evidence recorded in `TESTED-BEHAVIOUR.md` and CI;
+3. SooperLooper's `OSC` protocol document;
+4. this fork's normative specification;
+5. implementation comments and UI copy.
 
 Differences between the public SooperLooper OSC document and its current source
 must be recorded rather than silently guessed.
