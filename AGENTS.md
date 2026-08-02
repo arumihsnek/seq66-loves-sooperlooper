@@ -163,6 +163,58 @@ Before editing:
 A session may make small prerequisite fixes, but unrelated cleanup is deferred
 to another task.
 
+## Senior consultation workflow
+
+Use the `codex-senior-consult` skill as a bounded planning, escalation and
+review mechanism. It does not replace repository recovery, direct source
+inspection, tests or ownership by the primary agent.
+
+Consultation is required at these high-leverage points when the skill is
+available:
+
+1. once after repository recovery and before finalizing the implementation plan
+   for a non-trivial task involving architecture, protocol, concurrency,
+   lifecycle, persistence, CI/branch history or several plausible approaches;
+2. before crossing a project phase gate, task gate or accepting a durable
+   decision whose consequences extend beyond the current local edit;
+3. after one focused self-diagnosis when work is genuinely blocked, repeated
+   failure has occurred or more than one credible root cause remains;
+4. before moving a high-risk task to `review` or `done`, especially when it
+   introduces or changes a protocol contract, state model, range, threading
+   rule, persistence behaviour, backend policy or recovery procedure.
+
+Do not consult for routine edits, formatting, obvious compiler diagnostics,
+ordinary test reruns or questions already answered by canonical repository
+evidence. Do not repeat a consultation on unchanged evidence.
+
+The default consultation budget is one planning/review call per meaningful
+phase or task gate and one call per distinct blocker. Re-consult only after new
+evidence, a materially changed plan or a failed proposed remedy. Bundle related
+questions into one focused request instead of issuing many small calls.
+
+A consultation request should provide only the smallest sufficient packet:
+
+- task ID, objective and current phase;
+- relevant invariants and acceptance criteria;
+- exact source, diff, failing command or runtime evidence;
+- options already considered and what has been ruled out;
+- one precise decision, diagnosis or review question.
+
+Ask the consultant to challenge assumptions, compare the credible options,
+identify failure modes, missing tests and rollback concerns, and recommend the
+smallest safe next step.
+
+The primary agent remains responsible for the decision and MUST verify advice
+against pinned source, repository contracts and executable evidence.
+Consultation output is advice, not proof. Record only durable conclusions,
+rationale and accepted/rejected recommendations in the PR, checkpoint,
+`DECISIONS.md` or affected control file; do not paste full consultation
+transcripts into the repository.
+
+If the skill is unavailable or fails, continue with bounded best effort after
+recording that limitation. Unavailability alone is not a reason to abandon a
+safe, well-evidenced task.
+
 ## Parallel agents
 
 Parallel work is allowed only when tasks have:
