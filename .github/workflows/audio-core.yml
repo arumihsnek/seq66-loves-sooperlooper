@@ -33,54 +33,19 @@ jobs:
       - name: Prepare focused build configuration
         run: |
           mkdir -p .ci/include .ci/bin
-          cat > .ci/include/seq66-config.h <<'EOF'
+          cat > .ci/include/seq66-config.h <<'END'
           #define SEQ66_HAVE_LIBLO 1
           #define SEQ66_SOOPERLOOPER_SUPPORT 1
-          EOF
+          END
 
       - name: Compile audio model test
-        run: |
-          g++ \\
-            -std=c++17 \\
-            -Wall -Wextra -Wpedantic -Werror \\
-            -I.ci/include \\
-            -Ilibseq66/include \\
-            libseq66/src/audio/audio_clip.cpp \\
-            libseq66/src/audio/sooperlooper_client.cpp \\
-            libseq66/src/audio/sooperlooper_protocol.cpp \\
-            tests/audio/audio_clip_test.cpp \\
-            -llo \\
-            -o .ci/bin/audio_clip_test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp tests/audio/audio_clip_test.cpp -llo -o .ci/bin/audio_clip_test
 
       - name: Compile headless OSC contract test
-        run: |
-          g++ \\
-            -std=c++17 \\
-            -Wall -Wextra -Wpedantic -Werror \\
-            -pthread \\
-            -I.ci/include \\
-            -Ilibseq66/include \\
-            libseq66/src/audio/audio_clip.cpp \\
-            libseq66/src/audio/sooperlooper_client.cpp \\
-            libseq66/src/audio/sooperlooper_protocol.cpp \\
-            tests/audio/sooperlooper_osc_contract_test.cpp \\
-            -llo \\
-            -o .ci/bin/sooperlooper_osc_contract_test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp tests/audio/sooperlooper_osc_contract_test.cpp -llo -o .ci/bin/sooperlooper_osc_contract_test
 
       - name: Compile typed protocol test
-        run: |
-          g++ \\
-            -std=c++17 \\
-            -Wall -Wextra -Wpedantic -Werror \\
-            -pthread \\
-            -I.ci/include \\
-            -Ilibseq66/include \\
-            libseq66/src/audio/audio_clip.cpp \\
-            libseq66/src/audio/sooperlooper_client.cpp \\
-            libseq66/src/audio/sooperlooper_protocol.cpp \\
-            tests/audio/sooperlooper_protocol_test.cpp \\
-            -llo \\
-            -o .ci/bin/sooperlooper_protocol_test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp tests/audio/sooperlooper_protocol_test.cpp -llo -o .ci/bin/sooperlooper_protocol_test
 
       - name: Run audio model test
         run: .ci/bin/audio_clip_test
