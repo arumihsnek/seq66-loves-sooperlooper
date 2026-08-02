@@ -15,15 +15,19 @@ it alongside MIDI patterns without operating the SooperLooper GUI.
 
 ## Documents
 
-- [ARCHITECTURE.md](ARCHITECTURE.md) — process boundaries, ownership, threads,
-  transport, loop identity, persistence and failure handling.
+- [ARCHITECTURE.md](ARCHITECTURE.md) — process boundaries, authority, backends,
+  threads, transport, loop identity, persistence and failure handling.
 - [OSC-CONTROL-AND-FEEDBACK.md](OSC-CONTROL-AND-FEEDBACK.md) — commands sent to
   SooperLooper and all runtime feedback received from it.
 - [SPECIFICATION.md](SPECIFICATION.md) — normative behaviour and acceptance
   criteria for audio clips, recording, sync, feedback and supervision.
 - [HEADLESS-TESTING.md](HEADLESS-TESTING.md) — unit, protocol, real-engine,
-  fault-injection and soak-test strategy.
+  negative-backend, fault-injection and soak-test strategy.
+- [DEVELOPMENT.md](DEVELOPMENT.md) — reproducible dependencies, focused builds,
+  pinned engine, JACK dummy fixture and diagnostics.
 - [ROADMAP.md](ROADMAP.md) — staged implementation order and definition of done.
+- [Audio test directory](../../tests/audio/README.md) — current executable test
+  files and their responsibilities.
 
 Repository-wide agent instructions live in [`/AGENTS.md`](../../AGENTS.md).
 
@@ -48,10 +52,20 @@ The branch `feature/sooperlooper-audio-clips` currently contains:
 - free, tape and elastic tempo policies;
 - independent pitch shift;
 - an initial outbound OSC client;
-- focused CI tests.
+- a fake-engine OSC contract test;
+- a pinned real-engine/JACK-dummy smoke fixture;
+- focused CI and the project contract documents.
 
-It does not yet contain a bidirectional OSC receiver, process supervisor,
+It does not yet contain the production bidirectional OSC receiver,
+observed-state cache, process supervisor, backend gate in application code,
 `performer` integration, Qt audio slots, persistence or waveform display.
+
+## Backend decision
+
+SooperLooper tracks initially require native JACK or PipeWire-JACK. Seq66 may
+continue using ALSA for MIDI, but ALSA-only audio places clips in a hard
+`backend_unavailable` state. This state is not mute, cannot be unlocked by
+track controls and never causes project data to be discarded.
 
 ## Design principle
 
