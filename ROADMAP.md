@@ -1,93 +1,37 @@
-# ROADMAP for a Possible Seq66 v. 2
+# Roadmap — Seq66 Loves SooperLooper
 
-Chris Ahlstrom
-2022-05-11 to 2026-07-13
+This file is the root entry point for the fork roadmap.
 
-This file is simply some thoughts about the future of __Seq66__ and
-a version 2...  if we decide to keep updating this project until Ahlstrom
-croaks. :-D Also see the bottom of the TODO file.
+The active phased roadmap is:
 
-# Topics
+- [`doc/sooperlooper/ROADMAP.md`](doc/sooperlooper/ROADMAP.md)
 
-##  Qt Upgrade
+The actionable task queue is:
 
-    It should be straightforward to upgrade from Qt 5 to Qt 6.
-    This is done with version 0.99.25 and beyond.
+- [`doc/sooperlooper/WORK-QUEUE.md`](doc/sooperlooper/WORK-QUEUE.md)
 
-##  Configuration files
+The current phase, branch, PR and task are recorded in:
 
-    Currently, we see no need to change the format of the Seq66 configuration
-    files greatly.  The INI format is simpler and easier to read and edit than
-    XML, and covers our needs well. Also see the separate cfg66 project.
+- [`PROJECT-MANIFEST.json`](PROJECT-MANIFEST.json)
+- [`doc/sooperlooper/checkpoints/CURRENT.md`](doc/sooperlooper/checkpoints/CURRENT.md)
 
-##  Non Session Manager
+## Important: upstream roadmap
 
-    Will continue to be supported.  Will remove the unused nsmserver module,
-    which was mostly meant for "just in cases" already covered by other
-    NSM-derived projects. However, see the new nsm66 and nsmd66 projects,
-    not yet in heavy usage.
+The file previously at this path was the inherited **“ROADMAP for a Possible
+Seq66 v. 2”** written for upstream Seq66. It is not the roadmap for this fork.
 
-##  Builds
+The unmodified upstream roadmap remains available on the upstream-mirror
+`master` branch and in `ahlstromcj/seq66`.
 
-    *   We might transition to Cmake, based on its cross-platform support.
-        Or not, as there are also a lot of complaints about it, even lately.
-        It might be nice to stick with Qmake, but it's been deprecated by Qt.
-        There should be no need for both the build systems we use at present:
-        Autotools and Qmake.
-    *   As of 0.99.25, we use Meson, with Qmake left in use for QtCreator.
-    *   The libraries libseq66, sessions, seq\_portmidi, and seq\_rtmidi will
-        be split into separate projects for better re-use.
-    *   A new namespace would be in order.
+Agents MUST NOT derive fork tasks from the upstream roadmap. An upstream idea
+becomes fork work only after it receives a stable task ID in `WORK-QUEUE.md`,
+requirements in `SPECIFICATION.md`/`TRACEABILITY.md`, and acceptance tests.
 
-##  Engines
+## Branch model
 
-    *   Remove the Mac and Windows support from our derivative "portmidi"
-        library.
-    *   Move the support to our derivative "rtmidi" library. But we are
-        working on a more comprehensive "rtmidi" library in the rtl66
-        projects.
+- `master`: clean mirror of Seq66 upstream;
+- `fork-main`: stable integration line for this fork;
+- `feature/*`, `fix/*`, `docs/*`: reviewed work targeting `fork-main`;
+- `sync/upstream-YYYY-MM-DD`: explicit upstream import branches.
 
-##  Executables
-
-    The following executables will still be supported, though with new names and
-    features.
-
-    *   ALSA/JACK: `qseq66`
-    *   Command-line/headless: `seq66cli`
-    *   Windows: `qpseq66.exe`
-
-## Code Improvements
-
-    *   Untangle some of the header-file dependencies.
-    *   Create independent libraries for strings, files, midi, etc.
-    *   Add comprehensive Qt string translation.
-
-##  Additional Features
-
-    *   Limited support for audio patterns.  Clips that could compress or
-        expand to fit the BPM and measures and be included in the MIDI file in a
-        new SeqSpec section.  However, editing would be left to far better audio
-        applications.  Perhaps best supported as a soundfont?
-    *   A comprehensive and improved system for undo/redo support for
-        configuration and for all song changes.
-    *   Use "rtmidi" for Windows/Mac; removed "portmidi".
-
-##  Requested Features / Suggestions
-
-    These items are requests.  Not sure if all are worth doing in version 2.
-
-    *   Replace GNU Autotools.  Candidates: meson and cmake.  Meson seems
-        preferable at this time.
-    *   Use a true RtMidi-compatible library; dump the portmidi implementation.
-    *   Add Pipewire support.
-    *   Full OSC support for automation.
-    *   Break libraries into Git submodules.
-    *   MIDI clips launched by a note.
-    *   MIDINAM.  See issue #1 and the TODO file for this request.
-    *   Ableton Live transport support.  See issue #16 and the TODO file for
-        this request.
-    *   Support RELNOTEs.md better, as per issue #24 and the TODO.
-    *   Beef up recording live sequence changes as per issue #44 and the TODO.
-    *   Weak JACK.
-
-// vim: sw=4 ts=4 wm=2 et ft=markdown
+See [`doc/sooperlooper/UPSTREAM-SYNC.md`](doc/sooperlooper/UPSTREAM-SYNC.md).
