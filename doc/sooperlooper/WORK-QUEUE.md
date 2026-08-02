@@ -27,13 +27,17 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-001**
+Active task: **M1-001** (status: `in_progress`)
 
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
 
-Status: `ready`
+Status: `in_progress`
+
+Agent: `hermes` session `0bc5d91d41b9`
+Branch: `feature/m1-001-typed-osc-protocol` (base `fork-main` @ `cb6929c0`)
+Started: 2026-08-02
 
 Dependencies: Phase 0 complete.
 
