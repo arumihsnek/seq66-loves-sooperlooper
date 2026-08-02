@@ -27,17 +27,20 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-001** (status: `in_progress`)
+Active task: **M1-001** (status: `review`)
 
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
 
-Status: `in_progress`
+Status: `review`
 
 Agent: `hermes` session `0bc5d91d41b9`
-Branch: `feature/m1-001-typed-osc-protocol` (base `fork-main` @ `cb6929c0`)
+Branch: `feature/m1-001-typed-osc-protocol` (base `fork-main` @ `c2999d8`)
+Draft PR: `#3`
+Published implementation head: `1fc306e48c4d5af80cfcf9623b5a0e9b4bf10722`
 Started: 2026-08-02
+Review entered: 2026-08-03
 
 Dependencies: Phase 0 complete.
 
@@ -74,8 +77,20 @@ Required tests:
 - existing fake-engine OSC contract test;
 - metadata consistency test.
 
+Review evidence:
+
+- `Audio integration core` run `30770456443`, job `91556592912`: PASS on
+  implementation head `1fc306e48c4d5af80cfcf9623b5a0e9b4bf10722`;
+- all three compile steps and all three test executions passed;
+- `Project control plane` run `30770456444`, job `91556592918`: PASS on the
+  same implementation head;
+- the real-engine workflow did not trigger for this diff because its PR path
+  filter covers only the real-engine probe, its workflow and related contract
+  documentation; the latest verified pinned-engine smoke remains run
+  `30756422662`, job `91519250698` from the bootstrap line.
+
 Handoff target: M1-002 can build a receiver without adding untyped protocol
-strings.
+strings, after PR #3 is reviewed and merged.
 
 ### M1-002 — receiver lifecycle and strict parser
 
