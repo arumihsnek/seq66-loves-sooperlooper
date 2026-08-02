@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "project_id": "seq66-loves-sooperlooper",
+  "project_name": "Seq66 Loves SooperLooper",
+  "status": "active",
+  "updated_at": "2026-08-02T17:12:00+02:00",
+  "repository": {
+    "full_name": "arumihsnek/seq66-loves-sooperlooper",
+    "default_branch": "master",
+    "active_branch": "feature/sooperlooper-audio-clips",
+    "active_pull_request": 1
+  },
+  "upstreams": {
+    "seq66": {
+      "repository": "ahlstromcj/seq66",
+      "base_commit": "d6a588a48fdb0a30bf7223c5d325627163181615",
+      "base_version": "0.99.26"
+    },
+    "sooperlooper": {
+      "repository": "essej/sooperlooper",
+      "tested_commit": "c5e22ce76ae9a6b358fe7d85720c61dfc5af8bec",
+      "tested_version": "1.7.9"
+    }
+  },
+  "coordination": {
+    "completed_phase": "phase-0-project-contract",
+    "current_phase": "phase-1-protocol-core",
+    "current_checkpoint": "doc/sooperlooper/checkpoints/CURRENT.md",
+    "checkpoint_protocol": "doc/sooperlooper/CHECKPOINTS.md",
+    "work_queue": "doc/sooperlooper/WORK-QUEUE.md",
+    "roadmap": "doc/sooperlooper/ROADMAP.md",
+    "workflow": "doc/sooperlooper/WORKFLOW.md",
+    "traceability": "doc/sooperlooper/TRACEABILITY.md",
+    "decision_log": "doc/sooperlooper/DECISIONS.md",
+    "fork_changelog": "CHANGELOG-FORK.md",
+    "agent_instructions": "AGENTS.md"
+  },
+  "source_of_truth_order": [
+    "tested upstream source revisions",
+    "executable CI evidence and TESTED-BEHAVIOUR.md",
+    "normative SPECIFICATION.md",
+    "ARCHITECTURE.md and accepted decisions",
+    "current checkpoint and work queue",
+    "implementation comments and UI copy"
+  ],
+  "backend_policy": {
+    "supported_audio_backends": [
+      "native-jack",
+      "pipewire-jack"
+    ],
+    "alsa_midi": "supported",
+    "alsa_only_audio": "backend_unavailable",
+    "silent_jack_over_alsa_start": false
+  },
+  "current_capabilities": [
+    "audio_clip musical model",
+    "free, tape and elastic tempo policies",
+    "initial outbound OSC adapter",
+    "fake-engine OSC contract test",
+    "real SooperLooper 1.7.9 plus JACK-dummy smoke test"
+  ],
+  "missing_capabilities": [
+    "production OSC receiver",
+    "typed observed-state cache",
+    "engine generation and stale-feedback rejection",
+    "process supervisor",
+    "backend capability gate in Seq66",
+    "performer integration",
+    "native Qt audio slots",
+    "transactional audio persistence"
+  ],
+  "ci": [
+    {
+      "workflow": ".github/workflows/audio-core.yml",
+      "required": true,
+      "purpose": "model, metadata and fake-engine OSC contract"
+    },
+    {
+      "workflow": ".github/workflows/sooperlooper-real-engine.yml",
+      "required": true,
+      "purpose": "pinned real-engine bidirectional smoke test"
+    }
+  ],
+  "next_milestone": {
+    "id": "M1",
+    "name": "bidirectional protocol core",
+    "active_task": "M1-001",
+    "definition_of_done": "Typed receive/send protocol, generation-scoped observed state, ping/subscriptions and bounded confirmation tests pass without blocking UI or real-time paths."
+  },
+  "required_agent_exit_updates": [
+    "update WORK-QUEUE.md",
+    "update CHANGELOG-FORK.md for durable changes",
+    "update TRACEABILITY.md when requirements or tests move",
+    "update PROJECT-MANIFEST.json when phase, compatibility or current task changes",
+    "write an immutable checkpoint and update checkpoints/CURRENT.md",
+    "update the active pull request with exact test evidence and remaining risks"
+  ]
+}
