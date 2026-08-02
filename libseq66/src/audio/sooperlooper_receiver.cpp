@@ -10,12 +10,19 @@
 
 #include "audio/sooperlooper_receiver.hpp"
 
+#include "seq66-config.h"
+
+#include <atomic>
+#include <chrono>
 #include <condition_variable>
+#include <cstdlib>
+#include <cstring>
 #include <functional>
 #include <memory>
 #include <mutex>
 #include <queue>
 #include <string>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -39,6 +46,8 @@ private:
 #endif
     /** The port the server is bound to. */
     int m_port;
+    /** Port string passed to liblo (persistent, since liblo keeps the pointer). */
+    std::string m_port_str;
     /** Flag indicating whether the server thread is running. */
     std::atomic<bool> m_running{false};
     /** Mutex for protecting the event queue. */
@@ -75,18 +84,10 @@ private:
                           lo_arg ** argv, int argc,
                           void * data, void * user_data)
     {
+        (void) data;
         auto * self = static_cast<implementation *>(user_data);
         if (!self || !self->m_running.load())
             return 0;
-
-        // Look up the handler for this (path, types)
-        handler_key key{path, types};
-        auto it = self->m_handlers.find(key);
-        if (it == self->m_handlers.end())
-        {
-            // No handler for this message; ignore it.
-            return 0;
-        }
 
         // Convert the lo_arg arguments to strings.
         std::vector<std::string> args;
@@ -102,10 +103,15 @@ private:
                     args.push_back(std::to_string(argv[i]->f));
                     break;
                 case 's':
-                    if (argv[i]->s)
-                        args.push_back(argv[i]->s);
-                    else
-                        args.push_back("");
+                case 'S':
+                    {
+                        // liblo stores strings/symbols inline: read via &argv[i]->s.
+                        const char * str = &argv[i]->s;
+                        if (str)
+                            args.push_back(str);
+                        else
+                            args.push_back("");
+                    }
                     break;
                 default:
                     // Unsupported type; treat as empty string.
@@ -114,16 +120,15 @@ private:
             }
         }
 
-        // Invoke the user-provided callback, but we must be careful:
-        // The liblo server thread is not necessarily real-time safe, but we
-        // still want to avoid doing heavy work here. Instead, we push the
-        // event onto a queue and let the user poll for it.
+        // Marshal to the event queue: never run user code on the liblo thread.
         {
             std::lock_guard<std::mutex> lock(self->m_queue_mutex);
-            self->m_event_queue.emplace(receiver_event{
-                .path = path,
-                .args = std::move(args),
-                .timestamp_us = std::chrono::duration_cast<std::chrono::microseconds>(
+            self->m_event_queue.emplace(receiver_event
+            {
+                path,
+                types,
+                std::move(args),
+                std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::system_clock::now().time_since_epoch()).count()
             });
         }
@@ -134,7 +139,7 @@ private:
     }
 
 public:
-    implementation() : m_port(0) {}
+    explicit implementation(int port = 0) : m_port(port), m_port_str(std::to_string(port)) {}
 
     ~implementation()
     {
@@ -151,22 +156,31 @@ public:
             return true;
 
 #if SEQ66_SOOPERLOOPER_SUPPORT
-        // Create the server thread on the given port (0 means let the OS choose).
-        m_server_thread = lo_server_thread_new(nullptr, m_port, error_handler, this);
+        // Create the server thread. Passing nullptr lets the OS choose a free
+        // port; otherwise pass the explicit port as a string.
+        const char * port_arg = (m_port == 0) ? nullptr : m_port_str.c_str();
+        m_server_thread = lo_server_thread_new(port_arg, error_handler);
         if (!m_server_thread)
             return false;
 
-        // Get the actual port bound (if port was 0).
-        const char * url = lo_server_thread_get_url(m_server_thread);
-        if (url)
+        // Register the catch-all trampoline. Every incoming message is queued;
+        // dispatch() later filters by the exact (path, types) allow-list.
+        // Using a catch-all means unknown controls remain observable via
+        // poll_event() instead of being silently dropped by liblo.
+        lo_server_thread_add_method(m_server_thread, nullptr, nullptr, trampoline, this);
+
+        // Get the actual port bound (when the OS chose it).
+        lo_server srv = lo_server_thread_get_server(m_server_thread);
+        if (srv)
         {
-            // Parse the URL to get the port number.
-            // The URL is of the form "osc.udp://<ip>:<port>/".
-            const char * colon = strrchr(url, ':');
-            if (colon)
-            {
-                m_port = std::atoi(colon + 1);
-            }
+            m_port = lo_server_get_port(srv);
+            m_port_str = std::to_string(m_port);
+        }
+        if (m_port <= 0)
+        {
+            lo_server_thread_free(m_server_thread);
+            m_server_thread = nullptr;
+            return false;
         }
 
         // Start the thread.
@@ -193,9 +207,11 @@ public:
         if (m_server_thread)
         {
             lo_server_thread_stop(m_server_thread);
+            lo_server_thread_free(m_server_thread);
+            m_server_thread = nullptr;
         }
 #endif
-        // Wake up any thread waiting in poll_event.
+        // Wake up any thread waiting in wait_event().
         m_queue_cv.notify_all();
     }
 
@@ -222,11 +238,23 @@ public:
         if (m_handlers.find(key) != m_handlers.end())
             return false;
 
-        m_handlers.emplace(std::move(key), std::move(cb));
+        m_handlers.emplace(key, std::move(cb));
         return true;
     }
 
     bool poll_event(receiver_event & event)
+    {
+        std::lock_guard<std::mutex> lock(m_queue_mutex);
+        if (m_event_queue.empty())
+            return false;
+
+        event = m_event_queue.front();
+        m_event_queue.pop();
+        return true;
+    }
+
+    /** Block until an event is available or the receiver stops. */
+    bool wait_event(receiver_event & event)
     {
         std::unique_lock<std::mutex> lock(m_queue_mutex);
         m_queue_cv.wait(lock, [this] { return !m_event_queue.empty() || !m_running.load(); });
@@ -238,22 +266,34 @@ public:
         return true;
     }
 
+    /** Drain queued events and invoke their handlers from a safe context. */
+    void dispatch()
+    {
+        receiver_event event;
+        while (poll_event(event))
+        {
+            handler_key key{event.path, event.types};
+            auto it = m_handlers.find(key);
+            if (it != m_handlers.end() && it->second)
+            {
+                it->second(event.args, event.timestamp_us);
+            }
+        }
+    }
+
     /** Static error handler for liblo. */
-    static void error_handler(int err_num, const char * msg, const char * path,
-                              void * user_data)
+    static void error_handler(int err_num, const char * msg, const char * path)
     {
         // We could log this, but for now we just ignore it.
         (void) err_num;
         (void) msg;
         (void) path;
-        (void) user_data;
     }
 };
 
 sooperlooper_receiver::sooperlooper_receiver(int port)
-    : m_impl(std::make_unique<implementation>())
+    : m_impl(std::make_unique<implementation>(port))
 {
-    m_impl->m_port = port;
 }
 
 sooperlooper_receiver::~sooperlooper_receiver() = default;
@@ -288,6 +328,11 @@ bool sooperlooper_receiver::handle(const std::string & path, const std::string &
 bool sooperlooper_receiver::poll_event(receiver_event & event)
 {
     return m_impl->poll_event(event);
+}
+
+void sooperlooper_receiver::dispatch()
+{
+    m_impl->dispatch();
 }
 
 } // namespace seq66

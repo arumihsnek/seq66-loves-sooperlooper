@@ -15,9 +15,6 @@
 #include <vector>
 #include <functional>
 #include <memory>
-#include <queue>
-#include <mutex>
-#include <conditionally>
 
 #if SEQ66_SOOPERLOOPER_SUPPORT
 #include <lo/lo.h>
@@ -70,6 +67,15 @@ public:
     /** Get the port the receiver is bound to (useful if port=0 was used). */
     int port() const;
 
+    /** Structure representing a received OSC event. */
+    struct receiver_event
+    {
+        std::string path;                     ///< The OSC path of the message.
+        std::string types;                    ///< The OSC type tag string.
+        std::vector<std::string> args;        ///< The arguments as strings.
+        long long timestamp_us;               ///< Timestamp in microseconds since epoch.
+    };
+
     /**
      *  Register a handler for a specific OSC path and argument signature.
      *
@@ -92,18 +98,28 @@ public:
     /**
      *  Retrieve the next received event, if any.
      *
+     *  This call is non-blocking: it returns immediately with false when the
+     *  queue is empty.
+     *
      *  @param[out] event  The event structure to fill.
      *  @return true if an event was available, false if the queue is empty.
      */
-    bool poll_event(struct receiver_event & event);
+    bool poll_event(receiver_event & event);
 
-    /** Structure representing a received OSC event. */
-    struct receiver_event
-    {
-        std::string path;                     ///< The OSC path of the message.
-        std::vector<std::string> args;        ///< The arguments as strings.
-        long long timestamp_us;               ///< Timestamp in microseconds since epoch.
-    };
+    /**
+     *  Block until the next event is available or the receiver stops.
+     *
+     *  @param[out] event  The event structure to fill.
+     *  @return true if an event was available, false if the receiver stopped
+     *          while waiting.
+     */
+    bool wait_event(receiver_event & event);
+
+    /**
+     *  Drain all queued events and invoke the registered handlers from the
+     *  calling thread (a safe, non-realtime context).
+     */
+    void dispatch();
 };
 
 } // namespace seq66
