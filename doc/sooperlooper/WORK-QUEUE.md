@@ -28,13 +28,13 @@ feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
 Active task: **M1-001** (status: `review`)
-
+Active task: **M1-002** (status: `in_progress`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
 
 Status: `review`
-
+Status: `done`
 Agent: `hermes` session `0bc5d91d41b9`
 Branch: `feature/m1-001-typed-osc-protocol` (base `fork-main` @ `c2999d8`)
 Draft PR: `#3`
@@ -94,7 +94,7 @@ strings, after PR #3 is reviewed and merged.
 
 ### M1-002 — receiver lifecycle and strict parser
 
-Status: `ready`
+Status: `in_progress`
 
 Dependencies: M1-001.
 

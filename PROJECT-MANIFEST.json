@@ -3,7 +3,7 @@
   "project_id": "seq66-loves-sooperlooper",
   "project_name": "Seq66 Loves SooperLooper",
   "status": "active",
-  "updated_at": "2026-08-03T00:37:00+02:00",
+  "updated_at": "2026-08-02T23:13:46.891076+00:00",
   "repository": {
     "full_name": "arumihsnek/seq66-loves-sooperlooper",
     "default_branch": "fork-main",
@@ -11,10 +11,10 @@
     "default_branch_transition": "complete",
     "upstream_mirror_branch": "master",
     "integration_branch": "fork-main",
-    "active_branch": "feature/m1-001-typed-osc-protocol",
-    "active_pull_request": 3,
-    "active_pull_request_base": "fork-main",
-    "active_pull_request_note": "draft PR #3 is open; implementation and required fast CI passed on head 1fc306e48c4d5af80cfcf9623b5a0e9b4bf10722, with control-only checkpoint updates following"
+    "active_branch": "fork-main",
+    "active_pull_request": 0,
+    "active_pull_request_base": "",
+    "active_pull_request_note": ""
   },
   "upstreams": {
     "seq66": {
