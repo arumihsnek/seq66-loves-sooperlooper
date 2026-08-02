@@ -6,7 +6,7 @@
 # \library     seq66
 # \author      Chris Ahlstrom
 # \date        2026-04-23
-# \updates     2026-05-19
+# \updates     2026-08-02
 # \license     $XPC_SUITE_GPL_LICENSE$
 #
 #  This file is part of the "seq66" library. See the top-level meson.build
@@ -21,6 +21,9 @@
 message('Processing libseq66...')
 
 libseq66_library = 'seq66'
+libseq66_cpp_args = build_args + [
+   '-DSEQ66_SOOPERLOOPER_SUPPORT=SEQ66_HAVE_LIBLO'
+   ]
 
 subdir('include')
 subdir('src')
@@ -33,7 +36,7 @@ if seq66_use_potext
       seq66_git_tag,    # generated earlier, see seq66/include/meson.build
       install : false,
       c_args : build_args,
-      cpp_args : build_args,
+      cpp_args : libseq66_cpp_args,
       dependencies : [
          system_depends, liblib66_library_dep,
 #        libcfg66_library_dep,
@@ -51,7 +54,7 @@ else
       seq66_git_tag,
       install : false,
       c_args : build_args,
-      cpp_args : build_args,
+      cpp_args : libseq66_cpp_args,
       dependencies : [
          system_depends, liblib66_library_dep
 #        libcfg66_library_dep,
