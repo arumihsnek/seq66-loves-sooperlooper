@@ -21,26 +21,39 @@ versions before the fork reaches a releasable state.
 - Pinned SooperLooper 1.7.9 real-engine smoke test over JACK dummy.
 - Architecture, bidirectional OSC contract, normative specification, headless
   testing strategy, development guide and phased roadmap.
-- `AGENTS.md` instructions for Codex, Hermes and human contributors.
+- `AGENTS.md` operating contract for Codex, Hermes and human contributors.
 - Machine-readable `PROJECT-MANIFEST.json`.
 - Multi-agent workflow, actionable work queue, checkpoint protocol, decision
-  log and requirement/test traceability.
+  log, documentation map and requirement/test traceability.
+- Immutable checkpoint `CP-001` plus the small mutable
+  `checkpoints/CURRENT.md` resume pointer.
 - Branch policy separating upstream mirror `master`, fork integration
   `fork-main` and short-lived feature branches.
-- Structural CI validation for project-control metadata.
+- Dedicated upstream synchronization policy preserving a clean import line.
+- Structural CI validation for project-control metadata, canonical files,
+  active task, checkpoint schema and required workflows.
+- Root fork entry points replacing the inherited unstructured `TODO` and
+  possible-v2 `ROADMAP.md` on the fork line while preserving their originals on
+  `master` and in upstream Seq66.
 
 ### Changed
 
 - Pull request #1 now targets `fork-main` instead of upstream-mirror `master`.
 - Documentation distinguishes fork plans from upstream Seq66 TODOs, roadmap,
   release notes and historical changelog.
-- Control confirmation now models SooperLooper updates as eventually
-  consistent, based on real-engine evidence.
+- The integration documentation index now provides a progressive-disclosure
+  recovery path designed to minimize agent context use.
+- Control confirmation models SooperLooper updates as eventually consistent,
+  based on real-engine evidence.
+- Material agent sessions must leave an immutable checkpoint, update the work
+  queue and record exact CI evidence before handoff.
 
 ### Fixed
 
 - Real-engine smoke test no longer assumes a `/set` is visible to an immediate
   `/get`; it waits for bounded observed confirmation.
+- Project-control bootstrap now includes the checkpoint and `CURRENT.md` files
+  required by its own validator.
 
 ### Security and safety
 
