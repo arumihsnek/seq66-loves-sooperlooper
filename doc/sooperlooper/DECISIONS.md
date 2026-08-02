@@ -158,6 +158,63 @@ Resolution evidence required:
 - persistence/reconciliation design;
 - Raspberry Pi representative-load validation.
 
+## D-009 — preserve a clean upstream mirror and a separate fork integration line
+
+- Status: `accepted`
+- Date: 2026-08-02
+- Evidence: branch creation and PR #1 retargeting
+- Scope: Git history and upstream compatibility
+
+Decision:
+
+- `master` remains the clean import mirror of `ahlstromcj/seq66:master`;
+- `fork-main` is the stable product integration branch;
+- normal feature/fix/docs PRs target `fork-main`;
+- upstream changes are imported into `master` first, then merged through a
+  reviewed `sync/upstream-*` PR into `fork-main`.
+
+Rationale:
+
+- makes upstream ancestry and imported fixes auditable;
+- prevents fork product commits from contaminating the mirror line;
+- avoids rebasing shared fork history for routine upstream updates;
+- gives agents an unambiguous branch target.
+
+Consequences:
+
+- PR #1 targets `fork-main`;
+- after PR #1 is merged, GitHub's default branch should be switched manually to
+  `fork-main` so visitors land on the product line;
+- branch changes require manifest/checkpoint updates;
+- merges into `master` are forbidden except verified upstream mirror updates.
+
+## D-010 — replace root upstream planning prose on the fork line with pointers
+
+- Status: `accepted`
+- Date: 2026-08-02
+- Evidence: root `TODO`/`ROADMAP.md`, documentation map and control-plane CI
+- Scope: documentation authority and agent context safety
+
+Decision: on `fork-main` and fork feature branches, root `TODO` and
+`ROADMAP.md` are concise entry points to the canonical fork work queue and
+roadmap. The large inherited upstream contents remain unchanged on mirror
+`master` and in `ahlstromcj/seq66`.
+
+Rationale:
+
+- agents frequently read these filenames automatically;
+- upstream files contain a large unrelated backlog and speculative v2 plan;
+- retaining hundreds of upstream lines under a banner still wastes context and
+  risks accidental unauthorized work;
+- the clean mirror preserves the originals without duplication.
+
+Consequences:
+
+- these two files are intentional conflict points during upstream sync;
+- sync resolution normally keeps the fork pointers on `fork-main`;
+- upstream items require a fork task ID, requirements and tests before work;
+- other inherited documentation is not bulk moved or rewritten.
+
 ## New decision template
 
 ```markdown
