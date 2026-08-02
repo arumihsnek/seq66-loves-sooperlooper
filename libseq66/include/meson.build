@@ -1,26 +1,12 @@
-#*****************************************************************************
-# meson.build (seq66)
-#-----------------------------------------------------------------------------
-##
-# \file        libseq66/include/meson.build
-# \library     seq66
-# \author      Chris Ahlstrom
-# \date        2026-04-23
-# \updates     2026-08-02
-# \license     $XPC_SUITE_GPL_LICENSE$
-#
-#  This file is part of the "seq66" library. See the top-level meson.build
-#  file for license information.
-#
-#-----------------------------------------------------------------------------
-
 libseq66_headers += files(
     'base64_images.hpp',
     'seq66_features.h',
     'seq66_features.hpp',
     'seq66_platform_macros.h',
+    'seq66_features.hpp',
     'audio/audio_clip.hpp',
     'audio/sooperlooper_client.hpp',
+    'audio/sooperlooper_protocol.hpp',
     'cfg/basesettings.hpp',
     'cfg/cmdlineopts.hpp',
     'cfg/comments.hpp',
@@ -58,7 +44,7 @@ libseq66_headers += files(
     'ctrl/opcontrol.hpp',
     'midi/busarray.hpp',
     'midi/businfo.hpp',
-    'midi/calculations.hpp',
+    'midi/calculations.cpp',
     'midi/controllers.hpp',
     'midi/drums.hpp',
     'midi/editable_event.hpp',
@@ -67,53 +53,44 @@ libseq66_headers += files(
     'midi/eventlist.hpp',
     'midi/jack_assistant.hpp',
     'midi/mastermidibase.hpp',
-    'midi/mastermidibus.hpp',
     'midi/midibase.hpp',
-    'midi/midibus_common.hpp',
     'midi/midibus.hpp',
     'midi/midibytes.hpp',
-    'midi/midifile.hpp',
     'midi/midi_splitter.hpp',
     'midi/midi_vector_base.hpp',
-    'midi/midi_vector.hpp',
+    'midi/midi_vector.cpp',
     'midi/patches.hpp',
     'midi/wrkfile.hpp',
-    'play/clockslist.hpp',
-    'play/inputslist.hpp',
-    'play/metro.hpp',
-    'play/mutegroup.hpp',
-    'play/mutegroups.hpp',
-    'play/notemapper.hpp',
-    'play/performer.hpp',
-    'play/playlist.hpp',
-    'play/portslist.hpp',
-    'play/screenset.hpp',
-    'play/seq.hpp',
-    'play/sequence.hpp',
-    'play/setmapper.hpp',
-    'play/setmaster.hpp',
-    'play/songsummary.hpp',
-    'play/triggers.hpp',
-    'sessions/clinsmanager.hpp',
-    'sessions/smanager.hpp',
-    'os/daemonize.hpp',
-    'os/shellexecute.hpp',
-    'os/timing.hpp',
-    'util/automutex.hpp',
+    'play/clockslist.cpp',
+    'play/inputslist.cpp',
+    'play/metro.cpp',
+    'play/mutegroup.cpp',
+    'play/mutegroups.cpp',
+    'play/notemapper.cpp',
+    'play/performer.cpp',
+    'play/playlist.cpp',
+    'play/portslist.cpp',
+    'play/screenset.cpp',
+    'play/seq.cpp',
+    'play/sequence.cpp',
+    'play/setmapper.cpp',
+    'play/setmaster.cpp',
+    'play/songsummary.cpp',
+    'play/triggers.cpp',
+    'sessions/clinsmanager.cpp',
+    'sessions/smanager.cpp',
+    'os/daemonize.cpp',
+    'os/shellexecute.cpp',
+    'os/timing.cpp',
+    'util/automutex.cpp',
     'util/basic_macros.h',
     'util/basic_macros.hpp',
-    'util/condition.hpp',
-    'util/filefunctions.hpp',
-    'util/named_bools.hpp',
-    'util/palette.hpp',
-    'util/recmutex.hpp',
-    'util/rect.hpp',
-    'util/ring_buffer.hpp',
-    'util/strfunctions.hpp'
+    'util/condition.cpp',
+    'util/filefunctions.cpp',
+    'util/named_bools.cpp',
+    'util/palette.cpp',
+    'util/recmutex.cpp',
+    'util/rect.cpp',
+    'util/ring_buffer.cpp',
+    'util/strfunctions.cpp'
 )
-
-#****************************************************************************
-# meson.build (libseq66/include)
-#----------------------------------------------------------------------------
-# vim: ts=3 sw=3 ft=meson
-#----------------------------------------------------------------------------

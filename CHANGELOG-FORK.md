@@ -13,6 +13,14 @@ versions before the fork reaches a releasable state.
 
 ### Added
 
+- M1-001 typed SooperLooper OSC protocol identifiers, bidirectional string
+  mappings, per-control range/type metadata and bounded observed-state integer
+  parsing in `libseq66/include/audio/sooperlooper_protocol.hpp` and
+  `libseq66/src/audio/sooperlooper_protocol.cpp`, plus a focused
+  `tests/audio/sooperlooper_protocol_test.cpp` covering all command,
+  loop-control and global-control identifiers and the canonical SooperLooper
+  state integers (-1, 0..14, 20).
+
 - Fork purpose and authority model in the root README.
 - `audio_clip` model with arbitrary positive bar counts and time signatures.
 - Free, tape and elastic tempo policies plus independent pitch shift.
