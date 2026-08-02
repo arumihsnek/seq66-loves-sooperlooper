@@ -143,8 +143,8 @@ def validate() -> list[str]:
         )
 
     active_pr = repository.get("active_pull_request")
-    if not isinstance(active_pr, int) or active_pr <= 0:
-        fail(errors, "repository.active_pull_request must be a positive integer")
+    if active_pr is None or (not isinstance(active_pr, int)) or active_pr < 0:
+        fail(errors, "repository.active_pull_request must be a non-negative integer (0 when no draft PR is open yet)")
 
     path_keys = {
         "current_checkpoint",

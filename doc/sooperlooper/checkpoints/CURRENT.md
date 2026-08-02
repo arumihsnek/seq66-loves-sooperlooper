@@ -1,47 +1,57 @@
 # Current project checkpoint
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-02-CP-002-agent-continuity.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-004-m1-001-pr3-ci-green.md`
 
-Checkpoint ID: `CP-002`
-Checkpoint date: 2026-08-02
-Active branch: `feature/sooperlooper-audio-clips`
+Checkpoint ID: `CP-004`
+Checkpoint date: 2026-08-03
+Active branch: `feature/m1-001-typed-osc-protocol`
 Integration target: `fork-main`
-Active pull request: #1
+Active pull request: `#3` (draft)
 Current phase: `phase-1-protocol-core` — Phase 1, protocol core
 Completed phase: `phase-0-project-contract`
 Active task: `M1-001`
-Task status: `ready`
+Task status: `review`
 
 ## Minimal resume summary
 
-The repository now has a complete project-control plane for multi-agent work:
-manifest, canonical documentation map, phased roadmap, stable-ID work queue,
-traceability, decision log, fork changelog, checkpoint protocol, upstream sync
-policy and GitHub PR/task templates.
+PR #1 bootstrap is merged into `fork-main` at `cb6929c0`. PR #2, which adds
+the bounded `codex-senior-consult` policy to `AGENTS.md`, is merged at
+`c2999d8`. GitHub's default branch is now `fork-main`; `master` remains the
+upstream mirror.
 
-`master` is the clean upstream mirror; `fork-main` is the fork integration line.
-Root `TODO` and `ROADMAP.md` on the fork line are short pointers, while original
-upstream contents remain on `master`.
+M1-001 is published in draft PR #3 from
+`feature/m1-001-typed-osc-protocol` to `fork-main`. The implementation head
+`1fc306e48c4d5af80cfcf9623b5a0e9b4bf10722` has green fast CI:
 
-The audio model, outbound OSC adapter, fake-engine contract and pinned real
-SooperLooper/JACK-dummy smoke test are present. Production inbound feedback and
-application integration are not.
+- `Project control plane` run `30770456444`, job `91556592918`: PASS;
+- `Audio integration core` run `30770456443`, job `91556592912`: PASS;
+- all three compile steps and all three focused tests passed.
+
+The real-engine workflow did not trigger for PR #3 because none of its filtered
+probe/workflow/contract paths changed. The latest separate pinned-engine PASS
+remains run `30756422662`, job `91519250698`; it must not be presented as a new
+run on the PR #3 head.
+
+M1-001 is in `review`, not `done`. M1-002 has not started.
 
 ## Next executable action
 
-Claim `M1-001`, then implement canonical typed SooperLooper protocol identifiers,
-mappings and metadata with focused tests. Do not begin UI, supervisor or
-persistence work first.
+1. Confirm the final control-only branch head has a green
+   `Project control plane` run.
+2. Review PR #3 and its exact CI evidence.
+3. Do not start M1-002 on this branch.
+4. Merge PR #3 only with explicit human authorization.
+5. After merge, create a fresh M1-002 branch from updated `fork-main` and write
+   a new immutable checkpoint.
 
 ## Read next
 
-1. the immutable CP-002 checkpoint linked above;
+1. the immutable CP-004 checkpoint linked above;
 2. `PROJECT-MANIFEST.json`;
-3. only `M1-001` in `doc/sooperlooper/WORK-QUEUE.md`;
-4. relevant identifier/range sections in
-   `OSC-CONTROL-AND-FEEDBACK.md`;
-5. affected client code/tests and traceability rows;
-6. latest PR #1 checks.
+3. PR #3 metadata, diff and latest checks;
+4. only `M1-001` in `doc/sooperlooper/WORK-QUEUE.md`;
+5. affected `TRACEABILITY.md` rows;
+6. protocol source/tests only when review finds a concrete issue.
 
 Do not treat upstream `NEWS`, `RELNOTES`, `ChangeLog`, mirror `TODO`, mirror
 `ROADMAP.md` or old Seq66 planning prose as the active fork plan.

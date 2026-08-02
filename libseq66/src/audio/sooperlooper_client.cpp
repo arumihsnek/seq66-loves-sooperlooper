@@ -18,38 +18,47 @@
 #endif
 
 #include "audio/sooperlooper_client.hpp"
+#include "audio/sooperlooper_protocol.hpp"
 
 namespace seq66
 {
+
+/* -------------------------------------------------------------------------
+ *  Helper: command_name (unchanged)
+ * ------------------------------------------------------------------------- */
 
 static const char *
 command_name (sooperlooper_command command)
 {
     switch (command)
     {
-    case sooperlooper_command::record:       return "record";
-    case sooperlooper_command::overdub:      return "overdub";
-    case sooperlooper_command::multiply:     return "multiply";
-    case sooperlooper_command::insert:       return "insert";
-    case sooperlooper_command::replace:      return "replace";
-    case sooperlooper_command::reverse:      return "reverse";
-    case sooperlooper_command::mute:         return "mute";
-    case sooperlooper_command::undo:         return "undo";
-    case sooperlooper_command::redo:         return "redo";
-    case sooperlooper_command::one_shot:     return "oneshot";
-    case sooperlooper_command::trigger:      return "trigger";
-    case sooperlooper_command::substitute:   return "substitute";
-    case sooperlooper_command::pause:        return "pause";
-    case sooperlooper_command::solo:         return "solo";
-    case sooperlooper_command::mute_on:      return "mute_on";
-    case sooperlooper_command::mute_off:     return "mute_off";
+        case sooperlooper_command::record:       return "record";
+        case sooperlooper_command::overdub:      return "overdub";
+        case sooperlooper_command::multiply:     return "multiply";
+        case sooperlooper_command::insert:       return "insert";
+        case sooperlooper_command::replace:      return "replace";
+        case sooperlooper_command::reverse:      return "reverse";
+        case sooperlooper_command::mute:         return "mute";
+        case sooperlooper_command::undo:         return "undo";
+        case sooperlooper_command::redo:         return "redo";
+        case sooperlooper_command::one_shot:     return "oneshot";
+        case sooperlooper_command::trigger:      return "trigger";
+        case sooperlooper_command::substitute:   return "substitute";
+        case sooperlooper_command::pause:        return "pause";
+        case sooperlooper_command::solo:         return "solo";
+        case sooperlooper_command::mute_on:      return "mute_on";
+        case sooperlooper_command::mute_off:     return "mute_off";
+        default:                                 break;
     }
     return "";
 }
 
+/* -------------------------------------------------------------------------
+ *  pimpl implementation (unchanged except for includes)
+ * ------------------------------------------------------------------------- */
+
 class sooperlooper_client::implementation
 {
-
 private:
 
     std::string m_endpoint;
@@ -90,6 +99,7 @@ public:
             lo_address_free(m_address);
             m_address = nullptr;
         }
+#endif
 
         if (value.empty())
         {
@@ -104,11 +114,6 @@ public:
             return false;
         }
         return true;
-#else
-        (void) value;
-        m_last_error = "Seq66 was built without SooperLooper/liblo support";
-        return false;
-#endif
     }
 
     const std::string & endpoint () const
@@ -169,17 +174,16 @@ public:
 
     bool send_string_float
     (
-        const std::string & path, const std::string & name, float value
+        const std::string & path,
+        const std::string & name,
+        float value
     )
     {
 #if SEQ66_SOOPERLOOPER_SUPPORT
         if (! ready())
             return report_send(-1);
 
-        return report_send
-        (
-            lo_send(m_address, path.c_str(), "sf", name.c_str(), value)
-        );
+        return report_send(lo_send(m_address, path.c_str(), "sf", name.c_str(), value));
 #else
         (void) path;
         (void) name;
@@ -217,6 +221,10 @@ public:
 #endif
     }
 };
+
+/* -------------------------------------------------------------------------
+ *  sooperlooper_client public methods
+ * ------------------------------------------------------------------------- */
 
 sooperlooper_client::sooperlooper_client (const std::string & endpoint) :
     m_impl     (new implementation())
@@ -260,6 +268,10 @@ sooperlooper_client::ready () const
     return m_impl->ready();
 }
 
+/* -----------------------------------------------------------------
+ *  String-based original API (preserved for compatibility)
+ * ----------------------------------------------------------------- */
+
 bool
 sooperlooper_client::hit
 (
@@ -296,10 +308,7 @@ sooperlooper_client::set_loop_control
 }
 
 bool
-sooperlooper_client::set_global_control
-(
-    const std::string & control, float value
-)
+sooperlooper_client::set_global_control (const std::string & control, float value)
 {
     return ! control.empty() && std::isfinite(value) ?
         m_impl->send_string_float("/set", control, value) :
@@ -344,41 +353,67 @@ sooperlooper_client::apply_sync_policy
 
     switch (clip.sync_mode())
     {
-    case audio_sync_mode::free:
-        result = result &&
-            set_loop_control(loop, "sync", 0.0f) &&
-            set_loop_control(loop, "playback_sync", 0.0f) &&
-            set_loop_control(loop, "tempo_stretch", 0.0f) &&
-            set_loop_control(loop, "use_rate", 0.0f) &&
-            set_loop_control(loop, "rate", 1.0f) &&
-            set_loop_control(loop, "stretch_ratio", 1.0f);
-        break;
+        case audio_sync_mode::free:
+            result = result &&
+                set_loop_control(loop, "sync", 0.0f) &&
+                set_loop_control(loop, "playback_sync", 0.0f) &&
+                set_loop_control(loop, "tempo_stretch", 0.0f) &&
+                set_loop_control(loop, "use_rate", 0.0f) &&
+                set_loop_control(loop, "rate", 1.0f) &&
+                set_loop_control(loop, "stretch_ratio", 1.0f);
+            break;
 
-    case audio_sync_mode::tape:
-        result = result &&
-            set_loop_control(loop, "sync", 1.0f) &&
-            set_loop_control(loop, "playback_sync", 1.0f) &&
-            set_loop_control(loop, "tempo_stretch", 0.0f) &&
-            set_loop_control(loop, "stretch_ratio", 1.0f) &&
-            set_loop_control(loop, "use_rate", 1.0f) &&
-            set_loop_control(loop, "rate", float(clip.playback_rate(target_bpm)));
-        break;
+        case audio_sync_mode::tape:
+            result = result &&
+                set_loop_control(loop, "sync", 1.0f) &&
+                set_loop_control(loop, "playback_sync", 1.0f) &&
+                set_loop_control(loop, "tempo_stretch", 0.0f) &&
+                set_loop_control(loop, "stretch_ratio", 1.0f) &&
+                set_loop_control(loop, "use_rate", 1.0f) &&
+                set_loop_control(loop, "rate", float(clip.playback_rate(target_bpm)));
+            break;
 
-    case audio_sync_mode::elastic:
-        result = result &&
-            set_loop_control(loop, "sync", 1.0f) &&
-            set_loop_control(loop, "playback_sync", 1.0f) &&
-            set_loop_control(loop, "use_rate", 0.0f) &&
-            set_loop_control(loop, "rate", 1.0f) &&
-            set_loop_control(loop, "tempo_stretch", 1.0f) &&
-            set_loop_control
-            (
-                loop, "stretch_ratio",
-                float(clip.time_stretch_ratio(target_bpm))
-            );
-        break;
+        case audio_sync_mode::elastic:
+            result = result &&
+                set_loop_control(loop, "sync", 1.0f) &&
+                set_loop_control(loop, "playback_sync", 1.0f) &&
+                set_loop_control(loop, "use_rate", 0.0f) &&
+                set_loop_control(loop, "rate", 1.0f) &&
+                set_loop_control(loop, "tempo_stretch", 1.0f) &&
+                set_loop_control(loop, "stretch_ratio",
+                                 float(clip.time_stretch_ratio(target_bpm)));
+            break;
     }
     return result;
+}
+
+/* -----------------------------------------------------------------
+ *  New typed overloads (delegate to protocol helpers)
+ * ----------------------------------------------------------------- */
+
+bool
+sooperlooper_client::set_loop_control
+(
+    int loop_index, loop_control control, float value
+)
+{
+    if (! m_impl->ready())
+        return false;
+    if (! is_in_range(control, value))
+        return false;
+    return m_impl->send_string_float(
+                "/sl/" + std::to_string(loop_index) + "/set",
+                to_string(control), value);
+}
+
+bool
+sooperlooper_client::set_global_control (global_control control, float value)
+{
+    if (! m_impl->ready())
+        return false;
+    if (! is_in_range(control, value))
+        return false;
+    return m_impl->send_string_float("/set", to_string(control), value);
 }
 
 }           // namespace seq66

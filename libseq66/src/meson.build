@@ -1,30 +1,8 @@
-#*****************************************************************************
-# meson.build (seq66)
-#-----------------------------------------------------------------------------
-##
-# \file        libseq66/src/meson.build
-# \library     seq66
-# \author      Chris Ahlstrom
-# \date        2026-04-23
-# \updates     2026-08-02
-# \license     $XPC_SUITE_GPL_LICENSE$
-#
-#  This file is part of the "seq66" library. See the top-level meson.build
-#  file for license information.
-#
-# ../include
-# include
-# libseq66/include
-# libsessions/include
-# seq_portmidi/include
-# seq_rtmidi/include
-#
-#-----------------------------------------------------------------------------
-
 libseq66_sources += files(
     'seq66_features.cpp',
     'audio/audio_clip.cpp',
     'audio/sooperlooper_client.cpp',
+    'audio/sooperlooper_protocol.cpp',
     'cfg/basesettings.cpp',
     'cfg/cmdlineopts.cpp',
     'cfg/comments.cpp',
@@ -73,7 +51,6 @@ libseq66_sources += files(
     'midi/mastermidibase.cpp',
     'midi/midibase.cpp',
     'midi/midibytes.cpp',
-    'midi/midifile.cpp',
     'midi/midi_splitter.cpp',
     'midi/midi_vector_base.cpp',
     'midi/midi_vector.cpp',
@@ -111,9 +88,3 @@ libseq66_sources += files(
     'util/ring_buffer.cpp',
     'util/strfunctions.cpp'
 )
-
-#****************************************************************************
-# meson.build (libseq66/src)
-#----------------------------------------------------------------------------
-# vim: ts=3 sw=3 ft=meson
-#----------------------------------------------------------------------------

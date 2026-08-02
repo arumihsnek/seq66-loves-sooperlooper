@@ -15,35 +15,20 @@
 #include <string>
 
 #include "audio/audio_clip.hpp"
+#include "audio/sooperlooper_protocol.hpp"
 
 namespace seq66
 {
 
-enum class sooperlooper_command
-{
-    record,
-    overdub,
-    multiply,
-    insert,
-    replace,
-    reverse,
-    mute,
-    undo,
-    redo,
-    one_shot,
-    trigger,
-    substitute,
-    pause,
-    solo,
-    mute_on,
-    mute_off
-};
-
+/**
+ *  Public API: retains string-based methods for backward compatibility,
+ *  adds new typed overloads for loop and global controls.
+ */
 class sooperlooper_client
 {
-
 private:
 
+    /* Forward declaration of the pimpl implementation (nested class) */
     class implementation;
     std::unique_ptr<implementation> m_impl;
 
@@ -66,13 +51,16 @@ public:
     const std::string & last_error () const;
     bool ready () const;
 
+    /* -----------------------------------------------------------------
+     *  String-based original API (preserved for compatibility)
+     * ----------------------------------------------------------------- */
+
     bool hit (int loop_index, sooperlooper_command command);
     bool set_loop_control
     (
         int loop_index, const std::string & control, float value
     );
     bool set_global_control (const std::string & control, float value);
-
     bool add_loop (int channels, float minimum_seconds = 40.0f);
     bool delete_last_loop ();
 
@@ -80,9 +68,20 @@ public:
      *  Applies Seq66's three tempo policies to one existing loop.
      *  It does not start playback or recording.
      */
-
     bool apply_sync_policy (const audio_clip & clip, double target_bpm);
-};
+
+    /* -----------------------------------------------------------------
+     *  New typed overloads (preferred for new code)
+     * ----------------------------------------------------------------- */
+
+    bool set_loop_control
+    (
+        int loop_index, loop_control control, float value
+    );
+
+    bool set_global_control (global_control control, float value);
+
+};  // class sooperlooper_client
 
 }           // namespace seq66
 
@@ -92,4 +91,4 @@ public:
  * sooperlooper_client.hpp
  *
  * vim: sw=4 ts=4 wm=4 et ft=cpp
- */
+*/
