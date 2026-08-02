@@ -10,6 +10,7 @@
 #include <cmath>
 #include <condition_variable>
 #include <cstdlib>
+#include <iostream>
 #include <mutex>
 #include <string>
 #include <thread>
@@ -90,7 +91,7 @@ public:
     bool wait_value_after
     (
         unsigned previous,
-        std::chrono::milliseconds timeout = std::chrono::milliseconds(1000)
+        std::chrono::milliseconds timeout = std::chrono::milliseconds(500)
     )
     {
         std::unique_lock<std::mutex> lock(m_mutex);
@@ -207,7 +208,7 @@ wait_for_loop_count
             if (state.loop_count() == expected)
                 return true;
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
     return false;
 }
@@ -245,6 +246,53 @@ bool
 near (float left, float right, float epsilon = 1.0e-4f)
 {
     return std::fabs(left - right) <= epsilon;
+}
+
+bool
+wait_for_loop_value
+(
+    lo_address engine,
+    const std::string & callback_url,
+    probe_state & state,
+    int loop_index,
+    const std::string & control,
+    float expected,
+    std::chrono::milliseconds timeout = std::chrono::milliseconds(3000)
+)
+{
+    const auto deadline { std::chrono::steady_clock::now() + timeout };
+    float last_value { 0.0f };
+    bool observed { false };
+
+    while (std::chrono::steady_clock::now() < deadline)
+    {
+        if (get_loop_value(engine, callback_url, state, loop_index, control))
+        {
+            if
+            (
+                state.loop_index() == loop_index &&
+                state.control() == control
+            )
+            {
+                last_value = state.value();
+                observed = true;
+                if (near(last_value, expected))
+                    return true;
+            }
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    }
+
+    std::cerr
+        << "Timed out observing loop " << loop_index
+        << " control '" << control << "' at " << expected;
+    if (observed)
+        std::cerr << "; last observed value was " << last_value;
+    else
+        std::cerr << "; no matching callback was observed";
+
+    std::cerr << std::endl;
+    return false;
 }
 
 }           // namespace anonymous
@@ -295,16 +343,28 @@ main ()
     assert(lo_send(engine, "/loop_add", "if", 1, 5.0f) >= 0);
     assert(wait_for_loop_count(engine, callback_url, state, 1));
 
-    assert(get_loop_value(engine, callback_url, state, 0, "channel_count"));
-    assert(state.loop_index() == 0);
-    assert(state.control() == "channel_count");
-    assert(near(state.value(), 1.0f));
+    assert
+    (
+        wait_for_loop_value
+        (
+            engine, callback_url, state, 0, "channel_count", 1.0f
+        )
+    );
+
+    /*
+     * SooperLooper applies loop controls through its engine/audio cycle. A
+     * successful OSC send is therefore not synchronous confirmation. Poll the
+     * observed value until the engine reports it or the bounded deadline ends.
+     */
 
     assert(lo_send(engine, "/sl/0/set", "sf", "wet", 0.75f) >= 0);
-    assert(get_loop_value(engine, callback_url, state, 0, "wet"));
-    assert(state.loop_index() == 0);
-    assert(state.control() == "wet");
-    assert(near(state.value(), 0.75f));
+    assert
+    (
+        wait_for_loop_value
+        (
+            engine, callback_url, state, 0, "wet", 0.75f
+        )
+    );
 
     assert(lo_send(engine, "/loop_del", "i", -1) >= 0);
     assert(wait_for_loop_count(engine, callback_url, state, 0));
