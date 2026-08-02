@@ -3,10 +3,12 @@
   "project_id": "seq66-loves-sooperlooper",
   "project_name": "Seq66 Loves SooperLooper",
   "status": "active",
-  "updated_at": "2026-08-02T17:20:00+02:00",
+  "updated_at": "2026-08-02T18:20:00+02:00",
   "repository": {
     "full_name": "arumihsnek/seq66-loves-sooperlooper",
     "default_branch": "master",
+    "planned_default_branch": "fork-main",
+    "default_branch_transition": "after-bootstrap-pr-merge",
     "upstream_mirror_branch": "master",
     "integration_branch": "fork-main",
     "active_branch": "feature/sooperlooper-audio-clips",
@@ -38,7 +40,9 @@
     "documentation_map": "doc/sooperlooper/DOCUMENTATION-MAP.md",
     "upstream_sync_policy": "doc/sooperlooper/UPSTREAM-SYNC.md",
     "fork_changelog": "CHANGELOG-FORK.md",
-    "agent_instructions": "AGENTS.md"
+    "agent_instructions": "AGENTS.md",
+    "pull_request_template": ".github/PULL_REQUEST_TEMPLATE.md",
+    "task_issue_template": ".github/ISSUE_TEMPLATE/fork-task.md"
   },
   "source_of_truth_order": [
     "tested upstream source revisions",
@@ -70,7 +74,9 @@
     "initial outbound OSC adapter",
     "fake-engine OSC contract test",
     "real SooperLooper 1.7.9 plus JACK-dummy smoke test",
-    "repository project-control plane and multi-agent handoff policy"
+    "repository project-control plane and multi-agent handoff policy",
+    "machine-validated checkpoint and traceability structure",
+    "fork-specific pull request and task proposal templates"
   ],
   "missing_capabilities": [
     "production OSC receiver",
