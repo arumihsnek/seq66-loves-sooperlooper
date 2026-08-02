@@ -10,6 +10,12 @@ on:
       - '.github/workflows/sooperlooper-real-engine.yml'
       - 'doc/sooperlooper/OSC-CONTROL-AND-FEEDBACK.md'
       - 'doc/sooperlooper/HEADLESS-TESTING.md'
+  pull_request:
+    paths:
+      - 'tests/audio/sooperlooper_real_engine_smoke.cpp'
+      - '.github/workflows/sooperlooper-real-engine.yml'
+      - 'doc/sooperlooper/OSC-CONTROL-AND-FEEDBACK.md'
+      - 'doc/sooperlooper/HEADLESS-TESTING.md'
 
 permissions:
   contents: read
