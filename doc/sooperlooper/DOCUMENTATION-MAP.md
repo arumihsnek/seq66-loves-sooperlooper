@@ -27,8 +27,9 @@ product contract.
 | How are tests/builds reproduced? | `DEVELOPMENT.md`, `HEADLESS-TESTING.md` |
 | What durable fork changes exist? | `/CHANGELOG-FORK.md` |
 | How do we import Seq66 upstream fixes? | `UPSTREAM-SYNC.md` |
-| What did upstream Seq66 plan historically? | `/ROADMAP.md`, `/TODO` — reference only |
-| What changed in upstream Seq66 releases? | `/NEWS`, `/RELNOTES`, `/ChangeLog` — reference only |
+| Where are quick fork planning entry points? | root `/ROADMAP.md` and `/TODO` on `fork-main` |
+| What did upstream Seq66 plan historically? | root `/ROADMAP.md` and `/TODO` on mirror branch `master` or `ahlstromcj/seq66` |
+| What changed in upstream Seq66 releases? | `/NEWS`, upstream `/RELNOTES`, `/ChangeLog` — reference only |
 
 ## Canonical fork documents
 
@@ -38,6 +39,7 @@ These files may establish requirements, task status or gates:
   manifest;
 - `/AGENTS.md` — mandatory repository-wide agent rules;
 - `/CHANGELOG-FORK.md` — durable fork changes;
+- root `/ROADMAP.md` and `/TODO` on `fork-main` — concise entry points only;
 - `README.md` before its clearly marked upstream section — user-facing fork
   introduction;
 - this `doc/sooperlooper/` documentation set;
@@ -49,8 +51,8 @@ These files may establish requirements, task status or gates:
 
 The following remain useful references but cannot assign work to a fork agent:
 
-- root `/ROADMAP.md` — upstream Seq66 v2 ideas;
-- root `/TODO` — upstream Seq66 backlog, issues and experiments;
+- root `/ROADMAP.md` on `master` — upstream Seq66 v2 ideas;
+- root `/TODO` on `master` — upstream Seq66 backlog, issues and experiments;
 - `/ChangeLog`, `/NEWS`, upstream content in `/RELNOTES` — upstream history and
   release information;
 - most pre-existing content under `/doc`, `/contrib` and platform installation
@@ -58,8 +60,13 @@ The following remain useful references but cannot assign work to a fork agent:
 - source comments containing TODO/FIXME — local technical clues, not approved
   fork tasks.
 
-An item from inherited documentation becomes fork work only when it is assigned
-a stable task ID in `WORK-QUEUE.md` and linked to requirements/acceptance tests.
+The fork intentionally replaces only the root `ROADMAP.md` and `TODO` contents
+on `fork-main` with compact pointers because these names are automatically read
+by agents and the upstream versions are very large. The original files remain
+unchanged on clean-mirror `master` and in `ahlstromcj/seq66`.
+
+An item from inherited documentation becomes fork work only when it receives a
+stable task ID in `WORK-QUEUE.md` and linked requirements/acceptance tests.
 
 ## Status-bearing documents
 
@@ -71,8 +78,8 @@ Only these documents contain live project status:
 4. `TRACEABILITY.md`;
 5. active PR/CI evidence.
 
-`ROADMAP.md` gives phase intent. It must not contain volatile session notes or
-be used as a substitute for the work queue.
+`doc/sooperlooper/ROADMAP.md` gives phase intent. It must not contain volatile
+session notes or be used as a substitute for the work queue.
 
 ## History-bearing documents
 
@@ -80,7 +87,8 @@ be used as a substitute for the work queue.
 - `CHANGELOG-FORK.md` preserves notable fork changes;
 - `DECISIONS.md` preserves product/architecture rationale;
 - `TESTED-BEHAVIOUR.md` preserves revision-specific runtime evidence;
-- Git commits and PR reviews preserve implementation history.
+- Git commits and PR reviews preserve implementation history;
+- mirror branch `master` preserves inherited upstream planning/history files.
 
 Do not overload one file to serve all these purposes.
 
@@ -96,11 +104,12 @@ Do not overload one file to serve all these purposes.
 | `SPECIFICATION.md` | feature owner plus reviewer |
 | `DECISIONS.md` | architecture/product decision owner |
 | `CHANGELOG-FORK.md` | integration owner or task owner for its change |
-| upstream inherited docs | modify only for necessary fork banners/corrections |
+| root fork `ROADMAP.md`/`TODO` | integration owner; keep as concise pointers |
+| other upstream inherited docs | modify only for necessary fork behaviour/corrections |
 
 ## Preventing stale duplicate plans
 
-Do not create additional files named variations of:
+Do not create additional active files named variations of:
 
 - roadmap;
 - plan;
