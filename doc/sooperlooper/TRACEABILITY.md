@@ -83,9 +83,10 @@ engine and target-hardware verification are recorded separately.
 | TEST-001 | Fast model and fake-engine checks compile with warnings-as-errors | HEADLESS-TESTING | verified | `Audio integration core` PASS | maintain |
 | TEST-002 | Pinned real engine builds and runs without GUI over JACK dummy | HEADLESS-TESTING | verified | `Real SooperLooper headless smoke` PASS | maintain |
 | TEST-003 | Fault-injection matrix covers malformed/late/lost feedback | HEADLESS-TESTING | specified | none | M1-007 |
-| OPS-001 | Project state is recoverable from repository control files without chat | WORKFLOW, D-007 | implemented | manifest/work queue/checkpoint protocol | metadata CI pending |
-| OPS-002 | Every state-changing agent session leaves a checkpoint | CHECKPOINTS, AGENTS | implemented as policy | current checkpoint present | enforce socially and in CI |
-| OPS-003 | Upstream mirror and fork integration history remain separable | UPSTREAM-SYNC | implemented | `master`, `fork-main`, feature branch | branch policy CI/manual review |
+| OPS-001 | Project state is recoverable from repository control files without chat | WORKFLOW, D-007 | verified | manifest, current checkpoint, work queue and `Project control plane` CI PASS | maintain |
+| OPS-002 | Every state-changing agent session leaves a checkpoint | CHECKPOINTS, AGENTS | verified for bootstrap | CP-001 plus validator-enforced pointer/schema | enforce for every material session |
+| OPS-003 | Upstream mirror and fork integration history remain separable | UPSTREAM-SYNC | implemented | `master`, `fork-main`, feature branch and PR base | manual review plus future sync rehearsal |
+| OPS-004 | PRs and proposed tasks request task IDs, evidence levels and control-file updates | WORKFLOW, AGENTS | implemented | GitHub PR and issue templates present | verify during review |
 
 ## Update rules
 
