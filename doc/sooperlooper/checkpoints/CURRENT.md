@@ -7,7 +7,8 @@ Checkpoint date: 2026-08-02
 Active branch: `feature/sooperlooper-audio-clips`
 Integration target: `fork-main`
 Active pull request: #1
-Current phase: Phase 1 — protocol core
+Current phase: `phase-1-protocol-core` — Phase 1, protocol core
+Completed phase: `phase-0-project-contract`
 Active task: `M1-001`
 
 ## Minimal resume summary
@@ -16,9 +17,10 @@ The project contract, backend policy, bidirectional OSC specification, initial
 audio model, outbound OSC adapter, fake-engine test and pinned real-engine JACK
 dummy smoke test are in place.
 
-Both audio test workflows passed at the checkpoint. The next implementation is
-the production typed inbound OSC receiver, followed by observed-state caching,
-engine generations, ping/subscriptions and bounded command confirmation.
+Both audio test workflows passed at checkpoint creation. The next implementation
+is the production typed inbound OSC receiver, followed by observed-state
+caching, engine generations, ping/subscriptions and bounded command
+confirmation.
 
 ## Read next
 
