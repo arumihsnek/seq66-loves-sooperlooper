@@ -56,6 +56,10 @@ private:
     std::condition_variable m_queue_cv;
     /** Queue of received events. */
     std::queue<receiver_event> m_event_queue;
+    /** Maximum number of queued events before incoming messages are dropped. */
+    size_t m_max_queue_size;
+    /** Number of messages dropped due to queue overflow. */
+    unsigned long long m_dropped_count{0};
     /** Map of (path, types) to callback. */
     struct handler_key
     {
@@ -78,6 +82,8 @@ private:
                        std::function<void(const std::vector<std::string> &,
                                           long long)>,
                        handler_key_hash> m_handlers;
+    /** Mutex protecting m_handlers (handle() and dispatch() can race). */
+    std::mutex m_handlers_mutex;
 
     /** Static trampoline function for liblo. */
     static int trampoline(const char * path, const char * types,
@@ -89,7 +95,9 @@ private:
         if (!self || !self->m_running.load())
             return 0;
 
-        // Convert the lo_arg arguments to strings.
+        // Convert the lo_arg arguments to strings. Only the types accepted by
+        // the allow-list (see handle()) are converted explicitly; anything else
+        // is preserved as an empty string and remains observable via poll_event.
         std::vector<std::string> args;
         args.reserve(argc);
         for (int i = 0; i < argc; ++i)
@@ -101,6 +109,15 @@ private:
                     break;
                 case 'f':
                     args.push_back(std::to_string(argv[i]->f));
+                    break;
+                case 'd':
+                    args.push_back(std::to_string(argv[i]->d));
+                    break;
+                case 'h':
+                    args.push_back(std::to_string(argv[i]->h));
+                    break;
+                case 'c':
+                    args.push_back(std::to_string(static_cast<int>(argv[i]->c)));
                     break;
                 case 's':
                 case 'S':
@@ -114,7 +131,7 @@ private:
                     }
                     break;
                 default:
-                    // Unsupported type; treat as empty string.
+                    // Unsupported type; preserve the fact it exists as empty.
                     args.push_back("");
                     break;
             }
@@ -123,14 +140,21 @@ private:
         // Marshal to the event queue: never run user code on the liblo thread.
         {
             std::lock_guard<std::mutex> lock(self->m_queue_mutex);
-            self->m_event_queue.emplace(receiver_event
+            if (self->m_event_queue.size() >= self->m_max_queue_size)
             {
-                path,
-                types,
-                std::move(args),
-                std::chrono::duration_cast<std::chrono::microseconds>(
-                    std::chrono::system_clock::now().time_since_epoch()).count()
-            });
+                ++self->m_dropped_count;
+            }
+            else
+            {
+                self->m_event_queue.emplace(receiver_event
+                {
+                    path,
+                    types,
+                    std::move(args),
+                    std::chrono::duration_cast<std::chrono::microseconds>(
+                        std::chrono::system_clock::now().time_since_epoch()).count()
+                });
+            }
         }
         self->m_queue_cv.notify_one();
 
@@ -139,7 +163,12 @@ private:
     }
 
 public:
-    explicit implementation(int port = 0) : m_port(port), m_port_str(std::to_string(port)) {}
+    explicit implementation(int port = 0, size_t max_queue_size = 4096)
+        : m_port(port)
+        , m_port_str(std::to_string(port))
+        , m_max_queue_size(max_queue_size)
+    {
+    }
 
     ~implementation()
     {
@@ -155,19 +184,36 @@ public:
         if (m_running.load())
             return true;
 
+        // Set the running flag before starting liblo so the trampoline does
+        // not discard early messages that arrive right after the thread starts.
+        m_running.store(true);
+
 #if SEQ66_SOOPERLOOPER_SUPPORT
         // Create the server thread. Passing nullptr lets the OS choose a free
         // port; otherwise pass the explicit port as a string.
         const char * port_arg = (m_port == 0) ? nullptr : m_port_str.c_str();
         m_server_thread = lo_server_thread_new(port_arg, error_handler);
         if (!m_server_thread)
+        {
+            m_running.store(false);
             return false;
+        }
 
         // Register the catch-all trampoline. Every incoming message is queued;
         // dispatch() later filters by the exact (path, types) allow-list.
         // Using a catch-all means unknown controls remain observable via
         // poll_event() instead of being silently dropped by liblo.
-        lo_server_thread_add_method(m_server_thread, nullptr, nullptr, trampoline, this);
+        lo_method method = lo_server_thread_add_method
+        (
+            m_server_thread, nullptr, nullptr, trampoline, this
+        );
+        if (!method)
+        {
+            lo_server_thread_free(m_server_thread);
+            m_server_thread = nullptr;
+            m_running.store(false);
+            return false;
+        }
 
         // Get the actual port bound (when the OS chose it).
         lo_server srv = lo_server_thread_get_server(m_server_thread);
@@ -180,6 +226,7 @@ public:
         {
             lo_server_thread_free(m_server_thread);
             m_server_thread = nullptr;
+            m_running.store(false);
             return false;
         }
 
@@ -188,12 +235,12 @@ public:
         {
             lo_server_thread_free(m_server_thread);
             m_server_thread = nullptr;
+            m_running.store(false);
             return false;
         }
 #else
         (void) m_port;
 #endif
-        m_running.store(true);
         return true;
     }
 
@@ -225,6 +272,11 @@ public:
         return m_port;
     }
 
+    unsigned long long dropped_count() const
+    {
+        return m_dropped_count;
+    }
+
     bool handle(const std::string & path, const std::string & types,
                 std::function<void(const std::vector<std::string> & args,
                                    long long timestamp_us)> cb)
@@ -233,6 +285,21 @@ public:
         if (path.empty() || types.empty())
             return false;
 
+        // Only accept OSC type tags that the trampoline converts explicitly.
+        // Rejecting unsupported signatures avoids silently mis-parsing them.
+        for (char t : types)
+        {
+            switch (t)
+            {
+                case 'i': case 'f': case 'd': case 'h': case 'c':
+                case 's': case 'S':
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        std::lock_guard<std::mutex> lock(m_handlers_mutex);
         // Prevent overwriting an existing handler for the same (path, types).
         handler_key key{path, types};
         if (m_handlers.find(key) != m_handlers.end())
@@ -273,11 +340,18 @@ public:
         while (poll_event(event))
         {
             handler_key key{event.path, event.types};
-            auto it = m_handlers.find(key);
-            if (it != m_handlers.end() && it->second)
+            std::function<void(const std::vector<std::string> &, long long)> cb;
             {
-                it->second(event.args, event.timestamp_us);
+                // Copy the callback under lock so handle() can safely race with
+                // dispatch(); invoke it after releasing the lock so user code
+                // never runs while holding the handler mutex.
+                std::lock_guard<std::mutex> lock(m_handlers_mutex);
+                auto it = m_handlers.find(key);
+                if (it == m_handlers.end() || !it->second)
+                    continue;
+                cb = it->second;
             }
+            cb(event.args, event.timestamp_us);
         }
     }
 
@@ -291,8 +365,8 @@ public:
     }
 };
 
-sooperlooper_receiver::sooperlooper_receiver(int port)
-    : m_impl(std::make_unique<implementation>(port))
+sooperlooper_receiver::sooperlooper_receiver(int port, size_t max_queue_size)
+    : m_impl(std::make_unique<implementation>(port, max_queue_size))
 {
 }
 
@@ -330,9 +404,19 @@ bool sooperlooper_receiver::poll_event(receiver_event & event)
     return m_impl->poll_event(event);
 }
 
+bool sooperlooper_receiver::wait_event(receiver_event & event)
+{
+    return m_impl->wait_event(event);
+}
+
 void sooperlooper_receiver::dispatch()
 {
     m_impl->dispatch();
+}
+
+unsigned long long sooperlooper_receiver::dropped_count() const
+{
+    return m_impl->dropped_count();
 }
 
 } // namespace seq66

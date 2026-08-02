@@ -30,6 +30,26 @@ actual packets emitted by `sooperlooper_client`:
 
 This is the first protocol gate and runs in `audio-core.yml`.
 
+### `sooperlooper_protocol_test.cpp`
+
+Fast liblo test for the typed protocol layer. Verifies typed paths, command
+construction, argument validation and rejection of malformed input before any
+packet is emitted.
+
+### `sooperlooper_receiver_test.cpp`
+
+Fast liblo fake-engine test for the inbound OSC receiver. It starts a receiver,
+registers allow-listed handlers, sends messages to itself and verifies:
+
+- lifecycle: start, port binding, stop, restart;
+- dispatch: handled messages invoke their exact (path, types) callback;
+- poll_event: unhandled messages remain observable (quarantine);
+- wait_event: blocking receive;
+- bounded queue: overflow is counted via `dropped_count()`, never grows unbounded;
+- concurrency: handler registration racing with dispatch does not corrupt state.
+
+This is the second protocol gate and runs in `audio-core.yml`.
+
 ### `sooperlooper_real_engine_smoke.cpp`
 
 Bidirectional smoke probe for a real pinned SooperLooper engine running against

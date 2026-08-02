@@ -45,8 +45,16 @@ private:
     std::unique_ptr<implementation> m_impl;
 
 public:
-    /** Constructor. */
-    explicit sooperlooper_receiver(int port = 0);
+    /**
+     *  Constructor.
+     *
+     *  @param port           The UDP port to bind (0 lets the OS choose a free
+     *                        port; the bound port is available via port()).
+     *  @param max_queue_size The maximum number of queued events before
+     *                        incoming messages are dropped (overflow counter
+     *                        exposed via dropped_count()).
+     */
+    explicit sooperlooper_receiver(int port = 0, size_t max_queue_size = 4096);
 
     /** Destructor. */
     ~sooperlooper_receiver();
@@ -66,6 +74,9 @@ public:
 
     /** Get the port the receiver is bound to (useful if port=0 was used). */
     int port() const;
+
+    /** Number of messages dropped because the event queue was full. */
+    unsigned long long dropped_count() const;
 
     /** Structure representing a received OSC event. */
     struct receiver_event
@@ -87,9 +98,9 @@ public:
      *
      *  @return true if the handler was registered successfully, false otherwise.
      *
-     *  Note: The callback is invoked from the liblo server thread, but the
-     *        actual user-provided callback is executed via a queued mechanism
-     *        to ensure it is safe for non-realtime contexts.
+     *  Note: Incoming messages are queued on the liblo server thread and the
+     *        user-provided callback is executed later from dispatch() on the
+     *        caller's thread. No user code runs on the liblo thread.
      */
     bool handle(const std::string & path, const std::string & types,
                 std::function<void(const std::vector<std::string> & args,
