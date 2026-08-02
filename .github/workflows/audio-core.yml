@@ -1,0 +1,50 @@
+name: Audio integration core
+
+on:
+  push:
+    branches:
+      - feature/sooperlooper-audio-clips
+  pull_request:
+    paths:
+      - 'libseq66/include/audio/**'
+      - 'libseq66/src/audio/**'
+      - 'tests/audio/**'
+      - '.github/workflows/audio-core.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  compile-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install compiler and OSC dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes g++ liblo-dev
+
+      - name: Compile focused audio integration test
+        run: |
+          mkdir -p .ci/include .ci/bin
+          cat > .ci/include/seq66-config.h <<'EOF'
+          #define SEQ66_HAVE_LIBLO 1
+          #define SEQ66_SOOPERLOOPER_SUPPORT 1
+          EOF
+
+          g++ \
+            -std=c++17 \
+            -Wall -Wextra -Wpedantic -Werror \
+            -I.ci/include \
+            -Ilibseq66/include \
+            libseq66/src/audio/audio_clip.cpp \
+            libseq66/src/audio/sooperlooper_client.cpp \
+            tests/audio/audio_clip_test.cpp \
+            -llo \
+            -o .ci/bin/audio_clip_test
+
+      - name: Run focused audio integration test
+        run: .ci/bin/audio_clip_test
