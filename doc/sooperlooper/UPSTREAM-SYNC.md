@@ -34,9 +34,9 @@ Rules:
 - direct pushes are avoided except repository-control repairs authorized by the
   project owner.
 
-The GitHub default branch should eventually be `fork-main` once the first
-integration milestone is merged and repository settings permit the switch.
-Until then, the README and manifest must make the active product branch clear.
+The GitHub default branch should become `fork-main` after the bootstrap PR is
+merged. Until repository settings are switched, the manifest and PR base are
+the authoritative indicators of the active product line.
 
 ## Temporary branches
 
@@ -92,6 +92,8 @@ Files inherited from Seq66 remain valuable but do not all govern this fork.
 
 ### Upstream reference, not active fork planning
 
+On `master` and in `ahlstromcj/seq66`, these are upstream references:
+
 - `/ROADMAP.md`;
 - `/TODO`;
 - `/ChangeLog`;
@@ -100,15 +102,18 @@ Files inherited from Seq66 remain valuable but do not all govern this fork.
 - upstream manuals and planning notes under `/doc` unless the fork index says
   otherwise.
 
-These files describe Seq66 upstream history, ideas, releases and outstanding
-MIDI work. They may reveal useful fixes or conflicts, but agents MUST NOT select
-fork tasks from them automatically.
+They describe Seq66 upstream history, ideas, releases and outstanding MIDI
+work. They may reveal useful fixes or conflicts, but agents MUST NOT select fork
+tasks from them automatically.
 
 ### Canonical fork control and planning
+
+On `fork-main` and its feature branches:
 
 - `/PROJECT-MANIFEST.json`;
 - `/AGENTS.md`;
 - `/CHANGELOG-FORK.md`;
+- root `/ROADMAP.md` and `/TODO` as concise fork entry points;
 - `/doc/sooperlooper/README.md`;
 - `/doc/sooperlooper/WORKFLOW.md`;
 - `/doc/sooperlooper/WORK-QUEUE.md`;
@@ -118,21 +123,44 @@ fork tasks from them automatically.
 - `/doc/sooperlooper/DECISIONS.md`;
 - `/doc/sooperlooper/checkpoints/CURRENT.md`.
 
+## Intentional root planning-file divergence
+
+The fork integration line intentionally replaces the inherited root `TODO` and
+`ROADMAP.md` contents with short fork entry points. This is a deliberate
+exception to the general preference for low-conflict inherited documentation.
+
+Reasons:
+
+- these two filenames are highly likely to be read automatically by agents;
+- the upstream files contain a large unrelated backlog and speculative v2 plan;
+- a warning banner above hundreds of upstream lines still wastes context and
+  risks accidental task selection;
+- the complete originals remain losslessly available on clean-mirror `master`
+  and in `ahlstromcj/seq66`.
+
+Consequences:
+
+- every upstream sync must review conflicts in these two files;
+- sync resolution normally keeps the fork entry-point versions on `fork-main`;
+- relevant upstream roadmap/TODO changes are assessed as possible compatibility
+  information, not copied into the fork queue automatically;
+- an upstream item enters fork planning only through a stable task ID,
+  requirements and acceptance tests.
+
+Other inherited documentation should remain at original paths unless there is a
+similarly explicit decision and checkpoint.
+
 ## Avoiding documentation conflicts
 
-Do not rename or relocate large upstream documentation trees merely to mark them
-as upstream. That causes unnecessary conflicts on every import.
-
-Instead:
-
-- keep original paths;
-- add a short fork banner to only the most ambiguous top-level planning files;
-- maintain the canonical classification in this document and
-  `DOCUMENTATION-MAP.md`;
-- keep fork planning under `doc/sooperlooper/`;
-- use `CHANGELOG-FORK.md` rather than rewriting upstream history;
-- when an upstream file must be changed for product reasons, isolate the fork
-  addition clearly and expect to review it during every sync.
+- Keep the clean upstream originals on `master`.
+- Keep fork planning under `doc/sooperlooper/`.
+- Use `CHANGELOG-FORK.md` rather than rewriting upstream history.
+- Modify inherited manuals only for actual fork user-facing behaviour.
+- Isolate fork additions in inherited release/install files and review them on
+  every sync.
+- Never bulk-rename the inherited documentation tree merely to label it.
+- Record any new intentional divergence in `DOCUMENTATION-MAP.md`, decisions,
+  changelog and a checkpoint.
 
 ## Upstream compatibility review
 
@@ -143,7 +171,8 @@ Every sync reviews at least:
 - transport and JACK behaviour;
 - configuration format and SeqSpec changes;
 - thread ownership and shutdown;
-- documentation claims about audio, PipeWire/JACK or headless operation.
+- documentation claims about audio, PipeWire/JACK or headless operation;
+- upstream changes to root `TODO` and `ROADMAP.md` for useful fixes or conflicts.
 
 Record compatibility findings in the sync checkpoint. Do not silently assume an
 upstream build passing means the fork integration remains semantically correct.
