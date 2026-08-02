@@ -92,5 +92,6 @@ libseq66_headers += files(
     'util/recmutex.cpp',
     'util/rect.cpp',
     'util/ring_buffer.cpp',
-    'util/strfunctions.cpp'
+    'util/strfunctions.cpp',
+    'audio/sooperlooper_receiver.hpp',
 )
