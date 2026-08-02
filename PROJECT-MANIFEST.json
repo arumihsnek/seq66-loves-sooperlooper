@@ -3,12 +3,15 @@
   "project_id": "seq66-loves-sooperlooper",
   "project_name": "Seq66 Loves SooperLooper",
   "status": "active",
-  "updated_at": "2026-08-02T17:12:00+02:00",
+  "updated_at": "2026-08-02T17:20:00+02:00",
   "repository": {
     "full_name": "arumihsnek/seq66-loves-sooperlooper",
     "default_branch": "master",
+    "upstream_mirror_branch": "master",
+    "integration_branch": "fork-main",
     "active_branch": "feature/sooperlooper-audio-clips",
-    "active_pull_request": 1
+    "active_pull_request": 1,
+    "active_pull_request_base": "fork-main"
   },
   "upstreams": {
     "seq66": {
@@ -32,6 +35,8 @@
     "workflow": "doc/sooperlooper/WORKFLOW.md",
     "traceability": "doc/sooperlooper/TRACEABILITY.md",
     "decision_log": "doc/sooperlooper/DECISIONS.md",
+    "documentation_map": "doc/sooperlooper/DOCUMENTATION-MAP.md",
+    "upstream_sync_policy": "doc/sooperlooper/UPSTREAM-SYNC.md",
     "fork_changelog": "CHANGELOG-FORK.md",
     "agent_instructions": "AGENTS.md"
   },
@@ -43,6 +48,13 @@
     "current checkpoint and work queue",
     "implementation comments and UI copy"
   ],
+  "documentation_policy": {
+    "canonical_fork_root": "doc/sooperlooper",
+    "root_roadmap": "fork entry point",
+    "root_todo": "fork queue pointer",
+    "upstream_planning_reference_branch": "master",
+    "unstructured_agent_todos_allowed": false
+  },
   "backend_policy": {
     "supported_audio_backends": [
       "native-jack",
@@ -57,7 +69,8 @@
     "free, tape and elastic tempo policies",
     "initial outbound OSC adapter",
     "fake-engine OSC contract test",
-    "real SooperLooper 1.7.9 plus JACK-dummy smoke test"
+    "real SooperLooper 1.7.9 plus JACK-dummy smoke test",
+    "repository project-control plane and multi-agent handoff policy"
   ],
   "missing_capabilities": [
     "production OSC receiver",
@@ -71,9 +84,14 @@
   ],
   "ci": [
     {
+      "workflow": ".github/workflows/project-control.yml",
+      "required": true,
+      "purpose": "validate manifest, checkpoint, work queue and canonical documentation structure"
+    },
+    {
       "workflow": ".github/workflows/audio-core.yml",
       "required": true,
-      "purpose": "model, metadata and fake-engine OSC contract"
+      "purpose": "model and fake-engine OSC contract"
     },
     {
       "workflow": ".github/workflows/sooperlooper-real-engine.yml",
@@ -91,7 +109,7 @@
     "update WORK-QUEUE.md",
     "update CHANGELOG-FORK.md for durable changes",
     "update TRACEABILITY.md when requirements or tests move",
-    "update PROJECT-MANIFEST.json when phase, compatibility or current task changes",
+    "update PROJECT-MANIFEST.json when phase, branch, compatibility or current task changes",
     "write an immutable checkpoint and update checkpoints/CURRENT.md",
     "update the active pull request with exact test evidence and remaining risks"
   ]
