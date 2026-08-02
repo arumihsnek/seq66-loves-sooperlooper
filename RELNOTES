@@ -1,3 +1,27 @@
+Fork development note — Seq66 Loves SooperLooper
+=================================================
+
+This repository is an experimental fork of Seq66 0.99.26. Its active work adds
+first-class SooperLooper-backed audio clips controlled entirely by Seq66.
+
+The audio integration is not a released feature yet. The current branch defines
+its architecture, bidirectional OSC contract, headless test suite and initial
+audio model/client. Native JACK and PipeWire-JACK are the intended initial audio
+backends. ALSA-only audio leaves existing audio clips preserved in a hard
+`backend_unavailable` state; it is not represented as mute and cannot be
+unlocked by track controls.
+
+See:
+
+- README.md
+- AGENTS.md
+- doc/sooperlooper/README.md
+- the draft integration pull request and its CI checks
+
+The upstream Seq66 0.99.26 release notes are preserved below.
+
+------------------------------------------------------------------------
+
 Release Notes for Seq66 v. 0.99.26 2026-07-15 "MIDI Learn".
 
 This version introduces the Seq66 flavor of MIDI Learn. See NEWS,

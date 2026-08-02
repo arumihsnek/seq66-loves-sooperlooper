@@ -1,0 +1,148 @@
+name: Real SooperLooper headless smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/sooperlooper-audio-clips
+    paths:
+      - 'tests/audio/sooperlooper_real_engine_smoke.cpp'
+      - '.github/workflows/sooperlooper-real-engine.yml'
+      - 'doc/sooperlooper/OSC-CONTROL-AND-FEEDBACK.md'
+      - 'doc/sooperlooper/HEADLESS-TESTING.md'
+  pull_request:
+    paths:
+      - 'tests/audio/sooperlooper_real_engine_smoke.cpp'
+      - '.github/workflows/sooperlooper-real-engine.yml'
+      - 'doc/sooperlooper/OSC-CONTROL-AND-FEEDBACK.md'
+      - 'doc/sooperlooper/HEADLESS-TESTING.md'
+
+permissions:
+  contents: read
+
+jobs:
+  real-engine-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    env:
+      SOOPERLOOPER_SHA: c5e22ce76ae9a6b358fe7d85720c61dfc5af8bec
+      SEQ66_SL_TEST_URL: osc.udp://127.0.0.1:19953/
+
+    steps:
+      - name: Check out Seq66 fork
+        uses: actions/checkout@v4
+
+      - name: Install headless build and JACK dependencies
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            autoconf \
+            autoconf-archive \
+            automake \
+            autopoint \
+            build-essential \
+            gettext \
+            git \
+            jackd2 \
+            jack-tools \
+            libfftw3-dev \
+            libjack-jackd2-dev \
+            liblo-dev \
+            libncurses-dev \
+            librubberband-dev \
+            libsamplerate0-dev \
+            libsigc++-2.0-dev \
+            libsndfile1-dev \
+            libtool \
+            libtool-bin \
+            libxml2-dev \
+            pkg-config
+
+      - name: Build pinned SooperLooper engine without GUI
+        run: |
+          git clone https://github.com/essej/sooperlooper.git .ci/sooperlooper
+          git -C .ci/sooperlooper checkout --detach "$SOOPERLOOPER_SHA"
+          cd .ci/sooperlooper
+          ./autogen.sh
+          ./configure \
+            --without-gui \
+            --prefix="$GITHUB_WORKSPACE/.ci/sooperlooper-install"
+          make -j2
+          make install
+          "$GITHUB_WORKSPACE/.ci/sooperlooper-install/bin/sooperlooper" --version
+
+      - name: Compile real-engine smoke probe
+        run: |
+          mkdir -p .ci/bin
+          g++ \
+            -std=c++17 \
+            -Wall -Wextra -Wpedantic -Werror \
+            -pthread \
+            tests/audio/sooperlooper_real_engine_smoke.cpp \
+            -llo \
+            -o .ci/bin/sooperlooper_real_engine_smoke
+
+      - name: Start JACK dummy server
+        run: |
+          nohup jackd -r -d dummy -r 48000 -p 256 \
+            > .ci/jack.log 2>&1 &
+          echo $! > .ci/jack.pid
+
+          ready=false
+          for attempt in $(seq 1 100); do
+            if jack_lsp > .ci/jack-ports.txt 2>/dev/null; then
+              ready=true
+              break
+            fi
+            sleep 0.1
+          done
+          test "$ready" = true
+
+      - name: Start pinned SooperLooper headless engine
+        run: |
+          nohup .ci/sooperlooper-install/bin/sooperlooper \
+            --quiet \
+            --loopcount=0 \
+            --osc-port=19953 \
+            --jack-name=seq66-sl-ci \
+            > .ci/sooperlooper.log 2>&1 &
+          echo $! > .ci/sooperlooper.pid
+
+          alive=false
+          for attempt in $(seq 1 50); do
+            if kill -0 "$(cat .ci/sooperlooper.pid)" 2>/dev/null; then
+              alive=true
+              sleep 0.1
+            else
+              break
+            fi
+          done
+          test "$alive" = true
+
+      - name: Run real-engine bidirectional smoke test
+        run: .ci/bin/sooperlooper_real_engine_smoke
+
+      - name: Show fixture diagnostics
+        if: always()
+        run: |
+          echo '=== pinned SooperLooper revision ==='
+          echo "$SOOPERLOOPER_SHA"
+          echo '=== JACK ports ==='
+          jack_lsp 2>&1 || true
+          echo '=== JACK log ==='
+          cat .ci/jack.log 2>/dev/null || true
+          echo '=== SooperLooper log ==='
+          cat .ci/sooperlooper.log 2>/dev/null || true
+
+      - name: Stop leaked fixture processes
+        if: always()
+        run: |
+          if test -f .ci/sooperlooper.pid; then
+            kill "$(cat .ci/sooperlooper.pid)" 2>/dev/null || true
+          fi
+          if test -f .ci/jack.pid; then
+            kill "$(cat .ci/jack.pid)" 2>/dev/null || true
+          fi

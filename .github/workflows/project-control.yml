@@ -1,0 +1,43 @@
+name: Project control plane
+
+on:
+  push:
+    branches:
+      - feature/sooperlooper-audio-clips
+      - fork-main
+    paths:
+      - 'PROJECT-MANIFEST.json'
+      - 'AGENTS.md'
+      - 'CHANGELOG-FORK.md'
+      - 'ROADMAP.md'
+      - 'TODO'
+      - 'doc/sooperlooper/**'
+      - 'contrib/scripts/validate-project-control.py'
+      - '.github/workflows/project-control.yml'
+  pull_request:
+    paths:
+      - 'PROJECT-MANIFEST.json'
+      - 'AGENTS.md'
+      - 'CHANGELOG-FORK.md'
+      - 'ROADMAP.md'
+      - 'TODO'
+      - 'doc/sooperlooper/**'
+      - 'contrib/scripts/validate-project-control.py'
+      - '.github/workflows/project-control.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-control-plane:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate manifest JSON
+        run: python3 -m json.tool PROJECT-MANIFEST.json > /dev/null
+
+      - name: Validate control-file consistency
+        run: python3 contrib/scripts/validate-project-control.py

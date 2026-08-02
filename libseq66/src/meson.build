@@ -6,7 +6,7 @@
 # \library     seq66
 # \author      Chris Ahlstrom
 # \date        2026-04-23
-# \updates     2026-06-09
+# \updates     2026-08-02
 # \license     $XPC_SUITE_GPL_LICENSE$
 #
 #  This file is part of the "seq66" library. See the top-level meson.build
@@ -23,6 +23,8 @@
 
 libseq66_sources += files(
     'seq66_features.cpp',
+    'audio/audio_clip.cpp',
+    'audio/sooperlooper_client.cpp',
     'cfg/basesettings.cpp',
     'cfg/cmdlineopts.cpp',
     'cfg/comments.cpp',
