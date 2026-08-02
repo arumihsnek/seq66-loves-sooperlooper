@@ -1,53 +1,57 @@
 # Current project checkpoint
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-02-CP-003-m1-001-typed-protocol.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-004-m1-001-pr3-ci-green.md`
 
-Checkpoint ID: `CP-003`
-Checkpoint date: 2026-08-02
+Checkpoint ID: `CP-004`
+Checkpoint date: 2026-08-03
 Active branch: `feature/m1-001-typed-osc-protocol`
 Integration target: `fork-main`
-Active pull request: not opened yet
+Active pull request: `#3` (draft)
 Current phase: `phase-1-protocol-core` — Phase 1, protocol core
 Completed phase: `phase-0-project-contract`
 Active task: `M1-001`
-Task status: `in_progress`
+Task status: `review`
 
 ## Minimal resume summary
 
-`master` remains the clean upstream mirror; `fork-main` is the fork integration
-line. PR #1 (bootstrap) has been merged into `fork-main` (commit `cb6929c0`).
+PR #1 bootstrap is merged into `fork-main` at `cb6929c0`. PR #2, which adds
+the bounded `codex-senior-consult` policy to `AGENTS.md`, is merged at
+`c2999d8`. GitHub's default branch is now `fork-main`; `master` remains the
+upstream mirror.
 
-M1-001 is in progress on `feature/m1-001-typed-osc-protocol`.  A new typed
-protocol module (`libseq66/include/audio/sooperlooper_protocol.hpp` and
-`libseq66/src/audio/sooperlooper_protocol.cpp`) centralises SooperLooper OSC
-command, loop-control and global-control identifiers with bidirectional string
-mappings, per-control range/type metadata and bounded observed-state integer
-parsing.  A focused unit test
-(`tests/audio/sooperlooper_protocol_test.cpp`) covers every mapped identifier
-and the canonical SooperLooper state integers.
+M1-001 is published in draft PR #3 from
+`feature/m1-001-typed-osc-protocol` to `fork-main`. The implementation head
+`1fc306e48c4d5af80cfcf9623b5a0e9b4bf10722` has green fast CI:
 
-The previous outbound client (`sooperlooper_client.cpp`) has been migrated to
-the new typed accessors; no raw OSC string literals remain in integration code.
+- `Project control plane` run `30770456444`, job `91556592918`: PASS;
+- `Audio integration core` run `30770456443`, job `91556592912`: PASS;
+- all three compile steps and all three focused tests passed.
 
-The new module, the migrated client and the focused unit test all compile
-with warnings-as-errors and the unit test passes locally against
-`-Wall -Wextra -Werror -pedantic -std=c++17`.  The existing
-`audio_clip_test` and `sooperlooper_osc_contract_test` still pass against the
-migrated client.
+The real-engine workflow did not trigger for PR #3 because none of its filtered
+probe/workflow/contract paths changed. The latest separate pinned-engine PASS
+remains run `30756422662`, job `91519250698`; it must not be presented as a new
+run on the PR #3 head.
+
+M1-001 is in `review`, not `done`. M1-002 has not started.
 
 ## Next executable action
 
-Commit the M1-001 work on `feature/m1-001-typed-osc-protocol`, push the branch
-and open a draft pull request against `fork-main`.  Then update the immutable
-checkpoint with the PR number and the first required-workflow runs.
+1. Confirm the final control-only branch head has a green
+   `Project control plane` run.
+2. Review PR #3 and its exact CI evidence.
+3. Do not start M1-002 on this branch.
+4. Merge PR #3 only with explicit human authorization.
+5. After merge, create a fresh M1-002 branch from updated `fork-main` and write
+   a new immutable checkpoint.
 
 ## Read next
 
-1. the immutable CP-003 checkpoint linked above;
+1. the immutable CP-004 checkpoint linked above;
 2. `PROJECT-MANIFEST.json`;
-3. only `M1-001` in `doc/sooperlooper/WORK-QUEUE.md`;
-4. `OSC-CONTROL-AND-FEEDBACK.md` for the canonical contract;
-5. affected client code/tests and `TRACEABILITY.md` rows.
+3. PR #3 metadata, diff and latest checks;
+4. only `M1-001` in `doc/sooperlooper/WORK-QUEUE.md`;
+5. affected `TRACEABILITY.md` rows;
+6. protocol source/tests only when review finds a concrete issue.
 
 Do not treat upstream `NEWS`, `RELNOTES`, `ChangeLog`, mirror `TODO`, mirror
 `ROADMAP.md` or old Seq66 planning prose as the active fork plan.
