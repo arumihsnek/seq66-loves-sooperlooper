@@ -1,34 +1,26 @@
-# Current checkpoint — M2-008 in progress
+# Current checkpoint — Phase 2 gate pass, Phase 3 ready
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-025-m2-008-ci-closure.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-026-phase2-gate-pass.md`
 
-Checkpoint ID: `CP-025`
+Checkpoint ID: `CP-026`
 Checkpoint date: 2026-08-03
-Phase: `phase-2-managed-engine-backend`
-Active task: `M2-008`
-Status: `in_progress`
-Branch: `feature/m2-008-ci-closure`
+Phase: `phase-3-performer-integration`
+Active task: `M3-001`
+Status: `ready`
+Branch: `feature/m3-001-clip-mapper`
 
 ## Completed
 
-- M2-001 through M2-007 merged (7 PRs).
-- Crash reconciler (45 assertions, 19 cases) merged in PR #23.
-- Lifecycle smoke test (21 assertions, 6 cases) implemented.
-- TESTED-BEHAVIOUR.md updated with M2-008 evidence.
-- CI updated with lifecycle smoke test step.
-
-## In progress
-
-- M2-008: lifecycle smoke test committed, CI updated, pending PR.
+- Phase 2 complete: all 8 tasks merged, 282 assertions pass, CI green.
+- Senior-consult accept verdict for Phase 2 gate.
+- Phase 3 opened, M3-001 defined.
 
 ## Next action
 
-- Commit M2-008 changes, open PR, verify CI, merge.
-- Complete Phase 2 gate with senior review.
+M3-001: clip UUID/runtime-index mapper.
 
 ## Verification
 
-- Lifecycle smoke: 21/21 assertions pass.
-- Regression: 282 total assertions across 6 suites, all pass.
+- 282 assertions across 6 suites pass.
 - validate-project-control.py: pass.
 - validate-autonomy-policy.py: pass.

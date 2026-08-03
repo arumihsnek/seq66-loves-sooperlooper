@@ -110,7 +110,7 @@ supervision except narrow scaffolding required to test protocol ownership.
 ## Phase 2 — managed engine and backend gate
 
 Status: **complete**.
-Gate record: `CP-023`.
+Gate record: `CP-026` (senior-consult accept, 282 assertions, 19 invariants preserved).
 
 Deliverables:
 
@@ -134,9 +134,9 @@ Definition of done:
 - native JACK and PipeWire-JACK capability paths are separately tested;
 - failure never deletes project clip state.
 
-## Phase 3 — loop allocation and performer integration
+## Phase 3 — performer integration
 
-Status: **blocked by Phase 2**.
+Status: **ready**.
 
 Deliverables:
 

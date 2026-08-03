@@ -587,7 +587,10 @@ Handoff target: M2-008 (CI closure) provides real-engine evidence.
 
 ### M2-008 — real-engine CI and regression closure
 
-Status: `in_progress`
+Status: `done`
+Completed: 2026-08-03
+Branch: `feature/m2-008-ci-closure`
+Merged PR: `#24`
 Agent: `hermes`
 
 Dependencies: M2-007.
@@ -649,3 +652,41 @@ Acceptance criteria:
 - subscribe registers real callbacks;
 - readiness requires all prerequisites;
 - no synchronous blocking on UI/RT paths.
+
+### M3-001 — clip UUID/runtime-index mapper
+
+Status: `ready`
+Agent: `hermes`
+
+Dependencies: M2-008 (Phase 2 complete).
+
+Requirement IDs: `ALLOC-001`, `STATE-006`.
+
+Expected ownership:
+
+- `libseq66/src/audio/` clip allocation and UUID/index mapping;
+- `tests/audio/` allocation tests.
+
+Deliverables:
+
+- stable clip UUID to runtime-index mapper;
+- pool with append/remove-last or controlled rebuild policy;
+- generation-scoped index validity;
+- index invalidation on crash/topology change.
+
+Acceptance criteria:
+
+- UUID is stable across restarts;
+- runtime index is generation-scoped;
+- crash invalidates all runtime indexes;
+- pool append/remove-last semantics verified;
+- no index persists as clip identity.
+
+Required tests:
+
+- UUID generation and stability;
+- index allocation and invalidation;
+- pool append/remove-last;
+- crash invalidation.
+
+Handoff target: M3-002 (performer command dispatch).

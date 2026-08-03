@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "fork-main",
+        "active_branch": "feature/m3-001-clip-mapper",
         "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M2-007 (PR #23) and M2-008 (PR #24) merged. Phase 2 gate pending."
+        "active_pull_request_note": "Phase 2 complete (CP-026). Phase 3 opening."
     },
     "upstreams": {
         "seq66": {
@@ -29,8 +29,8 @@
         }
     },
     "coordination": {
-        "completed_phase": "phase-1-protocol-core",
-        "current_phase": "phase-2-managed-engine-backend",
+        "completed_phase": "phase-2-managed-engine-backend",
+        "current_phase": "phase-3-performer-integration",
         "current_checkpoint": "doc/sooperlooper/checkpoints/CURRENT.md",
         "checkpoint_protocol": "doc/sooperlooper/CHECKPOINTS.md",
         "work_queue": "doc/sooperlooper/WORK-QUEUE.md",
@@ -115,8 +115,8 @@
     "next_milestone": {
         "id": "M2",
         "name": "managed engine and backend gate",
-        "active_task": "Phase 2 gate",
-        "active_task_status": "in_progress",
+        "active_task": "M3-001",
+        "active_task_status": "ready",
         "definition_of_done": "Engine readiness verified, ALSA-only hard-blocked, crash/restart safe, no SooperLooper GUI needed, native JACK and PipeWire-JACK separately tested."
     },
     "required_agent_exit_updates": [
