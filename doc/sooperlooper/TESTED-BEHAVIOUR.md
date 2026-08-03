@@ -93,3 +93,74 @@ When the pinned SooperLooper revision, JACK version or test topology changes:
   supported;
 - never generalize from one passing smoke test to sample-accurate musical
   guarantees.
+
+## M2-008 managed-engine lifecycle evidence
+
+```text
+Date:       2026-08-03
+Branch:     feature/m2-008-ci-closure
+Evidence:   Ad-hoc compilation and execution on Linux aarch64
+```
+
+### Lifecycle smoke (21 assertions)
+
+The following managed-engine lifecycle behaviours have been demonstrated
+with a fake process adapter (no real SooperLooper required):
+
+- **Full lifecycle**: launch -> running -> crash -> poll detects -> reconciler
+  restarts -> generation invalidated -> routing restored via callback ->
+  state returns to watching.
+- **Graceful shutdown escalation**: shutdown sends SIGTERM when graceful
+  (wait_exit) fails.
+- **Pending operation cancellation**: all registered pending operations are
+  cancelled when a crash is detected.
+- **Terminal state**: after exhausting max_restarts, the reconciler enters
+  terminal state and does not attempt further restarts.
+- **ALSA-only no-launch**: when the backend probe reports ALSA-only audio,
+  no launch attempt is made.
+- **Stable-interval backoff reset**: after a stable interval elapses
+  (configurable, tested at 3000ms), the restart counter resets and
+  backoff returns to the base value.
+
+### Crash reconciler (45 assertions, 19 cases)
+
+The crash reconciler has been tested with deterministic injection:
+
+- Crash detection via supervisor poll
+- Exponential backoff with configurable multiplier and cap
+- Terminal state after max restarts
+- Pending operation register / complete / cancel lifecycle
+- Generation invalidation callback on crash
+- Shutdown-during-startup handling
+- Stable-interval backoff reset
+- Routing restoration via restart callback
+- State machine transitions: idle -> watching -> reconciling -> backoff/terminal
+
+### Regression
+
+All pre-existing test suites pass without modification:
+
+| Suite | Assertions |
+|---|---|
+| process supervisor | 86 |
+| engine launcher | 62 |
+| JACK discovery | 38 |
+| readiness gate | 30 |
+| crash reconciler | 45 |
+| lifecycle smoke | 21 |
+| **Total** | **282** |
+
+### Evidence level
+
+These are unit/fake-engine level tests. The fake process adapter
+simulates process lifecycle without real SooperLooper or JACK.
+
+- Unit tested (45 assertions)
+- Fake-engine protocol tested (21 lifecycle assertions)
+- Real SooperLooper tested: NO
+- Native JACK tested: NO
+- PipeWire-JACK tested: NO
+- Hardware tested: NO
+
+Real-engine evidence requires a subsequent phase or CI job with pinned
+SooperLooper and JACK dummy backend.

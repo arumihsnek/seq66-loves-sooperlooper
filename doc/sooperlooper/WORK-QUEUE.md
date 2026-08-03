@@ -587,7 +587,7 @@ Handoff target: M2-008 (CI closure) provides real-engine evidence.
 
 ### M2-008 — real-engine CI and regression closure
 
-Status: `planned`
+Status: `in_progress`
 Agent: `hermes`
 
 Dependencies: M2-007.
