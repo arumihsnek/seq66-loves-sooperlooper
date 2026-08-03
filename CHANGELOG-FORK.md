@@ -13,6 +13,23 @@ versions before the fork reaches a releasable state.
 
 ### Added
 
+- M1-004A generation atomicity corrective: TOCTOU race fixed (generation
+  check inside m_mutex), wildcard bypass removed (no default
+  event_generation=0), event provenance via receiver_event.generation
+  stamped at receive time, typed apply_event() entry point, NaN/Inf
+  rejection in apply_field(float).  27 tests pass.  TSAN compiled but
+  cannot execute on ARM64 kernel 6.17 (documented).  PR #8 merged
+  (merge commit `691241dc`).
+
+- M1-004 engine generation tracking (`set_generation()`, generation-aware
+  `apply()`, `snapshot_data.generation`).  uint64 monotonic counter
+  advances on engine restart; `set_generation()` clears all cached state
+  atomically; `apply()` rejects events from stale generations; backward
+  compatible via default `event_generation=0`.  6 new test groups
+  covering generation lifecycle, stale rejection, matching acceptance,
+  and multiple resets.  PR #6 merged to fork-main
+  (merge commit `bf030007`).
+
 - M1-003 observed-state cache (`sooperlooper_observed_cache`) providing
   thread-safe storage of SooperLooper feedback with per-field freshness
   timestamps, zero-vs-absent distinction, meter/position coalescing,

@@ -27,7 +27,7 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-004** (status: `in_progress`)
+Active task: **M1-005** (status: `in_progress`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -163,7 +163,12 @@ Acceptance criteria:
 
 ### M1-004 — engine generation and stale feedback
 
-Status: `ready`
+Status: `done`
+Agent: `hermes`
+Branch: `feature/m1-004-engine-generation` (merged to `fork-main`)
+Draft PR: `#6` (merged, merge commit `bf0300072a23d7e1efa57565c4abb4643577d81b`)
+Started: 2026-08-03
+Completed: 2026-08-03
 
 Dependencies: M1-003.
 
