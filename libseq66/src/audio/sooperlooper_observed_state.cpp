@@ -89,28 +89,30 @@ extract_loop_index (const std::string & path)
 /*
  *  Apply a float value to an observed_field.
  */
-static void
+static bool
 apply_field (observed_field<float> & field, const std::string & arg,
              long long timestamp_us)
 {
     float v = parse_float(arg);
     if (!std::isfinite(v))
-        return;     // Reject NaN and Inf — do not create state from invalid payload.
+        return false;   // Reject NaN and Inf — do not create state from invalid payload.
     field.value = v;
     field.present = true;
     field.timestamp_us = timestamp_us;
+    return true;
 }
 
 /*
  *  Apply an int value to an observed_field.
  */
-static void
+static bool
 apply_field (observed_field<int> & field, const std::string & arg,
              long long timestamp_us)
 {
     field.value = parse_int(arg);
     field.present = true;
     field.timestamp_us = timestamp_us;
+    return true;
 }
 
 /*
@@ -130,48 +132,37 @@ apply_loop_control (loop_observed_state & state, loop_control control,
     switch (control)
     {
         case loop_control::state:
-            apply_field(state.state, val, timestamp_us);
-            return true;
+            return apply_field(state.state, val, timestamp_us);
 
         case loop_control::next_state:
-            apply_field(state.next_state, val, timestamp_us);
-            return true;
+            return apply_field(state.next_state, val, timestamp_us);
 
         case loop_control::waiting:
-            apply_field(state.waiting, val, timestamp_us);
-            return true;
+            return apply_field(state.waiting, val, timestamp_us);
 
         case loop_control::loop_len:
-            apply_field(state.loop_len, val, timestamp_us);
-            return true;
+            return apply_field(state.loop_len, val, timestamp_us);
 
         case loop_control::loop_pos:
-            apply_field(state.loop_pos, val, timestamp_us);
-            return true;
+            return apply_field(state.loop_pos, val, timestamp_us);
 
         case loop_control::cycle_len:
-            apply_field(state.cycle_len, val, timestamp_us);
-            return true;
+            return apply_field(state.cycle_len, val, timestamp_us);
 
         case loop_control::rate_output:
-            apply_field(state.rate_output, val, timestamp_us);
-            return true;
+            return apply_field(state.rate_output, val, timestamp_us);
 
         case loop_control::channel_count:
-            apply_field(state.channel_count, val, timestamp_us);
-            return true;
+            return apply_field(state.channel_count, val, timestamp_us);
 
         case loop_control::is_soloed:
-            apply_field(state.is_soloed, val, timestamp_us);
-            return true;
+            return apply_field(state.is_soloed, val, timestamp_us);
 
         case loop_control::in_peak_meter:
-            apply_field(state.in_peak_meter, val, timestamp_us);
-            return true;
+            return apply_field(state.in_peak_meter, val, timestamp_us);
 
         case loop_control::out_peak_meter:
-            apply_field(state.out_peak_meter, val, timestamp_us);
-            return true;
+            return apply_field(state.out_peak_meter, val, timestamp_us);
 
         default:
             return false;
@@ -195,24 +186,19 @@ apply_global_control (global_observed_state & state, global_control control,
     switch (control)
     {
         case global_control::tempo:
-            apply_field(state.tempo, val, timestamp_us);
-            return true;
+            return apply_field(state.tempo, val, timestamp_us);
 
         case global_control::eighth_per_cycle:
-            apply_field(state.eighth_per_cycle, val, timestamp_us);
-            return true;
+            return apply_field(state.eighth_per_cycle, val, timestamp_us);
 
         case global_control::sync_source:
-            apply_field(state.sync_source, val, timestamp_us);
-            return true;
+            return apply_field(state.sync_source, val, timestamp_us);
 
         case global_control::global_cycle_len:
-            apply_field(state.global_cycle_len, val, timestamp_us);
-            return true;
+            return apply_field(state.global_cycle_len, val, timestamp_us);
 
         case global_control::global_cycle_pos:
-            apply_field(state.global_cycle_pos, val, timestamp_us);
-            return true;
+            return apply_field(state.global_cycle_pos, val, timestamp_us);
 
         default:
             return false;
