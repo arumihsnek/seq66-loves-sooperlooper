@@ -378,7 +378,7 @@ static void test_confirmation_timeout ()
     command_confirmation_tracker tracker;
     /* Track an operation. */
     bool tracked = tracker.track(
-        "op-timeout", "record loop 0", "/sl/0/hit", 1, 0, 10);  /* 10ms deadline */
+        "op-timeout", "record loop 0", "/sl/0/hit", 1, 0, 0, "", 10);  /* 10ms deadline */
     check(tracked, "operation tracked");
 
     /* Wait for deadline to expire. */

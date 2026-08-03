@@ -1,26 +1,20 @@
-# Checkpoint: Phase 1 gate — ready for human review
+# Current checkpoint — Phase 1 human gate
 
-## Checkpoint ID: `CP-013`
-## Checkpoint date: 2026-08-03
+Checkpoint ID: `CP-017`
+Checkpoint date: 2026-08-03
+Phase: `phase-1-protocol-core`
+Active task: `M1-008`
+Status: `review`
+Branch: `gate/m1-008-phase-1`
+Draft PR: `#14`
 
-### Phase
-phase-1-protocol-core
+The technical Phase 1 gate has passed and the senior consultation returned
+`accept`. PR #14 remains draft and requires explicit human approval before
+merge.
 
-### Active task
-M1-008 (phase-1 integration gate) — awaiting human review
+Phase 2 is not authorized until that human approval and the merge of PR #14.
 
-### Summary
-Phase 1 is complete. All M1-001-M1-007 tasks merged, plus three
-correctives (M1-004A, M1-005A, M1-006A, M1-007A). All tests pass.
-Ready for human review. NO PHASE 2 AUTHORIZED.
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-017-gate-governance-correction.md`
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-013-phase-1-gate.md`
-
-### Evidence
-- 13 PRs merged (PR #1-#13)
-- 5 test suites pass: receiver, observed-state, monitor, confirmation, fault-injection
-- All correctives verified: TOCTOU fix, real transport, safe reconciliation, meaningful assertions
-- Control plane coherent and validated
-
-### Next immediate action
-Awaiting human review. No autonomous action.
+Next executable action: obtain green CI on this corrected control-plane head,
+then present PR #14 for the explicit human Phase 1 decision.

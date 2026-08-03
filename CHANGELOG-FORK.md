@@ -13,6 +13,21 @@ versions before the fork reaches a releasable state.
 
 ### Added
 
+- M1-008 Phase 1 integration gate PASS (CP-016): all three required CI
+  workflows green on gate head `50d39dfb`, `codex-senior-consult` verdict
+  `accept`, Phase 2 authorized. PR #14 awaits human approval.
+
+- M1-005B subscription wire protocol correction: exact loop/global paths,
+  `sss`/`siss` signatures, callback URL/path, integer auto-update interval,
+  unregister/cancellation paths, 16 tests.
+
+- M1-006B generation-aware reconciliation: engine generation in pending
+  operations, immutable reconciliation requests, generation cancellation,
+  unknown-UUID handling, 25 tests.
+
+- M1-007B reordered event semantics: monotonic timestamp handling,
+  stale-event rejection, explicit arrival-order semantics, 38 tests.
+
 - M1-005A real OSC ping/subscription transport (PR #11)
 - M1-006A safe reconciliation without mutex (PR #12)
 - M1-007A meaningful fault-injection assertions (PR #13)
