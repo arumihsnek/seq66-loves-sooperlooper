@@ -776,7 +776,8 @@ Handoff target: M3-004 (native Qt audio slots).
 
 ### M3-004 — native Qt audio slots
 
-Status: `ready`
+Status: `in_progress`
+Branch: `feature/m3-004-qt-audio-slots`
 Agent: `hermes`
 
 Dependencies: M3-003.
@@ -803,3 +804,24 @@ Required tests:
 - Command integration tests.
 
 Handoff target: M3-005 (transactional audio persistence).
+
+### M3-005 — transactional audio persistence
+
+Status: `pending`
+Agent: `hermes`
+
+Dependencies: M3-004.
+
+Requirement IDs: `PERSIST-001`.
+
+Deliverables:
+- Transactional save/load of audio slot state;
+- UUID-preserved clip identity across save/load;
+- Rollback on corruption;
+- Schema migration path.
+
+Acceptance criteria:
+- Save/load round-trips correctly;
+- Missing media visible and recoverable;
+- Corrupt file reverts to last valid;
+- MIDI-only projects unaffected.
