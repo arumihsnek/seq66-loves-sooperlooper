@@ -303,7 +303,7 @@ static void test_shutdown_during_flow ()
     sender.join();
 
     /* No crash = pass. */
-    check(true, "shutdown during flow did not crash");
+    check(!receiver.started(), "receiver stopped during flow");
 
     lo_address_free(addr);
 }
@@ -364,7 +364,7 @@ static void test_concurrent_cache_access ()
 
     check(write_count.load() > 0, "writer made progress");
     check(read_count.load() > 0, "readers made progress");
-    check(true, "concurrent access did not crash or deadlock");
+    check(cache.generation() > 0, "generation advanced during concurrent access");
 }
 
 /**
@@ -560,7 +560,10 @@ static void test_reorder_resilience ()
 
     auto snap = cache.snapshot();
     /* The latest timestamp should win. */
-    check(true, "reorder resilience — no crash, state applied");
+    check(snap.loops.count(0) && snap.loops[0].state.present,
+          "reorder resilience — state present after out-of-order apply");
+    check(snap.loops[0].state.value == 3,
+          "reorder resilience — latest timestamp value wins");
 }
 
 int
