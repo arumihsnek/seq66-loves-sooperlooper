@@ -32,7 +32,7 @@ versions before the fork reaches a releasable state.
 - M2-004 engine launch orchestration: backend-gated launch, deterministic
   OSC/JACK naming from instance_id + generation hash, generation sync
   between supervisor/observed_cache/engine_monitor, stale callback
-  rejection. 62 test assertions. PR #20.
+  rejection. 62 test assertions. PR #20 merged to fork-main (merge commit `5b8e2ba7`).
 
 - Phase 1 merged into `fork-main` via PR #14 (merge commit `75c57c4a`).
   Human approval recorded. CP-017 governance correction published.
