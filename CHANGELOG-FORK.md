@@ -13,6 +13,8 @@ versions before the fork reaches a releasable state.
 
 ### Added
 
+- M1-006 command confirmation contracts: `command_confirmation_tracker` with UUID-keyed pending operations, deadline evaluation, reconciliation, confirm/fail/cancel outcomes, 12 test groups. PR #9 merged (merge commit `d56f8edb`).
+
 - M1-005 ping, discovery and subscriptions: `sooperlooper_engine_monitor`
   lifecycle state machine (disabled -> starting -> reconciling -> ready ->
   stale -> engine_offline), configurable deadlines (ping interval 1s,
