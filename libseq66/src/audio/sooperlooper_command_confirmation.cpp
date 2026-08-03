@@ -133,23 +133,37 @@ command_confirmation_tracker::evaluate ()
 int
 command_confirmation_tracker::reconcile ()
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
     int count = 0;
 
     if (!m_reconciler)
         return 0;
 
-    for (auto & [uuid, op] : m_operations)
+    // Phase 1: copy indeterminate operations under lock.
+    std::vector<pending_operation> candidates;
     {
-        if (op.outcome != confirmation_outcome::indeterminate)
-            continue;
-        if (op.loop_index < 0)
-            continue;
+        std::lock_guard<std::mutex> lock(m_mutex);
+        for (const auto & [uuid, op] : m_operations)
+        {
+            if (op.outcome == confirmation_outcome::indeterminate &&
+                op.loop_index >= 0)
+                candidates.push_back(op);
+        }
+    }
 
+    // Phase 2: reconcile WITHOUT holding the lock.
+    for (const auto & op : candidates)
+    {
         if (m_reconciler(op.loop_index))
         {
-            op.outcome = confirmation_outcome::confirmed;
-            ++count;
+            // Phase 3: re-acquire lock and verify before confirming.
+            std::lock_guard<std::mutex> lock(m_mutex);
+            auto it = m_operations.find(op.uuid);
+            if (it != m_operations.end() &&
+                it->second.outcome == confirmation_outcome::indeterminate)
+            {
+                it->second.outcome = confirmation_outcome::confirmed;
+                ++count;
+            }
         }
     }
     return count;
