@@ -169,3 +169,15 @@ jobs:
 
       - name: Run audio slot view model test
         run: .ci/bin/sooperlooper_audio_slot_view_test
+
+      - name: Install Qt5 dev
+        run: sudo apt-get install -y qtbase5-dev libqt5test5
+
+      - name: Generate MOC for audio slot view
+        run: moc libseq66/include/widgets/sooperlooper_audio_slot_view.hpp -o /tmp/moc_view.cpp
+
+      - name: Compile Qt widget test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include -I/tmp libseq66/src/audio/sooperlooper_audio_slot_widget.cpp libseq66/src/widgets/sooperlooper_audio_slot_view.cpp /tmp/moc_view.cpp tests/widgets/sooperlooper_audio_slot_view_qt_test.cpp $(pkg-config --cflags --libs Qt5Widgets Qt5Test) -o .ci/bin/sooperlooper_audio_slot_view_qt_test
+
+      - name: Run Qt widget test
+        run: QT_QPA_PLATFORM=offscreen .ci/bin/sooperlooper_audio_slot_view_qt_test

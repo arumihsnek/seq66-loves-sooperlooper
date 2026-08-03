@@ -858,7 +858,10 @@ Does NOT satisfy Phase 4 DoD — minimum view/model only.
 
 ### M4-002 — Qt compilation and real test
 
-Status: `in_progress`
+Status: `done`
+Completed: 2026-08-03
+PR: pending
+Agent: `hermes`
 Branch: `feature/m4-002-qt-compilation`
 Agent: `hermes`
 
@@ -874,7 +877,9 @@ Acceptance: CI compiles and runs Qt widget test in headless mode.
 
 ### M4-003 — grid item integration
 
-Status: `pending`
+Status: `in_progress`
+Branch: `feature/m4-003-grid-integration`
+Agent: `hermes`
 Agent: `hermes`
 
 Dependencies: M4-002

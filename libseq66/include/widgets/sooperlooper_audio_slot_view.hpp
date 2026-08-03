@@ -86,6 +86,9 @@ private:
 
 } // namespace seq66
 
+Q_DECLARE_METATYPE(seq66::transport_action)
+Q_DECLARE_METATYPE(seq66::tempo_mode_selection)
+
 #endif // SEQ66_SOOPERLOOPER_AUDIO_SLOT_VIEW_HPP
 
 /*
