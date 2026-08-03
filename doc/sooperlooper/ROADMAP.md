@@ -136,7 +136,7 @@ Definition of done:
 
 ## Phase 3 — performer integration
 
-Status: **ready**.
+Status: **done** (2026-08-03, gate CP-034).
 
 Deliverables:
 
@@ -159,7 +159,7 @@ Definition of done:
 
 ## Phase 4 — first native Qt audio slot
 
-Status: **blocked by Phase 3**.
+Status: **ready**.
 
 Deliverables:
 

@@ -845,3 +845,21 @@ Acceptance criteria:
 - 504 assertions across 9 suites pass.
 - Phase gate review obtained.
 - Phase 4 opened.
+
+### PHASE4-001 — first native Qt audio slot
+
+Status: `in_progress`
+Branch: `feature/phase4-native-qt-audio-slot`
+Agent: `hermes`
+...[truncated]
+
+
+### PHASE4-001 — first native Qt audio slot
+
+Status: `in_progress`
+Branch: `feature/phase4-native-qt-audio-slot`
+Agent: `hermes`
+
+Dependencies: M3-001, M3-002, M3-003, M3-004, M3-005
+Acceptance: Phase 4 DoD in ROADMAP.md
+Handoff target: Phase 4 visual polish and integration testing.

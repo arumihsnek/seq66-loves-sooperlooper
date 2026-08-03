@@ -3,7 +3,7 @@
     "project_id": "seq66-loves-sooperlooper",
     "project_name": "Seq66 Loves SooperLooper",
     "status": "active",
-    "updated_at": "2026-08-03T18:30:00+02:00",
+    "updated_at": "2026-08-03",
     "repository": {
         "full_name": "arumihsnek/seq66-loves-sooperlooper",
         "default_branch": "fork-main",
@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "feature/m3-005-audio-persistence",
+        "active_branch": "feature/phase4-native-qt-audio-slot",
         "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "Phase 3 complete; awaiting phase gate."
+        "active_pull_request_note": "Phase 4 in progress"
     },
     "upstreams": {
         "seq66": {
@@ -29,8 +29,8 @@
         }
     },
     "coordination": {
-        "completed_phase": "phase-2-managed-engine-backend",
-        "current_phase": "phase-3-performer-integration",
+        "completed_phase": "phase-3-performer-integration",
+        "current_phase": "phase-4-native-qt-slot",
         "current_checkpoint": "doc/sooperlooper/checkpoints/CURRENT.md",
         "checkpoint_protocol": "doc/sooperlooper/CHECKPOINTS.md",
         "work_queue": "doc/sooperlooper/WORK-QUEUE.md",
@@ -70,34 +70,20 @@
         "silent_jack_over_alsa_start": false
     },
     "current_capabilities": [
-        "audio_clip musical model",
-        "free, tape and elastic tempo policies",
-        "initial outbound OSC adapter",
-        "typed SooperLooper command, control and state identifiers",
-        "fake-engine OSC contract test",
-        "real SooperLooper 1.7.9 plus JACK-dummy smoke test",
-        "production OSC receiver with lifecycle, strict allow-list, typed events and overflow counting",
-        "repository project-control plane and multi-agent handoff policy",
-        "machine-validated checkpoint and traceability structure",
-        "fork-specific pull request and task proposal templates",
-        "typed observed-state cache",
-        "engine generation and stale-feedback rejection",
-        "real OSC ping, discovery and subscription transport",
-        "generation-aware command confirmation and reconciliation",
-        "fault-injection matrix with reordered-event semantics",
-        "managed process supervisor with injectable adapter",
-        "engine launch orchestration with generation protocol",
-        "backend capability probe with injectable detection",
-        "JACK client/port discovery and Seq66-owned routing",
-        "readiness gate combining all evidence sources",
-        "process crash/restart reconciliation with exponential backoff",
-        "lifecycle smoke tests (crash, restart, ALSA-only no-launch)",
-        "clip UUID/runtime-index mapper with generation-scoped validity",
-        "audio slot widget model (no Qt rendering)",
-        "transactional audio persistence with rollback"
+        "headless clip lifecycle through Seq66 control paths",
+        "feedback-driven state display",
+        "UUID-based clip identity with generation-scoped runtime indexes",
+        "topology-conflict blocking during reconciliation",
+        "generation invalidation on crash",
+        "MIDI-only behaviour preserved",
+        "audio slot widget model layer",
+        "transactional audio persistence",
+        "transport and tempo policy"
     ],
     "missing_capabilities": [
-        "native Qt rendering layer"
+        "native Qt audio slot rendering",
+        "real SooperLooper/JACK integration",
+        "persistence schema migration"
     ],
     "ci": [
         {
@@ -117,11 +103,11 @@
         }
     ],
     "next_milestone": {
-        "id": "M3",
-        "name": "performer integration",
-        "active_task": "PHASE3-GATE",
+        "id": "M4",
+        "name": "native Qt audio slot",
+        "active_task": "PHASE4-001",
         "active_task_status": "in_progress",
-        "definition_of_done": "One headless audio clip can be allocated, recorded, launched, muted and overdubbed through Seq66 control paths; displayed state derives from feedback; restart rebuilds mapping without persisting raw indexes; topology conflicts blocked during reconciliation; MIDI-only behaviour remains functional."
+        "definition_of_done": "First native Qt audio slot renders real loop state, supports transport start/stop, tempo mode selection, and command feedback via the widget model layer."
     },
     "required_agent_exit_updates": [
         "update WORK-QUEUE.md",
