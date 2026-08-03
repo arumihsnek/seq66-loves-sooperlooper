@@ -1,131 +1,136 @@
-## Task and scope
+## Task or phase gate and scope
 
-Task ID: <!-- e.g. M2-002 -->
-Requirement IDs: <!-- e.g. BACKEND-001, FAIL-005 -->
+Task/phase ID: <!-- e.g. M2-003 or Phase 2 gate -->
+Requirement IDs:
 Target branch: `fork-main`
 
-Describe the smallest coherent vertical change and explicitly list anything out
-of scope.
+Describe the smallest coherent unit and explicitly list out-of-scope work.
 
 ## Autonomy classification
 
-Decision level:
+Highest decision level:
 
 - [ ] `L1_AUTONOMOUS`
 - [ ] `L2_SENIOR_REQUIRED`
 - [ ] `L3_HUMAN_REQUIRED`
 - [ ] `L4_SAFETY_STOP`
 
-Human decision ID, when applicable: <!-- none or DECISION-ID -->
+Human decision ID when applicable: <!-- none or DECISION-ID -->
+Hermes selection form used when applicable: <!-- yes/no/not applicable -->
 
-Explain why the selected level is correct. An ordinary technical uncertainty is
-not a valid L3 escalation.
+Explain the classification. A phase boundary or ordinary technical uncertainty
+is not by itself L3.
 
 ## Evidence level
 
-Check only evidence actually produced:
-
 - [ ] code inspected/implemented
 - [ ] compiled
-- [ ] pure/unit tests passed
-- [ ] fake-engine OSC tests passed
-- [ ] pinned real SooperLooper test passed
+- [ ] unit tests passed
+- [ ] fake-engine tests passed
+- [ ] pinned real-engine test passed
 - [ ] native JACK tested
 - [ ] PipeWire-JACK tested
-- [ ] Raspberry Pi/target hardware tested
+- [ ] target hardware tested
 - [ ] soak/performance tested
 
-Exact commands/workflows and results:
+Exact commands/workflows, exact revision and results:
 
 ```text
-<!-- command/workflow, exact revision, result -->
+<!-- evidence -->
 ```
 
 Unavailable evidence and reason:
 
 ```text
-<!-- explicit none / not applicable / unavailable -->
+<!-- none / not applicable / unavailable -->
 ```
 
 ## Architecture and safety
 
 - [ ] Seq66 remains authority for intent, project, lifecycle, routing and UI.
 - [ ] desired and observed state remain separate.
-- [ ] outbound OSC delivery is not treated as completion.
-- [ ] no UI or real-time path performs blocking OSC/process/file operations.
-- [ ] runtime loop indexes are not persisted as clip identity.
-- [ ] ALSA-only audio remains hard `backend_unavailable`, not mute.
-- [ ] existing MIDI-only behaviour is preserved.
-- [ ] no destructive operation, shared-history rewrite or silent requirement
-      relaxation is included.
-
-## Protocol changes
-
-- [ ] no protocol change
-- [ ] paths/signatures/ranges are verified against pinned SooperLooper source
-- [ ] fake-engine tests cover valid and invalid forms
-- [ ] `OSC-CONTROL-AND-FEEDBACK.md` and traceability are updated
+- [ ] outbound delivery is not treated as completion.
+- [ ] no UI or real-time path blocks on OSC/process/file work.
+- [ ] runtime indexes are not persisted as identity.
+- [ ] ALSA-only remains hard `backend_unavailable`.
+- [ ] MIDI-only behaviour is preserved.
+- [ ] no destructive operation, history rewrite or silent requirement relaxation.
 
 ## Senior consultation
 
-- [ ] not required by policy
-- [ ] planning consultation completed
-- [ ] failure consultation completed
-- [ ] exact-head merge-gate consultation completed
+- [ ] planning consultation completed when required
+- [ ] failure consultation completed when required
+- [ ] exact-head task merge review completed
+- [ ] exact-head phase review completed when this is a phase gate
 
-Consultation reference/execution:
+Consultation reference:
 Exact head reviewed:
 Verdict:
 Blocking findings:
 Non-blocking risks:
 
-A material code, test or contract change after the recorded review invalidates
-the merge verdict.
+A material change after review invalidates the verdict.
 
 ## Project-control updates
 
-- [ ] `WORK-QUEUE.md` task status/next action updated
-- [ ] `TRACEABILITY.md` updated when requirements/evidence changed
+- [ ] `WORK-QUEUE.md` updated
+- [ ] `TRACEABILITY.md` updated
 - [ ] `DECISIONS.md` updated for durable choices
-- [ ] `CHANGELOG-FORK.md` updated for notable durable changes
-- [ ] `PROJECT-MANIFEST.json` updated when phase/task/branch/revisions changed
-- [ ] new immutable checkpoint written
-- [ ] `checkpoints/CURRENT.md` points to the new checkpoint
-- [ ] PR body states exact failures, risks and next task ID
-- [ ] `PROJECT-AUTONOMY.json` and autonomy documents remain consistent
+- [ ] `CHANGELOG-FORK.md` updated for durable notable changes
+- [ ] `PROJECT-MANIFEST.json` updated when live state changed
+- [ ] immutable checkpoint written
+- [ ] CURRENT points to the correct checkpoint
+- [ ] autonomy policy and documents remain consistent
 
-## Autonomous merge gate
+## Autonomous merge and phase gate
 
-Complete this section for an ordinary autonomous merge. Milestone transitions
-still require a human decision.
+Complete for every autonomous merge.
 
-- [ ] task exists in `WORK-QUEUE.md` and dependencies are satisfied
-- [ ] scope matches one task or a declared integration unit
+- [ ] task or phase gate exists in the control plane
+- [ ] dependencies and definition of done are satisfied
+- [ ] scope matches the declared unit
 - [ ] all required checks pass on the exact head below
-- [ ] focused negative tests are present where behaviour changes
+- [ ] focused negative tests are present where applicable
 - [ ] project-control validator passes
 - [ ] autonomy-policy validator passes
-- [ ] traceability and immutable checkpoint are current
-- [ ] senior merge gate accepts the exact head without blockers
+- [ ] traceability and checkpoint are current
+- [ ] senior exact-head gate accepts without blockers
 - [ ] no unresolved review thread remains
 - [ ] PR is mergeable and targets the intended base
 - [ ] expected-head protection will be used
-- [ ] merge commit will be used unless a versioned policy says otherwise
-- [ ] this PR does not close a milestone or open the next one
+- [ ] merge commit will be used unless versioned policy says otherwise
+- [ ] no unresolved L3 or L4 trigger is crossed
+
+For a phase transition additionally:
+
+- [ ] current phase definition of done is satisfied
+- [ ] full phase matrix passes on the integrated exact head
+- [ ] next phase is already approved and bounded in the roadmap
+- [ ] next phase has a first real task
+- [ ] residual risks are recorded and senior-classified non-blocking
+- [ ] no product, subjective, incompatibility, licensing, data-loss or other L3
+      choice remains
 
 Expected head:
 Expected base:
 Required workflow runs:
 Planned merge method: `merge`
 
+## Human interaction when L3/L4 applies
+
+- [ ] native Hermes selection form used when supported
+- [ ] two to four concrete options provided
+- [ ] senior recommendation visibly marked
+- [ ] `Otra opción / Other` with free text included when safe
+- [ ] plain chat fallback reason recorded when a form was not used
+
 ## Upstream compatibility
 
-- [ ] branch targets `fork-main`, not `master`
-- [ ] unrelated upstream refactors are excluded
-- [ ] conflicts with upstream Seq66 are described
-- [ ] upstream/tested revisions are recorded when changed
+- [ ] targets `fork-main`, not `master`
+- [ ] unrelated upstream refactors excluded
+- [ ] upstream conflicts described
+- [ ] tested/upstream revisions recorded when changed
 
 ## Remaining risks and next executable action
 
-List blocking and non-blocking risks separately. Give one concrete next action;
-do not write a vague “continue work.”
+Separate blocking and non-blocking risks. Give one bounded next action.
