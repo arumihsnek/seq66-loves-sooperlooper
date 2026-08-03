@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "feature/m2-004-engine-launch",
-        "active_pull_request": 20,
+        "active_branch": "feature/m2-005-jack-discovery",
+        "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M2-004 engine launch orchestration with generation protocol"
+        "active_pull_request_note": "M2-005 JACK discovery and routing — preparing"
     },
     "upstreams": {
         "seq66": {
@@ -85,7 +85,8 @@
         "real OSC ping, discovery and subscription transport",
         "generation-aware command confirmation and reconciliation",
         "fault-injection matrix with reordered-event semantics",
-        "managed process supervisor with injectable adapter"
+        "managed process supervisor with injectable adapter",
+        "engine launch orchestration with generation protocol"
     ],
     "missing_capabilities": [
         "process supervisor",
@@ -114,7 +115,7 @@
     "next_milestone": {
         "id": "M2",
         "name": "managed engine and backend gate",
-        "active_task": "M2-004",
+        "active_task": "M2-005",
         "active_task_status": "ready",
         "definition_of_done": "Engine readiness verified, ALSA-only hard-blocked, crash/restart safe, no SooperLooper GUI needed, native JACK and PipeWire-JACK separately tested."
     },

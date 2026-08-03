@@ -109,3 +109,9 @@ jobs:
 
       - name: Run engine launcher test
         run: .ci/bin/sooperlooper_engine_launcher_test
+
+      - name: Compile JACK discovery test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_engine_jack_discovery.cpp tests/audio/sooperlooper_engine_jack_discovery_test.cpp -o .ci/bin/sooperlooper_engine_jack_discovery_test
+
+      - name: Run JACK discovery test
+        run: .ci/bin/sooperlooper_engine_jack_discovery_test
