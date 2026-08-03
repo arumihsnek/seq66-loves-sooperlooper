@@ -157,3 +157,9 @@ jobs:
 
       - name: Run audio slot widget model test
         run: .ci/bin/sooperlooper_audio_slot_widget_test
+
+      - name: Compile audio persistence test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_audio_slot_widget.cpp libseq66/src/audio/sooperlooper_audio_persistence.cpp tests/audio/sooperlooper_audio_persistence_test.cpp -o .ci/bin/sooperlooper_audio_persistence_test
+
+      - name: Run audio persistence test
+        run: .ci/bin/sooperlooper_audio_persistence_test
