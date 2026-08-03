@@ -204,7 +204,7 @@ jobs:
         run: .ci/bin/sooperlooper_audio_slot_controls_test
 
       - name: Compile state renderer test
-        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_audio_slot_state_renderer.cpp libseq66/src/audio/sooperlooper_audio_slot_widget.cpp tests/audio/sooperlooper_audio_slot_state_renderer_test.cpp -o .ci/bin/sooperlooper_audio_slot_state_renderer_test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_audio_slot_widget.cpp libseq66/src/audio/sooperlooper_audio_slot_state_renderer.cpp tests/audio/sooperlooper_audio_slot_state_renderer_test.cpp -o .ci/bin/sooperlooper_audio_slot_state_renderer_test
 
       - name: Run state renderer test
         run: .ci/bin/sooperlooper_audio_slot_state_renderer_test

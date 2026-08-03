@@ -448,3 +448,45 @@ Result: 22/22 pass. All Qt assertions passed.
 - QSignalSpy verifies signal emission
 - No synchronous OSC calls from any handler
 - Model layer still passes 55 assertions
+
+## M4-006 state renderer evidence
+
+### Compilation
+
+Compiled on Linux with g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include.
+Exit code: 0
+
+### Test execution
+
+Result: 32/32 pass. All state renderer assertions passed.
+
+### Coverage
+
+| Test case | Assertions | Status |
+|---|---|---|
+| Idle state | 4 | pass |
+| Pending state | 2 | pass |
+| Active state | 2 | pass |
+| Stale state | 2 | pass |
+| Offline state | 2 | pass |
+| Failed state | 2 | pass |
+| Indeterminate state | 2 | pass |
+| Meter freshness | 3 | pass |
+| Meter absent | 2 | pass |
+| Transport enabled | 2 | pass |
+| Record enabled | 3 | pass |
+| is_stale | 3 | pass |
+| is_failed | 3 | pass |
+| **Total** | **32** | **all pass** |
+
+### Design verification
+
+- No synchronous OSC from paint: renderer reads only from audio_slot_model snapshots
+- State driven by observed snapshots: display_state derived from model.command_status and model.observed_state
+- Bounded update frequency: staleness threshold (5000ms) is configurable via stale_threshold_ms parameter
+- Absent/stale values: cached_meter.present distinguishes absent from zero
+
+### CI steps added
+
+1. Compile state renderer test
+2. Run state renderer test
