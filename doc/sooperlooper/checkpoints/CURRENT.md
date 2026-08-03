@@ -1,26 +1,26 @@
-# Checkpoint: Phase 1 gate — ready for human review
+# Checkpoint: Human-review corrective audit baseline
 
-## Checkpoint ID: `CP-013`
+## Checkpoint ID: `CP-014`
 ## Checkpoint date: 2026-08-03
 
 ### Phase
 phase-1-protocol-core
 
 ### Active task
-M1-008 (phase-1 integration gate) — awaiting human review
+M1-005B (subscription wire protocol fix) — corrective cycle
 
 ### Summary
-Phase 1 is complete. All M1-001-M1-007 tasks merged, plus three
-correctives (M1-004A, M1-005A, M1-006A, M1-007A). All tests pass.
-Ready for human review. NO PHASE 2 AUTHORIZED.
+Human review found three functional blockers (B-001 subscription wire
+protocol, B-002 reconciliation generation awareness, B-003 reordered
+event semantics) and several gate incoherencies. Three corrective branches
+planned. No PRs approved or merged during corrective cycle.
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-013-phase-1-gate.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-014-human-review-correctives.md`
 
 ### Evidence
-- 13 PRs merged (PR #1-#13)
-- 5 test suites pass: receiver, observed-state, monitor, confirmation, fault-injection
-- All correctives verified: TOCTOU fix, real transport, safe reconciliation, meaningful assertions
-- Control plane coherent and validated
+- CP-013 exists as immutable historical record
+- Three blockers identified: subscription protocol, reconciliation, event ordering
+- Gate incoherencies documented
 
 ### Next immediate action
-Awaiting human review. No autonomous action.
+Begin M1-005B on fix/m1-005b-subscription-wire-protocol.
