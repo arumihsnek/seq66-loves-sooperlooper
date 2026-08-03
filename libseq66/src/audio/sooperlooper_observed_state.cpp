@@ -88,14 +88,24 @@ extract_loop_index (const std::string & path)
 
 /*
  *  Apply a float value to an observed_field.
+ *
+ *  M1-007B: For coalescible fields, reject if the new timestamp is older
+ *  than or equal to the current timestamp.  This prevents stale telemetry
+ *  from corrupting state after network reorder.
  */
 static bool
-apply_field (observed_field<float> & field, const std::string & arg,
-             long long timestamp_us)
+apply_field_coalescible (observed_field<float> & field, const std::string & arg,
+                         long long timestamp_us)
 {
     float v = parse_float(arg);
     if (!std::isfinite(v))
         return false;   // Reject NaN and Inf — do not create state from invalid payload.
+    /* M1-007B: Monotonic timestamp check for coalescible fields.
+     * Ignore arrivals with timestamps <= the current field timestamp.
+     * This prevents stale/out-of-order telemetry from overwriting
+     * newer values. */
+    if (field.present && timestamp_us < field.timestamp_us)
+        return false;   // Stale arrival — strictly older timestamp ignored.
     field.value = v;
     field.present = true;
     field.timestamp_us = timestamp_us;
@@ -103,11 +113,11 @@ apply_field (observed_field<float> & field, const std::string & arg,
 }
 
 /*
- *  Apply an int value to an observed_field.
+ *  Apply an int value to an observed_field (non-coalescible).
  */
 static bool
-apply_field (observed_field<int> & field, const std::string & arg,
-             long long timestamp_us)
+apply_field_int (observed_field<int> & field, const std::string & arg,
+                 long long timestamp_us)
 {
     field.value = parse_int(arg);
     field.present = true;
@@ -116,8 +126,41 @@ apply_field (observed_field<int> & field, const std::string & arg,
 }
 
 /*
+ *  Apply a float value to an observed_field (non-coalescible, for
+ *  transition-critical or low-rate fields).
+ */
+static bool
+apply_field_non_coalescible (observed_field<float> & field, const std::string & arg,
+                             long long timestamp_us)
+{
+    float v = parse_float(arg);
+    if (!std::isfinite(v))
+        return false;
+    field.value = v;
+    field.present = true;
+    field.timestamp_us = timestamp_us;
+    return true;
+}
+
+/*
  *  Try to apply a loop control from string arguments.
  *  Returns true if the control was recognised and applied.
+ */
+/*
+ *  M1-007B: Field classification policy.
+ *
+ *  Arrival-ordered (always applied, never skipped):
+ *    state, next_state, waiting — transition-critical
+ *    loop_len, cycle_len — low-rate structural
+ *    channel_count, is_soloed — low-rate structural
+ *
+ *  Timestamp-ordered (stale arrivals rejected):
+ *    loop_pos — high-frequency coalescible
+ *    in_peak_meter, out_peak_meter — high-frequency coalescible
+ *    rate_output — high-frequency coalescible
+ *
+ *  Unknown future controls are rejected by try_parse() before reaching
+ *  this function.
  */
 static bool
 apply_loop_control (loop_observed_state & state, loop_control control,
@@ -131,38 +174,33 @@ apply_loop_control (loop_observed_state & state, loop_control control,
 
     switch (control)
     {
+        /* Transition-critical: always applied in arrival order. */
         case loop_control::state:
-            return apply_field(state.state, val, timestamp_us);
-
+            return apply_field_int(state.state, val, timestamp_us);
         case loop_control::next_state:
-            return apply_field(state.next_state, val, timestamp_us);
-
+            return apply_field_int(state.next_state, val, timestamp_us);
         case loop_control::waiting:
-            return apply_field(state.waiting, val, timestamp_us);
+            return apply_field_int(state.waiting, val, timestamp_us);
 
+        /* Low-rate structural: always applied. */
         case loop_control::loop_len:
-            return apply_field(state.loop_len, val, timestamp_us);
-
-        case loop_control::loop_pos:
-            return apply_field(state.loop_pos, val, timestamp_us);
-
+            return apply_field_non_coalescible(state.loop_len, val, timestamp_us);
         case loop_control::cycle_len:
-            return apply_field(state.cycle_len, val, timestamp_us);
-
-        case loop_control::rate_output:
-            return apply_field(state.rate_output, val, timestamp_us);
-
+            return apply_field_non_coalescible(state.cycle_len, val, timestamp_us);
         case loop_control::channel_count:
-            return apply_field(state.channel_count, val, timestamp_us);
-
+            return apply_field_int(state.channel_count, val, timestamp_us);
         case loop_control::is_soloed:
-            return apply_field(state.is_soloed, val, timestamp_us);
+            return apply_field_int(state.is_soloed, val, timestamp_us);
 
+        /* High-frequency coalescible: stale arrivals rejected. */
+        case loop_control::loop_pos:
+            return apply_field_coalescible(state.loop_pos, val, timestamp_us);
+        case loop_control::rate_output:
+            return apply_field_coalescible(state.rate_output, val, timestamp_us);
         case loop_control::in_peak_meter:
-            return apply_field(state.in_peak_meter, val, timestamp_us);
-
+            return apply_field_coalescible(state.in_peak_meter, val, timestamp_us);
         case loop_control::out_peak_meter:
-            return apply_field(state.out_peak_meter, val, timestamp_us);
+            return apply_field_coalescible(state.out_peak_meter, val, timestamp_us);
 
         default:
             return false;
@@ -186,19 +224,19 @@ apply_global_control (global_observed_state & state, global_control control,
     switch (control)
     {
         case global_control::tempo:
-            return apply_field(state.tempo, val, timestamp_us);
+            return apply_field_non_coalescible(state.tempo, val, timestamp_us);
 
         case global_control::eighth_per_cycle:
-            return apply_field(state.eighth_per_cycle, val, timestamp_us);
+            return apply_field_non_coalescible(state.eighth_per_cycle, val, timestamp_us);
 
         case global_control::sync_source:
-            return apply_field(state.sync_source, val, timestamp_us);
+            return apply_field_int(state.sync_source, val, timestamp_us);
 
         case global_control::global_cycle_len:
-            return apply_field(state.global_cycle_len, val, timestamp_us);
+            return apply_field_non_coalescible(state.global_cycle_len, val, timestamp_us);
 
         case global_control::global_cycle_pos:
-            return apply_field(state.global_cycle_pos, val, timestamp_us);
+            return apply_field_coalescible(state.global_cycle_pos, val, timestamp_us);
 
         default:
             return false;

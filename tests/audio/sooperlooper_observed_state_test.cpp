@@ -725,6 +725,203 @@ main ()
     }
 
     // ---- Summary ----
+    // ---- M1-007B: Reordered event semantics tests ----
+
+    // ---- Test 28: Reordered telemetry - stale loop_pos rejected ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "loop_pos", "0.8", 5000000LL);
+        bool applied = make_loop_event(cache, 0, "loop_pos", "0.3", 1000000LL);
+        if (applied)
+        {
+            std::cerr << "ERROR: Stale loop_pos should be rejected." << std::endl;
+            ++failures;
+        }
+        auto snap = cache.snapshot();
+        auto it = snap.loops.find(0);
+        if (it != snap.loops.end() && it->second.loop_pos.value != 0.8f)
+        {
+            std::cerr << "ERROR: loop_pos should remain 0.8." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Stale loop_pos rejected." << std::endl;
+    }
+
+    // ---- Test 29: Reordered telemetry - stale in_peak_meter rejected ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "in_peak_meter", "0.5", 3000000LL);
+        make_loop_event(cache, 0, "in_peak_meter", "0.9", 4000000LL);
+        bool applied = make_loop_event(cache, 0, "in_peak_meter", "0.2", 2000000LL);
+        if (applied)
+        {
+            std::cerr << "ERROR: Stale in_peak_meter should be rejected." << std::endl;
+            ++failures;
+        }
+        auto snap = cache.snapshot();
+        auto it = snap.loops.find(0);
+        if (it != snap.loops.end() && it->second.in_peak_meter.value != 0.9f)
+        {
+            std::cerr << "ERROR: in_peak_meter should remain 0.9." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Stale in_peak_meter rejected." << std::endl;
+    }
+
+    // ---- Test 30: Reordered telemetry - stale rate_output rejected ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "rate_output", "2.0", 5000000LL);
+        bool applied = make_loop_event(cache, 0, "rate_output", "0.5", 4000000LL);
+        if (applied)
+        {
+            std::cerr << "ERROR: Stale rate_output should be rejected." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Stale rate_output rejected." << std::endl;
+    }
+
+    // ---- Test 31: Equal timestamps - applied (not rejected) ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "loop_pos", "0.5", 1000000LL);
+        bool applied = make_loop_event(cache, 0, "loop_pos", "0.7", 1000000LL);
+        if (!applied)
+        {
+            std::cerr << "ERROR: Equal timestamp should still be applied." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Equal timestamp applied." << std::endl;
+    }
+
+    // ---- Test 32: Transition-critical state always applied ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "state", "3", 5000000LL);
+        bool applied = make_loop_event(cache, 0, "state", "1", 1000000LL);
+        if (!applied)
+        {
+            std::cerr << "ERROR: Older state should still be applied (transition-critical)." << std::endl;
+            ++failures;
+        }
+        auto snap = cache.snapshot();
+        auto it = snap.loops.find(0);
+        if (it != snap.loops.end() && it->second.state.value != 1)
+        {
+            std::cerr << "ERROR: state should be 1 after arrival-ordered apply." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Transition-critical state applied in arrival order." << std::endl;
+    }
+
+    // ---- Test 33: Duplicate packets - same value, same timestamp ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "loop_pos", "0.5", 1000000LL);
+        bool applied = make_loop_event(cache, 0, "loop_pos", "0.5", 1000000LL);
+        if (!applied)
+        {
+            std::cerr << "ERROR: Duplicate packet with same timestamp should be applied." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Duplicate packet applied (equal timestamp)." << std::endl;
+    }
+
+    // ---- Test 34: Reorder between generations - stale gen rejected ----
+    {
+        sooperlooper_observed_cache cache;
+        cache.set_generation(2);
+        make_loop_event(cache, 0, "state", "4", 2000000LL, 2);
+        bool applied = make_loop_event(cache, 0, "state", "1", 3000000LL, 1);
+        if (applied)
+        {
+            std::cerr << "ERROR: Old generation event should be rejected." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Old generation event rejected." << std::endl;
+    }
+
+    // ---- Test 35: Coalescible field monotonic timestamp ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "loop_pos", "0.9", 5000000LL);
+        make_loop_event(cache, 0, "loop_pos", "0.1", 3000000LL);
+        make_loop_event(cache, 0, "loop_pos", "0.7", 4000000LL);
+        make_loop_event(cache, 0, "loop_pos", "0.6", 6000000LL);
+        auto snap = cache.snapshot();
+        auto it = snap.loops.find(0);
+        if (it != snap.loops.end())
+        {
+            if (it->second.loop_pos.value != 0.6f)
+            {
+                std::cerr << "ERROR: loop_pos should be 0.6 (latest timestamp)." << std::endl;
+                ++failures;
+            }
+            if (it->second.loop_pos.timestamp_us != 6000000LL)
+            {
+                std::cerr << "ERROR: timestamp should be 6000000." << std::endl;
+                ++failures;
+            }
+        }
+        std::cout << "  [PASS] Coalescible field monotonic timestamp." << std::endl;
+    }
+
+    // ---- Test 36: Callback recovery after gap ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "loop_pos", "0.5", 1000000LL);
+        make_loop_event(cache, 0, "loop_pos", "0.8", 5000000LL);
+        auto snap = cache.snapshot();
+        auto it = snap.loops.find(0);
+        if (it != snap.loops.end() && it->second.loop_pos.value != 0.8f)
+        {
+            std::cerr << "ERROR: loop_pos should be 0.8 after recovery." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Callback recovery after gap." << std::endl;
+    }
+
+    // ---- Test 37: Out_peak_meter stale rejected ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "out_peak_meter", "0.9", 5000000LL);
+        bool applied = make_loop_event(cache, 0, "out_peak_meter", "0.1", 2000000LL);
+        if (applied)
+        {
+            std::cerr << "ERROR: Stale out_peak_meter should be rejected." << std::endl;
+            ++failures;
+        }
+        auto snap = cache.snapshot();
+        auto it = snap.loops.find(0);
+        if (it != snap.loops.end() && it->second.out_peak_meter.value != 0.9f)
+        {
+            std::cerr << "ERROR: out_peak_meter should remain 0.9." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Stale out_peak_meter rejected." << std::endl;
+    }
+
+    // ---- Test 38: Concrete invariant - no check(true) ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "loop_pos", "0.5", 1000000LL);
+        make_loop_event(cache, 0, "loop_pos", "0.8", 5000000LL);
+        make_loop_event(cache, 0, "loop_pos", "0.3", 2000000LL);
+        auto snap = cache.snapshot();
+        auto it = snap.loops.find(0);
+        if (it != snap.loops.end())
+        {
+            bool invariant = it->second.loop_pos.timestamp_us >= 1000000LL &&
+                             it->second.loop_pos.value >= 0.0f;
+            if (!invariant)
+            {
+                std::cerr << "ERROR: Coalescible invariant violated." << std::endl;
+                ++failures;
+            }
+        }
+        std::cout << "  [PASS] Concrete invariant verified." << std::endl;
+    }
+
     std::cout << std::endl;
     if (failures == 0)
     {
