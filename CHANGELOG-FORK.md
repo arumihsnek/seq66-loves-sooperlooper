@@ -13,6 +13,13 @@ versions before the fork reaches a releasable state.
 
 ### Added
 
+- Machine-validated autonomous project governance: `PROJECT-AUTONOMY.json`,
+  L1-L4 decision authority, independent `codex-senior-consult` contracts,
+  exact-head autonomous merge gates, bounded human-decision packets, a complete
+  recover/implement/review/merge/checkpoint mission lifecycle, CI validation and
+  task/PR/report templates. Ordinary task execution and eligible merges can now
+  continue without repeated human coordination inside an approved milestone.
+
 - M1-008 Phase 1 integration gate PASS (CP-016): all three required CI
   workflows green on gate head `50d39dfb`, `codex-senior-consult` verdict
   `accept`, Phase 2 authorized. PR #14 awaits human approval.
@@ -121,6 +128,10 @@ versions before the fork reaches a releasable state.
 
 ### Changed
 
+- `AGENTS.md`, task proposals and PR templates now classify L1-L4 authority,
+  require exact-head senior review where applicable and permit ordinary
+  autonomous merges only through the versioned merge gate. Milestone
+  transitions remain explicit human decisions.
 - Pull request #1 now targets `fork-main` instead of upstream-mirror `master`.
 - Documentation distinguishes fork plans from upstream Seq66 TODOs, roadmap,
   release notes and historical changelog.
@@ -140,6 +151,9 @@ versions before the fork reaches a releasable state.
 
 ### Security and safety
 
+- Autonomous operation explicitly forbids force pushes, shared-history rewrite,
+  silent requirement relaxation, red-check merges, implicit approval and
+  destructive/irreversible changes without the corresponding human gate.
 - ALSA-only audio is specified to fail closed as `backend_unavailable` without
   deleting or silently muting persisted clips.
 - OSC callback paths, signatures and file operations are constrained by the
@@ -152,6 +166,7 @@ Update this file in the same coherent change for:
 - user-visible behaviour;
 - supported backend or compatibility changes;
 - architecture or persistence changes;
+- autonomy, merge or human-authority changes;
 - new required workflows or tooling;
 - migrations;
 - important fixes;

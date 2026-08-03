@@ -7,22 +7,30 @@ on:
       - fork-main
     paths:
       - 'PROJECT-MANIFEST.json'
+      - 'PROJECT-AUTONOMY.json'
+      - 'AUTONOMY.md'
       - 'AGENTS.md'
       - 'CHANGELOG-FORK.md'
       - 'ROADMAP.md'
       - 'TODO'
       - 'doc/sooperlooper/**'
       - 'contrib/scripts/validate-project-control.py'
+      - 'contrib/scripts/validate-autonomy-policy.py'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
       - '.github/workflows/project-control.yml'
   pull_request:
     paths:
       - 'PROJECT-MANIFEST.json'
+      - 'PROJECT-AUTONOMY.json'
+      - 'AUTONOMY.md'
       - 'AGENTS.md'
       - 'CHANGELOG-FORK.md'
       - 'ROADMAP.md'
       - 'TODO'
       - 'doc/sooperlooper/**'
       - 'contrib/scripts/validate-project-control.py'
+      - 'contrib/scripts/validate-autonomy-policy.py'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
       - '.github/workflows/project-control.yml'
 
 permissions:
@@ -39,5 +47,11 @@ jobs:
       - name: Validate manifest JSON
         run: python3 -m json.tool PROJECT-MANIFEST.json > /dev/null
 
+      - name: Validate autonomy JSON
+        run: python3 -m json.tool PROJECT-AUTONOMY.json > /dev/null
+
       - name: Validate control-file consistency
         run: python3 contrib/scripts/validate-project-control.py
+
+      - name: Validate autonomous governance
+        run: python3 contrib/scripts/validate-autonomy-policy.py

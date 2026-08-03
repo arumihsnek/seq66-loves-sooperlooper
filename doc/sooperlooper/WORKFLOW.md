@@ -2,188 +2,189 @@
 
 ## Purpose
 
-This document defines how humans, Codex sessions and Hermes profiles continue
-work without relying on chat history or loading the entire repository into
-context.
+This document defines how Hermes, Codex sessions and humans continue work
+without relying on chat history.
 
-The durable project state lives in GitHub. Agent memory and conversation logs
-are disposable caches.
+Durable state lives in GitHub. `/PROJECT-AUTONOMY.json` and `/AUTONOMY.md`
+define authority; this workflow applies them to the manifest, queue,
+checkpoints, traceability and CI.
+
+## Autonomous-by-default mode
+
+Hermes is expected to progress through the approved roadmap without repeated
+human permission.
+
+Hermes owns implementation, tests, branches, PRs, CI repair, control-plane
+maintenance, senior consultation, eligible task merges and clear phase
+transitions.
+
+The human owns only genuine L3/L4 decisions: product scope, subjective musical
+or visual behaviour, intentional incompatibility, licensing, data loss,
+irreversible migration, unresolved requirement conflict, unavailable physical
+or subjective acceptance and safety stops.
+
+A phase boundary is not automatically a human gate.
+
+## Decision classification
+
+- `L1_AUTONOMOUS`: Hermes decides and executes;
+- `L2_SENIOR_REQUIRED`: Hermes consults senior, then decides and executes;
+- `L3_HUMAN_REQUIRED`: one bounded human selection form;
+- `L4_SAFETY_STOP`: stop the affected mutation and report evidence.
+
+Human questions follow `HUMAN-ESCALATION.md`. Merges and phase transitions
+follow `AUTONOMOUS-MERGE.md`.
+
+## Continuous task loop
+
+1. recover repository state;
+2. select one ready task;
+3. define acceptance criteria and evidence;
+4. consult senior when L2 applies;
+5. implement the smallest complete vertical unit;
+6. run local validation;
+7. open/update a PR;
+8. repair CI autonomously;
+9. obtain exact-head senior merge review;
+10. merge with `expected-head` protection when all gates pass;
+11. write an immutable checkpoint and update control files;
+12. continue with the next ready task.
+
+The loop stops only for a genuine L3/L4 condition.
+
+## Phase loop
+
+When a phase is complete Hermes:
+
+1. verifies definition of done item by item;
+2. runs the full required matrix on the exact integrated head;
+3. records unavailable evidence;
+4. audits traceability and project control;
+5. obtains global exact-head senior phase review;
+6. records blocking/non-blocking risks;
+7. verifies the next phase is already approved, bounded and has a first task;
+8. confirms no L3/L4 trigger exists;
+9. publishes the phase gate checkpoint and PR;
+10. merges with `expected-head` protection;
+11. writes the post-transition checkpoint;
+12. opens the next phase and continues.
+
+No human message is required when all conditions are true.
+
+If the transition changes approved scope or hits L3/L4, Hermes uses the native
+selection-form protocol in `HUMAN-ESCALATION.md`.
 
 ## Five-minute recovery path
 
-A new agent starts with this exact order:
-
 1. read `/PROJECT-MANIFEST.json`;
-2. read `checkpoints/CURRENT.md`;
-3. read `WORK-QUEUE.md` and locate the active task ID;
-4. inspect the active PR metadata and latest CI results;
-5. read only the architecture/specification sections linked by that task;
-6. inspect only the source and tests named by that task or changed by the PR.
+2. read `/PROJECT-AUTONOMY.json` and `/AUTONOMY.md`;
+3. read `checkpoints/CURRENT.md`;
+4. locate the active `WORK-QUEUE.md` task;
+5. inspect active PR and exact-head CI;
+6. read only linked specification/architecture sections;
+7. inspect only owned source and tests.
 
-Do not initially load every document, the complete PR diff or broad parts of
-Seq66. Expand context only when evidence or dependencies require it.
+Do not reconstruct state from chat or commit messages alone.
 
-## Context budget rules
+## Context rules
 
-- The manifest answers where the project is.
-- The current checkpoint answers what just happened and what remains risky.
-- The work queue answers what to do next.
-- The traceability matrix answers which requirement and test own the task.
-- The roadmap answers phase ordering, not day-to-day task selection.
-- The detailed specification is opened by section, not blindly in full.
-- `TESTED-BEHAVIOUR.md` is read when assumptions about SooperLooper runtime are
-  involved.
+- manifest: live repository and task state;
+- autonomy policy: authority and gates;
+- CURRENT/checkpoint: latest handoff and risks;
+- work queue: next executable work;
+- traceability: requirement/evidence ownership;
+- roadmap: phase ordering and approved boundaries;
+- PR/CI: review surface and executable proof.
 
-An agent must not reconstruct state from commit messages alone when the control
-files above are available.
+## Starting a session
 
-## Starting a work session
-
-1. Verify repository, branch and active PR against the manifest.
-2. Verify `CURRENT.md` points to an existing immutable checkpoint.
-3. Confirm CI status for the current head.
-4. Claim one ready task in `WORK-QUEUE.md` by changing its status to
-   `in_progress` and adding the agent/session identifier when practical.
-5. Read the task's requirement IDs, dependencies, acceptance criteria and
-   expected files.
-6. State any assumption that is not already backed by source or test evidence.
-
-Only one task may be considered the session's primary task. Small prerequisite
-fixes may be included, but unrelated cleanup is deferred.
+1. verify repository, branch and PR base;
+2. verify CURRENT and checkpoint;
+3. verify current exact-head CI;
+4. read autonomy policy;
+5. claim one ready task;
+6. read dependencies, criteria and expected files;
+7. classify material decisions L1-L4;
+8. state unsupported assumptions.
 
 ## During implementation
 
-- Work in the active feature branch or a child branch agreed in the checkpoint.
-- Keep changes vertically coherent: implementation, focused tests and contract
-  documentation move together.
-- Record new durable runtime findings in `TESTED-BEHAVIOUR.md`.
-- Record architecture/product decisions in `DECISIONS.md` before they become
-  hidden implementation policy.
-- Update traceability when a requirement becomes implemented or verified.
-- Keep the work queue honest; blocked work is marked `blocked`, never left
-  appearing active without explanation.
-- Use bounded state-based waits, not arbitrary long sleeps.
+- keep implementation, tests and contract docs together;
+- record durable runtime findings;
+- record architecture/product decisions;
+- keep queue and traceability honest;
+- use bounded state-based waits;
+- use senior consultation at required points;
+- do not wait for human permission for L1/L2 work.
 
-## Mandatory handoff before stopping
+## Senior consultation
 
-Every agent session that changes repository state, changes the plan, discovers a
-durable fact, or stops with incomplete work MUST leave a checkpoint before it
-ends.
+Packets and verdicts follow `SENIOR-CONSULTATION.md`. The senior receives exact
+head/diff, invariants, criteria and evidence. A material change makes the verdict
+stale. Hermes remains responsible for verification.
 
-The exit sequence is:
+## Pull requests and merge
 
-1. run the narrowest relevant tests and record exact results;
-2. update the active task status and next action in `WORK-QUEUE.md`;
-3. update `TRACEABILITY.md` for changed requirement/test status;
-4. append user-visible or architectural changes to `CHANGELOG-FORK.md`;
-5. update `PROJECT-MANIFEST.json` if phase, active task, compatibility, tested
-   revision, backend policy or required workflow changed;
-6. create one immutable checkpoint under `checkpoints/`;
-7. update `checkpoints/CURRENT.md` to point to it;
-8. update the active PR body with completed scope, CI evidence, known failures
-   and the next task ID;
-9. leave the branch buildable, or clearly record the exact failing gate and
-   reproduction command.
+Open draft PRs early. The PR records:
 
-A narrative chat handoff without these repository updates is not a valid
-handoff.
+- autonomy level;
+- evidence levels;
+- exact senior review head/verdict;
+- control-plane consistency;
+- task or phase gate fields;
+- risks and one next action.
 
-## Checkpoint granularity
+Hermes may mark ready and merge any eligible task or clear phase gate when every
+condition in `AUTONOMOUS-MERGE.md` passes.
 
-Create a checkpoint when any of these occurs:
+## Human interaction
 
-- an agent/session is ending after repository changes;
-- a task changes status;
-- a phase gate is met or fails materially;
-- a new tested runtime behaviour changes design assumptions;
-- work is blocked and another agent must continue;
-- branch, PR, upstream base or tested SooperLooper revision changes.
+When L3/L4 applies and Hermes supports interactive forms, Hermes MUST use a
+native selection form with two to four concrete choices, senior recommendation
+and `Otra opción / Other` with free-text input when safe.
 
-Do not create checkpoints for trivial read-only inspection that produced no new
-finding and changed no project state.
+Plain chat is fallback only when the form is unavailable or unsafe for the
+decision.
 
-## Task claiming and parallel agents
+## Mandatory handoff
 
-Parallel work is allowed only when tasks have disjoint expected files or an
-explicit integration owner is named.
+Every state-changing session:
 
-Before parallel work:
+1. records exact tests/results;
+2. updates queue status and next action;
+3. updates traceability;
+4. updates changelog/decisions where durable;
+5. updates manifest when live state changes;
+6. writes one immutable checkpoint;
+7. updates CURRENT;
+8. updates the PR with exact evidence, risks, autonomy class and next task;
+9. leaves the branch buildable or records the exact red gate.
 
-- split the work into separate task IDs;
-- declare dependencies and expected files;
-- identify which task owns shared documents or APIs;
-- avoid two agents editing `PROJECT-MANIFEST.json`, `CURRENT.md`, the same
-  protocol table or the same build file simultaneously.
+## Parallel work
 
-The integration owner resolves shared-file updates and writes the final
-checkpoint.
+Parallel tasks require separate IDs, dependencies, disjoint ownership or one
+integration owner. Shared control files have one writer at a time.
 
-## Status vocabulary
-
-Tasks use only:
-
-- `ready`;
-- `in_progress`;
-- `blocked`;
-- `review`;
-- `done`;
-- `deferred`.
-
-Requirements use only:
-
-- `specified`;
-- `partially_implemented`;
-- `implemented`;
-- `verified`;
-- `blocked`;
-- `deferred`.
-
-A task is not `done` when code exists but required tests or documentation do not.
+A branch waiting for L3 may pause while disjoint safe work continues.
 
 ## Failure handoff
 
-A failed attempt is useful when the checkpoint contains:
+Record exact commit/task, failing command, relevant diagnostics, ruled-out
+causes, hypothesis, changed files, rollback point, decision level and next
+diagnostic action.
 
-- exact commit and task ID;
-- command or workflow that failed;
-- smallest relevant log excerpt or assertion;
-- what was ruled out;
-- current hypothesis;
-- files already changed;
-- safe rollback point;
-- next diagnostic action.
-
-Do not hide known failures by weakening tests or removing a required workflow.
+Ordinary failures are diagnosed and corrected autonomously. Never weaken tests
+or required workflows to hide failure.
 
 ## Review protocol
 
-A reviewing agent reads, in order:
-
-1. task acceptance criteria;
-2. requirement IDs in traceability;
-3. changed tests;
-4. implementation diff;
-5. changed architecture/specification text;
-6. CI evidence;
-7. current checkpoint.
-
-The reviewer must distinguish:
-
-- code present;
-- code compiled;
-- mock protocol verified;
-- real engine verified;
-- target hardware verified.
-
-These are separate confidence levels.
+Reviewers inspect task/phase criteria, autonomy classification, traceability,
+tests, implementation, contracts, CI and checkpoint. They distinguish code
+present, compiled, unit tested, fake-engine tested, real-engine tested and target
+hardware tested.
 
 ## Human gates
 
-Human instruction remains required for:
-
-- merging the main integration PR;
-- destructive migration of project formats;
-- changing supported backend policy;
-- adding a maintained SooperLooper fork or patch dependency;
-- abandoning upstream compatibility;
-- deleting user media or replacing prior valid project data.
+Human instruction is required only for genuine L3/L4 categories. A completed
+phase with a senior-accepted exact-head gate and a preapproved bounded next phase
+is not a human gate.

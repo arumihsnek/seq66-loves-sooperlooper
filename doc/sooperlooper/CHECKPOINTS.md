@@ -3,127 +3,200 @@
 ## Purpose
 
 Checkpoints are durable handoffs between agents and human sessions. They make
-project continuation possible without replaying conversations or rereading the
-entire repository.
+continuation possible without replaying conversations.
 
-`checkpoints/CURRENT.md` is the fast entry point. It points to one immutable,
-dated checkpoint containing the detailed handoff.
+`checkpoints/CURRENT.md` is the compact entry point and points to one immutable,
+dated checkpoint.
 
-## When a checkpoint is mandatory
+Autonomy does not reduce checkpoint requirements; checkpoints are what let
+Hermes operate across tasks and phases without a human coordinator.
 
-A checkpoint MUST be written before an agent/session stops when it has:
+## When mandatory
 
-- committed or modified repository state;
-- changed a task status or roadmap assumption;
-- discovered durable behaviour from source, CI or a real engine;
-- reached, failed or redefined a gate;
-- become blocked with work left for another agent;
-- changed branch, PR, upstream base, tested engine revision or backend policy.
+Write a checkpoint before stopping after any state change, including:
 
-A chat message, model summary or PR comment alone is not a checkpoint.
+- repository or task-status changes;
+- durable source/CI/runtime discoveries;
+- gate pass/failure/redefinition;
+- blockers and handoffs;
+- branch, PR, upstream, tested-engine or backend changes;
+- durable L2 decisions;
+- applied L3 decisions;
+- autonomous task merges;
+- autonomous phase transitions.
 
-## File naming
+A chat summary, PR comment or model handoff alone is not a checkpoint.
 
-Immutable checkpoints use:
+## File naming and immutability
 
 ```text
 checkpoints/YYYY-MM-DD-CP-NNN-short-description.md
 ```
 
-IDs are monotonically increasing within the project:
+Use monotonically increasing IDs. Never rewrite history to reinterpret state;
+write a new checkpoint that supersedes the prior interpretation.
 
-```text
-CP-001, CP-002, CP-003, ...
-```
-
-Never rewrite an immutable checkpoint except to fix a factual typo that does not
-change the recorded state. Later corrections belong in a new checkpoint.
-
-## Required checkpoint fields
+## Required headings
 
 Every immutable checkpoint contains:
 
-1. checkpoint ID and creation timestamp;
-2. repository, branch and active PR;
-3. primary task ID and phase;
-4. short objective of the session;
-5. commits or range covered;
+```markdown
+## Objective
+## Completed
+## Verification
+## Current state
+## Risks and unresolved questions
+## Next executable action
+## Open first
+## Safe reference point
+```
+
+## Required fields
+
+Record:
+
+1. checkpoint ID and timestamp;
+2. repository, branch and PR;
+3. task/phase ID;
+4. objective;
+5. commits/range covered;
 6. exact completed work;
 7. exact tests/workflows and outcomes;
-8. current component/status summary;
-9. changed requirements and decisions;
-10. known failures, risks and unresolved questions;
-11. next executable action, not merely a broad phase name;
-12. files another agent should open first;
-13. safe rollback/reference point;
-14. whether the branch is buildable and mergeable;
-15. author/agent identifier when available.
+8. current status;
+9. changed requirements/decisions;
+10. failures and risks;
+11. one executable next action;
+12. files to open first;
+13. rollback/reference point;
+14. buildable/mergeable state;
+15. agent identifier when available;
+16. L1-L4 classification;
+17. senior reference and exact reviewed head for L2;
+18. human decision ID, selected option/custom answer and interaction method for
+    L3;
+19. expected-head, merge method and merge SHA after merge;
+20. phase-gate audit when a phase transition occurred.
 
 Use `none` explicitly rather than omitting required fields.
 
-## CURRENT.md format
+## Decision authority record
 
-`checkpoints/CURRENT.md` is intentionally compact. It contains:
+Example:
 
-- current checkpoint ID and link;
-- current phase and active task;
-- one-paragraph state summary;
-- verified CI summary;
+```markdown
+## Decision authority
+
+- Level: `L2_SENIOR_REQUIRED`
+- Decision: bounded SIGTERM -> timeout -> SIGKILL shutdown
+- Senior consultation: `<reference>`
+- Exact head reviewed: `<sha>`
+- Human decision: `none`
+- Evidence: `<tests/source>`
+```
+
+For L3 also record:
+
+- decision ID;
+- native Hermes selection form or chat fallback;
+- options presented;
+- senior recommendation;
+- selected option or `Otra opción / Other` free text;
+- time received;
+- authorized scope/head.
+
+Silence is never approval.
+
+## Autonomous task merge record
+
+Record task ID/PR, exact head, senior verdict, workflow runs, expected-head,
+merge method, merge commit, ancestry verification, residual risks and next task.
+
+## Autonomous phase-transition record
+
+When a clear phase gate passes, record:
+
+- every definition-of-done item;
+- exact integrated head and commit range;
+- full workflow/runtime evidence;
+- unavailable evidence;
+- traceability/control consistency;
+- global senior phase verdict and exact reviewed head;
+- blocking/non-blocking residual risks;
+- next phase's approved bounded scope and first task;
+- explicit audit that no L3/L4 trigger exists;
+- expected-head and gate merge commit;
+- manifest/roadmap/work-queue transition;
+- post-transition checkpoint;
+- first next-phase action started or ready.
+
+No human decision field is required when no L3/L4 trigger exists. Record
+`Human decision: none — senior phase gate authorized transition`.
+
+If the phase transition contains L3, record the Hermes selection-form decision
+instead and do not advance until answered.
+
+## CURRENT.md
+
+Keep CURRENT compact and include:
+
+- checkpoint ID/link;
+- current phase and task;
+- state summary;
+- verified CI;
+- autonomy state (`running`, `human_decision_pending`, `safety_stopped`,
+  `phase_gate_review`, `phase_transition_complete`);
 - next action;
 - top risks;
 - minimal reading list.
 
-Keep it short enough to load in a small context window. Detailed history belongs
-in immutable checkpoints and the changelog.
-
-## Checkpoint quality rules
-
-A good checkpoint is evidence-based and continuation-oriented.
+## Quality rules
 
 Do:
 
-- give exact task IDs, paths, commands and workflow names;
-- distinguish implemented from compiled, mock-tested, real-engine-tested and
-  target-hardware-tested;
-- describe failed hypotheses and what was ruled out;
-- identify the smallest next action;
-- state whether pending changes are committed;
-- link decisions and requirement IDs.
+- give exact IDs, paths, commands, SHAs and workflow runs;
+- distinguish specified, compiled, unit-tested, fake-engine, real-engine and
+  hardware evidence;
+- record failed hypotheses;
+- identify one next action;
+- state whether changes are committed;
+- link decisions and requirements;
+- record exact authority/review evidence.
 
 Do not:
 
 - paste large logs;
-- repeat entire architecture documents;
-- say only “continue Phase 1”;
-- claim success because an OSC packet was sent;
-- hide a red required workflow;
-- refer to inaccessible chat context as required knowledge.
+- duplicate architecture documents;
+- use vague next actions;
+- hide red required checks;
+- depend on inaccessible chat context;
+- infer human approval from silence;
+- claim senior review for another head.
 
-## Checkpoint and control-file consistency
+## Consistency checks
 
-Before committing the checkpoint, verify:
+Before committing verify:
 
-- manifest `current_phase` and `active_task` agree with the checkpoint;
-- work queue status agrees with the checkpoint;
-- traceability reflects newly verified requirements;
-- changelog contains durable externally meaningful changes;
-- roadmap phase status is not advanced prematurely;
-- active PR describes the same gate and next task.
+- manifest phase/task agree;
+- work queue agrees;
+- traceability reflects evidence;
+- changelog records durable changes;
+- roadmap is not advanced before its exact gate;
+- PR describes the same gate and next task;
+- autonomy classification matches policy;
+- human/senior authority is represented honestly;
+- autonomous merge/phase transition satisfies `AUTONOMOUS-MERGE.md`.
 
-CI validates structural consistency, but semantic consistency remains the
-agent's responsibility.
-
-## Failed-session checkpoint template
+## Failed-session template
 
 ```markdown
 # CP-NNN — short title
 
-- Created: ISO-8601 timestamp
-- Branch: ...
-- PR: ...
-- Phase/task: ...
-- Covered commits: ...
-- Branch buildable: yes/no
+- Created: ISO-8601
+- Branch/PR:
+- Phase/task:
+- Covered commits:
+- Buildable: yes/no
+- Decision level: L1/L2/L3/L4
 
 ## Objective
 ...
@@ -134,13 +207,17 @@ agent's responsibility.
 ## Verification
 - command/workflow: PASS/FAIL
 
-## Failure or blocker
-- failing assertion:
-- reproduction:
-- ruled out:
-- current hypothesis:
+## Current state
+...
 
-## Changed contract/decisions
+## Failure or blocker
+- assertion/reproduction:
+- ruled out:
+- hypothesis:
+- senior reference:
+- human decision/form, when applicable:
+
+## Risks and unresolved questions
 ...
 
 ## Next executable action
@@ -153,15 +230,8 @@ agent's responsibility.
 ...
 ```
 
-## Milestone checkpoint
+## Long-running missions
 
-When a phase gate passes, the checkpoint additionally records:
-
-- every definition-of-done item;
-- workflow run evidence;
-- traceability rows advanced to `verified`;
-- deferred risks accepted for the next phase;
-- manifest and roadmap transition.
-
-The manifest and roadmap move to the next phase only in the same coherent change
-as the passing milestone checkpoint.
+Hermes writes a checkpoint at each task merge and phase transition even when the
+same chat continues. Human-facing reports may remain sparse; repository
+checkpoints remain complete.
