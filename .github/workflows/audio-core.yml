@@ -227,3 +227,15 @@ jobs:
             tests/audio/sooperlooper_recording_scheduler_test.cpp \
             -o /tmp/t_recording_scheduler
           /tmp/t_recording_scheduler
+
+      - name: Compile recording orchestrator test
+        run: |
+          g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread \
+            -Ilibseq66/include -I.ci/include \
+            libseq66/src/audio/sooperlooper_recording_types.cpp \
+            libseq66/src/audio/sooperlooper_recording_scheduler.cpp \
+            libseq66/src/audio/sooperlooper_recording_orchestrator.cpp \
+            libseq66/src/audio/sooperlooper_recording_verifier.cpp \
+            tests/audio/sooperlooper_recording_orchestrator_test.cpp \
+            -o /tmp/t_recording_orchestrator
+          /tmp/t_recording_orchestrator

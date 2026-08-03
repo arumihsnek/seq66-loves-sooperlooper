@@ -1017,9 +1017,18 @@ Acceptance: scheduler compiles, 100+ assertions, generation-aware transitions
 
 ### P5-003 — orchestration, verification, synthetic tests
 
-Status: `in_progress`
+Status: `done`
 Branch: `feature/p5-recording-types`
 Agent: `hermes`
 
 Dependencies: P5-001 (types), P5-002 (scheduler)
 Acceptance: orchestrator bridges scheduler→dispatcher, verification checks length, synthetic tests with mock SooperLooper
+
+### P5-004 — deterministic synthetic tests
+
+Status: `in_progress`
+Branch: `feature/p5-recording-types`
+Agent: `hermes`
+
+Dependencies: P5-001 (types), P5-002 (scheduler), P5-003 (orchestrator/verifier)
+Acceptance: full matrix test, crash/restart, tempo change, edge cases
