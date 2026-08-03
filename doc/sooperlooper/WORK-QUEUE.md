@@ -27,7 +27,7 @@ Goal: Seq66 detects audio backend capability, supervises a headless
 SooperLooper process, and gates audio clip operations on verified engine
 readiness without requiring the SooperLooper GUI.
 
-Active task: **M2-002** (status: `ready`)
+Active task: **M2-003** (status: `planned`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -342,8 +342,11 @@ Handoff target: M2-002 (backend capability probe) can begin.
 
 ### M2-002 — backend capability probe
 
-Status: `ready`
+Status: `done`
 Agent: `hermes`
+Branch: `feature/m2-002-backend-capability-probe`
+Completed: 2026-08-03
+PR: `#17` (pending)
 
 Dependencies: none (no M2 dependencies).
 
@@ -379,7 +382,7 @@ Handoff target: M2-003 (supervisor) consumes typed probe result.
 
 ### M2-003 — managed process supervisor core
 
-Status: `planned`
+Status: `ready`
 Agent: `hermes`
 
 Dependencies: M2-002.
