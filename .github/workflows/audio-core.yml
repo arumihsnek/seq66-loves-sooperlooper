@@ -121,3 +121,9 @@ jobs:
 
       - name: Run readiness gate test
         run: .ci/bin/sooperlooper_readiness_gate_test
+
+      - name: Compile crash reconciler test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_process_supervisor.cpp libseq66/src/audio/sooperlooper_crash_reconciler.cpp tests/audio/sooperlooper_crash_reconciler_test.cpp -o .ci/bin/sooperlooper_crash_reconciler_test
+
+      - name: Run crash reconciler test
+        run: .ci/bin/sooperlooper_crash_reconciler_test
