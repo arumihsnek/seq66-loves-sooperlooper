@@ -1,18 +1,15 @@
-# Current checkpoint — Phase 2 core tasks complete
+# Current checkpoint — M2-007 ready
 
-Checkpoint ID: `CP-023`
+Checkpoint ID: `CP-024`
 Checkpoint date: 2026-08-03
 Phase: `phase-2-managed-engine-backend`
 Active task: `M2-007`
-Status: `planned`
+Status: `ready`
 Branch: `fork-main`
 
-Phase 2 core tasks (M2-001 through M2-006) are complete and merged.
-216 test assertions. All CI green.
+Phase 2 core tasks (M2-001 through M2-006) complete. 251 test assertions.
+M2-007 (crash/restart reconciliation) is the next executable action.
 
-M2-007 (crash/restart reconciliation) and M2-008 (real-engine CI) remain
-as Phase 2 hardening tasks. Phase 2 gate review is ready.
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-024-m2-007-ready.md`
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-023-phase2-core-complete.md`
-
-Next executable action: Phase 2 gate review or M2-007.
+Next executable action: implement M2-007 (crash/restart reconciliation).
