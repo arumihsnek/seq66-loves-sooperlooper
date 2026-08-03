@@ -272,7 +272,7 @@ Acceptance criteria:
 
 ### M1-008 — phase-1 integration gate
 
-Status: `blocked`
+Status: `in_progress`
 
 Blocked by: M1-001 through M1-007.
 
@@ -327,3 +327,25 @@ Acceptance criteria:
 - subscribe registers real callbacks;
 - readiness requires all prerequisites;
 - no synchronous blocking on UI/RT paths.
+
+### M1-008 — phase-1 integration gate
+
+Status: `in_progress`
+Agent: `hermes`
+
+Dependencies: M1-001 through M1-007 plus correctives.
+
+Requirement IDs: `TEST-001`, `TEST-002`, `OPS-001`, `OPS-002`.
+
+Expected ownership:
+- all tests pass;
+- no APIs declared without implementation;
+- traceability complete;
+- human review gate.
+
+Acceptance criteria:
+- all fast tests pass;
+- real-engine smoke passes;
+- no declared-but-not-defined methods;
+- control plane coherent;
+- human approval required for merge.

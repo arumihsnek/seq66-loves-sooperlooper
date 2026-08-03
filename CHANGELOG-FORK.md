@@ -13,6 +13,10 @@ versions before the fork reaches a releasable state.
 
 ### Added
 
+- M1-005A real OSC ping/subscription transport (PR #11)
+- M1-006A safe reconciliation without mutex (PR #12)
+- M1-007A meaningful fault-injection assertions (PR #13)
+
 - M1-007 fault-injection matrix: comprehensive test suite covering delayed, duplicate, reordered, lost, malformed callbacks, shutdown races, queue overflow, generation rollover. PR #10 merged (merge commit `a19ea20c`).
 
 - M1-006 command confirmation contracts: `command_confirmation_tracker` with UUID-keyed pending operations, deadline evaluation, reconciliation, confirm/fail/cancel outcomes, 12 test groups. PR #9 merged (merge commit `d56f8edb`).

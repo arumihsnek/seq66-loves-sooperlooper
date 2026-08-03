@@ -1,27 +1,26 @@
-# Checkpoint: Audit post-M1-007 — Phase 1 corrective cycle
+# Checkpoint: Phase 1 gate — ready for human review
 
-## Checkpoint ID: `CP-012`
+## Checkpoint ID: `CP-013`
 ## Checkpoint date: 2026-08-03
 
 ### Phase
 phase-1-protocol-core
 
 ### Active task
-M1-005A (real OSC ping/subscription transport)
+M1-008 (phase-1 integration gate) — awaiting human review
 
 ### Summary
-Audit complete. Control plane corrected. Phase 1 has M1-001 through
-M1-007 merged but requires three correctives before M1-008 gate:
-M1-005A (real transport), M1-006A (safe reconciliation), M1-007A
-(meaningful fault assertions).
+Phase 1 is complete. All M1-001-M1-007 tasks merged, plus three
+correctives (M1-004A, M1-005A, M1-006A, M1-007A). All tests pass.
+Ready for human review. NO PHASE 2 AUTHORIZED.
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-012-audit.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-013-phase-1-gate.md`
 
 ### Evidence
-- All PRs #1-#10 merged
-- Control plane inconsistencies identified and fixed
-- Corrective plan established
+- 13 PRs merged (PR #1-#13)
+- 5 test suites pass: receiver, observed-state, monitor, confirmation, fault-injection
+- All correctives verified: TOCTOU fix, real transport, safe reconciliation, meaningful assertions
+- Control plane coherent and validated
 
 ### Next immediate action
-Begin M1-005A: implement real OSC ping and subscription transport
-in sooperlooper_client.
+Awaiting human review. No autonomous action.
