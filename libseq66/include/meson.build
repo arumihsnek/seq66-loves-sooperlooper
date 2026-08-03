@@ -6,6 +6,7 @@ libseq66_headers += files(
     'seq66_features.hpp',
     'audio/audio_clip.hpp',
     'audio/sooperlooper_client.hpp',
+    'audio/sooperlooper_observed_state.hpp',
     'audio/sooperlooper_protocol.hpp',
     'cfg/basesettings.hpp',
     'cfg/cmdlineopts.hpp',

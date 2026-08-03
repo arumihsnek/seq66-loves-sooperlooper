@@ -61,3 +61,9 @@ jobs:
 
       - name: Run receiver test
         run: .ci/bin/sooperlooper_receiver_test
+
+      - name: Compile observed-state cache test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp libseq66/src/audio/sooperlooper_observed_state.cpp tests/audio/sooperlooper_observed_state_test.cpp -llo -o .ci/bin/sooperlooper_observed_state_test
+
+      - name: Run observed-state cache test
+        run: .ci/bin/sooperlooper_observed_state_test
