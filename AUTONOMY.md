@@ -45,6 +45,9 @@ the decision safely.
 
 ## Safety
 
+Every autonomous merge and phase transition uses exact-head CI and
+`expected-head` protection.
+
 Autonomy never permits force push, shared-history rewrite, red-check merges,
 stale senior verdicts, changed expected heads, silent requirement relaxation,
 destructive actions without authority or hidden scope changes.
