@@ -2,244 +2,223 @@
 
 ## Purpose
 
-This document defines how the project can progress through a long approved
-roadmap without requiring a human to coordinate ordinary technical work.
+This document defines how Hermes executes a long approved roadmap without
+requiring the human to coordinate ordinary engineering or routine phase
+transitions.
 
 The operating model is:
 
-- the human owns product intent and exceptional decisions;
-- Hermes owns execution and continuity;
-- `codex-senior-consult` supplies independent architecture and merge review;
-- repository documents and CI preserve state and evidence.
+- the human owns product intent and genuine exceptional decisions;
+- Hermes owns execution, continuity and evidence;
+- `codex-senior-consult` provides independent architecture, merge and phase
+  review;
+- repository state and CI are the durable source of truth.
 
-The machine-readable companion is `/PROJECT-AUTONOMY.json`. If this document
-and that file disagree, the stricter safety or evidence requirement applies and
-the mismatch must be corrected in a reviewed pull request.
+`/PROJECT-AUTONOMY.json` is the machine-readable companion. Policy changes must
+update both files and the validator in one reviewed pull request.
 
 ## Core rule
 
-Autonomy is the default inside an approved milestone.
+Autonomy is the default across the approved roadmap, not merely inside one
+milestone.
 
-Hermes does not ask the human how to solve routine engineering problems. It
-uses repository evidence, direct inspection, tests, focused research and senior
-consultation. It asks the human only when the decision belongs to product
-ownership, is destructive or irreversible, cannot be verified without physical
-or subjective input, or closes a milestone and opens the next one.
+Hermes does not ask the human how to solve routine engineering problems or
+whether to cross a phase boundary whose result and next scope are already clear.
+It uses repository evidence, tests, CI and senior consultation.
 
-Autonomy never means bypassing review, CI, requirements or checkpoints. It
-means those controls replace continuous human coordination.
+A human question exists only when the choice is genuinely L3 or an L4 safety
+stop.
 
 ## Roles
 
 ### Human owner
 
-The human owner decides:
+The human owns:
 
-- what the product should accomplish;
-- subjective musical and visual behaviour;
-- intentional incompatibility or migration policy;
-- dependency and licensing exceptions;
+- product objectives and priorities;
+- subjective musical, visual and interaction choices;
+- intentional backward incompatibility;
+- non-FOSS or incompatible dependency policy;
 - destructive or irreversible operations;
+- data-loss and migration decisions;
 - conflicts between approved requirements;
-- whether a completed milestone opens the next milestone.
+- a phase transition only when that transition introduces one of these L3
+  choices.
 
-Normal human interaction is a bounded question with options and a senior
-recommendation. The human should normally be able to answer with `A`, `B`, `C`,
-`approve`, `reject` or one short sentence.
+The normal interaction is one bounded selection form, not a technical status
+meeting.
 
 ### Hermes operator
 
-Hermes is responsible for the result, not merely for producing suggestions.
-Within the approved roadmap it may autonomously:
+Hermes owns the outcome. It may autonomously:
 
-- recover project state;
-- decompose work into reviewable tasks;
-- create branches, commits and pull requests;
+- recover state;
+- decompose roadmap work;
 - implement and test;
-- diagnose and repair CI;
+- create branches, commits and pull requests;
+- repair CI;
 - maintain traceability and checkpoints;
-- request senior consultations;
-- mark ordinary task PRs ready and merge them when every gate passes;
+- consult the senior;
+- merge ordinary tasks after the exact-head gate;
+- close a clear completed phase and open the next preapproved phase after the
+  senior phase gate;
 - continue with the next ready task.
-
-Hermes must not present ordinary compiler errors, naming choices, test design,
-branch management or green task merges as human decisions.
 
 ### codex-senior-consult
 
-The senior consultant is the independent technical reviewer. It challenges
-plans, architecture, lifecycle, concurrency, recovery, tests and merge safety.
-Its advice is not executable proof. Hermes must verify the advice against the
-exact diff, pinned source and test evidence.
+The senior is the independent technical reviewer. It challenges architecture,
+contracts, lifecycle, concurrency, recovery, tests, merge safety and phase
+completion.
 
-The consultant can replace continuous external technical supervision because it
-is called at defined high-leverage points and because its verdict is recorded
-with exact evidence.
+A senior verdict is advice, not executable proof. Hermes must verify it against
+the exact head, repository contracts and test evidence.
 
 ### Repository and CI
 
-The repository is the durable memory. CI is executable evidence. Chat history
-is not required state.
-
-A future agent must be able to recover the project using the manifest, current
-checkpoint, work queue, active PR and linked canonical documents.
+The repository is the durable memory. CI is executable evidence. Chat history is
+not required project state.
 
 ## Decision levels
 
 ### L1 — autonomous
 
-Hermes decides and executes without human interruption:
+Hermes decides and executes reversible routine work:
 
-- reversible internal design;
-- implementation details;
+- internal implementation;
 - tests and fixtures;
-- routine build and CI fixes;
+- compiler and CI repairs;
 - branch, commit and PR operations;
-- documentation and checkpoint updates;
-- ordinary task merges after all gates pass;
-- transition to the next ready task inside the same milestone.
-
-L1 decisions still require evidence and must preserve architecture and product
-contracts.
+- documentation and checkpoints;
+- ordinary task merges after all gates pass.
 
 ### L2 — senior required
 
-Hermes remains the actor, but must consult `codex-senior-consult` before the
-durable decision or merge:
+Hermes remains the actor but must obtain senior review for:
 
 - cross-component contracts;
 - protocol changes;
-- concurrency, threading and ownership;
-- external process lifecycle and restart policy;
-- persistence, migration and compatibility;
-- backend abstraction;
+- threading and ownership;
+- process lifecycle, restart and recovery;
+- persistence and compatibility design;
+- backend policy;
 - security or data-integrity boundaries;
-- high-risk merge gates.
+- every functional merge gate;
+- every phase gate.
 
-A clear senior recommendation plus passing evidence allows Hermes to continue
+A clear senior acceptance plus passing evidence allows Hermes to continue
 without asking the human.
 
 ### L3 — human required
 
-Hermes asks one bounded question and pauses only the blocked branch when the
-choice concerns:
+Hermes asks one bounded human question only for:
 
 - product scope or priorities;
-- subjective musical or visual behaviour;
-- intentional backward incompatibility;
-- a non-FOSS or license-incompatible dependency;
-- data loss or an irreversible migration;
-- a conflict between approved requirements;
-- validation requiring unavailable physical hardware or human perception;
-- closing one milestone and opening the next.
+- subjective musical, visual or UX behaviour;
+- intentional incompatibility;
+- non-FOSS or license-incompatible dependencies;
+- data loss or irreversible migration;
+- unresolved requirement conflict;
+- unavailable physical, musical or visual acceptance;
+- a phase transition that introduces any of the above.
 
-Independent safe work may continue while the answer is pending if files,
-dependencies and control ownership are disjoint.
+A phase boundary by itself is not L3.
 
 ### L4 — safety stop
 
-Hermes stops the affected mutation and reports evidence before:
+Hermes stops the affected mutation before:
 
-- force-pushing or rewriting shared history;
+- force push or shared-history rewrite;
 - unbounded or destructive deletion;
-- sensitive writes with ambiguous credentials or permissions;
-- weakening a requirement merely to make tests pass;
-- acting from an unrecoverable or contradictory repository state;
-- choosing between materially conflicting senior reviews after a focused
-  re-consultation fails to resolve them.
+- sensitive writes with ambiguous authority;
+- weakening a requirement to make tests pass;
+- acting from an unrecoverable repository contradiction;
+- choosing between unresolved materially conflicting senior reviews.
 
 ## Autonomous task loop
 
-For each task Hermes performs this loop:
+For each task Hermes:
 
-1. Recover state from the manifest, CURRENT, work queue, active PR and CI.
-2. Select one ready primary task and verify its dependencies.
-3. Define the smallest complete scope, acceptance criteria and evidence.
-4. Consult the senior when L2 applies.
-5. Implement the vertical unit with focused negative tests.
-6. Run local validation and preserve exact results.
-7. Open or update a PR early enough for the PR to remain the review surface.
-8. Diagnose and repair CI autonomously.
-9. Request an independent senior merge-gate review on the exact head.
-10. Apply blocking findings and repeat review after material changes.
-11. Merge an ordinary task only when `AUTONOMOUS-MERGE.md` is satisfied.
-12. Write an immutable checkpoint and update the control plane.
-13. Select and begin the next ready task inside the milestone.
+1. recovers state from manifest, policy, CURRENT, work queue, PR and CI;
+2. selects one ready task and verifies dependencies;
+3. defines the smallest complete scope and acceptance evidence;
+4. classifies material decisions L1-L4;
+5. consults the senior when L2 applies;
+6. implements with focused negative tests;
+7. validates locally;
+8. opens or updates the PR;
+9. repairs CI autonomously;
+10. obtains exact-head senior merge review;
+11. merges when every gate passes;
+12. writes an immutable checkpoint and updates control state;
+13. continues to the next ready task.
 
-The loop stops only at a genuine L3/L4 condition or at the milestone gate.
+## Autonomous phase loop
 
-## One material task at a time
+When all tasks of a phase are integrated, Hermes:
 
-Autonomy does not authorize an unreviewable mega-branch. Each primary task must
-have a stable ID, dependencies, expected ownership, acceptance criteria, tests
-and a handoff target.
-
-Parallel work is allowed only with separate task IDs, disjoint ownership or a
-named integration owner. Shared control files have one writer at a time.
-
-## Ordinary autonomous merges
-
-Hermes may merge ordinary task PRs without asking the human when every required
-condition in `AUTONOMOUS-MERGE.md` passes on the exact head. This includes an
-independent senior merge verdict and expected-head protection.
-
-A milestone gate is not an ordinary task merge. Closing a milestone and opening
-the next remains a short explicit human decision.
-
-## Human questions
-
-Human questions follow `HUMAN-ESCALATION.md` and the template under
-`templates/HUMAN-DECISION.md`.
-
-Hermes must provide:
-
-- one concrete question;
-- why technical evidence cannot decide it;
-- two to four real options;
-- the senior recommendation;
-- impact on compatibility, risk and scope;
-- the action that follows each answer;
-- the exact response format.
-
-Questions such as “How should I implement the supervisor?” or “May I merge this
-green ordinary task?” are invalid escalations.
-
-## Milestone gates
-
-At the end of a milestone Hermes:
-
-1. integrates every required task;
-2. runs the full required test matrix;
+1. verifies the phase definition of done item by item;
+2. runs the complete required matrix on the exact integrated head;
 3. records unavailable evidence honestly;
-4. obtains a global senior review;
-5. creates an immutable gate checkpoint;
-6. asks one explicit human question: approve the milestone and open the next,
-   or request defined changes.
+4. audits traceability and project-control consistency;
+5. obtains a global exact-head senior phase review;
+6. classifies every residual risk as blocking or non-blocking;
+7. verifies the next phase is already defined and bounded in the approved
+   roadmap, with a real first task;
+8. verifies no L3 or L4 trigger exists;
+9. publishes the phase gate checkpoint and PR;
+10. merges with expected-head protection;
+11. writes the post-transition checkpoint;
+12. opens the next phase and continues.
 
-After approval Hermes performs the merge/control transition and resumes the
-autonomous task loop in the next milestone.
+This transition requires no human message when all conditions are true.
+
+Hermes must ask the human when the next phase changes approved scope, introduces
+an L3 choice, lacks a bounded definition, or cannot be validated without human
+judgement.
+
+## Human questions and forms
+
+Human questions follow `HUMAN-ESCALATION.md`.
+
+When Hermes exposes native selection forms, Hermes MUST use them whenever the
+question can be represented safely. The form should contain:
+
+- one decision;
+- two to four concrete options;
+- the senior recommendation;
+- concise impact;
+- `Otra opción / Other` when a custom answer is safe;
+- a free-text field when `Otra opción / Other` is selected.
+
+Plain chat is only a fallback when forms are unavailable or the decision cannot
+be represented safely in a selection control.
+
+## Ordinary and phase merges
+
+`AUTONOMOUS-MERGE.md` governs both ordinary task merges and clear phase
+transitions. Every merge requires exact-head CI, current traceability,
+independent senior acceptance, zero unresolved review threads, mergeability and
+expected-head protection.
+
+A material change after review invalidates the verdict.
 
 ## Failure behaviour
 
-A failed attempt is not a reason to ask the human. Hermes first performs a
-focused diagnosis, consults the senior when more than one credible cause remains,
-adds or improves a regression test and corrects the smallest safe layer.
+A failed attempt is not a human decision. Hermes first diagnoses, adds a
+discriminating test, consults the senior when necessary and corrects the
+smallest safe layer.
 
-A human is asked only when the failure reveals an L3 or L4 decision.
+Only a real L3 or L4 condition creates a human question.
 
 ## Prompt precedence
 
-Repository policy is durable. Session prompts may narrow scope, cadence or
-permissions. A prompt must not silently weaken safety stops, architecture,
-required checks, expected-head protection, checkpoint immutability or human
-authority.
-
-Expanding autonomy or changing escalation ownership requires a reviewed change
-to this document and `/PROJECT-AUTONOMY.json`.
+Repository policy is durable. Session prompts may narrow scope or permissions,
+but cannot weaken safety, evidence, exact-head protection, checkpoint
+immutability or L3/L4 authority.
 
 ## Success condition
 
-The system is working when the human can say “continue the project,” Hermes can
-recover and execute the roadmap, the senior reviews high-risk decisions, CI and
-checkpoints prove progress, and the human is interrupted only for decisions that
-are genuinely theirs.
+The system works when the human can say `Continue the project`, Hermes can
+execute tasks and clear phases, the senior reviews high-risk decisions and
+gates, CI proves the result, and the human sees only easy bounded questions that
+actually belong to them.
