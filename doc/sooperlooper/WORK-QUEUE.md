@@ -776,8 +776,10 @@ Handoff target: M3-004 (native Qt audio slots).
 
 ### M3-004 — native Qt audio slots
 
-Status: `in_progress`
-Branch: `feature/m3-004-qt-audio-slots`
+Status: `done`
+Completed: 2026-08-03
+Branch: `feature/m3-004-qt-audio-slots` (merged to fork-main)
+Merged PR: `#28`
 Agent: `hermes`
 
 Dependencies: M3-003.
@@ -807,7 +809,10 @@ Handoff target: M3-005 (transactional audio persistence).
 
 ### M3-005 — transactional audio persistence
 
-Status: `pending`
+Status: `done`
+Completed: 2026-08-03
+Branch: `feature/m3-005-audio-persistence`
+Merged PR: `#29`
 Agent: `hermes`
 
 Dependencies: M3-004.
@@ -825,3 +830,18 @@ Acceptance criteria:
 - Missing media visible and recoverable;
 - Corrupt file reverts to last valid;
 - MIDI-only projects unaffected.
+
+### PHASE3-GATE — Phase 3 completion gate
+
+Status: `in_progress`
+Agent: `hermes`
+
+Dependencies: M3-005.
+
+Description: Phase 3 definition of done review, phase gate, and Phase 4 preparation.
+
+Acceptance criteria:
+- All Phase 3 tasks complete and merged.
+- 504 assertions across 9 suites pass.
+- Phase gate review obtained.
+- Phase 4 opened.

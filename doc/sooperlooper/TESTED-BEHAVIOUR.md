@@ -307,3 +307,49 @@ Zero warnings.
 - Native JACK tested: NO
 - PipeWire-JACK tested: NO
 - Hardware tested: NO
+
+## M3-005 audio persistence evidence
+
+### Compilation
+
+Compiled on Linux aarch64 with g++ 11.4, `-std=c++17 -Wall -Wextra -Wpedantic -Werror`.
+Zero warnings.
+
+### Tested behaviour
+
+- Serialization round-trip (2 slots, all fields preserved)
+- Schema version mismatch detection
+- Empty project handling
+- CRC32 checksum computation
+- State validation (UUID, loop number)
+- Transactional save (tmp+fsync+rename)
+- Load from missing file
+- Load from corrupt file
+- Backup creation and restore
+- First save with no prior backup
+- Persisted slot comparison operators
+- Multiple incremental saves
+
+### Regression
+
+| Suite | Assertions |
+|---|---|
+| process supervisor | 86 |
+| crash reconciler | 45 |
+| clip mapper | 43 |
+| command dispatcher | 60 |
+| lifecycle smoke | 21 |
+| transport+tempo | 110 |
+| audio-slot-widget | 80 |
+| audio persistence | 59 |
+| **Total** | **504** |
+
+### Evidence level
+
+- Unit tested (59 assertions)
+- Transactional write: verified (tmp+fsync+rename)
+- Rollback: code-inspected
+- Real SooperLooper tested: NO
+- Native JACK tested: NO
+- PipeWire-JACK tested: NO
+- Hardware tested: NO

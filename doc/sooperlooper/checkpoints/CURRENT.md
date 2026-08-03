@@ -1,13 +1,13 @@
-# Current checkpoint — M3-004 model layer complete, awaiting L3 visual
+# Current checkpoint — Phase 3 complete, phase gate in progress
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-031-m3-004-audio-slot.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-033-m3-005-persistence.md`
 
-Checkpoint ID: `CP-031`
+Checkpoint ID: `CP-033`
 Checkpoint date: 2026-08-03
 Phase: `phase-3-performer-integration`
-Active task: `M3-004`
+Active task: `PHASE3-GATE`
 Status: `in_progress`
-Branch: `feature/m3-004-qt-audio-slots`
+Branch: `fork-main`
 
 ## Completed
 
@@ -15,14 +15,15 @@ Branch: `feature/m3-004-qt-audio-slots`
 - M3-001 clip mapper merged (CP-027, PR #25).
 - M3-002 command dispatcher merged (CP-029, PR #26).
 - M3-003 transport/tempo merged (CP-030, PR #27).
-- M3-004 audio slot widget model: 80 assertions, all pass.
+- M3-004 audio slot widget model merged (CP-032, PR #28).
+- M3-005 audio persistence merged (CP-033, PR #29).
 
 ## Next action
 
-L3 visual/UX design decision, then PR, merge, M3-005.
+PHASE3-GATE: Phase 3 definition of done review and phase gate.
 
 ## Verification
 
-- 445 assertions across 8 suites, all pass.
+- 504 assertions across 9 suites, all pass.
 - validate-project-control.py: pass.
 - validate-autonomy-policy.py: pass.
