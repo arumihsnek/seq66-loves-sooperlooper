@@ -45,7 +45,7 @@ jobs:
         run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp tests/audio/sooperlooper_osc_contract_test.cpp -llo -o .ci/bin/sooperlooper_osc_contract_test
 
       - name: Compile typed protocol test
-        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp tests/audio/sooperlooper_protocol_test.cpp -llo -o .ci/bin/sooperlooper_protocol_test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp libseq66/src/audio/sooperlooper_receiver.cpp tests/audio/sooperlooper_protocol_test.cpp -llo -o .ci/bin/sooperlooper_protocol_test
 
       - name: Compile receiver test
         run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp libseq66/src/audio/sooperlooper_receiver.cpp tests/audio/sooperlooper_receiver_test.cpp -llo -o .ci/bin/sooperlooper_receiver_test
@@ -79,6 +79,12 @@ jobs:
 
       - name: Run command confirmation test
         run: .ci/bin/sooperlooper_command_confirmation_test
+
+      - name: Compile subscription wire protocol test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp libseq66/src/audio/sooperlooper_receiver.cpp tests/audio/sooperlooper_subscription_test.cpp -llo -o .ci/bin/sooperlooper_subscription_test
+
+      - name: Run subscription wire protocol test
+        run: .ci/bin/sooperlooper_subscription_test
 
       - name: Compile fault injection test
         run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp libseq66/src/audio/sooperlooper_receiver.cpp libseq66/src/audio/sooperlooper_observed_state.cpp libseq66/src/audio/sooperlooper_engine_monitor.cpp libseq66/src/audio/sooperlooper_command_confirmation.cpp tests/audio/sooperlooper_fault_injection_test.cpp -llo -o .ci/bin/sooperlooper_fault_injection_test
