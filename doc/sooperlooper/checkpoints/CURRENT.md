@@ -1,17 +1,18 @@
-# Current checkpoint — M2-005 merged, M2-006 ready
+# Current checkpoint — Phase 2 core tasks complete
 
-Checkpoint ID: `CP-022`
+Checkpoint ID: `CP-023`
 Checkpoint date: 2026-08-03
 Phase: `phase-2-managed-engine-backend`
-Active task: `M2-006`
-Status: `ready`
+Active task: `M2-007`
+Status: `planned`
 Branch: `fork-main`
 
-M2-005 (JACK discovery and routing) is merged. Merge commit: `2b115706`.
-PR #21 closed. Senior verdict: accept. 38 tests pass, CI green.
+Phase 2 core tasks (M2-001 through M2-006) are complete and merged.
+216 test assertions. All CI green.
 
-M2-006 (readiness gate) is next.
+M2-007 (crash/restart reconciliation) and M2-008 (real-engine CI) remain
+as Phase 2 hardening tasks. Phase 2 gate review is ready.
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-022-m2-005-merged-m2-006-ready.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-023-phase2-core-complete.md`
 
-Next executable action: implement M2-006 (readiness gate).
+Next executable action: Phase 2 gate review or M2-007.

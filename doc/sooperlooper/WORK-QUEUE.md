@@ -507,8 +507,11 @@ Handoff target: M2-006 (readiness gate) combines all evidence sources.
 
 ### M2-006 — readiness gate
 
-Status: `planned`
+Status: `done`
 Agent: `hermes`
+Branch: `feature/m2-006-readiness-gate` (merged to `fork-main`)
+PR: `#22` (merged, merge commit `82e6aa24`)
+Completed: 2026-08-03
 
 Dependencies: M2-004, M2-005.
 
@@ -545,7 +548,7 @@ Handoff target: M2-007 (crash/restart) tests recovery paths.
 
 ### M2-007 — shutdown, crash, and restart reconciliation
 
-Status: `planned`
+Status: `ready`
 Agent: `hermes`
 
 Dependencies: M2-003 through M2-006.

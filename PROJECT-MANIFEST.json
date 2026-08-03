@@ -115,7 +115,7 @@
     "next_milestone": {
         "id": "M2",
         "name": "managed engine and backend gate",
-        "active_task": "M2-006",
+        "active_task": "M2-007",
         "active_task_status": "ready",
         "definition_of_done": "Engine readiness verified, ALSA-only hard-blocked, crash/restart safe, no SooperLooper GUI needed, native JACK and PipeWire-JACK separately tested."
     },

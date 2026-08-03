@@ -38,6 +38,10 @@ versions before the fork reaches a releasable state.
  idempotent connections, topology completeness, graph change detection.
  38 test assertions. PR #21 merged to fork-main (merge commit `2b115706`).
 
+ - M2-006 readiness gate: evaluates backend, process, OSC monitor, and
+ JACK topology into typed readiness state. 30 test assertions.
+ PR #22 merged to fork-main (merge commit `82e6aa24`).
+
 - Phase 1 merged into `fork-main` via PR #14 (merge commit `75c57c4a`).
   Human approval recorded. CP-017 governance correction published.
   CP-018 opens Phase 2. First M2 task `M2-001` selected.
