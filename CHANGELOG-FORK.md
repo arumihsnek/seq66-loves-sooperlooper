@@ -29,6 +29,11 @@ versions before the fork reaches a releasable state.
   shutdown escalation (graceful → SIGTERM → SIGKILL), non-blocking poll,
   deterministic argv. 86 test assertions. PR #19 merged to fork-main (merge commit `e09930f7`).
 
+- M2-004 engine launch orchestration: backend-gated launch, deterministic
+  OSC/JACK naming from instance_id + generation hash, generation sync
+  between supervisor/observed_cache/engine_monitor, stale callback
+  rejection. 62 test assertions. PR #20.
+
 - Phase 1 merged into `fork-main` via PR #14 (merge commit `75c57c4a`).
   Human approval recorded. CP-017 governance correction published.
   CP-018 opens Phase 2. First M2 task `M2-001` selected.
