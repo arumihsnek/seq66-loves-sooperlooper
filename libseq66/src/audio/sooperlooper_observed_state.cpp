@@ -235,9 +235,14 @@ bool
 sooperlooper_observed_cache::apply (const std::string & path,
                                     const std::string & /* types */,
                                     const std::vector<std::string> & args,
-                                    long long timestamp_us)
+                                    long long timestamp_us,
+                                    std::uint64_t event_generation)
 {
     if (args.empty())
+        return false;
+
+    // Reject events from a stale engine generation.
+    if (event_generation != 0 && event_generation != m_generation)
         return false;
 
     // Determine if this is a per-loop or global event based on path.
@@ -297,6 +302,7 @@ sooperlooper_observed_cache::snapshot () const
     snap.loops = m_loops;
     snap.global = m_global;
     snap.dirty = m_dirty;
+    snap.generation = m_generation;
     return snap;
 }
 
@@ -307,6 +313,23 @@ sooperlooper_observed_cache::clear ()
     m_loops.clear();
     m_global = global_observed_state{};
     m_dirty = false;
+}
+
+void
+sooperlooper_observed_cache::set_generation (std::uint64_t new_generation)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    m_loops.clear();
+    m_global = global_observed_state{};
+    m_dirty = false;
+    m_generation = new_generation;
+}
+
+std::uint64_t
+sooperlooper_observed_cache::generation () const
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    return m_generation;
 }
 
 bool
