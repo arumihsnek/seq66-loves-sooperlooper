@@ -17,6 +17,10 @@ versions before the fork reaches a releasable state.
   workflows green on gate head `50d39dfb`, `codex-senior-consult` verdict
   `accept`, Phase 2 authorized. PR #14 awaits human approval.
 
+- Phase 1 merged into `fork-main` via PR #14 (merge commit `75c57c4a`).
+  Human approval recorded. CP-017 governance correction published.
+  CP-018 opens Phase 2. First M2 task `M2-001` selected.
+
 - M1-005B subscription wire protocol correction: exact loop/global paths,
   `sss`/`siss` signatures, callback URL/path, integer auto-update interval,
   unregister/cancellation paths, 16 tests.

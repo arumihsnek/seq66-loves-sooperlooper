@@ -12,8 +12,8 @@ when phase scope, ordering or gate status changes.
 | Phase | Name | Status | Gate record |
 |---|---|---|---|
 | 0 | Project contract and control plane | complete | CP-001 |
-| 1 | Bidirectional protocol core | in progress | pending |
-| 2 | Managed engine and backend gate | blocked by Phase 1 | pending |
+|| 1 | Bidirectional protocol core | complete | CP-016 |
+| 2 | Managed engine and backend gate | ready | pending |
 | 3 | Allocation and performer integration | blocked by Phase 2 | pending |
 | 4 | First native Qt audio slot | blocked by Phase 3 | pending |
 | 5 | Exact musical recording | blocked by Phase 4 | pending |
@@ -69,7 +69,8 @@ checkpoint.
 
 ## Phase 1 — bidirectional protocol core
 
-Status: **in progress**.
+Status: **complete**.
+Gate record: `CP-016`.
 
 Current milestone: `M1`.
 
@@ -108,7 +109,7 @@ supervision except narrow scaffolding required to test protocol ownership.
 
 ## Phase 2 — managed engine and backend gate
 
-Status: **blocked by Phase 1**.
+Status: **ready**.
 
 Deliverables:
 

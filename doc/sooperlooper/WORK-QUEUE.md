@@ -21,13 +21,13 @@ checkpoint.
 
 ## Current milestone
 
-Milestone: **M1 — bidirectional protocol core**
+Milestone: **M2 — managed engine and backend gate**
 
-Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
-feedback, maintain generation-scoped observed state and confirm commands without
-blocking UI or real-time paths.
+Goal: Seq66 detects audio backend capability, supervises a headless
+SooperLooper process, and gates audio clip operations on verified engine
+readiness without requiring the SooperLooper GUI.
 
-Active task: **M1-008** (status: `review`)
+Active task: **M2-001** (status: `ready`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -309,7 +309,6 @@ Handoff target: human approves PR #14; Phase 2 work begins on `fork-main`.
 
 These tasks are intentionally not ready before the Phase 1 gate:
 
-- M2 backend capability detector;
 - M2 managed process supervisor;
 - M2 JACK/PipeWire routing;
 - M3 performer integration;
@@ -319,6 +318,48 @@ These tasks are intentionally not ready before the Phase 1 gate:
 
 Agents must not bypass Phase 1 to implement UI or persistence prototypes in the
 main integration branch.
+
+### M2-001 — Phase 2 decomposition and contract
+
+Status: `ready`
+Agent: `hermes`
+Branch: `docs/cp-018-open-phase-2`
+
+Dependencies: Phase 1 complete (CP-018).
+
+Requirement IDs: `BACKEND-001`, `BACKEND-002`, `BACKEND-003`, `ARCH-001`.
+
+Expected ownership:
+
+- `doc/sooperlooper/` Phase 2 specification and architecture updates;
+- `PROJECT-MANIFEST.json` and `WORK-QUEUE.md` M2 task decomposition;
+- `TRACEABILITY.md` Phase 2 requirement rows;
+- Phase 2 acceptance criteria and test strategy.
+
+Deliverables:
+
+- decomposed M2 task list with stable IDs, dependencies and acceptance criteria;
+- backend capability detection specification;
+- ALSA-only `backend_unavailable` hard-block specification;
+- process supervisor interface contract;
+- Phase 2 test strategy (unit, fake-engine, real-engine);
+- traceability rows for Phase 2 requirements.
+
+Acceptance criteria:
+
+- every M2 deliverable from ROADMAP has a corresponding task ID;
+- backend detection, ALSA hard-block and supervisor have specified behaviour;
+- test strategy covers enabled/disabled configurations;
+- no Phase 2 implementation code is included.
+
+Required tests:
+
+- documentation review;
+- traceability completeness check;
+- validator passes on updated control files.
+
+Handoff target: M2-002 (backend capability detector) can begin after M2-001
+is reviewed and merged.
 
 ### M1-005A — real OSC ping and subscription transport
 
