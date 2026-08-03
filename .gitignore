@@ -23,3 +23,4 @@ tmp/
 .ci/
 *.json
 summary.md
+.build/
