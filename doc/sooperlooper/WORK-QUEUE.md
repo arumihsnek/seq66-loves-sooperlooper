@@ -27,7 +27,7 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-008** (status: `done`)
+Active task: **M1-008** (status: `review`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -272,7 +272,7 @@ Acceptance criteria:
 
 ### M1-008 — phase-1 integration gate
 
-Status: `done`
+Status: `review`
 Agent: `hermes`
 Branch: `gate/m1-008-phase-1`
 Draft PR: `#14`

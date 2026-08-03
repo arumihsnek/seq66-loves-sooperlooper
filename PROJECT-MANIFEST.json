@@ -3,7 +3,7 @@
     "project_id": "seq66-loves-sooperlooper",
     "project_name": "Seq66 Loves SooperLooper",
     "status": "active",
-    "updated_at": "2026-08-03T15:00:00+02:00",
+    "updated_at": "2026-08-03T15:31:00+02:00",
     "repository": {
         "full_name": "arumihsnek/seq66-loves-sooperlooper",
         "default_branch": "fork-main",
@@ -14,7 +14,7 @@
         "active_branch": "gate/m1-008-phase-1",
         "active_pull_request": 14,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "Draft PR #14 is the Phase 1 integration gate; gate PASS, awaiting human approval"
+        "active_pull_request_note": "Phase 1 technical gate PASS; draft PR #14 awaits explicit human approval"
     },
     "upstreams": {
         "seq66": {
@@ -29,8 +29,8 @@
         }
     },
     "coordination": {
-        "completed_phase": "phase-1-protocol-core",
-        "current_phase": "phase-2-managed-engine",
+        "completed_phase": "phase-0-project-contract",
+        "current_phase": "phase-1-protocol-core",
         "current_checkpoint": "doc/sooperlooper/checkpoints/CURRENT.md",
         "checkpoint_protocol": "doc/sooperlooper/CHECKPOINTS.md",
         "work_queue": "doc/sooperlooper/WORK-QUEUE.md",
@@ -111,11 +111,11 @@
         }
     ],
     "next_milestone": {
-        "id": "M2",
-        "name": "managed engine and backend gate",
-        "active_task": "none yet",
-        "active_task_status": "ready",
-        "definition_of_done": "Engine readiness verified, ALSA-only hard-blocked, crash/restart safe, no SooperLooper GUI needed, native JACK and PipeWire-JACK separately tested."
+        "id": "M1",
+        "name": "bidirectional protocol core",
+        "active_task": "M1-008",
+        "active_task_status": "review",
+        "definition_of_done": "Typed receive/send protocol, generation-scoped observed state, ping/subscriptions and bounded confirmation tests pass without blocking UI or real-time paths."
     },
     "required_agent_exit_updates": [
         "update WORK-QUEUE.md",
