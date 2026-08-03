@@ -244,6 +244,9 @@
     "doc/sooperlooper/SENIOR-CONSULTATION.md",
     "doc/sooperlooper/AUTONOMOUS-MERGE.md",
     "doc/sooperlooper/HUMAN-ESCALATION.md",
+    "doc/sooperlooper/AUTONOMY-SCENARIOS.md",
+    "doc/sooperlooper/AUTONOMY-ADOPTION.md",
+    "doc/sooperlooper/templates/README.md",
     "doc/sooperlooper/templates/HUMAN-DECISION.md",
     "doc/sooperlooper/templates/AUTONOMOUS-REPORT.md"
   ],
