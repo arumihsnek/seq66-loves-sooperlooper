@@ -21,3 +21,5 @@ tmp/
 
 # Local CI scratch (gtest-style local build artifacts)
 .ci/
+*.json
+summary.md
