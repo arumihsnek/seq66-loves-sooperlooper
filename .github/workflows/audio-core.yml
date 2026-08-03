@@ -103,3 +103,9 @@ jobs:
 
       - name: Run process supervisor test
         run: .ci/bin/sooperlooper_process_supervisor_test
+
+      - name: Compile engine launcher test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_process_supervisor.cpp libseq66/src/audio/sooperlooper_engine_launcher.cpp libseq66/src/audio/sooperlooper_observed_state.cpp libseq66/src/audio/sooperlooper_engine_monitor.cpp libseq66/src/audio/sooperlooper_protocol.cpp tests/audio/sooperlooper_engine_launcher_test.cpp -o .ci/bin/sooperlooper_engine_launcher_test
+
+      - name: Run engine launcher test
+        run: .ci/bin/sooperlooper_engine_launcher_test
