@@ -27,7 +27,7 @@ Goal: Seq66 detects audio backend capability, supervises a headless
 SooperLooper process, and gates audio clip operations on verified engine
 readiness without requiring the SooperLooper GUI.
 
-Active task: **M2-004** (status: `in_progress`)
+Active task: **M2-004** (status: `ready`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
