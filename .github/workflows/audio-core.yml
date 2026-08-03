@@ -181,3 +181,12 @@ jobs:
 
       - name: Run Qt widget test
         run: QT_QPA_PLATFORM=offscreen .ci/bin/sooperlooper_audio_slot_view_qt_test
+
+      - name: Generate MOC for grid adapter
+        run: moc libseq66/include/widgets/sooperlooper_audio_slot_grid_adapter.hpp -o /tmp/moc_grid_adapter.cpp
+
+      - name: Compile grid adapter test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -fPIC -pthread -I.ci/include -Ilibseq66/include -I/tmp libseq66/src/audio/sooperlooper_audio_slot_widget.cpp libseq66/src/widgets/sooperlooper_audio_slot_grid_adapter.cpp /tmp/moc_grid_adapter.cpp tests/widgets/sooperlooper_audio_slot_grid_adapter_test.cpp $(pkg-config --cflags --libs Qt5Widgets) -o .ci/bin/sooperlooper_audio_slot_grid_adapter_test
+
+      - name: Run grid adapter test
+        run: QT_QPA_PLATFORM=offscreen .ci/bin/sooperlooper_audio_slot_grid_adapter_test

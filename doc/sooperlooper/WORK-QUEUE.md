@@ -877,7 +877,10 @@ Acceptance: CI compiles and runs Qt widget test in headless mode.
 
 ### M4-003 — grid item integration
 
-Status: `in_progress`
+Status: `done`
+Completed: 2026-08-03
+PR: pending
+Agent: `hermes`
 Branch: `feature/m4-003-grid-integration`
 Agent: `hermes`
 Agent: `hermes`
@@ -893,7 +896,9 @@ Deliverables:
 
 ### M4-004 — backend gate (ALSA-only)
 
-Status: `pending`
+Status: `in_progress`
+Branch: `feature/m4-004-backend-gate`
+Agent: `hermes`
 Agent: `hermes`
 
 Dependencies: M4-003
