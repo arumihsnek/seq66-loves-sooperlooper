@@ -115,3 +115,9 @@ jobs:
 
       - name: Run JACK discovery test
         run: .ci/bin/sooperlooper_engine_jack_discovery_test
+
+      - name: Compile readiness gate test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_readiness_gate.cpp tests/audio/sooperlooper_readiness_gate_test.cpp -o .ci/bin/sooperlooper_readiness_gate_test
+
+      - name: Run readiness gate test
+        run: .ci/bin/sooperlooper_readiness_gate_test
