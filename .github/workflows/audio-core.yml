@@ -97,3 +97,9 @@ jobs:
 
       - name: Run backend capability probe test
         run: .ci/bin/sooperlooper_backend_probe_test
+
+      - name: Compile process supervisor test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_process_supervisor.cpp tests/audio/sooperlooper_process_supervisor_test.cpp -o .ci/bin/sooperlooper_process_supervisor_test
+
+      - name: Run process supervisor test
+        run: .ci/bin/sooperlooper_process_supervisor_test
