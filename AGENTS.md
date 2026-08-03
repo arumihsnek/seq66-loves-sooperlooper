@@ -5,8 +5,8 @@
 These instructions apply to the whole repository.
 
 A more specific `AGENTS.md` may refine rules for a subtree, but it MUST NOT
-weaken the architecture, backend, testing, documentation, branch or handoff
-requirements defined here.
+weaken the architecture, backend, testing, documentation, branch, autonomy,
+merge, escalation or handoff requirements defined here.
 
 This repository is a fork of Seq66 whose product goal is to make
 SooperLooper-backed audio loops first-class Seq66 tracks and grid slots.
@@ -24,18 +24,50 @@ state or continue work.
 A state-changing session is incomplete until it leaves the required repository
 checkpoint and updates the project-control files.
 
+## Autonomous operating authority
+
+The repository operates in `autonomous_by_default` mode inside an approved
+milestone.
+
+Mandatory governance sources:
+
+- `/PROJECT-AUTONOMY.json` — machine-readable authority and gate contract;
+- `/AUTONOMY.md` — compact entry point;
+- `doc/sooperlooper/AUTONOMY.md` — normative operating model;
+- `MISSION-LIFECYCLE.md` — recover/implement/review/merge/checkpoint loop;
+- `SENIOR-CONSULTATION.md` — independent senior review contract;
+- `AUTONOMOUS-MERGE.md` — exact ordinary-task merge gate;
+- `HUMAN-ESCALATION.md` — valid human questions and safety stops.
+
+Agents classify material decisions as:
+
+- `L1_AUTONOMOUS` — operator decides and executes;
+- `L2_SENIOR_REQUIRED` — operator consults senior, then decides and executes;
+- `L3_HUMAN_REQUIRED` — one bounded human decision;
+- `L4_SAFETY_STOP` — stop the affected mutation and report evidence.
+
+Ordinary technical uncertainty is not a human gate. Human authority remains for
+product choices, destructive/irreversible changes, incompatible licensing,
+requirement conflicts, unavailable subjective/physical validation and milestone
+close/open transitions.
+
+An ordinary task PR may be merged autonomously only when every condition in
+`AUTONOMOUS-MERGE.md` passes on the exact head. No prompt may weaken those
+conditions or the architectural invariants below.
+
 ## Five-minute recovery path
 
 A new Codex, Hermes or human development session MUST begin in this order:
 
 1. read `/PROJECT-MANIFEST.json`;
-2. read `doc/sooperlooper/checkpoints/CURRENT.md`;
-3. read `doc/sooperlooper/WORK-QUEUE.md` and locate the active task ID;
-4. inspect the active PR metadata and current CI status;
-5. read only the requirement, architecture and protocol sections linked by the
+2. read `/PROJECT-AUTONOMY.json` and `/AUTONOMY.md`;
+3. read `doc/sooperlooper/checkpoints/CURRENT.md`;
+4. read `doc/sooperlooper/WORK-QUEUE.md` and locate the active task ID;
+5. inspect the active PR metadata and current CI status;
+6. read only the requirement, architecture and protocol sections linked by the
    active task;
-6. inspect only the source/tests named by the task and current PR diff;
-7. expand context further only when a concrete dependency or failure requires
+7. inspect only the source/tests named by the task and current PR diff;
+8. expand context further only when a concrete dependency or failure requires
    it.
 
 Do NOT start by loading every Markdown file, the complete upstream TODO, the
@@ -47,6 +79,8 @@ Use each control file for one purpose:
 
 - `PROJECT-MANIFEST.json`: repository, branches, upstream revisions, phase,
   active task, required workflows and canonical paths;
+- `PROJECT-AUTONOMY.json`: decision authority, consultation, merge and human
+  escalation gates;
 - `checkpoints/CURRENT.md`: compact latest handoff and next executable action;
 - immutable checkpoint: detailed evidence and risks for one handoff;
 - `WORK-QUEUE.md`: executable tasks, dependencies and acceptance criteria;
@@ -67,9 +101,10 @@ Do not paste large documents into checkpoints or duplicate canonical lists.
 Every task reads:
 
 1. `PROJECT-MANIFEST.json`;
-2. `checkpoints/CURRENT.md`;
-3. its `WORK-QUEUE.md` entry;
-4. affected `TRACEABILITY.md` rows.
+2. `PROJECT-AUTONOMY.json` and `AUTONOMY.md`;
+3. `checkpoints/CURRENT.md`;
+4. its `WORK-QUEUE.md` entry;
+5. affected `TRACEABILITY.md` rows.
 
 Protocol work additionally reads:
 
@@ -82,6 +117,7 @@ Architecture/backend/process work additionally reads:
 
 - `ARCHITECTURE.md`;
 - `DECISIONS.md`;
+- `SENIOR-CONSULTATION.md`;
 - `UPSTREAM-SYNC.md` when branch/upstream compatibility is involved.
 
 UI, performer, recording and persistence work reads its complete normative
@@ -98,6 +134,8 @@ They do not have equal authority.
 ### Canonical fork planning/control
 
 - `/PROJECT-MANIFEST.json`;
+- `/PROJECT-AUTONOMY.json`;
+- `/AUTONOMY.md`;
 - `/AGENTS.md`;
 - `/CHANGELOG-FORK.md`;
 - `/ROADMAP.md` and `/TODO` as fork entry-point pointers;
@@ -118,8 +156,9 @@ An upstream TODO or roadmap item is NOT authorized fork work. It becomes work
 only after receiving a stable task ID, linked requirements and acceptance tests.
 
 Do not create duplicate active files named variants of roadmap, TODO, backlog,
-status, manifest, handoff or checkpoint. Extend the canonical file or archive a
-superseded fork document according to `DOCUMENTATION-MAP.md`.
+status, manifest, handoff, checkpoint, autonomy or agent governance. Extend the
+canonical file or archive a superseded fork document according to
+`DOCUMENTATION-MAP.md`.
 
 ## Branch model
 
@@ -150,24 +189,27 @@ Before editing:
 
 1. verify repository, active branch, PR base and upstream SHAs against the
    manifest;
-2. verify `CURRENT.md` points to an existing immutable checkpoint;
-3. inspect current required workflows;
-4. select one primary ready task from `WORK-QUEUE.md`;
-5. verify dependencies and expected file ownership;
-6. mark the task `in_progress` and record an agent/session identifier when
+2. verify the autonomy policy and classify material decisions L1-L4;
+3. verify `CURRENT.md` points to an existing immutable checkpoint;
+4. inspect current required workflows;
+5. select one primary ready task from `WORK-QUEUE.md`;
+6. verify dependencies and expected file ownership;
+7. mark the task `in_progress` and record an agent/session identifier when
    practical;
-7. create a checkpoint for the status transition if work is being handed across
+8. create a checkpoint for the status transition if work is being handed across
    sessions or agents;
-8. state assumptions in repository/PR context when evidence is incomplete.
+9. state assumptions in repository/PR context when evidence is incomplete.
 
 A session may make small prerequisite fixes, but unrelated cleanup is deferred
 to another task.
 
 ## Senior consultation workflow
 
-Use the `codex-senior-consult` skill as a bounded planning, escalation and
-review mechanism. It does not replace repository recovery, direct source
-inspection, tests or ownership by the primary agent.
+Use the `codex-senior-consult` skill according to
+`doc/sooperlooper/SENIOR-CONSULTATION.md` as a bounded planning, escalation,
+failure-diagnosis and independent merge-review mechanism. It does not replace
+repository recovery, direct source inspection, tests or ownership by the
+primary agent.
 
 Consultation is required at these high-leverage points when the skill is
 available:
@@ -175,28 +217,28 @@ available:
 1. once after repository recovery and before finalizing the implementation plan
    for a non-trivial task involving architecture, protocol, concurrency,
    lifecycle, persistence, CI/branch history or several plausible approaches;
-2. before crossing a project phase gate, task gate or accepting a durable
-   decision whose consequences extend beyond the current local edit;
+2. before accepting a durable L2 decision whose consequences extend beyond the
+   current local edit;
 3. after one focused self-diagnosis when work is genuinely blocked, repeated
    failure has occurred or more than one credible root cause remains;
 4. before moving a high-risk task to `review` or `done`, especially when it
    introduces or changes a protocol contract, state model, range, threading
-   rule, persistence behaviour, backend policy or recovery procedure.
+   rule, persistence behaviour, backend policy or recovery procedure;
+5. before every ordinary functional autonomous merge and every milestone gate.
 
 Do not consult for routine edits, formatting, obvious compiler diagnostics,
 ordinary test reruns or questions already answered by canonical repository
 evidence. Do not repeat a consultation on unchanged evidence.
 
-The default consultation budget is one planning/review call per meaningful
-phase or task gate and one call per distinct blocker. Re-consult only after new
-evidence, a materially changed plan or a failed proposed remedy. Bundle related
-questions into one focused request instead of issuing many small calls.
+Re-consult only after new evidence, a materially changed plan, a stale reviewed
+head or a failed proposed remedy. Bundle related questions into one focused
+request instead of issuing many small calls.
 
 A consultation request should provide only the smallest sufficient packet:
 
 - task ID, objective and current phase;
 - relevant invariants and acceptance criteria;
-- exact source, diff, failing command or runtime evidence;
+- exact head/diff, source, failing command or runtime evidence;
 - options already considered and what has been ruled out;
 - one precise decision, diagnosis or review question.
 
@@ -211,9 +253,10 @@ rationale and accepted/rejected recommendations in the PR, checkpoint,
 `DECISIONS.md` or affected control file; do not paste full consultation
 transcripts into the repository.
 
-If the skill is unavailable or fails, continue with bounded best effort after
-recording that limitation. Unavailability alone is not a reason to abandon a
-safe, well-evidenced task.
+If the skill is unavailable or fails, continue only with bounded safe L1 work
+after recording that limitation. Unavailability cannot waive an L2 merge gate;
+that task remains in review until independent review is available or the human
+explicitly changes policy.
 
 ## Parallel agents
 
@@ -227,6 +270,7 @@ Parallel work is allowed only when tasks have:
 Avoid simultaneous edits to:
 
 - `PROJECT-MANIFEST.json`;
+- `PROJECT-AUTONOMY.json` and autonomy contracts;
 - `checkpoints/CURRENT.md`;
 - the same immutable checkpoint;
 - shared Meson files;
@@ -237,11 +281,14 @@ Avoid simultaneous edits to:
 The integration owner resolves shared-file changes, validates the combined diff
 and writes the final checkpoint.
 
+A branch waiting for an L3 answer may pause while independent safe work
+continues on disjoint tasks.
+
 ## Mandatory handoff and checkpoint
 
 Every session that changes repository state, task/phase status, product policy,
-architecture, tested behaviour or the plan MUST leave a checkpoint before it
-ends.
+architecture, tested behaviour, autonomy policy or the plan MUST leave a
+checkpoint before it ends.
 
 The mandatory exit sequence is:
 
@@ -253,17 +300,20 @@ The mandatory exit sequence is:
    choices;
 6. update `PROJECT-MANIFEST.json` when phase, task, branches, upstream/tested
    revisions, compatibility or required workflows changed;
-7. write one immutable checkpoint under `doc/sooperlooper/checkpoints/`;
-8. update `checkpoints/CURRENT.md` to point to it;
-9. update the active PR with scope, commits, exact test evidence, failures,
-   risks and next task ID;
-10. leave the branch buildable, or record the exact red gate and reproduction.
+7. update `PROJECT-AUTONOMY.json` and linked governance documents together when
+   authority or gates changed;
+8. write one immutable checkpoint under `doc/sooperlooper/checkpoints/`;
+9. update `checkpoints/CURRENT.md` to point to it;
+10. update the active PR with scope, commits, exact test evidence, failures,
+    decision level, senior/human references, risks and next task ID;
+11. leave the branch buildable, or record the exact red gate and reproduction.
 
 A chat summary, model handoff, commit message or PR comment alone is not a valid
 checkpoint.
 
 Follow `CHECKPOINTS.md`. Checkpoints are required at task transitions, phase
-gates, durable runtime discoveries, blockers and branch/upstream changes.
+gates, durable runtime discoveries, blockers, autonomous merges and
+branch/upstream changes.
 
 Do not rewrite immutable checkpoints to reinterpret history. Write a new one.
 
@@ -287,8 +337,8 @@ Requirements use only:
 - `blocked`;
 - `deferred`.
 
-A task is not `done` when code exists but required documentation, tests, review
-or checkpoint are missing.
+A task is not `done` when code exists but required documentation, tests, review,
+autonomy gate or checkpoint are missing.
 
 ## Evidence levels
 
@@ -363,6 +413,8 @@ Agents MUST preserve these invariants:
     `fork-main`.
 19. Current project state is recoverable from repository control files without
     chat history.
+20. Ordinary autonomy never bypasses required independent review, exact-head CI
+    or human L3/L4 authority.
 
 Violating an invariant requires an explicit decision, specification change,
 traceability update, tests, changelog and checkpoint in the same reviewed PR.
@@ -459,7 +511,7 @@ Until a later decision resolves the allocation policy:
 - Preserve prior valid project on failure.
 - Loading without supported audio backend preserves clips and media.
 - Missing media is a visible recoverable error, not silent deletion.
-- Schema changes require migration, rollback tests and a human gate.
+- Schema changes require migration, rollback tests and an L3 human gate.
 
 ## Testing requirements
 
@@ -474,7 +526,8 @@ Required fast checks where applicable:
 - fake-engine OSC contract tests;
 - audio-disabled compilation/build wiring;
 - existing relevant Seq66 MIDI/build checks;
-- project-control validation.
+- project-control validation;
+- autonomy-policy validation.
 
 Required real-engine checks where applicable:
 
@@ -514,6 +567,10 @@ record the exact result.
 Never weaken/remove a required workflow to make a PR green. A changed required
 workflow needs manifest, changelog, checkpoint and review updates.
 
+`PROJECT-AUTONOMY.json` and governance documents are validated by
+`contrib/scripts/validate-autonomy-policy.py` through the project-control
+workflow.
+
 ## Documentation update matrix
 
 Update the same coherent change when modifying:
@@ -525,15 +582,17 @@ Update the same coherent change when modifying:
 - phase/task status -> work queue, roadmap/manifest as applicable, checkpoint;
 - tested runtime behaviour -> `TESTED-BEHAVIOUR.md`, traceability, checkpoint;
 - branch/upstream policy -> `UPSTREAM-SYNC.md`, manifest, checkpoint;
+- autonomy/merge/escalation authority -> `PROJECT-AUTONOMY.json`, autonomy
+  documents, validator, PR template, changelog and checkpoint;
 - notable fork behaviour/tooling -> `CHANGELOG-FORK.md`;
 - canonical document path -> documentation map, manifest, validator and links.
 
-Do not duplicate large protocol lists. Link canonical material.
+Do not duplicate large protocol or governance lists. Link canonical material.
 
 ## Codex-specific guidance
 
 - Use one coherent branch/PR per task or small milestone after bootstrap.
-- Read the active task before broad code search.
+- Read the active task and autonomy policy before broad code search.
 - Use a draft PR early for CI/review visibility.
 - Keep commits logically reviewable.
 - Do not commit build directories, sessions or captured audio except intentional
@@ -541,7 +600,9 @@ Do not duplicate large protocol lists. Link canonical material.
 - When local tests cannot run, add/repair CI and state what remains unverified.
 - Use available specialist consultation autonomously for ordinary technical
   problems.
-- Do not merge without explicit human instruction.
+- Merge eligible ordinary tasks only through `AUTONOMOUS-MERGE.md`.
+- Do not close/open a milestone, perform destructive migration or cross an L3/L4
+  gate without the required human answer.
 - Before stopping, complete the mandatory checkpoint sequence.
 
 ## Hermes-specific guidance
@@ -549,16 +610,21 @@ Do not duplicate large protocol lists. Link canonical material.
 Hermes may coordinate planner, implementer, reviewer and operator profiles, but
 GitHub remains the shared source of truth.
 
-- Give every profile the manifest, current checkpoint and task ID rather than a
-  complete chat transcript.
+- Give every profile the manifest, autonomy policy, current checkpoint and task
+  ID rather than a complete chat transcript.
 - Separate investigation, implementation and review findings.
 - Durable decisions go into repository documents, issues or PRs.
 - A coordinator must verify diff and CI; another agent's narrative is not proof.
 - A reviewer checks invariants, protocol schema, threading, backend blocking,
-  persistence safety and evidence level.
+  persistence safety, autonomy classification and evidence level.
 - The integration owner writes the final combined checkpoint.
-- Human gates remain for merge, destructive migration, backend-policy changes,
-  maintained SooperLooper patch dependency and upstream-compatibility breaks.
+- Hermes may autonomously merge ordinary task PRs when every exact-head gate
+  passes and the senior verdict has no blocker.
+- Hermes asks the human only under `HUMAN-ESCALATION.md`, including milestone
+  gates, destructive migration, backend product-policy changes, incompatible
+  dependencies, upstream-compatibility breaks and unavailable subjective or
+  physical acceptance.
+- A blocked branch may wait while disjoint safe tasks continue.
 
 ## Failure handoff
 
@@ -571,6 +637,8 @@ A failed attempt is acceptable only when the checkpoint records:
 - current hypothesis;
 - changed files;
 - safe rollback/reference point;
+- decision level;
+- senior or human reference when applicable;
 - next diagnostic action.
 
 Do not hide failure by removing assertions, extending arbitrary sleeps or
@@ -578,9 +646,10 @@ marking a blocked task done.
 
 ## Review checklist
 
-Before declaring a task ready/done:
+Before declaring a task ready/done or merging autonomously:
 
 - Is current state recoverable from manifest/checkpoint/work queue?
+- Is the autonomy classification correct?
 - Is the task status honest and traceability updated?
 - Does Seq66 still own intent/lifecycle?
 - Is runtime truth derived from feedback?
@@ -595,13 +664,19 @@ Before declaring a task ready/done:
 - Are waits bounded and diagnostics useful?
 - Does MIDI-only behaviour remain intact?
 - Are evidence levels stated precisely?
+- Did the senior review the exact current head when required?
+- Are all required checks green on that exact head?
+- Are unresolved review threads zero?
+- Will expected-head protection and the required merge method be used?
 - Are docs, changelog, PR and checkpoint current?
 - Does the PR target `fork-main`, not `master`?
+- Is a milestone/human gate being crossed accidentally?
 
 ## Current state
 
 Do not encode volatile branch/task status here.
 
-Read `PROJECT-MANIFEST.json` and `checkpoints/CURRENT.md`. They are validated by
+Read `PROJECT-MANIFEST.json`, `PROJECT-AUTONOMY.json` and
+`checkpoints/CURRENT.md`. They are validated by
 `.github/workflows/project-control.yml` and are the authoritative compact state
-entry points.
+and authority entry points.

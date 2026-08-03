@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "policy_id": "seq66-sl-autonomy-v1",
+  "mode": "autonomous_by_default",
+  "purpose": "Allow Hermes to execute the approved roadmap end to end while escalating only decisions that cannot be resolved safely by repository evidence, tests and independent senior consultation.",
+  "roles": {
+    "human_owner": {
+      "authority": [
+        "product_objectives",
+        "subjective_musical_or_visual_choices",
+        "destructive_or_irreversible_changes",
+        "license_and_dependency_policy",
+        "requirement_conflict_resolution",
+        "milestone_gate_decisions"
+      ],
+      "normal_interaction": "answer_bounded_decision_questions"
+    },
+    "hermes_operator": {
+      "authority": [
+        "recover_repository_state",
+        "plan_and_decompose_tasks",
+        "implement",
+        "test",
+        "open_and_update_pull_requests",
+        "repair_ci",
+        "maintain_control_plane",
+        "request_senior_consultation",
+        "merge_ordinary_tasks_when_gate_passes",
+        "continue_to_next_ready_task"
+      ],
+      "responsibility": "own_outcome_and_evidence"
+    },
+    "codex_senior_consult": {
+      "authority": [
+        "architecture_advice",
+        "risk_review",
+        "failure_diagnosis",
+        "merge_gate_review",
+        "milestone_review"
+      ],
+      "responsibility": "independent_advisory_review_not_execution_proof"
+    },
+    "repository_and_ci": {
+      "authority": [
+        "durable_state",
+        "requirements",
+        "task_status",
+        "executable_evidence",
+        "checkpoint_history"
+      ],
+      "responsibility": "source_of_truth"
+    }
+  },
+  "decision_levels": {
+    "L1_AUTONOMOUS": {
+      "actor": "hermes_operator",
+      "examples": [
+        "reversible_internal_design",
+        "implementation_details",
+        "tests_and_fixtures",
+        "branch_commit_and_pr_management",
+        "routine_ci_repairs",
+        "documentation_and_checkpoint_updates",
+        "ordinary_task_merge_when_all_gates_pass"
+      ],
+      "human_interrupt": false
+    },
+    "L2_SENIOR_REQUIRED": {
+      "actor": "hermes_operator_after_codex_senior_consult",
+      "examples": [
+        "new_cross_component_contract",
+        "threading_and_ownership",
+        "process_lifecycle_and_recovery",
+        "persistence_or_compatibility_design",
+        "backend_abstraction",
+        "security_sensitive_boundary",
+        "high_risk_merge_gate"
+      ],
+      "human_interrupt": false
+    },
+    "L3_HUMAN_REQUIRED": {
+      "actor": "human_owner",
+      "examples": [
+        "product_scope_change",
+        "subjective_user_experience_choice",
+        "intentional_backward_incompatibility",
+        "new_non_foss_or_license_incompatible_dependency",
+        "data_loss_or_irreversible_migration",
+        "unresolved_requirement_conflict",
+        "physical_or_musical_validation_unavailable_to_agents",
+        "milestone_gate_decision"
+      ],
+      "human_interrupt": true
+    },
+    "L4_SAFETY_STOP": {
+      "actor": "hermes_operator_stops_without_mutation",
+      "examples": [
+        "force_push_or_shared_history_rewrite",
+        "unbounded_or_destructive_delete",
+        "credential_or_permission_ambiguity_for_sensitive_write",
+        "tests_require_weakening_an_approved_requirement",
+        "repository_state_cannot_be_recovered_safely",
+        "two_materially_conflicting_senior_reviews_after_reconsultation"
+      ],
+      "human_interrupt": true
+    }
+  },
+  "task_loop": [
+    "recover_state",
+    "select_one_ready_task",
+    "define_acceptance_and_evidence",
+    "consult_senior_when_policy_requires",
+    "implement_smallest_complete_unit",
+    "run_local_validation",
+    "open_or_update_pr",
+    "repair_ci",
+    "obtain_independent_merge_gate",
+    "merge_if_authorized",
+    "write_immutable_checkpoint",
+    "update_control_plane",
+    "continue_to_next_ready_task"
+  ],
+  "autonomous_merge": {
+    "enabled": true,
+    "ordinary_tasks_only": true,
+    "required": [
+      "task_exists_in_work_queue",
+      "scope_matches_one_task_or_declared_integration_unit",
+      "dependencies_satisfied",
+      "all_required_checks_success_on_exact_head",
+      "focused_negative_tests_present",
+      "project_control_validation_success",
+      "traceability_and_checkpoint_current",
+      "senior_merge_gate_accepts_without_blockers",
+      "no_unresolved_review_threads",
+      "pull_request_mergeable",
+      "expected_head_matches",
+      "merge_commit_used_unless_versioned_policy_says_otherwise"
+    ],
+    "forbidden": [
+      "force_push",
+      "silent_requirement_relaxation",
+      "silent_merge_method_change",
+      "merge_with_red_or_missing_required_check",
+      "merge_after_head_changed_without_reverification",
+      "milestone_transition_without_human_gate"
+    ]
+  },
+  "senior_consultation": {
+    "required_for": [
+      "architecture_or_protocol_contract",
+      "concurrency_threading_or_ownership",
+      "process_lifecycle_restart_or_recovery",
+      "persistence_migration_or_compatibility",
+      "backend_capability_policy",
+      "security_or_data_integrity_boundary",
+      "ordinary_functional_merge_gate",
+      "milestone_gate"
+    ],
+    "not_required_for": [
+      "formatting",
+      "obvious_compiler_diagnostic",
+      "routine_test_rerun",
+      "mechanical_document_link_update",
+      "known_ci_quoting_or_dependency_fix"
+    ],
+    "minimum_packet": [
+      "task_id_and_objective",
+      "exact_head_or_diff",
+      "relevant_invariants",
+      "acceptance_criteria",
+      "test_and_ci_evidence",
+      "one_precise_question"
+    ],
+    "valid_merge_verdicts": [
+      "accept",
+      "accept_with_non_blocking_risks"
+    ]
+  },
+  "human_escalation": {
+    "ask_one_decision_at_a_time": true,
+    "required_fields": [
+      "decision_id",
+      "question",
+      "why_technical_resolution_is_insufficient",
+      "options",
+      "senior_recommendation",
+      "impact",
+      "default_if_no_response",
+      "next_action_after_answer",
+      "expected_answer_format"
+    ],
+    "option_count_min": 2,
+    "option_count_max": 4,
+    "default_if_no_response": "pause_only_the_blocked_branch_and_continue_independent_safe_work"
+  },
+  "milestone_policy": {
+    "tasks_inside_approved_milestone": "autonomous",
+    "ordinary_task_merges": "autonomous_when_gate_passes",
+    "close_milestone_and_open_next": "human_required",
+    "phase_gate_packet": [
+      "definition_of_done",
+      "exact_integrated_head",
+      "required_workflow_runs",
+      "senior_global_verdict",
+      "residual_risks",
+      "explicit_human_question"
+    ]
+  },
+  "parallelism": {
+    "allowed": true,
+    "requirements": [
+      "separate_task_ids",
+      "declared_dependencies",
+      "disjoint_files_or_named_integration_owner",
+      "single_owner_for_shared_control_files"
+    ],
+    "shared_files": [
+      "PROJECT-MANIFEST.json",
+      "PROJECT-AUTONOMY.json",
+      "doc/sooperlooper/checkpoints/CURRENT.md",
+      "doc/sooperlooper/WORK-QUEUE.md",
+      "doc/sooperlooper/TRACEABILITY.md",
+      "shared_build_files",
+      "shared_protocol_headers"
+    ]
+  },
+  "evidence_levels": [
+    "specified",
+    "implemented_by_inspection",
+    "compiled",
+    "unit_tested",
+    "fake_engine_tested",
+    "pinned_real_engine_tested",
+    "native_jack_tested",
+    "pipewire_jack_tested",
+    "target_hardware_tested",
+    "soak_or_performance_tested"
+  ],
+  "required_documents": [
+    "AUTONOMY.md",
+    "doc/sooperlooper/AUTONOMY.md",
+    "doc/sooperlooper/MISSION-LIFECYCLE.md",
+    "doc/sooperlooper/SENIOR-CONSULTATION.md",
+    "doc/sooperlooper/AUTONOMOUS-MERGE.md",
+    "doc/sooperlooper/HUMAN-ESCALATION.md",
+    "doc/sooperlooper/AUTONOMY-SCENARIOS.md",
+    "doc/sooperlooper/AUTONOMY-ADOPTION.md",
+    "doc/sooperlooper/templates/README.md",
+    "doc/sooperlooper/templates/HUMAN-DECISION.md",
+    "doc/sooperlooper/templates/AUTONOMOUS-REPORT.md"
+  ],
+  "validation": {
+    "script": "contrib/scripts/validate-autonomy-policy.py",
+    "workflow": ".github/workflows/project-control.yml"
+  }
+}
