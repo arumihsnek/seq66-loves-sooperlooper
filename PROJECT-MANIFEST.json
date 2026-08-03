@@ -45,14 +45,6 @@
         "pull_request_template": ".github/PULL_REQUEST_TEMPLATE.md",
         "task_issue_template": ".github/ISSUE_TEMPLATE/fork-task.md"
     },
-    "governance": {
-        "autonomy_policy": "PROJECT-AUTONOMY.json",
-        "autonomy_entry_point": "AUTONOMY.md",
-        "human_escalation": "doc/sooperlooper/HUMAN-ESCALATION.md",
-        "autonomous_merge": "doc/sooperlooper/AUTONOMOUS-MERGE.md",
-        "senior_consultation": "doc/sooperlooper/SENIOR-CONSULTATION.md",
-        "mission_lifecycle": "doc/sooperlooper/MISSION-LIFECYCLE.md"
-    },
     "source_of_truth_order": [
         "tested upstream source revisions",
         "executable CI evidence and TESTED-BEHAVIOUR.md",
@@ -92,8 +84,7 @@
         "engine generation and stale-feedback rejection",
         "real OSC ping, discovery and subscription transport",
         "generation-aware command confirmation and reconciliation",
-        "fault-injection matrix with reordered-event semantics",
-        "machine-validated autonomous-agent governance contract"
+        "fault-injection matrix with reordered-event semantics"
     ],
     "missing_capabilities": [
         "process supervisor",
@@ -106,7 +97,7 @@
         {
             "workflow": ".github/workflows/project-control.yml",
             "required": true,
-            "purpose": "validate manifest, checkpoint, work queue, autonomy policy and canonical documentation structure"
+            "purpose": "validate manifest, checkpoint, work queue and canonical documentation structure"
         },
         {
             "workflow": ".github/workflows/audio-core.yml",
