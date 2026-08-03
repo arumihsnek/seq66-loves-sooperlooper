@@ -1,10 +1,10 @@
-# Current checkpoint — P5-003 done, P5-004 ready
+# Current checkpoint — P5-004 done, P5-005 ready
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-046-p5-orchestrator-verifier.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-047-p5-synthetic-tests.md`
 
-Checkpoint ID: `CP-046`
+Checkpoint ID: `CP-047`
 Checkpoint date: 2026-08-03
 Phase: `phase-5-exact-recording`
-Active task: `P5-004`
+Active task: `P5-005`
 Status: `in_progress`
 Branch: `fork-main`

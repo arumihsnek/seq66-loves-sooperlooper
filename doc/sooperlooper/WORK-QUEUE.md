@@ -1026,9 +1026,18 @@ Acceptance: orchestrator bridges scheduler→dispatcher, verification checks len
 
 ### P5-004 — deterministic synthetic tests
 
-Status: `in_progress`
+Status: `done`
 Branch: `feature/p5-recording-types`
 Agent: `hermes`
 
 Dependencies: P5-001 (types), P5-002 (scheduler), P5-003 (orchestrator/verifier)
 Acceptance: full matrix test, crash/restart, tempo change, edge cases
+
+### P5-005 — real SooperLooper/JACK integration
+
+Status: `in_progress`
+Branch: `feature/p5-recording-types`
+Agent: `hermes`
+
+Dependencies: P5-001-P5-004
+Acceptance: scheduler outputs correct OSC, real transport integration
