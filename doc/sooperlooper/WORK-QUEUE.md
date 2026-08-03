@@ -27,7 +27,7 @@ Goal: Seq66 detects audio backend capability, supervises a headless
 SooperLooper process, and gates audio clip operations on verified engine
 readiness without requiring the SooperLooper GUI.
 
-Active task: **M2-001** (status: `ready`)
+Active task: **M2-002** (status: `ready`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -321,29 +321,15 @@ main integration branch.
 
 ### M2-001 — Phase 2 decomposition and contract
 
-Status: `ready`
+Status: `done`
 Agent: `hermes`
-Branch: `docs/cp-018-open-phase-2`
+Branch: `feature/m2-001-phase2-contract`
+Completed: 2026-08-03
+Senior consult: `c335b6d5-2ea3-425b-ba3f-60b67378efb7` (verdict: `continue`)
 
 Dependencies: Phase 1 complete (CP-018).
 
 Requirement IDs: `BACKEND-001`, `BACKEND-002`, `BACKEND-003`, `ARCH-001`.
-
-Expected ownership:
-
-- `doc/sooperlooper/` Phase 2 specification and architecture updates;
-- `PROJECT-MANIFEST.json` and `WORK-QUEUE.md` M2 task decomposition;
-- `TRACEABILITY.md` Phase 2 requirement rows;
-- Phase 2 acceptance criteria and test strategy.
-
-Deliverables:
-
-- decomposed M2 task list with stable IDs, dependencies and acceptance criteria;
-- backend capability detection specification;
-- ALSA-only `backend_unavailable` hard-block specification;
-- process supervisor interface contract;
-- Phase 2 test strategy (unit, fake-engine, real-engine);
-- traceability rows for Phase 2 requirements.
 
 Acceptance criteria:
 
@@ -352,14 +338,278 @@ Acceptance criteria:
 - test strategy covers enabled/disabled configurations;
 - no Phase 2 implementation code is included.
 
+Handoff target: M2-002 (backend capability probe) can begin.
+
+### M2-002 — backend capability probe
+
+Status: `ready`
+Agent: `hermes`
+
+Dependencies: none (no M2 dependencies).
+
+Requirement IDs: `BACKEND-001`, `BACKEND-002`, `BACKEND-003`.
+
+Expected ownership:
+
+- `libseq66/include/audio/` backend capability types;
+- `libseq66/src/audio/` probe implementation;
+- `tests/audio/` probe tests.
+
+Deliverables:
+
+- typed backend capability probe (native JACK, PipeWire-JACK, backend_unavailable, probe_error);
+- side-effect-free classification using JACK API capability probe;
+- ALSA-only produces backend_unavailable without starting JACK;
+- evidence: selected client library, reachable server, implementation metadata.
+
+Acceptance criteria:
+
+- probe compiles with `-Wall -Wextra -Wpedantic -Werror`;
+- fake-JACK tests cover: native JACK, PipeWire-JACK, ALSA-only, probe error;
+- ALSA-only never starts JACK, PipeWire or SooperLooper;
+- probe is independently testable without launching processes.
+
 Required tests:
 
-- documentation review;
-- traceability completeness check;
-- validator passes on updated control files.
+- unit tests with fake JACK API stubs;
+- ALSA-only negative test (no process launch);
+- backend_unavailable state correctly produced.
 
-Handoff target: M2-002 (backend capability detector) can begin after M2-001
-is reviewed and merged.
+Handoff target: M2-003 (supervisor) consumes typed probe result.
+
+### M2-003 — managed process supervisor core
+
+Status: `planned`
+Agent: `hermes`
+
+Dependencies: M2-002.
+
+Requirement IDs: `ARCH-001`, `THREAD-001`, `THREAD-002`.
+
+Expected ownership:
+
+- `libseq66/include/audio/` supervisor interface;
+- `libseq66/src/audio/` supervisor implementation;
+- `tests/audio/` supervisor tests.
+
+Deliverables:
+
+- owned-child lifecycle (PID + identity verification);
+- serialized event loop on one supervisor context;
+- deterministic executable arguments and names;
+- bounded shutdown (protocol graceful → TERM → KILL);
+- generation-tagged observations;
+- never kills externally discovered processes.
+
+Acceptance criteria:
+
+- supervisor compiles with warnings-as-errors;
+- fake-process tests cover: start, stop, restart, owned-child verification;
+- signals only sent to verified owned child;
+- generation increments on each launch attempt;
+- no synchronous waits on UI/RT paths.
+
+Required tests:
+
+- lifecycle unit tests with fake process adapter;
+- owned-child-only signaling verification;
+- generation tagging tests;
+- shutdown escalation tests (graceful → TERM → KILL).
+
+Handoff target: M2-004 (engine launch) integrates supervisor with Phase 1 OSC.
+
+### M2-004 — engine launch and OSC reconciliation
+
+Status: `planned`
+Agent: `hermes`
+
+Dependencies: M2-003, Phase 1 complete.
+
+Requirement IDs: `OSC-005`, `STATE-005`, `STATE-006`.
+
+Expected ownership:
+
+- `libseq66/src/audio/` launch orchestration;
+- `tests/audio/` launch tests.
+
+Deliverables:
+
+- launch SooperLooper only when backend is usable;
+- assign deterministic OSC/JACK names;
+- connect supervisor generation to Phase 1 monitor;
+- reject stale callbacks from old generations.
+
+Acceptance criteria:
+
+- launch gated on usable backend probe;
+- deterministic names derived from instance identity + generation;
+- Phase 1 engine_monitor receives generation-tagged lifecycle events;
+- stale event rejection verified.
+
+Required tests:
+
+- fake-engine launch tests with backend gate;
+- deterministic naming verification;
+- generation-to-monitor integration tests;
+- stale callback rejection tests.
+
+Handoff target: M2-005 (JACK discovery) adds port discovery and routing.
+
+### M2-005 — JACK discovery and Seq66-owned routing
+
+Status: `planned`
+Agent: `hermes`
+
+Dependencies: M2-002, M2-004.
+
+Requirement IDs: `BACKEND-001`.
+
+Expected ownership:
+
+- `libseq66/include/audio/` JACK discovery types;
+- `libseq66/src/audio/` routing implementation;
+- `tests/audio/` routing tests.
+
+Deliverables:
+
+- discover expected JACK clients and ports;
+- establish idempotent Seq66-owned connections;
+- report incomplete topology;
+- reconnect after graph changes.
+
+Acceptance criteria:
+
+- fake-JACK graph tests for discovery and connection;
+- idempotent routing (repeated calls produce same result);
+- incomplete topology detected and reported;
+- JACK-dummy integration test when environment allows.
+
+Required tests:
+
+- fake-JACK graph simulation tests;
+- idempotent routing verification;
+- topology incompleteness detection;
+- JACK-dummy integration (CI environment permitting).
+
+Handoff target: M2-006 (readiness gate) combines all evidence sources.
+
+### M2-006 — readiness gate
+
+Status: `planned`
+Agent: `hermes`
+
+Dependencies: M2-004, M2-005.
+
+Requirement IDs: `STATE-006`, `FAIL-002`.
+
+Expected ownership:
+
+- `libseq66/include/audio/` readiness types;
+- `libseq66/src/audio/` readiness derivation;
+- `tests/audio/` readiness tests.
+
+Deliverables:
+
+- derive readiness from: child health, OSC confirmation, JACK topology, routing, backend capability;
+- backend_unavailable cannot become ready;
+- degraded states properly classified.
+
+Acceptance criteria:
+
+- deterministic unit tests for all readiness combinations;
+- backend_unavailable → not ready (verified);
+- child exit → not ready;
+- OSC loss → not ready;
+- routing loss → not ready;
+- generation change → readiness re-evaluated.
+
+Required tests:
+
+- unit tests for each readiness condition;
+- negative tests (backend_unavailable, child exit, OSC loss);
+- generation-change re-evaluation tests.
+
+Handoff target: M2-007 (crash/restart) tests recovery paths.
+
+### M2-007 — shutdown, crash, and restart reconciliation
+
+Status: `planned`
+Agent: `hermes`
+
+Dependencies: M2-003 through M2-006.
+
+Requirement IDs: `FAIL-001`, `FAIL-004`, `STATE-005`.
+
+Expected ownership:
+
+- `libseq66/src/audio/` restart policy;
+- `tests/audio/` fault injection tests.
+
+Deliverables:
+
+- bounded graceful shutdown with escalation;
+- generation rollover on crash;
+- stale-state invalidation;
+- routing restoration after restart;
+- capped exponential backoff with terminal state.
+
+Acceptance criteria:
+
+- crash invalidates generation and all runtime indexes;
+- pending operations cancelled or marked indeterminate;
+- restart loop has cap and backoff;
+- backoff resets after stable interval;
+- shutdown during startup handled safely.
+
+Required tests:
+
+- crash injection tests;
+- restart backoff verification;
+- shutdown-during-startup tests;
+- pending-operation cancellation tests.
+
+Handoff target: M2-008 (CI closure) provides real-engine evidence.
+
+### M2-008 — real-engine CI and regression closure
+
+Status: `planned`
+Agent: `hermes`
+
+Dependencies: M2-007.
+
+Requirement IDs: `TEST-001`, `TEST-002`, `BACKEND-001`.
+
+Expected ownership:
+
+- `.github/workflows/` CI updates;
+- `tests/audio/` integration tests;
+- `TESTED-BEHAVIOUR.md` updates.
+
+Deliverables:
+
+- JACK-dummy lifecycle/crash/restart smoke;
+- deterministic names and ports verification;
+- routing and readiness assertions;
+- ALSA-only no-launch test;
+- warnings-as-errors build;
+- existing MIDI-only regression suite.
+
+Acceptance criteria:
+
+- all three CI workflows pass on gate head;
+- real-engine smoke covers lifecycle, crash, restart;
+- ALSA-only test proves no JACK launch;
+- MIDI-only regression passes;
+- TESTED-BEHAVIOUR.md updated.
+
+Required tests:
+
+- real-engine smoke with crash/restart;
+- ALSA-only no-launch test;
+- MIDI-only regression;
+- build with support enabled and disabled.
+
+Handoff target: Phase 2 gate review.
 
 ### M1-005A — real OSC ping and subscription transport
 
