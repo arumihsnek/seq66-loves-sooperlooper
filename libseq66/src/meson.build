@@ -1,5 +1,6 @@
 libseq66_sources += files(    'audio/audio_clip.cpp',
     'audio/sooperlooper_client.cpp',
+    'audio/sooperlooper_observed_state.cpp',
     'audio/sooperlooper_protocol.cpp',
     'audio/sooperlooper_receiver.cpp',
     'cfg/basesettings.cpp',
