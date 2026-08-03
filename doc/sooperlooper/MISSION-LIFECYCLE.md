@@ -3,15 +3,15 @@
 ## Purpose
 
 This document defines the complete lifecycle from a minimal user instruction to
-multiple integrated tasks, milestone completion and the next human decision.
+multiple integrated tasks and phase transitions.
 
-The intended normal instruction is simply:
+The intended normal instruction is:
 
 ```text
 Continue the project.
 ```
 
-Hermes then recovers state and runs the loop below without requiring a long
+Hermes then recovers state and runs the loop without requiring a long
 session-specific prompt.
 
 ## Stage 0 — recover
@@ -28,197 +28,150 @@ Read in this order:
    sections;
 8. exact source and tests owned by the task.
 
-Verify repository, branch, PR base, active task and checkpoint consistency.
 Recover from repository evidence rather than chat memory.
 
-If control files disagree, classify the discrepancy:
+Classify inconsistent control state as:
 
-- mechanical and safely correctable: create a bounded control task;
-- ambiguous but non-destructive: consult senior;
-- phase/product authority conflict: ask the human;
-- unrecoverable or destructive ambiguity: safety stop.
+- mechanical and safely correctable: bounded autonomous control task;
+- ambiguous but non-destructive: senior consultation;
+- genuine L3 product/compatibility/data/licensing decision: human form;
+- unrecoverable or destructive ambiguity: L4 safety stop.
 
 ## Stage 1 — claim one task
 
-Select one ready task whose dependencies are complete.
+Select one ready task whose dependencies are complete. Verify stable ID,
+objective, dependencies, requirement IDs, ownership, acceptance criteria,
+required evidence and handoff target.
 
-Before editing, verify it has:
+If a phase is too vague, create a decomposition/contract task before functional
+implementation.
 
-- stable ID;
-- objective;
-- dependencies;
-- requirement IDs;
-- expected ownership;
-- deliverables;
-- acceptance criteria;
-- required tests;
-- handoff target.
+## Stage 2 — plan and classify
 
-If the active milestone is insufficiently decomposed, create a documentation
-and contract task first. Do not begin a broad implementation from a vague phase
-heading.
-
-Move the task to `in_progress` and establish branch/PR ownership according to
-the existing workflow.
-
-## Stage 2 — plan and classify decisions
-
-Create the smallest vertically complete implementation plan.
-
-For each material decision classify it:
+Create the smallest vertically complete plan. Classify each material decision:
 
 - L1: Hermes decides;
-- L2: senior review required, Hermes decides after review;
-- L3: human decision required;
+- L2: senior review required, then Hermes decides;
+- L3: bounded human selection required;
 - L4: safety stop.
-
-A plan should identify:
-
-- changed contracts;
-- source and test paths;
-- ownership and lifecycle;
-- expected failure cases;
-- evidence levels achievable in the environment;
-- rollback/reference point;
-- deferred scope.
 
 ## Stage 3 — implement
 
-Implement only the selected unit and necessary prerequisites.
-
-Keep behaviour, tests, traceability and contract documentation together.
-Do not mix unrelated refactors.
-
-Use bounded waits and explicit state transitions. Preserve architecture,
-backend, process, protocol and persistence invariants from `AGENTS.md`.
+Implement only the selected unit and necessary prerequisites. Keep behaviour,
+tests, traceability and contract documentation together. Preserve all
+architecture, backend, protocol, persistence and real-time invariants.
 
 ## Stage 4 — verify locally
 
-Run the narrowest relevant matrix before relying on remote CI:
+Run the narrowest relevant matrix:
 
 - warnings-as-errors compile;
-- focused unit tests;
-- negative/fault tests;
-- configuration enabled/disabled tests where relevant;
-- validator and `git diff --check`;
-- fake-engine or real-engine tests according to the changed layer.
+- focused unit and negative tests;
+- enabled/disabled configurations where relevant;
+- project-control and autonomy validators;
+- `git diff --check`;
+- fake-engine, real-engine, backend or hardware evidence appropriate to the
+  changed layer.
 
-Record exact commands and outcomes. Do not write “all tests pass” without naming
-the evidence level.
+Record exact commands and outcomes.
 
 ## Stage 5 — publish and use CI
 
-Open a draft PR early. The PR is the review surface and contains:
+Open a draft PR early. Include task/requirement IDs, scope, exclusions,
+architecture impact, exact evidence, failures, residual risks and next action.
 
-- task and requirement IDs;
-- scope and exclusions;
-- architecture impact;
-- exact evidence;
-- known failures and residual risks;
-- next executable action.
-
-Use CI failures as concrete evidence. Diagnose and repair them autonomously.
-Never weaken a required workflow or assertion merely to make the PR green.
+Diagnose and repair CI autonomously. Never weaken a workflow or assertion merely
+to obtain green status.
 
 ## Stage 6 — independent review
 
 Request `codex-senior-consult` according to
 `SENIOR-CONSULTATION.md`.
 
-For a merge gate, provide the exact head SHA and request blocking/non-blocking
-classification.
+For a merge gate provide the exact head. Apply blockers and repeat review after
+material changes.
 
-Apply blockers, add regression tests and repeat review after material changes.
+## Stage 7 — merge task
 
-## Stage 7 — merge ordinary task
-
-Apply every condition in `AUTONOMOUS-MERGE.md`.
-
-When all conditions pass:
+Apply every condition in `AUTONOMOUS-MERGE.md`:
 
 - capture expected head;
+- verify exact-head checks and senior verdict;
+- verify zero unresolved threads and mergeability;
 - mark ready when needed;
-- reverify checks and mergeability;
-- merge using expected-head protection and the required method;
-- capture merge SHA;
-- fast-forward local integration branch;
-- prove ancestry.
+- merge with expected-head protection;
+- record merge SHA and prove ancestry.
 
-No human permission is required for an ordinary eligible task.
+No human permission is required for an eligible task.
 
 ## Stage 8 — checkpoint and continue
 
-After integration:
-
-- update task status and next ready task;
-- update traceability and changelog;
-- record durable decisions;
-- update manifest when active branch/task/phase or compatibility changes;
-- write one immutable checkpoint;
-- update CURRENT;
-- update PR/merge evidence;
-- select the next ready task.
-
-Continue automatically inside the same milestone.
+After integration update task status, traceability, changelog, manifest where
+needed, immutable checkpoint, CURRENT and PR/merge evidence. Then select the
+next ready task.
 
 ## Stage 9 — blocked task
 
-A blocked ordinary task follows this order:
+Use focused diagnosis, discriminating tests, senior failure consultation and the
+smallest safe correction. Only a real L3/L4 condition creates a human question.
+Pause only the blocked branch when independent work can continue.
 
-1. focused self-diagnosis;
-2. discriminating test or inspection;
-3. senior failure consultation when needed;
-4. smallest safe correction;
-5. regression evidence;
-6. resume task.
+## Stage 10 — phase gate
 
-Only L3/L4 conditions create a human question. Use
-`HUMAN-ESCALATION.md`.
+When every required task in the current phase is integrated:
 
-When possible, pause only the blocked branch and continue independent tasks.
-
-## Stage 10 — milestone gate
-
-When every milestone task is integrated:
-
-1. verify the roadmap definition of done item by item;
-2. run the full required suite;
-3. run pinned real-engine and backend/hardware evidence where applicable;
+1. verify the definition of done item by item;
+2. run the full required suite on the exact integrated head;
+3. run real-engine, backend and hardware evidence where applicable;
 4. state unavailable evidence precisely;
 5. audit traceability and control consistency;
-6. request global senior milestone review;
-7. create the gate checkpoint and PR;
-8. ask one explicit human approval question.
+6. request a global exact-head senior phase review;
+7. classify residual risks as blocking or non-blocking;
+8. verify the next phase is already bounded in the approved roadmap and has a
+   first real task;
+9. classify whether any L3 or L4 trigger exists;
+10. create the gate checkpoint and PR.
 
-The human answer is the only normal interruption between milestones.
+### Clear phase transition
 
-After approval Hermes:
+When the senior accepts without blockers, all required evidence is green, the
+next phase is preapproved and bounded, and no L3/L4 trigger exists, Hermes:
 
-- updates the gate PR body;
-- marks ready and merges with expected-head protection;
-- writes the post-merge checkpoint;
-- changes manifest/roadmap/work queue to the next milestone;
-- begins its first ready task.
+1. marks the gate PR ready;
+2. re-verifies the exact head;
+3. merges with expected-head protection;
+4. writes the post-transition checkpoint;
+5. updates manifest, roadmap, work queue and CURRENT;
+6. starts the next phase's first ready task.
+
+No human message is required.
+
+### Phase transition with an L3 choice
+
+When the transition changes product scope, requires subjective judgement,
+introduces intentional incompatibility, data loss, irreversible migration,
+licensing policy, unresolved requirement conflict or unavailable physical
+acceptance, Hermes pauses only that transition and uses the selection-form
+protocol in `HUMAN-ESCALATION.md`.
+
+The phase boundary itself is not a human gate.
 
 ## Session ending
 
-A particular chat or agent process may end at any point. Before ending after any
-state change it must leave the mandatory checkpoint described in
-`CHECKPOINTS.md`.
-
-A new session resumes at Stage 0. No private chain of thought, hidden memory or
-conversation transcript is required.
+A chat or agent process may end at any point. After state changes it leaves the
+mandatory checkpoint described in `CHECKPOINTS.md`. A new session resumes at
+Stage 0 without private memory.
 
 ## Long-running autonomy
 
-Hermes may complete multiple ordinary tasks in one long-running mission. It
-should not produce a human report after every command.
+Hermes may complete multiple tasks and clear multiple well-defined phases in one
+long-running mission.
 
-Send an intermediate report only when:
+Send an intermediate human report only when:
 
-- an L3/L4 human decision is required;
-- a task materially changes an approved cross-phase contract;
-- a meaningful set of tasks is integrated;
-- the milestone is complete.
+- an L3/L4 decision is required;
+- a material cross-roadmap contract changes;
+- a meaningful progress summary is useful;
+- the whole approved roadmap or a major release gate is complete.
 
 Use `templates/AUTONOMOUS-REPORT.md`.
