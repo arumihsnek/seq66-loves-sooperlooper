@@ -27,7 +27,7 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-003** (status: `in_progress`)
+Active task: **M1-004** (status: `in_progress`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -135,10 +135,12 @@ receiver events without calling the network.
 
 ### M1-003 — observed-state cache
 
-Status: `in_progress`
+Status: `done`
 Agent: `hermes`
-Branch: `feature/m1-003-observed-state-cache` (base `fork-main`)
-Draft PR: `#5`
+Branch: `feature/m1-003-observed-state-cache` (merged to `fork-main`)
+Draft PR: `#5` (merged, merge commit `da8ec5cb1a6afc392e17848154af5c4d8bf038f5`)
+Started: 2026-08-03
+Completed: 2026-08-03
 
 Dependencies: M1-002.
 

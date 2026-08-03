@@ -46,8 +46,8 @@ engine and target-hardware verification are recorded separately.
 ||---|---|---|---|---|---|---|
 || STATE-001 | Known protocol/state values have deterministic typed mappings | OSC contract | **implemented** | `parse_state_int(int, state_parse_result&)` maps the 18 canonical SooperLooper state integers (-1, 0..15, 20) to canonical labels; unknown raw values are preserved verbatim in `result.raw` with `result.known == false` | focused `tests/audio/sooperlooper_protocol_test.cpp::test_state_parsing` PASS, including the `raw=999` unknown path | M1-001 (in_progress) |
 || STATE-002 | Receiver callbacks become typed events outside UI/RT paths | ARCHITECTURE | **verified** | `sooperlooper_receiver` trampoline queues events; `dispatch()` invokes typed callbacks from caller thread only | receiver test PASS; no user code on liblo thread; `Audio integration core` run `30774259960` | M1-002 (done) |
-|| STATE-003 | Desired and observed state are structurally separate | ARCHITECTURE, D-002 | specified | audio clip desired model only | none | M1-003 |
-|| STATE-004 | Observed values carry presence and freshness timestamps | SPECIFICATION | specified | none | none | M1-003 |
+|| STATE-003 | Desired and observed state are structurally separate | ARCHITECTURE, D-002 | **verified** | `loop_observed_state` and `global_observed_state` are separate structs from desired state; `observed_field<T>` carries value + present + timestamp | observed-state cache test PASS (zero vs absent, snapshot immutability); `Audio integration core` run 30777160194 | M1-003 (done) |
+|| STATE-004 | Observed values carry presence and freshness timestamps | SPECIFICATION | **verified** | `observed_field<T>` has `present` flag and `timestamp_us`; freshness test verifies timestamp advances; zero meter present=true vs absent | observed-state cache test PASS (freshness, zero vs absent); `Audio integration core` run 30777160194 | M1-003 (done) |
 || STATE-005 | Runtime loop indexes are scoped to engine generation | SPECIFICATION, D-005 | specified | none | none | M1-004 |
 || STATE-006 | Ready, stale and offline are deterministic distinct states | SPECIFICATION | specified | none | none | M1-005 |
 || STATE-007 | Operations have pending, confirmed, failed or indeterminate results | SPECIFICATION | specified | test-only pending logic | real-engine confirmation test PASS | M1-006 |
@@ -63,7 +63,7 @@ engine and target-hardware verification are recorded separately.
 ||---|---|---|---|---|---|---|
 || THREAD-001 | OSC receive/send never blocks Qt paint or RT paths | ARCHITECTURE | **verified** | `sooperlooper_receiver` liblo thread only queues events; `dispatch()` runs from caller thread; `handle()` registration uses a separate handler mutex | receiver test PASS; liblo trampoline does not call user code; `Audio integration core` run `30774259960` | M1-002 (done) |
 || THREAD-002 | Receiver ownership and shutdown are deterministic | ARCHITECTURE | **verified** | `start()` creates liblo thread and sets `m_running` atomically; `stop()` sets `m_running` false, stops/frees liblo thread, notifies waiters; destructor calls `stop()` | receiver test lifecycle PASS (start/stop/restart); concurrent registration/dispatch test PASS; `Audio integration core` run `30774259960` | M1-002 (done) |
-|| THREAD-003 | UI/performer consume bounded snapshots/events | ARCHITECTURE | specified | none | none | M1-003 |
+|| THREAD-003 | UI/performer consume bounded snapshots/events | ARCHITECTURE | **verified** | `snapshot()` returns immutable copy under mutex; concurrent read/write test PASS (28K writes, 50K reads in 200ms); no network calls from snapshot | observed-state cache test PASS (snapshot immutability, concurrent access); `Audio integration core` run 30777160194 | M1-003 (done) |
 
 ## Musical model
 

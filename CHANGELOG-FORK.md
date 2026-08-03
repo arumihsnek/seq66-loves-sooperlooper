@@ -13,6 +13,17 @@ versions before the fork reaches a releasable state.
 
 ### Added
 
+- M1-003 observed-state cache (`sooperlooper_observed_cache`) providing
+  thread-safe storage of SooperLooper feedback with per-field freshness
+  timestamps, zero-vs-absent distinction, meter/position coalescing,
+  immutable snapshots, and generation-reset hook (`clear()`).  Unknown
+  controls safely rejected at typed boundary.  14 test groups covering
+  empty state, apply, zero vs absent, freshness, coalescing, transitions,
+  unknown control rejection, snapshot immutability, clear(), global state,
+  multiple loops, concurrent read/write, and argument validation.
+  Co-consulted with codex-senior-consult (plan + merge-gate).
+  PR #5 merged to fork-main (merge commit `da8ec5cb`).
+
 - M1-002 SooperLooper OSC receiver (`sooperlooper_receiver`) with liblo server
   thread lifecycle, strict `(path, types)` allow-list rejecting unsupported OSC
   type tags, catch-all trampoline routing all inbound messages through a
