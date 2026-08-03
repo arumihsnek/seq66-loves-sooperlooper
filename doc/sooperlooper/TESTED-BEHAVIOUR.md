@@ -353,3 +353,57 @@ Zero warnings.
 - Native JACK tested: NO
 - PipeWire-JACK tested: NO
 - Hardware tested: NO
+
+## M4-001 audio slot view evidence
+
+### Compilation
+
+Compiled on Linux aarch64 with g++ (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0:
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread \
+  -Ilibseq66/include \
+  libseq66/src/audio/sooperlooper_audio_slot_widget.cpp \
+  tests/widgets/sooperlooper_audio_slot_view_test.cpp \
+  -o /tmp/slot_view_test
+
+Exit code: 0
+
+### Test execution
+
+/tmp/slot_view_test
+Result: 55/55 pass. All assertions passed.
+
+### Coverage
+
+| Test case | Assertions | Status |
+|---|---|---|
+| Model initial state | 14 | pass |
+| Model state labels | 4 | pass |
+| Model command labels | 7 | pass |
+| Model tempo labels | 3 | pass |
+| Model has_clip | 3 | pass |
+| Transport action creation | 4 | pass |
+| Tempo action creation | 3 | pass |
+| Both action creation | 4 | pass |
+| Model transport playing | 3 | pass |
+| Model state transitions | 5 | pass |
+| Model last_error | 3 | pass |
+
+### Full regression (core 8 suites)
+
+| Suite | Assertions | Status |
+|---|---|---|
+| process_supervisor | 86 | pass |
+| crash_reconciler | 45 | pass |
+| clip_mapper | 43 | pass |
+| command_dispatcher | 60 | pass |
+| lifecycle_smoke | 21 | pass |
+| transport_tempo_policy | 110 | pass |
+| audio_slot_widget | 80 | pass |
+| audio_persistence | 59 | pass |
+| audio_slot_view | 55 | pass |
+| **Total** | **559** | **all pass** |
+
+### CI steps added
+
+1. Compile audio slot view model test
+2. Run audio slot view model test
