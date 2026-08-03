@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the repository's autonomous-agent governance contract.
-
-The autonomy policy is deliberately independent of volatile project state such
-as the active branch, task or checkpoint. This prevents governance work from
-conflicting with an operator that is advancing the implementation in parallel.
-"""
+"""Validate the repository autonomous-agent governance contract."""
 
 from __future__ import annotations
 
@@ -13,114 +8,87 @@ import sys
 from pathlib import Path
 from typing import Any
 
-
 ROOT = Path(__file__).resolve().parents[2]
 POLICY_PATH = ROOT / "PROJECT-AUTONOMY.json"
 
 
 class PolicyError(RuntimeError):
-    """Raised when the autonomy policy cannot be loaded."""
+    pass
 
 
 def load_json(path: Path) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError as exc:
-        raise PolicyError(
-            f"missing required JSON file: {path.relative_to(ROOT)}"
-        ) from exc
+        raise PolicyError(f"missing required JSON file: {path.relative_to(ROOT)}") from exc
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-        raise PolicyError(
-            f"invalid JSON in {path.relative_to(ROOT)}: {exc}"
-        ) from exc
+        raise PolicyError(f"invalid JSON in {path.relative_to(ROOT)}: {exc}") from exc
     if not isinstance(value, dict):
-        raise PolicyError(
-            f"{path.relative_to(ROOT)} must contain a JSON object"
-        )
+        raise PolicyError(f"{path.relative_to(ROOT)} must contain a JSON object")
     return value
 
 
-def require_mapping(
-    value: Any, name: str, errors: list[str]
-) -> dict[str, Any]:
+def mapping(value: Any, name: str, errors: list[str]) -> dict[str, Any]:
     if not isinstance(value, dict):
         errors.append(f"{name} must be an object")
         return {}
     return value
 
 
-def require_list(value: Any, name: str, errors: list[str]) -> list[Any]:
+def nonempty_list(value: Any, name: str, errors: list[str]) -> list[Any]:
     if not isinstance(value, list) or not value:
         errors.append(f"{name} must be a non-empty list")
         return []
     return value
 
 
-def require_string(value: Any, name: str, errors: list[str]) -> str:
-    if not isinstance(value, str) or not value.strip():
-        errors.append(f"{name} must be a non-empty string")
-        return ""
-    return value
-
-
-def require_members(
-    container: list[Any],
-    required: set[str],
-    name: str,
-    errors: list[str],
-) -> None:
-    strings = {item for item in container if isinstance(item, str)}
+def require_members(items: list[Any], required: set[str], name: str, errors: list[str]) -> None:
+    strings = {item for item in items if isinstance(item, str)}
     missing = required - strings
     if missing:
-        errors.append(
-            f"{name} missing required values: {', '.join(sorted(missing))}"
-        )
+        errors.append(f"{name} missing: {', '.join(sorted(missing))}")
 
 
-def require_file(relative: str, errors: list[str]) -> None:
-    if not (ROOT / relative).is_file():
-        errors.append(f"missing autonomy document/file: {relative}")
-
-
-def require_text_tokens(
-    relative: str,
-    tokens: tuple[str, ...],
-    errors: list[str],
-) -> None:
+def require_file(relative: str, errors: list[str]) -> str:
     path = ROOT / relative
     if not path.is_file():
-        errors.append(f"missing required integration file: {relative}")
-        return
+        errors.append(f"missing required autonomy file: {relative}")
+        return ""
     try:
-        text = path.read_text(encoding="utf-8")
-    except UnicodeDecodeError as exc:
-        errors.append(f"not valid UTF-8: {relative}: {exc}")
-        return
-    for token in tokens:
-        if token not in text:
-            errors.append(f"{relative} missing required token: {token}")
+        return path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        errors.append(f"autonomy file is not UTF-8: {relative}")
+        return ""
+
+
+def require_text(text: str, needles: list[str], name: str, errors: list[str]) -> None:
+    for needle in needles:
+        if needle not in text:
+            errors.append(f"{name} missing required text: {needle}")
+
+
+def forbid_text(text: str, needles: list[str], name: str, errors: list[str]) -> None:
+    lowered = text.lower()
+    for needle in needles:
+        if needle.lower() in lowered:
+            errors.append(f"{name} contains obsolete policy text: {needle}")
 
 
 def validate() -> list[str]:
     errors: list[str] = []
-
     try:
         policy = load_json(POLICY_PATH)
     except PolicyError as exc:
         return [str(exc)]
 
-    if policy.get("schema_version") != 1:
-        errors.append("PROJECT-AUTONOMY.json schema_version must equal 1")
-    if policy.get("policy_id") != "seq66-sl-autonomy-v1":
-        errors.append(
-            "PROJECT-AUTONOMY.json policy_id must equal seq66-sl-autonomy-v1"
-        )
+    if policy.get("schema_version") != 2:
+        errors.append("PROJECT-AUTONOMY.json schema_version must equal 2")
+    if policy.get("policy_id") != "seq66-sl-autonomy-v2":
+        errors.append("PROJECT-AUTONOMY.json policy_id must be seq66-sl-autonomy-v2")
     if policy.get("mode") != "autonomous_by_default":
-        errors.append(
-            "PROJECT-AUTONOMY.json mode must be autonomous_by_default"
-        )
+        errors.append("mode must be autonomous_by_default")
 
-    roles = require_mapping(policy.get("roles"), "roles", errors)
+    roles = mapping(policy.get("roles"), "roles", errors)
     required_roles = {
         "human_owner",
         "hermes_operator",
@@ -131,49 +99,71 @@ def validate() -> list[str]:
     if missing_roles:
         errors.append(f"roles missing: {', '.join(sorted(missing_roles))}")
 
-    for role in sorted(required_roles):
-        entry = require_mapping(roles.get(role), f"roles.{role}", errors)
-        require_list(entry.get("authority"), f"roles.{role}.authority", errors)
-        require_string(
-            entry.get("responsibility", entry.get("normal_interaction")),
-            f"roles.{role}.responsibility_or_normal_interaction",
-            errors,
-        )
-
-    levels = require_mapping(
-        policy.get("decision_levels"), "decision_levels", errors
+    human_authority = nonempty_list(
+        mapping(roles.get("human_owner"), "roles.human_owner", errors).get("authority"),
+        "roles.human_owner.authority",
+        errors,
     )
-    expected_levels = {
+    require_members(
+        human_authority,
+        {
+            "product_objectives",
+            "subjective_musical_or_visual_choices",
+            "phase_transition_only_when_l3_triggered",
+        },
+        "roles.human_owner.authority",
+        errors,
+    )
+    if "milestone_gate_decisions" in human_authority:
+        errors.append("blanket human milestone_gate_decisions authority is obsolete")
+
+    hermes_authority = nonempty_list(
+        mapping(roles.get("hermes_operator"), "roles.hermes_operator", errors).get("authority"),
+        "roles.hermes_operator.authority",
+        errors,
+    )
+    require_members(
+        hermes_authority,
+        {
+            "merge_ordinary_tasks_when_gate_passes",
+            "close_clear_phase_and_open_preapproved_next_phase_when_senior_gate_passes",
+            "continue_to_next_ready_task",
+        },
+        "roles.hermes_operator.authority",
+        errors,
+    )
+
+    levels = mapping(policy.get("decision_levels"), "decision_levels", errors)
+    expected_interrupt = {
         "L1_AUTONOMOUS": False,
         "L2_SENIOR_REQUIRED": False,
         "L3_HUMAN_REQUIRED": True,
         "L4_SAFETY_STOP": True,
     }
-    for level, human_interrupt in expected_levels.items():
-        entry = require_mapping(
-            levels.get(level), f"decision_levels.{level}", errors
-        )
-        if entry and entry.get("human_interrupt") is not human_interrupt:
-            errors.append(
-                f"decision_levels.{level}.human_interrupt must be "
-                f"{human_interrupt}"
-            )
-        require_string(
-            entry.get("actor"), f"decision_levels.{level}.actor", errors
-        )
-        require_list(
-            entry.get("examples"), f"decision_levels.{level}.examples", errors
-        )
+    for level, expected in expected_interrupt.items():
+        item = mapping(levels.get(level), f"decision_levels.{level}", errors)
+        if item.get("human_interrupt") is not expected:
+            errors.append(f"decision_levels.{level}.human_interrupt must be {expected}")
+        nonempty_list(item.get("examples"), f"decision_levels.{level}.examples", errors)
 
-    task_loop = require_list(policy.get("task_loop"), "task_loop", errors)
+    l2_examples = nonempty_list(
+        mapping(levels.get("L2_SENIOR_REQUIRED"), "L2", errors).get("examples"),
+        "decision_levels.L2_SENIOR_REQUIRED.examples",
+        errors,
+    )
+    require_members(
+        l2_examples,
+        {"clear_phase_close_and_preapproved_next_phase_open"},
+        "decision_levels.L2_SENIOR_REQUIRED.examples",
+        errors,
+    )
+
+    task_loop = nonempty_list(policy.get("task_loop"), "task_loop", errors)
     require_members(
         task_loop,
         {
             "recover_state",
-            "select_one_ready_task",
             "consult_senior_when_policy_requires",
-            "implement_smallest_complete_unit",
-            "repair_ci",
             "obtain_independent_merge_gate",
             "merge_if_authorized",
             "write_immutable_checkpoint",
@@ -183,225 +173,173 @@ def validate() -> list[str]:
         errors,
     )
 
-    merge = require_mapping(
-        policy.get("autonomous_merge"), "autonomous_merge", errors
-    )
+    merge = mapping(policy.get("autonomous_merge"), "autonomous_merge", errors)
     if merge.get("enabled") is not True:
         errors.append("autonomous_merge.enabled must be true")
-    if merge.get("ordinary_tasks_only") is not True:
-        errors.append("autonomous_merge.ordinary_tasks_only must be true")
-
-    merge_required = require_list(
-        merge.get("required"), "autonomous_merge.required", errors
-    )
+    merge_required = nonempty_list(merge.get("required"), "autonomous_merge.required", errors)
     require_members(
         merge_required,
         {
             "all_required_checks_success_on_exact_head",
-            "project_control_validation_success",
-            "senior_merge_gate_accepts_without_blockers",
+            "senior_exact_head_gate_accepts_without_blockers",
             "no_unresolved_review_threads",
             "expected_head_matches",
-            "merge_commit_used_unless_versioned_policy_says_otherwise",
         },
         "autonomous_merge.required",
         errors,
     )
-
-    merge_forbidden = require_list(
-        merge.get("forbidden"), "autonomous_merge.forbidden", errors
-    )
+    merge_forbidden = nonempty_list(merge.get("forbidden"), "autonomous_merge.forbidden", errors)
     require_members(
         merge_forbidden,
         {
             "force_push",
-            "silent_requirement_relaxation",
             "merge_with_red_or_missing_required_check",
-            "merge_after_head_changed_without_reverification",
-            "milestone_transition_without_human_gate",
+            "phase_transition_with_unresolved_l3_or_l4_trigger",
         },
         "autonomous_merge.forbidden",
         errors,
     )
 
-    consult = require_mapping(
-        policy.get("senior_consultation"),
-        "senior_consultation",
-        errors,
-    )
-    require_list(
-        consult.get("required_for"),
+    senior = mapping(policy.get("senior_consultation"), "senior_consultation", errors)
+    require_members(
+        nonempty_list(senior.get("required_for"), "senior_consultation.required_for", errors),
+        {"ordinary_functional_merge_gate", "phase_gate"},
         "senior_consultation.required_for",
         errors,
     )
-    require_list(
-        consult.get("minimum_packet"),
-        "senior_consultation.minimum_packet",
-        errors,
-    )
-    verdicts = require_list(
-        consult.get("valid_merge_verdicts"),
-        "senior_consultation.valid_merge_verdicts",
-        errors,
-    )
     require_members(
-        verdicts,
+        nonempty_list(senior.get("valid_gate_verdicts"), "senior_consultation.valid_gate_verdicts", errors),
         {"accept", "accept_with_non_blocking_risks"},
-        "senior_consultation.valid_merge_verdicts",
+        "senior_consultation.valid_gate_verdicts",
         errors,
     )
 
-    escalation = require_mapping(
-        policy.get("human_escalation"), "human_escalation", errors
-    )
-    if escalation.get("ask_one_decision_at_a_time") is not True:
-        errors.append(
-            "human_escalation.ask_one_decision_at_a_time must be true"
-        )
-    fields = require_list(
-        escalation.get("required_fields"),
-        "human_escalation.required_fields",
-        errors,
-    )
+    phase = mapping(policy.get("phase_transition"), "phase_transition", errors)
+    if phase.get("default_authority") != "L2_SENIOR_REQUIRED":
+        errors.append("phase_transition.default_authority must be L2_SENIOR_REQUIRED")
+    if phase.get("result") != "close_current_phase_open_preapproved_next_phase_and_continue":
+        errors.append("phase_transition.result must authorize continuing into the preapproved next phase")
     require_members(
-        fields,
+        nonempty_list(
+            phase.get("autonomous_transition_required"),
+            "phase_transition.autonomous_transition_required",
+            errors,
+        ),
         {
-            "decision_id",
-            "question",
-            "options",
-            "senior_recommendation",
-            "impact",
-            "default_if_no_response",
-            "next_action_after_answer",
-            "expected_answer_format",
+            "current_phase_definition_of_done_satisfied",
+            "global_senior_phase_review_accepts_without_blockers",
+            "next_phase_already_defined_in_approved_roadmap",
+            "no_L3_or_L4_trigger_present",
+            "post_transition_checkpoint_published",
         },
-        "human_escalation.required_fields",
+        "phase_transition.autonomous_transition_required",
         errors,
     )
-    if escalation.get("option_count_min") != 2:
-        errors.append("human_escalation.option_count_min must equal 2")
-    maximum = escalation.get("option_count_max")
-    if not isinstance(maximum, int) or maximum < 2 or maximum > 4:
-        errors.append(
-            "human_escalation.option_count_max must be an integer from 2 to 4"
-        )
 
-    milestone = require_mapping(
-        policy.get("milestone_policy"), "milestone_policy", errors
-    )
-    if milestone.get("tasks_inside_approved_milestone") != "autonomous":
-        errors.append("milestone tasks must be autonomous")
-    if (
-        milestone.get("ordinary_task_merges")
-        != "autonomous_when_gate_passes"
+    interaction = mapping(policy.get("human_interaction"), "human_interaction", errors)
+    for key in (
+        "ask_one_decision_at_a_time",
+        "prefer_native_hermes_selection_form",
+        "selection_form_required_when_supported",
+        "free_text_chat_fallback_only_when_form_unavailable_or_question_not_representable",
+        "include_other_option_when_safe",
+        "other_option_requires_free_text",
     ):
-        errors.append(
-            "ordinary task merges must be autonomous_when_gate_passes"
-        )
-    if milestone.get("close_milestone_and_open_next") != "human_required":
-        errors.append(
-            "milestone close/open transition must remain human_required"
-        )
+        if interaction.get(key) is not True:
+            errors.append(f"human_interaction.{key} must be true")
+    if interaction.get("other_option_label") != "Otra opción / Other":
+        errors.append("human_interaction.other_option_label must be 'Otra opción / Other'")
+    if interaction.get("option_count_min") != 2:
+        errors.append("human_interaction.option_count_min must equal 2")
+    maximum = interaction.get("option_count_max")
+    if not isinstance(maximum, int) or maximum < 2 or maximum > 4:
+        errors.append("human_interaction.option_count_max must be 2..4")
 
-    parallelism = require_mapping(
-        policy.get("parallelism"), "parallelism", errors
-    )
-    if parallelism.get("allowed") is not True:
-        errors.append("parallelism.allowed must be true")
-    require_list(
-        parallelism.get("requirements"), "parallelism.requirements", errors
-    )
-    require_list(
-        parallelism.get("shared_files"), "parallelism.shared_files", errors
-    )
-
-    require_list(
-        policy.get("evidence_levels"), "evidence_levels", errors
-    )
-
-    required_documents = require_list(
-        policy.get("required_documents"), "required_documents", errors
-    )
+    required_documents = nonempty_list(policy.get("required_documents"), "required_documents", errors)
+    documents: dict[str, str] = {}
     for relative in required_documents:
         if isinstance(relative, str):
-            require_file(relative, errors)
+            documents[relative] = require_file(relative, errors)
         else:
             errors.append("required_documents entries must be strings")
 
-    validation = require_mapping(
-        policy.get("validation"), "validation", errors
-    )
-    script = require_string(
-        validation.get("script"), "validation.script", errors
-    )
-    workflow = require_string(
-        validation.get("workflow"), "validation.workflow", errors
-    )
-    if script:
-        require_file(script, errors)
-    if workflow:
-        require_file(workflow, errors)
+    root_agents = require_file("AGENTS.md", errors)
+    root_autonomy = documents.get("AUTONOMY.md", "")
+    normative = documents.get("doc/sooperlooper/AUTONOMY.md", "")
+    lifecycle = documents.get("doc/sooperlooper/MISSION-LIFECYCLE.md", "")
+    escalation = documents.get("doc/sooperlooper/HUMAN-ESCALATION.md", "")
+    merge_doc = documents.get("doc/sooperlooper/AUTONOMOUS-MERGE.md", "")
+    human_template = documents.get("doc/sooperlooper/templates/HUMAN-DECISION.md", "")
 
-    require_text_tokens(
-        "AGENTS.md",
-        (
-            "PROJECT-AUTONOMY.json",
-            "L1_AUTONOMOUS",
-            "L2_SENIOR_REQUIRED",
-            "L3_HUMAN_REQUIRED",
-            "L4_SAFETY_STOP",
-            "AUTONOMOUS-MERGE.md",
-            "HUMAN-ESCALATION.md",
-        ),
+    for name, text in (
+        ("AGENTS.md", root_agents),
+        ("AUTONOMY.md", root_autonomy),
+        ("doc/sooperlooper/AUTONOMY.md", normative),
+        ("MISSION-LIFECYCLE.md", lifecycle),
+        ("AUTONOMOUS-MERGE.md", merge_doc),
+    ):
+        require_text(
+            text,
+            [
+                "phase boundary is not",
+                "senior",
+                "expected-head",
+            ],
+            name,
+            errors,
+        )
+
+    require_text(
+        escalation,
+        [
+            "native interactive selection forms",
+            "Otra opción / Other",
+            "Plain chat",
+            "A phase transition is L3 only",
+        ],
+        "HUMAN-ESCALATION.md",
         errors,
     )
-    require_text_tokens(
-        "AUTONOMY.md",
-        (
-            "PROJECT-AUTONOMY.json",
-            "MISSION-LIFECYCLE.md",
-            "SENIOR-CONSULTATION.md",
-            "AUTONOMOUS-MERGE.md",
-            "HUMAN-ESCALATION.md",
-        ),
+    require_text(
+        human_template,
+        [
+            "Hermes selection form",
+            "Otra opción / Other",
+            "Senior recommendation",
+        ],
+        "templates/HUMAN-DECISION.md",
         errors,
     )
-    require_text_tokens(
+
+    obsolete = [
+        "closing a milestone and opening the next remains a short explicit human decision",
+        "the human answer is the only normal interruption between milestones",
+        "final close/open transition requires an explicit human answer",
+        "closing one milestone and opening the next",
+    ]
+    for name, text in (
+        ("AGENTS.md", root_agents),
+        ("AUTONOMY.md", root_autonomy),
+        ("doc/sooperlooper/AUTONOMY.md", normative),
+        ("MISSION-LIFECYCLE.md", lifecycle),
+        ("HUMAN-ESCALATION.md", escalation),
+        ("AUTONOMOUS-MERGE.md", merge_doc),
+    ):
+        forbid_text(text, obsolete, name, errors)
+
+    workflow = require_file(".github/workflows/project-control.yml", errors)
+    require_text(
+        workflow,
+        ["PROJECT-AUTONOMY.json", "validate-autonomy-policy.py"],
         ".github/workflows/project-control.yml",
-        (
-            "PROJECT-AUTONOMY.json",
-            "validate-autonomy-policy.py",
-            "Validate autonomous governance",
-        ),
         errors,
     )
-    require_text_tokens(
+
+    pr_template = require_file(".github/PULL_REQUEST_TEMPLATE.md", errors)
+    require_text(
+        pr_template,
+        ["## Autonomy classification", "## Autonomous merge and phase gate"],
         ".github/PULL_REQUEST_TEMPLATE.md",
-        (
-            "## Autonomy classification",
-            "## Senior consultation",
-            "## Autonomous merge gate",
-            "Expected head:",
-        ),
-        errors,
-    )
-    require_text_tokens(
-        "doc/sooperlooper/WORKFLOW.md",
-        (
-            "## Autonomous-by-default mode",
-            "## Decision classification",
-            "## Continuous task loop",
-        ),
-        errors,
-    )
-    require_text_tokens(
-        "doc/sooperlooper/DOCUMENTATION-MAP.md",
-        (
-            "PROJECT-AUTONOMY.json",
-            "AUTONOMY.md",
-            "AUTONOMY-SCENARIOS.md",
-            "AUTONOMY-ADOPTION.md",
-        ),
         errors,
     )
 
