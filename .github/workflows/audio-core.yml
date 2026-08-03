@@ -208,3 +208,12 @@ jobs:
 
       - name: Run state renderer test
         run: .ci/bin/sooperlooper_audio_slot_state_renderer_test
+
+      - name: Compile recording types test
+        run: |
+          g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread \
+            -Ilibseq66/include -I.ci/include \
+            libseq66/src/audio/sooperlooper_recording_types.cpp \
+            tests/audio/sooperlooper_recording_types_test.cpp \
+            -o /tmp/t_recording_types
+          /tmp/t_recording_types

@@ -1,23 +1,10 @@
-# Current checkpoint — Phase 4 gate passed
+# Current checkpoint — P5-001 types done, P5-002 ready
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-043-phase4-gate-passed.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-044-p5-recording-types.md`
 
-Checkpoint ID: `CP-043`
+Checkpoint ID: `CP-044`
 Checkpoint date: 2026-08-03
 Phase: `phase-5-exact-recording`
-Active task: `PHASE5-001`
-Status: `ready`
+Active task: `P5-002`
+Status: `in_progress`
 Branch: `fork-main`
-Exact head: `e0629b2e3c67ab188652cdad27f70b8f1eec1346`
-
-## Verification summary
-
-- Phase 4 DoD: all 5 items satisfied
-- Senior gate: ACCEPT
-- 204 assertions across 6 M4 tasks
-- 517+ assertions across 12 suites
-- Validators pass
-
-## Next action
-
-Begin Phase 5 planning.

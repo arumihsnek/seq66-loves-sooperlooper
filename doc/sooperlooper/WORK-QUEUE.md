@@ -999,9 +999,18 @@ Acceptance: Phase 5 DoD in ROADMAP.md
 
 ### PHASE5-001 — exact musical recording
 
-Status: `ready`
+Status: `done`
 Branch: `feature/phase5-exact-recording`
 Agent: `hermes`
 
 Dependencies: Phase 4 complete
 Acceptance: Phase 5 DoD in ROADMAP.md
+
+### P5-002 — recording scheduler state machine
+
+Status: `in_progress`
+Branch: `feature/p5-recording-types`
+Agent: `hermes`
+
+Dependencies: P5-001 (types)
+Acceptance: scheduler compiles, 100+ assertions, generation-aware transitions
