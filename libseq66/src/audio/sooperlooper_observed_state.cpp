@@ -93,7 +93,10 @@ static void
 apply_field (observed_field<float> & field, const std::string & arg,
              long long timestamp_us)
 {
-    field.value = parse_float(arg);
+    float v = parse_float(arg);
+    if (!std::isfinite(v))
+        return;     // Reject NaN and Inf — do not create state from invalid payload.
+    field.value = v;
     field.present = true;
     field.timestamp_us = timestamp_us;
 }
@@ -241,14 +244,15 @@ sooperlooper_observed_cache::apply (const std::string & path,
     if (args.empty())
         return false;
 
-    // Reject events from a stale engine generation.
-    if (event_generation != 0 && event_generation != m_generation)
-        return false;
-
     // Determine if this is a per-loop or global event based on path.
     int loop_index = extract_loop_index(path);
 
     std::lock_guard<std::mutex> lock(m_mutex);
+
+    // Generation check INSIDE the mutex to prevent TOCTOU race.
+    // No wildcard: event_generation must exactly match m_generation.
+    if (event_generation != m_generation)
+        return false;
 
     if (loop_index >= 0)
     {
@@ -370,6 +374,57 @@ sooperlooper_observed_cache::is_present (int loop_index,
         case loop_control::in_peak_meter:  return s.in_peak_meter.present;
         case loop_control::out_peak_meter: return s.out_peak_meter.present;
         default:                           return false;
+    }
+}
+
+bool
+sooperlooper_observed_cache::apply_event (
+    const sooperlooper_receiver::receiver_event & event)
+{
+    if (event.args.empty())
+        return false;
+
+    int loop_index = extract_loop_index(event.path);
+
+    std::lock_guard<std::mutex> lock(m_mutex);
+
+    // Generation check INSIDE the mutex.
+    // No wildcard: event.generation must exactly match m_generation.
+    if (event.generation != m_generation)
+        return false;
+
+    if (loop_index >= 0)
+    {
+        if (event.args.size() < 2)
+            return false;
+
+        loop_control control;
+        if (!try_parse(event.args[0], control))
+            return false;
+
+        auto & state = m_loops[loop_index];
+        if (apply_loop_control(state, control, {event.args[1]}, event.timestamp_us))
+        {
+            m_dirty = true;
+            return true;
+        }
+        return false;
+    }
+    else
+    {
+        if (event.args.size() < 2)
+            return false;
+
+        global_control control;
+        if (!try_parse(event.args[0], control))
+            return false;
+
+        if (apply_global_control(m_global, control, {event.args[1]}, event.timestamp_us))
+        {
+            m_dirty = true;
+            return true;
+        }
+        return false;
     }
 }
 
