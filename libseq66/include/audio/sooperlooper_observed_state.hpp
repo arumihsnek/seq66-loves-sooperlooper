@@ -155,6 +155,9 @@ public:
 
         /** True if any state has been written since construction or last clear(). */
         bool dirty{false};
+
+        /** Engine generation token.  Increments on each restart. */
+        std::uint64_t generation{0};
     };
 
 private:
@@ -169,6 +172,9 @@ private:
 
     /** True if any field has been updated since construction/clear(). */
     bool m_dirty{false};
+
+    /** Current engine generation token. */
+    std::uint64_t m_generation{0};
 
 public:
     sooperlooper_observed_cache () = default;
@@ -193,7 +199,8 @@ public:
      *  \return true if the event was applied, false if rejected.
      */
     bool apply (const std::string & path, const std::string & types,
-                const std::vector<std::string> & args, long long timestamp_us);
+                const std::vector<std::string> & args, long long timestamp_us,
+                std::uint64_t event_generation = 0);
 
     /**
      *  Return an immutable snapshot of the full observed state.
@@ -210,6 +217,22 @@ public:
      *  fields return to absent state and dirty becomes false.
      */
     void clear ();
+
+    /**
+     *  Advance to a new engine generation.
+     *
+     *  Equivalent to clear() plus updating the generation token.
+     *  All prior loop indexes are invalidated.  Must be called
+     *  before accepting events from a restarted engine.
+     *
+     *  \param new_generation  The new generation token.
+     */
+    void set_generation (std::uint64_t new_generation);
+
+    /**
+     *  Return the current engine generation token.
+     */
+    std::uint64_t generation () const;
 
     /**
      *  Return true if any field has been updated since construction

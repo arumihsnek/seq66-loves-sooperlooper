@@ -439,6 +439,129 @@ main ()
         std::cout << "  [PASS] Empty args rejected." << std::endl;
     }
 
+    // ---- Test 15: generation tracking - initial generation is 0 ----
+    {
+        sooperlooper_observed_cache cache;
+        if (cache.generation() != 0)
+        {
+            std::cerr << "ERROR: Initial generation should be 0." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Initial generation is 0." << std::endl;
+    }
+
+    // ---- Test 16: set_generation clears state ----
+    {
+        sooperlooper_observed_cache cache;
+        make_loop_event(cache, 0, "state", "1");
+        make_global_event(cache, "tempo", "120.0");
+        cache.set_generation(42);
+        if (cache.generation() != 42)
+        {
+            std::cerr << "ERROR: Generation should be 42." << std::endl;
+            ++failures;
+        }
+        if (cache.dirty())
+        {
+            std::cerr << "ERROR: Cache should not be dirty after set_generation." << std::endl;
+            ++failures;
+        }
+        if (cache.loop_count() != 0)
+        {
+            std::cerr << "ERROR: Loop count should be 0 after set_generation." << std::endl;
+            ++failures;
+        }
+        auto snap = cache.snapshot();
+        if (snap.generation != 42)
+        {
+            std::cerr << "ERROR: Snapshot generation should be 42." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] set_generation clears state." << std::endl;
+    }
+
+    // ---- Test 17: apply with wrong explicit generation is rejected ----
+    {
+        sooperlooper_observed_cache cache;
+        cache.set_generation(5);
+        std::string path = "/sl/0/get";
+        bool applied = cache.apply(path, "sf", {"state", "1"}, 1000000LL, 3);
+        if (applied)
+        {
+            std::cerr << "ERROR: Event with generation 3 should be rejected when cache gen is 5." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Stale event rejected (gen mismatch)." << std::endl;
+    }
+
+    // ---- Test 18: apply with correct generation succeeds ----
+    {
+        sooperlooper_observed_cache cache;
+        cache.set_generation(5);
+        std::string path = "/sl/0/get";
+        bool applied = cache.apply(path, "sf", {"state", "1"}, 1000000LL, 5);
+        if (!applied)
+        {
+            std::cerr << "ERROR: Event with matching generation should succeed." << std::endl;
+            ++failures;
+        }
+        if (!cache.is_present(0, loop_control::state))
+        {
+            std::cerr << "ERROR: state should be present after matching generation apply." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Matching generation apply succeeds." << std::endl;
+    }
+
+    // ---- Test 19: old generation event does not mutate cache ----
+    {
+        sooperlooper_observed_cache cache;
+        cache.set_generation(10);
+        std::string path = "/sl/0/get";
+        // Event from generation 3 should be rejected
+        bool applied = cache.apply(path, "sf", {"state", "99"}, 1000000LL, 3);
+        if (applied)
+        {
+            std::cerr << "ERROR: Old generation event should be rejected." << std::endl;
+            ++failures;
+        }
+        if (cache.dirty())
+        {
+            std::cerr << "ERROR: Cache should not be dirty after rejected old-gen event." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Old generation event rejected, no mutation." << std::endl;
+    }
+
+    // ---- Test 20: multiple generation changes ----
+    {
+        sooperlooper_observed_cache cache;
+        cache.set_generation(1);
+        cache.apply("/sl/0/get", "sf", {"state", "1"}, 1000000LL, 1);
+        cache.set_generation(2);
+        cache.apply("/sl/0/get", "sf", {"state", "2"}, 2000000LL, 2);
+        cache.set_generation(3);
+        auto snap = cache.snapshot();
+        if (snap.generation != 3)
+        {
+            std::cerr << "ERROR: Generation should be 3." << std::endl;
+            ++failures;
+        }
+        if (!snap.loops.empty())
+        {
+            std::cerr << "ERROR: Loops should be empty after set_generation(3)." << std::endl;
+            ++failures;
+        }
+        // Event from generation 2 should now be rejected
+        bool applied = cache.apply("/sl/0/get", "sf", {"state", "99"}, 3000000LL, 2);
+        if (applied)
+        {
+            std::cerr << "ERROR: Generation 2 event should be rejected after advance to 3." << std::endl;
+            ++failures;
+        }
+        std::cout << "  [PASS] Multiple generation changes work." << std::endl;
+    }
+
     // ---- Summary ----
     std::cout << std::endl;
     if (failures == 0)
