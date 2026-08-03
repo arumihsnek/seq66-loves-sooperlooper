@@ -1,46 +1,53 @@
 # Autonomous project governance
 
-This file is the compact entry point for the repository's autonomous-agent
-operating model.
+This is the compact entry point for the repository's autonomous operating
+model.
 
-Normative human-readable policy:
+Read after `PROJECT-MANIFEST.json` and before `checkpoints/CURRENT.md`:
 
-- `doc/sooperlooper/AUTONOMY.md`
+1. `PROJECT-AUTONOMY.json` — machine-readable authority and gates;
+2. `doc/sooperlooper/AUTONOMY.md` — normative human-readable policy;
+3. `doc/sooperlooper/MISSION-LIFECYCLE.md` — end-to-end task and phase loop;
+4. `doc/sooperlooper/SENIOR-CONSULTATION.md` — independent review contract;
+5. `doc/sooperlooper/AUTONOMOUS-MERGE.md` — exact-head merge and phase gate;
+6. `doc/sooperlooper/HUMAN-ESCALATION.md` — genuine human decisions;
+7. `doc/sooperlooper/AUTONOMY-SCENARIOS.md` — worked examples;
+8. `doc/sooperlooper/AUTONOMY-ADOPTION.md` — adoption and rollback.
 
-Machine-readable policy validated by CI:
+## Default mode
 
-- `PROJECT-AUTONOMY.json`
+Hermes executes the approved roadmap autonomously. It implements, tests,
+repairs CI, consults `codex-senior-consult`, merges eligible pull requests,
+writes checkpoints and continues with the next task.
 
-Supporting contracts:
+A clear phase transition is also autonomous when:
 
-- `doc/sooperlooper/MISSION-LIFECYCLE.md`
-- `doc/sooperlooper/SENIOR-CONSULTATION.md`
-- `doc/sooperlooper/AUTONOMOUS-MERGE.md`
-- `doc/sooperlooper/HUMAN-ESCALATION.md`
-- `doc/sooperlooper/AUTONOMY-SCENARIOS.md`
-- `doc/sooperlooper/AUTONOMY-ADOPTION.md`
+- the current phase definition of done is satisfied;
+- all required checks pass on the exact integrated head;
+- a global senior phase review accepts without blockers;
+- the next phase is already bounded in the approved roadmap;
+- no L3 or L4 trigger exists.
 
-Templates:
+A phase boundary is not automatically a human gate.
 
-- `doc/sooperlooper/templates/HUMAN-DECISION.md`
-- `doc/sooperlooper/templates/AUTONOMOUS-REPORT.md`
+## Human interaction
 
-A new Hermes, Codex or human coordinator reads this file immediately after
-`PROJECT-MANIFEST.json`, before `checkpoints/CURRENT.md` and the active
-`WORK-QUEUE.md` task.
+Hermes asks the human only for genuine L3/L4 matters: product scope, subjective
+musical or visual behaviour, intentional incompatibility, licensing, data loss,
+irreversible migration, unresolved requirement conflict, unavailable physical or
+subjective acceptance, or a safety stop.
 
-The default mode is autonomous execution inside the approved roadmap and
-specification. Routine technical decisions are owned by the operator and
-reviewed by `codex-senior-consult` when required. Human interruption is reserved
-for product choices, destructive or irreversible actions, incompatible
-licensing, unresolved requirement conflicts, unavailable physical/subjective
-validation and milestone gates.
+Whenever Hermes supports native interactive selection forms, it MUST use them
+for human questions. Forms should contain two to four concrete options and,
+when safe, an `Otra opción / Other` choice that opens free-text input. Plain chat
+is only the fallback when the form capability is unavailable or cannot represent
+the decision safely.
 
-Ordinary task PRs may be merged autonomously only through the exact-head gate in
-`AUTONOMOUS-MERGE.md`. Closing a milestone and opening the next remains one
-explicit bounded human decision.
+## Safety
 
-No chat prompt may weaken the repository's safety stops, architectural
-invariants, required checks, expected-head protection or evidence requirements.
-A prompt may temporarily narrow autonomy, but expanding autonomy requires a
-reviewed policy change.
+Autonomy never permits force push, shared-history rewrite, red-check merges,
+stale senior verdicts, changed expected heads, silent requirement relaxation,
+destructive actions without authority or hidden scope changes.
+
+No session prompt may weaken these rules. Expanding authority requires a
+reviewed change to the versioned policy and its validator.
