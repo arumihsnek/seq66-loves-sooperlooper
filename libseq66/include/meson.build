@@ -9,6 +9,8 @@ libseq66_headers += files(
     'audio/sooperlooper_command_confirmation.hpp',
     'audio/sooperlooper_command_dispatcher.hpp',
     'audio/sooperlooper_clip_mapper.hpp',
+    'audio/sooperlooper_transport_policy.hpp',
+    'audio/sooperlooper_tempo_policy.hpp',
     'audio/sooperlooper_engine_monitor.hpp',
     'audio/sooperlooper_observed_state.hpp',
     'audio/sooperlooper_protocol.hpp',

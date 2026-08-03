@@ -217,3 +217,48 @@ These are unit/fake-engine level tests.
 - Native JACK tested: NO
 - PipeWire-JACK tested: NO
 - Hardware tested: NO
+
+## M3-003 transport and tempo policy evidence
+
+### Compilation
+
+Compiled on Linux aarch64 with g++ 11.4, `-std=c++17 -Wall -Wextra -Wpedantic -Werror`.
+Zero warnings.
+
+### Tested behaviour
+
+**Transport policy:**
+- sync source mapping: jack (-1), midi (-2), internal (-3), none (0)
+- start/stop state transitions
+- config propagation (midi start, clock output)
+- string conversion and parse
+
+**Tempo policy:**
+- free mode: use_rate=false, tempo_stretch=false
+- tape mode: use_rate=true, rate=1.0
+- elastic mode: use_rate=true, tempo_stretch=true, rate=global/recording
+- rate clamped to [0.25, 4.0]
+- global tempo change propagates to all loops
+- add/remove/clear loops
+- tempo mode string conversion and parse
+- global tempo clamped to [0, 1000]
+
+### Regression
+
+| Suite | Assertions |
+|---|---|
+| process supervisor | 86 |
+| crash reconciler | 45 |
+| clip mapper | 43 |
+| command dispatcher | 60 |
+| lifecycle smoke | 21 |
+| transport+tempo | 110 |
+| **Total** | **365** |
+
+### Evidence level
+
+- Unit tested (110 assertions)
+- Real SooperLooper tested: NO
+- Native JACK tested: NO
+- PipeWire-JACK tested: NO
+- Hardware tested: NO

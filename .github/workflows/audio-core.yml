@@ -145,3 +145,9 @@ jobs:
 
       - name: Run command dispatcher test
         run: .ci/bin/sooperlooper_command_dispatcher_test
+
+      - name: Compile transport tempo policy test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_transport_policy.cpp libseq66/src/audio/sooperlooper_tempo_policy.cpp tests/audio/sooperlooper_transport_tempo_policy_test.cpp -o .ci/bin/sooperlooper_transport_tempo_policy_test
+
+      - name: Run transport tempo policy test
+        run: .ci/bin/sooperlooper_transport_tempo_policy_test

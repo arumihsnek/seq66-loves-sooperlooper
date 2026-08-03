@@ -95,7 +95,6 @@
         "clip UUID/runtime-index mapper with generation-scoped validity"
     ],
     "missing_capabilities": [
-        "transport and tempo policy integration",
         "native Qt audio slots",
         "transactional audio persistence"
     ],
@@ -119,7 +118,7 @@
     "next_milestone": {
         "id": "M3",
         "name": "performer integration",
-        "active_task": "M3-003",
+        "active_task": "M3-004",
         "active_task_status": "ready",
         "definition_of_done": "One headless audio clip can be allocated, recorded, launched, muted and overdubbed through Seq66 control paths; displayed state derives from feedback; restart rebuilds mapping without persisting raw indexes; topology conflicts blocked during reconciliation; MIDI-only behaviour remains functional."
     },
