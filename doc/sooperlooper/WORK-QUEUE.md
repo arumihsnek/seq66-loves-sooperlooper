@@ -27,7 +27,7 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-008** (status: `review`)
+Active task: **M1-008** (status: `done`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -272,10 +272,11 @@ Acceptance criteria:
 
 ### M1-008 — phase-1 integration gate
 
-Status: `review`
+Status: `done`
 Agent: `hermes`
 Branch: `gate/m1-008-phase-1`
 Draft PR: `#14`
+Completed: 2026-08-03
 
 Blocked by: M1-001 through M1-007.
 
@@ -293,6 +294,16 @@ Acceptance criteria:
 - Phase 1 definition of done in `ROADMAP.md` is met;
 - no unresolved required-test failure;
 - PR body identifies exact verified scope and remaining Phase 2 risks.
+
+Review evidence:
+- `Audio integration core` run `30814274582`: PASS on gate head `50d39dfb`;
+- `Project control plane` run `30814274616`: PASS;
+- `Real SooperLooper headless smoke` run `30814274591`: PASS;
+- `codex-senior-consult` merge-gate: `VALID_ADVISORY_VERDICT`, verdict `accept`,
+  execution `efaabd1a-f018-4d53-9ff7-b5138d9005e5`;
+- checkpoint `CP-016` records gate PASS.
+
+Handoff target: human approves PR #14; Phase 2 work begins on `fork-main`.
 
 ## Deferred queue
 

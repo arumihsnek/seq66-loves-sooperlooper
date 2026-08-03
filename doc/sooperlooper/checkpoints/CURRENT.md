@@ -1,20 +1,19 @@
-# Current checkpoint — Phase 1 corrective gate
+# Current checkpoint — Phase 1 gate PASS
 
-Checkpoint ID: `CP-015`
+Checkpoint ID: `CP-016`
 Checkpoint date: 2026-08-03
 Phase: `phase-1-protocol-core`
 Active task: `M1-008`
-Status: `review`
+Status: `done`
 Branch: `gate/m1-008-phase-1`
 Draft PR: `#14`
 
-The M1-005B, M1-006B and M1-007B correctives are published.
-Local ad-hoc verification passed, but the first remote gate run exposed
-project-control and focused-linking defects that must be corrected before
-the Phase 1 human decision.
+Phase 1 bidirectional protocol core is complete. All three required CI
+workflows pass on gate head `50d39dfb`. Senior consult verdict: `accept`.
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-015-correctives-merged.md`
+Phase 2 (managed engine and backend gate) is authorized.
 
-Next executable action: repair the gate workflow and control files, run
-fresh CI on the exact resulting head, then execute the pinned real-engine
-smoke. PR #14 remains draft and Phase 2 is not authorized.
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-016-phase1-gate-pass.md`
+
+Next executable action: human reviews and approves PR #14, then Phase 2
+work begins on `fork-main`.
