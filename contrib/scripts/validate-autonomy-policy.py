@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Validate the repository's autonomous-agent governance contract."""
+"""Validate the repository's autonomous-agent governance contract.
+
+The autonomy policy is deliberately independent of volatile project state such
+as the active branch, task or checkpoint. This prevents governance work from
+conflicting with an operator that is advancing the implementation in parallel.
+"""
 
 from __future__ import annotations
 
@@ -11,26 +16,33 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 POLICY_PATH = ROOT / "PROJECT-AUTONOMY.json"
-MANIFEST_PATH = ROOT / "PROJECT-MANIFEST.json"
 
 
 class PolicyError(RuntimeError):
-    """Raised when the autonomy policy is structurally invalid."""
+    """Raised when the autonomy policy cannot be loaded."""
 
 
 def load_json(path: Path) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError as exc:
-        raise PolicyError(f"missing required JSON file: {path.relative_to(ROOT)}") from exc
+        raise PolicyError(
+            f"missing required JSON file: {path.relative_to(ROOT)}"
+        ) from exc
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-        raise PolicyError(f"invalid JSON in {path.relative_to(ROOT)}: {exc}") from exc
+        raise PolicyError(
+            f"invalid JSON in {path.relative_to(ROOT)}: {exc}"
+        ) from exc
     if not isinstance(value, dict):
-        raise PolicyError(f"{path.relative_to(ROOT)} must contain a JSON object")
+        raise PolicyError(
+            f"{path.relative_to(ROOT)} must contain a JSON object"
+        )
     return value
 
 
-def require_mapping(value: Any, name: str, errors: list[str]) -> dict[str, Any]:
+def require_mapping(
+    value: Any, name: str, errors: list[str]
+) -> dict[str, Any]:
     if not isinstance(value, dict):
         errors.append(f"{name} must be an object")
         return {}
@@ -51,17 +63,42 @@ def require_string(value: Any, name: str, errors: list[str]) -> str:
     return value
 
 
-def require_members(container: list[Any], required: set[str], name: str, errors: list[str]) -> None:
+def require_members(
+    container: list[Any],
+    required: set[str],
+    name: str,
+    errors: list[str],
+) -> None:
     strings = {item for item in container if isinstance(item, str)}
     missing = required - strings
     if missing:
-        errors.append(f"{name} missing required values: {', '.join(sorted(missing))}")
+        errors.append(
+            f"{name} missing required values: {', '.join(sorted(missing))}"
+        )
 
 
 def require_file(relative: str, errors: list[str]) -> None:
+    if not (ROOT / relative).is_file():
+        errors.append(f"missing autonomy document/file: {relative}")
+
+
+def require_text_tokens(
+    relative: str,
+    tokens: tuple[str, ...],
+    errors: list[str],
+) -> None:
     path = ROOT / relative
     if not path.is_file():
-        errors.append(f"missing autonomy document/file: {relative}")
+        errors.append(f"missing required integration file: {relative}")
+        return
+    try:
+        text = path.read_text(encoding="utf-8")
+    except UnicodeDecodeError as exc:
+        errors.append(f"not valid UTF-8: {relative}: {exc}")
+        return
+    for token in tokens:
+        if token not in text:
+            errors.append(f"{relative} missing required token: {token}")
 
 
 def validate() -> list[str]:
@@ -69,14 +106,19 @@ def validate() -> list[str]:
 
     try:
         policy = load_json(POLICY_PATH)
-        manifest = load_json(MANIFEST_PATH)
     except PolicyError as exc:
         return [str(exc)]
 
     if policy.get("schema_version") != 1:
         errors.append("PROJECT-AUTONOMY.json schema_version must equal 1")
+    if policy.get("policy_id") != "seq66-sl-autonomy-v1":
+        errors.append(
+            "PROJECT-AUTONOMY.json policy_id must equal seq66-sl-autonomy-v1"
+        )
     if policy.get("mode") != "autonomous_by_default":
-        errors.append("PROJECT-AUTONOMY.json mode must be autonomous_by_default")
+        errors.append(
+            "PROJECT-AUTONOMY.json mode must be autonomous_by_default"
+        )
 
     roles = require_mapping(policy.get("roles"), "roles", errors)
     required_roles = {
@@ -89,7 +131,18 @@ def validate() -> list[str]:
     if missing_roles:
         errors.append(f"roles missing: {', '.join(sorted(missing_roles))}")
 
-    levels = require_mapping(policy.get("decision_levels"), "decision_levels", errors)
+    for role in sorted(required_roles):
+        entry = require_mapping(roles.get(role), f"roles.{role}", errors)
+        require_list(entry.get("authority"), f"roles.{role}.authority", errors)
+        require_string(
+            entry.get("responsibility", entry.get("normal_interaction")),
+            f"roles.{role}.responsibility_or_normal_interaction",
+            errors,
+        )
+
+    levels = require_mapping(
+        policy.get("decision_levels"), "decision_levels", errors
+    )
     expected_levels = {
         "L1_AUTONOMOUS": False,
         "L2_SENIOR_REQUIRED": False,
@@ -97,13 +150,20 @@ def validate() -> list[str]:
         "L4_SAFETY_STOP": True,
     }
     for level, human_interrupt in expected_levels.items():
-        entry = require_mapping(levels.get(level), f"decision_levels.{level}", errors)
+        entry = require_mapping(
+            levels.get(level), f"decision_levels.{level}", errors
+        )
         if entry and entry.get("human_interrupt") is not human_interrupt:
             errors.append(
-                f"decision_levels.{level}.human_interrupt must be {human_interrupt}"
+                f"decision_levels.{level}.human_interrupt must be "
+                f"{human_interrupt}"
             )
-        require_string(entry.get("actor"), f"decision_levels.{level}.actor", errors)
-        require_list(entry.get("examples"), f"decision_levels.{level}.examples", errors)
+        require_string(
+            entry.get("actor"), f"decision_levels.{level}.actor", errors
+        )
+        require_list(
+            entry.get("examples"), f"decision_levels.{level}.examples", errors
+        )
 
     task_loop = require_list(policy.get("task_loop"), "task_loop", errors)
     require_members(
@@ -123,12 +183,17 @@ def validate() -> list[str]:
         errors,
     )
 
-    merge = require_mapping(policy.get("autonomous_merge"), "autonomous_merge", errors)
+    merge = require_mapping(
+        policy.get("autonomous_merge"), "autonomous_merge", errors
+    )
     if merge.get("enabled") is not True:
         errors.append("autonomous_merge.enabled must be true")
     if merge.get("ordinary_tasks_only") is not True:
         errors.append("autonomous_merge.ordinary_tasks_only must be true")
-    merge_required = require_list(merge.get("required"), "autonomous_merge.required", errors)
+
+    merge_required = require_list(
+        merge.get("required"), "autonomous_merge.required", errors
+    )
     require_members(
         merge_required,
         {
@@ -137,17 +202,22 @@ def validate() -> list[str]:
             "senior_merge_gate_accepts_without_blockers",
             "no_unresolved_review_threads",
             "expected_head_matches",
+            "merge_commit_used_unless_versioned_policy_says_otherwise",
         },
         "autonomous_merge.required",
         errors,
     )
-    merge_forbidden = require_list(merge.get("forbidden"), "autonomous_merge.forbidden", errors)
+
+    merge_forbidden = require_list(
+        merge.get("forbidden"), "autonomous_merge.forbidden", errors
+    )
     require_members(
         merge_forbidden,
         {
             "force_push",
             "silent_requirement_relaxation",
             "merge_with_red_or_missing_required_check",
+            "merge_after_head_changed_without_reverification",
             "milestone_transition_without_human_gate",
         },
         "autonomous_merge.forbidden",
@@ -155,9 +225,20 @@ def validate() -> list[str]:
     )
 
     consult = require_mapping(
-        policy.get("senior_consultation"), "senior_consultation", errors
+        policy.get("senior_consultation"),
+        "senior_consultation",
+        errors,
     )
-    require_list(consult.get("required_for"), "senior_consultation.required_for", errors)
+    require_list(
+        consult.get("required_for"),
+        "senior_consultation.required_for",
+        errors,
+    )
+    require_list(
+        consult.get("minimum_packet"),
+        "senior_consultation.minimum_packet",
+        errors,
+    )
     verdicts = require_list(
         consult.get("valid_merge_verdicts"),
         "senior_consultation.valid_merge_verdicts",
@@ -174,9 +255,13 @@ def validate() -> list[str]:
         policy.get("human_escalation"), "human_escalation", errors
     )
     if escalation.get("ask_one_decision_at_a_time") is not True:
-        errors.append("human_escalation.ask_one_decision_at_a_time must be true")
+        errors.append(
+            "human_escalation.ask_one_decision_at_a_time must be true"
+        )
     fields = require_list(
-        escalation.get("required_fields"), "human_escalation.required_fields", errors
+        escalation.get("required_fields"),
+        "human_escalation.required_fields",
+        errors,
     )
     require_members(
         fields,
@@ -197,15 +282,42 @@ def validate() -> list[str]:
         errors.append("human_escalation.option_count_min must equal 2")
     maximum = escalation.get("option_count_max")
     if not isinstance(maximum, int) or maximum < 2 or maximum > 4:
-        errors.append("human_escalation.option_count_max must be an integer from 2 to 4")
+        errors.append(
+            "human_escalation.option_count_max must be an integer from 2 to 4"
+        )
 
-    milestone = require_mapping(policy.get("milestone_policy"), "milestone_policy", errors)
+    milestone = require_mapping(
+        policy.get("milestone_policy"), "milestone_policy", errors
+    )
     if milestone.get("tasks_inside_approved_milestone") != "autonomous":
         errors.append("milestone tasks must be autonomous")
-    if milestone.get("ordinary_task_merges") != "autonomous_when_gate_passes":
-        errors.append("ordinary task merges must be autonomous_when_gate_passes")
+    if (
+        milestone.get("ordinary_task_merges")
+        != "autonomous_when_gate_passes"
+    ):
+        errors.append(
+            "ordinary task merges must be autonomous_when_gate_passes"
+        )
     if milestone.get("close_milestone_and_open_next") != "human_required":
-        errors.append("milestone close/open transition must remain human_required")
+        errors.append(
+            "milestone close/open transition must remain human_required"
+        )
+
+    parallelism = require_mapping(
+        policy.get("parallelism"), "parallelism", errors
+    )
+    if parallelism.get("allowed") is not True:
+        errors.append("parallelism.allowed must be true")
+    require_list(
+        parallelism.get("requirements"), "parallelism.requirements", errors
+    )
+    require_list(
+        parallelism.get("shared_files"), "parallelism.shared_files", errors
+    )
+
+    require_list(
+        policy.get("evidence_levels"), "evidence_levels", errors
+    )
 
     required_documents = require_list(
         policy.get("required_documents"), "required_documents", errors
@@ -216,60 +328,82 @@ def validate() -> list[str]:
         else:
             errors.append("required_documents entries must be strings")
 
-    validation = require_mapping(policy.get("validation"), "validation", errors)
-    script = require_string(validation.get("script"), "validation.script", errors)
-    workflow = require_string(validation.get("workflow"), "validation.workflow", errors)
+    validation = require_mapping(
+        policy.get("validation"), "validation", errors
+    )
+    script = require_string(
+        validation.get("script"), "validation.script", errors
+    )
+    workflow = require_string(
+        validation.get("workflow"), "validation.workflow", errors
+    )
     if script:
         require_file(script, errors)
     if workflow:
         require_file(workflow, errors)
 
-    governance = require_mapping(manifest.get("governance"), "manifest.governance", errors)
-    expected_governance = {
-        "autonomy_policy": "PROJECT-AUTONOMY.json",
-        "autonomy_entry_point": "AUTONOMY.md",
-        "human_escalation": "doc/sooperlooper/HUMAN-ESCALATION.md",
-        "autonomous_merge": "doc/sooperlooper/AUTONOMOUS-MERGE.md",
-        "senior_consultation": "doc/sooperlooper/SENIOR-CONSULTATION.md",
-        "mission_lifecycle": "doc/sooperlooper/MISSION-LIFECYCLE.md",
-    }
-    for key, expected in expected_governance.items():
-        if governance.get(key) != expected:
-            errors.append(f"manifest.governance.{key} must equal {expected}")
-
-    workflow_path = ROOT / ".github/workflows/project-control.yml"
-    if workflow_path.is_file():
-        workflow_text = workflow_path.read_text(encoding="utf-8")
-        if "validate-autonomy-policy.py" not in workflow_text:
-            errors.append("project-control workflow must execute validate-autonomy-policy.py")
-        if "PROJECT-AUTONOMY.json" not in workflow_text:
-            errors.append("project-control workflow paths must include PROJECT-AUTONOMY.json")
-
-    pr_template = ROOT / ".github/PULL_REQUEST_TEMPLATE.md"
-    if pr_template.is_file():
-        template_text = pr_template.read_text(encoding="utf-8")
-        for heading in ("## Autonomy classification", "## Autonomous merge gate"):
-            if heading not in template_text:
-                errors.append(f"pull request template missing heading: {heading}")
-
-    workflow_doc = ROOT / "doc/sooperlooper/WORKFLOW.md"
-    if workflow_doc.is_file():
-        workflow_text = workflow_doc.read_text(encoding="utf-8")
-        for heading in (
+    require_text_tokens(
+        "AGENTS.md",
+        (
+            "PROJECT-AUTONOMY.json",
+            "L1_AUTONOMOUS",
+            "L2_SENIOR_REQUIRED",
+            "L3_HUMAN_REQUIRED",
+            "L4_SAFETY_STOP",
+            "AUTONOMOUS-MERGE.md",
+            "HUMAN-ESCALATION.md",
+        ),
+        errors,
+    )
+    require_text_tokens(
+        "AUTONOMY.md",
+        (
+            "PROJECT-AUTONOMY.json",
+            "MISSION-LIFECYCLE.md",
+            "SENIOR-CONSULTATION.md",
+            "AUTONOMOUS-MERGE.md",
+            "HUMAN-ESCALATION.md",
+        ),
+        errors,
+    )
+    require_text_tokens(
+        ".github/workflows/project-control.yml",
+        (
+            "PROJECT-AUTONOMY.json",
+            "validate-autonomy-policy.py",
+            "Validate autonomous governance",
+        ),
+        errors,
+    )
+    require_text_tokens(
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        (
+            "## Autonomy classification",
+            "## Senior consultation",
+            "## Autonomous merge gate",
+            "Expected head:",
+        ),
+        errors,
+    )
+    require_text_tokens(
+        "doc/sooperlooper/WORKFLOW.md",
+        (
             "## Autonomous-by-default mode",
             "## Decision classification",
             "## Continuous task loop",
-        ):
-            if heading not in workflow_text:
-                errors.append(f"WORKFLOW.md missing heading: {heading}")
-
-    documentation_map = ROOT / "doc/sooperlooper/DOCUMENTATION-MAP.md"
-    if documentation_map.is_file():
-        map_text = documentation_map.read_text(encoding="utf-8")
-        if "PROJECT-AUTONOMY.json" not in map_text:
-            errors.append("DOCUMENTATION-MAP.md must index PROJECT-AUTONOMY.json")
-        if "AUTONOMY.md" not in map_text:
-            errors.append("DOCUMENTATION-MAP.md must index AUTONOMY.md")
+        ),
+        errors,
+    )
+    require_text_tokens(
+        "doc/sooperlooper/DOCUMENTATION-MAP.md",
+        (
+            "PROJECT-AUTONOMY.json",
+            "AUTONOMY.md",
+            "AUTONOMY-SCENARIOS.md",
+            "AUTONOMY-ADOPTION.md",
+        ),
+        errors,
+    )
 
     return errors
 
