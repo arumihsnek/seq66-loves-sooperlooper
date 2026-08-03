@@ -217,3 +217,13 @@ jobs:
             tests/audio/sooperlooper_recording_types_test.cpp \
             -o /tmp/t_recording_types
           /tmp/t_recording_types
+
+      - name: Compile recording scheduler test
+        run: |
+          g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread \
+            -Ilibseq66/include -I.ci/include \
+            libseq66/src/audio/sooperlooper_recording_types.cpp \
+            libseq66/src/audio/sooperlooper_recording_scheduler.cpp \
+            tests/audio/sooperlooper_recording_scheduler_test.cpp \
+            -o /tmp/t_recording_scheduler
+          /tmp/t_recording_scheduler
