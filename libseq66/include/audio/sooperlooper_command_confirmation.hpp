@@ -1,4 +1,4 @@
-/*
+/* 
  *  This file is part of Seq66 Loves SooperLooper.
  */
 
@@ -11,6 +11,10 @@
  *  and reconciliation.  OSC send success is never treated as user-visible
  *  completion; confirmation requires observed feedback or bounded
  *  verification.
+ *
+ *  M1-006B: Operations carry engine generation for stale detection.
+ *  Reconciliation receives an immutable copy of the full operation.
+ *  Unknown UUIDs return indeterminate, not cancelled.
  */
 
 #ifndef SEQ66_SOOPERLOOPER_COMMAND_CONFIRMATION_HPP
@@ -35,12 +39,16 @@ enum class confirmation_outcome
     pending,            /**< Waiting for feedback.                       */
     confirmed,          /**< Expected transition observed.               */
     failed,             /**< Engine reported an error.                   */
-    indeterminate,      /**< Deadline expired without confirmation.      */
+    indeterminate,      /**< Deadline expired without confirmation,
+                         *   or UUID not found.                         */
     cancelled           /**< Operation cancelled by caller.              */
 };
 
 /**
  *  Result of a single command confirmation tracking entry.
+ *
+ *  M1-006B: Added engine_generation, expected_control, and request_uuid
+ *  for generation-aware reconciliation and typed verification.
  */
 struct pending_operation
 {
@@ -56,8 +64,14 @@ struct pending_operation
     /** The expected state value after confirmation (or -1 for any). */
     int expected_state{-1};
 
+    /** The expected control name for verification (empty = any). */
+    std::string expected_control;
+
     /** The loop index (or -1 for global). */
     int loop_index{-1};
+
+    /** Engine generation when this operation was created. */
+    std::uint64_t engine_generation{0};
 
     /** When the operation was sent. */
     std::chrono::steady_clock::time_point sent_at;
@@ -86,14 +100,31 @@ struct pending_operation
  *  - When feedback arrives, it is correlated by loop_index + expected_state.
  *  - After deadline expiry, the operation transitions to indeterminate.
  *  - Reconciliation can be triggered explicitly or automatically.
+ *  - M1-006B: Operations carry engine generation; stale operations
+ *    after restart are not confirmed.
  */
 class command_confirmation_tracker
 {
 public:
-    /** Callback for reconciliation queries. */
-    using reconciliation_fn = std::function<bool(int loop_index)>;
+
+    /**
+     *  Callback for reconciliation queries.
+     *
+     *  M1-006B: Receives an immutable copy of the pending operation
+     *  instead of just the loop index.  This allows the reconciler to
+     *  verify the expected state, control name, generation, and other
+     *  fields before confirming.
+     *
+     *  The reconciler must NOT modify the operation.  It should query
+     *  the engine (or observed state cache) and return true only if
+     *  the transition was actually observed.
+     *
+     *  Returns true if the operation's expected transition was observed.
+     */
+    using reconciliation_fn = std::function<bool(const pending_operation &)>;
 
 private:
+
     /** Mutex protecting all internal state. */
     mutable std::mutex m_mutex;
 
@@ -104,6 +135,7 @@ private:
     reconciliation_fn m_reconciler;
 
 public:
+
     command_confirmation_tracker () = default;
     ~command_confirmation_tracker () = default;
 
@@ -114,8 +146,9 @@ public:
     /**
      *  Set the reconciliation callback.
      *
-     *  The callback receives a loop index and returns true if the
-     *  loop is in the expected state (reconciliation successful).
+     *  M1-006B: The callback receives an immutable copy of the pending
+     *  operation.  It must verify the expected state, control, and
+     *  generation before returning true.
      */
     void set_reconciler (reconciliation_fn fn);
 
@@ -127,6 +160,8 @@ public:
      *  \param osc_path         The OSC path that was sent.
      *  \param expected_state   Expected state after confirmation (-1 = any).
      *  \param loop_index       Loop index (-1 = global).
+     *  \param engine_generation Engine generation when operation was created.
+     *  \param expected_control Expected control name (empty = any).
      *  \param deadline_ms      Deadline in milliseconds from now.
      *  \return true if the operation was recorded.
      */
@@ -135,6 +170,8 @@ public:
                 const std::string & osc_path,
                 int expected_state,
                 int loop_index,
+                std::uint64_t engine_generation = 0,
+                const std::string & expected_control = "",
                 int deadline_ms = 5000);
 
     /**
@@ -172,12 +209,19 @@ public:
     /**
      *  Trigger reconciliation for all indeterminate operations.
      *
+     *  M1-006B: The reconciler receives an immutable copy of each
+     *  operation.  After the callback returns, the tracker re-acquires
+     *  the lock and verifies the operation hasn't changed (generation,
+     *  outcome) before confirming.
+     *
      *  \return Number of operations reconciled.
      */
     int reconcile ();
 
     /**
      *  Get the outcome of a specific operation.
+     *
+     *  M1-006B: Returns indeterminate for unknown UUID (not cancelled).
      */
     confirmation_outcome outcome (const std::string & uuid) const;
 
@@ -200,6 +244,17 @@ public:
      *  Clear all operations.
      */
     void clear ();
+
+    /**
+     *  Cancel all operations for a given engine generation.
+     *
+     *  M1-006B: Used during engine restart to invalidate stale
+     *  operations from the previous generation.
+     *
+     *  \param generation   The generation whose operations to cancel.
+     *  \return Number of operations cancelled.
+     */
+    int cancel_generation (std::uint64_t generation);
 };
 
 } // namespace seq66
