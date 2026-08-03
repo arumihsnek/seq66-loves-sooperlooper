@@ -382,8 +382,11 @@ Handoff target: M2-003 (supervisor) consumes typed probe result.
 
 ### M2-003 — managed process supervisor core
 
-Status: `ready`
-Agent: `hermes`
+Status: `in_progress`
+Agent: `hermes` session `m2-003-impl`
+Branch: `feature/m2-003-process-supervisor` (base `fork-main`)
+PR: `#19` (pending)
+Started: 2026-08-03
 
 Dependencies: M2-002.
 

@@ -24,6 +24,11 @@ versions before the fork reaches a releasable state.
   workflows green on gate head `50d39dfb`, `codex-senior-consult` verdict
   `accept`, Phase 2 authorized. PR #14 awaits human approval.
 
+- M2-003 managed process supervisor core: injectable `process_adapter`
+  interface, owned-child PID verification, generation tracking, bounded
+  shutdown escalation (graceful → SIGTERM → SIGKILL), non-blocking poll,
+  deterministic argv. 86 test assertions. PR #19.
+
 - Phase 1 merged into `fork-main` via PR #14 (merge commit `75c57c4a`).
   Human approval recorded. CP-017 governance correction published.
   CP-018 opens Phase 2. First M2 task `M2-001` selected.

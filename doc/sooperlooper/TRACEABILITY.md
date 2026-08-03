@@ -22,7 +22,7 @@ engine and target-hardware verification are recorded separately.
 
 || ID | Requirement | Canonical source | Status | Implementation | Evidence | Work item |
 ||---|---|---|---|---|---|---|
-|| ARCH-001 | SooperLooper remains a separate headless process | ARCHITECTURE, D-001 | specified | none yet | real-engine fixture proves headless execution | M2 supervisor |
+|| ARCH-001 | SooperLooper remains a separate headless process | ARCHITECTURE, D-001 | **implemented** | `sooperlooper_process_supervisor` with injectable `process_adapter`; owned-child lifecycle, PID verification, generation tracking, bounded shutdown escalation | fake-process 86 tests PASS; compile with `-Wall -Wextra -Wpedantic -Werror`; `Audio integration core` workflow | M2-003 (in_progress) |
 || ARCH-002 | Seq66 owns desired state and lifecycle | ARCHITECTURE, D-002 | specified | initial client only | documentation review | M1/M2 |
 || ARCH-003 | Runtime truth comes from observed feedback | SPECIFICATION, D-002 | partially_implemented | real-engine probe only | real-engine `/get` feedback PASS | M1-003, M1-006 |
 || BACKEND-001 | Native JACK and PipeWire-JACK are supported audio environments | SPECIFICATION, D-003 | specified | none in application | JACK dummy fixture PASS | M2 backend gate |
@@ -61,8 +61,8 @@ engine and target-hardware verification are recorded separately.
 
 || ID | Requirement | Canonical source | Status | Implementation | Evidence | Work item |
 ||---|---|---|---|---|---|---|
-|| THREAD-001 | OSC receive/send never blocks Qt paint or RT paths | ARCHITECTURE | **verified** | `sooperlooper_receiver` liblo thread only queues events; `dispatch()` runs from caller thread; `handle()` registration uses a separate handler mutex | receiver test PASS; liblo trampoline does not call user code; `Audio integration core` run `30774259960` | M1-002 (done) |
-|| THREAD-002 | Receiver ownership and shutdown are deterministic | ARCHITECTURE | **verified** | `start()` creates liblo thread and sets `m_running` atomically; `stop()` sets `m_running` false, stops/frees liblo thread, notifies waiters; destructor calls `stop()` | receiver test lifecycle PASS (start/stop/restart); concurrent registration/dispatch test PASS; `Audio integration core` run `30774259960` | M1-002 (done) |
+|| THREAD-001 | OSC receive/send never blocks Qt paint or RT paths | ARCHITECTURE | **verified** | `sooperlooper_receiver` liblo thread only queues events; `dispatch()` runs from caller thread; `handle()` registration uses a separate handler mutex; `sooperlooper_process_supervisor::poll()` is non-blocking | `sooperlooper_receiver` liblo thread only queues events; `dispatch()` runs from caller thread; `handle()` registration uses a separate handler mutex | receiver test PASS; liblo trampoline does not call user code; `Audio integration core` run `30774259960` | M1-002 (done) |
+|| THREAD-002 | Receiver ownership and shutdown are deterministic | ARCHITECTURE | **verified** | `sooperlooper_receiver` start/stop lifecycle; `sooperlooper_process_supervisor` bounded shutdown escalation (graceful → TERM → KILL) with owned-child-only signals | `start()` creates liblo thread and sets `m_running` atomically; `stop()` sets `m_running` false, stops/frees liblo thread, notifies waiters; destructor calls `stop()` | receiver test lifecycle PASS (start/stop/restart); concurrent registration/dispatch test PASS; `Audio integration core` run `30774259960` | M1-002 (done) |
 || THREAD-003 | UI/performer consume bounded snapshots/events | ARCHITECTURE | **verified** | `snapshot()` returns immutable copy under mutex; concurrent read/write test PASS (28K writes, 50K reads in 200ms); no network calls from snapshot | observed-state cache test PASS (snapshot immutability, concurrent access); `Audio integration core` run 30777160194 | M1-003 (done) |
 
 ## Musical model
