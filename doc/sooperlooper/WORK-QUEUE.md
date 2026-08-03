@@ -27,7 +27,7 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-007** (status: `in_progress`)
+Active task: **M1-008** (status: `ready`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -245,7 +245,12 @@ Acceptance criteria:
 
 ### M1-007 — negative and fault-injection matrix
 
-Status: `in_progress`
+Status: `done`
+Agent: `hermes`
+Branch: `feature/m1-007-fault-injection` (merged to `fork-main`)
+PR: `#10` (merged, merge commit `a19ea20c`)
+Started: 2026-08-03
+Completed: 2026-08-03
 
 Dependencies: M1-002 through M1-006.
 
@@ -267,9 +272,9 @@ Acceptance criteria:
 
 ### M1-008 — phase-1 integration gate
 
-Status: `blocked`
+Status: `ready`
 
-Blocked by: M1-001 through M1-007.
+All dependencies met (M1-001 through M1-007 complete).
 
 Requirement IDs: all Phase 1 IDs.
 
