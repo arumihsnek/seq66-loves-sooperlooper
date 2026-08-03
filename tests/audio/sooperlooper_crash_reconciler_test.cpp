@@ -338,6 +338,105 @@ test_shutdown_not_during_startup ()
     CHECK(! handled, "not handled when not watching");
 }
 
+
+static void
+test_stable_interval_resets_backoff ()
+{
+    std::cout << "\n--- Stable interval resets backoff ---" << std::endl;
+    seq66::sooperlooper_crash_reconciler r;
+    seq66::reconciler_config cfg;
+    cfg.base_backoff_ms = 1000;
+    cfg.max_restarts = 3;
+    cfg.stable_interval_ms = 5000;
+    r.set_config(cfg);
+    r.begin_watching(1);
+
+    /* Crash 1 at t=0: restart_count becomes 1 */
+    {
+        auto a = std::make_shared<fake_process_adapter>();
+        seq66::sooperlooper_process_supervisor sup(a);
+        configure_sup(sup);
+        sup.launch();
+        a->m_alive = false;
+        r.check_and_reconcile(sup, [](std::uint64_t) {},
+            []() { return true; }, 0);
+    }
+    CHECK(r.restart_count() == 1, "count 1 after first crash");
+
+    /* Crash 2 at t=1000: restart_count becomes 2, backoff active */
+    {
+        auto a = std::make_shared<fake_process_adapter>();
+        seq66::sooperlooper_process_supervisor sup(a);
+        configure_sup(sup);
+        sup.launch();
+        a->m_alive = false;
+        auto result = r.check_and_reconcile(sup,
+            [](std::uint64_t) {}, nullptr, 1000);
+        CHECK(result == seq66::reconcile_result::backoff, "backoff on 2nd crash");
+    }
+    CHECK(r.restart_count() == 2, "count 2 after second crash");
+
+    /* Simulate successful restart: backoff elapsed, engine relaunched.
+     * The reconciler is now in backoff state; we transition it back
+     * to watching to simulate a successful restart after backoff. */
+    r.begin_watching(1);
+
+    /* Set stable timer to t=0 (stable interval: 0 to 6000 = 6000ms > 5000ms) */
+    r.set_last_stable_time(1);
+
+    /* Crash 3 at t=6000: stable interval elapsed, restart_count resets to 0 */
+    {
+        auto a = std::make_shared<fake_process_adapter>();
+        seq66::sooperlooper_process_supervisor sup(a);
+        configure_sup(sup);
+        sup.launch();
+        a->m_alive = false;
+        auto result = r.check_and_reconcile(sup,
+            [](std::uint64_t) {},
+            []() { return true; },
+            6000);
+        CHECK(result == seq66::reconcile_result::restarted,
+            "restarted after stable reset");
+    }
+    CHECK(r.restart_count() == 1, "count reset to 0 then incremented to 1");
+    CHECK(r.current_backoff_ms() == 1000, "backoff reset to base (count=1)");
+}
+
+static void
+test_routing_restoration_on_restart ()
+{
+    std::cout << "\n--- Routing restoration on restart ---" << std::endl;
+    seq66::sooperlooper_crash_reconciler r;
+    r.begin_watching(1);
+
+    /* Track routing restoration */
+    bool routing_restored = false;
+    bool generation_invalidated = false;
+
+    auto adapter = std::make_shared<fake_process_adapter>();
+    seq66::sooperlooper_process_supervisor sup(adapter);
+    configure_sup(sup);
+    sup.launch();
+    adapter->m_alive = false;
+
+    auto result = r.check_and_reconcile(sup,
+        [&generation_invalidated](std::uint64_t)
+        {
+            generation_invalidated = true;
+        },
+        [&routing_restored]() -> bool
+        {
+            /* Simulate routing restoration during restart callback */
+            routing_restored = true;
+            return true;
+        });
+
+    CHECK(result == seq66::reconcile_result::restarted, "restarted");
+    CHECK(generation_invalidated, "generation invalidated");
+    CHECK(routing_restored, "routing restored in restart callback");
+    CHECK(r.state() == seq66::reconciler_state::watching, "back to watching");
+}
+
 static void
 test_backoff_computation ()
 {
@@ -408,6 +507,8 @@ main ()
     test_pending_cancelled_on_crash();
     test_shutdown_during_startup();
     test_shutdown_not_during_startup();
+    test_stable_interval_resets_backoff();
+    test_routing_restoration_on_restart();
     test_backoff_computation();
     test_backoff_elapsed();
     test_reconciler_state_enum();

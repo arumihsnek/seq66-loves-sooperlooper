@@ -1,0 +1,161 @@
+{
+  "alternatives": [
+    "Reject: add more edge-case tests",
+    "Defer: wait for real-engine testing"
+  ],
+  "candidate_decision": {
+    "action": "merge",
+    "reasoning": "All 42 crash reconciler assertions pass. All 216 regression assertions pass. CI green."
+  },
+  "code_excerpts": [
+    {
+      "file": "sooperlooper_crash_reconciler.hpp",
+      "lines": "header: reconciler_state, pending_operation, reconciler_config, class"
+    },
+    {
+      "file": "sooperlooper_crash_reconciler.cpp",
+      "lines": "implementation: check_and_reconcile, backoff, pending ops, shutdown"
+    },
+    {
+      "file": "sooperlooper_crash_reconciler_test.cpp",
+      "lines": "17 test cases, 42 assertions"
+    }
+  ],
+  "constraints": [
+    "Phase 2 gate requires M2-007 and M2-008",
+    "No force-pushes",
+    "CI must be green"
+  ],
+  "current_plan": {
+    "next_step": "Merge PR #23, then implement M2-008",
+    "phase": "M2-007 implementation complete",
+    "status": "all tests pass, CI green"
+  },
+  "decision_needed": "Does the M2-007 crash reconciler implementation satisfy the merge gate?",
+  "diff": {
+    "commits": "d1166fab feat(M2-007): crash reconciler with backoff and pending ops\n866318f9 control: CP-024, correct drift, M2-007 ready",
+    "files_changed": [
+      "libseq66/include/audio/sooperlooper_crash_reconciler.hpp",
+      "libseq66/src/audio/sooperlooper_crash_reconciler.cpp",
+      "tests/audio/sooperlooper_crash_reconciler_test.cpp",
+      ".github/workflows/audio-core.yml"
+    ],
+    "stat": ".github/workflows/audio-core.yml                   |   6 +\n PROJECT-MANIFEST.json                              |   2 +-\n .../checkpoints/2026-08-03-CP-024-m2-007-ready.md  |  59 +++\n doc/sooperlooper/checkpoints/CURRENT.md            |  17 +-\n .../audio/sooperlooper_crash_reconciler.hpp        | 292 ++++++++++++++\n .../src/audio/sooperlooper_crash_reconciler.cpp    | 276 +++++++++++++\n tests/audio/sooperlooper_crash_reconciler_test.cpp | 426 +++++++++++++++++++++\n 7 files changed, 1067 insertions(+), 11 deletions(-)"
+  },
+  "escalation": {
+    "local_deterministic_checks": [
+      "42 crash reconciler assertions pass",
+      "216 regression assertions pass",
+      "CI green"
+    ],
+    "material_impact": "Adds crash reconciliation to managed engine lifecycle. No existing behavior changed."
+  },
+  "invalidated_assumptions": [],
+  "mission_id": "m2-007-merge-gate",
+  "mode": "merge-gate",
+  "normalized_bundle_fingerprint": "b3fb1ce94156e2a0fce091ea280ea92fb26a20274bbaeae7d0ffa2891f799f72",
+  "objective": "Merge M2-007: crash reconciler with exponential backoff, pending operation lifecycle, generation invalidation, and shutdown-during-startup handling.",
+  "observed_facts": [
+    "CI compile-and-test: pass",
+    "CI validate-control-plane: pass",
+    "Crash reconciler: 42/42 pass",
+    "Supervisor: 86/86",
+    "Launcher: 62/62",
+    "JACK discovery: 38/38",
+    "Readiness gate: 30/30"
+  ],
+  "progress": {
+    "ci": "compile-and-test green, validate-control-plane green",
+    "implemented": "crash reconciler with 5-state machine",
+    "pr": "#23 open",
+    "tests": "42 assertions pass, 216 regression pass"
+  },
+  "questions": [
+    {
+      "id": "merge-evidence",
+      "text": "Does M2-007 satisfy the merge gate?"
+    }
+  ],
+  "relevant_contracts": [
+    "WORK-QUEUE.md M2-007",
+    "ARCHITECTURE.md crash reconciler"
+  ],
+  "repository": {
+    "dirty": true,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    "Backoff timing not tested with real clocks"
+  ],
+  "runtime_evidence": [
+    {
+      "assertions": 42,
+      "status": "PASS",
+      "test": "crash_reconciler"
+    },
+    {
+      "assertions": 86,
+      "status": "PASS",
+      "test": "supervisor"
+    },
+    {
+      "assertions": 62,
+      "status": "PASS",
+      "test": "launcher"
+    },
+    {
+      "assertions": 38,
+      "status": "PASS",
+      "test": "jack_discovery"
+    },
+    {
+      "assertions": 30,
+      "status": "PASS",
+      "test": "readiness_gate"
+    }
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "272b30360836ea0930f8e656d24610a435eaeabab8d1d52cd1e96837754f1570",
+    "plan_fingerprint": "f2ba9cbdd828b1406132ec76cba10fedb39d00d54ecedf11ba3680f5dc37c23c",
+    "repository_head": "d1166fab8ec1d722da9ff1578ec1f86d18740046",
+    "working_tree_fingerprint": "b91e4c613e0b72b7b1ba1f3337a6b7ec833e519d0f0d97120d0a0c79c24a3df6"
+  },
+  "tests": [
+    {
+      "name": "compile",
+      "result": "warnings-as-errors clean",
+      "status": "pass"
+    },
+    {
+      "assertions": 42,
+      "cases": 17,
+      "name": "crash_reconciler",
+      "status": "pass"
+    },
+    {
+      "assertions": 86,
+      "name": "supervisor_regression",
+      "status": "pass"
+    },
+    {
+      "assertions": 62,
+      "name": "launcher_regression",
+      "status": "pass"
+    },
+    {
+      "assertions": 38,
+      "name": "jack_discovery_regression",
+      "status": "pass"
+    },
+    {
+      "assertions": 30,
+      "name": "readiness_gate_regression",
+      "status": "pass"
+    }
+  ]
+}

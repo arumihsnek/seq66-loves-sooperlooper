@@ -1,0 +1,186 @@
+{
+  "alternatives": [
+    {
+      "id": "alt-1",
+      "description": "Merge M2-004 as-is (recommended)",
+      "tradeoffs": "All senior blocking findings addressed. Standard integration."
+    },
+    {
+      "id": "alt-2",
+      "description": "Defer merge",
+      "tradeoffs": "Delays M2-005."
+    }
+  ],
+  "caller_required": [
+    "/alternatives",
+    "/candidate_decision",
+    "/code_excerpts",
+    "/constraints",
+    "/current_plan",
+    "/decision_needed",
+    "/diff",
+    "/escalation",
+    "/invalidated_assumptions",
+    "/objective",
+    "/observed_facts",
+    "/progress",
+    "/questions",
+    "/relevant_contracts",
+    "/risks_already_identified",
+    "/runtime_evidence",
+    "/snapshot/checkpoint_fingerprint",
+    "/snapshot/plan_fingerprint",
+    "/tests"
+  ],
+  "candidate_decision": {
+    "type": "merge_gate",
+    "target_branch": "fork-main",
+    "expected_head": "44d15dcf"
+  },
+  "code_excerpts": [
+    {
+      "file": "libseq66/src/audio/sooperlooper_engine_launcher.cpp",
+      "excerpt": "launch() { probe_backend(); if (unavailable) return; prospective_gen = compute_prospective_generation(); reserve_names(prospective_gen); launch via supervisor; publish_generation(gen); }",
+      "significance": "Ordered launch sequence addressing senior blocking findings"
+    }
+  ],
+  "constraints": [
+    "Seq66 owns process lifecycle, OSC port, JACK client name (ARCHITECTURE)",
+    "Backend probe gates launch (D-003, D-004)",
+    "Generation sync: supervisor \u2192 observed_cache \u2192 monitor (STATE-005)",
+    "No synchronous waits on UI/RT paths (THREAD-001)",
+    "Existing Phase 1 components not modified",
+    "Injectable adapters for testability"
+  ],
+  "current_plan": {
+    "phase": "phase-2-managed-engine-backend",
+    "task": "M2-004",
+    "description": "Engine launch orchestration with generation protocol",
+    "pr": "#20",
+    "branch": "feature/m2-004-engine-launch",
+    "target": "fork-main"
+  },
+  "decision_needed": "Should PR #20 (M2-004 engine launch orchestration) be merged into fork-main?",
+  "diff": {
+    "summary": "3 new files + 1 CI workflow update",
+    "files_changed": [
+      "libseq66/include/audio/sooperlooper_engine_launcher.hpp (NEW)",
+      "libseq66/src/audio/sooperlooper_engine_launcher.cpp (NEW)",
+      "tests/audio/sooperlooper_engine_launcher_test.cpp (NEW, 62 assertions)",
+      ".github/workflows/audio-core.yml (+6 lines)"
+    ]
+  },
+  "escalation": {
+    "local_deterministic_checks": [
+      "Compile with -Wall -Wextra -Wpedantic -Werror: PASS",
+      "62 test assertions: PASS",
+      "Existing tests unchanged: PASS",
+      "project-control validator: PASS",
+      "autonomy-policy validator: PASS"
+    ],
+    "material_impact": "New integration component. No existing files modified except CI."
+  },
+  "invalidated_assumptions": [],
+  "mission_id": "m2-004-merge-gate",
+  "mode": "merge-gate",
+  "objective": "Merge gate review for M2-004 engine launch orchestration. Verify generation protocol correctness, naming policy, stale callback rejection, and integration coherence before merging PR #20.",
+  "observed_facts": [
+    "Compile: clean with warnings-as-errors",
+    "Tests: 62 assertions, 0 failures",
+    "CI: compile-and-test PASS, validate-control-plane PASS",
+    "Validators: both PASS",
+    "PR #20 open, targeting fork-main",
+    "Head: 44d15dcf"
+  ],
+  "progress": {
+    "completed": [
+      "M2-001",
+      "M2-002",
+      "M2-003"
+    ],
+    "in_progress": "M2-004 merge-gate review",
+    "next": "M2-005 JACK discovery"
+  },
+  "questions": [
+    {
+      "id": "merge-evidence",
+      "text": "Does the supplied evidence support the merge gate for M2-004? Check generation protocol ordering, naming collision safety, stale callback rejection, and integration coherence."
+    },
+    {
+      "id": "blocking-findings",
+      "text": "Are there any blocking findings? Consider state machine completeness, generation sync correctness, port reservation safety, and regression risk."
+    }
+  ],
+  "relevant_contracts": [
+    "ARCHITECTURE.md: process supervision",
+    "D-001: SooperLooper remains separate headless process",
+    "STATE-005: generation-scoped indexes",
+    "STATE-006: ready/stale/offline states"
+  ],
+  "repository": {
+    "dirty": true,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    {
+      "risk": "Real-process integration via CI only",
+      "severity": "non-blocking",
+      "mitigation": "Pinned SooperLooper 1.7.9 + JACK dummy CI"
+    },
+    {
+      "risk": "Naming hash non-cryptographic",
+      "severity": "non-blocking",
+      "mitigation": "Sufficient for collision resistance"
+    }
+  ],
+  "runtime_evidence": [
+    "Compile: clean",
+    "Tests: 62 PASS",
+    "CI: both workflows PASS"
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "a5f64c85b82f0a2a9e93d651e0796fe2517b7a845885e0e72ec4f86a5df9c3eb",
+    "plan_fingerprint": "90bc774b0339d65e5682287a5fb69411cf64525d50aa56dcf755d363635dc12d",
+    "repository_head": "44d15dcfc5594ef084d08ada8c24720c400e555c",
+    "working_tree_fingerprint": "e64c71dfa55bca15add55237e2fbd2f6f6f41165a55755a6819b6053200166d8"
+  },
+  "tests": [
+    {
+      "name": "initial_state",
+      "result": "PASS"
+    },
+    {
+      "name": "deterministic_naming",
+      "result": "PASS"
+    },
+    {
+      "name": "launch_backend_unavailable",
+      "result": "PASS"
+    },
+    {
+      "name": "launch_success",
+      "result": "PASS"
+    },
+    {
+      "name": "shutdown",
+      "result": "PASS"
+    },
+    {
+      "name": "generation_sync_with_cache",
+      "result": "PASS"
+    },
+    {
+      "name": "stale_callback_rejection",
+      "result": "PASS"
+    },
+    {
+      "name": "full_lifecycle",
+      "result": "PASS"
+    }
+  ]
+}

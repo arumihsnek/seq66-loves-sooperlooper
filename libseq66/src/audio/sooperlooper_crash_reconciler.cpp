@@ -114,7 +114,8 @@ sooperlooper_crash_reconciler::check_and_reconcile
 (
     sooperlooper_process_supervisor & supervisor,
     std::function<void(std::uint64_t)> on_invalidate_generation,
-    std::function<bool()> on_restart
+    std::function<bool()> on_restart,
+    long long now_ms
 )
 {
     if (m_state != reconciler_state::watching)
@@ -134,17 +135,28 @@ sooperlooper_crash_reconciler::check_and_reconcile
     if (on_invalidate_generation)
         on_invalidate_generation(m_watched_generation);
 
-    /* 3. Check restart budget. */
+    /* 3. Check stable-interval reset: if enough time has elapsed
+     *    since the last crash, reset the restart counter so that
+     *    backoff pressure is released.  This satisfies the acceptance
+     *    criterion: "backoff resets after stable interval". */
+    if (now_ms > 0 && m_last_crash_time_ms > 0 &&
+        stable_interval_elapsed(now_ms))
+    {
+        m_restart_count = 0;
+    }
+
+    /* 4. Record crash time for backoff. */
+    if (now_ms > 0)
+        m_last_crash_time_ms = now_ms;
+
+    /* 5. Check restart budget. */
     if (m_restart_count >= m_config.max_restarts)
     {
         m_state = reconciler_state::terminal;
         return reconcile_result::terminal;
     }
 
-    /* 4. Record crash time for backoff. */
-    m_last_crash_time_ms = 0;  /* Caller should provide time */
-
-    /* 5. Compute backoff. */
+    /* 6. Compute backoff. */
     int backoff = compute_backoff_ms(m_restart_count);
     ++m_restart_count;
 
@@ -154,7 +166,7 @@ sooperlooper_crash_reconciler::check_and_reconcile
         return reconcile_result::backoff;
     }
 
-    /* 6. Immediate restart (backoff is 0 for first crash). */
+    /* 7. Immediate restart (backoff is 0 for first crash). */
     if (on_restart && on_restart())
     {
         m_state = reconciler_state::watching;
@@ -229,6 +241,12 @@ void
 sooperlooper_crash_reconciler::force_restart_count (int count)
 {
     m_restart_count = count;
+}
+
+void
+sooperlooper_crash_reconciler::set_last_stable_time (long long now_ms)
+{
+    m_last_stable_time_ms = now_ms;
 }
 
 bool

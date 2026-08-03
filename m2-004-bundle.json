@@ -1,0 +1,187 @@
+{
+  "alternatives": [
+    {
+      "id": "alt-single-class",
+      "description": "Single sooperlooper_engine_launcher class owns orchestration",
+      "tradeoffs": "Simple, one place for lifecycle logic. May grow large."
+    },
+    {
+      "id": "alt-facade",
+      "description": "Thin facade over existing components, coordinator calls them in order",
+      "tradeoffs": "Less new code, but lifecycle scattered across callers."
+    }
+  ],
+  "caller_required": [
+    "/alternatives",
+    "/candidate_decision",
+    "/code_excerpts",
+    "/constraints",
+    "/current_plan",
+    "/decision_needed",
+    "/diff",
+    "/escalation",
+    "/invalidated_assumptions",
+    "/objective",
+    "/observed_facts",
+    "/progress",
+    "/questions",
+    "/relevant_contracts",
+    "/risks_already_identified",
+    "/runtime_evidence",
+    "/snapshot/checkpoint_fingerprint",
+    "/snapshot/plan_fingerprint",
+    "/tests"
+  ],
+  "candidate_decision": {
+    "type": "plan_review",
+    "question": "Design the engine_launcher integration component"
+  },
+  "code_excerpts": [
+    {
+      "file": "libseq66/include/audio/sooperlooper_process_supervisor.hpp",
+      "excerpt": "launch_result launch(); bool shutdown(); std::uint64_t generation() const;",
+      "significance": "Supervisor API that the launcher will call"
+    },
+    {
+      "file": "libseq66/include/audio/sooperlooper_backend_probe.hpp",
+      "excerpt": "backend_probe_result probe_backend_capability(backend_detect_fn detect = nullptr); bool is_usable() const;",
+      "significance": "Backend gate that launcher must check before launch"
+    },
+    {
+      "file": "libseq66/include/audio/sooperlooper_engine_monitor.hpp",
+      "excerpt": "void ping_sent(); void ping_reply(const std::string& version, int loop_count); engine_state evaluate(); void force_state(engine_state s); void reset();",
+      "significance": "Monitor API that launcher will integrate with supervisor lifecycle"
+    },
+    {
+      "file": "libseq66/include/audio/sooperlooper_observed_state.hpp",
+      "excerpt": "void set_generation(std::uint64_t new_generation); std::uint64_t generation() const;",
+      "significance": "Cache generation must sync with supervisor generation"
+    }
+  ],
+  "constraints": [
+    "Seq66 owns process lifecycle, OSC port, JACK client name (ARCHITECTURE)",
+    "Backend probe gates launch: backend_unavailable \u2192 no launch (D-003, D-004)",
+    "Generation must sync: supervisor.generation == observed_cache.generation (STATE-005)",
+    "No synchronous waits on UI/RT paths (THREAD-001)",
+    "Existing Phase 1 components must not be modified (incremental integration)",
+    "Injectable adapters for testability (established pattern)",
+    "Owned-child-only: supervisor never kills external processes (ARCH-001)"
+  ],
+  "current_plan": {
+    "phase": "phase-2-managed-engine-backend",
+    "task": "M2-004",
+    "description": "Engine launch and OSC reconciliation",
+    "dependencies": [
+      "M2-002 (backend probe)",
+      "M2-003 (process supervisor)",
+      "Phase 1 complete"
+    ],
+    "deliverables": [
+      "Launch SooperLooper only when backend is usable",
+      "Assign deterministic OSC/JACK names from instance identity + generation",
+      "Connect supervisor generation to Phase 1 engine_monitor",
+      "Reject stale callbacks from old generations"
+    ]
+  },
+  "decision_needed": "Design the engine_launcher integration component that bridges process_supervisor, backend_probe, engine_monitor, and observed_cache for M2-004.",
+  "diff": {
+    "summary": "New integration component bridging supervisor, probe, monitor, and cache",
+    "existing_components": [
+      "sooperlooper_process_supervisor (M2-003): owns child lifecycle",
+      "sooperlooper_backend_probe (M2-002): detects audio capability",
+      "sooperlooper_engine_monitor (M1-005): tracks engine health/states",
+      "sooperlooper_observed_cache (M1-003/M1-004): generation-scoped state"
+    ],
+    "integration_points": [
+      "supervisor.generation() \u2192 observed_cache.set_generation()",
+      "supervisor.launch() \u2192 only when backend_probe.is_usable()",
+      "supervisor.state() \u2192 engine_monitor.force_state() mapping",
+      "deterministic naming: instance_id + generation \u2192 OSC port, JACK name"
+    ]
+  },
+  "escalation": {
+    "local_deterministic_checks": [
+      "All existing tests pass (86 supervisor + Phase 1 suite)",
+      "Validators pass",
+      "fork-main clean and synced"
+    ],
+    "material_impact": "New integration component. No existing code modified. Connects four existing components."
+  },
+  "invalidated_assumptions": [],
+  "mission_id": "m2-004-planning",
+  "mode": "plan-review",
+  "objective": "Plan M2-004 (engine launch and OSC reconciliation): design the integration layer that connects process_supervisor, backend_probe, engine_monitor, and observed_state cache.",
+  "observed_facts": [
+    "All Phase 1 requirements verified (M1-001 through M1-008)",
+    "M2-002 backend probe: 35 tests PASS, merged PR #17",
+    "M2-003 process supervisor: 86 tests PASS, merged PR #19",
+    "fork-main synced at e09930f7",
+    "All validators pass",
+    "No open PRs on fork-main"
+  ],
+  "progress": {
+    "completed": [
+      "M2-001 Phase 2 decomposition (done)",
+      "M2-002 backend probe (done, merged)",
+      "M2-003 process supervisor (done, merged PR #19)"
+    ],
+    "in_progress": "M2-004 planning",
+    "next": "M2-004 implementation"
+  },
+  "questions": [
+    {
+      "id": "design-approach",
+      "text": "Should M2-004 use a single sooperlooper_engine_launcher class that owns the orchestration, or a thinner coordinator pattern? Consider: testability, lifecycle ownership, generation sync, and future M2-005 (JACK routing) integration."
+    },
+    {
+      "id": "naming-strategy",
+      "text": "How should deterministic OSC port and JACK client names be derived from instance identity + generation? Consider: avoiding conflicts, readability, and reset behavior on restart."
+    }
+  ],
+  "relevant_contracts": [
+    "ARCHITECTURE.md: process supervision section",
+    "D-001: SooperLooper remains separate headless process",
+    "D-003: support native JACK and PipeWire-JACK",
+    "STATE-005: runtime loop indexes scoped to engine generation",
+    "STATE-006: ready, stale, offline are deterministic distinct states"
+  ],
+  "repository": {
+    "dirty": true,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    {
+      "risk": "Threading contract between launcher and Qt/event loop unknown",
+      "severity": "non-blocking",
+      "mitigation": "Launcher will be coordinator-thread-only; no UI calls"
+    },
+    {
+      "risk": "OSC port allocation may conflict with existing Seq66 ports",
+      "severity": "non-blocking",
+      "mitigation": "Deterministic naming avoids conflicts; port range configurable"
+    }
+  ],
+  "runtime_evidence": [
+    "Phase 1: all requirements verified",
+    "M2-002: backend probe 35 tests PASS",
+    "M2-003: process supervisor 86 tests PASS",
+    "M2-004: not yet implemented"
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "74580e0cbabcd55c5197db8f5f36487bed0d43d4d11294681e0069ef373e2586",
+    "plan_fingerprint": "95beab6502b4bd0459a5e4d2821219b40de9cfa182d5e0dc71dbe66e82851432",
+    "repository_head": "86986cd5cd44ac481ea33bc531e32c30d47a1292",
+    "working_tree_fingerprint": "e1a0dc737c96011612039273aa833896dd57ddc9896b217d8caee19765be2f53"
+  },
+  "tests": [
+    {
+      "name": "planning phase",
+      "result": "in_progress"
+    }
+  ]
+}

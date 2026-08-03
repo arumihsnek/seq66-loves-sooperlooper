@@ -192,7 +192,8 @@ public:
     (
         sooperlooper_process_supervisor & supervisor,
         std::function<void(std::uint64_t)> on_invalidate_generation,
-        std::function<bool()> on_restart
+        std::function<bool()> on_restart,
+        long long now_ms = 0
     );
 
     /**
@@ -249,6 +250,11 @@ public:
      *  Force a restart count (for testing).
      */
     void force_restart_count (int count);
+
+    /**
+     *  Set the last-stable timestamp (for testing stable-interval reset).
+     */
+    void set_last_stable_time (long long now_ms);
 
     /**
      *  Check if backoff has elapsed since the last crash.
