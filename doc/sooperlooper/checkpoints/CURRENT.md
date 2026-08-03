@@ -1,11 +1,11 @@
 # Current checkpoint — Phase 1 corrective gate
 
-Checkpoint ID: `CP-015`  
-Checkpoint date: 2026-08-03  
-Phase: `phase-1-protocol-core`  
-Active task: `M1-008`  
-Status: `review`  
-Branch: `gate/m1-008-phase-1`  
+Checkpoint ID: `CP-015`
+Checkpoint date: 2026-08-03
+Phase: `phase-1-protocol-core`
+Active task: `M1-008`
+Status: `review`
+Branch: `gate/m1-008-phase-1`
 Draft PR: `#14`
 
 The M1-005B, M1-006B and M1-007B correctives are published.

@@ -1,10 +1,10 @@
 # CP-015 — Phase 1 correctives published for gate verification
 
-Checkpoint ID: `CP-015`  
-Checkpoint date: 2026-08-03  
-Phase: `phase-1-protocol-core`  
-Active task: `M1-008`  
-Branch: `gate/m1-008-phase-1`  
+Checkpoint ID: `CP-015`
+Checkpoint date: 2026-08-03
+Phase: `phase-1-protocol-core`
+Active task: `M1-008`
+Branch: `gate/m1-008-phase-1`
 Draft PR: `#14`
 
 ## Objective
