@@ -39,6 +39,12 @@ namespace seq66
  */
 class sooperlooper_receiver
 {
+    /// \note The start() and stop() methods are not thread-safe for concurrent calls from different threads.
+    /// If concurrent start/stop is required, the caller must provide external synchronization (e.g., a mutex).
+    /// However, the receiver is designed to be used from a single thread (e.g., the main or audio/UI thread).
+    /// Calling start() while the receiver is already running returns true and has no effect (idempotent).
+    /// Calling stop() when the receiver is already stopped is safe and has no effect.
+
 private:
     /** Forward declaration of the pimpl implementation. */
     class implementation;

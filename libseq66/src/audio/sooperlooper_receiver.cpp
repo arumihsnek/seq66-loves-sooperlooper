@@ -59,7 +59,7 @@ private:
     /** Maximum number of queued events before incoming messages are dropped. */
     size_t m_max_queue_size;
     /** Number of messages dropped due to queue overflow. */
-    unsigned long long m_dropped_count{0};
+    std::atomic<unsigned long long> m_dropped_count{0};
     /** Map of (path, types) to callback. */
     struct handler_key
     {
@@ -272,10 +272,7 @@ public:
         return m_port;
     }
 
-    unsigned long long dropped_count() const
-    {
-        return m_dropped_count;
-    }
+    unsigned long long dropped_count() const { return m_dropped_count.load(std::memory_order_relaxed); }
 
     bool handle(const std::string & path, const std::string & types,
                 std::function<void(const std::vector<std::string> & args,
