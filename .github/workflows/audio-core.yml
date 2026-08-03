@@ -127,3 +127,9 @@ jobs:
 
       - name: Run crash reconciler test
         run: .ci/bin/sooperlooper_crash_reconciler_test
+
+      - name: Compile lifecycle smoke test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_process_supervisor.cpp libseq66/src/audio/sooperlooper_crash_reconciler.cpp tests/audio/sooperlooper_lifecycle_smoke_test.cpp -o .ci/bin/sooperlooper_lifecycle_smoke_test
+
+      - name: Run lifecycle smoke test
+        run: .ci/bin/sooperlooper_lifecycle_smoke_test
