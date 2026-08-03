@@ -36,7 +36,7 @@ engine and target-hardware verification are recorded separately.
 || OSC-001 | Protocol commands and controls use canonical typed identifiers | OSC contract | **implemented** | `libseq66/include/audio/sooperlooper_protocol.hpp` and `libseq66/src/audio/sooperlooper_protocol.cpp` provide `sooperlooper_command` (16), `loop_control` (51) and `global_control` (17) typed enums with canonical `to_string()` mappings in each direction; the existing `sooperlooper_client` was migrated to use them and no raw OSC string literals remain in integration code | focused `tests/audio/sooperlooper_protocol_test.cpp` PASS; `audio_clip_test` and `sooperlooper_osc_contract_test` PASS against the migrated client | M1-001 (in_progress) |
 || OSC-002 | Outbound indexes, ranges and finite values are validated | OSC contract, SPECIFICATION | **implemented** | per-control wire-level range validation in `is_in_range(loop_control|global_control, float)` with inclusive/exclusive bound modes; non-finite values are always rejected | focused protocol test exercises valid/low/high/+Inf/-Inf/NaN for every identifier (PASS) | M1-001 (in_progress) |
 || OSC-003 | Unknown outbound identifiers cannot be emitted | OSC contract | **implemented** | `to_string(loop_control)` / `to_string(global_control)` return `""` for out-of-range enum values, and the public client setters accept only the typed enums | focused protocol test includes `try_parse("totally_fake_control", ...)` returning `false` and leaving the output unchanged (PASS) | M1-001 (in_progress) |
-|| OSC-004 | Inbound paths/signatures/values are strictly validated | OSC contract | specified | test probe only; no production receiver | none | M1-002 |
+||| OSC-004 | Inbound paths/signatures/values are strictly validated | OSC contract | **verified** | `sooperlooper_receiver` strict `(path, types)` allow-list rejects unknown OSC type tags at registration; `trampoline()` converts only i f d h c s S; malformed signatures cannot be registered | receiver test PASS; handler registration rejection tested; `Audio integration core` run `30774259960` | M1-002 (done) |
 || OSC-005 | Ping/version/topology and subscriptions establish readiness | OSC contract | partially_implemented | smoke probe ping only | pinned real-engine ping PASS | M1-005 |
 || OSC-006 | Send success is not operation confirmation | SPECIFICATION, D-006 | partially_implemented | real-engine test uses bounded verification | pinned real-engine eventual-confirmation PASS | M1-006 |
 
@@ -45,7 +45,7 @@ engine and target-hardware verification are recorded separately.
 || ID | Requirement | Canonical source | Status | Implementation | Evidence | Work item |
 ||---|---|---|---|---|---|---|
 || STATE-001 | Known protocol/state values have deterministic typed mappings | OSC contract | **implemented** | `parse_state_int(int, state_parse_result&)` maps the 18 canonical SooperLooper state integers (-1, 0..15, 20) to canonical labels; unknown raw values are preserved verbatim in `result.raw` with `result.known == false` | focused `tests/audio/sooperlooper_protocol_test.cpp::test_state_parsing` PASS, including the `raw=999` unknown path | M1-001 (in_progress) |
-|| STATE-002 | Receiver callbacks become typed events outside UI/RT paths | ARCHITECTURE | specified | none | none | M1-002 |
+|| STATE-002 | Receiver callbacks become typed events outside UI/RT paths | ARCHITECTURE | **verified** | `sooperlooper_receiver` trampoline queues events; `dispatch()` invokes typed callbacks from caller thread only | receiver test PASS; no user code on liblo thread; `Audio integration core` run `30774259960` | M1-002 (done) |
 || STATE-003 | Desired and observed state are structurally separate | ARCHITECTURE, D-002 | specified | audio clip desired model only | none | M1-003 |
 || STATE-004 | Observed values carry presence and freshness timestamps | SPECIFICATION | specified | none | none | M1-003 |
 || STATE-005 | Runtime loop indexes are scoped to engine generation | SPECIFICATION, D-005 | specified | none | none | M1-004 |
@@ -61,8 +61,8 @@ engine and target-hardware verification are recorded separately.
 
 || ID | Requirement | Canonical source | Status | Implementation | Evidence | Work item |
 ||---|---|---|---|---|---|---|
-|| THREAD-001 | OSC receive/send never blocks Qt paint or RT paths | ARCHITECTURE | specified | outbound adapter is non-UI and non-RT only | focused compile | M1-002 |
-|| THREAD-002 | Receiver ownership and shutdown are deterministic | ARCHITECTURE | specified | none | none | M1-002 |
+|| THREAD-001 | OSC receive/send never blocks Qt paint or RT paths | ARCHITECTURE | **verified** | `sooperlooper_receiver` liblo thread only queues events; `dispatch()` runs from caller thread; `handle()` registration uses a separate handler mutex | receiver test PASS; liblo trampoline does not call user code; `Audio integration core` run `30774259960` | M1-002 (done) |
+|| THREAD-002 | Receiver ownership and shutdown are deterministic | ARCHITECTURE | **verified** | `start()` creates liblo thread and sets `m_running` atomically; `stop()` sets `m_running` false, stops/frees liblo thread, notifies waiters; destructor calls `stop()` | receiver test lifecycle PASS (start/stop/restart); concurrent registration/dispatch test PASS; `Audio integration core` run `30774259960` | M1-002 (done) |
 || THREAD-003 | UI/performer consume bounded snapshots/events | ARCHITECTURE | specified | none | none | M1-003 |
 
 ## Musical model

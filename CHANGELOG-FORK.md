@@ -13,6 +13,19 @@ versions before the fork reaches a releasable state.
 
 ### Added
 
+- M1-002 SooperLooper OSC receiver (`sooperlooper_receiver`) with liblo server
+  thread lifecycle, strict `(path, types)` allow-list rejecting unsupported OSC
+  type tags, catch-all trampoline routing all inbound messages through a
+  thread-safe event queue, typed `poll_event`/`wait_event`/`dispatch` receive
+  paths, bounded queue with atomic overflow counter, and deterministic
+  start/stop lifecycle (idempotent, no-op safe).  The start/stop concurrency
+  contract is documented: single-thread control only; external synchronization
+  required for concurrent calls.  Comprehensive test suite covering lifecycle,
+  handler registration, duplicate rejection, type-tagged send/receive,
+  unhandled-path poll, blocking wait, overflow, and concurrent registration
+  with dispatch.  CI integration via `audio-core.yml` receiver test step.
+  PR #4 merged to fork-main (merge commit `1131a33d`).
+
 - M1-001 typed SooperLooper OSC protocol identifiers, bidirectional string
   mappings, per-control range/type metadata and bounded observed-state integer
   parsing in `libseq66/include/audio/sooperlooper_protocol.hpp` and

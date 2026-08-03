@@ -27,13 +27,11 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-001** (status: `review`)
-Active task: **M1-002** (status: `in_progress`)
+Active task: **M1-003** (status: `in_progress`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
 
-Status: `review`
 Status: `done`
 Agent: `hermes` session `0bc5d91d41b9`
 Branch: `feature/m1-001-typed-osc-protocol` (base `fork-main` @ `c2999d8`)
@@ -94,7 +92,12 @@ strings, after PR #3 is reviewed and merged.
 
 ### M1-002 — receiver lifecycle and strict parser
 
-Status: `in_progress`
+Status: `done`
+Agent: `hermes`
+Branch: `feature/m1-002-osc-receiver` (merged to `fork-main`)
+Draft PR: `#4` (merged, merge commit `1131a33d2e2e81eb63f2f408f727ee41db42a65`)
+Started: 2026-08-02
+Completed: 2026-08-03
 
 Dependencies: M1-001.
 
@@ -122,9 +125,20 @@ Required tests:
 - repeated receiver start/stop;
 - sanitizer run when practical.
 
+Review evidence:
+- `Audio integration core` run `30774259960` on PR #4 branch: PASS (compile + all 5 receiver test groups).
+- Local: `.ci/bin/sooperlooper_receiver_test` PASS; existing audio tests unchanged.
+- Atomic `m_dropped_count` + `memory_order_relaxed` load documented; no race.
+
+Handoff target: M1-003 builds an immutable snapshot cache from the typed
+receiver events without calling the network.
+
 ### M1-003 — observed-state cache
 
-Status: `ready`
+Status: `in_progress`
+Agent: `hermes`
+Branch: `feature/m1-003-observed-state-cache` (base `fork-main`)
+Draft PR: `#5`
 
 Dependencies: M1-002.
 

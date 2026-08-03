@@ -1,43 +1,45 @@
-# Checkpoint: M1-001 completed
+# Checkpoint: M1-002 receiver lifecycle completed
 
-## Checkpoint ID: `CP-005`
+## Checkpoint ID: `CP-006`
 ## Checkpoint date: 2026-08-03
 
+### Phase
+phase-1-protocol-core
+
+### Active task
+M1-003 (observed-state cache)
+
 ### Summary
-M1-001 (typed protocol identifiers) is complete. PR #3 has been merged into fork-main.
-The implementation adds strongly-typed enums for SooperLooper OSC commands, loop controls,
-global controls, and state integers with string conversions and range validation.
+M1-002 (receiver lifecycle and strict parser) is complete. PR #4 has been merged
+into fork-main. The implementation adds a production `sooperlooper_receiver` class
+with liblo server thread lifecycle, strict OSC path/signature allow-list, typed
+inbound events, thread-safe dispatch, bounded queue with overflow counting, and
+deterministic shutdown.
+
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-006-m1-002-done.md`
 
 ### Evidence
-- PR #3 merged with merge commit SHA: e071b8d3aff7675bd0ebfd6f38d35c204f83b7c1
-- All required checks passed:
-  - Project control plane: PASS
-  - Audio integration core: PASS
-- Local validation:
-  - Compile with warnings-as-errors: PASS
-  - Focused protocol unit tests: PASS
-  - Fake-engine OSC contract test: PASS
-- Real-engine smoke test (separate workflow): PASS (run 30756422662, job 91519250698)
+- PR #4 merged with merge commit SHA: `1131a33d2e2e81eb63f2f408f727ee41db42a65`
+- Audio integration core run `30774259960`: compile-and-test PASS (receiver test included)
+- Local verification: `.ci/bin/sooperlooper_receiver_test` PASS — all 5 test groups passed
+- Existing audio tests unchanged and passing (no regression)
 
 ### Updated artifacts
-- PROJECT-MANIFEST.json: active_pull_request set to 0, active_branch set to fork-main
-- WORK-QUEUE.md: M1-001 status set to done, M1-002 status set to in_progress
-- CHANGELOG-FORK.md: entry for M1-001 added
-- TRACEABILITY.md: updated for M1-001 requirements and tests
 - New files created:
-  - libseq66/include/audio/sooperlooper_protocol.hpp
-  - libseq66/src/audio/sooperlooper_protocol.cpp
-  - tests/audio/sooperlooper_protocol_test.cpp
+  - `libseq66/include/audio/sooperlooper_receiver.hpp`
+  - `libseq66/src/audio/sooperlooper_receiver.cpp`
+  - `tests/audio/sooperlooper_receiver_test.cpp`
 - Updated files:
-  - .github/workflows/audio-core.yml (to compile and run the new protocol test)
-  - libseq66/include/audio/sooperlooper_client.hpp
-  - libseq66/src/audio/sooperlooper_client.cpp
-  - libseq66/include/meson.build
-  - libseq66/src/meson.build
-  - doc/sooperlooper/TRACEABILITY.md
-  - doc/sooperlooper/WORK-QUEUE.md
-  - doc/sooperlooper/checkpoints/CURRENT.md (this file)
+  - `.github/workflows/audio-core.yml` (added receiver test step)
+  - `libseq66/include/meson.build`
+  - `libseq66/src/meson.build`
+  - `tests/audio/README.md`
+  - `doc/sooperlooper/TRACEABILITY.md`
+  - `doc/sooperlooper/WORK-QUEUE.md`
+  - `CHANGELOG-FORK.md`
+  - `doc/sooperlooper/checkpoints/CURRENT.md` (this file)
+  - `PROJECT-MANIFEST.json`
 
 ### Next immediate action
-Begin M1-002: receiver lifecycle and strict parser.
-Create a new feature branch from fork-main and open a draft PR.
+Begin M1-003 (observed-state cache). PR #5 (draft) is already open on branch
+`feature/m1-003-observed-state-cache`.
