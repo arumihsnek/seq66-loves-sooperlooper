@@ -19,6 +19,8 @@ product contract and autonomous-agent authority.
 | What happened most recently? | `checkpoints/CURRENT.md` |
 | What should an agent do next? | `WORK-QUEUE.md` |
 | How does a complete autonomous mission run? | `MISSION-LIFECYCLE.md` |
+| How is the policy adopted without disrupting active work? | `AUTONOMY-ADOPTION.md` |
+| How should common situations be classified? | `AUTONOMY-SCENARIOS.md` |
 | How should an agent recover context and hand off? | `WORKFLOW.md`, `CHECKPOINTS.md`, `/AGENTS.md` |
 | When is senior consultation required? | `SENIOR-CONSULTATION.md` |
 | When may Hermes merge without asking? | `AUTONOMOUS-MERGE.md` |
@@ -65,6 +67,10 @@ The autonomous operating model is intentionally split by responsibility:
 - `SENIOR-CONSULTATION.md` — when and how independent senior advice is used;
 - `AUTONOMOUS-MERGE.md` — exact ordinary-task merge gate;
 - `HUMAN-ESCALATION.md` — valid human questions and waiting behaviour;
+- `AUTONOMY-SCENARIOS.md` — worked classification examples that act as policy
+  acceptance cases;
+- `AUTONOMY-ADOPTION.md` — safe stacked introduction and activation sequence;
+- `templates/README.md` — template index;
 - `templates/HUMAN-DECISION.md` — bounded one-question decision packet;
 - `templates/AUTONOMOUS-REPORT.md` — sparse progress/blocker report;
 - `/PROJECT-AUTONOMY.json` — CI-validated machine contract linking all of the
