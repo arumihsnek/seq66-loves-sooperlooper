@@ -133,3 +133,9 @@ jobs:
 
       - name: Run lifecycle smoke test
         run: .ci/bin/sooperlooper_lifecycle_smoke_test
+
+      - name: Compile clip mapper test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_clip_mapper.cpp tests/audio/sooperlooper_clip_mapper_test.cpp -o .ci/bin/sooperlooper_clip_mapper_test
+
+      - name: Run clip mapper test
+        run: .ci/bin/sooperlooper_clip_mapper_test
