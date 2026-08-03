@@ -934,7 +934,10 @@ Deliverables:
 
 ### M4-006 — state and meter rendering
 
-Status: `in_progress`
+Status: `done`
+Completed: 2026-08-03
+PR: pending
+Agent: `hermes`
 Branch: `feature/m4-006-state-meter`
 Agent: `hermes`
 Agent: `hermes`
@@ -950,7 +953,9 @@ Deliverables:
 
 ### M4-007 — Phase 4 gate review
 
-Status: `pending`
+Status: `in_progress`
+Branch: `feature/m4-007-gate-review`
+Agent: `hermes`
 Agent: `hermes`
 
 Dependencies: M4-001 through M4-006
