@@ -1,6 +1,6 @@
-# Checkpoint: M1-004 engine generation tracking completed
+# Checkpoint: M1-004A generation atomicity corrective
 
-## Checkpoint ID: `CP-008`
+## Checkpoint ID: `CP-009`
 ## Checkpoint date: 2026-08-03
 
 ### Phase
@@ -10,32 +10,26 @@ phase-1-protocol-core
 M1-005 (ping, discovery and subscriptions)
 
 ### Summary
-M1-004 (engine generation tracking) is complete. PR #6 has been merged
-into fork-main. The implementation adds a uint64_t generation token to
-`sooperlooper_observed_cache` with `set_generation()` for atomic cache
-clear + generation advance, generation-aware `apply()` that rejects
-stale events, and `snapshot_data.generation` for consumer visibility.
+M1-004A (generation atomicity corrective) is complete. PR #8 merged
+to fork-main. Fixes TOCTOU race, wildcard bypass, missing event
+provenance, and NaN/Inf acceptance in M1-004 generation tracking.
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-008-m1-004-done.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-009-m1-004a-corrective.md`
 
 ### Evidence
-- PR #6 merged with merge commit SHA: `bf0300072a23d7e1efa57565c4abb4643577d81b`
-- Audio integration core run `30778132565`: compile-and-test PASS (20 test groups)
-- Local verification: `.ci/bin/sooperlooper_observed_state_test` PASS — all 20 tests
-- Existing audio tests unchanged and passing (no regression)
+- PR #8 merged with merge commit SHA: `691241dc3dc51501e9b11c32e33dc0027bfb3d1d`
+- Audio integration core run `30778778423`: compile-and-test PASS (27 test groups)
+- Local verification: all 27 tests pass with -Werror
+- TSAN: compiled but FATAL on ARM64 kernel 6.17 (documented)
+- Existing tests unchanged (no regression)
 
 ### Updated artifacts
 - Modified files:
   - `libseq66/include/audio/sooperlooper_observed_state.hpp`
+  - `libseq66/include/audio/sooperlooper_receiver.hpp`
   - `libseq66/src/audio/sooperlooper_observed_state.cpp`
   - `tests/audio/sooperlooper_observed_state_test.cpp`
-- Updated files:
-  - `doc/sooperlooper/TRACEABILITY.md`
-  - `doc/sooperlooper/WORK-QUEUE.md`
-  - `CHANGELOG-FORK.md`
-  - `PROJECT-MANIFEST.json`
-  - `doc/sooperlooper/checkpoints/CURRENT.md` (this file)
+  - `.github/workflows/audio-core.yml`
 
 ### Next immediate action
-Begin M1-005 (ping, discovery and subscriptions). Create a new
-feature branch from fork-main and open a draft PR.
+Integrate fork-main into PR #7 branch, then begin M1-005 implementation.

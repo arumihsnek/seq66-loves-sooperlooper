@@ -14,7 +14,7 @@
         "active_branch": "feature/m1-005-discovery-subscriptions",
         "active_pull_request": 7,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M1-005 ping discovery subscriptions"
+        "active_pull_request_note": "M1-005 pending; blocked by M1-004A rebase"
     },
     "upstreams": {
         "seq66": {
