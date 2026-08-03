@@ -995,3 +995,13 @@ Agent: `hermes`
 
 Dependencies: Phase 4 gate (CP-043)
 Acceptance: Phase 5 DoD in ROADMAP.md
+
+
+### PHASE5-001 — exact musical recording
+
+Status: `ready`
+Branch: `feature/phase5-exact-recording`
+Agent: `hermes`
+
+Dependencies: Phase 4 complete
+Acceptance: Phase 5 DoD in ROADMAP.md

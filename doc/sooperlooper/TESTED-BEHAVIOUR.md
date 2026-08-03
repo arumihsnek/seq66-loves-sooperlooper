@@ -490,3 +490,33 @@ Result: 32/32 pass. All state renderer assertions passed.
 
 1. Compile state renderer test
 2. Run state renderer test
+
+## M4-006 state renderer evidence
+
+### Compilation
+Compiled on Linux with g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include.
+Exit code: 0
+
+### Test execution
+Result: 32/32 pass. All state renderer assertions passed.
+
+### Coverage
+| Test case | Status |
+|---|---|
+| Idle state | pass |
+| Pending state | pass |
+| Active state | pass |
+| Stale state | pass |
+| Offline state | pass |
+| Failed state | pass |
+| Indeterminate state | pass |
+| Meter freshness | pass |
+| Meter absent | pass |
+| Transport enabled | pass |
+| Record enabled | pass |
+| is_stale | pass |
+| is_failed | pass |
+
+### CI steps added
+1. Compile audio slot state renderer test
+2. Run audio slot state renderer test
