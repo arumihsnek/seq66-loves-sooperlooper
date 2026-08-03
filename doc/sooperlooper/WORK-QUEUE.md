@@ -27,7 +27,7 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-005** (status: `in_progress`)
+Active task: **M1-006** (status: `in_progress`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -190,7 +190,12 @@ Acceptance criteria:
 
 ### M1-005 — ping, discovery and subscriptions
 
-Status: `ready`
+Status: `done`
+Agent: `hermes`
+Branch: `feature/m1-005-discovery-subscriptions` (merged to `fork-main`)
+Draft PR: `#7` (merged, merge commit `2228cfd088f24552c2aa51aae670adb06904051d`)
+Started: 2026-08-03
+Completed: 2026-08-03
 
 Dependencies: M1-002, M1-003, M1-004.
 

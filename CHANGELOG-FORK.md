@@ -13,6 +13,13 @@ versions before the fork reaches a releasable state.
 
 ### Added
 
+- M1-005 ping, discovery and subscriptions: `sooperlooper_engine_monitor`
+  lifecycle state machine (disabled -> starting -> reconciling -> ready ->
+  stale -> engine_offline), configurable deadlines (ping interval 1s,
+  timeout 1s, startup 5s, stale threshold 3), client ping/version/
+  subscribe API, 11 test groups.  PR #7 merged
+  (merge commit `2228cfd0`).
+
 - M1-004A generation atomicity corrective: TOCTOU race fixed (generation
   check inside m_mutex), wildcard bypass removed (no default
   event_generation=0), event provenance via receiver_event.generation
