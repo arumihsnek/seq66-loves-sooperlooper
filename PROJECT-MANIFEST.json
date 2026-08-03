@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "feature/m3-002-command-dispatch",
+        "active_branch": "feature/m3-004-qt-audio-slots",
         "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M3-002 claimed; PR not yet open."
+        "active_pull_request_note": "M3-004 model layer; awaiting L3 visual before PR."
     },
     "upstreams": {
         "seq66": {
@@ -119,7 +119,7 @@
         "id": "M3",
         "name": "performer integration",
         "active_task": "M3-004",
-        "active_task_status": "ready",
+        "active_task_status": "in_progress",
         "definition_of_done": "One headless audio clip can be allocated, recorded, launched, muted and overdubbed through Seq66 control paths; displayed state derives from feedback; restart rebuilds mapping without persisting raw indexes; topology conflicts blocked during reconciliation; MIDI-only behaviour remains functional."
     },
     "required_agent_exit_updates": [

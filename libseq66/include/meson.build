@@ -11,6 +11,7 @@ libseq66_headers += files(
     'audio/sooperlooper_clip_mapper.hpp',
     'audio/sooperlooper_transport_policy.hpp',
     'audio/sooperlooper_tempo_policy.hpp',
+    'audio/sooperlooper_audio_slot_widget.hpp',
     'audio/sooperlooper_engine_monitor.hpp',
     'audio/sooperlooper_observed_state.hpp',
     'audio/sooperlooper_protocol.hpp',

@@ -262,3 +262,48 @@ Zero warnings.
 - Native JACK tested: NO
 - PipeWire-JACK tested: NO
 - Hardware tested: NO
+
+## M3-004 audio slot widget model evidence
+
+### Compilation
+
+Compiled on Linux aarch64 with g++ 11.4, `-std=c++17 -Wall -Wextra -Wpedantic -Werror`.
+Zero warnings.
+
+### Tested behaviour
+
+- Initial state and defaults (runtime_index, clip_uuid, observed_state, command_status, tempo_mode, transport_playing, last_error, last_state_change_ms)
+- has_clip() empty and assigned
+- command_terminal() for none/pending/confirmed/failed/indeterminate
+- state_label() for all 16 loop states
+- command_label() for all 5 command statuses
+- tempo_label() for all 3 tempo modes
+- Action factory: make_transport, make_tempo, make_both
+- MIDI-only regression: no clip, no state change
+- Command lifecycle: none → pending → confirmed → none → pending → indeterminate → none → pending → failed
+- Tempo mode transitions: free ↔ tape ↔ elastic
+- Transport transitions: playing ↔ stopped
+- Error message set/clear
+- Multiple independent slots
+
+### Regression
+
+| Suite | Assertions |
+|---|---|
+| process supervisor | 86 |
+| crash reconciler | 45 |
+| clip mapper | 43 |
+| command dispatcher | 60 |
+| lifecycle smoke | 21 |
+| transport+tempo | 110 |
+| audio-slot-widget | 80 |
+| **Total** | **445** |
+
+### Evidence level
+
+- Unit tested (80 assertions)
+- Qt rendering: NOT TESTED (model-only, no display server required)
+- Real SooperLooper tested: NO
+- Native JACK tested: NO
+- PipeWire-JACK tested: NO
+- Hardware tested: NO

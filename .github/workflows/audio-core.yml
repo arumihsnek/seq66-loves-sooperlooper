@@ -151,3 +151,9 @@ jobs:
 
       - name: Run transport tempo policy test
         run: .ci/bin/sooperlooper_transport_tempo_policy_test
+
+      - name: Compile audio slot widget model test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_audio_slot_widget.cpp tests/audio/sooperlooper_audio_slot_widget_test.cpp -o .ci/bin/sooperlooper_audio_slot_widget_test
+
+      - name: Run audio slot widget model test
+        run: .ci/bin/sooperlooper_audio_slot_widget_test
