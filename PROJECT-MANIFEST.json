@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "feature/m1-004-engine-generation",
-        "active_pull_request": 6,
+        "active_branch": "feature/m1-005-discovery-subscriptions",
+        "active_pull_request": 7,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M1-004 engine generation and stale feedback"
+        "active_pull_request_note": "M1-005 ping discovery subscriptions"
     },
     "upstreams": {
         "seq66": {
@@ -110,7 +110,7 @@
     "next_milestone": {
         "id": "M1",
         "name": "bidirectional protocol core",
-        "active_task": "M1-004",
+        "active_task": "M1-005",
         "active_task_status": "in_progress",
         "definition_of_done": "Typed receive/send protocol, generation-scoped observed state, ping/subscriptions and bounded confirmation tests pass without blocking UI or real-time paths."
     },
