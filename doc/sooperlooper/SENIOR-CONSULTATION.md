@@ -91,7 +91,8 @@ Blocking verdicts:
 - `block`;
 - any answer containing unresolved blockers.
 
-A material change after review makes the verdict stale.
+A material change after review makes the verdict stale. The merge must use
+`expected-head` protection for the exact reviewed SHA.
 
 ## Phase gate
 
@@ -117,8 +118,9 @@ already approved and bounded, and no L3/L4 trigger exists, the verdict is
 operational: Hermes may merge the gate, close the current phase, open the next
 phase and continue without a human message.
 
-The senior must explicitly state whether any residual matter is genuinely L3 or
-L4. A phase boundary is not itself a human decision.
+The phase merge also uses `expected-head` protection. The senior must explicitly
+state whether any residual matter is genuinely L3 or L4. A phase boundary is not
+itself a human decision.
 
 When a genuine L3 matter exists, the senior explains why it belongs to the human
 and recommends one option for the Hermes selection form.
