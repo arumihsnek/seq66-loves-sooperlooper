@@ -738,7 +738,10 @@ Handoff target: M3-003 (transport and tempo policy).
 
 ### M3-003 — transport and tempo policy integration
 
-Status: `ready`
+Status: `done`
+Completed: 2026-08-03
+Branch: `feature/m3-003-transport-tempo`
+Merged PR: `#27`
 Agent: `hermes`
 
 Dependencies: M3-002.
@@ -770,3 +773,33 @@ Required tests:
 - negative tests (unsupported modes rejected).
 
 Handoff target: M3-004 (native Qt audio slots).
+
+### M3-004 — native Qt audio slots
+
+Status: `ready`
+Agent: `hermes`
+
+Dependencies: M3-003.
+
+Requirement IDs: `UI-001`.
+
+Expected ownership:
+- `seq66qt/` Qt UI widgets for audio slots;
+- `tests/audio/` UI slot tests.
+
+Deliverables:
+- Audio slot widget showing loop state, transport, tempo mode;
+- Integration with command dispatcher for user actions;
+- Visual feedback for pending/confirmed/failed commands.
+
+Acceptance criteria:
+- Slot widget renders with correct state;
+- Transport start/stop buttons work;
+- Tempo mode selector works;
+- Command feedback visible in slot.
+
+Required tests:
+- Widget state unit tests;
+- Command integration tests.
+
+Handoff target: M3-005 (transactional audio persistence).
