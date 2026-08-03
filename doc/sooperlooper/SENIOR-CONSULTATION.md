@@ -3,165 +3,149 @@
 ## Purpose
 
 `codex-senior-consult` is the project's independent technical reviewer. It
-replaces continuous external supervision at the moments where architecture,
-risk or merge safety benefits from a second high-capability model.
+replaces continuous external supervision at high-leverage architecture, failure,
+merge and phase gates.
 
-The consultant does not own implementation and its answer is not proof. Hermes
-owns the outcome and must verify all advice against repository contracts,
-pinned source and executable evidence.
+The consultant does not implement and its answer is not proof. Hermes owns the
+outcome and verifies advice against repository contracts, pinned source and
+executable evidence.
 
 ## Required consultation points
 
-Consultation is mandatory before a durable decision involving:
+Consultation is mandatory for:
 
 - architecture or cross-component protocol;
 - concurrency, threading, lock ordering or ownership;
-- external process startup, shutdown, crash, restart or reconciliation;
+- process startup, shutdown, crash, restart or reconciliation;
 - persistence, migration or backward compatibility;
 - backend capability policy;
 - security, path safety or data integrity;
-- an ordinary functional merge gate;
-- a milestone gate.
+- every functional merge gate;
+- every phase gate.
 
-Consultation is also required after focused self-diagnosis when:
+It is also required after focused diagnosis when multiple credible root causes
+remain, repeated remedies fail or a test exposes lifecycle/race ambiguity.
 
-- more than one credible root cause remains;
-- the proposed correction changes a contract;
-- repeated attempts fail for materially different reasons;
-- a test exposes a race, deadlock, lifecycle or recovery ambiguity.
+## Not required for
 
-## Consultation is not required for
-
-- formatting and prose cleanup;
+- formatting/prose cleanup;
 - obvious compiler diagnostics;
 - routine test reruns;
-- mechanical path/link updates;
+- mechanical links;
 - known shell quoting mistakes;
 - straightforward missing link dependencies;
-- changes already prescribed by an unchanged accepted review.
+- an unchanged action already prescribed by a current accepted review.
 
-Avoid ceremonial calls. A consultation must answer a real review or decision
-question.
+## Minimum packet
 
-## Minimum consultation packet
+Provide:
 
-Provide the smallest sufficient packet:
-
-1. task ID, phase and objective;
-2. exact head SHA or exact diff range;
-3. relevant architecture and product invariants;
-4. acceptance criteria;
-5. source paths and symbols under review;
+1. task or phase ID and objective;
+2. exact head SHA or diff range;
+3. relevant architecture/product invariants;
+4. acceptance criteria or definition of done;
+5. source paths/symbols;
 6. exact tests and CI evidence;
-7. credible options or current hypothesis;
-8. one precise question;
-9. requested verdict format.
+7. unavailable evidence and residual risks;
+8. credible options or current hypothesis;
+9. one precise question;
+10. requested verdict format.
 
-Do not paste the entire repository or unrelated chat history.
+Do not send broad chat history or the entire repository.
 
-## Planning consultation
+## Planning review
 
-Ask the consultant to:
+Ask the senior to challenge assumptions, compare alternatives, define ownership
+and lifecycle, identify hidden failure modes and negative tests, and recommend
+the smallest complete unit.
 
-- challenge assumptions;
-- compare credible alternatives;
-- identify hidden failure modes;
-- define ownership and lifecycle;
-- identify required negative tests;
-- recommend the smallest complete implementation unit;
-- separate Phase-current work from deferred scope.
+## Failure review
 
-Hermes records the durable decision and rationale in the appropriate canonical
-document, not the full consultation transcript.
+Hermes first performs one bounded diagnosis and reports exact failing evidence,
+what changed, what was ruled out, competing causes, rollback point and a proposed
+discriminating test.
 
-## Failure consultation
+The senior should recommend how to distinguish hypotheses rather than merely
+guess.
 
-Before consulting, Hermes performs one bounded diagnosis and reports:
+## Task merge gate
 
-- exact failing command/run/job;
-- smallest relevant log excerpt;
-- what changed;
-- what was ruled out;
-- competing root causes;
-- safe rollback point;
-- proposed next diagnostic or correction.
-
-The consultant must recommend how to discriminate between hypotheses, not merely
-guess a cause.
-
-## Merge-gate consultation
-
-The merge request must identify the exact PR head and ask the consultant to
-review:
+The senior reviews the exact PR head for:
 
 - scope against the work-queue task;
-- implementation and affected contracts;
-- changed tests and quality of their oracles;
+- implementation and changed contracts;
+- test oracle quality;
 - concurrency/lifecycle implications;
 - CI and real-engine evidence;
-- documentation, traceability and checkpoint consistency;
-- residual risks and deferred work.
+- traceability/checkpoint consistency;
+- residual and deferred risks.
 
-Accepted merge verdicts are:
+Accepted verdicts:
 
 - `accept`;
 - `accept_with_non_blocking_risks`.
 
-Blocking verdicts include:
+Blocking verdicts:
 
 - `request_changes`;
 - `block`;
-- any answer with unresolved blocking findings even if its prose sounds
-  positive.
+- any answer containing unresolved blockers.
 
-A valid verdict must identify the exact head reviewed. A verdict for an earlier
-head is stale after material code, test or contract changes.
+A material change after review makes the verdict stale.
+
+## Phase gate
+
+The global phase consultation receives:
+
+- phase definition of done;
+- exact integrated head and commit range;
+- every required workflow and evidence level;
+- traceability/control status;
+- unavailable evidence;
+- blocking and non-blocking residual risks;
+- the next phase's already-approved bounded scope and first task;
+- an explicit L3/L4 trigger audit.
+
+Valid phase verdicts:
+
+- `accept`;
+- `accept_with_non_blocking_risks`;
+- `block`.
+
+When the verdict accepts without blockers, evidence is green, the next phase is
+already approved and bounded, and no L3/L4 trigger exists, the verdict is
+operational: Hermes may merge the gate, close the current phase, open the next
+phase and continue without a human message.
+
+The senior must explicitly state whether any residual matter is genuinely L3 or
+L4. A phase boundary is not itself a human decision.
+
+When a genuine L3 matter exists, the senior explains why it belongs to the human
+and recommends one option for the Hermes selection form.
 
 ## Applying advice
 
-Hermes must:
+Hermes:
 
-1. verify the consultant inspected the intended evidence;
-2. classify findings as blocking or non-blocking;
-3. implement blocking corrections;
-4. add regression tests where applicable;
-5. re-run required validation;
-6. re-consult after material changes;
-7. record only durable conclusions and accepted risks.
+1. verifies the intended exact evidence was inspected;
+2. classifies findings blocking/non-blocking;
+3. implements blockers;
+4. adds regression tests;
+5. re-runs required validation;
+6. re-consults after material changes;
+7. records durable conclusions and accepted risks.
 
-Hermes may reject advice when pinned source or executable evidence disproves it,
-but must record the contradiction and request a focused re-consultation before a
-high-risk merge.
+Hermes may reject advice disproved by pinned source or tests, but must record the
+contradiction and request focused re-consultation before a high-risk gate.
 
 ## Conflicting consultations
 
-When two senior answers conflict:
+When senior answers conflict:
 
-1. compare exact evidence and head SHAs;
-2. ask one focused reconciliation question containing both positions;
+1. compare evidence and head SHAs;
+2. request one reconciliation review containing both positions;
 3. run a discriminating test when possible;
-4. follow the position supported by stronger source and evidence.
+4. follow the position supported by stronger evidence.
 
-If a material contradiction remains after this process, it becomes an L4 safety
-stop and a bounded human decision.
-
-## Milestone review
-
-The global milestone consultation receives:
-
-- milestone definition of done;
-- integrated commit range;
-- every required workflow and evidence level;
-- traceability status;
-- known unavailable evidence;
-- accepted/deferred risks;
-- proposed next milestone boundary.
-
-It must return one of:
-
-- `approve_milestone_gate`;
-- `approve_with_non_blocking_risks`;
-- `block_milestone_gate`.
-
-The senior verdict informs the human gate; it does not replace the explicit
-human decision to close one milestone and open the next.
+If a material contradiction remains, classify it L4 and use
+`HUMAN-ESCALATION.md`.
