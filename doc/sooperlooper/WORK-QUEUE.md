@@ -21,13 +21,13 @@ checkpoint.
 
 ## Current milestone
 
-Milestone: **M2 — managed engine and backend gate**
+Milestone: **M3 — performer integration**
 
-Goal: Seq66 detects audio backend capability, supervises a headless
-SooperLooper process, and gates audio clip operations on verified engine
-readiness without requiring the SooperLooper GUI.
+Goal: One headless audio clip can be allocated, recorded, launched, muted and
+overdubbed through Seq66 control paths.  Displayed state derives from feedback.
+Restart rebuilds mapping without persisting raw indexes.
 
-Active task: **M2-006** (status: `ready`)
+Active task: **M3-003** (status: `ready`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -548,7 +548,10 @@ Handoff target: M2-007 (crash/restart) tests recovery paths.
 
 ### M2-007 — shutdown, crash, and restart reconciliation
 
-Status: `ready`
+Status: `done`
+Completed: 2026-08-03
+Branch: `feature/m2-008-ci-closure`
+Merged PR: `#24`
 Agent: `hermes`
 
 Dependencies: M2-003 through M2-006.
@@ -696,7 +699,10 @@ Handoff target: M3-002 (performer command dispatch).
 
 ### M3-002 — performer audio command dispatch
 
-Status: `ready`
+Status: `done`
+Completed: 2026-08-03
+Branch: `feature/m3-002-command-dispatch`
+Merged PR: `#26`
 Agent: `hermes`
 
 Dependencies: M3-001.
@@ -729,3 +735,38 @@ Required tests:
 - concurrent command safety.
 
 Handoff target: M3-003 (transport and tempo policy).
+
+### M3-003 — transport and tempo policy integration
+
+Status: `ready`
+Agent: `hermes`
+
+Dependencies: M3-002.
+
+Requirement IDs: `TRAN-001`, `TEMPO-001`.
+
+Expected ownership:
+- `libseq66/src/audio/` transport policy and tempo application;
+- `tests/audio/` transport and tempo tests.
+
+Deliverables:
+- tape, free and elastic tempo modes applied to audio loops;
+- transport start/stop follows Seq66 global transport;
+- tempo changes propagated to SooperLooper via OSC;
+- round-trip latency compensation.
+
+Acceptance criteria:
+- tape mode: loop plays at recording speed;
+- free mode: loop plays at independent speed;
+- elastic mode: loop follows global tempo;
+- transport sync: start/stop follows Seq66;
+- tempo changes propagate within 1 cycle;
+- no audio glitch on tempo change.
+
+Required tests:
+- tempo mode unit tests;
+- transport sync tests;
+- tempo propagation timing tests;
+- negative tests (unsupported modes rejected).
+
+Handoff target: M3-004 (native Qt audio slots).
