@@ -1,26 +1,23 @@
-# Current checkpoint — M4-006 done, M4-007 ready
+# Current checkpoint — Phase 4 gate passed
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-042-m4-006-state-meter.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-043-phase4-gate-passed.md`
 
-Checkpoint ID: `CP-042`
+Checkpoint ID: `CP-043`
 Checkpoint date: 2026-08-03
-Phase: `phase-4-native-qt-slot`
-Active task: `M4-007`
-Status: `in_progress`
+Phase: `phase-5-exact-recording`
+Active task: `PHASE5-001`
+Status: `ready`
 Branch: `fork-main`
-Exact head: pending (M4-006 commit)
+Exact head: `e0629b2e3c67ab188652cdad27f70b8f1eec1346`
 
 ## Verification summary
 
-- M4-006: state renderer, 32 assertions
-- M4-005: controls, 31 assertions
-- M4-004: backend gate, 26 assertions
-- M4-003: grid adapter, 38 assertions
-- M4-002: Qt compilation, 22 Qt assertions
-- M4-001: model layer, 55 assertions
-- Core regression: 12 suites, 517+ assertions
-- Phase 4 DoD: not yet satisfied (M4-007 needed)
+- Phase 4 DoD: all 5 items satisfied
+- Senior gate: ACCEPT
+- 204 assertions across 6 M4 tasks
+- 517+ assertions across 12 suites
+- Validators pass
 
 ## Next action
 
-Begin M4-007: Phase 4 gate review.
+Begin Phase 5 planning.

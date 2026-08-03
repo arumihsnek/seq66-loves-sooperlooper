@@ -159,7 +159,7 @@ Definition of done:
 
 ## Phase 4 — first native Qt audio slot
 
-Status: **in_progress** (CP-036 correction).
+Status: **done** (2026-08-03, gate CP-043).
 
 Deliverables:
 

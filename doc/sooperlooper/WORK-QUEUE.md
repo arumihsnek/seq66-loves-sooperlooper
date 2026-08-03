@@ -860,7 +860,7 @@ Does NOT satisfy Phase 4 DoD — minimum view/model only.
 
 Status: `done`
 Completed: 2026-08-03
-PR: pending
+PR: direct push to fork-main (CP-042)
 Agent: `hermes`
 Branch: `feature/m4-002-qt-compilation`
 Agent: `hermes`
@@ -879,7 +879,7 @@ Acceptance: CI compiles and runs Qt widget test in headless mode.
 
 Status: `done`
 Completed: 2026-08-03
-PR: pending
+PR: direct push to fork-main (CP-042)
 Agent: `hermes`
 Branch: `feature/m4-003-grid-integration`
 Agent: `hermes`
@@ -898,7 +898,7 @@ Deliverables:
 
 Status: `done`
 Completed: 2026-08-03
-PR: pending
+PR: direct push to fork-main (CP-042)
 Agent: `hermes`
 Branch: `feature/m4-004-backend-gate`
 Agent: `hermes`
@@ -917,7 +917,7 @@ Deliverables:
 
 Status: `done`
 Completed: 2026-08-03
-PR: pending
+PR: direct push to fork-main (CP-042)
 Agent: `hermes`
 Branch: `feature/m4-005-controls-dispatcher`
 Agent: `hermes`
@@ -936,7 +936,7 @@ Deliverables:
 
 Status: `done`
 Completed: 2026-08-03
-PR: pending
+PR: direct push to fork-main (CP-042)
 Agent: `hermes`
 Branch: `feature/m4-006-state-meter`
 Agent: `hermes`
@@ -986,3 +986,12 @@ M4-004 depends on M4-003 (grid item must exist before gate enforcement).
 M4-005 depends on M4-003 and M4-004 (controls need grid item + gate).
 M4-006 depends on M4-005 (rendering needs controls connected).
 M4-007 depends on M4-001 through M4-006 (gate review needs all complete).
+
+### PHASE5-001 — Phase 5 planning
+
+Status: `in_progress`
+Branch: `feature/phase5-recording-playback`
+Agent: `hermes`
+
+Dependencies: Phase 4 gate (CP-043)
+Acceptance: Phase 5 DoD in ROADMAP.md

@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "feature/m4-007-gate-review",
+        "active_branch": "feature/phase5-recording-playback",
         "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M4-006 merged, M4-007 gate review"
+        "active_pull_request_note": "Phase 4 gate passed"
     },
     "upstreams": {
         "seq66": {
@@ -29,8 +29,8 @@
         }
     },
     "coordination": {
-        "completed_phase": "phase-3-performer-integration",
-        "current_phase": "phase-4-native-qt-slot",
+        "completed_phase": "phase-4-native-qt-slot",
+        "current_phase": "phase-5-exact-recording",
         "current_checkpoint": "doc/sooperlooper/checkpoints/CURRENT.md",
         "checkpoint_protocol": "doc/sooperlooper/CHECKPOINTS.md",
         "work_queue": "doc/sooperlooper/WORK-QUEUE.md",
@@ -106,11 +106,11 @@
         }
     ],
     "next_milestone": {
-        "id": "M4",
-        "name": "native Qt audio slot",
-        "active_task": "M4-007",
+        "id": "M5",
+        "name": "exact musical recording",
+        "active_task": "PHASE5-001",
         "active_task_status": "in_progress",
-        "definition_of_done": "ROADMAP Phase 4 DoD \u2014 not reduced."
+        "definition_of_done": "ROADMAP Phase 5 DoD"
     },
     "required_agent_exit_updates": [
         "update WORK-QUEUE.md",
