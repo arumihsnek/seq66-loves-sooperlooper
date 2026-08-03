@@ -27,7 +27,7 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-006** (status: `in_progress`)
+Active task: **M1-007** (status: `in_progress`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -217,7 +217,12 @@ Acceptance criteria:
 
 ### M1-006 — command confirmation contracts
 
-Status: `ready`
+Status: `done`
+Agent: `hermes`
+Branch: `feature/m1-006-command-confirmation` (merged to `fork-main`)
+Draft PR: `#9` (merged, merge commit `d56f8edb`)
+Started: 2026-08-03
+Completed: 2026-08-03
 
 Dependencies: M1-003, M1-005.
 
@@ -240,7 +245,7 @@ Acceptance criteria:
 
 ### M1-007 — negative and fault-injection matrix
 
-Status: `ready`
+Status: `in_progress`
 
 Dependencies: M1-002 through M1-006.
 
