@@ -10,6 +10,7 @@
 
 #include "seq66-config.h"
 
+#include <chrono>
 #include <cmath>
 #include <string>
 
@@ -134,6 +135,20 @@ public:
         return false;
 #endif
     }
+
+    void set_error (const std::string & msg)
+    {
+        m_last_error = msg;
+    }
+
+    void clear_error ()
+    {
+        m_last_error.clear();
+    }
+
+#if SEQ66_SOOPERLOOPER_SUPPORT
+    lo_address get_address () const { return m_address; }
+#endif
 
     bool report_send (int result)
     {
@@ -414,6 +429,176 @@ sooperlooper_client::set_global_control (global_control control, float value)
     if (! is_in_range(control, value))
         return false;
     return m_impl->send_string_float("/set", to_string(control), value);
+}
+
+/* -----------------------------------------------------------------
+ *  Engine discovery and health (real OSC transport)
+ * ----------------------------------------------------------------- */
+
+#if SEQ66_SOOPERLOOPER_SUPPORT
+
+struct ping_context
+{
+    lo_server server{nullptr};
+    bool replied{false};
+    std::string engine_url;
+    std::string version;
+    int loop_count{0};
+};
+
+static int
+ping_reply_handler (const char * /* path */, const char * types,
+                    lo_arg ** argv, int argc,
+                    void * /* data */, void * user_data)
+{
+    auto * ctx = static_cast<ping_context *>(user_data);
+    if (! ctx || argc < 3)
+        return 0;
+    if (types[0] != 's' || types[1] != 's' || types[2] != 'i')
+        return 0;
+    ctx->engine_url = &argv[0]->s;
+    ctx->version = &argv[1]->s;
+    ctx->loop_count = argv[2]->i;
+    ctx->replied = true;
+    return 0;
+}
+
+#endif
+
+bool
+sooperlooper_client::ping (std::string & version, int & loop_count,
+                           int timeout_ms)
+{
+#if SEQ66_SOOPERLOOPER_SUPPORT
+    if (! m_impl->ready())
+        return false;
+
+    ping_context ctx;
+    ctx.server = lo_server_new(nullptr, nullptr);
+    if (! ctx.server)
+    {
+        m_impl->set_error("Failed to create temporary OSC server");
+        return false;
+    }
+
+    lo_server_add_method(ctx.server, "/reply", "ssi",
+                         ping_reply_handler, &ctx);
+
+    int port = lo_server_get_port(ctx.server);
+    std::string return_url =
+        "osc.udp://127.0.0.1:" + std::to_string(port);
+
+    int result = lo_send(m_impl->get_address(), "/ping", "ss",
+                         return_url.c_str(), "/reply");
+    if (result < 0)
+    {
+        m_impl->set_error("Failed to send ping");
+        lo_server_free(ctx.server);
+        return false;
+    }
+
+    auto start = std::chrono::steady_clock::now();
+    while (! ctx.replied)
+    {
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now() - start).count();
+        if (elapsed >= timeout_ms)
+        {
+            m_impl->set_error("Ping reply timeout");
+            lo_server_free(ctx.server);
+            return false;
+        }
+        lo_server_recv_noblock(ctx.server, 50);
+    }
+
+    lo_server_free(ctx.server);
+    version = ctx.version;
+    loop_count = ctx.loop_count;
+    m_impl->clear_error();
+    return true;
+#else
+    (void) version;
+    (void) loop_count;
+    (void) timeout_ms;
+    m_impl->set_error("Built without SooperLooper support");
+    return false;
+#endif
+}
+
+bool
+sooperlooper_client::subscribe_loop (int loop_index, loop_control control)
+{
+#if SEQ66_SOOPERLOOPER_SUPPORT
+    if (! m_impl->ready())
+        return false;
+    std::string path = "/sl/" + std::to_string(loop_index) +
+                       "/register_update";
+    return m_impl->send_string(path, to_string(control));
+#else
+    (void) loop_index;
+    (void) control;
+    return false;
+#endif
+}
+
+bool
+sooperlooper_client::subscribe_loop_auto (int loop_index,
+                                           loop_control control,
+                                           int interval_ms)
+{
+#if SEQ66_SOOPERLOOPER_SUPPORT
+    if (! m_impl->ready())
+        return false;
+    if (interval_ms < 10 || interval_ms > 100)
+    {
+        m_impl->set_error("Auto-update interval must be 10..100 ms");
+        return false;
+    }
+    std::string path = "/sl/" + std::to_string(loop_index) +
+                       "/register_auto_update";
+    return m_impl->send_string_float(path, to_string(control),
+                                     float(interval_ms));
+#else
+    (void) loop_index;
+    (void) control;
+    (void) interval_ms;
+    return false;
+#endif
+}
+
+bool
+sooperlooper_client::subscribe_global (global_control control)
+{
+#if SEQ66_SOOPERLOOPER_SUPPORT
+    if (! m_impl->ready())
+        return false;
+    return m_impl->send_string("/register_update", to_string(control));
+#else
+    (void) control;
+    return false;
+#endif
+}
+
+bool
+sooperlooper_client::subscribe_global_auto (global_control control,
+                                            int interval_ms)
+{
+#if SEQ66_SOOPERLOOPER_SUPPORT
+    if (! m_impl->ready())
+        return false;
+    if (interval_ms < 10 || interval_ms > 100)
+    {
+        m_impl->set_error("Auto-update interval must be 10..100 ms");
+        return false;
+    }
+    return m_impl->send_string_float("/register_auto_update",
+                                     to_string(control),
+                                     float(interval_ms));
+#else
+    (void) control;
+    (void) interval_ms;
+    return false;
+#endif
 }
 
 }           // namespace seq66
