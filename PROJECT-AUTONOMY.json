@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
-  "policy_id": "seq66-sl-autonomy-v1",
+  "schema_version": 2,
+  "policy_id": "seq66-sl-autonomy-v2",
   "mode": "autonomous_by_default",
-  "purpose": "Allow Hermes to execute the approved roadmap end to end while escalating only decisions that cannot be resolved safely by repository evidence, tests and independent senior consultation.",
+  "purpose": "Allow Hermes to execute the approved roadmap end to end, including clear phase transitions, while escalating only genuine product, irreversible, safety, licensing, compatibility or subjective decisions.",
   "roles": {
     "human_owner": {
       "authority": [
@@ -10,10 +10,11 @@
         "subjective_musical_or_visual_choices",
         "destructive_or_irreversible_changes",
         "license_and_dependency_policy",
+        "intentional_backward_incompatibility",
         "requirement_conflict_resolution",
-        "milestone_gate_decisions"
+        "phase_transition_only_when_l3_triggered"
       ],
-      "normal_interaction": "answer_bounded_decision_questions"
+      "normal_interaction": "answer_bounded_selection_forms"
     },
     "hermes_operator": {
       "authority": [
@@ -26,6 +27,7 @@
         "maintain_control_plane",
         "request_senior_consultation",
         "merge_ordinary_tasks_when_gate_passes",
+        "close_clear_phase_and_open_preapproved_next_phase_when_senior_gate_passes",
         "continue_to_next_ready_task"
       ],
       "responsibility": "own_outcome_and_evidence"
@@ -36,7 +38,7 @@
         "risk_review",
         "failure_diagnosis",
         "merge_gate_review",
-        "milestone_review"
+        "phase_gate_review"
       ],
       "responsibility": "independent_advisory_review_not_execution_proof"
     },
@@ -74,7 +76,8 @@
         "persistence_or_compatibility_design",
         "backend_abstraction",
         "security_sensitive_boundary",
-        "high_risk_merge_gate"
+        "high_risk_merge_gate",
+        "clear_phase_close_and_preapproved_next_phase_open"
       ],
       "human_interrupt": false
     },
@@ -88,7 +91,7 @@
         "data_loss_or_irreversible_migration",
         "unresolved_requirement_conflict",
         "physical_or_musical_validation_unavailable_to_agents",
-        "milestone_gate_decision"
+        "phase_transition_that_changes_approved_scope_or_hits_any_l3_trigger"
       ],
       "human_interrupt": true
     },
@@ -122,16 +125,15 @@
   ],
   "autonomous_merge": {
     "enabled": true,
-    "ordinary_tasks_only": true,
     "required": [
-      "task_exists_in_work_queue",
-      "scope_matches_one_task_or_declared_integration_unit",
+      "task_or_phase_gate_exists_in_control_plane",
+      "scope_matches_declared_unit",
       "dependencies_satisfied",
       "all_required_checks_success_on_exact_head",
-      "focused_negative_tests_present",
+      "focused_negative_tests_present_when_applicable",
       "project_control_validation_success",
       "traceability_and_checkpoint_current",
-      "senior_merge_gate_accepts_without_blockers",
+      "senior_exact_head_gate_accepts_without_blockers",
       "no_unresolved_review_threads",
       "pull_request_mergeable",
       "expected_head_matches",
@@ -143,7 +145,7 @@
       "silent_merge_method_change",
       "merge_with_red_or_missing_required_check",
       "merge_after_head_changed_without_reverification",
-      "milestone_transition_without_human_gate"
+      "phase_transition_with_unresolved_l3_or_l4_trigger"
     ]
   },
   "senior_consultation": {
@@ -155,7 +157,7 @@
       "backend_capability_policy",
       "security_or_data_integrity_boundary",
       "ordinary_functional_merge_gate",
-      "milestone_gate"
+      "phase_gate"
     ],
     "not_required_for": [
       "formatting",
@@ -165,20 +167,55 @@
       "known_ci_quoting_or_dependency_fix"
     ],
     "minimum_packet": [
-      "task_id_and_objective",
+      "task_or_phase_id_and_objective",
       "exact_head_or_diff",
       "relevant_invariants",
-      "acceptance_criteria",
+      "acceptance_criteria_or_definition_of_done",
       "test_and_ci_evidence",
+      "residual_risks",
       "one_precise_question"
     ],
-    "valid_merge_verdicts": [
+    "valid_gate_verdicts": [
       "accept",
       "accept_with_non_blocking_risks"
     ]
   },
-  "human_escalation": {
+  "phase_transition": {
+    "default_authority": "L2_SENIOR_REQUIRED",
+    "human_gate_required_only_when": [
+      "next_phase_changes_approved_product_scope",
+      "next_phase_requires_subjective_musical_or_visual_choice",
+      "intentional_backward_incompatibility",
+      "non_foss_or_license_incompatible_dependency",
+      "data_loss_or_irreversible_migration",
+      "unresolved_requirement_conflict",
+      "required_physical_or_subjective_validation_is_unavailable",
+      "any_other_L3_or_L4_trigger"
+    ],
+    "autonomous_transition_required": [
+      "current_phase_definition_of_done_satisfied",
+      "all_required_phase_checks_success_on_exact_integrated_head",
+      "traceability_and_control_plane_consistent",
+      "global_senior_phase_review_accepts_without_blockers",
+      "residual_risks_recorded_and_non_blocking",
+      "next_phase_already_defined_in_approved_roadmap",
+      "next_phase_has_bounded_scope_and_first_real_task",
+      "no_L3_or_L4_trigger_present",
+      "expected_head_protection_used",
+      "post_transition_checkpoint_published"
+    ],
+    "result": "close_current_phase_open_preapproved_next_phase_and_continue"
+  },
+  "human_interaction": {
     "ask_one_decision_at_a_time": true,
+    "prefer_native_hermes_selection_form": true,
+    "selection_form_required_when_supported": true,
+    "free_text_chat_fallback_only_when_form_unavailable_or_question_not_representable": true,
+    "option_count_min": 2,
+    "option_count_max": 4,
+    "include_other_option_when_safe": true,
+    "other_option_label": "Otra opción / Other",
+    "other_option_requires_free_text": true,
     "required_fields": [
       "decision_id",
       "question",
@@ -187,25 +224,9 @@
       "senior_recommendation",
       "impact",
       "default_if_no_response",
-      "next_action_after_answer",
-      "expected_answer_format"
+      "next_action_after_answer"
     ],
-    "option_count_min": 2,
-    "option_count_max": 4,
     "default_if_no_response": "pause_only_the_blocked_branch_and_continue_independent_safe_work"
-  },
-  "milestone_policy": {
-    "tasks_inside_approved_milestone": "autonomous",
-    "ordinary_task_merges": "autonomous_when_gate_passes",
-    "close_milestone_and_open_next": "human_required",
-    "phase_gate_packet": [
-      "definition_of_done",
-      "exact_integrated_head",
-      "required_workflow_runs",
-      "senior_global_verdict",
-      "residual_risks",
-      "explicit_human_question"
-    ]
   },
   "parallelism": {
     "allowed": true,
