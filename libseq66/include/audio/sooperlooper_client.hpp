@@ -81,6 +81,58 @@ public:
 
     bool set_global_control (global_control control, float value);
 
+    /* -----------------------------------------------------------------
+     *  Engine discovery and health
+     * ----------------------------------------------------------------- */
+
+    /**
+     *  Send a ping request and wait for a reply.
+     *
+     *  \param[out] version      Engine version string on success.
+     *  \param[out] loop_count   Number of loops on success.
+     *  \param timeout_ms        Maximum wait for reply.
+     *  \return true if a valid reply was received.
+     */
+    bool ping (std::string & version, int & loop_count,
+               int timeout_ms = 1000);
+
+    /**
+     *  Subscribe to a per-loop control change notification.
+     *
+     *  \param loop_index   The loop index.
+     *  \param control      The control to subscribe to.
+     *  \return true if the subscribe message was sent.
+     */
+    bool subscribe_loop (int loop_index, loop_control control);
+
+    /**
+     *  Subscribe to a per-loop auto-update at the given interval.
+     *
+     *  \param loop_index   The loop index.
+     *  \param control      The control to subscribe to.
+     *  \param interval_ms  Update interval (10..100 ms).
+     *  \return true if the subscribe message was sent.
+     */
+    bool subscribe_loop_auto (int loop_index, loop_control control,
+                              int interval_ms = 50);
+
+    /**
+     *  Subscribe to a global control change notification.
+     *
+     *  \param control      The global control to subscribe to.
+     *  \return true if the subscribe message was sent.
+     */
+    bool subscribe_global (global_control control);
+
+    /**
+     *  Subscribe to a global auto-update at the given interval.
+     *
+     *  \param control      The global control to subscribe to.
+     *  \param interval_ms  Update interval (10..100 ms).
+     *  \return true if the subscribe message was sent.
+     */
+    bool subscribe_global_auto (global_control control,
+                               int interval_ms = 50);
 };  // class sooperlooper_client
 
 }           // namespace seq66
