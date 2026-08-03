@@ -27,7 +27,7 @@ Goal: Seq66 detects audio backend capability, supervises a headless
 SooperLooper process, and gates audio clip operations on verified engine
 readiness without requiring the SooperLooper GUI.
 
-Active task: **M2-005** (status: `ready`)
+Active task: **M2-006** (status: `ready`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -466,10 +466,11 @@ Handoff target: M2-005 (JACK discovery) adds port discovery and routing.
 
 ### M2-005 — JACK discovery and Seq66-owned routing
 
-Status: `in_progress`
+Status: `done`
 Agent: `hermes`
-Branch: `feature/m2-005-jack-discovery`
-Started: 2026-08-03
+Branch: `feature/m2-005-jack-discovery` (merged to `fork-main`)
+PR: `#21` (merged, merge commit `2b115706`)
+Completed: 2026-08-03
 
 Dependencies: M2-002, M2-004.
 

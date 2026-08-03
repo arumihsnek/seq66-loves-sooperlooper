@@ -34,6 +34,10 @@ versions before the fork reaches a releasable state.
   between supervisor/observed_cache/engine_monitor, stale callback
   rejection. 62 test assertions. PR #20 merged to fork-main (merge commit `5b8e2ba7`).
 
+ - M2-005 JACK discovery and Seq66-owned routing: injectable graph adapter,
+ idempotent connections, topology completeness, graph change detection.
+ 38 test assertions. PR #21 merged to fork-main (merge commit `2b115706`).
+
 - Phase 1 merged into `fork-main` via PR #14 (merge commit `75c57c4a`).
   Human approval recorded. CP-017 governance correction published.
   CP-018 opens Phase 2. First M2 task `M2-001` selected.
