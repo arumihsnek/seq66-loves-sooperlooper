@@ -896,7 +896,10 @@ Deliverables:
 
 ### M4-004 — backend gate (ALSA-only)
 
-Status: `in_progress`
+Status: `done`
+Completed: 2026-08-03
+PR: pending
+Agent: `hermes`
 Branch: `feature/m4-004-backend-gate`
 Agent: `hermes`
 Agent: `hermes`
@@ -912,7 +915,9 @@ Deliverables:
 
 ### M4-005 — controls and dispatcher
 
-Status: `pending`
+Status: `in_progress`
+Branch: `feature/m4-005-controls-dispatcher`
+Agent: `hermes`
 Agent: `hermes`
 
 Dependencies: M4-003, M4-004

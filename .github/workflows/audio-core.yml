@@ -190,3 +190,9 @@ jobs:
 
       - name: Run grid adapter test
         run: QT_QPA_PLATFORM=offscreen .ci/bin/sooperlooper_audio_slot_grid_adapter_test
+
+      - name: Compile backend gate test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_backend_gate.cpp libseq66/src/audio/sooperlooper_backend_probe.cpp tests/audio/sooperlooper_backend_gate_test.cpp -o .ci/bin/sooperlooper_backend_gate_test
+
+      - name: Run backend gate test
+        run: .ci/bin/sooperlooper_backend_gate_test
