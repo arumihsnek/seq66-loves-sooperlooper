@@ -846,20 +846,96 @@ Acceptance criteria:
 - Phase gate review obtained.
 - Phase 4 opened.
 
-### PHASE4-001 — first native Qt audio slot
+### M4-001 — minimum view/model
 
-Status: `in_progress`
-Branch: `feature/phase4-native-qt-audio-slot`
-Agent: `hermes`
-...[truncated]
-
-
-### PHASE4-001 — first native Qt audio slot
-
-Status: `in_progress`
-Branch: `feature/phase4-native-qt-audio-slot`
+Status: `done`
+Completed: 2026-08-03
+PR: `#30` (merged, commit `8be93cf1`)
 Agent: `hermes`
 
-Dependencies: M3-001, M3-002, M3-003, M3-004, M3-005
-Acceptance: Phase 4 DoD in ROADMAP.md
-Handoff target: Phase 4 visual polish and integration testing.
+Deliverables: audio_slot_model, audio_slot_view, 55-assertion test suite.
+Does NOT satisfy Phase 4 DoD — minimum view/model only.
+
+### M4-002 — Qt compilation and real test
+
+Status: `in_progress`
+Branch: `feature/m4-002-qt-compilation`
+Agent: `hermes`
+
+Dependencies: M4-001
+
+Deliverables:
+- compile sooperlooper_audio_slot_view.cpp with real Qt
+- instantiate widget in headless (offscreen) test
+- verify signals, snapshot updates, no synchronous OSC
+- test with audio enabled and disabled
+
+Acceptance: CI compiles and runs Qt widget test in headless mode.
+
+### M4-003 — grid item integration
+
+Status: `pending`
+Agent: `hermes`
+
+Dependencies: M4-002
+
+Deliverables:
+- integrate audio slot into common slot abstraction
+- add New MIDI pattern and New audio loop actions
+- insert slot into grid/main window
+- preserve MIDI-only slots
+- test creation, selection, update, deletion
+
+### M4-004 — backend gate (ALSA-only)
+
+Status: `pending`
+Agent: `hermes`
+
+Dependencies: M4-003
+
+Deliverables:
+- audio action visible but disabled in ALSA-only
+- backend explanation text
+- native JACK and PipeWire-JACK enable path
+- UI, keyboard, MIDI, headless use same gate
+- no silent JACK/PipeWire/SooperLooper start
+
+### M4-005 — controls and dispatcher
+
+Status: `pending`
+Agent: `hermes`
+
+Dependencies: M4-003, M4-004
+
+Deliverables:
+- Record, Launch, Mute, Overdub, Stop
+- connection to command dispatcher
+- send != confirmation
+- pending/confirmed/failed/indeterminate from feedback
+- timeout and error visibility
+
+### M4-006 — state and meter rendering
+
+Status: `pending`
+Agent: `hermes`
+
+Dependencies: M4-005
+
+Deliverables:
+- pending, stale, offline, failed/error rendering
+- cached meter display
+- no synchronous OSC from paint
+- bounded update frequency
+- tests with snapshots and absent/stale values
+
+### M4-007 — Phase 4 gate review
+
+Status: `pending`
+Agent: `hermes`
+
+Dependencies: M4-001 through M4-006
+
+Deliverables:
+- verify all Phase 4 DoD items from ROADMAP.md
+- senior exact-head review
+- CI and validators pass on exact head

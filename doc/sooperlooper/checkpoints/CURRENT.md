@@ -1,22 +1,21 @@
-# Current checkpoint — Phase 4 complete
+# Current checkpoint — Phase 4 gate correction
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-035-phase4-native-qt-audio-slot.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-036-phase4-gate-correction.md`
 
-Checkpoint ID: `CP-035`
+Checkpoint ID: `CP-036`
 Checkpoint date: 2026-08-03
 Phase: `phase-4-native-qt-slot`
-Active task: `PHASE4-001`
-Status: `done`
+Active task: `M4-002`
+Status: `in_progress`
 Branch: `fork-main`
-Exact head: `0ef0d4368fcdf87c3893e786b43810807bdef4c9`
+Exact head: `8be93cf1`
 
 ## Verification summary
 
-- CI: all test suites pass
-- Core assertions: 559 across 9 suites
-- validate-project-control.py: pass
-- validate-autonomy-policy.py: pass
+- PR #30 (M4-001) merged: model layer + thin Qt view
+- Phase 4 DoD NOT satisfied (premature gate correction)
+- M4-002 through M4-007 pending
 
 ## Next action
 
-Create PR for Phase 4, merge, then begin visual/UX design iteration.
+Begin M4-002: Qt compilation and real test.

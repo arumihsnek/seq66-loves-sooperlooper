@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "feature/phase4-native-qt-audio-slot",
+        "active_branch": "feature/m4-002-qt-compilation",
         "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "Phase 4 complete"
+        "active_pull_request_note": "Phase 4 in progress \u2014 M4-002"
     },
     "upstreams": {
         "seq66": {
@@ -76,14 +76,17 @@
         "topology-conflict blocking during reconciliation",
         "generation invalidation on crash",
         "MIDI-only behaviour preserved",
-        "audio slot widget model layer",
+        "audio slot widget model layer (M4-001)",
         "transactional audio persistence",
         "transport and tempo policy"
     ],
     "missing_capabilities": [
-        "native Qt audio slot rendering",
-        "real SooperLooper/JACK integration",
-        "persistence schema migration"
+        "native Qt audio slot grid integration",
+        "ALSA-only backend gate",
+        "Record/Launch/Mute/Overdub controls",
+        "cached meter display",
+        "pending/stale/error rendering",
+        "real Qt compilation in CI"
     ],
     "ci": [
         {
@@ -105,9 +108,9 @@
     "next_milestone": {
         "id": "M4",
         "name": "native Qt audio slot",
-        "active_task": "PHASE4-001",
-        "active_task_status": "done",
-        "definition_of_done": "First native Qt audio slot renders real loop state, supports transport start/stop, tempo mode selection, and command feedback via the widget model layer."
+        "active_task": "M4-002",
+        "active_task_status": "in_progress",
+        "definition_of_done": "ROADMAP Phase 4 DoD \u2014 not reduced."
     },
     "required_agent_exit_updates": [
         "update WORK-QUEUE.md",
