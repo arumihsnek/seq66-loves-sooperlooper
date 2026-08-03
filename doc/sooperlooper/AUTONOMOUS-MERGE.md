@@ -1,149 +1,166 @@
-# Autonomous merge policy
+# Autonomous merge and phase-transition policy
 
 ## Purpose
 
-This policy allows Hermes to merge ordinary task pull requests without asking
-the human each time, while preserving independent review, exact-head safety and
-reproducible evidence.
+This policy allows Hermes to merge ordinary tasks and clear phase transitions
+without asking the human each time, while preserving independent review,
+exact-head safety and reproducible evidence.
 
-Autonomous merge applies only inside an already approved milestone. It does not
-close a milestone, open the next milestone, authorize destructive migration or
-change product scope.
+Autonomy never authorizes destructive migration, hidden product-scope change,
+incompatible licensing, force push or red-check merges.
 
-## Eligible pull requests
+## Eligible ordinary pull requests
 
-A pull request is eligible only when:
+A task PR is eligible when:
 
-- it maps to one task in `WORK-QUEUE.md`, or to a declared integration unit;
-- its dependencies are satisfied;
-- its scope and changed files match the task ownership;
-- unrelated cleanup is absent or split into another task;
-- it targets `fork-main`, not `master`;
-- it preserves repository architecture and product invariants;
-- no L3 or L4 decision is embedded in the change.
+- it maps to one task in `WORK-QUEUE.md` or a declared integration unit;
+- dependencies are satisfied;
+- scope and changed files match ownership;
+- unrelated cleanup is absent or separated;
+- it targets `fork-main`;
+- architecture and product invariants are preserved;
+- no L3 or L4 decision is embedded.
 
-Documentation-only control PRs are eligible when they do not change milestone
-ownership or bypass a human gate.
+## Eligible phase-gate pull requests
 
-## Mandatory merge conditions
+A phase gate is eligible for autonomous transition when:
 
-Every condition must be true on the exact head being merged:
+- every required phase task is integrated;
+- the definition of done is satisfied item by item;
+- required CI and runtime evidence pass on the exact integrated head;
+- unavailable evidence is explicit and senior-classified;
+- traceability and project control are consistent;
+- the next phase is already defined and bounded in the approved roadmap;
+- the next phase has a real first task;
+- global `codex-senior-consult` review accepts without blockers;
+- residual risks are recorded and non-blocking;
+- no L3 or L4 trigger exists.
 
-1. The task exists and has status `review`.
-2. Acceptance criteria are explicitly addressed in the PR.
+A phase boundary by itself is not a human gate.
+
+## Mandatory exact-head conditions
+
+Every merge condition must be true on the head being merged:
+
+1. The task or phase gate exists in the control plane.
+2. Acceptance criteria or definition of done are explicitly addressed.
 3. Focused positive and negative tests exist where behaviour changes.
-4. Test assertions observe the named property rather than only “no crash.”
+4. Test assertions observe named properties rather than only `no crash`.
 5. Every required workflow is `success` on the exact head.
 6. Project-control and autonomy-policy validators pass.
 7. Traceability reflects changed requirements and evidence.
-8. A new immutable checkpoint records the task result or merge-ready handoff.
-9. `CURRENT.md`, manifest, work queue and PR body are semantically consistent.
+8. An immutable checkpoint records the merge-ready state.
+9. CURRENT, manifest, work queue and PR body are semantically consistent.
 10. `git diff --check` is clean.
 11. No unresolved review thread remains.
 12. `codex-senior-consult` reviewed the exact head and returned `accept` or
-    `accept_with_non_blocking_risks` with no blocking finding.
-13. The PR is mergeable.
-14. The base is the intended integration branch.
-15. Expected-head protection is used for the merge.
-16. Merge commit is used unless a reviewed versioned policy explicitly requires
-    another method.
+    `accept_with_non_blocking_risks` with no blocker.
+13. The PR is mergeable and targets the intended base.
+14. Expected-head protection is used.
+15. Merge commit is used unless a reviewed versioned policy requires another
+    method.
+16. No unresolved L3 or L4 trigger is crossed.
 
-If a material code, test, contract or control change occurs after senior review,
-that review is stale and must be repeated.
+A material code, test, contract or control change after review invalidates the
+verdict and requires fresh CI and senior review.
 
-## Required evidence by task type
+## Evidence by change type
 
-### Documentation/control task
+### Documentation/control
 
-- structural validator;
+- structural validators;
 - semantic consistency review;
 - exact changed paths;
-- no accidental product or phase transition;
-- senior review when policy or milestone scope changes.
+- no accidental product-scope transition;
+- senior review for policy or phase changes.
 
-### Pure implementation task
+### Pure implementation
 
 - warnings-as-errors compile;
-- focused unit tests;
-- regression tests;
+- focused unit and regression tests;
 - negative/failure tests;
-- sanitizer evidence when practical and relevant.
+- sanitizer evidence when practical.
 
-### OSC or engine integration task
+### OSC/engine integration
 
 - unit/fake-engine contract tests;
-- exact paths and signatures verified against pinned source;
-- pinned real-engine evidence when the behaviour can reach the engine;
+- exact pinned-source path/signature evidence;
+- real-engine evidence when behaviour reaches the engine;
 - generation, timeout and stale-feedback cases.
 
-### Backend/process task
+### Backend/process
 
 - startup and shutdown outcomes;
 - bounded timeout and escalation;
 - crash/restart cases;
 - unavailable backend cases;
-- native JACK and PipeWire-JACK evidence named separately;
+- native JACK and PipeWire-JACK evidence separately;
 - enabled and disabled build configurations where relevant.
 
-### Persistence/migration task
+### Persistence/migration
 
-- rollback/atomicity tests;
+- rollback and atomicity tests;
 - prior valid project preservation;
 - compatibility matrix;
-- explicit human gate for destructive or irreversible behaviour.
+- L3 human selection for destructive, irreversible or intentionally
+  incompatible behaviour.
 
 ## Merge sequence
 
-Hermes performs:
+Hermes:
 
-1. fetch and verify base and head;
-2. capture `EXPECTED_HEAD`;
-3. inspect required checks for that exact SHA;
-4. verify senior verdict references that SHA;
-5. verify unresolved review threads count is zero;
-6. mark ready when still draft;
-7. re-read PR head immediately;
-8. merge using expected-head protection;
-9. record merge SHA and time;
-10. fetch and fast-forward local `fork-main`;
-11. prove the task head is an ancestor of `fork-main`;
-12. write/update the post-merge checkpoint and control state;
-13. continue to the next ready task.
+1. fetches and verifies base and head;
+2. captures `EXPECTED_HEAD`;
+3. verifies required checks for that SHA;
+4. verifies the senior verdict references that SHA;
+5. verifies zero unresolved threads;
+6. marks ready when still draft;
+7. re-reads the PR head;
+8. merges using expected-head protection;
+9. records merge SHA and time;
+10. fast-forwards local `fork-main` and proves ancestry;
+11. writes the post-merge or post-phase checkpoint;
+12. updates control state;
+13. continues to the next task or preapproved phase.
 
-A failed merge precondition is diagnosed and corrected; it is not bypassed.
+A failed precondition is corrected, not bypassed.
 
 ## Forbidden autonomous merges
 
-Hermes must not autonomously merge when:
+Hermes must not merge when:
 
-- a required check is red, missing or attached to a different head;
-- the senior review contains a blocker;
+- a required check is red, missing or attached to another head;
+- senior review contains a blocker;
 - the head changed after verification;
-- the PR silently relaxes a requirement or test;
-- unresolved review threads remain;
-- mergeability is unknown or conflicting;
-- the change rewrites shared history;
-- the change deletes user data or performs irreversible migration;
-- the change introduces a non-FOSS or incompatible dependency;
-- the change closes a milestone or opens the next one;
-- physical or subjective acceptance remains unresolved.
+- a requirement or test is silently relaxed;
+- review threads remain unresolved;
+- mergeability is unknown/conflicting;
+- shared history would be rewritten;
+- user data may be deleted or irreversibly migrated without L3 authority;
+- a non-FOSS/incompatible dependency is introduced without L3 authority;
+- physical or subjective acceptance remains unresolved;
+- a phase transition changes approved scope or otherwise hits L3/L4.
 
-These become a correction, L3 question or L4 stop according to
-`HUMAN-ESCALATION.md`.
+## Non-blocking risks
 
-## Non-blocking risk handling
+A risk may be accepted autonomously only when:
 
-Non-blocking risks may be accepted autonomously only when:
-
-- the senior explicitly classifies them as non-blocking;
-- they do not violate current acceptance criteria;
-- they are recorded in the PR and checkpoint;
-- they receive a task ID when follow-up is required;
+- senior explicitly classifies it as non-blocking;
+- current acceptance criteria remain satisfied;
+- it is recorded in the PR and checkpoint;
+- it receives a task ID when follow-up is required;
 - deferral does not falsely advance a requirement to `verified`.
 
-## Milestone exception
+## Phase-transition result
 
-A milestone integration PR may be technically prepared and reviewed
-autonomously, but the final close/open transition requires an explicit human
-answer. After that answer Hermes may perform the authorized merge and control
-updates without another permission round.
+For a clear phase gate, Hermes may autonomously:
+
+- close the completed phase;
+- merge the gate PR;
+- publish the post-transition checkpoint;
+- open the next approved phase;
+- select its first ready task;
+- continue execution.
+
+When an L3 choice exists, Hermes uses the native selection-form protocol in
+`HUMAN-ESCALATION.md`.
