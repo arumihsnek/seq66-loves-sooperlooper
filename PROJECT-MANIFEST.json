@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "feature/m4-005-controls-dispatcher",
+        "active_branch": "feature/m4-006-state-meter",
         "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M4-004 merged, M4-005 in progress"
+        "active_pull_request_note": "M4-005 merged, M4-006 in progress"
     },
     "upstreams": {
         "seq66": {
@@ -108,7 +108,7 @@
     "next_milestone": {
         "id": "M4",
         "name": "native Qt audio slot",
-        "active_task": "M4-005",
+        "active_task": "M4-006",
         "active_task_status": "in_progress",
         "definition_of_done": "ROADMAP Phase 4 DoD \u2014 not reduced."
     },

@@ -196,3 +196,9 @@ jobs:
 
       - name: Run backend gate test
         run: .ci/bin/sooperlooper_backend_gate_test
+
+      - name: Compile audio slot controls test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_audio_slot_controls.cpp libseq66/src/audio/sooperlooper_audio_slot_widget.cpp tests/audio/sooperlooper_audio_slot_controls_test.cpp -o .ci/bin/sooperlooper_audio_slot_controls_test
+
+      - name: Run audio slot controls test
+        run: .ci/bin/sooperlooper_audio_slot_controls_test
