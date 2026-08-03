@@ -27,7 +27,7 @@ Goal: Seq66 detects audio backend capability, supervises a headless
 SooperLooper process, and gates audio clip operations on verified engine
 readiness without requiring the SooperLooper GUI.
 
-Active task: **M2-003** (status: `planned`)
+Active task: **M2-004** (status: `in_progress`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -382,11 +382,11 @@ Handoff target: M2-003 (supervisor) consumes typed probe result.
 
 ### M2-003 — managed process supervisor core
 
-Status: `in_progress`
-Agent: `hermes` session `m2-003-impl`
-Branch: `feature/m2-003-process-supervisor` (base `fork-main`)
-PR: `#19` (pending)
-Started: 2026-08-03
+Status: `done`
+Agent: `hermes`
+Branch: `feature/m2-003-process-supervisor` (merged to `fork-main`)
+PR: `#19` (merged, merge commit `e09930f7`)
+Completed: 2026-08-03
 
 Dependencies: M2-002.
 
@@ -426,8 +426,10 @@ Handoff target: M2-004 (engine launch) integrates supervisor with Phase 1 OSC.
 
 ### M2-004 — engine launch and OSC reconciliation
 
-Status: `planned`
+Status: `in_progress`
 Agent: `hermes`
+Branch: `feature/m2-004-engine-launch`
+Started: 2026-08-03
 
 Dependencies: M2-003, Phase 1 complete.
 

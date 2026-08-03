@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "feature/m2-003-process-supervisor",
-        "active_pull_request": 19,
+        "active_branch": "fork-main",
+        "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M2-003 managed process supervisor core"
+        "active_pull_request_note": "M2-003 merged; M2-004 starting"
     },
     "upstreams": {
         "seq66": {
@@ -114,7 +114,7 @@
     "next_milestone": {
         "id": "M2",
         "name": "managed engine and backend gate",
-        "active_task": "M2-003",
+        "active_task": "M2-004",
         "active_task_status": "in_progress",
         "definition_of_done": "Engine readiness verified, ALSA-only hard-blocked, crash/restart safe, no SooperLooper GUI needed, native JACK and PipeWire-JACK separately tested."
     },

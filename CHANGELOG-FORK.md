@@ -27,7 +27,7 @@ versions before the fork reaches a releasable state.
 - M2-003 managed process supervisor core: injectable `process_adapter`
   interface, owned-child PID verification, generation tracking, bounded
   shutdown escalation (graceful → SIGTERM → SIGKILL), non-blocking poll,
-  deterministic argv. 86 test assertions. PR #19.
+  deterministic argv. 86 test assertions. PR #19 merged to fork-main (merge commit `e09930f7`).
 
 - Phase 1 merged into `fork-main` via PR #14 (merge commit `75c57c4a`).
   Human approval recorded. CP-017 governance correction published.

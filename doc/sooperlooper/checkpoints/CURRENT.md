@@ -1,19 +1,18 @@
-# Current checkpoint — M2-003 implemented, pending review
+# Current checkpoint — M2-003 merged, M2-004 starting
 
-Checkpoint ID: `CP-019`
+Checkpoint ID: `CP-020`
 Checkpoint date: 2026-08-03
 Phase: `phase-2-managed-engine-backend`
-Active task: `M2-003`
+Active task: `M2-004`
 Status: `in_progress`
-Branch: `feature/m2-003-process-supervisor`
+Branch: `fork-main`
 
-M2-003 (managed process supervisor core) is implemented: injectable
-process_adapter, owned-child lifecycle, shutdown escalation, generation
-tracking, 86 tests pass, CI workflow updated.
+M2-003 (managed process supervisor core) is merged into fork-main.
+Merge commit: `e09930f7`. PR #19 closed. Senior verdict: accept.
+86 tests pass, CI green, validators pass.
 
-PR #19 is open and pending senior merge-gate review.
+M2-004 (engine launch and OSC reconciliation) is next.
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-019-m2-003-process-supervisor.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-020-m2-003-merged-m2-004-starting.md`
 
-Next executable action: senior consult merge-gate review of PR #19, then
-merge and proceed to M2-004 (engine launch and OSC reconciliation).
+Next executable action: implement M2-004 (engine launch and OSC reconciliation).
