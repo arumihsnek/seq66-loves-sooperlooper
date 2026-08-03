@@ -14,7 +14,7 @@
         "active_branch": "feature/phase4-native-qt-audio-slot",
         "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "Phase 4 in progress"
+        "active_pull_request_note": "Phase 4 complete"
     },
     "upstreams": {
         "seq66": {
@@ -106,7 +106,7 @@
         "id": "M4",
         "name": "native Qt audio slot",
         "active_task": "PHASE4-001",
-        "active_task_status": "in_progress",
+        "active_task_status": "done",
         "definition_of_done": "First native Qt audio slot renders real loop state, supports transport start/stop, tempo mode selection, and command feedback via the widget model layer."
     },
     "required_agent_exit_updates": [
