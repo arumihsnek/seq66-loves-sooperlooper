@@ -12,9 +12,9 @@
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
         "active_branch": "feature/m2-004-engine-launch",
-        "active_pull_request": 0,
+        "active_pull_request": 20,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M2-004 engine launch and OSC reconciliation — preparing"
+        "active_pull_request_note": "M2-004 engine launch orchestration with generation protocol"
     },
     "upstreams": {
         "seq66": {
