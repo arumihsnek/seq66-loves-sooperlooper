@@ -55,7 +55,7 @@ engine and target-hardware verification are recorded separately.
 || FAIL-001 | Feedback from obsolete engine generations is ignored | SPECIFICATION | **verified** | `apply()` generation check inside m_mutex; no wildcard (generation=0 requires explicit match); `apply_event()` validates receiver_event.generation; stale event test confirms no mutation after set_generation() | observed-state cache 27 tests PASS; M1-004A wildcard removal + TOCTOU fix verified; `Audio integration core` run 30778778423 | M1-004/M1-004A (done) |
 || FAIL-002 | Missed health evidence triggers bounded stale/offline transitions | SPECIFICATION | **verified** | `ping_missed()` increments counter; `evaluate()` transitions to stale after `stale_threshold` misses, then to `engine_offline` after `stale_threshold*2`; startup deadline triggers offline | engine monitor 11 tests PASS (stale threshold, deadline, recovery); `Audio integration core` run 30779063918 | M1-005 (done) |
 || FAIL-003 | Timeout is not success and triggers reconciliation | SPECIFICATION | **verified** | `evaluate()` transitions to indeterminate on deadline; `reconcile()` queries engine; timeout never classified as confirmed | confirmation tracker 12 tests PASS (deadline expiry, reconcile); `Audio integration core` run 30779297963 | M1-006 (done) |
-|| FAIL-004 | Delayed, duplicated, malformed and reordered callbacks do not corrupt state | HEADLESS-TESTING | specified | none | none | M1-007 |
+|| FAIL-004 | Delayed, duplicated, malformed and reordered callbacks do not corrupt state | HEADLESS-TESTING | **implemented** | `sooperlooper_fault_injection_test.cpp` covers delayed, duplicate, reorder, loss, malformed, shutdown races, queue overflow; assertions on state invariants | fault injection tests compiled and run; `Audio integration core` run on PR #10 | M1-007 (done) |
 
 ## Threading
 
@@ -82,7 +82,7 @@ engine and target-hardware verification are recorded separately.
 ||---|---|---|---|---|---|
 || TEST-001 | Fast model and fake-engine checks compile with warnings-as-errors | HEADLESS-TESTING | verified | `Audio integration core` PASS | maintain |
 || TEST-002 | Pinned real engine builds and runs without GUI over JACK dummy | HEADLESS-TESTING | verified | `Real SooperLooper headless smoke` PASS | maintain |
-|| TEST-003 | Fault-injection matrix covers malformed/late/lost feedback | HEADLESS-TESTING | specified | none | M1-007 |
+|| TEST-003 | Fault-injection matrix covers malformed/late/lost feedback | HEADLESS-TESTING | **implemented** | comprehensive fault injection test suite with 15+ scenarios | fault injection tests PASS; `Audio integration core` run 30779297963 | M1-007 (done) |
 || OPS-001 | Project state is recoverable from repository control files without chat | WORKFLOW, D-007 | verified | manifest, current checkpoint, work queue and `Project control plane` CI PASS | maintain |
 || OPS-002 | Every state-changing agent session leaves a checkpoint | CHECKPOINTS, AGENTS | verified for bootstrap | CP-001 plus validator-enforced pointer/schema | enforce for every material session |
 || OPS-003 | Upstream mirror and fork integration history remain separable | UPSTREAM-SYNC | implemented | `master`, `fork-main`, feature branch and PR base | manual review plus future sync rehearsal |

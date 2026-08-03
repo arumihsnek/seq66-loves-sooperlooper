@@ -245,7 +245,12 @@ Acceptance criteria:
 
 ### M1-007 — negative and fault-injection matrix
 
-Status: `in_progress`
+Status: `done`
+Agent: `hermes`
+Branch: `feature/m1-007-fault-injection` (merged to `fork-main`)
+Draft PR: `#10` (merged, merge commit `a19ea20cda074512884cce029aed9783913b944e`)
+Started: 2026-08-03
+Completed: 2026-08-03
 
 Dependencies: M1-002 through M1-006.
 
@@ -300,3 +305,25 @@ These tasks are intentionally not ready before the Phase 1 gate:
 
 Agents must not bypass Phase 1 to implement UI or persistence prototypes in the
 main integration branch.
+
+### M1-005A — real OSC ping and subscription transport
+
+Status: `in_progress`
+Agent: `hermes`
+Branch: `fix/m1-005-real-osc-transport`
+
+Dependencies: M1-005.
+
+Requirement IDs: `OSC-005`.
+
+Expected ownership:
+- real OSC ping implementation in sooperlooper_client;
+- real subscribe/unsubscribe implementation;
+- connection to receiver and monitor;
+- readiness only after version+topology+subscriptions.
+
+Acceptance criteria:
+- ping sends real OSC and parses reply;
+- subscribe registers real callbacks;
+- readiness requires all prerequisites;
+- no synchronous blocking on UI/RT paths.

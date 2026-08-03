@@ -1,25 +1,27 @@
-# Checkpoint: M1-006 command confirmation contracts completed
+# Checkpoint: Audit post-M1-007 — Phase 1 corrective cycle
 
-## Checkpoint ID: `CP-011`
+## Checkpoint ID: `CP-012`
 ## Checkpoint date: 2026-08-03
 
 ### Phase
 phase-1-protocol-core
 
 ### Active task
-M1-007 (fault injection matrix)
+M1-005A (real OSC ping/subscription transport)
 
 ### Summary
-M1-006 (command confirmation contracts) is complete. PR #9 merged.
-UUID-keyed pending operation tracking with deadlines and reconciliation.
+Audit complete. Control plane corrected. Phase 1 has M1-001 through
+M1-007 merged but requires three correctives before M1-008 gate:
+M1-005A (real transport), M1-006A (safe reconciliation), M1-007A
+(meaningful fault assertions).
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-011-m1-006-done.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-012-audit.md`
 
 ### Evidence
-- PR #9 merged with merge commit SHA: `d56f8edb06be9fd1a93e0f78aeed58ca20bde12a`
-- Audio integration core run `30779297963`: PASS
-- 12 confirmation tracker tests PASS
+- All PRs #1-#10 merged
+- Control plane inconsistencies identified and fixed
+- Corrective plan established
 
 ### Next immediate action
-Begin M1-007 (fault injection matrix). Create a new
-feature branch from fork-main and open a draft PR.
+Begin M1-005A: implement real OSC ping and subscription transport
+in sooperlooper_client.
