@@ -14,7 +14,7 @@
         "active_branch": "feature/m3-001-clip-mapper",
         "active_pull_request": 0,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "Phase 2 complete (CP-026). Phase 3 opening."
+        "active_pull_request_note": "M3-001 merged (PR #25). M3-002 ready."
     },
     "upstreams": {
         "seq66": {
@@ -115,7 +115,7 @@
     "next_milestone": {
         "id": "M2",
         "name": "managed engine and backend gate",
-        "active_task": "M3-001",
+        "active_task": "M3-002",
         "active_task_status": "ready",
         "definition_of_done": "Engine readiness verified, ALSA-only hard-blocked, crash/restart safe, no SooperLooper GUI needed, native JACK and PipeWire-JACK separately tested."
     },

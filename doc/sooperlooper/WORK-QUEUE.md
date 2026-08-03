@@ -655,7 +655,10 @@ Acceptance criteria:
 
 ### M3-001 — clip UUID/runtime-index mapper
 
-Status: `ready`
+Status: `done`
+Completed: 2026-08-03
+Branch: `feature/m3-001-clip-mapper`
+Merged PR: `#25`
 Agent: `hermes`
 
 Dependencies: M2-008 (Phase 2 complete).
@@ -690,3 +693,39 @@ Required tests:
 - crash invalidation.
 
 Handoff target: M3-002 (performer command dispatch).
+
+### M3-002 — performer audio command dispatch
+
+Status: `ready`
+Agent: `hermes`
+
+Dependencies: M3-001.
+
+Requirement IDs: `DISP-001`, `STATE-007`.
+
+Expected ownership:
+
+- `libseq66/src/audio/` command dispatch and operation model;
+- `tests/audio/` dispatch tests.
+
+Deliverables:
+
+- desired/pending/observed operation model for audio commands;
+- command deadlines and verification queries;
+- performer dispatch integrating clip mapper and supervisor.
+
+Acceptance criteria:
+
+- audio command goes through desired → pending → observed lifecycle;
+- deadline expiry classified as timeout/indeterminate;
+- dispatch integrates with clip mapper for index resolution;
+- concurrent commands handled safely.
+
+Required tests:
+
+- command lifecycle (desired → pending → observed);
+- deadline expiry handling;
+- dispatch with clip mapper integration;
+- concurrent command safety.
+
+Handoff target: M3-003 (transport and tempo policy).
