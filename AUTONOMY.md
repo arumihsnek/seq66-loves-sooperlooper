@@ -17,18 +17,30 @@ Supporting contracts:
 - `doc/sooperlooper/SENIOR-CONSULTATION.md`
 - `doc/sooperlooper/AUTONOMOUS-MERGE.md`
 - `doc/sooperlooper/HUMAN-ESCALATION.md`
+- `doc/sooperlooper/AUTONOMY-SCENARIOS.md`
+- `doc/sooperlooper/AUTONOMY-ADOPTION.md`
 
-A new Hermes, Codex or human coordinator reads this file after
-`PROJECT-MANIFEST.json`, `checkpoints/CURRENT.md` and the active
+Templates:
+
+- `doc/sooperlooper/templates/HUMAN-DECISION.md`
+- `doc/sooperlooper/templates/AUTONOMOUS-REPORT.md`
+
+A new Hermes, Codex or human coordinator reads this file immediately after
+`PROJECT-MANIFEST.json`, before `checkpoints/CURRENT.md` and the active
 `WORK-QUEUE.md` task.
 
 The default mode is autonomous execution inside the approved roadmap and
 specification. Routine technical decisions are owned by the operator and
 reviewed by `codex-senior-consult` when required. Human interruption is reserved
 for product choices, destructive or irreversible actions, incompatible
-licensing, unresolved requirement conflicts, unavailable physical validation
-and milestone gates.
+licensing, unresolved requirement conflicts, unavailable physical/subjective
+validation and milestone gates.
+
+Ordinary task PRs may be merged autonomously only through the exact-head gate in
+`AUTONOMOUS-MERGE.md`. Closing a milestone and opening the next remains one
+explicit bounded human decision.
 
 No chat prompt may weaken the repository's safety stops, architectural
-invariants or evidence requirements. A prompt may temporarily narrow autonomy,
-but expanding autonomy requires a reviewed policy change.
+invariants, required checks, expected-head protection or evidence requirements.
+A prompt may temporarily narrow autonomy, but expanding autonomy requires a
+reviewed policy change.
