@@ -30,6 +30,7 @@
 #include <vector>
 
 #include "audio/sooperlooper_protocol.hpp"
+#include "audio/sooperlooper_receiver.hpp"
 
 namespace seq66
 {
@@ -200,7 +201,19 @@ public:
      */
     bool apply (const std::string & path, const std::string & types,
                 const std::vector<std::string> & args, long long timestamp_us,
-                std::uint64_t event_generation = 0);
+                std::uint64_t event_generation);
+
+    /**
+     *  Apply a validated receiver event to the cache.
+     *
+     *  The event must carry a generation matching the cache generation.
+     *  The types field is validated against the control name.
+     *  This is the preferred entry point for production use.
+     *
+     *  \param event  The receiver event (must have generation set).
+     *  \return true if the event was applied, false if rejected.
+     */
+    bool apply_event (const sooperlooper_receiver::receiver_event & event);
 
     /**
      *  Return an immutable snapshot of the full observed state.

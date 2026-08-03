@@ -11,6 +11,7 @@
 #ifndef SEQ66_SOOPERLOOPER_RECEIVER_HPP
 #define SEQ66_SOOPERLOOPER_RECEIVER_HPP
 
+#include <cstdint>
 #include <string>
 #include <vector>
 #include <functional>
@@ -91,6 +92,7 @@ public:
         std::string types;                    ///< The OSC type tag string.
         std::vector<std::string> args;        ///< The arguments as strings.
         long long timestamp_us;               ///< Timestamp in microseconds since epoch.
+        std::uint64_t generation{0};          ///< Engine generation at receive time.
     };
 
     /**
