@@ -164,3 +164,56 @@ simulates process lifecycle without real SooperLooper or JACK.
 
 Real-engine evidence requires a subsequent phase or CI job with pinned
 SooperLooper and JACK dummy backend.
+
+## M3-002 performer audio command dispatch evidence
+
+### Compilation
+
+Compiled on Linux aarch64 with g++ 11.4, `-std=c++17 -Wall -Wextra -Wpedantic -Werror`.
+Zero warnings. Links against clip mapper, command confirmation tracker,
+observed state cache and protocol — no liblo required.
+
+### Tested behaviour
+
+- desired/pending/confirmed/failed/indeterminate/cancelled lifecycle
+- dispatch creates desired command with UUID
+- empty clip UUID rejected
+- submit resolves clip UUID via mapper
+- submit without mapper stays desired
+- submit failure transitions to failed
+- confirmation via tracker (evaluate + reconcile)
+- deadline expiry transitions to indeterminate
+- cancel desired and pending commands
+- cancel confirmed returns false
+- cancel unknown UUID returns false
+- cancel_generation invalidates old-generation commands
+- status callback fires on lifecycle transitions
+- multiple concurrent commands tracked independently
+- clear removes all commands
+- unique UUID generation across commands
+
+### Regression
+
+All pre-existing test suites pass without modification:
+
+| Suite | Assertions |
+|---|---|
+| process supervisor | 86 |
+| crash reconciler | 45 |
+| clip mapper | 43 |
+| command dispatcher | 60 |
+| lifecycle smoke | 21 |
+| **Total** | **255** |
+
+### Evidence level
+
+These are unit/fake-engine level tests.
+
+- Unit tested (60 assertions)
+- Integration with clip mapper: verified
+- Integration with command confirmation tracker: verified
+- Integration with observed state cache: verified
+- Real SooperLooper tested: NO
+- Native JACK tested: NO
+- PipeWire-JACK tested: NO
+- Hardware tested: NO

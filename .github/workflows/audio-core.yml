@@ -139,3 +139,9 @@ jobs:
 
       - name: Run clip mapper test
         run: .ci/bin/sooperlooper_clip_mapper_test
+
+      - name: Compile command dispatcher test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_command_dispatcher.cpp libseq66/src/audio/sooperlooper_clip_mapper.cpp libseq66/src/audio/sooperlooper_command_confirmation.cpp libseq66/src/audio/sooperlooper_observed_state.cpp libseq66/src/audio/sooperlooper_protocol.cpp tests/audio/sooperlooper_command_dispatcher_test.cpp -o .ci/bin/sooperlooper_command_dispatcher_test
+
+      - name: Run command dispatcher test
+        run: .ci/bin/sooperlooper_command_dispatcher_test
