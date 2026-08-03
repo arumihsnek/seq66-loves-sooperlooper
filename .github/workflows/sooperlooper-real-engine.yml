@@ -41,27 +41,27 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo apt-get update
-          sudo apt-get install --yes \\
-            autoconf \\
-            autoconf-archive \\
-            automake \\
-            autopoint \\
-            build-essential \\
-            gettext \\
-            git \\
-            jackd2 \\
-            jack-tools \\
-            libfftw3-dev \\
-            libjack-jackd2-dev \\
-            liblo-dev \\
-            libncurses-dev \\
-            librubberband-dev \\
-            libsamplerate0-dev \\
-            libsigc++-2.0-dev \\
-            libsndfile1-dev \\
-            libtool \\
-            libtool-bin \\
-            libxml2-dev \\
+          sudo apt-get install --yes \
+            autoconf \
+            autoconf-archive \
+            automake \
+            autopoint \
+            build-essential \
+            gettext \
+            git \
+            jackd2 \
+            jack-tools \
+            libfftw3-dev \
+            libjack-jackd2-dev \
+            liblo-dev \
+            libncurses-dev \
+            librubberband-dev \
+            libsamplerate0-dev \
+            libsigc++-2.0-dev \
+            libsndfile1-dev \
+            libtool \
+            libtool-bin \
+            libxml2-dev \
             pkg-config
 
       - name: Build pinned SooperLooper engine without GUI
@@ -70,8 +70,8 @@ jobs:
           git -C .ci/sooperlooper checkout --detach "$SOOPERLOOPER_SHA"
           cd .ci/sooperlooper
           ./autogen.sh
-          ./configure \\
-            --without-gui \\
+          ./configure \
+            --without-gui \
             --prefix="$GITHUB_WORKSPACE/.ci/sooperlooper-install"
           make -j2
           make install
@@ -80,17 +80,17 @@ jobs:
       - name: Compile real-engine smoke probe
         run: |
           mkdir -p .ci/bin
-          g++ \\
-            -std=c++17 \\
-            -Wall -Wextra -Wpedantic -Werror \\
-            -pthread \\
-            tests/audio/sooperlooper_real_engine_smoke.cpp \\
-            -llo \\
+          g++ \
+            -std=c++17 \
+            -Wall -Wextra -Wpedantic -Werror \
+            -pthread \
+            tests/audio/sooperlooper_real_engine_smoke.cpp \
+            -llo \
             -o .ci/bin/sooperlooper_real_engine_smoke
 
       - name: Start JACK dummy server
         run: |
-          nohup jackd -r -d dummy -r 48000 -p 256 \\
+          nohup jackd -r -d dummy -r 48000 -p 256 \
             > .ci/jack.log 2>&1 &
           echo $! > .ci/jack.pid
 
@@ -106,11 +106,11 @@ jobs:
 
       - name: Start pinned SooperLooper headless engine
         run: |
-          nohup .ci/sooperlooper-install/bin/sooperlooper \\
-            --quiet \\
-            --loopcount=0 \\
-            --osc-port=19953 \\
-            --jack-name=seq66-sl-ci \\
+          nohup .ci/sooperlooper-install/bin/sooperlooper \
+            --quiet \
+            --loopcount=0 \
+            --osc-port=19953 \
+            --jack-name=seq66-sl-ci \
             > .ci/sooperlooper.log 2>&1 &
           echo $! > .ci/sooperlooper.pid
 
