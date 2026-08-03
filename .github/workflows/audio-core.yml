@@ -91,3 +91,9 @@ jobs:
 
       - name: Run fault injection test
         run: .ci/bin/sooperlooper_fault_injection_test
+
+      - name: Compile backend capability probe test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/sooperlooper_backend_probe.cpp tests/audio/sooperlooper_backend_probe_test.cpp -o .ci/bin/sooperlooper_backend_probe_test
+
+      - name: Run backend capability probe test
+        run: .ci/bin/sooperlooper_backend_probe_test
