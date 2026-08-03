@@ -407,3 +407,44 @@ Result: 55/55 pass. All assertions passed.
 
 1. Compile audio slot view model test
 2. Run audio slot view model test
+
+## M4-002 Qt compilation evidence
+
+### Compilation
+
+Compiled on Linux aarch64 with g++ 11.3.0 and Qt 5.15.13:
+QTFLAGS=$(pkg-config --cflags --libs Qt5Widgets Qt5Test)
+g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread \
+  -Ilibseq66/include -I.ci/include -I/tmp \
+  libseq66/src/audio/sooperlooper_audio_slot_widget.cpp \
+  libseq66/src/widgets/sooperlooper_audio_slot_view.cpp \
+  /tmp/moc_sooperlooper_audio_slot_view.cpp \
+  tests/widgets/sooperlooper_audio_slot_view_qt_test.cpp \
+  $QTFLAGS -o /tmp/qt_widget_test
+
+Exit code: 0
+
+### Test execution
+
+QT_QPA_PLATFORM=offscreen /tmp/qt_widget_test
+Result: 22/22 pass. All Qt assertions passed.
+
+### Coverage
+
+| Test case | Assertions | Status |
+|---|---|---|
+| Widget instantiation | 3 | pass |
+| Model update | 7 | pass |
+| Transport signal | 1 | pass |
+| Tempo signal | 1 | pass |
+| No synchronous OSC | 2 | pass |
+| State label updates | 2 | pass |
+| Command label updates | 3 | pass |
+
+### Qt-specific verification
+
+- Widget compiles with real Qt5Widgets and Qt5Test
+- QApplication instantiated in offscreen mode (QT_QPA_PLATFORM=offscreen)
+- QSignalSpy verifies signal emission
+- No synchronous OSC calls from any handler
+- Model layer still passes 55 assertions

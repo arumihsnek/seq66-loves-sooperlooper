@@ -1,21 +1,22 @@
-# Current checkpoint — Phase 4 gate correction
+# Current checkpoint — M4-002 done, M4-003 ready
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-036-phase4-gate-correction.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-03-CP-037-m4-002-qt-compilation.md`
 
-Checkpoint ID: `CP-036`
+Checkpoint ID: `CP-037`
 Checkpoint date: 2026-08-03
 Phase: `phase-4-native-qt-slot`
-Active task: `M4-002`
+Active task: `M4-003`
 Status: `in_progress`
 Branch: `fork-main`
-Exact head: `8be93cf1`
+Exact head: pending (M4-002 commit)
 
 ## Verification summary
 
-- PR #30 (M4-001) merged: model layer + thin Qt view
-- Phase 4 DoD NOT satisfied (premature gate correction)
-- M4-002 through M4-007 pending
+- M4-002: Qt compilation + real test, 22 assertions pass
+- M4-001: model layer, 55 assertions pass
+- Core regression: 9 suites, 428+ assertions
+- Phase 4 DoD: not yet satisfied
 
 ## Next action
 
-Begin M4-002: Qt compilation and real test.
+Begin M4-003: grid item integration.

@@ -858,7 +858,10 @@ Does NOT satisfy Phase 4 DoD — minimum view/model only.
 
 ### M4-002 — Qt compilation and real test
 
-Status: `in_progress`
+Status: `done`
+Completed: 2026-08-03
+PR: pending
+Agent: `hermes`
 Branch: `feature/m4-002-qt-compilation`
 Agent: `hermes`
 
@@ -874,7 +877,9 @@ Acceptance: CI compiles and runs Qt widget test in headless mode.
 
 ### M4-003 — grid item integration
 
-Status: `pending`
+Status: `in_progress`
+Branch: `feature/m4-003-grid-integration`
+Agent: `hermes`
 Agent: `hermes`
 
 Dependencies: M4-002
@@ -939,3 +944,25 @@ Deliverables:
 - verify all Phase 4 DoD items from ROADMAP.md
 - senior exact-head review
 - CI and validators pass on exact head
+
+
+## Phase 4 DoD traceability matrix
+
+| DoD obligation | Task(s) | Acceptance check |
+|---|---|---|
+| One audio slot behaves like a first-class Seq66 grid item | M4-003 | Slot appears in grid, supports create/select/update/delete |
+| Remains visible but hard-blocked in ALSA-only mode | M4-004 | Audio action visible, disabled, explanation shown |
+| Keyboard, MIDI automation and headless paths cannot bypass the gate | M4-004 | Gate enforced from all entry points, no bypass possible |
+| Paint and UI events perform no synchronous OSC calls | M4-006 | No OSC calls in paint/event handlers, verified by code inspection |
+| UI state is driven by observed snapshots | M4-006 | All rendering reads from model snapshots, not direct engine state |
+
+## Task dependency graph
+
+M4-001 (done) -> M4-002 -> M4-003 -> M4-004 -> M4-005 -> M4-006 -> M4-007
+
+M4-002 depends on M4-001 (model layer must compile with Qt).
+M4-003 depends on M4-002 (widget must compile before grid integration).
+M4-004 depends on M4-003 (grid item must exist before gate enforcement).
+M4-005 depends on M4-003 and M4-004 (controls need grid item + gate).
+M4-006 depends on M4-005 (rendering needs controls connected).
+M4-007 depends on M4-001 through M4-006 (gate review needs all complete).
