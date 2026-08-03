@@ -39,10 +39,10 @@ jobs:
           END
 
       - name: Compile audio model test
-        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp tests/audio/audio_clip_test.cpp -llo -o .ci/bin/audio_clip_test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp tests/audio/audio_clip_test.cpp -llo -o .ci/bin/audio_clip_test
 
       - name: Compile headless OSC contract test
-        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp tests/audio/sooperlooper_osc_contract_test.cpp -llo -o .ci/bin/sooperlooper_osc_contract_test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp libseq66/src/audio/sooperlooper_receiver.cpp tests/audio/sooperlooper_osc_contract_test.cpp -llo -o .ci/bin/sooperlooper_osc_contract_test
 
       - name: Compile typed protocol test
         run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp libseq66/src/audio/sooperlooper_receiver.cpp tests/audio/sooperlooper_protocol_test.cpp -llo -o .ci/bin/sooperlooper_protocol_test
@@ -75,7 +75,7 @@ jobs:
         run: .ci/bin/sooperlooper_engine_monitor_test
 
       - name: Compile command confirmation test
-        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp libseq66/src/audio/sooperlooper_command_confirmation.cpp tests/audio/sooperlooper_command_confirmation_test.cpp -llo -o .ci/bin/sooperlooper_command_confirmation_test
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread -I.ci/include -Ilibseq66/include libseq66/src/audio/audio_clip.cpp libseq66/src/audio/sooperlooper_client.cpp libseq66/src/audio/sooperlooper_protocol.cpp libseq66/src/audio/sooperlooper_receiver.cpp libseq66/src/audio/sooperlooper_command_confirmation.cpp tests/audio/sooperlooper_command_confirmation_test.cpp -llo -o .ci/bin/sooperlooper_command_confirmation_test
 
       - name: Run command confirmation test
         run: .ci/bin/sooperlooper_command_confirmation_test

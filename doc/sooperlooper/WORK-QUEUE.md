@@ -27,7 +27,7 @@ Goal: Seq66 can discover a headless SooperLooper engine, receive and validate
 feedback, maintain generation-scoped observed state and confirm commands without
 blocking UI or real-time paths.
 
-Active task: **M1-007** (status: `in_progress`)
+Active task: **M1-008** (status: `review`)
 ## Tasks
 
 ### M1-001 — typed protocol identifiers
@@ -272,7 +272,10 @@ Acceptance criteria:
 
 ### M1-008 — phase-1 integration gate
 
-Status: `in_progress`
+Status: `review`
+Agent: `hermes`
+Branch: `gate/m1-008-phase-1`
+Draft PR: `#14`
 
 Blocked by: M1-001 through M1-007.
 
@@ -308,9 +311,11 @@ main integration branch.
 
 ### M1-005A — real OSC ping and subscription transport
 
-Status: `in_progress`
+Status: `done`
 Agent: `hermes`
 Branch: `fix/m1-005-real-osc-transport`
+Draft PR: `#11` (merged, merge commit `5f30a3b0`)
+Completed: 2026-08-03
 
 Dependencies: M1-005.
 
@@ -327,25 +332,3 @@ Acceptance criteria:
 - subscribe registers real callbacks;
 - readiness requires all prerequisites;
 - no synchronous blocking on UI/RT paths.
-
-### M1-008 — phase-1 integration gate
-
-Status: `in_progress`
-Agent: `hermes`
-
-Dependencies: M1-001 through M1-007 plus correctives.
-
-Requirement IDs: `TEST-001`, `TEST-002`, `OPS-001`, `OPS-002`.
-
-Expected ownership:
-- all tests pass;
-- no APIs declared without implementation;
-- traceability complete;
-- human review gate.
-
-Acceptance criteria:
-- all fast tests pass;
-- real-engine smoke passes;
-- no declared-but-not-defined methods;
-- control plane coherent;
-- human approval required for merge.

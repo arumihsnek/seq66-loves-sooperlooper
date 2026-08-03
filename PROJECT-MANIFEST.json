@@ -3,7 +3,7 @@
     "project_id": "seq66-loves-sooperlooper",
     "project_name": "Seq66 Loves SooperLooper",
     "status": "active",
-    "updated_at": "2026-08-03T01:37:09Z",
+    "updated_at": "2026-08-03T14:03:00+02:00",
     "repository": {
         "full_name": "arumihsnek/seq66-loves-sooperlooper",
         "default_branch": "fork-main",
@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "fork-main",
-        "active_pull_request": 0,
+        "active_branch": "gate/m1-008-phase-1",
+        "active_pull_request": 14,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "M1-008 gate: all correctives merged, awaiting human review"
+        "active_pull_request_note": "Draft PR #14 is the Phase 1 integration gate; correctives are published and CI repair is in progress"
     },
     "upstreams": {
         "seq66": {
@@ -79,11 +79,14 @@
         "production OSC receiver with lifecycle, strict allow-list, typed events and overflow counting",
         "repository project-control plane and multi-agent handoff policy",
         "machine-validated checkpoint and traceability structure",
-        "fork-specific pull request and task proposal templates"
-    ],
-    "missing_capabilities": [
+        "fork-specific pull request and task proposal templates",
         "typed observed-state cache",
         "engine generation and stale-feedback rejection",
+        "real OSC ping, discovery and subscription transport",
+        "generation-aware command confirmation and reconciliation",
+        "fault-injection matrix with reordered-event semantics"
+    ],
+    "missing_capabilities": [
         "process supervisor",
         "backend capability gate in Seq66",
         "performer integration",
@@ -111,7 +114,7 @@
         "id": "M1",
         "name": "bidirectional protocol core",
         "active_task": "M1-008",
-        "active_task_status": "in_progress",
+        "active_task_status": "review",
         "definition_of_done": "Typed receive/send protocol, generation-scoped observed state, ping/subscriptions and bounded confirmation tests pass without blocking UI or real-time paths."
     },
     "required_agent_exit_updates": [
