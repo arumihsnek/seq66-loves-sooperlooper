@@ -108,7 +108,7 @@
     "next_milestone": {
         "id": "M5",
         "name": "exact musical recording",
-        "active_task": "P5-006",
+        "active_task": "P5-007",
         "active_task_status": "in_progress",
         "definition_of_done": "ROADMAP Phase 5 DoD"
     },

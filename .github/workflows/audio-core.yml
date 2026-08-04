@@ -267,3 +267,15 @@ jobs:
             $(pkg-config --libs liblo jack) \
             -o /tmp/t_integration
           /tmp/t_integration
+
+      - name: Compile transport matrix test
+        run: |
+          g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread \
+            -Ilibseq66/include -I.ci/include \
+            libseq66/src/audio/sooperlooper_recording_types.cpp \
+            libseq66/src/audio/sooperlooper_recording_scheduler.cpp \
+            libseq66/src/audio/sooperlooper_recording_orchestrator.cpp \
+            libseq66/src/audio/sooperlooper_recording_verifier.cpp \
+            tests/audio/sooperlooper_transport_matrix_test.cpp \
+            -o /tmp/t_transport_matrix
+          /tmp/t_transport_matrix
