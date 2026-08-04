@@ -95,10 +95,14 @@ class ProcessSandbox:
             ready_timeout=5 if wait else 0,
         )
 
-        # Verify JACK is running
+        # Verify JACK is running and ports are registered
         if wait and self.is_alive("jackd"):
-            time.sleep(0.5)
-            return True
+            jc = JackConnections(self.server_name)
+            for _ in range(10):
+                time.sleep(0.3)
+                if len(jc.list_ports()) > 0:
+                    return True
+            return self.is_alive("jackd")  # Running but ports slow
         return False
 
     def start_sooperlooper(self, loops=1, channels=2, loop_time=40,
@@ -261,12 +265,12 @@ class JackConnections:
 
     def list_ports(self):
         """List all JACK ports."""
-        r = subprocess.run(
-            ["jack_lsp", "-s", self.server_name],
-            capture_output=True, text=True, timeout=5
-        )
-        if r.returncode == 0:
-            return [p for p in r.stdout.strip().split("\n") if p]
+        # Try with server name first, fall back to default
+        for cmd in [["jack_lsp", "-s", self.server_name],
+                     ["jack_lsp"]]:
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
+            if r.returncode == 0 and r.stdout.strip():
+                return [p for p in r.stdout.strip().split("\n") if p]
         return []
 
     def connect(self, src, dst):
