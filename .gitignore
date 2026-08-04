@@ -24,3 +24,9 @@ tmp/
 *.json
 summary.md
 .build/
+
+# Autonomous session supervisor dogfood artifacts
+
+# Autonomous session supervisor dogfood artifacts (un-ignore JSON here)
+!.hermes/autonomy/*.json
+!.hermes/autonomy/**/*.json

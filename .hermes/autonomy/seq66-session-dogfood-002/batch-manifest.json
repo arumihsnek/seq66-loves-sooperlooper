@@ -1,0 +1,123 @@
+{
+  "schema_version": "autonomous-session-batch/v1",
+  "batch_id": "BATCH-002",
+  "generation": 1,
+  "project_id": "seq66-loves-sooperlooper",
+  "phase_id": "phase-5-exact-recording",
+  "exact_base_sha": "e328bc2023956beb9753dab7e02b59588f61a617",
+  "review_class": "R1",
+  "tasks": [
+    {
+      "task_id": "P5-005A",
+      "objective": "Create sooperlooper_recording_verifier_test.cpp covering verify_length and verify_beats with pass, fail, and partial results, including tolerance edge cases",
+      "acceptance_criteria": [
+        {
+          "id": "AC-A1",
+          "text": "Test file compiles with -Werror"
+        },
+        {
+          "id": "AC-A2",
+          "text": "Covers verify_length: pass (exact), pass (within tolerance), fail (exceeds tolerance)"
+        },
+        {
+          "id": "AC-A3",
+          "text": "Covers verify_beats: pass, fail"
+        },
+        {
+          "id": "AC-A4",
+          "text": "Covers partial results when start/stop are approximate"
+        },
+        {
+          "id": "AC-A5",
+          "text": "All assertions pass"
+        }
+      ],
+      "phase_dod_contributions": [
+        "PH5-DOD4"
+      ],
+      "dependencies": [],
+      "owned_paths": [
+        "tests/audio/sooperlooper_recording_verifier_test.cpp"
+      ],
+      "forbidden_paths": [
+        "PROJECT-MANIFEST.json",
+        "doc/sooperlooper/checkpoints/*",
+        "doc/sooperlooper/WORK-QUEUE.md",
+        ".github/workflows/*",
+        ".gitignore",
+        ".hermes/autonomy/**"
+      ],
+      "focused_tests": [
+        {
+          "id": "ft-a",
+          "command": "compile and run tests/audio/sooperlooper_recording_verifier_test.cpp"
+        }
+      ],
+      "review_class": "R1",
+      "preferred_leaf_model": "mimo-v2.5",
+      "escalation_conditions": [
+        "verifier interface changed",
+        "recording_types changed"
+      ]
+    },
+    {
+      "task_id": "P5-005B",
+      "objective": "Add transport start/stop edge-case tests to sooperlooper_recording_scheduler_test.cpp: start during recording, stop before minimum bars, rapid start-stop cycles",
+      "acceptance_criteria": [
+        {
+          "id": "AC-B1",
+          "text": "Test file compiles with -Werror"
+        },
+        {
+          "id": "AC-B2",
+          "text": "Covers: start during active recording (should reject or queue)"
+        },
+        {
+          "id": "AC-B3",
+          "text": "Covers: stop before minimum bars (should warn or enforce minimum)"
+        },
+        {
+          "id": "AC-B4",
+          "text": "Covers: rapid start-stop-start cycle (should not corrupt state)"
+        },
+        {
+          "id": "AC-B5",
+          "text": "All new assertions pass without breaking existing tests"
+        }
+      ],
+      "phase_dod_contributions": [
+        "PH5-DOD6"
+      ],
+      "dependencies": [],
+      "owned_paths": [
+        "tests/audio/sooperlooper_recording_scheduler_test.cpp"
+      ],
+      "forbidden_paths": [
+        "PROJECT-MANIFEST.json",
+        "doc/sooperlooper/checkpoints/*",
+        "doc/sooperlooper/WORK-QUEUE.md",
+        ".github/workflows/*",
+        ".gitignore",
+        ".hermes/autonomy/**"
+      ],
+      "focused_tests": [
+        {
+          "id": "ft-b",
+          "command": "compile and run tests/audio/sooperlooper_recording_scheduler_test.cpp"
+        }
+      ],
+      "review_class": "R1",
+      "preferred_leaf_model": "mimo-v2.5",
+      "escalation_conditions": [
+        "scheduler interface changed",
+        "recording_types changed"
+      ]
+    }
+  ],
+  "integration_tests": [
+    {
+      "id": "regression",
+      "command": "full regression: all existing suites plus new verifier test"
+    }
+  ]
+}

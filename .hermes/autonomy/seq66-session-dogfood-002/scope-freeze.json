@@ -1,0 +1,23 @@
+{
+  "schema_version": "autonomous-session-scope-freeze/v1",
+  "scope_type": "phase",
+  "scope_id": "phase-5-exact-recording-P5-005A-P5-005B",
+  "canonical_source": "doc/sooperlooper/ROADMAP.md",
+  "source_head_sha": "e328bc2023956beb9753dab7e02b59588f61a617",
+  "source_content_sha256": "ae6cc77632b3c656212602070cc11c139f7a4b6b55ded93acf552094bb590305",
+  "items": [
+    {
+      "id": "PH5-DOD4",
+      "text": "observed length verification passes within documented tolerance"
+    },
+    {
+      "id": "PH5-DOD6",
+      "text": "transport start/stop edge-case tests pass"
+    }
+  ],
+  "scope_fingerprint": "a08592168ea2e683d247c75e20eaccdf4fda126eae31f42ccce3df9d94396e0a",
+  "approved_by": null,
+  "notes": [
+    "Dogfood run 002 \u2014 verifier tests and transport edge cases"
+  ]
+}

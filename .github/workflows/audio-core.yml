@@ -251,3 +251,19 @@ jobs:
             tests/audio/sooperlooper_recording_synthetic_test.cpp \
             -o /tmp/t_recording_synthetic
           /tmp/t_recording_synthetic
+
+      - name: Compile integration test
+        run: |
+          g++ -std=c++17 -Wall -Wextra -Wpedantic -Werror -pthread \
+            -Ilibseq66/include -I.ci/include \
+            $(pkg-config --cflags liblo jack) \
+            libseq66/src/audio/sooperlooper_recording_types.cpp \
+            libseq66/src/audio/sooperlooper_recording_scheduler.cpp \
+            libseq66/src/audio/sooperlooper_recording_orchestrator.cpp \
+            libseq66/src/audio/sooperlooper_recording_verifier.cpp \
+            libseq66/src/audio/sooperlooper_osc_client.cpp \
+            libseq66/src/audio/sooperlooper_jack_transport_observer.cpp \
+            tests/audio/sooperlooper_integration_test.cpp \
+            $(pkg-config --libs liblo jack) \
+            -o /tmp/t_integration
+          /tmp/t_integration

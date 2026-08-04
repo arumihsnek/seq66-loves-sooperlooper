@@ -1035,9 +1035,18 @@ Acceptance: full matrix test, crash/restart, tempo change, edge cases
 
 ### P5-005 — real SooperLooper/JACK integration
 
-Status: `in_progress`
+Status: `done`
 Branch: `feature/p5-recording-types`
 Agent: `hermes`
 
 Dependencies: P5-001-P5-004
 Acceptance: scheduler outputs correct OSC, real transport integration
+
+### P5-006 — transport and tempo matrix
+
+Status: `in_progress`
+Branch: `feature/p5-real-integration`
+Agent: `hermes`
+
+Dependencies: P5-001-P5-005
+Acceptance: full matrix of transport states and tempo changes
