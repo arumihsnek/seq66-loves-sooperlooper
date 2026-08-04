@@ -30,3 +30,6 @@ summary.md
 # Autonomous session supervisor dogfood artifacts (un-ignore JSON here)
 !.hermes/autonomy/*.json
 !.hermes/autonomy/**/*.json
+tests/integration/virtual_studio/runs/
+tests/integration/virtual_studio/audio/synthetic_source
+tests/integration/virtual_studio/audio/deterministic_capture
