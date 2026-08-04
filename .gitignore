@@ -33,3 +33,4 @@ summary.md
 tests/integration/virtual_studio/runs/
 tests/integration/virtual_studio/audio/synthetic_source
 tests/integration/virtual_studio/audio/deterministic_capture
+__pycache__/
