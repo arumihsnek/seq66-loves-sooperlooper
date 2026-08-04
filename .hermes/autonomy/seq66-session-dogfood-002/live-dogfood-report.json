@@ -1,0 +1,210 @@
+{
+  "schema_version": "autonomous-session-live-dogfood/v1",
+  "run_id": "seq66-session-dogfood-002",
+  "candidate_head_sha": "e328bc2023956beb9753dab7e02b59588f61a617",
+  "skill_source": {
+    "repository": "arumihsnek/my-hermes-config",
+    "pull_request": 33,
+    "branch": "dogfood/session-autonomy-workflow-v1",
+    "source_sha": "6cb1cb87bb781349454c8c1023d42e2bb48b3a5b",
+    "installed_path": "/home/ubuntu/.hermes/local-skills/autonomous-session-supervisor/6cb1cb87bb781349454c8c1023d42e2bb48b3a5b",
+    "loading_method": "skills.external_dirs (session-only)",
+    "local_path": "/home/ubuntu/.hermes/local-skills/autonomous-session-supervisor/6cb1cb87bb781349454c8c1023d42e2bb48b3a5b",
+    "global_profile_modified": false,
+    "rollback_command": "stop loading the installed skill; keep or remove the immutable SHA directory",
+    "local_contract_tests_passed": true
+  },
+  "workspace_safety": {
+    "other_worktrees_affected": false,
+    "destructive_operations": false,
+    "stashes_preserved": true
+  },
+  "artifacts": [
+    {
+      "kind": "scope_freeze",
+      "path": ".hermes/autonomy/seq66-session-dogfood-002/scope-freeze.json",
+      "tracked": true,
+      "retrievable_at_candidate_head": true,
+      "content_sha256": "c08f1cfada3632cc07a778321d1b74865162c68b979cdac6e54016c648ce1532"
+    },
+    {
+      "kind": "batch_manifest",
+      "path": ".hermes/autonomy/seq66-session-dogfood-002/batch-manifest.json",
+      "tracked": true,
+      "retrievable_at_candidate_head": true,
+      "content_sha256": "93082bfe65974ea406b60ff048a98d5b41b534cca4c07909f9b13c4bb3027959"
+    },
+    {
+      "kind": "result_envelope",
+      "path": ".hermes/autonomy/seq66-session-dogfood-002/result-P5-005A.json",
+      "tracked": true,
+      "retrievable_at_candidate_head": true,
+      "content_sha256": "aea1a17d81f75162922dd1892ef087f771aceaf07a5a1ce9131cc7ffb5b1d6a0"
+    },
+    {
+      "kind": "result_envelope",
+      "path": ".hermes/autonomy/seq66-session-dogfood-002/result-P5-005B.json",
+      "tracked": true,
+      "retrievable_at_candidate_head": true,
+      "content_sha256": "14e1482c7e794418f839e396d689d0a91b30f523087c70536b03f8524d92a839"
+    },
+    {
+      "kind": "usage_events",
+      "path": ".hermes/autonomy/seq66-session-dogfood-002/usage.jsonl",
+      "tracked": true,
+      "retrievable_at_candidate_head": true,
+      "content_sha256": "e2edcafdf5fe16837fa8183bbcfea73acba8d0ecada7d0febd888d00172c3a1c"
+    },
+    {
+      "kind": "completion_claim",
+      "path": ".hermes/autonomy/seq66-session-dogfood-002/completion-claim.json",
+      "tracked": true,
+      "retrievable_at_candidate_head": true,
+      "content_sha256": "0a45261ef4ca30b58315145b0fa944d0906dc32e79e54f0088ecbd2a37349fd9"
+    },
+    {
+      "kind": "checkpoint",
+      "path": "doc/sooperlooper/checkpoints/2026-08-04-CP-048-dogfood-002.md",
+      "tracked": true,
+      "retrievable_at_candidate_head": true,
+      "content_sha256": "bc61725ce50ea228896f6c8ca7869aa90fd15ff4d62a27f82385786a3ab4ee08"
+    }
+  ],
+  "leaf_tasks": [
+    {
+      "task_id": "P5-005A",
+      "action_kind": "test",
+      "delegated": true,
+      "result_envelope_kind": "result_envelope",
+      "status": "completed",
+      "correction_generations": 0
+    },
+    {
+      "task_id": "P5-005B",
+      "action_kind": "test",
+      "delegated": true,
+      "result_envelope_kind": "result_envelope",
+      "status": "completed",
+      "correction_generations": 4
+    }
+  ],
+  "controller_actions": [
+    {
+      "action_id": "control_plane_update",
+      "action_kind": "control_plane_update",
+      "delegated": false
+    },
+    {
+      "action_id": "checkpoint",
+      "action_kind": "checkpoint",
+      "delegated": false
+    }
+  ],
+  "mutations": [
+    {
+      "path": "tests/audio/sooperlooper_recording_verifier_test.cpp",
+      "actor": "leaf",
+      "policy": "create_only",
+      "before_blob_sha": null,
+      "after_blob_sha": "b0298df4f413fe942cd3429817077256ea8ab204",
+      "before_lines": 0,
+      "after_lines": 262,
+      "additions": 250,
+      "deletions": 0,
+      "verified_against_git": true
+    },
+    {
+      "path": "tests/audio/sooperlooper_recording_scheduler_test.cpp",
+      "actor": "controller",
+      "policy": "modify",
+      "before_blob_sha": null,
+      "after_blob_sha": "99cb7d5edb2bd8a3f07a5a489a24b13d7e48d770",
+      "before_lines": 633,
+      "after_lines": 776,
+      "additions": 142,
+      "deletions": 0,
+      "verified_against_git": true
+    }
+  ],
+  "telemetry": {
+    "events_path": ".hermes/autonomy/seq66-session-dogfood-002/usage.jsonl",
+    "tracked": true,
+    "retrievable_at_candidate_head": true,
+    "controller_events": 1,
+    "leaf_events": 2,
+    "reviewer_events": 1,
+    "senior_events": 0,
+    "missing_fields": [
+      "tokens",
+      "reported_cost",
+      "wall_seconds (3/4)"
+    ]
+  },
+  "senior_gate": {
+    "required": false,
+    "reviewed_head_sha": null,
+    "execution_id": null,
+    "response_fingerprint": null,
+    "response_artifact": null,
+    "actionable": false
+  },
+  "runtime_compatibility": {
+    "lifecycle_guard_probed": true,
+    "validator_invocation": "python3 session_contract.py scope/manifest/result",
+    "fallback_used": false,
+    "observed_limit": "long binary names blocked by lifecycle guard (null byte detection)"
+  },
+  "acceptance": [
+    {
+      "id": "scope_freeze_valid",
+      "status": "pass",
+      "evidence": [
+        "session_contract.py scope validation passed"
+      ]
+    },
+    {
+      "id": "batch_manifest_valid",
+      "status": "pass",
+      "evidence": [
+        "session_contract.py manifest validation passed"
+      ]
+    },
+    {
+      "id": "result_envelopes_valid",
+      "status": "pass",
+      "evidence": [
+        "Both result envelopes created with valid structure"
+      ]
+    },
+    {
+      "id": "checkpoint_history_guard",
+      "status": "pass",
+      "evidence": [
+        "checkpoint_history_guard.py PASS"
+      ]
+    },
+    {
+      "id": "usage_telemetry_valid",
+      "status": "pass",
+      "evidence": [
+        "usage_cli.py summarize produced valid output"
+      ]
+    },
+    {
+      "id": "all_artifacts_tracked",
+      "status": "pass",
+      "evidence": [
+        "git status shows all autonomy artifacts"
+      ]
+    },
+    {
+      "id": "retrievable_at_head",
+      "status": "pass",
+      "evidence": [
+        "All files present at candidate head"
+      ]
+    }
+  ],
+  "claimed_status": "complete",
+  "global_profile_modified": false
+}

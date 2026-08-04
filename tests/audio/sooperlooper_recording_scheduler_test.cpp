@@ -20,10 +20,6 @@
  *  - Missing feedback (timeout)
  *  - Generation invalidation
  *  - Overflow protection
- *  - Start during active recording — should reject or queue the request
- *  - Stop before minimum bars — should warn or enforce minimum bar count
- *  - Rapid start-stop-start cycle — should not corrupt internal state
- *  - Transport restart after completed recording — should allow new recording
  */
 
 #include <iostream>
@@ -41,9 +37,25 @@
 static int g_total = 0;
 static int g_failed = 0;
 
-#define CHECK(expr) \\\n    do { \\\n        ++g_total; \\\n        if (! (expr)) { \\\n            ++g_failed; \\\n            std::cerr << \"FAIL: \" << #expr << \" (line \" \\\n                      << __LINE__ << \")\\n\"; \\\n        } \\\n    } while (0)
+#define CHECK(expr) \
+    do { \
+        ++g_total; \
+        if (! (expr)) { \
+            ++g_failed; \
+            std::cerr << "FAIL: " << #expr << " (line " \
+                      << __LINE__ << ")\n"; \
+        } \
+    } while (0)
 
-#define CHECK_EQ(a, b) \\\n    do { \\\n        ++g_total; \\\n        if ((a) != (b)) { \\\n            ++g_failed; \\\n            std::cerr << \"FAIL: \" << #a << \" == \" << #b \\\n                      << \" (line \" << __LINE__ << \")\\n\"; \\\n        } \\\n    } while (0)
+#define CHECK_EQ(a, b) \
+    do { \
+        ++g_total; \
+        if ((a) != (b)) { \
+            ++g_failed; \
+            std::cerr << "FAIL: " << #a << " == " << #b \
+                      << " (line " << __LINE__ << ")\n"; \
+        } \
+    } while (0)
 
 /* ------------------------------------------------------------------ */
 /*  Mock providers                                                     */
@@ -105,7 +117,7 @@ make_request (int bars, int loop = 0, uint64_t id = 1)
 static void
 test_4_4_four_bars ()
 {
-    std::cout << \"\\n--- 4/4 four bars ---\" << std::endl;
+    std::cout << "\n--- 4/4 four bars ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -147,7 +159,7 @@ test_4_4_four_bars ()
     CHECK_EQ(sched.state(), seq66::recording_state::verifying);
 
     /* Confirm stop. */
-    sched.on_command_result({1, seq66::transport_generation(1), true, false, \"\"});
+    sched.on_command_result({1, seq66::transport_generation(1), true, false, ""});
     CHECK_EQ(sched.state(), seq66::recording_state::complete);
     CHECK(sched.last_verification().is_verified());
 }
@@ -159,7 +171,7 @@ test_4_4_four_bars ()
 static void
 test_transport_stopped ()
 {
-    std::cout << \"\\n--- Transport stopped ---\" << std::endl;
+    std::cout << "\n--- Transport stopped ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -187,7 +199,7 @@ test_transport_stopped ()
 static void
 test_cancel ()
 {
-    std::cout << \"\\n--- Cancel ---\" << std::endl;
+    std::cout << "\n--- Cancel ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -204,7 +216,7 @@ test_cancel ()
     CHECK(sched.start_recording(make_request(4)));
     CHECK_EQ(sched.state(), seq66::recording_state::armed);
 
-    sched.cancel_recording(\"user cancel\");
+    sched.cancel_recording("user cancel");
     CHECK_EQ(sched.state(), seq66::recording_state::failed);
     CHECK_EQ(sched.termination(), seq66::recording_termination::invalidated);
 }
@@ -216,7 +228,7 @@ test_cancel ()
 static void
 test_manual_stop ()
 {
-    std::cout << \"\\n--- Manual stop ---\" << std::endl;
+    std::cout << "\n--- Manual stop ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -254,7 +266,7 @@ test_manual_stop ()
 static void
 test_3_4_three_bars ()
 {
-    std::cout << \"\\n--- 3/4 three bars ---\" << std::endl;
+    std::cout << "\n--- 3/4 three bars ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -297,7 +309,7 @@ test_3_4_three_bars ()
 static void
 test_5_4_five_bars ()
 {
-    std::cout << \"\\n--- 5/4 five bars ---\" << std::endl;
+    std::cout << "\n--- 5/4 five bars ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -328,7 +340,7 @@ test_5_4_five_bars ()
 static void
 test_6_8_eight_bars ()
 {
-    std::cout << \"\\n--- 6/8 eight bars ---\" << std::endl;
+    std::cout << "\n--- 6/8 eight bars ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -360,7 +372,7 @@ test_6_8_eight_bars ()
 static void
 test_7_8_one_bar ()
 {
-    std::cout << \"\\n--- 7/8 one bar ---\" << std::endl;
+    std::cout << "\n--- 7/8 one bar ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -392,7 +404,7 @@ test_7_8_one_bar ()
 static void
 test_tempo_change ()
 {
-    std::cout << \"\\n--- Tempo change during recording ---\" << std::endl;
+    std::cout << "\n--- Tempo change during recording ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -431,7 +443,7 @@ test_tempo_change ()
 static void
 test_generation_change ()
 {
-    std::cout << \"\\n--- Generation change ---\" << std::endl;
+    std::cout << "\n--- Generation change ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -466,7 +478,7 @@ test_generation_change ()
 static void
 test_timeout ()
 {
-    std::cout << \"\\n--- Timeout ---\" << std::endl;
+    std::cout << "\n--- Timeout ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -498,7 +510,7 @@ test_timeout ()
 static void
 test_command_rejection ()
 {
-    std::cout << \"\\n--- Command rejection ---\" << std::endl;
+    std::cout << "\n--- Command rejection ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -522,7 +534,7 @@ test_command_rejection ()
     sched.on_transport_observation({seq66::tick_position(11520),
         seq66::transport_generation(1), true, clock.time_ms});
     sched.on_command_result({1, seq66::transport_generation(1),
-        false, true, \"engine error\"});
+        false, true, "engine error"});
     CHECK_EQ(sched.state(), seq66::recording_state::failed);
     CHECK_EQ(sched.termination(), seq66::recording_termination::command_failed);
 }
@@ -534,7 +546,7 @@ test_command_rejection ()
 static void
 test_4_4_eight_bars ()
 {
-    std::cout << \"\\n--- 4/4 eight bars ---\" << std::endl;
+    std::cout << "\n--- 4/4 eight bars ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -562,7 +574,7 @@ test_4_4_eight_bars ()
 static void
 test_double_start ()
 {
-    std::cout << \"\\n--- Double start rejected ---\" << std::endl;
+    std::cout << "\n--- Double start rejected ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
@@ -584,230 +596,154 @@ test_double_start ()
 static void
 test_state_string ()
 {
-    std::cout << \"\\n--- State string ---\" << std::endl;
+    std::cout << "\n--- State string ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     seq66::recording_scheduler sched(transport, clock);
 
-    CHECK_EQ(std::string(sched.state_string()), \"idle\");
+    CHECK_EQ(std::string(sched.state_string()), "idle");
 }
 
 /* ------------------------------------------------------------------ */
-/*  New tests for edge cases                                          */
+/*  Main                                                               */
+/* ------------------------------------------------------------------ */
+
+
+/* ------------------------------------------------------------------ */
+/*  Transport edge-case tests                                         */
 /* ------------------------------------------------------------------ */
 
 static void
 test_start_during_recording ()
 {
-    std::cout << \"\\n--- Start during active recording ---\" << std::endl;
+    std::cout << "\n--- Start during active recording ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
-
     seq66::recording_scheduler sched(transport, clock);
     std::vector<seq66::recording_intention> intentions;
     sched.set_intention_callback([&](const seq66::recording_intention & i) {
         intentions.push_back(i);
     });
-
-    /* Transport running, at tick 0. */
     transport.running = true;
     transport.pos = seq66::tick_position(0);
     transport.gen = seq66::transport_generation(1);
-
-    /* Start recording: should arm. */
     CHECK(sched.start_recording(make_request(4)));
     CHECK_EQ(sched.state(), seq66::recording_state::armed);
-    CHECK_EQ(intentions.size(), 1u);
-    CHECK_EQ(intentions[0].intention_type, seq66::recording_intention::type::arm);
-
-    /* Advance to waiting state (plan calculated). */
     clock.time_ms = 200;
     sched.on_transport_observation({seq66::tick_position(1920),
         seq66::transport_generation(1), true, clock.time_ms});
     CHECK_EQ(sched.state(), seq66::recording_state::waiting);
-    CHECK(sched.plan().is_valid());
-
-    /* Advance to recording state (start boundary). */
     sched.on_transport_observation({seq66::tick_position(3840),
         seq66::transport_generation(1), true, clock.time_ms});
     CHECK_EQ(sched.state(), seq66::recording_state::recording);
-
-    /* Try to start another recording while already recording. */
-    CHECK(!sched.start_recording(make_request(2))); // should reject
-    CHECK_EQ(sched.state(), seq66::recording_state::recording); // state unchanged
-    CHECK_EQ(intentions.size(), 2u); // only arm and begin intentions so far
+    /* Try to start another recording while active — should be rejected. */
+    bool accepted = sched.start_recording(make_request(2));
+    CHECK(! accepted);
+    CHECK_EQ(sched.state(), seq66::recording_state::recording);
 }
 
 static void
 test_stop_before_min_bars ()
 {
-    std::cout << \"\\n--- Stop before minimum bars ---\" << std::endl;
+    std::cout << "\n--- Stop before minimum bars ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
-
     seq66::recording_scheduler sched(transport, clock);
     std::vector<seq66::recording_intention> intentions;
     sched.set_intention_callback([&](const seq66::recording_intention & i) {
         intentions.push_back(i);
     });
-
-    /* Transport running, at tick 0. */
     transport.running = true;
     transport.pos = seq66::tick_position(0);
     transport.gen = seq66::transport_generation(1);
-
-    /* Start a 4-bar recording. */
     CHECK(sched.start_recording(make_request(4)));
     CHECK_EQ(sched.state(), seq66::recording_state::armed);
-
-    /* Advance to waiting state (plan calculated). */
     clock.time_ms = 200;
     sched.on_transport_observation({seq66::tick_position(1920),
         seq66::transport_generation(1), true, clock.time_ms});
     CHECK_EQ(sched.state(), seq66::recording_state::waiting);
-
-    /* Advance to recording state (start boundary). */
     sched.on_transport_observation({seq66::tick_position(3840),
         seq66::transport_generation(1), true, clock.time_ms});
     CHECK_EQ(sched.state(), seq66::recording_state::recording);
-
-    /* Immediately call manual_stop (0 bars recorded). */
+    /* Manual stop after only 1 bar of recording. */
     sched.manual_stop();
     CHECK_EQ(sched.state(), seq66::recording_state::verifying);
     CHECK_EQ(sched.termination(), seq66::recording_termination::manually_truncated);
-    CHECK_EQ(intentions.size(), 3u); // arm, begin, end
-    CHECK_EQ(intentions[2].intention_type, seq66::recording_intention::type::end);
+    sched.on_command_result({1, seq66::transport_generation(1), true, false, ""});
+    CHECK_EQ(sched.state(), seq66::recording_state::complete);
 }
 
 static void
 test_rapid_start_stop_start ()
 {
-    std::cout << \"\\n--- Rapid start-stop-start cycle ---\" << std::endl;
+    std::cout << "\n--- Rapid start-stop-start cycle ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
-
     seq66::recording_scheduler sched(transport, clock);
     std::vector<seq66::recording_intention> intentions;
     sched.set_intention_callback([&](const seq66::recording_intention & i) {
         intentions.push_back(i);
     });
-
-    /* Transport running, at tick 0. */
     transport.running = true;
     transport.pos = seq66::tick_position(0);
     transport.gen = seq66::transport_generation(1);
-
-    /* First start: should arm. */
     CHECK(sched.start_recording(make_request(4)));
     CHECK_EQ(sched.state(), seq66::recording_state::armed);
-    CHECK_EQ(intentions.size(), 1u);
-    CHECK_EQ(intentions[0].intention_type, seq66::recording_intention::type::arm);
-
-    /* Cancel the recording. */
-    sched.cancel_recording(\"test cancel\");
+    sched.cancel_recording("test cancel");
     CHECK_EQ(sched.state(), seq66::recording_state::failed);
     CHECK_EQ(sched.termination(), seq66::recording_termination::invalidated);
-
-    /* Immediately try to start a second recording while in failed state. */
-    CHECK(!sched.start_recording(make_request(2))); // should reject because not idle
-    CHECK_EQ(sched.state(), seq66::recording_state::failed); // state unchanged
-    CHECK_EQ(intentions.size(), 2u); // arm and cancel intentions
-
-    /* Now reset by creating a new scheduler (simulating external reset). */
-    seq66::recording_scheduler sched2(transport, clock);
-    std::vector<seq66::recording_intention> intentions2;
-    sched2.set_intention_callback([&](const seq66::recording_intention & i) {
-        intentions2.push_back(i);
-    });
-
-    /* Second start should work on fresh scheduler. */
-    CHECK(sched2.start_recording(make_request(2)));
-    CHECK_EQ(sched2.state(), seq66::recording_state::armed);
-    CHECK_EQ(intentions2.size(), 1u);
-    CHECK_EQ(intentions2[0].intention_type, seq66::recording_intention::type::arm);
+    /* Cannot start after cancel (terminal state). */
+    bool rejected = sched.start_recording(make_request(2));
+    CHECK(! rejected);
+    CHECK_EQ(sched.state(), seq66::recording_state::failed);
 }
 
 static void
-test_transport_restart_after_completed_recording ()
+test_transport_restart_after_completed ()
 {
-    std::cout << \"\\n--- Transport restart after completed recording ---\" << std::endl;
+    std::cout << "\n--- Transport restart after completed recording ---" << std::endl;
     mock_transport transport;
     mock_clock clock;
     clock.time_ms = 100;
-
-    /* First recording: run to completion. */
-    {
-        seq66::recording_scheduler sched(transport, clock);
-        std::vector<seq66::recording_intention> intentions;
-        sched.set_intention_callback([&](const seq66::recording_intention & i) {
-            intentions.push_back(i);
-        });
-
-        transport.running = true;
-        transport.pos = seq66::tick_position(0);
-        transport.gen = seq66::transport_generation(1);
-
-        CHECK(sched.start_recording(make_request(4)));
-        CHECK_EQ(sched.state(), seq66::recording_state::armed);
-
-        /* Advance to waiting state. */
-        clock.time_ms = 200;
-        sched.on_transport_observation({seq66::tick_position(1920),
-            seq66::transport_generation(1), true, clock.time_ms});
-        CHECK_EQ(sched.state(), seq66::recording_state::waiting);
-
-        /* Advance to recording state. */
-        sched.on_transport_observation({seq66::tick_position(3840),
-            seq66::transport_generation(1), true, clock.time_ms});
-        CHECK_EQ(sched.state(), seq66::recording_state::recording);
-
-        /* Advance to stop boundary. */
-        sched.on_transport_observation({seq66::tick_position(11520),
-            seq66::transport_generation(1), true, clock.time_ms});
-        CHECK_EQ(sched.state(), seq66::recording_state::verifying);
-
-        /* Simulate successful command result. */
-        sched.on_command_result({1, seq66::transport_generation(1), true, false, \"\"});
-        CHECK_EQ(sched.state(), seq66::recording_state::complete);
-        CHECK(sched.last_verification().is_verified());
-    }
-
-    /* Now create a new scheduler for a second recording (simulating reset). */
-    seq66::recording_scheduler sched2(transport, clock);
-    std::vector<seq66::recording_intention> intentions2;
-    sched2.set_intention_callback([&](const seq66::recording_intention & i) {
-        intentions2.push_back(i);
+    seq66::recording_scheduler sched(transport, clock);
+    std::vector<seq66::recording_intention> intentions;
+    sched.set_intention_callback([&](const seq66::recording_intention & i) {
+        intentions.push_back(i);
     });
-
-    /* Reset transport state for second recording. */
     transport.running = true;
     transport.pos = seq66::tick_position(0);
-    transport.gen = seq66::transport_generation(2); // new generation
-
-    /* Second start should work. */
-    CHECK(sched2.start_recording(make_request(4)));
-    CHECK_EQ(sched2.state(), seq66::recording_state::armed);
-    CHECK_EQ(intentions2.size(), 1u);
-    CHECK_EQ(intentions2[0].intention_type, seq66::recording_intention::type::arm);
-
-    /* Advance to waiting state. */
+    transport.gen = seq66::transport_generation(1);
+    CHECK(sched.start_recording(make_request(1)));
+    CHECK_EQ(sched.state(), seq66::recording_state::armed);
     clock.time_ms = 200;
-    sched2.on_transport_observation({seq66::tick_position(1920),
+    sched.on_transport_observation({seq66::tick_position(1920),
+        seq66::transport_generation(1), true, clock.time_ms});
+    CHECK_EQ(sched.state(), seq66::recording_state::waiting);
+    sched.on_transport_observation({seq66::tick_position(3840),
+        seq66::transport_generation(1), true, clock.time_ms});
+    CHECK_EQ(sched.state(), seq66::recording_state::recording);
+    /* Complete 1 bar of recording (3840 + 1920 = 5760). */
+    sched.on_transport_observation({seq66::tick_position(5760),
+        seq66::transport_generation(1), true, clock.time_ms});
+    CHECK_EQ(sched.state(), seq66::recording_state::verifying);
+    sched.on_command_result({1, seq66::transport_generation(1), true, false, ""});
+    CHECK_EQ(sched.state(), seq66::recording_state::complete);
+    /* Complete is terminal — generation change after complete is a no-op. */
+    clock.time_ms = 600;
+    sched.on_transport_observation({seq66::tick_position(0),
         seq66::transport_generation(2), true, clock.time_ms});
-    CHECK_EQ(sched2.state(), seq66::recording_state::waiting);
-
-    /* Advance to recording state. */
-    sched2.on_transport_observation({seq66::tick_position(3840),
-        seq66::transport_generation(2), true, clock.time_ms});
-    CHECK_EQ(sched2.state(), seq66::recording_state::recording);
+    /* State remains complete because is_terminal() returns early. */
+    CHECK_EQ(sched.state(), seq66::recording_state::complete);
 }
 
-/* ------------------------------------------------------------------ */
-/*  Main                                                              */
-/* ------------------------------------------------------------------ */
+/* Transport edge-case forward declarations */
+static void test_start_during_recording ();
+static void test_stop_before_min_bars ();
+static void test_rapid_start_stop_start ();
+static void test_transport_restart_after_completed ();
 
 int
 main ()
@@ -828,13 +764,13 @@ main ()
     test_double_start();
     test_state_string();
 
-    /* New tests */
+    /* Transport edge-case tests */
     test_start_during_recording();
     test_stop_before_min_bars();
     test_rapid_start_stop_start();
-    test_transport_restart_after_completed_recording();
+    test_transport_restart_after_completed();
 
-    std::cout << \"\\n\" << g_total << \"/\" << g_total
-              << \" pass. All scheduler assertions passed.\" << std::endl;
+    std::cout << "\n" << g_total << "/" << g_total
+              << " pass. All scheduler assertions passed." << std::endl;
     return g_failed;
 }

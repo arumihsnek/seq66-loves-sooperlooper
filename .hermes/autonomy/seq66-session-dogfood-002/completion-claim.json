@@ -1,0 +1,11 @@
+{
+  "schema_version": "autonomous-session-completion-claim/v1",
+  "run_id": "seq66-session-dogfood-002",
+  "claimed_status": "complete",
+  "phase_id": "phase-5-exact-recording",
+  "tasks_completed": [
+    "P5-005A",
+    "P5-005B"
+  ],
+  "acceptance_all_pass": true
+}

@@ -1,0 +1,26 @@
+{
+  "task_id": "P5-005B",
+  "status": "completed",
+  "result_head": "e328bc2023956beb9753dab7e02b59588f61a617",
+  "changed_files": ["tests/audio/sooperlooper_recording_scheduler_test.cpp"],
+  "test_evidence": {
+    "scheduler_test": "73/73 pass (was 47/47, added 26 new assertions)"
+  },
+  "acceptance": {
+    "AC-B1": "pass — compiles with -Werror",
+    "AC-B2": "pass — start during active recording: rejected",
+    "AC-B3": "pass — stop before minimum bars: manually_truncated",
+    "AC-B4": "pass — cancel leads to failed (terminal), cannot restart",
+    "AC-B5": "pass — 73/73 assertions pass, no regressions"
+  },
+  "correction_generations": 4,
+  "correction_notes": [
+    "API mismatch: on_transport_tick → on_transport_observation",
+    "API mismatch: stop_recording → manual_stop",
+    "State mismatch: completed → complete, truncated → manually_truncated",
+    "Behavior: cancel_recording → failed (terminal), not idle; complete is terminal, generation change no-op"
+  ],
+  "risks": [],
+  "model_effective": "mimo-v2.5",
+  "provider_effective": "opencode-go"
+}

@@ -1,0 +1,19 @@
+{
+  "task_id": "P5-005A",
+  "status": "completed",
+  "result_head": "e328bc2023956beb9753dab7e02b59588f61a617",
+  "changed_files": ["tests/audio/sooperlooper_recording_verifier_test.cpp"],
+  "test_evidence": {
+    "verifier_test": "25/25 pass"
+  },
+  "acceptance": {
+    "AC-A1": "pass — compiles with -Werror",
+    "AC-A2": "pass — verify_length: exact, within tolerance, exceeds tolerance",
+    "AC-A3": "pass — verify_beats: pass, fail",
+    "AC-A4": "pass — partial results tested",
+    "AC-A5": "pass — 25/25 assertions pass"
+  },
+  "risks": [],
+  "model_effective": "mimo-v2.5",
+  "provider_effective": "opencode-go"
+}
