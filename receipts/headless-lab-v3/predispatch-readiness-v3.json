@@ -1,0 +1,26 @@
+{
+  "batch_id": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+  "closure_summary": {
+    "d0_d1_d2_executed": false,
+    "integration_candidate_set": [],
+    "lab_a": "REJECTED (no result head / envelope)",
+    "lab_b": "REJECTED (invalid result head 0769d150...; placeholder tests; false provenance receipt; broken .gitignore; no envelope)",
+    "v2_leases": "terminal failed_validation; not reusable",
+    "v2_package": "consumed; not reusable"
+  },
+  "d0_d1_d2_authorized": false,
+  "human_redispatch_authorized": false,
+  "integration_authorized": false,
+  "predispatch_checks": [
+    "both result branches absent (result/<future-run-id>-lab-a, result/<future-run-id>-lab-b)",
+    "both worktree paths absent",
+    "both new worktrees clean at exact candidate 50953878...",
+    "acceptance harness SHA-256 verified against acceptance-manifest-v3.json",
+    "new lease plans planned",
+    "zero active old leases",
+    "no reuse of the four forbidden v2 paths/branches"
+  ],
+  "required_authorization": "HUMAN_DECISION_PENDING: authorize or reject a NEW LAB-A/LAB-B dispatch using EXACTLY package v3, new branches, new worktrees, new leases",
+  "schema": "predispatch-readiness/v3",
+  "status": "FROZEN_NOT_DISPATCHED"
+}

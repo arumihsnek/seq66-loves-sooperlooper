@@ -1,0 +1,49 @@
+{
+  "batch_id_v2": "BATCH-20260805T015358Z-DOGFOOD004-LAB-V2",
+  "closed_at_utc": "2026-08-05T14:42:37Z",
+  "closure_class": "v2_consumed_failed_validation",
+  "closures": [
+    {
+      "activation_receipt_hash": "052fe9d73046d26401fdb09508686e591c575ed3b35290d6e0b2214b044a26a7",
+      "activation_receipt_path": "/home/ubuntu/.hermes/runs/20260805T134658Z-headless-lab-leaf-dispatch/leases/LEASE-LAB-A.active.json",
+      "candidate_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "integration_eligible": false,
+      "leaf_id": "LEAF-LAB-A",
+      "lease_id": "LEASE-20260805T015358Z-LAB-A",
+      "result_head": null,
+      "reusable": false,
+      "terminal_reason": "Leaf produced no commit and no result head (HEAD remained at candidate); no canonical envelope; placeholder implementation (dummy ProcessInfo, no real process lifecycle); leaf summary corrupt.",
+      "terminal_status": "failed_validation",
+      "validation_findings": [
+        "commit_created=false (HEAD == candidate 50953878)",
+        "envelope_produced=false",
+        "placeholder code: start_process returns dummy ProcessInfo (pid=-1) without spawning",
+        "test_verification entries marked 'leaf claim' only (no committed head to rerun)",
+        "worktree_final_status=dirty (untracked tests/integration/headless_audio_lab/)"
+      ]
+    },
+    {
+      "activation_receipt_hash": "71f9e0a69ff9d8b85b71463b14575863105b3ffc511b0cc74f3eeb091906d9d4",
+      "activation_receipt_path": "/home/ubuntu/.hermes/runs/20260805T134658Z-headless-lab-leaf-dispatch/leases/LEASE-LAB-B.active.json",
+      "candidate_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "integration_eligible": false,
+      "leaf_id": "LEAF-LAB-B",
+      "lease_id": "LEASE-20260805T015358Z-LAB-B",
+      "result_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+      "reusable": false,
+      "terminal_reason": "Result head 0769d150 exists and is published as evidence but fails validation: literal ft-b3 FAILs on the committed head (TypeError); committed test_modules.py contains placeholders (pass/assertTrue(True)/MagicMock); fixtures/.gitignore is byte-broken (literal backslash-n) so worktree is not clean; leaf provenance receipt is false (claims gcc 11.4.0/03:24:18; observed gcc 13.3.0/14:10:47Z) and no authentic compile transcript exists; no canonical envelope produced.",
+      "terminal_status": "failed_validation",
+      "validation_findings": [
+        "ft-b1 PASS (controller independent rerun, clean checkout)",
+        "ft-b2 PASS (controller independent rerun, clean checkout)",
+        "ft-b3 FAIL (TypeError: analyze_wav() missing 5 required positional arguments)",
+        "ft-b4 PASS (deterministic rebuild produces hashes identical to quarantine; equality does not prove copy but receipt is false)",
+        "test_modules.py: contains 'pass' stub, assertTrue(True), MagicMock substitution; silence test does NOT invoke analyze_wav",
+        "fixtures/.gitignore: literal '\\n' sequences; no valid newlines; binaries not ignored",
+        "provenance receipt fabricated (toolchain/timestamp mismatch)",
+        "no canonical envelope JSON (markdown summary only)"
+      ]
+    }
+  ],
+  "schema": "lease-closure-receipt/v1"
+}
