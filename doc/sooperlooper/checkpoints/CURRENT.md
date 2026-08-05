@@ -1,29 +1,27 @@
-# Current checkpoint — Dogfood 003 forensic closure
+# Current checkpoint — Baseline qualification for headless-lab recovery
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-04-CP-051-dogfood-003-forensic-closure.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-05-CP-052-baseline-qualification.md`
 
-Checkpoint ID: `CP-051`
-Checkpoint date: 2026-08-04
+Checkpoint ID: `CP-052`
+Checkpoint date: 2026-08-05
 Phase: `phase-5-exact-recording`
 Active task: `P5-005`
 Status: `in_progress`
-Branch: `audit/dogfood-003-forensic-closure`
+Branch: `integration/baseline-qualification-20260805`
 
-## Corrected verification summary
+## Baseline state
 
-- Dogfood 003 ad-hoc: invalid as canonical evidence.
-- Dogfood 003b: invalid as repository-verifiable evidence.
-- Functional vertical: partial.
-- Exact two-bar loop length: not demonstrated.
-- Playback-only capture: not demonstrated.
-- Silent-WAV root cause: not established.
-- P5-007 target-hardware evidence remains deferred and does not block OCI work.
+- `baseline qualified for headless-lab recovery` (`NEW_SAFE_BASE = 509538784afc2b828f2d922f65cf8ca3a39b5ee7`, CI exact-head green: project-control + audio-core).
+- `LAB-A/LAB-B not dispatched`
+- `D0/D1/D2 not executed`
+- `old predispatch package requires rebinding`
 
 ## Durable evidence
 
-- `doc/sooperlooper/audits/2026-08-04-dogfood-003-workflow-forensic-audit.md`
-- `doc/sooperlooper/checkpoints/2026-08-04-CP-051-dogfood-003-forensic-closure.md`
+- `doc/sooperlooper/checkpoints/2026-08-05-CP-052-baseline-qualification.md`
+- PR #34 (`integration/baseline-qualification-20260805` → `fork-main`), head `509538784afc2b828f2d922f65cf8ca3a39b5ee7`.
+- RUN `20260805T015358Z-seq66-baseline-qualification` (receipts, reviews, contracts, leases, results).
 
 ## Next action
 
-Build and verify the isolated reusable headless audio lab, then repeat one two-bar vertical under the repository-verifiable v2 workflow.
+Regenerate the pre-dispatch package `20260804T194037Z-headless-lab-recovery` bound to `NEW_SAFE_BASE`; present the human decision (authorize/reject regenerated LAB-A/LAB-B package). P5-007 remains deferred per CP-051.
