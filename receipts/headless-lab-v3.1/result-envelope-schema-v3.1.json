@@ -1,0 +1,42 @@
+{
+  "model": "non-self-referential",
+  "rationale": "a commit cannot contain its own SHA; the envelope binds the result head via tested_parent_sha + result_tree_sha and the container commit is resolved externally after push",
+  "required_fields": {
+    "artifacts": {
+      "<path>": {
+        "kind": "source|envelope|fixture",
+        "sha256": "...",
+        "size": 0
+      }
+    },
+    "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+    "build_provenance": "path to leaf provenance receipt (must match build-provenance-policy-v3.1.json)",
+    "external_branch_binding": {
+      "note": "controller records the branch remote sha AFTER push; remote sha must equal result head",
+      "planned_branch": "result/<future-run-id>-<lab>-v3_1",
+      "remote": "origin"
+    },
+    "lab": "LAB-A | LAB-B",
+    "leaf_id": "LEAF-<LAB>-V3_1",
+    "lease_id": "LEASE-20260805T165044Z-LAB-<LAB>-V3_1",
+    "literal_tests": {
+      "ft-<n>": {
+        "evidence": "controller clean-checkout rerun",
+        "exit_code": 0
+      }
+    },
+    "result_head_placeholder": "BOUND_IN_EXTERNAL_BRANCH (never the envelope's own container SHA)",
+    "result_tree_sha": "SHA-256 of the result commit tree (resolved externally as HEAD^{tree})",
+    "schema": "headless-lab-result-envelope/v3.1",
+    "tested_parent_sha": "SHA-256 of the parent commit (must equal the candidate base)"
+  },
+  "schema": "result-envelope-schema/v3.1",
+  "validation_rules": [
+    "envelope is committed BY THE LEAF at the frozen owned path in the SAME result commit",
+    "controller verifies envelope.tested_parent_sha == git rev-parse <result_head>^",
+    "controller verifies envelope.result_tree_sha == git rev-parse <result_head>^{tree}",
+    "controller verifies remote branch sha == result_head after push",
+    "artifact hashes verified against the result tree blobs",
+    "no field may contain the envelope's own container SHA"
+  ]
+}

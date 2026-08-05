@@ -1,0 +1,56 @@
+{
+  "schema": "acceptance-verifier-v3.1",
+  "version": "3.1.0",
+  "mode": "controlled-ownership-probe",
+  "probe_supervisor": "/home/ubuntu/.hermes/runs/20260805T165044Z-v3-1-acceptance-gate-correction/defect-reproduction/process_supervisor_fixture.py",
+  "checks": [
+    {
+      "name": "controlled probe: harness probe pattern integrity",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "detected": []
+      }
+    },
+    {
+      "name": "controlled probe: corrected LAB-A probe vs fixture",
+      "status": "PASS",
+      "detail": "all eight corrected conditions satisfied against the contract-conformant fixture",
+      "evidence": {
+        "owned_pid_positive": {
+          "satisfied": true,
+          "observed": true
+        },
+        "owned_child_alive_before_cleanup": {
+          "satisfied": true,
+          "observed": true
+        },
+        "owned_child_alive_after_cleanup": {
+          "satisfied": true,
+          "observed": false
+        },
+        "cleanup_ok": {
+          "satisfied": true,
+          "observed": true
+        },
+        "foreign_alive_after_supervisor_cleanup": {
+          "satisfied": true,
+          "observed": true
+        },
+        "failure_propagation": {
+          "satisfied": true,
+          "observed": true
+        },
+        "foreign_registered_in_supervisor": {
+          "satisfied": true,
+          "observed": false
+        },
+        "foreign_terminated_by_controller": {
+          "satisfied": true,
+          "observed": true
+        }
+      }
+    }
+  ],
+  "verdict": "PASS"
+}

@@ -1,0 +1,46 @@
+{
+  "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+  "build_provenance_policy_ref": "build-provenance-policy-v3.1.json",
+  "completion_criteria": [
+    "non-empty commit exists on the result branch",
+    "branch published (remote ref present)",
+    "full result-head SHA recorded",
+    "clean worktree at result head (no tracked modifications, no required-untracked outputs)",
+    "valid result envelope at the frozen owned path",
+    "owned-path-only diff (no forbidden paths changed)",
+    "all literal focused tests executed with exit code 0 on the exact result head",
+    "controller clean-checkout verification PASS (acceptance-verifier-v3.1.py on clean checkout)"
+  ],
+  "envelope_schema_ref": "result-envelope-schema-v3.1.json",
+  "harness": {
+    "executed_by": "controller",
+    "execution_target": "clean checkout of the exact result head",
+    "file": "acceptance-verifier-v3.1.py",
+    "owner": "controller (NOT LAB-A, NOT LAB-B; leaf modifications forbidden)",
+    "selftest_required_before_use": true,
+    "sha256": "3f3f36eea460b150fe50b53af27c8580bd82aad06cc561f1c997d058e8f687f0"
+  },
+  "negative_gates_lab_a": [
+    "reject pass/TODO/NotImplemented placeholders",
+    "reject dummy ProcessInfo / pid=0 / pid=-1",
+    "reject MagicMock as process substitute",
+    "reject methods that always return success",
+    "reject tests that only verify importation",
+    "require owned child lifecycle, real positive PID, identity verification, bounded shutdown, failure propagation",
+    "require cleanup(timeout) to terminate ALL owned processes and verify_cleanup() == []",
+    "reject foreign-survival probe process created via sup.start_process() (foreign must be created OUTSIDE the supervisor via subprocess.Popen, start_new_session=True)",
+    "require foreign process to survive supervisor cleanup and be torn down by the controller via its Popen object (TERM, bounded wait, KILL exact fallback)"
+  ],
+  "negative_gates_lab_b": [
+    "exact analyze_wav signature",
+    "real silence test (silence always FAIL)",
+    "malformed WAV FAIL/ERROR",
+    "contractual frame count",
+    "no empty tests",
+    "no trivial asserts",
+    ".gitignore byte-exact (no literal backslash-n)",
+    "scenarios parseable",
+    "runner uses the contractual APIs"
+  ],
+  "schema": "acceptance-manifest/v3.1"
+}

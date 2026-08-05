@@ -1,0 +1,294 @@
+{
+  "alternatives": [
+    {
+      "cons": [
+        "One more review round before any dispatch"
+      ],
+      "name": "Freeze v3.1 without dispatch",
+      "pros": [
+        "Resolves the v3 semantic contradiction",
+        "All deterministic checks pass",
+        "Human retains the dispatch decision"
+      ]
+    },
+    {
+      "cons": [
+        "No dispatchable package for LAB-A/LAB-B; the defect remains unfixed",
+        "Contradicts the demonstrated controlled-probe PASS"
+      ],
+      "name": "Reject v3.1",
+      "pros": [
+        "Avoids any further investment in this package"
+      ]
+    },
+    {
+      "cons": [
+        "NOT AUTHORIZED: human redispatch decision is pending and mandatory",
+        "D0/D1/D2 authorization is false"
+      ],
+      "name": "Dispatch v3.1 now",
+      "pros": [
+        "Fastest path to lab execution"
+      ]
+    }
+  ],
+  "caller_required": [
+    "/alternatives",
+    "/candidate_decision",
+    "/code_excerpts",
+    "/constraints",
+    "/current_plan",
+    "/decision_needed",
+    "/diff",
+    "/escalation",
+    "/invalidated_assumptions",
+    "/objective",
+    "/observed_facts",
+    "/progress",
+    "/questions",
+    "/relevant_contracts",
+    "/risks_already_identified",
+    "/runtime_evidence",
+    "/snapshot/checkpoint_fingerprint",
+    "/snapshot/plan_fingerprint",
+    "/tests"
+  ],
+  "candidate_decision": {
+    "decision_type": "plan_review",
+    "description": "Freeze the corrected v3.1 acceptance package as exact-byte reviewed evidence; do NOT dispatch.",
+    "options": [
+      "accept_freeze",
+      "request_changes"
+    ],
+    "recommendation": "accept_freeze"
+  },
+  "code_excerpts": [
+    {
+      "excerpt": "foreign = sup.start_process('foreign', ['/bin/sleep', '5'], {}, '.', '/dev/null', '/dev/null')\nsup.cleanup(timeout=5.0)\nforeign_alive = os.path.exists('/proc/%d' % foreign.pid)\nout['foreign_not_signaled'] = foreign_alive\n",
+      "file": "receipts/headless-lab-v3/acceptance-verifier-v3.py",
+      "note": "THE DEFECT (exact bytes): 'foreign' is created via sup.start_process -> OWNED; cleanup() contractually terminates owned; the gate requires the same process to SURVIVE cleanup.",
+      "significance": "Semantic contradiction: conformant supervisors fail this gate, contract-violating ones pass."
+    },
+    {
+      "excerpt": "info = sup.start_process('probe', ['/bin/sleep', '3'], {}, '.', '/dev/null', '/dev/null')\nout['owned_pid_positive'] = bool(info.pid and info.pid > 0)\nout['owned_child_alive_before_cleanup'] = os.path.exists('/proc/%d' % info.pid)\nforeign = subprocess.Popen(['/bin/sleep', '5'], start_new_session=True,\n                           stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,\n                           stderr=subprocess.DEVNULL)\nout['foreign_registered_in_supervisor'] = foreign.pid in sup.get_owned_pids()\nsup.cleanup(timeout=5.0)\nout['owned_child_alive_after_cleanup'] = os.path.exists('/proc/%d' % info.pid)\nout['cleanup_ok'] = sup.verify_cleanup() == []\nout['foreign_alive_after_supervisor_cleanup'] = os.path.exists('/proc/%d' % foreign.pid)\nfinally:\n    if foreign is not None:\n        foreign.terminate()\n        try: foreign.wait(timeout=5.0)\n        except subprocess.TimeoutExpired: foreign.kill(); foreign.wait(timeout=5.0)\n",
+      "file": "receipts/headless-lab-v3.1/acceptance-verifier-v3.1.py",
+      "note": "CORRECTED: foreign created OUTSIDE the supervisor via subprocess.Popen(start_new_session=True), never registered; cleanup kills owned; foreign survives; teardown via Popen in finally.",
+      "significance": "Owned cleanup and foreign survival are separate controls; the probe is satisfiable by a conformant supervisor."
+    },
+    {
+      "excerpt": "os.setsid to create own process group\ntermination only over owned PIDs/PGIDs\nSIGTERM -> wait -> SIGKILL bounded\nno pkill/killall/pgrep/ipcrm/shell=True\nprocesses created by start_process ARE owned\ncleanup(timeout) MUST terminate all and only owned processes\nverify_cleanup() MUST report no remaining owned PIDs after cleanup\nthe acceptance harness MUST create foreign-survival probe processes OUTSIDE the supervisor via subprocess.Popen(start_new_session=True); foreign processes are NEVER registered as owned",
+      "file": "receipts/headless-lab-v3.1/lab-api-contract-v3.1.json",
+      "note": "ProcessSupervisor ownership semantics made explicit in the v3.1 contract.",
+      "significance": "Any leaf implementation and any future probe is bound to terminate all and only owned processes."
+    },
+    {
+      "excerpt": "R1 exact v3 signature: <var>=sup.start_process(...); sup.cleanup(...); <var>_alive=os.path.exists('/proc/%d' % <var>.pid); out['...']=<var>_alive\nR2 generic: any start_process-created <var> assigned to a BARE name on an os.path.exists-after-cleanup line",
+      "file": "receipts/headless-lab-v3.1/acceptance-verifier-v3.1.py (detect_v3_foreign_probe_pattern)",
+      "note": "The harness rejects its own probe if it regresses to the v3 pattern; selftest asserts detection of the v3 snippet and acceptance of the corrected snippet.",
+      "significance": "Non-vacuous negative gate for the exact defect fixed in v3.1."
+    }
+  ],
+  "constraints": [
+    "Single pass",
+    "No tools",
+    "No workspace reads",
+    "Advisory only",
+    "Accept does NOT authorize dispatch",
+    "Review binds the exact bytes: PR #34 head 9678ff50..., v3.1 package manifest SHA-256, and all twelve artifact SHA-256 values",
+    "Verdict accept requires 0 blocking findings and 0 required actions",
+    "v3 package is immutable historical evidence; do not propose mutating it"
+  ],
+  "current_plan": {
+    "fingerprint": "9e1ab8022db7f5fd476083b6ba8ecbb1160a7891c39aa1e6fe6e7a3154edc1ca",
+    "phases": [
+      "defect reproduction",
+      "corrected probe",
+      "controlled probe",
+      "package validation",
+      "selftest",
+      "rejected-head test",
+      "manifest byte-exact",
+      "senior plan-review",
+      "evidence publication",
+      "CP-057 checkpoint",
+      "PR push + exact-head CI",
+      "stop gate"
+    ],
+    "plan": "# v3.1 acceptance-gate correction (headless-lab LAB-A/LAB-B)\n\n## Context\n- v3 package (BATCH-20260805T143214Z-DOGFOOD004-LAB-V3) is REJECTED_FOR_DISPATCH_BY_EXTERNAL_ARCHITECT_REVIEW.\n- Its exact-byte review (CP-056) remains valid HISTORICAL evidence: 12/12 hashes matched, senior accept bound to 66f2f0c8..., zero findings.\n- The rejection is a SEMANTIC defect in the v3 acceptance harness LAB-A probe (V3_ACCEPTANCE_GATE_DEFECT, severity=blocking_for_dispatch, affected_control=no_signaling_of_foreign_processes). No malice/fraud is claimed.\n\n## The defect (reproduced from exact tracked bytes)\nacceptance-verifier-v3.py LAB-A probe:\n    foreign = sup.start_process('foreign', ['/bin/sleep', '5'], {}, '.', '/dev/null', '/dev/null')\n    sup.cleanup(timeout=5.0)\n    foreign_alive = os.path.exists('/proc/%d' % foreign.pid)\n    out['foreign_not_signaled'] = foreign_alive\nThe contract (lab-api-contract-v3.json) requires start_process-created processes to be OWNED and cleanup(timeout) to terminate all and only owned processes (verify_cleanup() == []). The probe therefore expects an OWNED process to SURVIVE cleanup: a conformant supervisor FAILS the gate; a contract-violating supervisor PASSES. Demonstrated by the controlled experiment: the correct fixture terminates the 'foreign' (owned) process -> v3_gate_would_pass_with_this_fixture=false.\n\n## The correction (package v3.1, NEW IDs and NEW hashes)\n1. Foreign-survival probe process is created OUTSIDE ProcessSupervisor via subprocess.Popen(start_new_session=True), never registered as owned, never created via sup.start_process().\n2. Owned process is created via ProcessSupervisor.start_process; cleanup(timeout) MUST terminate it; verify_cleanup() == [].\n3. Both PIDs are registered by the probe; every condition produces JSON evidence.\n4. The controller tears the foreign process down via its Popen object (TERM, bounded wait, KILL exact fallback) inside try/finally.\n5. The harness includes a pattern detector (detect_v3_foreign_probe_pattern) that REJECTS any probe creating a start_process process and expecting it to survive cleanup (R1 exact v3 signature, R2 generic bare-name rule).\n6. Selftest is expanded: known-bad LAB-A placeholder rejected; known-bad LAB-B trivial tests rejected; known-good nontrivial LAB-B test not falsely rejected; v3 defective pattern DETECTED; v3.1 corrected pattern ACCEPTED; external process survives supervisor cleanup in controlled fixture; owned process does not survive cleanup; all temporary children cleaned at end; foreign created via start_process is detected. Selftest FAILS if any of those invariants breaks.\n7. Controlled ownership probe: the corrected LAB-A probe runs against the controller-owned fixture (process_supervisor_fixture.py) and must satisfy 8/8 conditions.\n\n## Package contents (receipts/headless-lab-v3.1/, 12 operational artifacts)\nscope-freeze-v3.1.json, batch-manifest-v3.1.json, dispatch-plan-v3.1.json, port-plan-v3.1.json, lab-api-contract-v3.1.json, lease-plan-lab-a-v3.1.json, lease-plan-lab-b-v3.1.json, acceptance-manifest-v3.1.json, acceptance-verifier-v3.1.py, build-provenance-policy-v3.1.json, result-envelope-schema-v3.1.json, predispatch-readiness-v3.1.json, v3.1-package-manifest.json.\nNew IDs: BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1; LEASE-20260805T165044Z-LAB-A-V3_1 / LEASE-20260805T165044Z-LAB-B-V3_1 (planned, NOT activated). Supersedes package v3; supersession reason: LAB-A foreign-process acceptance-gate contradiction.\n\n## Validation performed (from package bytes)\n- JSON parse 12/12; 14/14 package validators PASS (scope, batch-manifest, dispatch-plan, port-plan, lease, ownership overlap, no-globs, forbidden branch/worktree reuse, envelope schema, build-provenance policy, predispatch readiness, v2/v3-ID reuse scan, harness forbidden-token scan).\n- v3.1-package-manifest validation PASS: 12/12 files, sizes, SHA-256; zero missing; zero extra; candidate binding exact; new batch exact.\n- acceptance-verifier-v3.1.py --selftest: PASS (11 checks).\n- --controlled-ownership-probe vs fixture: PASS (8/8 conditions).\n- Rejected-head test on clean checkout of 0769d150...: REJECT (LAB-A imports fail; LAB-B placeholder tests + broken .gitignore).\n- v3 immutability: receipts/headless-lab-v3 byte-identical 66f2f0c8..9678ff50; 12/12 hashes match v3-package-manifest.json; 66f2f0c8..9678ff50 contains ONLY CP-056, CURRENT, and review-binding artifacts.\n\n## Freeze semantics requested\n- v3.1 is FROZEN for review, NOT dispatched. Accept does NOT authorize dispatch.\n- Leases planned only; zero worktrees; zero leaves; D0/D1/D2 NOT executed; redispatch_authorized=false; integration_authorized=false.\n- The only subsequent human decision: authorize or reject a NEW LAB-A/LAB-B dispatch using EXACTLY the reviewed v3.1 package, new branches, new worktrees, new leases.",
+    "version": "v3.1"
+  },
+  "decision_needed": "Is the v3.1 package semantically correct (the probe really distinguishes owned from foreign processes), complete, and safe to freeze WITHOUT dispatch? Verdict accept requires 0 blocking findings and 0 required actions, bound to the exact v3.1 package manifest SHA-256 and all twelve artifact SHA-256 values.",
+  "diff": {
+    "byte_size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "summary": "v3.1 package (13 artifacts under receipts/headless-lab-v3.1/) + pre-review binding receipts under receipts/headless-lab-v3.1-review-binding/; staged in isolated worktree from exact PR head 9678ff50; no changes to candidate, v3, CP-048..CP-056, or LAB branches"
+  },
+  "escalation": {
+    "local_deterministic_checks": [
+      "PR #34 head == 9678ff50 (gh api + git fetch)",
+      "exact-head CI success on 9678ff50 (runs 31024861279, 31024859216)",
+      "v3 12/12 hash match vs manifest from tracked blobs",
+      "v3.1 selftest exit 0",
+      "controlled ownership probe exit 0",
+      "rejected-head test exit 1",
+      "14/14 package validators exit 0",
+      "manifest validation 12/12 exit 0"
+    ],
+    "material_impact": "The acceptance harness is the gate for any future LAB-A/LAB-B dispatch; a semantic contradiction in the gate would make dispatchable either contract-violating implementations or reject conformant ones. The correction must be independently reviewed before the package is frozen as exact-byte evidence for the human dispatch decision."
+  },
+  "invalidated_assumptions": [
+    "v3 acceptance harness was fit for dispatch (REJECTED by external architect review)",
+    "The v3 probe semantics (start_process-created foreign expected to survive cleanup) matched the contract"
+  ],
+  "mission_id": "seq66-lab-v3-1-corrected-acceptance-package",
+  "mode": "plan-review",
+  "objective": "Review whether the corrected headless-lab v3.1 acceptance package (LAB-A/LAB-B) resolves the v3 LAB-A foreign-process acceptance-gate contradiction, is semantically sound and byte-exact reviewable, and is safe to FREEZE (not dispatch) pending a separate human dispatch decision.",
+  "observed_facts": [
+    "PR #34 OPEN, draft=true, mergeable=MERGEABLE, head==9678ff50... (EXPECTED_PR_HEAD)",
+    "Project control plane run 31024861279 conclusion=success head_sha==9678ff50...",
+    "Audio integration core run 31024859216 conclusion=success head_sha==9678ff50...",
+    "v3 package 12/12 hashes match v3-package-manifest.json from tracked blobs; receipts/headless-lab-v3 byte-identical 66f2f0c8..9678ff50",
+    "66f2f0c8..9678ff50 diff contains ONLY CP-056, CURRENT, and receipts/headless-lab-v3-review-binding/*",
+    "v3 LAB-A defect reproduced: start_process-created 'foreign' expected to survive cleanup (semantic_contradiction=true)",
+    "Controlled experiment: correct fixture terminates owned; foreign (Popen) survives supervisor cleanup; v3 pattern makes the correct fixture FAIL the v3 gate",
+    "v3.1 selftest PASS (11 checks); controlled ownership probe PASS (8/8); rejected-head test on 0769d150... REJECT (exit 1)",
+    "v3.1 package validators 14/14 PASS; manifest validation 12/12 PASS (zero missing/extra, candidate+batch exact)",
+    "D0/D1/D2 NOT executed; leases planned only; zero worktrees; zero leaves"
+  ],
+  "plan_fingerprint_sha256": "9e1ab8022db7f5fd476083b6ba8ecbb1160a7891c39aa1e6fe6e7a3154edc1ca",
+  "progress": {
+    "completed": [
+      "identity verification (PR #34, CI, four heads)",
+      "v3 preservation + 12-hash validation",
+      "LAB-A defect reproduction + controlled experiments",
+      "v3.1 package creation (13 artifacts, new IDs/hashes)",
+      "selftest PASS, controlled probe PASS, rejected-head REJECT",
+      "package validators 14/14, manifest validation 12/12",
+      "evidence staged in isolated worktree from exact PR head"
+    ],
+    "current": "senior plan-review of the frozen v3.1 package"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "\u00bfEl probe realmente distingue un proceso owned de uno foreign? (v3.1 crea el foreign con subprocess.Popen fuera del supervisor, registra ambos PIDs, exige owned muerto y foreign vivo tras cleanup)."
+    },
+    {
+      "id": "Q2",
+      "text": "\u00bfUn ProcessSupervisor contractual puede superar el gate sin dejar procesos owned vivos? (cleanup(timeout) termina todos y solo los owned; verify_cleanup() == [])."
+    },
+    {
+      "id": "Q3",
+      "text": "\u00bfEl proceso externo se crea y limpia fuera del supervisor de forma acotada? (try/finally, TERM -> wait acotado -> KILL exacto como fallback, prohibici\u00f3n de crearlo con start_process)."
+    },
+    {
+      "id": "Q4",
+      "text": "\u00bfCompletion, envelopes, provenance y clean-checkout enforcement siguen intactos? (los 8 criterios de completion, modelo de envelope no autorreferente, pol\u00edtica de build provenance, verifier contra checkout limpio)."
+    },
+    {
+      "id": "Q5",
+      "text": "\u00bfEl paquete v3.1 exacto puede quedar frozen para una decisi\u00f3n humana separada? (sin dispatch, leases planned, cero worktrees/leaves, D0/D1/D2 no ejecutados, redispatch_authorized=false)."
+    }
+  ],
+  "relevant_contracts": [
+    "lab-api-contract-v3.1.json (ProcessSupervisor ownership semantics)",
+    "result-envelope-schema-v3.1.json (non-self-referential envelope model)",
+    "build-provenance-policy-v3.1.json (hash equality never proves copy/rebuild)",
+    "dispatch-plan-v3.1.json (COMPLETION-V3_1 eight criteria; summary never substitutes)",
+    "scope-freeze-v3.1.json (CORRECTED-FOREIGN-PROBE scope)",
+    "acceptance-manifest-v3.1.json (harness owned by controller; selftest required before use)",
+    "AGENTS.md senior-consultation and merge-gate contracts"
+  ],
+  "repository": {
+    "dirty": true,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    "The senior verdict is bound to exact bytes; any post-review byte change invalidates it",
+    "Accept does not authorize dispatch; human authorization remains mandatory",
+    "Hash equality/difference never proves copying or rebuild; only controlled rebuild does",
+    "A future v3.1 regression to the v3 probe pattern must be caught by the pattern detector and selftest"
+  ],
+  "runtime_evidence": [
+    {
+      "result": "PASS 11/11 (placeholder rejections, trivial-test rejections, good-test acceptance, v3 pattern DETECTED, v3.1 pattern ACCEPTED, owned terminated, foreign survives, all children cleaned)",
+      "source": "acceptance-verifier-v3.1.py --selftest"
+    },
+    {
+      "result": "PASS 8/8 corrected conditions",
+      "source": "--controlled-ownership-probe vs controller fixture process_supervisor_fixture.py"
+    },
+    {
+      "result": "REJECT both labs: LAB-A imports fail (No module named 'headless_audio_lab.process_supervisor'); LAB-B placeholder tests + broken .gitignore",
+      "source": "rejected-head test on clean checkout 0769d150..."
+    },
+    {
+      "result": "PASS 14/14",
+      "source": "v3.1 package validators"
+    },
+    {
+      "result": "PASS 12/12 files/sizes/SHA-256; zero missing; zero extra; candidate exact; batch exact",
+      "source": "v3.1-package-manifest validation"
+    },
+    {
+      "result": "PASS: owned_child_alive_after_cleanup=false, foreign_child_alive_after_supervisor_cleanup=true; v3 pattern: v3_gate_would_pass_with_this_fixture=false (contradiction demonstrated)",
+      "source": "controlled ownership experiments"
+    },
+    {
+      "result": "MATCH 12/12 vs manifest; v3 dir byte-identical between heads; manifest sha256 2114aa70a76ac23d70c374c1d5b042851d4c5eeec3b350e74cbfde1326c1c640",
+      "source": "v3 preservation"
+    },
+    {
+      "result": "evidence parent/head=9678ff50...; candidate=50953878...; batch=BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1; manifest_sha256=d6ebac8ea127a93f7f582b98b2436f60f3b1fc0b6dbbaad2760d89306186ac48; twelve artifact hashes={'acceptance-manifest-v3.1.json': 'ab2c2534b19e74f97bcd6c1a0dbf727600931a6e6eafcc069035e961ac337430', 'acceptance-verifier-v3.1.py': '3f3f36eea460b150fe50b53af27c8580bd82aad06cc561f1c997d058e8f687f0', 'batch-manifest-v3.1.json': 'e7c3f560192a9902614ba905f40dce4c7a707ed38d95ad81871163a641699ddc', 'build-provenance-policy-v3.1.json': 'c6161cbba2aadbab2f979e246b3c4db44175b5a784a78e4188ba3119f501b43b', 'dispatch-plan-v3.1.json': 'b196b6422c2a348b5a3836e30603155e4a17d6e3eaeb8ba70d76ef4666a9e67f', 'lab-api-contract-v3.1.json': 'b9ecf9c528249a117e3851691e50e93957d2b16a464c75e8e14dd2dae29485a2', 'lease-plan-lab-a-v3.1.json': '2758c63628bf213996a316b526870d32bcd7b93f0c44d54bd0cd03c1c746efa9', 'lease-plan-lab-b-v3.1.json': '6e1e24343323d84b3ac263977f46284390740c80954369d2c77169b626708ae3', 'port-plan-v3.1.json': '72a87fc1aade47255d786f895f665cb35d13ff1e2172e7a294788a25fb78afbf', 'predispatch-readiness-v3.1.json': '4aa37696f2ae47a6997a39a6d646282c85d664e12c670ce48cf8bb095279667b', 'result-envelope-schema-v3.1.json': '92d613575059e8e195a41182d8a54ba9ae7e1398c6789b34d65fc0543119b92d', 'scope-freeze-v3.1.json': '70aad3de4706214a266b0fdb7f2d40c0791c915071d55d20bf961fbf6547fb84'}",
+      "source": "bundle identities"
+    }
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "fa3fb3792045bfdd86895fcef8249c0e3c68edd9e0245d36f2c6bc6dc80e8471",
+    "plan_fingerprint": "9e1ab8022db7f5fd476083b6ba8ecbb1160a7891c39aa1e6fe6e7a3154edc1ca",
+    "repository_head": "9678ff5070b560e073070a2aa2bf8d1e79907f9e",
+    "working_tree_fingerprint": "b6ce2fddb9025b520d9ab63efa1e8d1f078f7d28da6a890b8d58614b30e92c86"
+  },
+  "tests": [
+    {
+      "command": "python3 receipts/headless-lab-v3.1/acceptance-verifier-v3.1.py --selftest",
+      "exit_code": 0,
+      "summary": "11 checks PASS"
+    },
+    {
+      "command": "python3 receipts/headless-lab-v3.1/acceptance-verifier-v3.1.py --controlled-ownership-probe --probe-supervisor <fixture>",
+      "exit_code": 0,
+      "summary": "8/8 conditions PASS"
+    },
+    {
+      "command": "python3 receipts/headless-lab-v3.1/acceptance-verifier-v3.1.py --lab a --checkout <0769d150> --contract <v3.1>",
+      "exit_code": 1,
+      "summary": "REJECT as expected"
+    },
+    {
+      "command": "python3 receipts/headless-lab-v3.1/acceptance-verifier-v3.1.py --lab b --checkout <0769d150> --contract <v3.1>",
+      "exit_code": 1,
+      "summary": "REJECT as expected"
+    },
+    {
+      "command": "validate_v31_package.py",
+      "exit_code": 0,
+      "summary": "14/14 validators PASS"
+    },
+    {
+      "command": "validate_v31_manifest.py",
+      "exit_code": 0,
+      "summary": "12/12 manifest PASS"
+    },
+    {
+      "command": "run_controlled_experiments.py",
+      "exit_code": 0,
+      "summary": "PASS; v3 contradiction demonstrated"
+    }
+  ]
+}

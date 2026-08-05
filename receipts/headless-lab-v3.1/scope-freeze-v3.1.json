@@ -1,0 +1,84 @@
+{
+  "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "closure_run": "20260805T165044Z-v3-1-acceptance-gate-correction",
+  "frozen_at_utc": "2026-08-05T17:00:00Z",
+  "items": [
+    {
+      "notes": "ProcessSupervisor/JackServer/OscProbe/SooperLooperLauncher/__init__ + envelope path (v3.1)",
+      "owned_paths": [
+        "tests/integration/headless_audio_lab/process_supervisor.py",
+        "tests/integration/headless_audio_lab/jack_server.py",
+        "tests/integration/headless_audio_lab/osc_probe.py",
+        "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+        "tests/integration/headless_audio_lab/__init__.py",
+        "receipts/headless-lab-results-v3.1/lab-a-result.json"
+      ],
+      "scope_id": "LAB-A",
+      "scope_type": "lab_a"
+    },
+    {
+      "notes": "oracle/graph/runner/tests/scenarios/fixtures + .gitignore + envelope path (v3.1)",
+      "owned_paths": [
+        "tests/__init__.py",
+        "tests/integration/__init__.py",
+        "tests/integration/headless_audio_lab/audio_oracle.py",
+        "tests/integration/headless_audio_lab/graph_assertions.py",
+        "tests/integration/headless_audio_lab/runner.py",
+        "tests/integration/headless_audio_lab/test_modules.py",
+        "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+        "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+        "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+        "tests/integration/headless_audio_lab/fixtures/.gitignore",
+        "receipts/headless-lab-results-v3.1/lab-b-result.json"
+      ],
+      "scope_id": "LAB-B",
+      "scope_type": "lab_b"
+    },
+    {
+      "items": [
+        "fixtures/synthetic_source and fixtures/deterministic_capture REBUILD from tests/integration/virtual_studio/audio/*.c at candidate",
+        "compile: gcc -std=c11 -O2 -o <out> <src> -ljack -lm -lpthread",
+        "quarantined precanonical ELFs are FORBIDDEN inputs (never copy)",
+        "provenance receipt must capture source commit+blob sha, command, toolchain version, timestamps, output sha256"
+      ],
+      "scope_id": "FIXTURES-REBUILD",
+      "scope_type": "rebuild_policy"
+    },
+    {
+      "items": [
+        "LAB-A envelope path: receipts/headless-lab-results-v3.1/lab-a-result.json",
+        "LAB-B envelope path: receipts/headless-lab-results-v3.1/lab-b-result.json",
+        "paths are part of each leaf's owned_paths; envelope model per result-envelope-schema-v3.1.json"
+      ],
+      "scope_id": "RESULT-ENVELOPES",
+      "scope_type": "envelope"
+    },
+    {
+      "items": [
+        "acceptance harness (acceptance-verifier-v3.1.py) belongs to the controller, not to any leaf",
+        "controller executes harness against clean checkout of the exact result head",
+        "selftest must PASS before the harness is used"
+      ],
+      "scope_id": "ACCEPTANCE-V3_1",
+      "scope_type": "acceptance"
+    },
+    {
+      "items": [
+        "the process used to prove foreign survival MUST be created OUTSIDE ProcessSupervisor via subprocess.Popen(start_new_session=True)",
+        "the foreign-survival probe process MUST NOT be created via sup.start_process()",
+        "cleanup(timeout) MUST terminate all and only owned processes",
+        "owned cleanup and foreign survival are SEPARATE controls tested independently",
+        "the controller tears the foreign process down via its Popen object (TERM, bounded wait, KILL exact fallback)",
+        "probe MUST use try/finally so the foreign process is cleaned even if an assertion fails"
+      ],
+      "scope_id": "CORRECTED-FOREIGN-PROBE",
+      "scope_type": "acceptance_correction"
+    }
+  ],
+  "normative_source": "doc/sooperlooper/checkpoints/2026-08-05-CP-057-v3-1-acceptance-gate-correction.md (normative excerpts) + CP-056/CP-055 + v3 scope-freeze items carried forward",
+  "receipt_container_head_sha": "BOUND_IN_EVIDENCE",
+  "schema": "scope-freeze/v3.1"
+}

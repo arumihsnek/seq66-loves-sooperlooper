@@ -1,0 +1,68 @@
+{
+  "schema": "v3-defect-reproduction/v1",
+  "source_commit": "9678ff5070b560e073070a2aa2bf8d1e79907f9e",
+  "reproduced_at_utc": "2026-08-05T16:52:00Z",
+  "verifier_path": "receipts/headless-lab-v3/acceptance-verifier-v3.py",
+  "verifier_blob_sha": "886f8f03a30127a99a133f5b0b61b09d3c3565de",
+  "verifier_sha256": "f6ee256dcb31c091492fcff17cc53f251293e76b3aa094559568e4fc36fffd78",
+  "contract_path": "receipts/headless-lab-v3/lab-api-contract-v3.json",
+  "contract_blob_sha": "648dedef0b527b6a084a02f4e7e7ffc69ad670f2",
+  "contract_sha256": "77b9572dd2e457b7b8eaee8d2c69d3040884ba157f47c92af84b040a0de5766e",
+  "probe_evidence": {
+    "exact_lines_from_verifier": [
+      "foreign = sup.start_process('foreign', ['/bin/sleep', '5'], {}, '.', '/dev/null', '/dev/null')",
+      "sup.cleanup(timeout=5.0)",
+      "foreign_alive = os.path.exists('/proc/%d' % foreign.pid)",
+      "out['foreign_not_signaled'] = foreign_alive",
+      "",
+      "context: 'lab-a: functional lifecycle' gate requires all of",
+      "pid_positive, child_alive_while_owned, failure_propagation, cleanup_ok, foreign_not_signaled",
+      "i.e. the gate PASSES only if foreign_alive is True after sup.cleanup(timeout=5.0)."
+    ],
+    "semantic_equivalence": "the probe sequence above is semantically equivalent to the human-specified defective sequence: process 'foreign' is created by sup.start_process(...), sup.cleanup(timeout=5.0) is invoked, and the probe asserts the same process remains alive."
+  },
+  "contract_evidence": {
+    "module": "process_supervisor.py",
+    "class": "ProcessSupervisor",
+    "required_methods": [
+      "start_process(name, cmd, env, cwd, stdout_path, stderr_path)",
+      "cleanup(timeout)",
+      "verify_cleanup()",
+      "get_owned_pids()",
+      "get_owned_pgids()"
+    ],
+    "constraints_exact": [
+      "os.setsid to create own process group",
+      "termination only over owned PIDs/PGIDs",
+      "SIGTERM -> wait -> SIGKILL bounded",
+      "no pkill/killall/pgrep/ipcrm/shell=True"
+    ],
+    "semantic_reading": "any process created by start_process is an OWNED process; cleanup(timeout) is required to terminate owned processes; verify_cleanup() must report no remaining owned PIDs."
+  },
+  "semantic_analysis": {
+    "process_created_by_start_process": "owned",
+    "cleanup_is_required_to_terminate_owned_processes": true,
+    "v3_probe_expects_that_owned_process_to_survive_cleanup": true,
+    "semantic_contradiction": true,
+    "consequence": "a ProcessSupervisor that correctly terminates every owned process during cleanup makes the v3 LAB-A gate FAIL ('foreign_not_signaled' requires the owned 'foreign' process to remain alive); a ProcessSupervisor that violates the contract by leaving owned processes alive makes the gate PASS. The gate therefore rewards contract-violating implementations and rejects conformant ones."
+  },
+  "classification": {
+    "id": "V3_ACCEPTANCE_GATE_DEFECT",
+    "severity": "blocking_for_dispatch",
+    "affected_control": "no_signaling_of_foreign_processes",
+    "package": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+    "dispatchable": false
+  },
+  "attribution": {
+    "no_malice_claim": true,
+    "no_fraud_claim": true,
+    "note": "The harness defect is classified as a semantic contradiction in the acceptance probe. No claim is made that the harness was malicious, nor that the senior review was fraudulent. The senior review remains valid historical evidence for the exact bytes reviewed (CP-056); it reviewed hashes and structure, and this defect is a semantic gate-level contradiction discovered on exact-byte re-reading."
+  },
+  "human_decision_state": {
+    "V3_REDISPATCH_AUTHORIZED": false,
+    "V3_STATUS": "REJECTED_FOR_DISPATCH_BY_EXTERNAL_ARCHITECT_REVIEW",
+    "V3_1_REDISPATCH_AUTHORIZED": false,
+    "INTEGRATION_AUTHORIZED": false,
+    "D0_D1_D2_AUTHORIZED": false
+  }
+}

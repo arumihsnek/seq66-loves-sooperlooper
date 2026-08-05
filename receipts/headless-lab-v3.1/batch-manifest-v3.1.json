@@ -1,0 +1,167 @@
+{
+  "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "supersedes": {
+    "batch_id": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+    "reason": "LAB-A foreign-process acceptance-gate contradiction (V3_ACCEPTANCE_GATE_DEFECT, severity=blocking_for_dispatch)",
+    "v3_package_unmodified": true,
+    "v3_dispatch_eligible": false
+  },
+  "escalation_conditions": [
+    "need to modify any path outside owned_paths or inside forbidden_paths",
+    "need to change lab-api-contract-v3.1.json or result-envelope-schema-v3.1.json",
+    "need to execute pkill/killall/pgrep/ipcrm/global cleanup of processes or /dev/shm",
+    "need to copy quarantined precanonical ELFs instead of rebuilding",
+    "any undeclared dependency on the other lab",
+    "need to create the foreign-survival probe process via sup.start_process()"
+  ],
+  "leaves": [
+    {
+      "dependencies": [],
+      "envelope_path": "receipts/headless-lab-results-v3.1/lab-a-result.json",
+      "focused_tests": [
+        {
+          "command": "python3 -m py_compile tests/integration/headless_audio_lab/process_supervisor.py tests/integration/headless_audio_lab/jack_server.py tests/integration/headless_audio_lab/osc_probe.py tests/integration/headless_audio_lab/sooperlooper_launcher.py tests/integration/headless_audio_lab/__init__.py",
+          "id": "ft-a1"
+        },
+        {
+          "command": "PYTHONPATH=tests/integration python3 -c \"from headless_audio_lab.process_supervisor import ProcessSupervisor; from headless_audio_lab.jack_server import JackServer; from headless_audio_lab.osc_probe import OscProbe; from headless_audio_lab.sooperlooper_launcher import SooperLooperLauncher; print('LAB-A API import OK')\"",
+          "id": "ft-a2"
+        },
+        {
+          "command": "PYTHONPATH=tests/integration python3 -c \"from headless_audio_lab.process_supervisor import ProcessSupervisor; s = ProcessSupervisor(); assert s.get_owned_pids() == [] and s.get_owned_pgids() == []; print('LAB-A empty-ledger OK')\"",
+          "id": "ft-a3"
+        },
+        {
+          "command": "PYTHONPATH=tests/integration python3 -c \"import subprocess, os, time; from headless_audio_lab.process_supervisor import ProcessSupervisor; s = ProcessSupervisor(); info = s.start_process('fta4', ['/bin/sleep', '5'], {}, '.', '/dev/null', '/dev/null'); assert info.pid > 0; foreign = subprocess.Popen(['/bin/sleep', '8'], start_new_session=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL); assert foreign.pid not in s.get_owned_pids(); s.cleanup(timeout=5.0); assert not os.path.exists('/proc/%d' % info.pid), 'owned must be terminated'; assert os.path.exists('/proc/%d' % foreign.pid), 'foreign must survive'; assert s.verify_cleanup() == []; foreign.terminate();\ntry:\n    foreign.wait(timeout=5.0)\nexcept subprocess.TimeoutExpired:\n    foreign.kill(); foreign.wait(timeout=5.0)\nprint('LAB-A corrected ownership lifecycle OK')\"",
+          "id": "ft-a4"
+        }
+      ],
+      "forbidden_paths": [
+        "PROJECT-MANIFEST.json",
+        "PROJECT-AUTONOMY.json",
+        "AUTONOMY.md",
+        "doc/sooperlooper/ROADMAP.md",
+        "doc/sooperlooper/WORK-QUEUE.md",
+        "doc/sooperlooper/checkpoints",
+        "doc/sooperlooper/checkpoints/CURRENT.md",
+        ".hermes/autonomy",
+        "receipts/headless-lab-v3",
+        "receipts/headless-lab-v3-review-binding",
+        "receipts/headless-lab-v3.1",
+        "receipts/headless-lab-v3.1-review-binding",
+        "tests/__init__.py",
+        "tests/integration/__init__.py",
+        "tests/integration/headless_audio_lab/audio_oracle.py",
+        "tests/integration/headless_audio_lab/graph_assertions.py",
+        "tests/integration/headless_audio_lab/runner.py",
+        "tests/integration/headless_audio_lab/test_modules.py",
+        "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+        "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+        "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+        "tests/integration/headless_audio_lab/fixtures/.gitignore",
+        "receipts/headless-lab-results-v3.1/lab-b-result.json"
+      ],
+      "hidden_dependencies": [],
+      "leaf_id": "LEAF-LAB-A-V3_1",
+      "lease_id": "LEASE-20260805T165044Z-LAB-A-V3_1",
+      "negative_gates": [
+        "reject pass/TODO/NotImplemented placeholders",
+        "reject dummy ProcessInfo / pid=0 / pid=-1",
+        "reject MagicMock as process substitute",
+        "reject methods that always return success",
+        "reject tests that only verify importation",
+        "require owned child lifecycle, real positive PID, identity verification, bounded shutdown, failure propagation",
+        "require cleanup(timeout) to terminate ALL owned processes and verify_cleanup() == []",
+        "reject foreign-survival probe process created via sup.start_process() (foreign must be created OUTSIDE the supervisor via subprocess.Popen, start_new_session=True)"
+      ],
+      "owned_paths": [
+        "tests/integration/headless_audio_lab/process_supervisor.py",
+        "tests/integration/headless_audio_lab/jack_server.py",
+        "tests/integration/headless_audio_lab/osc_probe.py",
+        "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+        "tests/integration/headless_audio_lab/__init__.py",
+        "receipts/headless-lab-results-v3.1/lab-a-result.json"
+      ],
+      "review_class": "R2",
+      "task_id": "LAB-A"
+    },
+    {
+      "dependencies": [],
+      "envelope_path": "receipts/headless-lab-results-v3.1/lab-b-result.json",
+      "focused_tests": [
+        {
+          "command": "python3 -m py_compile tests/integration/headless_audio_lab/audio_oracle.py tests/integration/headless_audio_lab/graph_assertions.py tests/integration/headless_audio_lab/runner.py tests/integration/headless_audio_lab/test_modules.py tests/__init__.py tests/integration/__init__.py",
+          "id": "ft-b1"
+        },
+        {
+          "command": "PYTHONPATH=tests/integration python3 -c \"from headless_audio_lab.audio_oracle import analyze_wav, AnalysisResult; from headless_audio_lab.graph_assertions import GraphAssertions; from headless_audio_lab.runner import LabRunner; print('LAB-B API import OK')\"",
+          "id": "ft-b2"
+        },
+        {
+          "command": "PYTHONPATH=tests/integration python3 -c \"import tempfile, wave, os; fd, p = tempfile.mkstemp(suffix='.wav'); os.close(fd); w = wave.open(p, 'wb'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(48000); w.writeframes(b'\\\\x00\\\\x00' * 4800); w.close(); from headless_audio_lab.audio_oracle import analyze_wav; r = analyze_wav(p, 4800, 4800, 120.0, 4, 48000); d = r.to_dict() if hasattr(r, 'to_dict') else r; assert d.get('verification') == 'FAIL', 'silence must be rejected'; os.unlink(p); print('LAB-B oracle silence-rejection OK')\"",
+          "id": "ft-b3"
+        },
+        {
+          "command": "gcc -std=c11 -O2 -o tests/integration/headless_audio_lab/fixtures/synthetic_source tests/integration/virtual_studio/audio/synthetic_source.c -ljack -lm -lpthread && gcc -std=c11 -O2 -o tests/integration/headless_audio_lab/fixtures/deterministic_capture tests/integration/virtual_studio/audio/deterministic_capture.c -ljack -lm -lpthread && test -x tests/integration/headless_audio_lab/fixtures/synthetic_source && test -x tests/integration/headless_audio_lab/fixtures/deterministic_capture && echo 'LAB-B fixtures rebuilt OK'",
+          "id": "ft-b4"
+        }
+      ],
+      "forbidden_paths": [
+        "PROJECT-MANIFEST.json",
+        "PROJECT-AUTONOMY.json",
+        "AUTONOMY.md",
+        "doc/sooperlooper/ROADMAP.md",
+        "doc/sooperlooper/WORK-QUEUE.md",
+        "doc/sooperlooper/checkpoints",
+        "doc/sooperlooper/checkpoints/CURRENT.md",
+        ".hermes/autonomy",
+        "receipts/headless-lab-v3",
+        "receipts/headless-lab-v3-review-binding",
+        "receipts/headless-lab-v3.1",
+        "receipts/headless-lab-v3.1-review-binding",
+        "tests/integration/headless_audio_lab/process_supervisor.py",
+        "tests/integration/headless_audio_lab/jack_server.py",
+        "tests/integration/headless_audio_lab/osc_probe.py",
+        "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+        "tests/integration/headless_audio_lab/__init__.py",
+        "receipts/headless-lab-results-v3.1/lab-a-result.json"
+      ],
+      "hidden_dependencies": [],
+      "leaf_id": "LEAF-LAB-B-V3_1",
+      "lease_id": "LEASE-20260805T165044Z-LAB-B-V3_1",
+      "negative_gates": [
+        "exact analyze_wav signature",
+        "real silence test (silence always FAIL)",
+        "malformed WAV FAIL/ERROR",
+        "contractual frame count",
+        "no empty tests",
+        "no trivial asserts",
+        ".gitignore byte-exact (no literal backslash-n)",
+        "scenarios parseable",
+        "runner uses the contractual APIs",
+        "no ELF tracked in the result commit"
+      ],
+      "owned_paths": [
+        "tests/__init__.py",
+        "tests/integration/__init__.py",
+        "tests/integration/headless_audio_lab/audio_oracle.py",
+        "tests/integration/headless_audio_lab/graph_assertions.py",
+        "tests/integration/headless_audio_lab/runner.py",
+        "tests/integration/headless_audio_lab/test_modules.py",
+        "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+        "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+        "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+        "tests/integration/headless_audio_lab/fixtures/.gitignore",
+        "receipts/headless-lab-results-v3.1/lab-b-result.json"
+      ],
+      "review_class": "R2",
+      "task_id": "LAB-B"
+    }
+  ],
+  "schema": "batch-manifest/v3.1"
+}

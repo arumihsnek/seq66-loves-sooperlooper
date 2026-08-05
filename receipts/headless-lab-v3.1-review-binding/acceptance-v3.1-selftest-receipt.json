@@ -1,0 +1,135 @@
+{
+  "schema": "acceptance-verifier-v3.1",
+  "version": "3.1.0",
+  "mode": "selftest",
+  "checks": [
+    {
+      "name": "selftest: LAB-A placeholder detector flags dummy ProcessInfo",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "hits": [
+          "dummy-start-comment",
+          "not-actually-comment",
+          "pid-zero-literal"
+        ]
+      }
+    },
+    {
+      "name": "selftest: LAB-B trivial-test detector flags pass/import-only",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "hits": [
+          "pass-stub",
+          "trivial-assert-true",
+          "import-only-test-name"
+        ]
+      }
+    },
+    {
+      "name": "selftest: good test not falsely flagged",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "hits": []
+      }
+    },
+    {
+      "name": "selftest: v3 defective foreign-process pattern detected/rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "reasons": [
+          "start_process-created 'foreign' checked for survival after cleanup (line 3) [exact v3 signature]"
+        ],
+        "snippet": "foreign = sup.start_process('foreign', ['/bin/sleep', '5'], {}, '.', '/dev/null', '/dev/null')\nsup.cleanup(timeout=5.0)\nforeign_alive = os.path.exists('/proc/%d' % foreign.pid)\nout['foreign_not_signaled'] = foreign_alive\n"
+      }
+    },
+    {
+      "name": "selftest: v3.1 corrected foreign-process pattern accepted",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "reasons": []
+      }
+    },
+    {
+      "name": "selftest: external process survives supervisor cleanup in controlled fixture",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "owned_alive_before": true,
+        "foreign_alive_before": true,
+        "foreign_registered_in_supervisor": false,
+        "owned_alive_after": false,
+        "foreign_alive_after": true,
+        "verify_cleanup": [],
+        "foreign_terminated_by_controller": true,
+        "remaining_children": []
+      }
+    },
+    {
+      "name": "selftest: owned process does not survive supervisor cleanup",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "owned_alive_before": true,
+        "foreign_alive_before": true,
+        "foreign_registered_in_supervisor": false,
+        "owned_alive_after": false,
+        "foreign_alive_after": true,
+        "verify_cleanup": [],
+        "foreign_terminated_by_controller": true,
+        "remaining_children": []
+      }
+    },
+    {
+      "name": "selftest: all temporary children cleaned at end",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "owned_alive_before": true,
+        "foreign_alive_before": true,
+        "foreign_registered_in_supervisor": false,
+        "owned_alive_after": false,
+        "foreign_alive_after": true,
+        "verify_cleanup": [],
+        "foreign_terminated_by_controller": true,
+        "remaining_children": []
+      }
+    },
+    {
+      "name": "selftest: controlled fixture ownership experiment overall",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "owned_alive_before": true,
+        "foreign_alive_before": true,
+        "foreign_registered_in_supervisor": false,
+        "owned_alive_after": false,
+        "foreign_alive_after": true,
+        "verify_cleanup": [],
+        "foreign_terminated_by_controller": true,
+        "remaining_children": []
+      }
+    },
+    {
+      "name": "selftest: foreign created by start_process is detected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "reasons": [
+          "start_process-created 'foreign' checked for survival after cleanup (line 3) [exact v3 signature]"
+        ]
+      }
+    },
+    {
+      "name": "selftest: silent WAV fixture constructed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {}
+    }
+  ],
+  "env_notes": []
+}

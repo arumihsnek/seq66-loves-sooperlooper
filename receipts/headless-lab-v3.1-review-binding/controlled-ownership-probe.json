@@ -1,0 +1,75 @@
+{
+  "all_temporary_children_cleaned": true,
+  "case1_correct": {
+    "case": "correct",
+    "command": [
+      "/bin/sleep",
+      "30"
+    ],
+    "expected_owned_child_alive_after_cleanup": false,
+    "finished_at_utc": "2026-08-05T16:54:08Z",
+    "owned_child_alive_after_cleanup": false,
+    "owned_child_alive_before_cleanup": true,
+    "pgid": 3283038,
+    "pid": 3283038,
+    "pid_positive": true,
+    "registered_owned_before_cleanup": [
+      3283038
+    ],
+    "started_at_utc": "2026-08-05T16:54:08Z",
+    "verify_cleanup_after": []
+  },
+  "case2_really_foreign": {
+    "case": "really_foreign",
+    "expected_foreign_child_alive_after_supervisor_cleanup": true,
+    "expected_owned_child_alive_after_cleanup": false,
+    "finished_at_utc": "2026-08-05T16:54:08Z",
+    "foreign_alive_after_teardown": false,
+    "foreign_alive_before_cleanup": true,
+    "foreign_child_alive_after_supervisor_cleanup": true,
+    "foreign_creation": "subprocess.Popen directly (start_new_session=True), NOT registered",
+    "foreign_pid": 3283039,
+    "foreign_registered_in_supervisor": false,
+    "foreign_teardown": {
+      "elapsed_s": 0.001,
+      "events": [
+        "TERM:exited"
+      ],
+      "label": "foreign-1",
+      "pid": 3283039,
+      "returncode": -15
+    },
+    "owned_child_alive_after_cleanup": false,
+    "owned_child_alive_before_cleanup": true,
+    "owned_command": [
+      "/bin/sleep",
+      "30"
+    ],
+    "owned_pid": 3283040,
+    "started_at_utc": "2026-08-05T16:54:08Z",
+    "verify_cleanup_after": []
+  },
+  "case3_v3_pattern_repro": {
+    "alive_before_cleanup": true,
+    "case": "v3_probe_pattern_against_correct_fixture",
+    "command": [
+      "/bin/sleep",
+      "5"
+    ],
+    "contradiction_demonstrated": true,
+    "correct_supervisor_terminates_owned": true,
+    "finished_at_utc": "2026-08-05T16:54:08Z",
+    "foreign_alive_after_cleanup": false,
+    "foreign_created_via": "sup.start_process (identical to acceptance-verifier-v3.py LAB-A probe)",
+    "pid": 3283041,
+    "started_at_utc": "2026-08-05T16:54:08Z",
+    "v3_gate_condition_foreign_not_signaled": false,
+    "v3_gate_would_pass_with_this_fixture": false
+  },
+  "exit_code": 0,
+  "finished_at_utc": "2026-08-05T16:54:08Z",
+  "leftover_children_after_all_experiments": [],
+  "result": "PASS",
+  "runner_pid": 3283037,
+  "started_at_utc": "2026-08-05T16:54:08Z"
+}

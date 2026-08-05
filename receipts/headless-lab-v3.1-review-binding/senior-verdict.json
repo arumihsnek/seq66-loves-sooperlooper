@@ -1,0 +1,72 @@
+{
+  "accept_does_not_authorize_dispatch": true,
+  "binding": {
+    "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+    "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+    "corrected_probe_controlled_test_receipt": "controlled-ownership-probe-receipt.json",
+    "defect_reproduction_receipt": "v3-defect-reproduction.json",
+    "evidence_parent_head": "9678ff5070b560e073070a2aa2bf8d1e79907f9e",
+    "package_validation_receipt": "v3.1-package-validation.json",
+    "rejected_head_receipt": "rejected-head-v3.1-test-receipt.json",
+    "selftest_receipt": "acceptance-v3.1-selftest-receipt.json",
+    "twelve_artifact_hashes": {
+      "acceptance-manifest-v3.1.json": "ab2c2534b19e74f97bcd6c1a0dbf727600931a6e6eafcc069035e961ac337430",
+      "acceptance-verifier-v3.1.py": "3f3f36eea460b150fe50b53af27c8580bd82aad06cc561f1c997d058e8f687f0",
+      "batch-manifest-v3.1.json": "e7c3f560192a9902614ba905f40dce4c7a707ed38d95ad81871163a641699ddc",
+      "build-provenance-policy-v3.1.json": "c6161cbba2aadbab2f979e246b3c4db44175b5a784a78e4188ba3119f501b43b",
+      "dispatch-plan-v3.1.json": "b196b6422c2a348b5a3836e30603155e4a17d6e3eaeb8ba70d76ef4666a9e67f",
+      "lab-api-contract-v3.1.json": "b9ecf9c528249a117e3851691e50e93957d2b16a464c75e8e14dd2dae29485a2",
+      "lease-plan-lab-a-v3.1.json": "2758c63628bf213996a316b526870d32bcd7b93f0c44d54bd0cd03c1c746efa9",
+      "lease-plan-lab-b-v3.1.json": "6e1e24343323d84b3ac263977f46284390740c80954369d2c77169b626708ae3",
+      "port-plan-v3.1.json": "72a87fc1aade47255d786f895f665cb35d13ff1e2172e7a294788a25fb78afbf",
+      "predispatch-readiness-v3.1.json": "4aa37696f2ae47a6997a39a6d646282c85d664e12c670ce48cf8bb095279667b",
+      "result-envelope-schema-v3.1.json": "92d613575059e8e195a41182d8a54ba9ae7e1398c6789b34d65fc0543119b92d",
+      "scope-freeze-v3.1.json": "70aad3de4706214a266b0fdb7f2d40c0791c915071d55d20bf961fbf6547fb84"
+    },
+    "v3_1_package_manifest_sha256": "d6ebac8ea127a93f7f582b98b2436f60f3b1fc0b6dbbaad2760d89306186ac48"
+  },
+  "blocking_findings": [],
+  "codex_exec_processes": 1,
+  "detailed_status": "VALID_ADVISORY_VERDICT",
+  "execution_id": "9f8e508f-4944-4c88-be2e-559e5e6585aa",
+  "label": "seq66-lab-v3-1-corrected-acceptance-package",
+  "mission_id": "seq66-lab-v3-1-corrected-acceptance-package",
+  "mode": "plan-review",
+  "model_turns_observed": 1,
+  "next_safe_step": "Congelar y publicar la evidencia exacta vinculada al head 9678ff50..., al manifest SHA-256 d6ebac8ea127a93f7f582b98b2436f60f3b1fc0b6dbbaad2760d89306186ac48 y a los doce hashes de artefactos; esperar una autorizaci\u00f3n humana separada antes de cualquier dispatch.",
+  "operational_usability": true,
+  "question_answers": [
+    {
+      "answer": "S\u00ed. v3.1 crea el proceso foreign fuera del supervisor mediante subprocess.Popen, mantiene el proceso owned bajo start_process y verifica correctamente que owned muera y foreign sobreviva tras cleanup.",
+      "id": "Q1"
+    },
+    {
+      "answer": "S\u00ed. El contrato exige terminar todos y solo los procesos owned, y verify_cleanup() == []; las pruebas controladas confirman owned muerto y cleanup correcto.",
+      "id": "Q2"
+    },
+    {
+      "answer": "S\u00ed. El proceso externo se crea fuera del supervisor y se limpia en finally con TERM, espera acotada y KILL como fallback exacto; el detector rechaza el patr\u00f3n defectuoso de v3.",
+      "id": "Q3"
+    },
+    {
+      "answer": "S\u00ed. Los checks reportados confirman integridad de completion, envelopes, provenance y clean-checkout enforcement: 14/14 validadores, selftest 11/11, probe 8/8 y rejected-head test rechazado correctamente.",
+      "id": "Q4"
+    },
+    {
+      "answer": "S\u00ed. El paquete exacto puede congelarse para decisi\u00f3n humana separada: est\u00e1 validado byte a byte, no se ha despachado, las leases est\u00e1n planned, no hay worktrees/leaves y D0/D1/D2 no se ejecutaron.",
+      "id": "Q5"
+    }
+  ],
+  "recorded_at_utc": "2026-08-05T17:05:45Z",
+  "required_actions": [],
+  "response_artifact": {
+    "artifact_schema": "codex-senior-consult-response-artifact/v1",
+    "fingerprint": "3b8839d7c154a958ccc933e8d5ba448c290ce1c380abe51f55e8e9c48d792e82",
+    "relative_path": "responses/3b8839d7c154a958ccc933e8d5ba448c290ce1c380abe51f55e8e9c48d792e82.json"
+  },
+  "response_fingerprint": "3b8839d7c154a958ccc933e8d5ba448c290ce1c380abe51f55e8e9c48d792e82",
+  "schema": "senior-verdict/v3.1",
+  "status": "COMPLETED",
+  "summary": "El paquete v3.1 corrige de forma sem\u00e1nticamente satisfacible la contradicci\u00f3n de v3, supera las validaciones declaradas y es seguro para congelar como evidencia exacta. La aceptaci\u00f3n no autoriza dispatch.",
+  "verdict": "accept"
+}

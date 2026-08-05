@@ -1,0 +1,27 @@
+{
+  "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+  "closure_summary": {
+    "d0_d1_d2_executed": false,
+    "integration_candidate_set": [],
+    "v3_package": "IMMUTABLE; REJECTED_FOR_DISPATCH_BY_EXTERNAL_ARCHITECT_REVIEW (LAB-A foreign-process acceptance-gate contradiction); exact-byte review remains valid historical evidence (CP-056)",
+    "v3_leases": "planned, never activated",
+    "v3_1_package": "created with new IDs/hashes; frozen; not dispatched",
+    "v3_1_leases": "planned (LEASE-20260805T165044Z-LAB-A-V3_1, LEASE-20260805T165044Z-LAB-B-V3_1); zero worktrees; zero leaves; D0/D1/D2 NOT executed"
+  },
+  "d0_d1_d2_authorized": false,
+  "human_redispatch_authorized": false,
+  "integration_authorized": false,
+  "predispatch_checks": [
+    "both result branches absent (result/<future-run-id>-lab-a-v3_1, result/<future-run-id>-lab-b-v3_1)",
+    "both worktree paths absent",
+    "both new worktrees clean at exact candidate 50953878...",
+    "acceptance harness SHA-256 verified against acceptance-manifest-v3.1.json",
+    "new lease plans planned (LEASE-20260805T165044Z-LAB-A-V3_1, LEASE-20260805T165044Z-LAB-B-V3_1)",
+    "zero active old leases",
+    "no reuse of the four forbidden v2 paths/branches",
+    "corrected foreign-process control satisfiable (controlled ownership probe PASS)"
+  ],
+  "required_authorization": "HUMAN_DECISION_PENDING: authorize or reject a NEW LAB-A/LAB-B dispatch using EXACTLY package v3.1, new branches, new worktrees, new leases",
+  "schema": "predispatch-readiness/v3.1",
+  "status": "FROZEN_NOT_DISPATCHED"
+}

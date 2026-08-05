@@ -1,0 +1,25 @@
+{
+  "d0_d1_d2_authorized": false,
+  "d0_d1_d2_executed": false,
+  "evidence_parent_head": "9678ff5070b560e073070a2aa2bf8d1e79907f9e",
+  "integration_authorized": false,
+  "leases_v3_1_activated": [],
+  "leases_v3_1_planned": [
+    "LEASE-20260805T165044Z-LAB-A-V3_1",
+    "LEASE-20260805T165044Z-LAB-B-V3_1"
+  ],
+  "leaves_v3_1": 0,
+  "recorded_at_utc": "2026-08-05T17:05:45Z",
+  "redispatch_authorized": false,
+  "schema": "review-binding-receipt/v3.1",
+  "senior_execution_id": "9f8e508f-4944-4c88-be2e-559e5e6585aa",
+  "senior_response_fingerprint": "3b8839d7c154a958ccc933e8d5ba448c290ce1c380abe51f55e8e9c48d792e82",
+  "v3_1_dispatched": false,
+  "v3_1_exact_bytes_reviewed": true,
+  "v3_1_package_manifest_sha256": "d6ebac8ea127a93f7f582b98b2436f60f3b1fc0b6dbbaad2760d89306186ac48",
+  "v3_1_status": "EXACT_BYTES_REVIEWED_NOT_DISPATCHED",
+  "v3_dispatch_eligible": false,
+  "v3_exact_bytes_reviewed": true,
+  "v3_status": "IMMUTABLE_REJECTED_FOR_DISPATCH",
+  "worktrees_v3_1": 0
+}

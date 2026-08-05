@@ -1,0 +1,23 @@
+{
+  "checkout": "clean detached worktree at rejected head (RUN_DIR/validation/checkout-0769d150)",
+  "expected_verdict": "REJECT",
+  "harness": "acceptance-verifier-v3.1.py",
+  "observed": {
+    "lab_a": {
+      "exit_code": 1,
+      "failures": [
+        "lab-a: imports"
+      ]
+    },
+    "lab_b": {
+      "exit_code": 1,
+      "failures": [
+        "lab-b: test_modules negative gates",
+        "lab-b: .gitignore byte-exact"
+      ]
+    }
+  },
+  "recorded_at_utc": "2026-08-05T17:05:45Z",
+  "rejected_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+  "schema": "rejected-head-test-receipt/v3.1"
+}

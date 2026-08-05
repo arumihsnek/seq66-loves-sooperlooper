@@ -1,0 +1,77 @@
+{
+  "directory": "receipts/headless-lab-v3.1-review-binding",
+  "files": [
+    {
+      "file": "acceptance-v3.1-selftest-receipt.json",
+      "sha256": "fdf03b45f87f8ffc36ae8c6b6a3886ee23a06287b007c7b44b6d0cd7f4df26c9",
+      "size": 3917
+    },
+    {
+      "file": "controlled-ownership-probe-receipt.json",
+      "sha256": "16ba6e591d1c41679cfc8bb73c1dcd4b90805c4b17445b2df4e63fd06e403f6f",
+      "size": 1562
+    },
+    {
+      "file": "controlled-ownership-probe.json",
+      "sha256": "36b596d4ec91a1c8220c49d74fb104a7f60e3eb785b13e158279b5426c255328",
+      "size": 2358
+    },
+    {
+      "file": "rejected-head-v3.1-lab-a-test-receipt.json",
+      "sha256": "fdc0f2e80c124b368c6f4e27c7fa8cf5cb037ae6eea4d985119f76a64f9abc26",
+      "size": 440
+    },
+    {
+      "file": "rejected-head-v3.1-lab-b-test-receipt.json",
+      "sha256": "99ec02cc9e52170a875ee79365bd9f95cba108545d45bbd8bee9b6225b9323aa",
+      "size": 2430
+    },
+    {
+      "file": "rejected-head-v3.1-test-receipt.json",
+      "sha256": "28b9aad747476c0743f1a963bc597b665376618fd4c3c784460f629e0ed24525",
+      "size": 605
+    },
+    {
+      "file": "review-binding-receipt.json",
+      "sha256": "e0262985a05a2163cf15e489a291240519ca869e838466cf58bc527dd68ed95d",
+      "size": 986
+    },
+    {
+      "file": "senior-preflight-receipt.json",
+      "sha256": "b2b563ae35d1be4f4243e93ad2215c9b100dd3d113bb24d749a8717a68e3c94b",
+      "size": 782
+    },
+    {
+      "file": "senior-review-bundle.json",
+      "sha256": "4f2b9ff399f09ab5ad77016fb70fc7941e9a5dd44af4132000b6f5a126ee75de",
+      "size": 21882
+    },
+    {
+      "file": "senior-verdict.json",
+      "sha256": "631a33eac19949ec9afbf1b5d225e3079dac296865d8134224586002236cdaea",
+      "size": 4705
+    },
+    {
+      "file": "tracked-v3.1-hashes.json",
+      "sha256": "453587ef13b4a5aebbf1a7cf5ef22f32980364564cd2b06b845f5821389dd258",
+      "size": 2233
+    },
+    {
+      "file": "v3-defect-reproduction.json",
+      "sha256": "e41df1ae58b71c17faf9c3848aa6bf91aba726ae46ef0d4cab73250f16d43e3e",
+      "size": 3853
+    },
+    {
+      "file": "v3.1-package-manifest-validation.json",
+      "sha256": "3f75e7677a4af30d02f163fe14d93bb428d42551e391e778a16471491fb0a892",
+      "size": 4529
+    },
+    {
+      "file": "v3.1-package-validation.json",
+      "sha256": "1aa54929a844c7959903ef4120aa86202e4f8a72538ee17a7e5dd771576fab9a",
+      "size": 2539
+    }
+  ],
+  "recorded_at_utc": "2026-08-05T17:05:45Z",
+  "schema": "review-binding-index/v3.1"
+}
