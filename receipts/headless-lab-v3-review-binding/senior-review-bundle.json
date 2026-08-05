@@ -1,0 +1,253 @@
+{
+  "alternatives": [
+    "Accept the previous review d080c145... as binding for these bytes -> rejected: it reviewed the pre-publication bundle snapshot, and the human stop reason requires an exact-byte binding.",
+    "Treat the reported vs published hash difference as proof of tampering -> rejected: demonstrated cause is first-generation staleness, and the published manifest validates against the tracked blobs."
+  ],
+  "caller_required": [
+    "/alternatives",
+    "/candidate_decision",
+    "/code_excerpts",
+    "/constraints",
+    "/current_plan",
+    "/decision_needed",
+    "/diff",
+    "/escalation",
+    "/invalidated_assumptions",
+    "/objective",
+    "/observed_facts",
+    "/progress",
+    "/questions",
+    "/relevant_contracts",
+    "/risks_already_identified",
+    "/runtime_evidence",
+    "/snapshot/checkpoint_fingerprint",
+    "/snapshot/plan_fingerprint",
+    "/tests"
+  ],
+  "candidate_decision": {
+    "decision": "The published v3 package at 66f2f0c8 is exact-byte verified and sound; review gap closed; still FROZEN_NOT_DISPATCHED.",
+    "rationale": "All 12 artifact hashes verified from tracked blobs; manifest MATCH; 10/10 validators; selftest PASS; rejected-head REJECT as expected; discrepancy cause demonstrated without mutating v3.",
+    "scope": "No dispatch, no leases, no worktrees, no D0/D1/D2; v3 bytes unchanged."
+  },
+  "code_excerpts": [
+    {
+      "section": "package manifest validation status",
+      "text": "MATCH: 12/12 files, sizes, sha256 exact; batch BATCH-20260805T143214Z-DOGFOOD004-LAB-V3; candidate exact in scope-freeze/batch-manifest/dispatch-plan/lease plans."
+    },
+    {
+      "section": "completion definition (dispatch-plan-v3.json)",
+      "text": "criteria: non-empty commit, published branch, full result-head SHA, clean worktree, valid envelope, owned-path-only diff, all literal tests executed, controller clean-checkout verification PASS; summary can never substitute."
+    },
+    {
+      "section": "envelope model (result-envelope-schema-v3.json)",
+      "text": "non-self-referential: tested_parent_sha + result_tree_sha + external_branch_binding; envelope committed by leaf at frozen owned path receipts/headless-lab-results-v3/<lab>-result.json; container commit resolved externally after push."
+    },
+    {
+      "section": "acceptance ownership (acceptance-manifest-v3.json)",
+      "text": "acceptance-verifier-v3.py sha256 f6ee256d...; owner=controller (NOT LAB-A, NOT LAB-B); executed by controller against clean checkout of exact result head; selftest required before use."
+    },
+    {
+      "section": "negative gates + provenance (acceptance-manifest/build-provenance)",
+      "text": "LAB-A: reject pass/TODO/NotImplemented/dummy ProcessInfo/pid=0/MagicMock/always-success/import-only; require real PID, owned lifecycle, bounded shutdown, failure propagation, no foreign signaling. LAB-B: exact analyze_wav signature, silence always FAIL, malformed WAV FAIL/ERROR, frame count, no empty tests, no trivial asserts, .gitignore byte-exact, scenarios parseable, runner uses contractual APIs. Build: empty dir, canonical sources, captured compiler/command/outputs, reject non-reproducible provenance and ELF tracked."
+    },
+    {
+      "section": "freshness + lease semantics (dispatch-plan/lease plans)",
+      "text": "forbidden reuse: v2 worktrees + result/lab-* branches; future naming derived from future RUN ID; new lease IDs LEASE-20260805T143214Z-LAB-A/B-V3 (planned); v2 leases terminal failed_validation; predispatch: FROZEN_NOT_DISPATCHED, redispatch_authorized=false, d0_d1_d2_authorized=false."
+    }
+  ],
+  "constraints": [
+    "Do NOT modify any artifact under receipts/headless-lab-v3/.",
+    "Do NOT edit CP-048..CP-055.",
+    "Do NOT modify candidate 50953878 or the rejected LAB-B branch.",
+    "Do NOT dispatch LAB-A/LAB-B, create LAB worktrees, activate leases, or run D0/D1/D2.",
+    "Previous senior review d080c145... is historical evidence only; not used as binding for these bytes."
+  ],
+  "current_plan": {
+    "batch_id": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+    "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+    "pr_head": "66f2f0c8ced0b29ca579fd01eafda2daca51b75d",
+    "summary": "V3 exact-byte review binding: revalidation -> tracked export -> manifest validation -> historical discrepancy analysis -> 10 validators -> selftest -> rejected-head test -> exact senior review -> durable evidence under receipts/headless-lab-v3-review-binding/ -> CP-056 -> commit + PR #34 + exact-head CI."
+  },
+  "decision_needed": "Verdict on the exact published v3 package. IMPORTANT: an accept verdict closes the review gap but does NOT authorize dispatch; a continue/revise/reject verdict or blocking findings produces V3_EXACT_REVIEW_NOT_ACCEPTED.",
+  "diff": {
+    "description": "No v3 mutation. Session diff will contain ONLY receipts/headless-lab-v3-review-binding/*, CP-056, CURRENT, and minimal manifest/queue changes required by the validator.",
+    "expected_diff_paths": [
+      "receipts/headless-lab-v3-review-binding/*",
+      "doc/sooperlooper/checkpoints/2026-08-05-CP-056-v3-exact-byte-review-binding.md",
+      "doc/sooperlooper/checkpoints/CURRENT.md"
+    ]
+  },
+  "escalation": {
+    "if_P0_P1_findings": "Record V3_EXACT_REVIEW_NOT_ACCEPTED; redispatch_authorized=false; no dispatch.",
+    "if_plan_unacceptable": "Do not close the gap; publish findings; no v3 mutation (repair would require v3.1+).",
+    "if_verdict_not_accept_or_continue": "V3_EXACT_REVIEW_NOT_ACCEPTED; stop at HUMAN_DECISION_PENDING.",
+    "local_deterministic_checks": [
+      "json.tool on all 12 JSON artifacts (PASS)",
+      "package manifest vs exported bytes: 12/12 MATCH (PASS)",
+      "v3 validators 10/10 (PASS)",
+      "acceptance-verifier --selftest (PASS)",
+      "acceptance-verifier vs clean 0769d150 (REJECT as expected)",
+      "git diff --check + validate-project-control.py (PASS at commit time)"
+    ],
+    "material_impact": "A wrong verdict could freeze a silently-mutated or mis-hashed package as dispatch-ready, or falsely block a correct package. Byte-exact binding eliminates both risks."
+  },
+  "invalidated_assumptions": [
+    "Local working copies (~/.hermes/runs/.../contracts-v3) are authoritative -> invalidated: only tracked blobs at the exact PR head are authoritative for this review.",
+    "The reported hashes (3948fb45/58dc0208/b8384f66) describe the published package -> invalidated: they were first-generation values; published bytes match the GitHub manifest."
+  ],
+  "mission_id": "seq66-lab-v3-exact-published-package",
+  "mode": "plan-review",
+  "objective": "Independent senior plan-review of the PUBLISHED v3 predispatch package bound to exact bytes at PR head 66f2f0c8ced0b29ca579fd01eafda2daca51b75d. Purpose: close the hash-discrepancy gap by reviewing the exact tracked blobs (not local working copies). Evaluate: completion enforcement, envelope enforcement, controller clean-checkout verification, acceptance ownership separation, negative placeholder gates, reproducible build provenance, no tracked ELF policy, fresh branches/worktrees, new lease IDs, v2 terminal lease state, D0/D1/D2 prohibition, controller cannot act as leaf. This review MUST NOT authorize dispatch.",
+  "observed_facts": [
+    "PR #34 OPEN, draft=true, MERGEABLE; remote head == 66f2f0c8ced0b29ca579fd01eafda2daca51b75d (== EXPECTED_PR_HEAD).",
+    "CI on 66f2f0c8: validate-control-plane SUCCESS + compile-and-test SUCCESS (head_sha matches).",
+    "Tracked-export from blobs at 66f2f0c8 (13 files via git cat-file -p of blob objects); source: receipts/headless-lab-v3/.",
+    "Package manifest validation vs exported bytes: MATCH \u2014 12/12 files present, 12/12 sizes exact, 12/12 sha256 exact, zero missing, zero extra, batch_id exact (BATCH-20260805T143214Z-DOGFOOD004-LAB-V3), candidate binding exact in 5 artifacts.",
+    "The 12 published artifact sha256 values are: acceptance-manifest-v3.json=114bce617d98091e2b0be8d09b0fac39fd6f7a639ae4ccae15f9da6e2d83e084; acceptance-verifier-v3.py=f6ee256dcb31c091492fcff17cc53f251293e76b3aa094559568e4fc36fffd78; batch-manifest-v3.json=fbb9df63b055018969a3d41ba28014bc4ac8a99d1a624c5ec235221d3b48d689; build-provenance-policy-v3.json=23f1aea291dc8164ff040aa3c14e38f89306c0f154d6d6127843dd3ec2e3c597; dispatch-plan-v3.json=a2934af1cf10934ff6625186de666731b43c4790590a3c3d7d1252bc4c62951e; lab-api-contract-v3.json=77b9572dd2e457b7b8eaee8d2c69d3040884ba157f47c92af84b040a0de5766e; lease-plan-lab-a-v3.json=b2d735cf578a594349f17747fe990987f5a4aba907d277e01c4474beb8ab7c1b; lease-plan-lab-b-v3.json=48b81f8aceaa8f32e3a5bce19a2c68fe534304a5fc3aadd18ca73c0a77449928; port-plan-v3.json=839835fba0451a74130169732c0deaeecc0f5fbfcf43614313a79872271f43d0; predispatch-readiness-v3.json=5fceb503c01a3af002dad12721d861de24d51b84cf86496f0d0e88bd9b7cb6db; result-envelope-schema-v3.json=5a0d3147562dbf7d16638061e9246f4d7603fbbead7a0610a8ee075cb1f4a2f1; scope-freeze-v3.json=c84c0c6ddfbbd346a0953fe8f735e1adf7d7ee3b1940a1c9a72f8bfe9e0117ee",
+    "Package manifest blob SHA: 6a7292b53ef22a9857d5cb1442c90097836ddfa8",
+    "Package manifest full SHA-256: 2114aa70a76ac23d70c374c1d5b042851d4c5eeec3b350e74cbfde1326c1c640",
+    "Validation receipt SHA-256: 5a9d4f333ed47a9f2f77e9c750e629a1ec4208afc853bf7664f2bd238efb019a",
+    "Selftest receipt SHA-256: 117645c5c3dc7a5ea70a233967e43a1afd17b7b8303be35fc53fdb8a65fb7574",
+    "Rejected-head test receipt SHA-256: dd4d739e9a0c1c6d6d69a374a5856d1d3c28dba2e077ec96b3cd31721025a9ea",
+    "acceptance-verifier-v3.py --selftest: PASS (exit 0).",
+    "acceptance-verifier-v3.py --lab b --checkout <clean 0769d150> --contract lab-api-contract-v3.json: REJECT (exit 1) as expected (placeholder gates fired).",
+    "v3 validators: 10/10 PASS (JSON 12/12, scope, batch-manifest, port-plan, lease, envelope schema, predispatch, v2-ID reuse refined, ownership overlap, forbidden branch/worktree reuse).",
+    "Historical discrepancy: reported hashes 3948fb45/58dc0208/b8384f66 were stale first-generation values quoted in the audit doc at HEAD; published package is the post-patch second generation; old bytes not recoverable -> historical_hash_origin_unresolved but cause demonstrated.",
+    "v3 package UNCHANGED in this review; NOT dispatched; leases v3 planned (not activated); zero v3 worktrees/leaves; D0/D1/D2 not executed."
+  ],
+  "progress": {
+    "done": [
+      "revalidation",
+      "tracked export",
+      "manifest validation",
+      "discrepancy analysis",
+      "10 validators",
+      "selftest",
+      "rejected-head test",
+      "bundle construction"
+    ],
+    "pending": [
+      "senior preflight + consult",
+      "durable evidence",
+      "CP-056",
+      "commit + CI"
+    ]
+  },
+  "questions": [
+    "Are the PUBLISHED v3 bytes (manifest + 12 artifacts, exact sha256 listed) internally consistent and fit to freeze for a FUTURE human-authorized dispatch?",
+    "Do the exact published bytes enforce the 12 required controls (completion, envelope, clean-checkout verification, acceptance ownership, negative gates, provenance reproducibility, no tracked ELF, fresh branches/worktrees, new lease IDs, v2 terminal lease state, D0/D1/D2 prohibition, no controller-as-leaf)?",
+    "Is the historical hash discrepancy correctly explained (stale pre-final values in the audit doc; published manifest correct) WITHOUT mutating v3, and does it block the review?",
+    "Is FROZEN_NOT_DISPATCHED with redispatch_authorized=false the correct state after this review?"
+  ],
+  "relevant_contracts": [
+    "receipts/headless-lab-v3/v3-package-manifest.json",
+    "receipts/headless-lab-v3/result-envelope-schema-v3.json",
+    "receipts/headless-lab-v3/acceptance-manifest-v3.json",
+    "receipts/headless-lab-v3/build-provenance-policy-v3.json",
+    "receipts/headless-lab-v3/dispatch-plan-v3.json",
+    "doc/sooperlooper/checkpoints/2026-08-05-CP-055-headless-lab-dispatch-rejected.md"
+  ],
+  "repository": {
+    "dirty": true,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "format": "verdict (accept/continue/revise/reject) with explicit per-control evaluation and binding confirmation",
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    "Historical reported hashes are unrecoverable (bytes gone); cause demonstrated, origin unresolved.",
+    "Selftest must be rerun at dispatch time; harness hash verified in this review.",
+    "ft-b4 requires gcc + libjack headers in the build environment."
+  ],
+  "runtime_evidence": [
+    {
+      "name": "tracked-export",
+      "path": "RUN_DIR/tracked-export (13 files from blobs @ 66f2f0c8)"
+    },
+    {
+      "name": "package-manifest-validation",
+      "path": "RUN_DIR/validation/package-manifest-validation.json (sha 6bd8cb68bdae6e1f)"
+    },
+    {
+      "name": "v3-validators",
+      "path": "RUN_DIR/validation/v3-validators.json (sha 5a9d4f333ed47a9f)"
+    },
+    {
+      "name": "acceptance-selftest-receipt",
+      "path": "RUN_DIR/validation/acceptance-selftest-receipt.json (sha 117645c5c3dc7a5e)"
+    },
+    {
+      "name": "rejected-head-test-receipt",
+      "path": "RUN_DIR/validation/rejected-head-test-receipt.json (sha dd4d739e9a0c1c6d)"
+    },
+    {
+      "name": "historical-discrepancy",
+      "path": "RUN_DIR/hashes/historical-hash-discrepancy.json (sha ece873bf8d946495)"
+    }
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "artifact_sha256": {
+      "acceptance-manifest-v3.json": "114bce617d98091e2b0be8d09b0fac39fd6f7a639ae4ccae15f9da6e2d83e084",
+      "acceptance-verifier-v3.py": "f6ee256dcb31c091492fcff17cc53f251293e76b3aa094559568e4fc36fffd78",
+      "batch-manifest-v3.json": "fbb9df63b055018969a3d41ba28014bc4ac8a99d1a624c5ec235221d3b48d689",
+      "build-provenance-policy-v3.json": "23f1aea291dc8164ff040aa3c14e38f89306c0f154d6d6127843dd3ec2e3c597",
+      "dispatch-plan-v3.json": "a2934af1cf10934ff6625186de666731b43c4790590a3c3d7d1252bc4c62951e",
+      "lab-api-contract-v3.json": "77b9572dd2e457b7b8eaee8d2c69d3040884ba157f47c92af84b040a0de5766e",
+      "lease-plan-lab-a-v3.json": "b2d735cf578a594349f17747fe990987f5a4aba907d277e01c4474beb8ab7c1b",
+      "lease-plan-lab-b-v3.json": "48b81f8aceaa8f32e3a5bce19a2c68fe534304a5fc3aadd18ca73c0a77449928",
+      "port-plan-v3.json": "839835fba0451a74130169732c0deaeecc0f5fbfcf43614313a79872271f43d0",
+      "predispatch-readiness-v3.json": "5fceb503c01a3af002dad12721d861de24d51b84cf86496f0d0e88bd9b7cb6db",
+      "result-envelope-schema-v3.json": "5a0d3147562dbf7d16638061e9246f4d7603fbbead7a0610a8ee075cb1f4a2f1",
+      "scope-freeze-v3.json": "c84c0c6ddfbbd346a0953fe8f735e1adf7d7ee3b1940a1c9a72f8bfe9e0117ee"
+    },
+    "batch_id": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+    "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+    "checkpoint_fingerprint": "c467c40bfedc0e0f79f41e2f74c4c9a0a1bb0a1bcc05023e92e6a6fcfe181b22",
+    "package_manifest_blob_sha": "6a7292b53ef22a9857d5cb1442c90097836ddfa8",
+    "package_manifest_sha256": "2114aa70a76ac23d70c374c1d5b042851d4c5eeec3b350e74cbfde1326c1c640",
+    "plan_fingerprint": "30fd28e6ebbe2299d575aa4d1921e1027557160242310ec828a1510cbcf5816f",
+    "pr_head": "66f2f0c8ced0b29ca579fd01eafda2daca51b75d",
+    "rejected_head_test_receipt_sha256": "dd4d739e9a0c1c6d6d69a374a5856d1d3c28dba2e077ec96b3cd31721025a9ea",
+    "repository_head": "3585334c07accc6f6036d04a7487bea6c6610894",
+    "selftest_receipt_sha256": "117645c5c3dc7a5ea70a233967e43a1afd17b7b8303be35fc53fdb8a65fb7574",
+    "validation_receipt_sha256": "5a9d4f333ed47a9f2f77e9c750e629a1ec4208afc853bf7664f2bd238efb019a",
+    "working_tree_fingerprint": "3292d0f6b404a06a18413ee1a55441aa87311051acc7f5f982f0fa0f662e9ce5"
+  },
+  "tests": [
+    {
+      "name": "JSON parse 12/12",
+      "result": "PASS"
+    },
+    {
+      "name": "package manifest vs bytes 12/12",
+      "result": "MATCH"
+    },
+    {
+      "name": "scope/batch/port/lease/envelope/predispatch validators",
+      "result": "PASS"
+    },
+    {
+      "name": "v2-ID reuse scan (refined)",
+      "result": "PASS"
+    },
+    {
+      "name": "ownership overlap scan",
+      "result": "PASS"
+    },
+    {
+      "name": "forbidden branch/worktree reuse scan",
+      "result": "PASS"
+    },
+    {
+      "name": "acceptance-verifier selftest",
+      "result": "PASS"
+    },
+    {
+      "name": "acceptance-verifier vs 0769d150",
+      "result": "REJECT as expected"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "analyzed_at_utc": "2026-08-05T16:16:09Z",
+  "conclusion": "The GitHub manifest hashes are CORRECT for the published bytes (validated independently from tracked blobs). The previously reported hashes (3948fb45..., 58dc0208..., b8384f66...) were stale pre-final values from the first generation, quoted in the audit doc and final report; the published package is the second generation (post verifier patch + regen). Old bytes are not recoverable; historical_hash_origin_unresolved for the old bytes, but the cause of the misreport is demonstrated.",
+  "found_copies_with_reported_hash": {},
+  "per_artifact": {
+    "acceptance-manifest-v3.json": {
+      "cause_demonstrated": "stale pre-final artifact",
+      "classification": "artifact not found (reported bytes not recoverable)",
+      "copies_found": [],
+      "demonstrated_explanation": "Reported hash 58dc0208... was computed from the FIRST generation. acceptance-manifest-v3.json embeds the acceptance-verifier-v3.py sha256; after the verifier patch the manifest was regenerated, changing its hash to 114bce61.... The previous RUN's manifest now records 114bce61..., matching the published bytes. The audit doc at HEAD quotes the first-generation value (stale summary). Old bytes are not recoverable.",
+      "evidence": null,
+      "evidence_sources": [
+        "doc/sooperlooper/audits/2026-08-05-headless-lab-leaf-dispatch-failure.md @ HEAD (quotes stale first-gen hashes)",
+        "previous RUN receipts/v3-package-manifest.json (records current published hashes)",
+        "closure session log: gen_v3_package.py run 1 -> verifier patch -> gen_v3_package.py run 2"
+      ],
+      "historical_hash_origin": "unresolved (old bytes not recoverable); cause demonstrated via session artifacts",
+      "old_bytes_recoverable": false,
+      "published_sha256": "114bce617d98091e2b0be8d09b0fac39fd6f7a639ae4ccae15f9da6e2d83e084",
+      "published_size": 1917,
+      "reported_prefix": "58dc0208efb32d36"
+    },
+    "acceptance-verifier-v3.py": {
+      "cause_demonstrated": "post-review mutation (before publication)",
+      "classification": "artifact not found (reported bytes not recoverable)",
+      "copies_found": [],
+      "demonstrated_explanation": "Reported hash b8384f66... was computed from the FIRST generation of the verifier. The verifier was then patched (binary-safe ELF scan: cat-file -p read as bytes instead of UTF-8 text) and the package was regenerated, producing f6ee256d.... The mutation happened BEFORE publication: the published blob (886f8f03...) matches f6ee256d... and passes selftest + reject-test. Old bytes are not recoverable. The audit doc at HEAD quotes the pre-mutation hash (stale summary).",
+      "evidence": null,
+      "evidence_sources": [
+        "doc/sooperlooper/audits/2026-08-05-headless-lab-leaf-dispatch-failure.md @ HEAD (quotes stale first-gen hashes)",
+        "previous RUN receipts/v3-package-manifest.json (records current published hashes)",
+        "closure session log: gen_v3_package.py run 1 -> verifier patch -> gen_v3_package.py run 2"
+      ],
+      "historical_hash_origin": "unresolved (old bytes not recoverable); cause demonstrated via session artifacts",
+      "old_bytes_recoverable": false,
+      "published_sha256": "f6ee256dcb31c091492fcff17cc53f251293e76b3aa094559568e4fc36fffd78",
+      "published_size": 22922,
+      "reported_prefix": "b8384f6627e791f7"
+    },
+    "scope-freeze-v3.json": {
+      "cause_demonstrated": "stale pre-final artifact",
+      "classification": "artifact not found (reported bytes not recoverable)",
+      "copies_found": [],
+      "demonstrated_explanation": "Reported hash 3948fb45... was computed from the FIRST generation of the v3 package (gen_v3_package.py run 1). scope-freeze-v3.json embeds 'frozen_at_utc'; the second generation (after the acceptance-verifier-v3.py patch) rewrote it, changing the hash to c84c0c6d.... The previous closure RUN's own receipts/v3-package-manifest.json now records c84c0c6d..., matching the published bytes. The audit doc at HEAD 66f2f0c8 quotes the first-generation value 3948fb45... (stale summary). Old bytes are not recoverable.",
+      "evidence": null,
+      "evidence_sources": [
+        "doc/sooperlooper/audits/2026-08-05-headless-lab-leaf-dispatch-failure.md @ HEAD (quotes stale first-gen hashes)",
+        "previous RUN receipts/v3-package-manifest.json (records current published hashes)",
+        "closure session log: gen_v3_package.py run 1 -> verifier patch -> gen_v3_package.py run 2"
+      ],
+      "historical_hash_origin": "unresolved (old bytes not recoverable); cause demonstrated via session artifacts",
+      "old_bytes_recoverable": false,
+      "published_sha256": "c84c0c6ddfbbd346a0953fe8f735e1adf7d7ee3b1940a1c9a72f8bfe9e0117ee",
+      "published_size": 3346,
+      "reported_prefix": "3948fb454d50c55b"
+    }
+  },
+  "published_hashes": {},
+  "reported_hashes": {
+    "acceptance-manifest-v3.json": "58dc0208efb32d36",
+    "acceptance-verifier-v3.py": "b8384f6627e791f7",
+    "scope-freeze-v3.json": "3948fb454d50c55b"
+  },
+  "schema": "historical-hash-discrepancy/v1"
+}

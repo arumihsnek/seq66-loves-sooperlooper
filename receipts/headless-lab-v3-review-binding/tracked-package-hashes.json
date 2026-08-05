@@ -1,0 +1,27 @@
+{
+  "artifact_full_sha256": {
+    "acceptance-manifest-v3.json": "114bce617d98091e2b0be8d09b0fac39fd6f7a639ae4ccae15f9da6e2d83e084",
+    "acceptance-verifier-v3.py": "f6ee256dcb31c091492fcff17cc53f251293e76b3aa094559568e4fc36fffd78",
+    "batch-manifest-v3.json": "fbb9df63b055018969a3d41ba28014bc4ac8a99d1a624c5ec235221d3b48d689",
+    "build-provenance-policy-v3.json": "23f1aea291dc8164ff040aa3c14e38f89306c0f154d6d6127843dd3ec2e3c597",
+    "dispatch-plan-v3.json": "a2934af1cf10934ff6625186de666731b43c4790590a3c3d7d1252bc4c62951e",
+    "lab-api-contract-v3.json": "77b9572dd2e457b7b8eaee8d2c69d3040884ba157f47c92af84b040a0de5766e",
+    "lease-plan-lab-a-v3.json": "b2d735cf578a594349f17747fe990987f5a4aba907d277e01c4474beb8ab7c1b",
+    "lease-plan-lab-b-v3.json": "48b81f8aceaa8f32e3a5bce19a2c68fe534304a5fc3aadd18ca73c0a77449928",
+    "port-plan-v3.json": "839835fba0451a74130169732c0deaeecc0f5fbfcf43614313a79872271f43d0",
+    "predispatch-readiness-v3.json": "5fceb503c01a3af002dad12721d861de24d51b84cf86496f0d0e88bd9b7cb6db",
+    "result-envelope-schema-v3.json": "5a0d3147562dbf7d16638061e9246f4d7603fbbead7a0610a8ee075cb1f4a2f1",
+    "scope-freeze-v3.json": "c84c0c6ddfbbd346a0953fe8f735e1adf7d7ee3b1940a1c9a72f8bfe9e0117ee",
+    "v3-package-manifest.json": "2114aa70a76ac23d70c374c1d5b042851d4c5eeec3b350e74cbfde1326c1c640"
+  },
+  "batch_id": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+  "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "historical_discrepancy_sha256": "ece873bf8d946495c8274ba122aaf5e605d441d7ebb22c866ecc686f07b4d28e",
+  "package_manifest_blob_sha": "6a7292b53ef22a9857d5cb1442c90097836ddfa8",
+  "package_manifest_full_sha256": "2114aa70a76ac23d70c374c1d5b042851d4c5eeec3b350e74cbfde1326c1c640",
+  "package_manifest_validation_sha256": "6bd8cb68bdae6e1f41c4d6ca5ac18979533dfb72291dc299b59eb0a4f4b3311e",
+  "pr_head": "66f2f0c8ced0b29ca579fd01eafda2daca51b75d",
+  "rejected_head_test_receipt_sha256": "dd4d739e9a0c1c6d6d69a374a5856d1d3c28dba2e077ec96b3cd31721025a9ea",
+  "selftest_receipt_sha256": "117645c5c3dc7a5ea70a233967e43a1afd17b7b8303be35fc53fdb8a65fb7574",
+  "validation_receipt_sha256": "5a9d4f333ed47a9f2f77e9c750e629a1ec4208afc853bf7664f2bd238efb019a"
+}

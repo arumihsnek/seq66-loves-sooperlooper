@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "detail": "",
+      "evidence": {
+        "hits": [
+          "dummy-start-comment",
+          "not-actually-comment",
+          "pid-zero-literal"
+        ]
+      },
+      "name": "selftest: LAB-A placeholder detector flags dummy ProcessInfo",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "hits": [
+          "pass-stub",
+          "trivial-assert-true",
+          "import-only-test-name"
+        ]
+      },
+      "name": "selftest: LAB-B trivial-test detector flags pass/import-only",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "hits": []
+      },
+      "name": "selftest: good test not falsely flagged",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {},
+      "name": "selftest: silent WAV fixture constructed",
+      "status": "PASS"
+    }
+  ],
+  "exit_code": 0,
+  "recorded_at_utc": "2026-08-05T16:17:52Z",
+  "schema": "acceptance-selftest-receipt/v1",
+  "selftest_status": "PASS",
+  "verifier": "receipts/headless-lab-v3/acceptance-verifier-v3.py (tracked-export bytes @ 66f2f0c8)",
+  "verifier_sha256": "f6ee256dcb31c091492fcff17cc53f251293e76b3aa094559568e4fc36fffd78"
+}
