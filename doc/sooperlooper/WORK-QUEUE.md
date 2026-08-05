@@ -1035,12 +1035,16 @@ Acceptance: full matrix test, crash/restart, tempo change, edge cases
 
 ### P5-005 — real SooperLooper/JACK integration
 
-Status: `done`
+Status: `in_progress`
 Branch: `feature/p5-recording-types`
 Agent: `hermes`
 
 Dependencies: P5-001-P5-004
 Acceptance: scheduler outputs correct OSC, real transport integration
+
+Note (CP-053, 2026-08-05): reactivated as active task by baseline-qualification
+control-plane coherence correction; the headless lab recovery (LAB-A/LAB-B pre-dispatch
+package) is the executing workstream for this task.
 
 ### P5-006 — transport and tempo matrix
 
@@ -1053,9 +1057,12 @@ Acceptance: full matrix of transport states and tempo changes
 
 ### P5-007 — Raspberry Pi validation
 
-Status: `in_progress`
+Status: `deferred`
 Branch: `feature/p5-transport-matrix`
 Agent: `hermes`
 
 Dependencies: P5-001-P5-006
+
+Note (CP-053, 2026-08-05): deferred per CP-051/CP-052; target-hardware evidence is
+not required for the OCI baseline workstream.
 Acceptance: tests pass on Raspberry Pi hardware
