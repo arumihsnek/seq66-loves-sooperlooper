@@ -1,0 +1,20 @@
+source:
+  type: jack_client
+  client_name: synthetic_source
+  command: synthetic_source
+  args: ["--mode", "beats", "--tempo", "120.0", "--numerator", "4", "--denominator", "4"]
+capture:
+  type: jack_client
+  client_name: deterministic_capture
+  command: deterministic_capture
+  args: ["--mode", "sine", "--tempo", "120.0", "--numerator", "4", "--denominator", "4"]
+sooperlooper:
+  enabled: true
+connections:
+  - [synthetic_source:out_l, deterministic_capture:in_l]
+  - [synthetic_source:out_r, deterministic_capture:in_r]
+  - [sooperlooper:out_l, system:playback_1]
+  - [sooperlooper:out_r, system:playback_2]
+expected:
+  capture_verification: PASS
+  max_tolerance_percent: 10

@@ -1,0 +1,15 @@
+source:
+  type: jack_client
+  client_name: synthetic_source
+  command: synthetic_source
+  args: ["--mode", "beats", "--tempo", "120.0", "--numerator", "4", "--denominator", "4"]
+capture:
+  type: jack_file
+  command: ""
+  args: []
+sooperlooper:
+  enabled: true
+connections:
+  - [synthetic_source:out_l, system:playback_1]
+  - [synthetic_source:out_r, system:playback_2]
+expected:
