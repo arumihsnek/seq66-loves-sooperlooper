@@ -1,0 +1,295 @@
+{
+  "schema_version": "seq66-semantic-receipt/v1",
+  "classification": "fresh_semantic_receipt",
+  "ad_hoc": true,
+  "canonical_test_suite": false,
+  "checks": [
+    {
+      "id": "1",
+      "description": "PROJECT-MANIFEST.json parses and declares P5-005 in_progress",
+      "command_or_method": "git -C /home/ubuntu/code/music/seq66-loves-sooperlooper show 2dff9052d3e94048b302eb60d9c7a12373b0229e:PROJECT-MANIFEST.json | python3 -m json.tool",
+      "expected": "P5-005 / in_progress",
+      "observed": "P5-005 / in_progress",
+      "result": "PASS",
+      "source_artifacts": [
+        "PROJECT-MANIFEST.json"
+      ]
+    },
+    {
+      "id": "2",
+      "description": "CP-053 declares P5-005",
+      "command_or_method": "git -C /home/ubuntu/code/music/seq66-loves-sooperlooper show 2dff9052d3e94048b302eb60d9c7a12373b0229e:doc/sooperlooper/checkpoints/2026-08-05-CP-053-control-plane-coherence.md | grep 'Active task'",
+      "expected": "Active task: `P5-005`",
+      "observed": "present",
+      "result": "PASS",
+      "source_artifacts": [
+        "doc/sooperlooper/checkpoints/2026-08-05-CP-053-control-plane-coherence.md"
+      ]
+    },
+    {
+      "id": "3",
+      "description": "CURRENT declares P5-005 and points to CP-053",
+      "command_or_method": "git -C /home/ubuntu/code/music/seq66-loves-sooperlooper show 2dff9052d3e94048b302eb60d9c7a12373b0229e:doc/sooperlooper/checkpoints/CURRENT.md",
+      "expected": "P5-005 + CP-053",
+      "observed": "P5-005 + CP-053",
+      "result": "PASS",
+      "source_artifacts": [
+        "doc/sooperlooper/checkpoints/CURRENT.md",
+        "doc/sooperlooper/checkpoints/2026-08-05-CP-053-control-plane-coherence.md"
+      ]
+    },
+    {
+      "id": "4",
+      "description": "WORK-QUEUE declares P5-005 in_progress",
+      "command_or_method": "git -C /home/ubuntu/code/music/seq66-loves-sooperlooper show 2dff9052d3e94048b302eb60d9c7a12373b0229e:doc/sooperlooper/WORK-QUEUE.md",
+      "expected": "P5-005 Status: in_progress",
+      "observed": "P5-005 -> in_progress",
+      "result": "PASS",
+      "source_artifacts": [
+        "doc/sooperlooper/WORK-QUEUE.md"
+      ]
+    },
+    {
+      "id": "5",
+      "description": "WORK-QUEUE declares P5-007 deferred",
+      "command_or_method": "git -C /home/ubuntu/code/music/seq66-loves-sooperlooper show 2dff9052d3e94048b302eb60d9c7a12373b0229e:doc/sooperlooper/WORK-QUEUE.md",
+      "expected": "P5-007 Status: deferred",
+      "observed": "P5-007 -> deferred",
+      "result": "PASS",
+      "source_artifacts": [
+        "doc/sooperlooper/WORK-QUEUE.md"
+      ]
+    },
+    {
+      "id": "6",
+      "description": "CANDIDATE_HEAD exists and is ancestor of VERIFIED_EVIDENCE_HEAD",
+      "command_or_method": "git -C /home/ubuntu/code/music/seq66-loves-sooperlooper merge-base --is-ancestor 509538784afc2b828f2d922f65cf8ca3a39b5ee7 2dff9052d3e94048b302eb60d9c7a12373b0229e",
+      "expected": "ancestor (merge-base = 509538784afc2b828f2d922f65cf8ca3a39b5ee7)",
+      "observed": "merge-base = 509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "result": "PASS",
+      "source_artifacts": [
+        "commit 509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+        "commit 2dff9052d3e94048b302eb60d9c7a12373b0229e"
+      ]
+    },
+    {
+      "id": "7",
+      "description": "PR #34 has remote head == VERIFIED_EVIDENCE_HEAD",
+      "command_or_method": "gh api repos/arumihsnek/seq66-loves-sooperlooper/pulls/34 --jq .head.sha",
+      "expected": "2dff9052d3e94048b302eb60d9c7a12373b0229e",
+      "observed": "2dff9052d3e94048b302eb60d9c7a12373b0229e",
+      "result": "PASS",
+      "source_artifacts": [
+        "PR #34"
+      ]
+    },
+    {
+      "id": "8",
+      "description": "Project control plane passes on VERIFIED_EVIDENCE_HEAD",
+      "command_or_method": "gh api .../actions/runs --jq '.workflow_runs[] | select(.head_sha==2dff9052d3e94048b302eb60d9c7a12373b0229e)'",
+      "expected": "success",
+      "observed": "success",
+      "result": "PASS",
+      "source_artifacts": [
+        "workflow run @ 2dff9052d3e94048b302eb60d9c7a12373b0229e"
+      ]
+    },
+    {
+      "id": "9",
+      "description": "Audio integration core passes on VERIFIED_EVIDENCE_HEAD",
+      "command_or_method": "gh api .../actions/runs --jq '.workflow_runs[] | select(.head_sha==2dff9052d3e94048b302eb60d9c7a12373b0229e)'",
+      "expected": "success",
+      "observed": "success",
+      "result": "PASS",
+      "source_artifacts": [
+        "workflow run @ 2dff9052d3e94048b302eb60d9c7a12373b0229e"
+      ]
+    },
+    {
+      "id": "10",
+      "description": "CP-048, CP-049, CP-050, CP-051 byte-identical to protected refs (OLD_SAFE_BASE)",
+      "command_or_method": "git -C /home/ubuntu/code/music/seq66-loves-sooperlooper ls-tree 30561153aae9a47553332c601f6be8a3c99122fd vs 2dff9052d3e94048b302eb60d9c7a12373b0229e + sha256 per file",
+      "expected": "identical set & bytes; CP-050 consistently absent in both refs",
+      "observed": "048:same; 049:same; 048:same; 051:same",
+      "result": "PASS",
+      "source_artifacts": [
+        "doc/sooperlooper/checkpoints/2026-08-03-CP-048-p5-real-integration.md",
+        "doc/sooperlooper/checkpoints/2026-08-03-CP-049-p5-transport-matrix.md",
+        "doc/sooperlooper/checkpoints/2026-08-04-CP-048-dogfood-002.md",
+        "doc/sooperlooper/checkpoints/2026-08-04-CP-051-dogfood-003-forensic-closure.md"
+      ]
+    },
+    {
+      "id": "11",
+      "description": "CP-052 byte-identical between PREVIOUS_EVIDENCE_HEAD and VERIFIED_EVIDENCE_HEAD",
+      "command_or_method": "git -C /home/ubuntu/code/music/seq66-loves-sooperlooper show 95b11e4d5cb08789a2eaeb131925beea1951cd25:doc/sooperlooper/checkpoints/2026-08-05-CP-052-baseline-qualification.md | sha256sum vs 2dff9052d3e94048b302eb60d9c7a12373b0229e:doc/sooperlooper/checkpoints/2026-08-05-CP-052-baseline-qualification.md",
+      "expected": "identical sha256",
+      "observed": "745a299fa2bba731... vs 745a299fa2bba731...",
+      "result": "PASS",
+      "source_artifacts": [
+        "doc/sooperlooper/checkpoints/2026-08-05-CP-052-baseline-qualification.md",
+        "commit 95b11e4d5cb08789a2eaeb131925beea1951cd25",
+        "commit 2dff9052d3e94048b302eb60d9c7a12373b0229e"
+      ]
+    },
+    {
+      "id": "12",
+      "description": "LAB-A and LAB-B leases planned (not active), bound to CANDIDATE_HEAD",
+      "command_or_method": "json.load(/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/regenerated-package/contracts-v2/lease-plan-{a,b}.json)",
+      "expected": "status=planned, base_sha=509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "observed": "lab-a:planned/509538784afc; lab-b:planned/509538784afc",
+      "result": "PASS",
+      "source_artifacts": [
+        "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/regenerated-package/contracts-v2"
+      ]
+    },
+    {
+      "id": "13",
+      "description": "LAB worktrees created = 0 and LAB leaves dispatched = 0",
+      "command_or_method": "git -C /home/ubuntu/code/music/seq66-loves-sooperlooper worktree list --porcelain + pre-dispatch readiness JSON",
+      "expected": "0 worktrees / 0 leaves",
+      "observed": "worktrees=0 leaves=0 (readiness worktrees=0)",
+      "result": "PASS",
+      "source_artifacts": [
+        "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/receipts/pre-dispatch-readiness-v2.json"
+      ]
+    },
+    {
+      "id": "14",
+      "description": "D0, D1, D2 not executed",
+      "command_or_method": "pre-dispatch readiness JSON field D0_D1_D2_executed + lease status",
+      "expected": "false",
+      "observed": "false",
+      "result": "PASS",
+      "source_artifacts": [
+        "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/receipts/pre-dispatch-readiness-v2.json"
+      ]
+    }
+  ],
+  "results": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": true,
+    "7": true,
+    "8": true,
+    "9": true,
+    "10": true,
+    "11": true,
+    "12": true,
+    "13": true,
+    "14": true
+  },
+  "generated_at_utc": "2026-08-05T11:00:11.053731+00:00",
+  "verifier_inputs": {
+    "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+    "verified_evidence_head": "2dff9052d3e94048b302eb60d9c7a12373b0229e",
+    "previous_evidence_head": "95b11e4d5cb08789a2eaeb131925beea1951cd25",
+    "product_base": "3585334c07accc6f6036d04a7487bea6c6610894",
+    "old_safe_base": "30561153aae9a47553332c601f6be8a3c99122fd",
+    "pr_number": 34
+  },
+  "overall_result": {
+    "checks_total": 14,
+    "checks_passed": 14,
+    "all_pass": true
+  },
+  "not_canonical_test_suite_evidence": true,
+  "workflow_runs": [
+    {
+      "name": "Project control plane",
+      "id": 30989658278,
+      "run_number": 152,
+      "head_sha": "2dff9052d3e94048b302eb60d9c7a12373b0229e",
+      "conclusion": "success",
+      "event": "pull_request",
+      "check_run_id": 92252506960,
+      "job_name": "validate-control-plane"
+    },
+    {
+      "name": "Audio integration core",
+      "id": 30989658187,
+      "run_number": 192,
+      "head_sha": "2dff9052d3e94048b302eb60d9c7a12373b0229e",
+      "conclusion": "success",
+      "event": "pull_request",
+      "check_run_id": 92252506752,
+      "job_name": "compile-and-test"
+    }
+  ],
+  "verifier": {
+    "path": "verification/semantic-receipt-verifier.py",
+    "sha256": "8351f831b0bb5acb1628248335b00808b70c19c6b62c596a5e02323984db1124",
+    "exit_code": 0,
+    "stdout": "verification/semantic-receipt.stdout",
+    "stderr": "verification/semantic-receipt.stderr"
+  },
+  "repository": "arumihsnek/seq66-loves-sooperlooper",
+  "pr_number": 34,
+  "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "verified_evidence_head": "2dff9052d3e94048b302eb60d9c7a12373b0229e",
+  "previous_evidence_head": "95b11e4d5cb08789a2eaeb131925beea1951cd25",
+  "product_base": "3585334c07accc6f6036d04a7487bea6c6610894",
+  "old_safe_base": "30561153aae9a47553332c601f6be8a3c99122fd",
+  "ad_hoc_verification": true,
+  "local_artifact_bindings": {
+    "r2_bundle": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/reviews/r2-bundle.json",
+      "sha256": "1ccad9eb0c38b8d7267530b85a56db88fa977afa81550cadc774e305ac206e3e"
+    },
+    "r2_review": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/reviews/r2-review.json",
+      "sha256": "3f7142991bf1b58fa3ea591815175c66fb3956f07ffef2c01e1aff5c8d1774fe"
+    },
+    "regen_bundle": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/reviews/regen-bundle.json",
+      "sha256": "8294b45d268ab3631e91783b70795ba73a08cf97130d4b463428f39cb1fe56ff"
+    },
+    "regen_review": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/reviews/regen-review.json",
+      "sha256": "ed6dbcb00cf624222cd1602238565b1bc3df5bc0fca6ec6d35016e9dd6bc1118"
+    },
+    "baseline_qualified": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/checkpoints/baseline-qualified.json",
+      "sha256": "ebd2d77e7e2b56c45d92742f1d82609bf94c39c3de47ffe8ad2cb3ccb9349875"
+    },
+    "scope_freeze_v2": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/regenerated-package/contracts-v2/scope-freeze.json",
+      "sha256": "d82985271707660f6176754d95a5d54926166e18e497e8e2a974658745496fcf"
+    },
+    "batch_manifest_v2": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/regenerated-package/contracts-v2/batch-manifest.json",
+      "sha256": "766a67eb02fef5c63d10182d6d6a4174c4025fb4aba97d289afa0f6a60b2576b"
+    },
+    "dispatch_plan_v2": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/regenerated-package/contracts-v2/dispatch-plan.json",
+      "sha256": "6807fc3824fc910fc931a7e5d7ff2f0bfb235520b8647ce1d34a0b3928e4076f"
+    },
+    "lease_plan_lab_a_v2": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/regenerated-package/contracts-v2/lease-plan-lab-a.json",
+      "sha256": "c454bfc2e32556fe060c96402ef5c907440928f68258e40b3415fd81f55ca8e6"
+    },
+    "lease_plan_lab_b_v2": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/regenerated-package/contracts-v2/lease-plan-lab-b.json",
+      "sha256": "4e1960b03c91371de82f55d81d04185d15835e60473c68b8809daa958ad5e372"
+    },
+    "port_plan_v2": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/regenerated-package/contracts-v2/port-plan.json",
+      "sha256": "efe8a3e4b888b94671feb6e80511927ba0cdb446e1a287925429ce02b1114dec"
+    },
+    "lab_api_contract_v2": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/regenerated-package/contracts-v2/lab-api-contract.json",
+      "sha256": "54d46b35d08791bc1b81b061d29de3864b60857a02b8cf02d8f15f5381f6d4a8"
+    },
+    "pre_dispatch_readiness_v2": {
+      "path": "/home/ubuntu/.hermes/runs/20260805T015358Z-seq66-baseline-qualification/receipts/pre-dispatch-readiness-v2.json",
+      "sha256": "ca3f51dc6c3851fcb07cc3c5185c82ee3b860ac0f3be3234630657f0ca1272a9"
+    },
+    "semantic_receipt_this_file": {
+      "path": "receipts/semantic-receipt-2026-08-05.json",
+      "sha256": "7cdc1747646ed4390b5c7f34cc51abb66632fbb782bc10fdff3f803bef6644e0"
+    }
+  }
+}
