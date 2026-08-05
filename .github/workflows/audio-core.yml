@@ -28,7 +28,7 @@ jobs:
       - name: Install compiler and OSC dependency
         run: |
           sudo apt-get update
-          sudo apt-get install --yes g++ liblo-dev
+          sudo apt-get install --yes g++ liblo-dev libjack-jackd2-dev
 
       - name: Prepare focused build configuration
         run: |
