@@ -1,0 +1,167 @@
+{
+  "schema": "acceptance-verifier-v3.2",
+  "version": "3.2.0",
+  "mode": "selftest",
+  "checks": [
+    {
+      "name": "selftest: v3.1 same-commit model rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: E^ == R",
+          "model: envelope absent from R",
+          "model: diff R..E envelope-only",
+          "model: implementation_result_commit_oid == R",
+          "model: implementation_result_tree_oid == R^{tree}"
+        ]
+      }
+    },
+    {
+      "name": "selftest: two-commit C->R->E model accepted",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": []
+      }
+    },
+    {
+      "name": "selftest: wrong candidate OID rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: candidate_commit_oid == C"
+        ]
+      }
+    },
+    {
+      "name": "selftest: wrong result commit OID rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: implementation_result_commit_oid == R"
+        ]
+      }
+    },
+    {
+      "name": "selftest: wrong result tree OID rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: implementation_result_tree_oid == R^{tree}"
+        ]
+      }
+    },
+    {
+      "name": "selftest: E parent != R rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: E^ == R",
+          "model: diff R..E envelope-only"
+        ],
+        "extra_commit": "9ae1890c1ff7b8e169da894285e8ee99c1160e0b"
+      }
+    },
+    {
+      "name": "selftest: envelope present in R rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: R^ == C",
+          "model: E^ == R",
+          "model: envelope absent from R",
+          "model: diff R..E envelope-only",
+          "model: implementation_result_commit_oid == R",
+          "model: implementation_result_tree_oid == R^{tree}"
+        ]
+      }
+    },
+    {
+      "name": "selftest: implementation change in E rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: E^ == R",
+          "model: diff R..E envelope-only"
+        ]
+      }
+    },
+    {
+      "name": "selftest: missing envelope in E rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: envelope present in E",
+          "model: diff R..E envelope-only",
+          "model: envelope parses"
+        ]
+      }
+    },
+    {
+      "name": "selftest: self container commit field rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: no forbidden self-binding fields"
+        ]
+      }
+    },
+    {
+      "name": "selftest: self tree field rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: no forbidden self-binding fields"
+        ]
+      }
+    },
+    {
+      "name": "selftest: envelope self-SHA256 rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing_checks": [
+          "model: no forbidden self-binding fields"
+        ]
+      }
+    },
+    {
+      "name": "selftest: remote branch mismatch rejected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "resolved": "556c0e2d87ad7b12b8c33931a8428fc451e296e7",
+        "expected": "8a5ff472e2460ba624387b9f3f662253e7eb7d4b",
+        "actual_is_C": true
+      }
+    },
+    {
+      "name": "selftest: correct external branch binding accepted",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "resolved": "8a5ff472e2460ba624387b9f3f662253e7eb7d4b",
+        "expected": "8a5ff472e2460ba624387b9f3f662253e7eb7d4b"
+      }
+    },
+    {
+      "name": "selftest: zero residual directories",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "leftovers": []
+      }
+    }
+  ],
+  "env_notes": []
+}

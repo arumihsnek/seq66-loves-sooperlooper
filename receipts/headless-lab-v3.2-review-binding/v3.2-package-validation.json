@@ -1,0 +1,86 @@
+{
+  "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+  "failed": 0,
+  "package_dir": "/home/ubuntu/.hermes/runs/20260805T224640Z-v3-2-envelope-binding-correction/v3-2-package",
+  "passed": 15,
+  "schema": "v3.2-package-validation/v1",
+  "total": 15,
+  "validators": [
+    {
+      "detail": "parsed 12 JSON artifacts; failures=[]",
+      "status": "PASS",
+      "validator": "json-parse"
+    },
+    {
+      "detail": "batch/candidate/schema/BOUND_IN_EVIDENCE/two-commit scope",
+      "status": "PASS",
+      "validator": "scope-validator"
+    },
+    {
+      "detail": "batch/candidate/leaves/ids/envelopes-v3.2/supersedes-v3.1",
+      "status": "PASS",
+      "validator": "batch-validator"
+    },
+    {
+      "detail": "harness/envelope-model/completion-14/reporting-R-heads",
+      "status": "PASS",
+      "validator": "dispatch-plan-validator"
+    },
+    {
+      "detail": "batch/schema/entries/quarantine/two-commit note",
+      "status": "PASS",
+      "validator": "port-plan-validator"
+    },
+    {
+      "detail": "both leases planned, v3.2 IDs, two-commit model, R-only integration",
+      "status": "PASS",
+      "validator": "lease-validator"
+    },
+    {
+      "detail": "LAB-A\u2229LAB-B empty; scope==lease; overlap=set()",
+      "status": "PASS",
+      "validator": "ownership-overlap-validator"
+    },
+    {
+      "detail": "glob hits=[]",
+      "status": "PASS",
+      "validator": "no-globs-validator"
+    },
+    {
+      "detail": "4 forbidden v2 paths; future v3_2 branches are placeholders",
+      "status": "PASS",
+      "validator": "forbidden-branch-worktree-reuse-validator"
+    },
+    {
+      "detail": "two-commit model/no self fields/OID naming/no SHA-256 for OIDs",
+      "status": "PASS",
+      "validator": "envelope-schema-validator"
+    },
+    {
+      "detail": "canonical sources/hash-equality caveat/rebuild-only",
+      "status": "PASS",
+      "validator": "build-provenance-validator"
+    },
+    {
+      "detail": "FROZEN_NOT_DISPATCHED/all auth false/v3.2 required",
+      "status": "PASS",
+      "validator": "predispatch-validator"
+    },
+    {
+      "detail": "active hits=[] stray=[]",
+      "status": "PASS",
+      "validator": "old-id-reuse-scan"
+    },
+    {
+      "detail": "hits=[]",
+      "status": "PASS",
+      "validator": "self-reference-field-scan"
+    },
+    {
+      "detail": "hits=[]",
+      "status": "PASS",
+      "validator": "harness-forbidden-token-scan"
+    }
+  ],
+  "verdict": "PASS"
+}

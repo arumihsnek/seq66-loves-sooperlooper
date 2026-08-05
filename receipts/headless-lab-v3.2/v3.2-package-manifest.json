@@ -1,0 +1,61 @@
+{
+  "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "files": {
+    "acceptance-manifest-v3.2.json": {
+      "sha256": "cdeb1212800b9238e078a74b43565b999c1decf4ee1ffc42086a5ef9db8c424e",
+      "size": 2659
+    },
+    "acceptance-verifier-v3.2.py": {
+      "sha256": "a06684a0bdc03c3553b4fc201f473c4959b6b2940bdd93b9251e3f7824c67ce6",
+      "size": 47597
+    },
+    "batch-manifest-v3.2.json": {
+      "sha256": "c32a1e2b71261d8b042a15f5ed90381275521788cf543d8bc0c8870d6a5344bb",
+      "size": 10768
+    },
+    "build-provenance-policy-v3.2.json": {
+      "sha256": "0a26321a1ea455a580e144f0c33fda6f0a2dd5c6a73b25f411c914fdae582baf",
+      "size": 2093
+    },
+    "dispatch-plan-v3.2.json": {
+      "sha256": "d307b3a46b2d5c1849402f30f4365ab7c72648e8e1715d72f8cb12869cd5e3f9",
+      "size": 2502
+    },
+    "lab-api-contract-v3.2.json": {
+      "sha256": "ed8dafdffcdad457c3fb235ef25de059eec870991a73ce02c97f95f6faf058af",
+      "size": 5998
+    },
+    "lease-plan-lab-a-v3.2.json": {
+      "sha256": "e4a48ad84d7d7ac7fb50f5ffbcc567de24697df3729fdc8123b17cc4649a83b2",
+      "size": 3332
+    },
+    "lease-plan-lab-b-v3.2.json": {
+      "sha256": "2864100eb982dc51c7bfcdfee375f7ce439e17fb1f193d74c12c5b07e68e9567",
+      "size": 3253
+    },
+    "port-plan-v3.2.json": {
+      "sha256": "de6faed10fdeeb17a7f5ae2f01d5f9322d8b7759bb478e31c22806fcfda4b098",
+      "size": 4185
+    },
+    "predispatch-readiness-v3.2.json": {
+      "sha256": "58477d65379ce221d1ef343146fdae8df2c9d037d359cee9e313e776c19ab286",
+      "size": 1707
+    },
+    "result-envelope-schema-v3.2.json": {
+      "sha256": "272eae704e420d1dfc813c6b71151d9b45573e23bb8f3dec9c839fba9caae8ac",
+      "size": 3054
+    },
+    "scope-freeze-v3.2.json": {
+      "sha256": "b7bd7a2e33b2c052a2f2ab3c675b8a19dae6be38868361246e0a9144e17135b6",
+      "size": 4046
+    }
+  },
+  "frozen_at_utc": "2026-08-05T22:58:59Z",
+  "schema": "v3.2-package-manifest/v1",
+  "supersedes": {
+    "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+    "package": "v3.1"
+  },
+  "supersession_reason": "same-commit envelope/tree-OID circularity"
+}

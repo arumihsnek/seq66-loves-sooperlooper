@@ -1,0 +1,78 @@
+{
+  "accept_does_not_authorize_dispatch": true,
+  "binding": {
+    "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+    "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+    "controlled_git_model_receipt": "controlled-git-model.json",
+    "defect_reproduction_receipt": "v3.1-envelope-defect-reproduction.json",
+    "evidence_parent_head": "da89654e05d7014bf0720ed5517c362b7c4beacf",
+    "invalid_same_commit_receipt": "invalid-same-commit-envelope-test.json",
+    "package_validation_receipt": "v3.2-package-validation.json",
+    "rejected_head_receipt": "rejected-head-v3.2-test-receipt.json",
+    "selftest_receipt": "acceptance-v3.2-selftest-receipt.json",
+    "twelve_artifact_hashes": {
+      "acceptance-manifest-v3.2.json": "cdeb1212800b9238e078a74b43565b999c1decf4ee1ffc42086a5ef9db8c424e",
+      "acceptance-verifier-v3.2.py": "a06684a0bdc03c3553b4fc201f473c4959b6b2940bdd93b9251e3f7824c67ce6",
+      "batch-manifest-v3.2.json": "c32a1e2b71261d8b042a15f5ed90381275521788cf543d8bc0c8870d6a5344bb",
+      "build-provenance-policy-v3.2.json": "0a26321a1ea455a580e144f0c33fda6f0a2dd5c6a73b25f411c914fdae582baf",
+      "dispatch-plan-v3.2.json": "d307b3a46b2d5c1849402f30f4365ab7c72648e8e1715d72f8cb12869cd5e3f9",
+      "lab-api-contract-v3.2.json": "ed8dafdffcdad457c3fb235ef25de059eec870991a73ce02c97f95f6faf058af",
+      "lease-plan-lab-a-v3.2.json": "e4a48ad84d7d7ac7fb50f5ffbcc567de24697df3729fdc8123b17cc4649a83b2",
+      "lease-plan-lab-b-v3.2.json": "2864100eb982dc51c7bfcdfee375f7ce439e17fb1f193d74c12c5b07e68e9567",
+      "port-plan-v3.2.json": "de6faed10fdeeb17a7f5ae2f01d5f9322d8b7759bb478e31c22806fcfda4b098",
+      "predispatch-readiness-v3.2.json": "58477d65379ce221d1ef343146fdae8df2c9d037d359cee9e313e776c19ab286",
+      "result-envelope-schema-v3.2.json": "272eae704e420d1dfc813c6b71151d9b45573e23bb8f3dec9c839fba9caae8ac",
+      "scope-freeze-v3.2.json": "b7bd7a2e33b2c052a2f2ab3c675b8a19dae6be38868361246e0a9144e17135b6"
+    },
+    "v3_2_package_manifest_sha256": "441d04d4eb812b5c2738372205ae244691386cec2c2c4fe8011889486bf9ec27",
+    "valid_two_commit_receipt": "valid-two-commit-envelope-test.json"
+  },
+  "blocking_findings": [],
+  "codex_exec_processes": 1,
+  "detailed_status": "VALID_ADVISORY_VERDICT",
+  "execution_id": "a4a74e23-b260-48ee-ba82-9b358966ec4f",
+  "label": "seq66-lab-v3-2-two-commit-envelope-package",
+  "mission_id": "seq66-lab-v3-2-two-commit-envelope-package",
+  "mode": "plan-review",
+  "model_turns_observed": 1,
+  "next_safe_step": "Mantener v3.2 congelado y solicitar una decisi\u00f3n humana independiente sobre el dispatch usando exactamente los bytes revisados, nuevas ramas, worktrees y leases; cualquier cambio invalida esta aceptaci\u00f3n.",
+  "operational_usability": true,
+  "question_answers": [
+    {
+      "answer": "S\u00ed. C\u2192R\u2192E elimina la dependencia autorreferencial: el envelope existe \u00fanicamente en E y declara solo OIDs de C/R; el binding de E se registra externamente.",
+      "id": "Q1"
+    },
+    {
+      "answer": "S\u00ed. El contrato define inequ\u00edvocamente que solo R es candidato de integraci\u00f3n y que E es evidence-only.",
+      "id": "Q2"
+    },
+    {
+      "answer": "S\u00ed. El branch remoto apunta a E y su verificaci\u00f3n se realiza externamente mediante el binding posterior al push; los campos autorreferenciales est\u00e1n prohibidos.",
+      "id": "Q3"
+    },
+    {
+      "answer": "S\u00ed. El verifier y los fixtures reales rechazan envelopes en R, cambios de implementaci\u00f3n en E y OIDs incorrectos; selftest 15/15 pasa.",
+      "id": "Q4"
+    },
+    {
+      "answer": "S\u00ed, seg\u00fan la evidencia suministrada: los controles funcionales, provenance, ownership, validaci\u00f3n de paquetes y clean-checkout permanecen cubiertos, con rechazo del head inv\u00e1lido en ambos labs.",
+      "id": "Q5"
+    },
+    {
+      "answer": "S\u00ed. El paquete exacto puede congelarse para revisi\u00f3n humana separada: no hubo dispatch, D0/D1/D2 ni worktrees/leaves, y redispatch_authorized=false.",
+      "id": "Q6"
+    }
+  ],
+  "recorded_at_utc": "2026-08-05T23:36:37Z",
+  "required_actions": [],
+  "response_artifact": {
+    "artifact_schema": "codex-senior-consult-response-artifact/v1",
+    "fingerprint": "3bf4941861cdcd4bcde356dbc0bc5c266c8993e4c911fc4c62e344b867e236cf",
+    "relative_path": "responses/3bf4941861cdcd4bcde356dbc0bc5c266c8993e4c911fc4c62e344b867e236cf.json"
+  },
+  "response_fingerprint": "3bf4941861cdcd4bcde356dbc0bc5c266c8993e4c911fc4c62e344b867e236cf",
+  "schema": "senior-verdict/v3.2",
+  "status": "COMPLETED",
+  "summary": "El modelo C\u2192R\u2192E corrige la circularidad de v3.1 y est\u00e1 respaldado por validaci\u00f3n byte-exact, selftests, repositorios Git reales y fixtures negativas. El paquete v3.2 puede aceptarse para freeze, \u00fanicamente vinculado al head da89654e..., al manifest SHA-256 441d04d4eb812b5c2738372205ae244691386cec2c2c4fe8011889486bf9ec27 y a los doce hashes de artefactos suministrados. La aceptaci\u00f3n no autoriza dispatch.",
+  "verdict": "accept"
+}

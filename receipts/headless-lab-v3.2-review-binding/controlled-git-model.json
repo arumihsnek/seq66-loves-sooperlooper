@@ -1,0 +1,198 @@
+{
+  "file_sha256": {
+    "envelope_after_write_T1": "7af9f7e1c39023d0dc7a3a0720fc29200116bd333979bd9808233f4af7391b01",
+    "envelope_after_write_T2": "24a0fc2d93c52fd16b2ff7a88098eeb71c624829ceea24e6f53742e82b23a47a",
+    "impl_py": "c97a636c074b22ea721d3267558208110f82e9423dad25d65abc0221b02035f2",
+    "readme": "b48fe079e279d5e034a62320368185cfec2dd7dbf97874b32a200a617f117c2c"
+  },
+  "finished_at_utc": "2026-08-05T22:47:49Z",
+  "oids": {
+    "C": "",
+    "C_tree": "d8b15f25a218106539c6015c9d00b808fff70c65",
+    "E1": "",
+    "E2": "",
+    "R0": "",
+    "T1": "bc726effecb7e7a9c0776bd75e6ea9b82326eb79",
+    "T2": "5646f00e3f2dedd88b6bf6366256ea831fba42b0",
+    "T3": "6798adeaafeffc1c3c5567e23459f687be626031"
+  },
+  "results": {
+    "iteration1": {
+      "actual_tree": "5646f00e3f2dedd88b6bf6366256ea831fba42b0",
+      "declared_equals_actual": false,
+      "envelope_declares": "bc726effecb7e7a9c0776bd75e6ea9b82326eb79",
+      "t1_ne_t2": true
+    },
+    "iteration2": {
+      "actual_tree": "6798adeaafeffc1c3c5567e23459f687be626031",
+      "declared_equals_actual": false,
+      "envelope_declares": "5646f00e3f2dedd88b6bf6366256ea831fba42b0",
+      "t2_ne_t3": true
+    },
+    "same_commit_binding_not_stable": true,
+    "summary": {
+      "T1": "bc726effecb7e7a9c0776bd75e6ea9b82326eb79",
+      "T1_neq_T2": true,
+      "T2": "5646f00e3f2dedd88b6bf6366256ea831fba42b0",
+      "T2_neq_T3": true,
+      "T3": "6798adeaafeffc1c3c5567e23459f687be626031",
+      "note": "Demonstrates the circular dependency of the ordinary same-commit envelope procedure; not a formal proof over the whole hash space.",
+      "same_commit_binding_not_stable": true
+    }
+  },
+  "run_dir": "/home/ubuntu/.hermes/runs/20260805T224640Z-v3-2-envelope-binding-correction/controlled-git-model",
+  "schema": "controlled-git-model/v1",
+  "started_at_utc": "2026-08-05T22:47:49Z",
+  "steps": [
+    {
+      "command": [
+        "git",
+        "init"
+      ],
+      "exit_code": 0,
+      "label": "init-repo",
+      "stderr": "",
+      "stdout": "/home/ubuntu/.hermes/runs/20260805T224640Z-v3-2-envelope-binding-correction/controlled-git-model/git-model-repo"
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "README.md"
+      ],
+      "exit_code": 0,
+      "label": "add-candidate",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-q",
+        "-m",
+        "C candidate"
+      ],
+      "exit_code": 0,
+      "label": "commit-candidate",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "exit_code": 0,
+      "label": "C-tree",
+      "stderr": "",
+      "stdout": "d8b15f25a218106539c6015c9d00b808fff70c65\n"
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "impl.py"
+      ],
+      "exit_code": 0,
+      "label": "add-impl",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-q",
+        "-m",
+        "R provisional implementation result"
+      ],
+      "exit_code": 0,
+      "label": "commit-R0",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "exit_code": 0,
+      "label": "T1-rev-parse-tree",
+      "stderr": "",
+      "stdout": "bc726effecb7e7a9c0776bd75e6ea9b82326eb79\n"
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "result-envelope.json"
+      ],
+      "exit_code": 0,
+      "label": "add-envelope-T1",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-q",
+        "-m",
+        "E1 envelope declaring T1 (same commit model)"
+      ],
+      "exit_code": 0,
+      "label": "commit-E1",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "exit_code": 0,
+      "label": "T2-rev-parse-tree",
+      "stderr": "",
+      "stdout": "5646f00e3f2dedd88b6bf6366256ea831fba42b0\n"
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "result-envelope.json"
+      ],
+      "exit_code": 0,
+      "label": "add-envelope-T2",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-q",
+        "-m",
+        "E2 envelope declaring T2 (same commit model)"
+      ],
+      "exit_code": 0,
+      "label": "commit-E2",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "exit_code": 0,
+      "label": "T3-rev-parse-tree",
+      "stderr": "",
+      "stdout": "6798adeaafeffc1c3c5567e23459f687be626031\n"
+    }
+  ]
+}

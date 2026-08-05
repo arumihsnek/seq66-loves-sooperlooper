@@ -1,0 +1,97 @@
+{
+  "directory": "receipts/headless-lab-v3.2-review-binding",
+  "files": [
+    {
+      "file": "acceptance-v3.2-selftest-receipt.json",
+      "sha256": "471071caf832374dfd87d4efc9805f1af35c9ae734a5e61d843e8071fb77d697",
+      "size": 4177
+    },
+    {
+      "file": "controlled-git-model.json",
+      "sha256": "94daa29d152c5324296fa6dc44b83b7c1381228fbe3f5304a0d5d325927128a4",
+      "size": 4801
+    },
+    {
+      "file": "invalid-impl-in-e-envelope-test.json",
+      "sha256": "24e2b581ced90fc413d1726150746e7c411c660e288377f282a812d671135490",
+      "size": 6248
+    },
+    {
+      "file": "invalid-same-commit-envelope-test.json",
+      "sha256": "185c575eb2174fdf9d291e8ffd9813edb5712183185f82183c2c976b8346f463",
+      "size": 6183
+    },
+    {
+      "file": "invalid-wrong-tree-envelope-test.json",
+      "sha256": "d7c7664f94029ae3da849deeb0630742f557a8b315e6f0e2a368dc7b8287eb33",
+      "size": 6190
+    },
+    {
+      "file": "rejected-head-v3.2-lab-a-test-receipt.json",
+      "sha256": "38179703826daa054a08057134f0ea470131e6a42f03df8614206b913eb4989a",
+      "size": 4227
+    },
+    {
+      "file": "rejected-head-v3.2-lab-b-test-receipt.json",
+      "sha256": "cce4d0668a3a31206b81ed92e903af40fbb6d205b40487b9c341414cf504939b",
+      "size": 5638
+    },
+    {
+      "file": "rejected-head-v3.2-test-receipt.json",
+      "sha256": "24598db5b16a52c54002f8a4b962826730fd3de77ffc4f5a0cbc404c809332e6",
+      "size": 870
+    },
+    {
+      "file": "review-binding-receipt.json",
+      "sha256": "be5add8262f88b4a603cbafad9fc8db1da32db14a3dd9b80d010cec45f4f0f29",
+      "size": 1415
+    },
+    {
+      "file": "senior-preflight-receipt.json",
+      "sha256": "ffb00b110a5093b04418d9329dd5fc82915402c38de3cf34f67268b3431322cf",
+      "size": 782
+    },
+    {
+      "file": "senior-review-bundle.json",
+      "sha256": "36997380aa6222449eec27792af97668a3416a095226c439ecdda1dd8e9dd05a",
+      "size": 23046
+    },
+    {
+      "file": "senior-verdict.json",
+      "sha256": "2cd266d7d04b4054f2d5886e71ce4a48dc96f4f8ca33d2d55262e874c3e141b0",
+      "size": 5059
+    },
+    {
+      "file": "tracked-v3.2-hashes.json",
+      "sha256": "dfae4271a123c2c5e7edbf5d869be02f93d4e95b8ae9f2084b619288f3ac4421",
+      "size": 2233
+    },
+    {
+      "file": "v3.1-envelope-defect-reproduction.json",
+      "sha256": "b485f6b213fdaf6a05938fcdc8195f3ca7955531cd0fe77e6ebc1672fa3027f0",
+      "size": 3018
+    },
+    {
+      "file": "v3.2-package-manifest-validation.json",
+      "sha256": "f379b4054eecb58bb3e88f020608632dfc2bf6fe69ff39e179324aa5e97d653b",
+      "size": 4532
+    },
+    {
+      "file": "v3.2-package-validation.json",
+      "sha256": "f96997e053f615fe071a765e85ccf921b6fd3d61d4aa336b5436fe9e1bd78425",
+      "size": 2453
+    },
+    {
+      "file": "valid-two-commit-envelope-test-run.json",
+      "sha256": "dc98c6e37968c42973f56ea5214309cac3503d1da01ef76c8b6a3c7c02788222",
+      "size": 6179
+    },
+    {
+      "file": "valid-two-commit-envelope-test.json",
+      "sha256": "cfaa26b97a2e697966b9de0fb8f1cea2a0afc6b37d1d2972ad476323a0b33d40",
+      "size": 1333
+    }
+  ],
+  "recorded_at_utc": "2026-08-05T23:36:37Z",
+  "schema": "review-binding-index/v3.2"
+}

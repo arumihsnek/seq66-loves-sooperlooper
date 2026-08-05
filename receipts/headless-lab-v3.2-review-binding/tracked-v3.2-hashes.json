@@ -1,0 +1,38 @@
+{
+  "artifact_hashes": {
+    "acceptance-manifest-v3.2.json": "cdeb1212800b9238e078a74b43565b999c1decf4ee1ffc42086a5ef9db8c424e",
+    "acceptance-verifier-v3.2.py": "a06684a0bdc03c3553b4fc201f473c4959b6b2940bdd93b9251e3f7824c67ce6",
+    "batch-manifest-v3.2.json": "c32a1e2b71261d8b042a15f5ed90381275521788cf543d8bc0c8870d6a5344bb",
+    "build-provenance-policy-v3.2.json": "0a26321a1ea455a580e144f0c33fda6f0a2dd5c6a73b25f411c914fdae582baf",
+    "dispatch-plan-v3.2.json": "d307b3a46b2d5c1849402f30f4365ab7c72648e8e1715d72f8cb12869cd5e3f9",
+    "lab-api-contract-v3.2.json": "ed8dafdffcdad457c3fb235ef25de059eec870991a73ce02c97f95f6faf058af",
+    "lease-plan-lab-a-v3.2.json": "e4a48ad84d7d7ac7fb50f5ffbcc567de24697df3729fdc8123b17cc4649a83b2",
+    "lease-plan-lab-b-v3.2.json": "2864100eb982dc51c7bfcdfee375f7ce439e17fb1f193d74c12c5b07e68e9567",
+    "port-plan-v3.2.json": "de6faed10fdeeb17a7f5ae2f01d5f9322d8b7759bb478e31c22806fcfda4b098",
+    "predispatch-readiness-v3.2.json": "58477d65379ce221d1ef343146fdae8df2c9d037d359cee9e313e776c19ab286",
+    "result-envelope-schema-v3.2.json": "272eae704e420d1dfc813c6b71151d9b45573e23bb8f3dec9c839fba9caae8ac",
+    "scope-freeze-v3.2.json": "b7bd7a2e33b2c052a2f2ab3c675b8a19dae6be38868361246e0a9144e17135b6"
+  },
+  "artifact_sizes": {
+    "acceptance-manifest-v3.2.json": 2659,
+    "acceptance-verifier-v3.2.py": 47597,
+    "batch-manifest-v3.2.json": 10768,
+    "build-provenance-policy-v3.2.json": 2093,
+    "dispatch-plan-v3.2.json": 2502,
+    "lab-api-contract-v3.2.json": 5998,
+    "lease-plan-lab-a-v3.2.json": 3332,
+    "lease-plan-lab-b-v3.2.json": 3253,
+    "port-plan-v3.2.json": 4185,
+    "predispatch-readiness-v3.2.json": 1707,
+    "result-envelope-schema-v3.2.json": 3054,
+    "scope-freeze-v3.2.json": 4046
+  },
+  "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "manifest_file": "v3.2-package-manifest.json",
+  "manifest_sha256": "441d04d4eb812b5c2738372205ae244691386cec2c2c4fe8011889486bf9ec27",
+  "package_dir": "receipts/headless-lab-v3.2",
+  "recorded_at_utc": "2026-08-05T23:36:37Z",
+  "schema": "tracked-v3.2-hashes/v1",
+  "source_commit": "da89654e05d7014bf0720ed5517c362b7c4beacf"
+}

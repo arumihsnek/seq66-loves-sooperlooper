@@ -1,0 +1,219 @@
+{
+  "schema": "acceptance-verifier-v3.2",
+  "version": "3.2.0",
+  "lab": "A",
+  "repository": "/home/ubuntu/.hermes/runs/20260805T224640Z-v3-2-envelope-binding-correction/validation/test-repos/bad-wrong-tree",
+  "candidate_head": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5",
+  "result_head": "2d7db442c384798de1e9d4da577e5fbf744302db",
+  "envelope_container_head": "98fda736841b631c024e3fdcfd4ab1ca73a2a4ac",
+  "envelope_path": "receipts/headless-lab-results-v3.2/lab-a-result.json",
+  "checks": [
+    {
+      "name": "model: C commit exists",
+      "status": "PASS",
+      "detail": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5",
+      "evidence": {}
+    },
+    {
+      "name": "model: R commit exists",
+      "status": "PASS",
+      "detail": "2d7db442c384798de1e9d4da577e5fbf744302db",
+      "evidence": {}
+    },
+    {
+      "name": "model: E commit exists",
+      "status": "PASS",
+      "detail": "98fda736841b631c024e3fdcfd4ab1ca73a2a4ac",
+      "evidence": {}
+    },
+    {
+      "name": "model: R^ == C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "r_parent": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5",
+        "c": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5"
+      }
+    },
+    {
+      "name": "model: E^ == R",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "e_parent": "2d7db442c384798de1e9d4da577e5fbf744302db",
+        "r": "2d7db442c384798de1e9d4da577e5fbf744302db"
+      }
+    },
+    {
+      "name": "model: envelope absent from R",
+      "status": "PASS",
+      "detail": "envelope must NOT be committed in the implementation result commit",
+      "evidence": {}
+    },
+    {
+      "name": "model: envelope present in E",
+      "status": "PASS",
+      "detail": "envelope must be committed in the envelope container commit",
+      "evidence": {}
+    },
+    {
+      "name": "model: diff C..R owned-only",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "changed": [
+          "tests/integration/headless_audio_lab/__init__.py",
+          "tests/integration/headless_audio_lab/jack_server.py",
+          "tests/integration/headless_audio_lab/osc_probe.py",
+          "tests/integration/headless_audio_lab/process_supervisor.py",
+          "tests/integration/headless_audio_lab/sooperlooper_launcher.py"
+        ],
+        "out_of_scope": []
+      }
+    },
+    {
+      "name": "model: diff R..E envelope-only",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "changed": [
+          "receipts/headless-lab-results-v3.2/lab-a-result.json"
+        ],
+        "expected": [
+          "receipts/headless-lab-results-v3.2/lab-a-result.json"
+        ]
+      }
+    },
+    {
+      "name": "model: candidate_commit_oid == C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5",
+        "expected": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5"
+      }
+    },
+    {
+      "name": "model: implementation_result_commit_oid == R",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "2d7db442c384798de1e9d4da577e5fbf744302db",
+        "expected": "2d7db442c384798de1e9d4da577e5fbf744302db"
+      }
+    },
+    {
+      "name": "model: implementation_result_tree_oid == R^{tree}",
+      "status": "FAIL",
+      "detail": "",
+      "evidence": {
+        "observed": "0000000000000000000000000000000000000000",
+        "expected": "20ef7d72305d895fdb548894ebe6d48b5b17b4c8"
+      }
+    },
+    {
+      "name": "model: git_object_format matches",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "sha1",
+        "expected": "sha1"
+      }
+    },
+    {
+      "name": "model: no forbidden self-binding fields",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "bad_self": [],
+        "e_blob_oid": "5545b48a35a6cf654f8ef1ae86ed5cfd82b21c5a",
+        "e_tree_oid": "bbd2e551561d84ff60f0dff3ae5925b4bb35b61f"
+      }
+    },
+    {
+      "name": "model: artifacts safe (no envelope self-hash, R-only)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "bad_art": []
+      }
+    },
+    {
+      "name": "model: clean worktree at R (on arrival)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    },
+    {
+      "name": "lab-a: imports",
+      "status": "PASS",
+      "detail": "all 4 modules import cleanly",
+      "evidence": {}
+    },
+    {
+      "name": "lab-a: placeholder scan",
+      "status": "PASS",
+      "detail": "no placeholder patterns in owned sources",
+      "evidence": {}
+    },
+    {
+      "name": "lab-a: harness probe pattern integrity",
+      "status": "PASS",
+      "detail": "shipped corrected probe must not contain the v3 foreign-survival contradiction",
+      "evidence": {
+        "detected": []
+      }
+    },
+    {
+      "name": "lab-a: functional lifecycle",
+      "status": "PASS",
+      "detail": "owned PID>0, owned terminated after cleanup, verify_cleanup()==[], foreign survives supervisor cleanup, foreign created outside supervisor",
+      "evidence": {
+        "owned_pid_positive": {
+          "satisfied": true,
+          "observed": true
+        },
+        "owned_child_alive_before_cleanup": {
+          "satisfied": true,
+          "observed": true
+        },
+        "owned_child_alive_after_cleanup": {
+          "satisfied": true,
+          "observed": false
+        },
+        "cleanup_ok": {
+          "satisfied": true,
+          "observed": true
+        },
+        "foreign_alive_after_supervisor_cleanup": {
+          "satisfied": true,
+          "observed": true
+        },
+        "failure_propagation": {
+          "satisfied": true,
+          "observed": true
+        },
+        "foreign_registered_in_supervisor": {
+          "satisfied": true,
+          "observed": false
+        },
+        "foreign_terminated_by_controller": {
+          "satisfied": true,
+          "observed": true
+        }
+      }
+    },
+    {
+      "name": "model: clean worktree at R (after gates)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    }
+  ],
+  "env_notes": [],
+  "verdict": "REJECT"
+}
