@@ -1,0 +1,49 @@
+{
+  "accept_does_not_authorize_package_work_or_dispatch": true,
+  "blocking_findings": [],
+  "bound_manifest_sha256": "6131be045b23369d32d3c0277ad32128eea98fa80e61918d92c4cb116d7a2d50",
+  "detailed_status": "VALID_ADVISORY_VERDICT",
+  "execution_id": "bd930aae-f912-4c5b-8b47-eba053d84dea",
+  "mission_id": "seq66-v3-4-dispatch-evidence-forensic-addendum",
+  "mode": "plan-review",
+  "question_answers": [
+    {
+      "answer": "S\u00ed. El snapshot original queda ligado al commit can\u00f3nico 889f759b; la discrepancia 20 declarados frente a 19 entradas efectivas est\u00e1 documentada como artefacto de publicaci\u00f3n preexistente.",
+      "id": "Q1"
+    },
+    {
+      "answer": "S\u00ed. El \u00edndice valida 19/19 entradas efectivas en 889f759b; count=20 no implica evidencia faltante.",
+      "id": "Q2"
+    },
+    {
+      "answer": "S\u00ed. En e88f6300 fallan exactamente leaf-a-report.json y leaf-b-report.json: 17/19 coinciden.",
+      "id": "Q3"
+    },
+    {
+      "answer": "S\u00ed. Las generaciones original y amended est\u00e1n preservadas y ligadas mediante OID, tama\u00f1o y SHA-256.",
+      "id": "Q4"
+    },
+    {
+      "answer": "S\u00ed. El addendum es append-only y no modifica CP-061 ni los receipts hist\u00f3ricos.",
+      "id": "Q5"
+    },
+    {
+      "answer": "S\u00ed. El veredicto permanece DISPATCH_RESULT_REJECTED y no existe conjunto candidato de integraci\u00f3n.",
+      "id": "Q6"
+    },
+    {
+      "answer": "S\u00ed. La clasificaci\u00f3n documenta la mutaci\u00f3n y evita atribuir fraude o malicia no demostrados.",
+      "id": "Q7"
+    },
+    {
+      "answer": "S\u00ed. La evidencia queda suficientemente cerrada para una decisi\u00f3n posterior sobre hardening de proceso v3.5.",
+      "id": "Q8"
+    }
+  ],
+  "recorded_at_utc": "2026-08-06T19:50:00Z",
+  "required_actions": [],
+  "response_fingerprint": "3c3f33926d1bb6c5b2e4ce0ecc466bb8a8d38de458a9cd20d54d5ee69cc665ef",
+  "schema": "senior-verdict/v1",
+  "status": "COMPLETED",
+  "verdict": "accept"
+}

@@ -1,0 +1,37 @@
+{
+  "cp061.md": {
+    "blob_oid": "f0e04415d20f469ac5fc88bf701a3217ae4cab64",
+    "path": "doc/sooperlooper/checkpoints/2026-08-06-CP-061-v3-4-authorized-dispatch-results.md",
+    "sha256": "c5c36f37650ec2ffef5121f25d372a937c9803be71ddf50f399d55ca27253865",
+    "size": 6596,
+    "source_commit": "889f759b9774d877b950c0609d799c272f1c9923"
+  },
+  "dispatch-index.json": {
+    "blob_oid": "6e51fc744065c2239ea8cc6ce3a2889c259e2ab3",
+    "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index.json",
+    "sha256": "60c415ca2c54df9b352563339b127b974243c7705a4fca80b6356c8668cdf150",
+    "size": 2059,
+    "source_commit": "889f759b9774d877b950c0609d799c272f1c9923"
+  },
+  "dispatch-verdict.json": {
+    "blob_oid": "d97668baa80723e732d48405daea5fa46ca7487d",
+    "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-verdict.json",
+    "sha256": "a710663a3c347e3635d4b66f952468fb3c7aba93be9331bec2541cf5b7defec5",
+    "size": 777,
+    "source_commit": "889f759b9774d877b950c0609d799c272f1c9923"
+  },
+  "leaf-a-report.json": {
+    "blob_oid": "d7313cbecf68e50fd6bb8f880f9d6ca5fc20bbbc",
+    "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report.json",
+    "sha256": "8bde156aedcfebf7982bf866138fbaf70ec42798db46ad010d8906d88b9134a1",
+    "size": 779,
+    "source_commit": "889f759b9774d877b950c0609d799c272f1c9923"
+  },
+  "leaf-b-report.json": {
+    "blob_oid": "994632441f85bade78abc981f1587870ece64967",
+    "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report.json",
+    "sha256": "29d975fe9f3903c4647e585c61847b35c020fda8267ab996a950a1989025b81c",
+    "size": 781,
+    "source_commit": "889f759b9774d877b950c0609d799c272f1c9923"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "amendment_commit": "e88f630090acc877fcafdf3a9142c2f9a425f194",
+  "canonical_semantics": {
+    "CANONICAL_CP061_DISPATCH_SNAPSHOT_COMMIT": "889f759b9774d877b950c0609d799c272f1c9923",
+    "SELF_REPORT_AMENDMENT_COMMIT": "e88f630090acc877fcafdf3a9142c2f9a425f194",
+    "interpretation": [
+      "The original 20-file indexed dispatch evidence set is canonical only when resolved at commit 889f759b.",
+      "The two richer leaf reports at e88f6300 are amendment evidence, not replacements covered by the original dispatch-index.",
+      "The append-only forensic addendum binds both generations explicitly."
+    ]
+  },
+  "canonical_snapshot_commit": "889f759b9774d877b950c0609d799c272f1c9923",
+  "canonical_verdict": {
+    "DISPATCH_RESULT": "DISPATCH_RESULT_REJECTED",
+    "NO_INTEGRATION_CANDIDATE_SET": true
+  },
+  "causal_limitation": "The addendum was applied by replacing two previously indexed receipts instead of publishing separate immutable addendum receipts.",
+  "flags": {
+    "APPEND_ONLY_RULE_VIOLATED": true,
+    "CP_061_DOCUMENT_IMMUTABLE": true,
+    "CP_061_REFERENCED_EVIDENCE_PATHS_MUTATED_AFTER_PUBLICATION": true,
+    "DISPATCH_VERDICT_CHANGED": false,
+    "INTEGRATION_STATE_CHANGED": false,
+    "ORIGINAL_DISPATCH_INDEX_VALID_AT_889F": true,
+    "ORIGINAL_DISPATCH_INDEX_VALID_AT_E88F": false,
+    "POST_CHECKPOINT_EVIDENCE_MUTATION": true,
+    "TOPOLOGY_VERDICT_CHANGED": false
+  },
+  "index_actual_counts": {
+    "at_889f759b": "19/19 files-map entries match (index self-consistent at canonical snapshot)",
+    "at_e88f6300": "17/19 match; exactly 2 mismatches: leaf-a-report.json, leaf-b-report.json",
+    "count_consistency_note": "publisher artifact (duplicate dispatch-verdict.json key collapsed at publication); pre-existing at 889f759b; NOT a post-CP061 mutation",
+    "declared_count_field": 20,
+    "files_map_entries": 19
+  },
+  "non_claims": [
+    "No evidence deletion: original blobs remain accessible via commit 889f759b.",
+    "No fraud or malice asserted."
+  ],
+  "recorded_at_utc": "2026-08-06T19:35:48Z",
+  "run_id": "20260806T193343Z-v3-4-dispatch-evidence-forensic-closure",
+  "schema": "forensic-classification/v1"
+}

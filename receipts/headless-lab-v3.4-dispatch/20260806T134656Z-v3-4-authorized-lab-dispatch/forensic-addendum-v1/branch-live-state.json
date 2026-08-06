@@ -1,0 +1,37 @@
+{
+  "D0_D1_D2": "not performed",
+  "LAB_A": {
+    "R": "0fd104ef2187346b8c00014829857e11ee9539ec",
+    "envelope_verifier": "REJECT (leaf_literal_tests 'exit code' -2 placeholders)",
+    "expected_E": "a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3",
+    "remote_branch": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-a-v3_4",
+    "remote_exists": true,
+    "remote_resolved": "a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3",
+    "topology_verified_at_dispatch": "PASS (remote==E, E^==R, R^==C, owned-only, envelope-only)"
+  },
+  "LAB_B": {
+    "E": "2906dc4fd77e2d7455060c3248db73aabdeb010b",
+    "E_parent": "2b774260ef54238dc3847e26385238766fd94499",
+    "E_parent_is_R": false,
+    "R": "608cefef3a270a2ea6859b8d48ee931c636743f8",
+    "envelope_verifier": "REJECT",
+    "fixtures": "MISSING in R (synthetic_source, deterministic_capture; 'cannot get blob at R')",
+    "ownership": "FAIL (headless_audio_lab/__init__.py in diff C..R)",
+    "remote_branch": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-b-v3_4",
+    "remote_exists": false,
+    "worktree_at_E": "recorded dirty (untracked .c files)"
+  },
+  "checked_at_utc": "2026-08-06T19:35:12Z",
+  "companion_LAB_B_provenance": "absent",
+  "controller_literal_tests": {
+    "LAB-A": "4/4 exit 0",
+    "LAB-B": "4/4 exit 0",
+    "total": "8/8 exit 0"
+  },
+  "dispatch_verdict": "DISPATCH_RESULT_REJECTED",
+  "full_completion": "not reached",
+  "functional_acceptance": "not reached (envelope/binding gates failed)",
+  "integration": "not performed",
+  "leases": "consumed (failed_validation, not reusable)",
+  "no_integration_candidate_set": true
+}

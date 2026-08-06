@@ -1,0 +1,154 @@
+{
+  "amendment_commit": "e88f630090acc877fcafdf3a9142c2f9a425f194",
+  "canonical_snapshot_commit": "889f759b9774d877b950c0609d799c272f1c9923",
+  "count": 19,
+  "files": {
+    "amended-leaf-a-report-e88f6300.json": {
+      "blob_oid": "e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-e88f6300.json",
+      "filename": "amended-leaf-a-report-e88f6300.json",
+      "role": "amendment",
+      "sha256": "1dfb196ee3d6b653783f7d6c5c1bab7f366f967eb54879935898241b1af72b8f",
+      "size": 2095,
+      "source_commit": "e88f630090acc877fcafdf3a9142c2f9a425f194"
+    },
+    "amended-leaf-b-report-e88f6300.json": {
+      "blob_oid": "e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-e88f6300.json",
+      "filename": "amended-leaf-b-report-e88f6300.json",
+      "role": "amendment",
+      "sha256": "68697e2133333a83a738036a1f3f68a9337a6b3dd0ecdceb3419121ee23ea3c2",
+      "size": 2059,
+      "source_commit": "e88f630090acc877fcafdf3a9142c2f9a425f194"
+    },
+    "amended-snapshot-hashes.json": {
+      "blob_oid": null,
+      "filename": "amended-snapshot-hashes.json",
+      "role": "analysis",
+      "sha256": "9062e9a0944bba8ce2c03d365f1601bdfe8066292e804b3389b79fb8f4d44ecc",
+      "size": 1836,
+      "source_commit": null
+    },
+    "branch-live-state.json": {
+      "blob_oid": null,
+      "filename": "branch-live-state.json",
+      "role": "analysis",
+      "sha256": "fb7d9dff15b5324d112d1b632f1b2fbea66c5bd2377fb534967c955f66c01f9a",
+      "size": 1615,
+      "source_commit": null
+    },
+    "commit-comparison.json": {
+      "blob_oid": null,
+      "filename": "commit-comparison.json",
+      "role": "analysis",
+      "sha256": "af40aab5cb65dd7a2bc9f942abe28f3c68e2ed31653a9b4f2e7754adbb2a1d86",
+      "size": 1037,
+      "source_commit": null
+    },
+    "current-dispatch-index-e88f6300.json": {
+      "blob_oid": "e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-e88f6300.json",
+      "filename": "current-dispatch-index-e88f6300.json",
+      "role": "amendment",
+      "sha256": "60c415ca2c54df9b352563339b127b974243c7705a4fca80b6356c8668cdf150",
+      "size": 2059,
+      "source_commit": "e88f630090acc877fcafdf3a9142c2f9a425f194"
+    },
+    "dispatch-verdict-revalidation.json": {
+      "blob_oid": null,
+      "filename": "dispatch-verdict-revalidation.json",
+      "role": "analysis",
+      "sha256": "fb7d9dff15b5324d112d1b632f1b2fbea66c5bd2377fb534967c955f66c01f9a",
+      "size": 1615,
+      "source_commit": null
+    },
+    "forensic-classification.json": {
+      "blob_oid": null,
+      "filename": "forensic-classification.json",
+      "role": "analysis",
+      "sha256": "a7ac8e573abd1cf4447fcaef2c179c590d5a3ebebbab18dc06728a9dca347bbd",
+      "size": 2163,
+      "source_commit": null
+    },
+    "index-validation-at-889f759b.json": {
+      "blob_oid": null,
+      "filename": "index-validation-at-889f759b.json",
+      "role": "analysis",
+      "sha256": "6a470944ac0a9e6c23cd806fac9537d6ec555bb3684193c69621ec9cedd37c1e",
+      "size": 471,
+      "source_commit": null
+    },
+    "index-validation-at-e88f6300.json": {
+      "blob_oid": null,
+      "filename": "index-validation-at-e88f6300.json",
+      "role": "analysis",
+      "sha256": "94f6b663cb9876ba4bef067727b10702e2744af235788fe0659b74d0839c49f8",
+      "size": 968,
+      "source_commit": null
+    },
+    "original-dispatch-index-889f759b.json": {
+      "blob_oid": "889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-889f759b.json",
+      "filename": "original-dispatch-index-889f759b.json",
+      "role": "original",
+      "sha256": "60c415ca2c54df9b352563339b127b974243c7705a4fca80b6356c8668cdf150",
+      "size": 2059,
+      "source_commit": "889f759b9774d877b950c0609d799c272f1c9923"
+    },
+    "original-leaf-a-report-889f759b.json": {
+      "blob_oid": "889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-889f759b.json",
+      "filename": "original-leaf-a-report-889f759b.json",
+      "role": "original",
+      "sha256": "8bde156aedcfebf7982bf866138fbaf70ec42798db46ad010d8906d88b9134a1",
+      "size": 779,
+      "source_commit": "889f759b9774d877b950c0609d799c272f1c9923"
+    },
+    "original-leaf-b-report-889f759b.json": {
+      "blob_oid": "889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-889f759b.json",
+      "filename": "original-leaf-b-report-889f759b.json",
+      "role": "original",
+      "sha256": "29d975fe9f3903c4647e585c61847b35c020fda8267ab996a950a1989025b81c",
+      "size": 781,
+      "source_commit": "889f759b9774d877b950c0609d799c272f1c9923"
+    },
+    "original-snapshot-hashes.json": {
+      "blob_oid": null,
+      "filename": "original-snapshot-hashes.json",
+      "role": "analysis",
+      "sha256": "09549ac5083e9923ab318f8645412d3e22cb02eb1407e511ffca13de641cfbfb",
+      "size": 1834,
+      "source_commit": null
+    },
+    "senior-preflight.json": {
+      "blob_oid": null,
+      "filename": "senior-preflight.json",
+      "role": "review",
+      "sha256": "e2a39ea27c86cf0a2ba0f10c33db354e8b4674e261a9684c684d2c77752b3cc5",
+      "size": 262,
+      "source_commit": null
+    },
+    "senior-review-bundle.json": {
+      "blob_oid": null,
+      "filename": "senior-review-bundle.json",
+      "role": "review",
+      "sha256": "38ac5ae249a65857c8e89eb91db7328d9c3bf8ef2b471b2866faee1285cb8c0b",
+      "size": 17639,
+      "source_commit": null
+    },
+    "senior-verdict.json": {
+      "blob_oid": null,
+      "filename": "senior-verdict.json",
+      "role": "review",
+      "sha256": "20cbdb3382be97966875ecd39c589b876a6732ab2323d92f3208fc6af505fbaa",
+      "size": 2004,
+      "source_commit": null
+    },
+    "source-state.json": {
+      "blob_oid": null,
+      "filename": "source-state.json",
+      "role": "analysis",
+      "sha256": "3eddf03fff9f0591bd2a4cae956cb542d123ddcf196c318266501f1352988fa0",
+      "size": 609,
+      "source_commit": null
+    }
+  },
+  "frozen_at_utc": "2026-08-06T19:39:10Z",
+  "run_id": "20260806T193343Z-v3-4-dispatch-evidence-forensic-closure",
+  "schema": "forensic-addendum-manifest/v1"
+}

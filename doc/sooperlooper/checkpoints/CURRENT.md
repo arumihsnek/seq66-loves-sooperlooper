@@ -1,28 +1,31 @@
-# Current checkpoint — V3.4 authorized dispatch results
+# Current checkpoint — V3.4 dispatch evidence forensic closure
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-06-CP-061-v3-4-authorized-dispatch-results.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-06-CP-062-v3-4-dispatch-evidence-forensic-closure.md`
 
-Checkpoint ID: `CP-061`
+Checkpoint ID: `CP-062`
 Checkpoint date: 2026-08-06
-Supersedes: `CP-060` (2026-08-06, immutable)
+Supersedes: `CP-061` (2026-08-06, immutable)
 
 ## Current state
 
 - Manifest current_phase: `phase-5-exact-recording`; active task `P5-005` in_progress; P5-007 deferred.
-- RUN_ID: `20260806T134656Z-v3-4-authorized-lab-dispatch`; dispatch authorized consumed (count=1); package v3.4 manifest `63c371ba...`.
-- LAB-A R=`0fd104ef2187346b8c00014829857e11ee9539ec` E=`a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3`; LAB-B R=`608cefef3a270a2ea6859b8d48ee931c636743f8` E=`2906dc4fd77e2d7455060c3248db73aabdeb010b` — **DISPATCH RESULT: DISPATCH_RESULT_REJECTED**
-  (no integration candidate set).
-- `integration_authorized=false`; `D0_D1_D2_authorized=false`; no integration performed.
-- Leases v3.4 consumed; leaf/evidence worktrees preserved (no destructive cleanup performed).
+- Forensic closure: **PASS** — original dispatch snapshot pinned to `889f759b`, self-report
+  amendment `e88f6300`, post-checkpoint mutation documented, append-only addendum bound.
+- `dispatch_result=DISPATCH_RESULT_REJECTED`; `no_integration_candidate_set=true`;
+  `dispatch_authorized=false`; `integration_authorized=false`; `D0_D1_D2_authorized=false`;
+  `PR_merge_authorized=false`.
+- Leases v3.4 consumed; v3.4 exact package cannot be redispatched with consumed exact lease IDs.
+- Senior forensic verdict: **accept** (0/0) — execution `bd930aae-f912-4c5b-8b47-eba053d84dea`.
 
 ## Next action
 
-Human decision: review the exact failure evidence (envelope/binding rejection for both leaves;
-implementations pass the frozen literal tests 8/8). Decide a future correction. No integration
-candidate set.
+Human decision: authorize or reject a SEPARATE session to prepare a v3.5 process-hardening package
+(new batch/leases/result paths; leaf produces R only; leaf has NO push authority; frozen mechanical
+finalizer constructs E; controller sole publisher; create-only push; no force-push; manual envelopes
+rejected; verifier PASS required before publication). NOT authorized yet; not executed.
 
 ## References
 
 - `PROJECT-MANIFEST.json`; `doc/sooperlooper/WORK-QUEUE.md` (P5-005)
-- `receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/` (evidence)
-- `doc/sooperlooper/checkpoints/2026-08-06-CP-060-v3-4-functional-contract-restoration.md`
+- `receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/`
+- `doc/sooperlooper/checkpoints/2026-08-06-CP-061-v3-4-authorized-dispatch-results.md`

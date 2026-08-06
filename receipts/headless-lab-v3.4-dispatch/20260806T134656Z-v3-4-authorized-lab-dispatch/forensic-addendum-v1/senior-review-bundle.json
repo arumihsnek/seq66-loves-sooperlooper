@@ -1,0 +1,205 @@
+{
+  "alternatives": [
+    {
+      "cons": [
+        "does not retroactively fix the index"
+      ],
+      "pros": [
+        "documents mutation without altering history",
+        "binds original + amended blobs",
+        "verdict unchanged"
+      ],
+      "recommendation": "keep",
+      "title": "Append-only forensic addendum binding both generations (recommended)"
+    },
+    {
+      "cons": [
+        "violates append-only",
+        "modifies historical evidence"
+      ],
+      "pros": [
+        "index becomes consistent"
+      ],
+      "recommendation": "not now",
+      "title": "Rewrite the index at a new commit"
+    }
+  ],
+  "caller_required": [
+    "/alternatives",
+    "/candidate_decision",
+    "/code_excerpts",
+    "/constraints",
+    "/current_plan",
+    "/decision_needed",
+    "/diff",
+    "/escalation",
+    "/invalidated_assumptions",
+    "/objective",
+    "/observed_facts",
+    "/progress",
+    "/questions",
+    "/relevant_contracts",
+    "/risks_already_identified",
+    "/runtime_evidence",
+    "/snapshot/checkpoint_fingerprint",
+    "/snapshot/plan_fingerprint",
+    "/tests"
+  ],
+  "candidate_decision": {
+    "requested": "verdict=accept with 0 blocking findings and 0 required actions, binding the exact forensic-addendum-manifest and all new hashes; accept does NOT authorize package work or dispatch"
+  },
+  "code_excerpts": [
+    {
+      "code": "M\treceipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report.json\nM\treceipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report.json",
+      "path": "git diff 889f..e88f --name-status"
+    },
+    {
+      "code": "19/19 files-map entries match; declared count=20 (publisher artifact)",
+      "path": "index @889f"
+    },
+    {
+      "code": "17/19 match; mismatches EXACTLY leaf-a-report.json (8bde156a->1dfb196e) and leaf-b-report.json (29d975fe->68697e21)",
+      "path": "index @e88f"
+    },
+    {
+      "code": "f0e04415d20f469ac5fc88bf701a3217ae4cab64 at both heads",
+      "path": "CP-061 blob"
+    }
+  ],
+  "constraints": [
+    "No dispatch; no v3.5 package; no implementation; no integration; no D0/D1/D2.",
+    "CP-048..CP-061 and ALL original dispatch receipts are immutable; no 'fixing' of the historical index; no restoring old report bytes; no adding fields to existing receipts.",
+    "Append-only: corrections only under forensic-addendum-v1/.",
+    "No force-push, no history rewrite, no branch/worktree deletion."
+  ],
+  "current_plan": {
+    "completed": [
+      "remote revalidation",
+      "git comparison (1 commit, 2 paths)",
+      "snapshot exports (original+amended)",
+      "index validations (19/19 @889f, 17/19 @e88f, exact 2 mismatches)",
+      "hash/blob binding",
+      "branch live state + verdict revalidation",
+      "forensic classification",
+      "append-only addendum (15 artifacts)"
+    ],
+    "next": "senior review -> manifest+index -> CP-062 -> PR -> CI -> stop gate",
+    "phase": "v3.4 dispatch evidence forensic closure"
+  },
+  "decision_needed": "Is the forensic classification correct and the append-only addendum sufficiently bound, with verdict=accept, 0 blocking findings, 0 required actions, binding the exact forensic-addendum-manifest and all new hashes? Accept does NOT authorize package work or dispatch.",
+  "diff": {
+    "base": "e88f630090acc877fcafdf3a9142c2f9a425f194",
+    "note": "evidence-only closure; no code, no dispatch",
+    "scope": "forensic-addendum-v1/*, CP-062, CURRENT (minimal control-plane)"
+  },
+  "escalation": {
+    "label": "seq66-v3-4-dispatch-evidence-forensic-addendum",
+    "level": "L2_SENIOR_REQUIRED",
+    "local_deterministic_checks": [
+      "git diff 2 paths",
+      "index 19/19 @889f",
+      "index 17/19 @e88f exact 2",
+      "blob bindings",
+      "branch revalidation",
+      "JSON parse 15/15"
+    ],
+    "material_impact": "The addendum binds both evidence generations; a classification error here would mislead the future v3.5 process-hardening decision.",
+    "mode": "plan-review"
+  },
+  "invalidated_assumptions": [
+    "Assumption that evidence published under CP-061 would remain byte-identical at later heads is invalidated for the two leaf reports."
+  ],
+  "mission_id": "seq66-v3-4-dispatch-evidence-forensic-addendum",
+  "mode": "plan-review",
+  "objective": "Forensic closure of the v3.4 authorized dispatch evidence: document that after CP-061 was published at 889f759b, a later commit e88f6300 replaced two indexed leaf reports (leaf-a-report.json, leaf-b-report.json) \u2014 a post-checkpoint evidence mutation violating the append-only rule \u2014 and bind both generations via an append-only forensic addendum without modifying any historical file.",
+  "observed_facts": [
+    "PR #34 open/draft/mergeable at e88f630090acc877fcafdf3a9142c2f9a425f194; CI success on e88f630090acc877fcafdf3a9142c2f9a425f194 (runs 31114699982/31114699983).",
+    "git diff 889f759b..e88f6300: exactly ONE commit ('docs(receipts): record leaf self-reports...') and exactly TWO modified paths (leaf-a-report.json, leaf-b-report.json); zero checkpoint/index/verdict/package changes.",
+    "CP-061 blob identical at both heads (f0e04415...); dispatch-verdict identical (d97668ba...); dispatch-index identical (6e51fc74...).",
+    "Original leaf-a: blob d7313cbe, 779 B, sha256 8bde156a...; original leaf-b: blob 99463244, 781 B, sha256 29d975fe... (match mission-known values).",
+    "Amended leaf-a: blob 4fecb912, 2095 B, sha256 1dfb196e...; amended leaf-b: blob aa30bc11, 2059 B, sha256 68697e21... (match mission-known values).",
+    "Index files-map has 19 keys (declared count field = 20): publisher artifact from duplicate dispatch-verdict.json key at publication; pre-existing at 889f759b; 19/19 match at 889f759b; 17/19 at e88f6300 with EXACTLY the two leaf reports mismatching.",
+    "Technical verdict unchanged: LAB-A remote==E (a30e3c9d), envelope verifier REJECT; LAB-B remote absent, E^!=R, ownership/fixtures/dirty FAIL; controller literal tests 8/8 exit 0; leases consumed; no integration; no D0/D1/D2."
+  ],
+  "progress": {
+    "blocked": [
+      "human decision on v3.5 process-hardening session"
+    ],
+    "done": 15,
+    "total": 20
+  },
+  "questions": [
+    "Q1. \u00bfEl snapshot original de 20 receipts est\u00e1 ligado exactamente a 889f759b?",
+    "Q2. \u00bfEl \u00edndice original valida 20/20 en 889f759b?",
+    "Q3. \u00bfEl mismo \u00edndice falla exactamente en los dos leaf reports de e88f6300?",
+    "Q4. \u00bfLos blobs originales y amended est\u00e1n preservados y ligados por OID, tama\u00f1o y SHA-256?",
+    "Q5. \u00bfEl addendum es totalmente append-only y no modifica CP-061 ni receipts anteriores?",
+    "Q6. \u00bfEl dispatch verdict permanece REJECTED y sin conjunto candidato de integraci\u00f3n?",
+    "Q7. \u00bfLa clasificaci\u00f3n evita atribuciones no demostradas de fraude o malicia?",
+    "Q8. \u00bfLa evidencia queda suficientemente cerrada para decidir despu\u00e9s una correcci\u00f3n de proceso v3.5?"
+  ],
+  "relevant_contracts": [
+    "CP-061 (dispatch results)",
+    "result-envelope-schema/v3.4",
+    "dispatch-index (original, at 889f759b)",
+    "append-only rule (this mission)"
+  ],
+  "repository": {
+    "dirty": true,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    "Index count-field (20) vs files-map (19) discrepancy \u2014 publisher artifact, not evidence mutation.",
+    "Two leaf reports replaced in place post-CP061 \u2014 append-only rule violated; blobs still accessible at 889f759b."
+  ],
+  "runtime_evidence": [
+    {
+      "artifact": "commit-comparison.json",
+      "content": "{\n  \"commit_count\": 1,\n  \"commits\": [\n    \"e88f6300 docs(receipts): record leaf self-reports + controller verification in dispatch evidence (CP-061)\"\n  ],\n  \"expected\": {\n    \"commit_count\": 1,\n    \"paths\": [\n      \"receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report.json\",\n      \"receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report.json\"\n    ]\n  },\n  \"from\": \"889f759b9774d877b950c0609d799c272f1c9923\",\n  \"name_status\": [\n    \"M\\treceipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report.json\",\n    \"M\\treceipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report.json\"\n  ],\n  \"stat\": [\n    \".../leaf-a-report.json                             | 22 +++++++++++++++++++++-\",\n    \" .../leaf-b-report.json                             | 22 +++++++++++++++++++++-\",\n    \" 2 files changed, 42 insertions(+), 2 deletions(-)\"\n  ],\n  \"to\": \"e88f630090acc877fcafdf3a9142c2f9a425f194\"\n}",
+      "sha256": "af40aab5cb65dd7a2bc9f942abe28f3c68e2ed31653a9b4f2e7754adbb2a1d86"
+    },
+    {
+      "artifact": "index-validation-at-889f759b.json",
+      "content": "{\n  \"all_match\": true,\n  \"commit\": \"889f759b9774d877b950c0609d799c272f1c9923\",\n  \"count_consistency_note\": \"publisher artifact: index 'count' field = 20 while files map has 19 keys (duplicate 'dispatch-verdict.json' key collapsed at publication); pre-existing at 889f759b; NOT a post-CP061 mutation\",\n  \"count_field_consistent\": false,\n  \"declared_count_field\": 20,\n  \"files_map_entries\": 19,\n  \"label\": \"at-889f759b\",\n  \"matched\": 19,\n  \"mismatches\": [],\n  \"total\": 19\n}",
+      "sha256": "6a470944ac0a9e6c23cd806fac9537d6ec555bb3684193c69621ec9cedd37c1e"
+    },
+    {
+      "artifact": "index-validation-at-e88f6300.json",
+      "content": "{\n  \"all_match\": false,\n  \"commit\": \"e88f630090acc877fcafdf3a9142c2f9a425f194\",\n  \"count_consistency_note\": \"publisher artifact: index 'count' field = 20 while files map has 19 keys (duplicate 'dispatch-verdict.json' key collapsed at publication); pre-existing at 889f759b; NOT a post-CP061 mutation\",\n  \"count_field_consistent\": false,\n  \"declared_count_field\": 20,\n  \"files_map_entries\": 19,\n  \"label\": \"at-e88f6300\",\n  \"matched\": 17,\n  \"mismatches\": [\n    {\n      \"actual\": \"1dfb196ee3d6b653783f7d6c5c1bab7f366f967eb54879935898241b1af72b8f\",\n      \"file\": \"leaf-a-report.json\",\n      \"indexed\": \"8bde156aedcfebf7982bf866138fbaf70ec42798db46ad010d8906d88b9134a1\",\n      \"size_at_commit\": 2095\n    },\n    {\n      \"actual\": \"68697e2133333a83a738036a1f3f68a9337a6b3dd0ecdceb3419121ee23ea3c2\",\n      \"file\": \"leaf-b-report.json\",\n      \"indexed\": \"29d975fe9f3903c4647e585c61847b35c020fda8267ab996a950a1989025b81c\",\n      \"size_at_commit\": 2059\n    }\n  ],\n  \"total\": 19\n}",
+      "sha256": "94f6b663cb9876ba4bef067727b10702e2744af235788fe0659b74d0839c49f8"
+    },
+    {
+      "artifact": "hash-blob-binding.json",
+      "content": "{\n  \"amended_leaf-a-report.json_actual_sha256\": \"1dfb196ee3d6b653783f7d6c5c1bab7f366f967eb54879935898241b1af72b8f\",\n  \"amended_leaf-a-report.json_actual_size\": 2095,\n  \"amended_leaf-b-report.json_actual_sha256\": \"68697e2133333a83a738036a1f3f68a9337a6b3dd0ecdceb3419121ee23ea3c2\",\n  \"amended_leaf-b-report.json_actual_size\": 2059,\n  \"amended_leaf_a_sha256_expected\": \"1dfb196ee3d6b653783f7d6c5c1bab7f366f967eb54879935898241b1af72b8f\",\n  \"amended_leaf_b_sha256_expected\": \"68697e2133333a83a738036a1f3f68a9337a6b3dd0ecdceb3419121ee23ea3c2\",\n  \"amended_sizes\": {\n    \"leaf-a-report.json\": 2095,\n    \"leaf-b-report.json\": 2059\n  },\n  \"original_leaf-a-report.json_actual_sha256\": \"8bde156aedcfebf7982bf866138fbaf70ec42798db46ad010d8906d88b9134a1\",\n  \"original_leaf-a-report.json_actual_size\": 779,\n  \"original_leaf-b-report.json_actual_sha256\": \"29d975fe9f3903c4647e585c61847b35c020fda8267ab996a950a1989025b81c\",\n  \"original_leaf-b-report.json_actual_size\": 781,\n  \"original_leaf_a_sha256_expected\": \"8bde156aedcfebf7982bf866138fbaf70ec42798db46ad010d8906d88b9134a1\",\n  \"original_leaf_b_sha256_expected\": \"29d975fe9f3903c4647e585c61847b35c020fda8267ab996a950a1989025b81c\",\n  \"original_sizes\": {\n    \"leaf-a-report.json\": 779,\n    \"leaf-b-report.json\": 781\n  }\n}",
+      "sha256": "fe02e67fb1e4a09c98884b23913e1ff21f0f01f4d0f8ee55b91823a3a3e35569"
+    },
+    {
+      "artifact": "branch-live-state.json",
+      "content": "{\n  \"D0_D1_D2\": \"not performed\",\n  \"LAB_A\": {\n    \"R\": \"0fd104ef2187346b8c00014829857e11ee9539ec\",\n    \"envelope_verifier\": \"REJECT (leaf_literal_tests 'exit code' -2 placeholders)\",\n    \"expected_E\": \"a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3\",\n    \"remote_branch\": \"result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-a-v3_4\",\n    \"remote_exists\": true,\n    \"remote_resolved\": \"a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3\",\n    \"topology_verified_at_dispatch\": \"PASS (remote==E, E^==R, R^==C, owned-only, envelope-only)\"\n  },\n  \"LAB_B\": {\n    \"E\": \"2906dc4fd77e2d7455060c3248db73aabdeb010b\",\n    \"E_parent\": \"2b774260ef54238dc3847e26385238766fd94499\",\n    \"E_parent_is_R\": false,\n    \"R\": \"608cefef3a270a2ea6859b8d48ee931c636743f8\",\n    \"envelope_verifier\": \"REJECT\",\n    \"fixtures\": \"MISSING in R (synthetic_source, deterministic_capture; 'cannot get blob at R')\",\n    \"ownership\": \"FAIL (headless_audio_lab/__init__.py in diff C..R)\",\n    \"remote_branch\": \"result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-b-v3_4\",\n    \"remote_exists\": false,\n    \"worktree_at_E\": \"recorded dirty (untracked .c files)\"\n  },\n  \"checked_at_utc\": \"2026-08-06T19:35:12Z\",\n  \"companion_LAB_B_provenance\": \"absent\",\n  \"controller_literal_tests\": {\n    \"LAB-A\": \"4/4 exit 0\",\n    \"LAB-B\": \"4/4 exit 0\",\n    \"total\": \"8/8 exit 0\"\n  },\n  \"dispatch_verdict\": \"DISPATCH_RESULT_REJECTED\",\n  \"full_completion\": \"not reached\",\n  \"functional_acceptance\": \"not reached (envelope/binding gates failed)\",\n  \"integration\": \"not performed\",\n  \"leases\": \"consumed (failed_validation, not reusable)\",\n  \"no_integration_candidate_set\": true\n}",
+      "sha256": "fb7d9dff15b5324d112d1b632f1b2fbea66c5bd2377fb534967c955f66c01f9a"
+    },
+    {
+      "artifact": "forensic-classification.json",
+      "content": "{\n  \"amendment_commit\": \"e88f630090acc877fcafdf3a9142c2f9a425f194\",\n  \"canonical_semantics\": {\n    \"CANONICAL_CP061_DISPATCH_SNAPSHOT_COMMIT\": \"889f759b9774d877b950c0609d799c272f1c9923\",\n    \"SELF_REPORT_AMENDMENT_COMMIT\": \"e88f630090acc877fcafdf3a9142c2f9a425f194\",\n    \"interpretation\": [\n      \"The original 20-file indexed dispatch evidence set is canonical only when resolved at commit 889f759b.\",\n      \"The two richer leaf reports at e88f6300 are amendment evidence, not replacements covered by the original dispatch-index.\",\n      \"The append-only forensic addendum binds both generations explicitly.\"\n    ]\n  },\n  \"canonical_snapshot_commit\": \"889f759b9774d877b950c0609d799c272f1c9923\",\n  \"canonical_verdict\": {\n    \"DISPATCH_RESULT\": \"DISPATCH_RESULT_REJECTED\",\n    \"NO_INTEGRATION_CANDIDATE_SET\": true\n  },\n  \"causal_limitation\": \"The addendum was applied by replacing two previously indexed receipts instead of publishing separate immutable addendum receipts.\",\n  \"flags\": {\n    \"APPEND_ONLY_RULE_VIOLATED\": true,\n    \"CP_061_DOCUMENT_IMMUTABLE\": true,\n    \"CP_061_REFERENCED_EVIDENCE_PATHS_MUTATED_AFTER_PUBLICATION\": true,\n    \"DISPATCH_VERDICT_CHANGED\": false,\n    \"INTEGRATION_STATE_CHANGED\": false,\n    \"ORIGINAL_DISPATCH_INDEX_VALID_AT_889F\": true,\n    \"ORIGINAL_DISPATCH_INDEX_VALID_AT_E88F\": false,\n    \"POST_CHECKPOINT_EVIDENCE_MUTATION\": true,\n    \"TOPOLOGY_VERDICT_CHANGED\": false\n  },\n  \"index_actual_counts\": {\n    \"at_889f759b\": \"19/19 files-map entries match (index self-consistent at canonical snapshot)\",\n    \"at_e88f6300\": \"17/19 match; exactly 2 mismatches: leaf-a-report.json, leaf-b-report.json\",\n    \"count_consistency_note\": \"publisher artifact (duplicate dispatch-verdict.json key collapsed at publication); pre-existing at 889f759b; NOT a post-CP061 mutation\",\n    \"declared_count_field\": 20,\n    \"files_map_entries\": 19\n  },\n  \"non_claims\": [\n    \"No evidence deletion: original blobs remain accessible via commit 889f759b.\",\n    \"No fraud or malice asserted.\"\n  ],\n  \"recorded_at_utc\": \"2026-08-06T19:35:48Z\",\n  \"run_id\": \"20260806T193343Z-v3-4-dispatch-evidence-forensic-closure\",\n  \"schema\": \"forensic-classification/v1\"\n}",
+      "sha256": "a7ac8e573abd1cf4447fcaef2c179c590d5a3ebebbab18dc06728a9dca347bbd"
+    }
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "5b967db1ecf64098721fd34a11e5a79558c3f1536cb810d8d20e3ecb54c27f8a",
+    "plan_fingerprint": "b65c7e3c6e68d0322fa06d01d1b58ca9f8f591452f2773b977fd734290009d56",
+    "repository_head": "3585334c07accc6f6036d04a7487bea6c6610894",
+    "working_tree_fingerprint": "84c99c013e4e7c1a12a0bb90a0ad126e2d1ec133102c964fb515cab3532b1f26"
+  },
+  "tests": [
+    "git diff --name-status / --stat 889f759b..e88f6300 (2 paths, 1 commit)",
+    "index validation at 889f759b (19/19) and at e88f6300 (17/19, mismatches exactly leaf-a/leaf-b)",
+    "hash/blob binding (OID, size, sha256 for all 5 snapshot pairs + CP-061)",
+    "branch-live-state revalidation (LAB-A remote==E; LAB-B remote absent)",
+    "JSON parse of all addendum artifacts (15/15 base artifacts)"
+  ]
+}
