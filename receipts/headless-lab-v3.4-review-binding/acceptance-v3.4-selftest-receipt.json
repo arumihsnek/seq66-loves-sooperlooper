@@ -1,0 +1,232 @@
+{
+  "schema": "headless-lab-result-envelope/v3.4",
+  "version": "1.0.0",
+  "mode": "selftest",
+  "checks": [
+    {
+      "name": "selftest: valid v3.2 functional contract + v3.3 strict workflow PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": []
+      }
+    },
+    {
+      "name": "selftest: v3.3 analyze_wav(wav_bytes)->dict REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: API surface deep-equal (functions/classes/fields/methods/constraints)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: v3.3 silent=True without verification FAIL REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: API surface deep-equal (functions/classes/fields/methods/constraints)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: AnalysisResult removed REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: API surface deep-equal (functions/classes/fields/methods/constraints)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: analyze_loop_reproduction missing REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: API surface deep-equal (functions/classes/fields/methods/constraints)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: GraphAssertions API reduced REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: API surface deep-equal (functions/classes/fields/methods/constraints)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: LabRunner API reduced REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: API surface deep-equal (functions/classes/fields/methods/constraints)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: JackServer API reduced REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: API surface deep-equal (functions/classes/fields/methods/constraints)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: OscProbe API reduced REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: API surface deep-equal (functions/classes/fields/methods/constraints)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: SooperLooperLauncher API reduced REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: API surface deep-equal (functions/classes/fields/methods/constraints)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: a LAB-A literal test missing REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: LAB-A literal-test IDs complete (>=4)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: a LAB-B literal test missing REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: LAB-B literal-test IDs complete (>=4)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: synthetic JSON build command REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "func: canonical compile command preserved"
+        ]
+      }
+    },
+    {
+      "name": "selftest: canonical source path changed REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: .gitignore absent from ownership manifest REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: ownership drift between artifacts REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: strict envelope valid PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": []
+      }
+    },
+    {
+      "name": "selftest: minimal v3.2 envelope REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: R empty REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong artifact hash REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: strict full completion valid PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": []
+      }
+    },
+    {
+      "name": "selftest: LAB-B full completion with real canonical rebuild PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": []
+      }
+    },
+    {
+      "name": "selftest: missing controller receipt REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: remote mismatch REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: dirty checkout REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: zero temporary worktrees",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: zero temporary directories (TemporaryDirectory auto-clean)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: zero temporary processes (all owned/foreign terminated in probes)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    }
+  ],
+  "env_notes": []
+}

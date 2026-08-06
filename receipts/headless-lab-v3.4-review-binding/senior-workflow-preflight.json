@@ -1,0 +1,10 @@
+{
+  "bundle_sha256": "1383516b77185548142d11fe47b0cb1dd7517abf7211224399d156d693cd187a",
+  "mission_id": "seq66-lab-v3-4-strict-workflow-package",
+  "mode": "plan-review",
+  "model_processes_consumed": 0,
+  "recorded_at_utc": "2026-08-06T02:22:03Z",
+  "schema": "senior-preflight-receipt/v1",
+  "status": "PREFLIGHT_VALID",
+  "valid": true
+}

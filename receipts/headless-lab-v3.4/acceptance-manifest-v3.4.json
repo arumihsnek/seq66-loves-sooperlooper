@@ -1,0 +1,10 @@
+{
+  "batch_id": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+  "package": "v3.4",
+  "phases": {
+    "full-completion": "leaf-envelope + controller acceptance receipt + literal tests reexecuted + v3.2 functional gates + controlled rebuild + provenance demonstrated",
+    "functional-continuity": "v3.4 API surface semantically equal to v3.2 baseline; methods/signatures/returns exact; silence semantics; literal test IDs; canonical sources; compile commands; ownership sets",
+    "leaf-envelope": "strict v3.3 workflow enforcement retained (schema/IDs/branch/literal/artifact/build claim/unknown+self+controller keys)"
+  },
+  "schema": "acceptance-manifest/v3.4"
+}

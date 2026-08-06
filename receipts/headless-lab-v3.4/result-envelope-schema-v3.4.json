@@ -1,0 +1,54 @@
+{
+  "forbidden_controller_future_keys": [
+    "controller_clean_checkout_rerun",
+    "controller_acceptance_pass",
+    "controller_acceptance",
+    "remote_branch_resolved_sha",
+    "controller_controlled_rebuild_pass",
+    "completion_verdict",
+    "final_verdict"
+  ],
+  "forbidden_self_binding_keys": [
+    "container_commit_oid",
+    "container_tree_oid",
+    "envelope_blob_oid",
+    "envelope_sha256",
+    "self_sha256",
+    "remote_branch_resolved_sha"
+  ],
+  "model": "two-commit-non-self-referential-with-strict-enforcement",
+  "schema": "result-envelope-schema/v3.4",
+  "separation_of_evidence": {
+    "controller_acceptance_receipt_A": "created AFTER E is pushed; binds remote branch -> E; reruns tests, harness, artifacts, rebuild; final verdict",
+    "leaf_envelope_E": "leaf claims only",
+    "rule": "A is NEVER included inside E"
+  },
+  "top_level_keys": {
+    "allowed": [
+      "schema",
+      "lab",
+      "batch_id",
+      "leaf_id",
+      "lease_id",
+      "candidate_commit_oid",
+      "implementation_result_commit_oid",
+      "implementation_result_tree_oid",
+      "git_object_format",
+      "external_branch_binding",
+      "leaf_literal_tests",
+      "leaf_build_claim",
+      "artifacts"
+    ],
+    "policy": "all required keys present; unknown top-level keys rejected; forbidden self-binding keys rejected"
+  },
+  "validation_rules": [
+    "C, R, E resolvable; R^ == C; E^ == R; R != C; diff C R nonzero",
+    "envelope ABSENT from C/R, PRESENT in E; diff R..E exactly the envelope path",
+    "schema EXACT == headless-lab-result-envelope/v3.4",
+    "lab/batch/leaf/lease exact; OIDs exact; object format exact; planned branch exact",
+    "leaf_literal_tests: exact ID set == batch-manifest IDs; command_sha256 byte-exact; exit 0; timestamps ordered",
+    "artifacts: exact set == C..R tracked changes; sha256/size from R blobs; kinds allowed; NEVER empty",
+    "leaf_build_claim structurally valid per lab",
+    "no controller-future claims inside E"
+  ]
+}

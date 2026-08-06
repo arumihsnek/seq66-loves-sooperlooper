@@ -1,0 +1,40 @@
+{
+  "recorded_at_utc": "2026-08-06T02:19:47Z",
+  "reduced_classes": {
+    "v3_3_GraphAssertions_reduced": true,
+    "v3_3_JackServer_reduced": true,
+    "v3_3_LabRunner_reduced": true,
+    "v3_3_OscProbe_reduced": true,
+    "v3_3_ProcessSupervisor_reduced": true,
+    "v3_3_SooperLooperLauncher_reduced": true
+  },
+  "schema": "api-structural-diff/v1",
+  "v3_2_AnalysisResult_fields": [
+    "expected_loop_frames",
+    "observed_loop_frames",
+    "captured_wav_frames",
+    "analyzed_segment_frames",
+    "verification"
+  ],
+  "v3_2_analyze_loop_reproduction_exists": true,
+  "v3_2_analyze_wav_returns": "AnalysisResult",
+  "v3_2_analyze_wav_signature": [
+    "wav_path",
+    "expected_loop_frames",
+    "observed_loop_frames",
+    "tempo",
+    "numerator",
+    "sample_rate",
+    "silence_threshold",
+    "peak_threshold"
+  ],
+  "v3_2_silent_semantics": [
+    "silent WAV MUST produce verification=FAIL"
+  ],
+  "v3_3_AnalysisResult_declared": false,
+  "v3_3_analyze_loop_reproduction_exists": false,
+  "v3_3_analyze_wav_returns": null,
+  "v3_3_analyze_wav_signature": [],
+  "v3_3_silent_semantics": [],
+  "v3_3_structured_surface_declared": false
+}

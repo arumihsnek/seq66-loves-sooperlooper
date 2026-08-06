@@ -1,0 +1,10 @@
+{
+  "bundle_sha256": "030109bae215c40a1c0115b0ec63d92f7014af6e7820549ccdb0d03354fedacf",
+  "mission_id": "seq66-lab-v3-4-functional-continuity",
+  "mode": "plan-review",
+  "model_processes_consumed": 0,
+  "recorded_at_utc": "2026-08-06T02:22:03Z",
+  "schema": "senior-preflight-receipt/v1",
+  "status": "PREFLIGHT_VALID",
+  "valid": true
+}

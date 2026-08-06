@@ -1,0 +1,220 @@
+{
+  "byte_diffs": {
+    "batch-manifest": {
+      "identical_bytes": false,
+      "v3_2_sha256": "c32a1e2b71261d8b042a15f5ed90381275521788cf543d8bc0c8870d6a5344bb",
+      "v3_3_sha256": "4d1ce39ffb9af5de8601638ff4d15cbba82ad804da046973d14eaada3781a8d8"
+    },
+    "build-provenance-policy": {
+      "identical_bytes": false,
+      "v3_2_sha256": "0a26321a1ea455a580e144f0c33fda6f0a2dd5c6a73b25f411c914fdae582baf",
+      "v3_3_sha256": "a36c8ac77a582bea91513ece0bfe2c6ecb7ce40175397f72689be1b645c661b2"
+    },
+    "lab-api-contract": {
+      "identical_bytes": false,
+      "v3_2_sha256": "ed8dafdffcdad457c3fb235ef25de059eec870991a73ce02c97f95f6faf058af",
+      "v3_3_sha256": "94ce7696ff6114cc248a4214addec95c5aedb668011085c01a4a1286ac620614"
+    },
+    "scope-freeze": {
+      "identical_bytes": false,
+      "v3_2_sha256": "b7bd7a2e33b2c052a2f2ab3c675b8a19dae6be38868361246e0a9144e17135b6",
+      "v3_3_sha256": "318b280df03f0040659dacdd4d6e85ab066497550973328c327077e90e301c67"
+    }
+  },
+  "classification": {
+    "affected_controls": [
+      "lab-api-contract-continuity",
+      "audio-oracle-verification-semantics",
+      "jack-osc-sooperlooper-api-surface",
+      "literal-test-coverage",
+      "canonical-helper-build-provenance",
+      "ownership-manifest-consistency"
+    ],
+    "id": "V3_3_FUNCTIONAL_CONTRACT_REGRESSION",
+    "severity": "blocking_for_dispatch"
+  },
+  "envelope_fix_scope_exceeded": true,
+  "functional_contract_continuity": false,
+  "no_fraud_claim": true,
+  "no_malice_claim": true,
+  "recorded_at_utc": "2026-08-06T02:07:23Z",
+  "regression_demonstrated": true,
+  "v3_2_AnalysisResult_fields": [
+    "expected_loop_frames",
+    "observed_loop_frames",
+    "captured_wav_frames",
+    "analyzed_segment_frames",
+    "verification"
+  ],
+  "v3_2_GraphAssertions_methods": [
+    "assert_clean_graph()",
+    "diff_snapshots()",
+    "get_clients()",
+    "get_connections()",
+    "get_graph()",
+    "get_ports()",
+    "snapshot()"
+  ],
+  "v3_2_JackServer_methods": [
+    "cleanup()",
+    "get_connections()",
+    "get_pgid()",
+    "get_pid()",
+    "get_ports()",
+    "is_running()",
+    "readiness_probe(timeout_s)",
+    "snapshot()",
+    "start()",
+    "verify_no_external_clients()"
+  ],
+  "v3_2_LAB_B_ftb4_command": "gcc -std=c11 -O2 -o tests/integration/headless_audio_lab/fixtures/synthetic_source tests/integration/virtual_studio/audio/synthetic_source.c -ljack -lm -lpthread && gcc -std=c11 -O2 -o tests/integration/headless_audio_lab/fixtures/deterministic_capture tests/integration/virtual_studio/audio/deterministic_capture.c -ljack -lm -lpthread && test -x tests/integration/headless_audio_lab/fixtures/synthetic_source && test -x tests/integration/headless_audio_lab/fixtures/deterministic_capture && echo 'LAB-B fixtures rebuilt OK'",
+  "v3_2_LAB_B_owned_paths": [
+    "tests/__init__.py",
+    "tests/integration/__init__.py",
+    "tests/integration/headless_audio_lab/audio_oracle.py",
+    "tests/integration/headless_audio_lab/fixtures/.gitignore",
+    "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+    "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+    "tests/integration/headless_audio_lab/graph_assertions.py",
+    "tests/integration/headless_audio_lab/runner.py",
+    "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+    "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+    "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+    "tests/integration/headless_audio_lab/test_modules.py"
+  ],
+  "v3_2_LAB_B_owned_paths_scope": [
+    "tests/__init__.py",
+    "tests/integration/__init__.py",
+    "tests/integration/headless_audio_lab/audio_oracle.py",
+    "tests/integration/headless_audio_lab/fixtures/.gitignore",
+    "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+    "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+    "tests/integration/headless_audio_lab/graph_assertions.py",
+    "tests/integration/headless_audio_lab/runner.py",
+    "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+    "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+    "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+    "tests/integration/headless_audio_lab/test_modules.py"
+  ],
+  "v3_2_LAB_B_uses_gcc_libjack": true,
+  "v3_2_LabRunner_methods": [
+    "cli()",
+    "run()"
+  ],
+  "v3_2_OscProbe_methods": [
+    "get_control()",
+    "hit_command()",
+    "ping()",
+    "poll()",
+    "register_auto_update()",
+    "set_control()",
+    "unregister_auto_update()"
+  ],
+  "v3_2_ProcessSupervisor_methods": [
+    "__enter__",
+    "__exit__",
+    "cleanup(timeout)",
+    "get_owned_pgids()",
+    "get_owned_pids()",
+    "get_process_info(name)",
+    "snapshot()",
+    "start_process(name, cmd, env, cwd, stdout_path, stderr_path)",
+    "verify_cleanup()"
+  ],
+  "v3_2_SooperLooperLauncher_methods": [
+    "cleanup()",
+    "launch()",
+    "readiness_ping()"
+  ],
+  "v3_2_analyze_loop_reproduction_exists": true,
+  "v3_2_analyze_wav_returns": "AnalysisResult",
+  "v3_2_analyze_wav_signature": [
+    "wav_path",
+    "expected_loop_frames",
+    "observed_loop_frames",
+    "tempo",
+    "numerator",
+    "sample_rate",
+    "silence_threshold",
+    "peak_threshold"
+  ],
+  "v3_2_canonical_sources": [
+    {
+      "blob_sha_at_candidate": "6f07457cd38a81c425b4ab080aeee46bf0c0e7de",
+      "path": "tests/integration/virtual_studio/audio/synthetic_source.c"
+    },
+    {
+      "blob_sha_at_candidate": "c6dd79fae6c49aea907b1e4814b0cc9d8d9f0994",
+      "path": "tests/integration/virtual_studio/audio/deterministic_capture.c"
+    }
+  ],
+  "v3_2_fixtures_gitignore_owned": true,
+  "v3_2_literal_count_per_lab": {
+    "LAB-A": 4,
+    "LAB-B": 4
+  },
+  "v3_2_literal_test_ids_LAB_A": [
+    "ft-a1",
+    "ft-a2",
+    "ft-a3",
+    "ft-a4"
+  ],
+  "v3_2_literal_test_ids_LAB_B": [
+    "ft-b1",
+    "ft-b2",
+    "ft-b3",
+    "ft-b4"
+  ],
+  "v3_2_silent_semantics": [
+    "silent WAV MUST produce verification=FAIL"
+  ],
+  "v3_3_AnalysisResult_declared": false,
+  "v3_3_GraphAssertions_methods": [],
+  "v3_3_GraphAssertions_reduced": true,
+  "v3_3_JackServer_methods": [],
+  "v3_3_JackServer_reduced": true,
+  "v3_3_LAB_B_build_command": [
+    "python3",
+    "-c",
+    "import hashlib,os; os.makedirs('build',exist_ok=True); v=hashlib.sha256(b'v3.3-oracle-claim').hexdigest(); open('build/lab-b-oracle-claim.json','w').write(v+chr(10))"
+  ],
+  "v3_3_LAB_B_build_is_synthetic_python": true,
+  "v3_3_LAB_B_owned_paths_scope": [
+    "tests/__init__.py",
+    "tests/integration/__init__.py",
+    "tests/integration/headless_audio_lab/audio_oracle.py",
+    "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+    "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+    "tests/integration/headless_audio_lab/graph_assertions.py",
+    "tests/integration/headless_audio_lab/runner.py",
+    "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+    "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+    "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+    "tests/integration/headless_audio_lab/test_modules.py"
+  ],
+  "v3_3_LabRunner_methods": [],
+  "v3_3_LabRunner_reduced": true,
+  "v3_3_OscProbe_methods": [],
+  "v3_3_OscProbe_reduced": true,
+  "v3_3_ProcessSupervisor_methods": [],
+  "v3_3_ProcessSupervisor_reduced": true,
+  "v3_3_SooperLooperLauncher_methods": [],
+  "v3_3_SooperLooperLauncher_reduced": true,
+  "v3_3_analyze_loop_reproduction_exists": false,
+  "v3_3_analyze_wav_returns": null,
+  "v3_3_analyze_wav_signature": [],
+  "v3_3_fixtures_gitignore_owned_in_scope": false,
+  "v3_3_literal_count_per_lab": {
+    "LAB-A": 1,
+    "LAB-B": 1
+  },
+  "v3_3_literal_test_ids_LAB_A": [
+    "ft-a1"
+  ],
+  "v3_3_literal_test_ids_LAB_B": [
+    "ft-b1"
+  ],
+  "v3_3_silent_semantics": [],
+  "v3_3_structured_surface_declared": false,
+  "v3_3_verifier_hardcodes_gitignore": true
+}

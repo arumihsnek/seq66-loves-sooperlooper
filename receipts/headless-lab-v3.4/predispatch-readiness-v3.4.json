@@ -1,0 +1,11 @@
+{
+  "D0_D1_D2_authorized": false,
+  "batch_id": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+  "dispatch_ready": false,
+  "human_decision": "PENDING",
+  "integration_authorized": false,
+  "note": "frozen with the package; readiness results recorded in receipts/headless-lab-v3.4-review-binding/",
+  "package": "v3.4",
+  "redispatch_authorized": false,
+  "schema": "predispatch-readiness/v3.4"
+}

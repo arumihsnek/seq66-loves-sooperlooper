@@ -1,0 +1,42 @@
+{
+  "batch_id": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+  "identity_rule": "No v2/v3/v3.1/v3.2/v3.3 IDs, leases, result paths or schema names reused in v3.4",
+  "not_used_as_normative": [
+    "v3.3 analyze_wav(wav_bytes)",
+    "v3.3 silent=True-only semantics",
+    "v3.3 reduced LAB-A APIs",
+    "v3.3 synthetic JSON build command"
+  ],
+  "package": "v3.4",
+  "ported_functional_from_v3_2": [
+    "analyze_wav full signature -> AnalysisResult",
+    "silence verification=FAIL",
+    "analyze_loop_reproduction",
+    "AnalysisResult fields",
+    "GraphAssertions API",
+    "LabRunner API",
+    "JACK/OSC/SooperLooper APIs",
+    "4 literal tests per lab",
+    "canonical C helper build via gcc/libjack",
+    "ownership incl. fixtures/.gitignore"
+  ],
+  "ported_workflow_from_v3_3": [
+    "strict envelope enforcement",
+    "C->R->E model",
+    "artifact set/hash/size",
+    "literal-command byte binding",
+    "separate controller acceptance receipt",
+    "full-completion phase"
+  ],
+  "schema": "port-plan/v3.4",
+  "source_functional_package": {
+    "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+    "package": "v3.2",
+    "role": "canonical functional layer (contract, scope, negative gates, literal semantics, canonical-helper build)"
+  },
+  "source_workflow_package": {
+    "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+    "package": "v3.3",
+    "role": "canonical workflow layer (strict envelope, C->R->E, artifact hash/size, literal byte binding, controller receipt, full-completion)"
+  }
+}

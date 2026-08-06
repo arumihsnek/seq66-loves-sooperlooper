@@ -1,0 +1,1179 @@
+{
+  "schema": "headless-lab-result-envelope/v3.4",
+  "version": "1.0.0",
+  "lab": "LAB-B",
+  "repository": "/home/ubuntu/.hermes/runs/20260806T020249Z-v3-4-functional-contract-restoration/controlled-git-model/fixtures/valid-leaf-b",
+  "phase": "full-completion",
+  "checks": [
+    {
+      "name": "model: C commit exists",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: R commit exists",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: E commit exists",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: R != C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: R exactly one parent and R^ == C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: E exactly one parent and E^ == R",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: git diff --quiet C R returns nonzero",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: envelope absent from C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: envelope absent from R",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: envelope present in E",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: diff C..R owned-only",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "out_of_scope": []
+      }
+    },
+    {
+      "name": "model: diff C..R non-empty",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: diff R..E envelope-only",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "changed": [
+          "receipts/headless-lab-results-v3.4/lab-b-result.json"
+        ]
+      }
+    },
+    {
+      "name": "model: envelope parses",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: schema EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "headless-lab-result-envelope/v3.4"
+      }
+    },
+    {
+      "name": "env: lab EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "LAB-B"
+      }
+    },
+    {
+      "name": "env: batch_id EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4"
+      }
+    },
+    {
+      "name": "env: leaf_id EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "LEAF-LAB-B-V3_4"
+      }
+    },
+    {
+      "name": "env: lease_id EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "LEASE-20260806T020249Z-LAB-B-V3_4"
+      }
+    },
+    {
+      "name": "env: candidate_commit_oid == C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "59cf1a16918d483620a01fa9b6277f9992e12faa"
+      }
+    },
+    {
+      "name": "env: implementation_result_commit_oid == R",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "b1f449d24589c135995ef59eb546951991c447ce"
+      }
+    },
+    {
+      "name": "env: implementation_result_tree_oid == R^{tree}",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "c260ba53510b1f03877ad6e7554ea0ae60fda679"
+      }
+    },
+    {
+      "name": "env: git_object_format EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "sha1"
+      }
+    },
+    {
+      "name": "env: external_branch_binding.remote == origin",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: planned_branch present (non-empty)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: planned_branch EXACT == expected branch",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "planned": "result/v3-4-fixture-lab-b",
+        "expected": "result/v3-4-fixture-lab-b"
+      }
+    },
+    {
+      "name": "env: all required top-level keys present",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "name": "env: no unknown top-level keys",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "unknown": []
+      }
+    },
+    {
+      "name": "env: no forbidden self-binding keys",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: no controller-future claims inside E",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "flagged": []
+      }
+    },
+    {
+      "name": "env: literal test ID set exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "expected": [
+          "ft-b1",
+          "ft-b2",
+          "ft-b3",
+          "ft-b4"
+        ],
+        "actual": [
+          "ft-b1",
+          "ft-b2",
+          "ft-b3",
+          "ft-b4"
+        ]
+      }
+    },
+    {
+      "name": "env: ft-b1 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b1 exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b1 started_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b1 ended_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b1 timestamps ordered",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b2 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b2 exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b2 started_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b2 ended_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b2 timestamps ordered",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b3 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b3 exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b3 started_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b3 ended_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b3 timestamps ordered",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b4 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b4 exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b4 started_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b4 ended_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-b4 timestamps ordered",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact set == C..R tracked changes (owned only)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "expected": [
+          "tests/__init__.py",
+          "tests/integration/__init__.py",
+          "tests/integration/headless_audio_lab/audio_oracle.py",
+          "tests/integration/headless_audio_lab/fixtures/.gitignore",
+          "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+          "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+          "tests/integration/headless_audio_lab/graph_assertions.py",
+          "tests/integration/headless_audio_lab/runner.py",
+          "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+          "tests/integration/headless_audio_lab/test_modules.py"
+        ],
+        "actual": [
+          "tests/__init__.py",
+          "tests/integration/__init__.py",
+          "tests/integration/headless_audio_lab/audio_oracle.py",
+          "tests/integration/headless_audio_lab/fixtures/.gitignore",
+          "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+          "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+          "tests/integration/headless_audio_lab/graph_assertions.py",
+          "tests/integration/headless_audio_lab/runner.py",
+          "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+          "tests/integration/headless_audio_lab/test_modules.py"
+        ]
+      }
+    },
+    {
+      "name": "env: artifacts non-empty (R non-empty enforced)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/__init__.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/__init__.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "735469839c842bc3fbc34792d87ecca2fb190d80bc5c631024bb850a07b5bbfb",
+        "computed": "735469839c842bc3fbc34792d87ecca2fb190d80bc5c631024bb850a07b5bbfb"
+      }
+    },
+    {
+      "name": "env: artifact tests/__init__.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 16,
+        "computed": 16
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/__init__.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/__init__.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "c36bab13be707e9a65e229adab464005332286394afa42b918b3569d07912faa",
+        "computed": "c36bab13be707e9a65e229adab464005332286394afa42b918b3569d07912faa"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/__init__.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 22,
+        "computed": 22
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/audio_oracle.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/audio_oracle.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "fe34b9003be0ef8a2968e82474b983dc8da5992f0d62d042d32446a1ead92a37",
+        "computed": "fe34b9003be0ef8a2968e82474b983dc8da5992f0d62d042d32446a1ead92a37"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/audio_oracle.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 2683,
+        "computed": 2683
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/fixtures/.gitignore kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/fixtures/.gitignore sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "c3c7809ffe0bc3325c0ff694cc6eb717fb85cbcb41b12918e27f78339272cf4c",
+        "computed": "c3c7809ffe0bc3325c0ff694cc6eb717fb85cbcb41b12918e27f78339272cf4c"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/fixtures/.gitignore size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 33,
+        "computed": 33
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/fixtures/deterministic_capture kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/fixtures/deterministic_capture sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "b59821b6ee44daa53cb3a6474e01c900e1455a4cabea804499b685a181d6d90a",
+        "computed": "b59821b6ee44daa53cb3a6474e01c900e1455a4cabea804499b685a181d6d90a"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/fixtures/deterministic_capture size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 101,
+        "computed": 101
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/fixtures/synthetic_source kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/fixtures/synthetic_source sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "8f00554fe4dd7f03af1f41a87285b423ad6b6eb1590a8206e75a89a250c32bb9",
+        "computed": "8f00554fe4dd7f03af1f41a87285b423ad6b6eb1590a8206e75a89a250c32bb9"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/fixtures/synthetic_source size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 95,
+        "computed": 95
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/graph_assertions.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/graph_assertions.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "b2bf001c66e9c5b2d71e88da77b43666a3997e3cffc6d5e0b892068bc0d89d79",
+        "computed": "b2bf001c66e9c5b2d71e88da77b43666a3997e3cffc6d5e0b892068bc0d89d79"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/graph_assertions.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 353,
+        "computed": 353
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/runner.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/runner.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "6c553887125d8c6a07d46653c79400dfcfe78371bd61f77a7f491b956b371d08",
+        "computed": "6c553887125d8c6a07d46653c79400dfcfe78371bd61f77a7f491b956b371d08"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/runner.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 305,
+        "computed": 305
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "e76b1ecb2905d2f329e0b65cd4837e82406a3e757a3bf9da9631b4c7c0056244",
+        "computed": "e76b1ecb2905d2f329e0b65cd4837e82406a3e757a3bf9da9631b4c7c0056244"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 110,
+        "computed": 110
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "03a538c840883e92fa0725648c651cf52276316a72b74d2f949253e4600c44ac",
+        "computed": "03a538c840883e92fa0725648c651cf52276316a72b74d2f949253e4600c44ac"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 121,
+        "computed": 121
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "07aca1ec254ee8d67e0a327107836cf77dcf6981b31914b2f2ed1b865213e1d5",
+        "computed": "07aca1ec254ee8d67e0a327107836cf77dcf6981b31914b2f2ed1b865213e1d5"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 116,
+        "computed": 116
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/test_modules.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/test_modules.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "6adfb22a51468db0d5137d2e62da34f90d4a406812cf09f2b1bde413d003114d",
+        "computed": "6adfb22a51468db0d5137d2e62da34f90d4a406812cf09f2b1bde413d003114d"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/test_modules.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 304,
+        "computed": 304
+      }
+    },
+    {
+      "name": "env: leaf_build_claim.status allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "status": "claimed_built"
+      }
+    },
+    {
+      "name": "env: LAB-B build claim structurally valid (sources/commands/outputs)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "status": "claimed_built",
+        "outputs": [
+          {
+            "path": "build/synthetic_source",
+            "sha256": "3223b3fcf6ff1e0a9e65ab17e07d306055cea6535a897142088341cfe589849f",
+            "size": 70336
+          },
+          {
+            "path": "build/deterministic_capture",
+            "sha256": "67b7136b8f9e8cb835a38e723faaee2488e76c28d9459ba730ed4aac1db5a564",
+            "size": 70336
+          }
+        ]
+      }
+    },
+    {
+      "name": "receipt: schema exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: all required fields present",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "name": "receipt: batch_id exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: lab exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: candidate OID exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: result OID exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: result tree OID exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: envelope container OID == E",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: envelope container tree OID == E^{tree}",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: envelope blob OID == E:path",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: envelope sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: remote == origin",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: branch == expected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: remote resolved OID == E",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "resolved": "95299e229dcbb4712d95ed117c538ce87f26660e",
+        "expected": "95299e229dcbb4712d95ed117c538ce87f26660e"
+      }
+    },
+    {
+      "name": "receipt: remote_resolved_oid field consistent with actual",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: controller literal test IDs exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "expected": [
+          "ft-b1",
+          "ft-b2",
+          "ft-b3",
+          "ft-b4"
+        ],
+        "actual": [
+          "ft-b1",
+          "ft-b2",
+          "ft-b3",
+          "ft-b4"
+        ]
+      }
+    },
+    {
+      "name": "receipt: ft-b1 controller exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: ft-b2 controller exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: ft-b3 controller exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: ft-b4 controller exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: acceptance harness sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: acceptance harness verdict PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: artifact verification PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: build provenance verdict",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: completion criteria all true",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "false": []
+      }
+    },
+    {
+      "name": "receipt: final verdict PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: worktree_clean_before true",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: worktree_clean_after true",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "completion: worktree clean before",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    },
+    {
+      "name": "completion: ft-b1 literal test reexec exit 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: ft-b1 stdout hash matches receipt",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "completion: ft-b2 literal test reexec exit 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: ft-b2 stdout hash matches receipt",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "completion: ft-b3 literal test reexec exit 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: ft-b3 stdout hash matches receipt",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "completion: ft-b4 literal test reexec exit 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: ft-b4 stdout hash matches receipt",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "lab-b: analyze_wav full v3.2 signature (8 args, 6 required)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "sig": "wav_path, expected_loop_frames, observed_loop_frames, tempo, numerator, sample_rate, silence_threshold=0.01, peak_threshold=0.9",
+        "missing": []
+      }
+    },
+    {
+      "name": "lab-b: test_modules negative gates",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "hits": [],
+        "invokes": true
+      }
+    },
+    {
+      "name": "lab-b: silent WAV -> verification=FAIL",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "silence_verification": "FAIL",
+        "captured_frames": 4800,
+        "malformed_result": "EXCEPTION:ValueError",
+        "frame_count": 4800
+      }
+    },
+    {
+      "name": "lab-b: captured_wav_frames exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "silence_verification": "FAIL",
+        "captured_frames": 4800,
+        "malformed_result": "EXCEPTION:ValueError",
+        "frame_count": 4800
+      }
+    },
+    {
+      "name": "lab-b: malformed WAV FAIL/ERROR",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "malformed": "EXCEPTION:ValueError"
+      }
+    },
+    {
+      "name": "lab-b: non-silent frames contract",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "silence_verification": "FAIL",
+        "captured_frames": 4800,
+        "malformed_result": "EXCEPTION:ValueError",
+        "frame_count": 4800
+      }
+    },
+    {
+      "name": "lab-b: .gitignore byte-exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "repr": "'# generated lab artifacts\\nbuild/\\n'"
+      }
+    },
+    {
+      "name": "lab-b: no ELF tracked",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "elf_tracked": []
+      }
+    },
+    {
+      "name": "lab-b: scenarios parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "bad": []
+      }
+    },
+    {
+      "name": "lab-b: runner uses contractual APIs",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "api_hits": [
+          "ProcessSupervisor",
+          "JackServer",
+          "OscProbe",
+          "SooperLooperLauncher",
+          "analyze_wav",
+          "GraphAssertions",
+          "LabRunner"
+        ]
+      }
+    },
+    {
+      "name": "completion: controlled rebuild exit 0 (-lm)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: controlled rebuild exit 0 (-lm)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: controller-built build/synthetic_source exists + ELF metadata",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "sha256": "3223b3fcf6ff1e0a9e65ab17e07d306055cea6535a897142088341cfe589849f",
+        "size": 70336,
+        "elf": true
+      }
+    },
+    {
+      "name": "completion: controller-built build/deterministic_capture exists + ELF metadata",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "sha256": "67b7136b8f9e8cb835a38e723faaee2488e76c28d9459ba730ed4aac1db5a564",
+        "size": 70336,
+        "elf": true
+      }
+    },
+    {
+      "name": "completion: rebuild output build/synthetic_source sha256 == claim",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "computed": "3223b3fcf6ff1e0a9e65ab17e07d306055cea6535a897142088341cfe589849f",
+        "claimed": "3223b3fcf6ff1e0a9e65ab17e07d306055cea6535a897142088341cfe589849f"
+      }
+    },
+    {
+      "name": "completion: rebuild output build/synthetic_source size == claim",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "computed": 70336,
+        "claimed": 70336
+      }
+    },
+    {
+      "name": "completion: rebuild output build/deterministic_capture sha256 == claim",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "computed": "67b7136b8f9e8cb835a38e723faaee2488e76c28d9459ba730ed4aac1db5a564",
+        "claimed": "67b7136b8f9e8cb835a38e723faaee2488e76c28d9459ba730ed4aac1db5a564"
+      }
+    },
+    {
+      "name": "completion: rebuild output build/deterministic_capture size == claim",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "computed": 70336,
+        "claimed": 70336
+      }
+    },
+    {
+      "name": "completion: worktree clean after",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    }
+  ],
+  "env_notes": [],
+  "verdict": "PASS"
+}

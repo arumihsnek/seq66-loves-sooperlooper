@@ -1,0 +1,50 @@
+{
+  "ownership": "The leaf does NOT create or modify this receipt; only the controller writes A after E is pushed",
+  "receipt_schema": "controller-acceptance-receipt/v3.4",
+  "required_equalities": [
+    "remote_resolved_oid == E",
+    "E^ == R",
+    "R^ == C",
+    "envelope_container_tree_oid == E^{tree}",
+    "envelope_blob_oid == E:path",
+    "envelope_sha256 == sha256(envelope blob)"
+  ],
+  "required_fields": [
+    "schema",
+    "batch_id",
+    "lab",
+    "candidate_commit_oid",
+    "implementation_result_commit_oid",
+    "implementation_result_tree_oid",
+    "envelope_container_commit_oid",
+    "envelope_container_tree_oid",
+    "envelope_blob_oid",
+    "envelope_sha256",
+    "remote",
+    "branch",
+    "remote_resolved_oid",
+    "controller_clean_checkout_path_or_receipt",
+    "controller_literal_tests",
+    "acceptance_harness_sha256",
+    "acceptance_harness_verdict",
+    "artifact_verification",
+    "controlled_rebuild",
+    "build_provenance_verdict",
+    "worktree_clean_before",
+    "worktree_clean_after",
+    "completion_criteria",
+    "final_verdict",
+    "recorded_at_utc"
+  ],
+  "required_verdicts": [
+    "all controller literal tests exit 0 (REEXECUTED on clean R)",
+    "acceptance harness PASS on exact R",
+    "artifact verification PASS",
+    "controlled rebuild PASS where applicable",
+    "build provenance demonstrated",
+    "clean checkout before and after",
+    "all completion criteria true",
+    "final verdict PASS"
+  ],
+  "schema": "controller-acceptance-schema/v3.4"
+}

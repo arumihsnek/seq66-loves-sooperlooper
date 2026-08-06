@@ -1,0 +1,16 @@
+{
+  "ft_b3_command_sha256": "6b6405cc7005b5f82c72a622cef01b2a07958f97c1f8f6b0aac85f51d9833910",
+  "ft_b3_execution_exit": 0,
+  "ft_b3_stderr_tail": "",
+  "ft_b3_stdout": "ft-b3 silent FAIL ok",
+  "recorded_at_utc": "2026-08-06T02:19:13Z",
+  "schema": "literal-command-escaping-test/v1",
+  "signature_6_required_args_used": true,
+  "silent_probe": {
+    "captured": 4800,
+    "literal_text": false,
+    "real_nul": true,
+    "verification": "FAIL"
+  },
+  "verification_observed": "FAIL"
+}

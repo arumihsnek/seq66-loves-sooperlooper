@@ -1,0 +1,879 @@
+{
+  "schema": "headless-lab-result-envelope/v3.4",
+  "version": "1.0.0",
+  "lab": "LAB-A",
+  "repository": "/home/ubuntu/.hermes/runs/20260806T020249Z-v3-4-functional-contract-restoration/controlled-git-model/fixtures/valid-leaf-a",
+  "phase": "full-completion",
+  "checks": [
+    {
+      "name": "model: C commit exists",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: R commit exists",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: E commit exists",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: R != C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: R exactly one parent and R^ == C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: E exactly one parent and E^ == R",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: git diff --quiet C R returns nonzero",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: envelope absent from C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: envelope absent from R",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: envelope present in E",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: diff C..R owned-only",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "out_of_scope": []
+      }
+    },
+    {
+      "name": "model: diff C..R non-empty",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "model: diff R..E envelope-only",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "changed": [
+          "receipts/headless-lab-results-v3.4/lab-a-result.json"
+        ]
+      }
+    },
+    {
+      "name": "model: envelope parses",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: schema EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "headless-lab-result-envelope/v3.4"
+      }
+    },
+    {
+      "name": "env: lab EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "LAB-A"
+      }
+    },
+    {
+      "name": "env: batch_id EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4"
+      }
+    },
+    {
+      "name": "env: leaf_id EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "LEAF-LAB-A-V3_4"
+      }
+    },
+    {
+      "name": "env: lease_id EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "LEASE-20260806T020249Z-LAB-A-V3_4"
+      }
+    },
+    {
+      "name": "env: candidate_commit_oid == C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "2ea76bf4cd4aeae683fb2b53cb4913549cb7e3d0"
+      }
+    },
+    {
+      "name": "env: implementation_result_commit_oid == R",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "6b394d74485dbf1223525abe0cd73280f20110ec"
+      }
+    },
+    {
+      "name": "env: implementation_result_tree_oid == R^{tree}",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "5e1f1c2d477092ecbc65460bdcb3fc365de25ca4"
+      }
+    },
+    {
+      "name": "env: git_object_format EXACT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "sha1"
+      }
+    },
+    {
+      "name": "env: external_branch_binding.remote == origin",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: planned_branch present (non-empty)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: planned_branch EXACT == expected branch",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "planned": "result/v3-4-fixture-lab-a",
+        "expected": "result/v3-4-fixture-lab-a"
+      }
+    },
+    {
+      "name": "env: all required top-level keys present",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "name": "env: no unknown top-level keys",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "unknown": []
+      }
+    },
+    {
+      "name": "env: no forbidden self-binding keys",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: no controller-future claims inside E",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "flagged": []
+      }
+    },
+    {
+      "name": "env: literal test ID set exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "expected": [
+          "ft-a1",
+          "ft-a2",
+          "ft-a3",
+          "ft-a4"
+        ],
+        "actual": [
+          "ft-a1",
+          "ft-a2",
+          "ft-a3",
+          "ft-a4"
+        ]
+      }
+    },
+    {
+      "name": "env: ft-a1 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a1 exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a1 started_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a1 ended_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a1 timestamps ordered",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a2 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a2 exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a2 started_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a2 ended_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a2 timestamps ordered",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a3 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a3 exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a3 started_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a3 ended_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a3 timestamps ordered",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a4 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a4 exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a4 started_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a4 ended_at_utc parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: ft-a4 timestamps ordered",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact set == C..R tracked changes (owned only)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "expected": [
+          "tests/integration/headless_audio_lab/__init__.py",
+          "tests/integration/headless_audio_lab/jack_server.py",
+          "tests/integration/headless_audio_lab/osc_probe.py",
+          "tests/integration/headless_audio_lab/process_supervisor.py",
+          "tests/integration/headless_audio_lab/sooperlooper_launcher.py"
+        ],
+        "actual": [
+          "tests/integration/headless_audio_lab/__init__.py",
+          "tests/integration/headless_audio_lab/jack_server.py",
+          "tests/integration/headless_audio_lab/osc_probe.py",
+          "tests/integration/headless_audio_lab/process_supervisor.py",
+          "tests/integration/headless_audio_lab/sooperlooper_launcher.py"
+        ]
+      }
+    },
+    {
+      "name": "env: artifacts non-empty (R non-empty enforced)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/__init__.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/__init__.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "0d7ead22437796e5b5141f67125cfb2d08dbbda0e63b52a140a77c658d0a3d1d",
+        "computed": "0d7ead22437796e5b5141f67125cfb2d08dbbda0e63b52a140a77c658d0a3d1d"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/__init__.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 29,
+        "computed": 29
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/jack_server.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/jack_server.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "7fd5e5b7e2849d866f0965c484fbbe6871033f333e3db4d31a0103b852e08873",
+        "computed": "7fd5e5b7e2849d866f0965c484fbbe6871033f333e3db4d31a0103b852e08873"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/jack_server.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 512,
+        "computed": 512
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/osc_probe.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/osc_probe.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "634b3fbe33682d5c9c9a9099c0d17707e2a4fec513709ac577301ef212c85f1b",
+        "computed": "634b3fbe33682d5c9c9a9099c0d17707e2a4fec513709ac577301ef212c85f1b"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/osc_probe.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 384,
+        "computed": 384
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/process_supervisor.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/process_supervisor.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "a5f086f9a79027a1e002de144a7c0315852fa840947c2e7610fd96923ef0bf47",
+        "computed": "a5f086f9a79027a1e002de144a7c0315852fa840947c2e7610fd96923ef0bf47"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/process_supervisor.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 2173,
+        "computed": 2173
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/sooperlooper_launcher.py kind allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/sooperlooper_launcher.py sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": "b067a9030d03a04cd97796cdb6a9b34a4d57eb24e31fc43023159eea21efb7df",
+        "computed": "b067a9030d03a04cd97796cdb6a9b34a4d57eb24e31fc43023159eea21efb7df"
+      }
+    },
+    {
+      "name": "env: artifact tests/integration/headless_audio_lab/sooperlooper_launcher.py size exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "declared": 164,
+        "computed": 164
+      }
+    },
+    {
+      "name": "env: leaf_build_claim.status allowed",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "status": "not_applicable"
+      }
+    },
+    {
+      "name": "env: LAB-A build claim not_applicable (no invented fields)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "invented": []
+      }
+    },
+    {
+      "name": "receipt: schema exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: all required fields present",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "missing": []
+      }
+    },
+    {
+      "name": "receipt: batch_id exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: lab exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: candidate OID exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: result OID exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: result tree OID exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: envelope container OID == E",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: envelope container tree OID == E^{tree}",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: envelope blob OID == E:path",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: envelope sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: remote == origin",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: branch == expected",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": null
+      }
+    },
+    {
+      "name": "receipt: remote resolved OID == E",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "resolved": "9cafba0a173816a78c9ef1a00ca7a271967e7cc2",
+        "expected": "9cafba0a173816a78c9ef1a00ca7a271967e7cc2"
+      }
+    },
+    {
+      "name": "receipt: remote_resolved_oid field consistent with actual",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: controller literal test IDs exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "expected": [
+          "ft-a1",
+          "ft-a2",
+          "ft-a3",
+          "ft-a4"
+        ],
+        "actual": [
+          "ft-a1",
+          "ft-a2",
+          "ft-a3",
+          "ft-a4"
+        ]
+      }
+    },
+    {
+      "name": "receipt: ft-a1 controller exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: ft-a2 controller exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: ft-a3 controller exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: ft-a4 controller exit_code == 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: acceptance harness sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: acceptance harness verdict PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: artifact verification PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: build provenance verdict",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: completion criteria all true",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "false": []
+      }
+    },
+    {
+      "name": "receipt: final verdict PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: worktree_clean_before true",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "receipt: worktree_clean_after true",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "completion: worktree clean before",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    },
+    {
+      "name": "completion: ft-a1 literal test reexec exit 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: ft-a1 stdout hash matches receipt",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "completion: ft-a2 literal test reexec exit 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: ft-a2 stdout hash matches receipt",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "completion: ft-a3 literal test reexec exit 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: ft-a3 stdout hash matches receipt",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "completion: ft-a4 literal test reexec exit 0",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "exit": 0,
+        "stderr_tail": ""
+      }
+    },
+    {
+      "name": "completion: ft-a4 stdout hash matches receipt",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "lab-a: imports",
+      "status": "PASS",
+      "detail": "all 4 modules import cleanly",
+      "evidence": null
+    },
+    {
+      "name": "lab-a: placeholder scan",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "lab-a: functional lifecycle (v3.2 surface)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "owned_pid_positive": {
+          "satisfied": true,
+          "observed": true
+        },
+        "owned_child_alive_before_cleanup": {
+          "satisfied": true,
+          "observed": true
+        },
+        "owned_child_alive_after_cleanup": {
+          "satisfied": true,
+          "observed": false
+        },
+        "cleanup_ok": {
+          "satisfied": true,
+          "observed": true
+        },
+        "foreign_alive_after_supervisor_cleanup": {
+          "satisfied": true,
+          "observed": true
+        },
+        "failure_propagation": {
+          "satisfied": true,
+          "observed": true
+        },
+        "foreign_registered_in_supervisor": {
+          "satisfied": true,
+          "observed": false
+        },
+        "foreign_terminated_by_controller": {
+          "satisfied": true,
+          "observed": true
+        },
+        "owned_pgids_registered": {
+          "satisfied": true,
+          "observed": [
+            3701410
+          ]
+        },
+        "snapshot_available": {
+          "satisfied": true,
+          "observed": null
+        }
+      }
+    },
+    {
+      "name": "completion: controlled rebuild not_applicable (LAB-A)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "completion: worktree clean after",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    }
+  ],
+  "env_notes": [],
+  "verdict": "PASS"
+}

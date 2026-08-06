@@ -1,0 +1,6 @@
+{
+  "note": "LAB-A 5 paths, LAB-B 12 paths (incl. fixtures/.gitignore) identical across scope/batch/baseline/lease/verifier",
+  "recorded_at_utc": "2026-08-06T02:19:13Z",
+  "schema": "ownership-consistency/v1",
+  "status": "PASS"
+}

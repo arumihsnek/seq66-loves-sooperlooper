@@ -1,0 +1,202 @@
+{
+  "schema": "headless-lab-result-envelope/v3.4",
+  "version": "1.0.0",
+  "lab": "LAB-B",
+  "repository": "/home/ubuntu/code/music/seq66-loves-sooperlooper",
+  "phase": "functional-continuity",
+  "checks": [
+    {
+      "name": "func: contract modules present",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "baseline_modules": [
+          "audio_oracle.py",
+          "graph_assertions.py",
+          "jack_server.py",
+          "osc_probe.py",
+          "process_supervisor.py",
+          "runner.py",
+          "sooperlooper_launcher.py"
+        ],
+        "v34_modules": [
+          "audio_oracle.py",
+          "graph_assertions.py",
+          "jack_server.py",
+          "osc_probe.py",
+          "process_supervisor.py",
+          "runner.py",
+          "sooperlooper_launcher.py"
+        ]
+      }
+    },
+    {
+      "name": "func: module set exact",
+      "status": "PASS",
+      "detail": "7 modules",
+      "evidence": null
+    },
+    {
+      "name": "func: API surface deep-equal (functions/classes/fields/methods/constraints)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "diffs": []
+      }
+    },
+    {
+      "name": "func: silence semantics intact (verification=FAIL)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: LAB-A literal-test IDs complete (>=4)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "canonical": [
+          "ft-a1",
+          "ft-a2",
+          "ft-a3",
+          "ft-a4"
+        ],
+        "actual": [
+          "ft-a1",
+          "ft-a2",
+          "ft-a3",
+          "ft-a4"
+        ],
+        "missing": []
+      }
+    },
+    {
+      "name": "func: LAB-A ft-a1 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: LAB-A ft-a2 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: LAB-A ft-a3 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: LAB-A ft-a4 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: LAB-B literal-test IDs complete (>=4)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "canonical": [
+          "ft-b1",
+          "ft-b2",
+          "ft-b3",
+          "ft-b4"
+        ],
+        "actual": [
+          "ft-b1",
+          "ft-b2",
+          "ft-b3",
+          "ft-b4"
+        ],
+        "missing": []
+      }
+    },
+    {
+      "name": "func: LAB-B ft-b1 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: LAB-B ft-b2 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: LAB-B ft-b3 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: LAB-B ft-b4 command_sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: canonical source tests/integration/virtual_studio/audio/synthetic_source.c blob OID exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "6f07457cd38a81c425b4ab080aeee46bf0c0e7de",
+        "expected": "6f07457cd38a81c425b4ab080aeee46bf0c0e7de"
+      }
+    },
+    {
+      "name": "func: canonical source tests/integration/virtual_studio/audio/synthetic_source.c sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: canonical source tests/integration/virtual_studio/audio/deterministic_capture.c blob OID exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "observed": "c6dd79fae6c49aea907b1e4814b0cc9d8d9f0994",
+        "expected": "c6dd79fae6c49aea907b1e4814b0cc9d8d9f0994"
+      }
+    },
+    {
+      "name": "func: canonical source tests/integration/virtual_studio/audio/deterministic_capture.c sha256 exact",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: canonical compile commands preserved (gcc -std=c11 -O2 -ljack -lm -lpthread)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "func: ownership consistency (LAB-A) across scope/batch/baseline/verifier",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "drift": []
+      }
+    },
+    {
+      "name": "func: ownership consistency (LAB-B) across scope/batch/baseline/verifier",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "drift": []
+      }
+    },
+    {
+      "name": "func: fixtures/.gitignore owned in every manifest (LAB-B)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    }
+  ],
+  "env_notes": [],
+  "verdict": "PASS"
+}
