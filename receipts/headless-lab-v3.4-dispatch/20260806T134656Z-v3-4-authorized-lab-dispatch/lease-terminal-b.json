@@ -1,0 +1,17 @@
+{
+  "E": "2906dc4fd77e2d7455060c3248db73aabdeb010b",
+  "R": "608cefef3a270a2ea6859b8d48ee931c636743f8",
+  "branch_preserved": true,
+  "closed_at_utc": "2026-08-06T15:04:49Z",
+  "consumed": true,
+  "failure_gate": "multiple: (1) remote branch NOT published (origin lacks result/...-lab-b-v3_4); (2) E^==2b774260 != R==608cefef (two envelope commits); (3) diff C..R includes tests/integration/headless_audio_lab/__init__.py which belongs to LAB-A ownership (violation); (4) owned fixtures/synthetic_source and fixtures/deterministic_capture ABSENT from R (left untracked as .c in the worktree); (5) leaf worktree dirty at E; (6) leaf misidentified R/E in its report.",
+  "lab": "LAB-B",
+  "leaf_id": "LEAF-LAB-B-V3_4",
+  "lease_id": "LEASE-20260806T020249Z-LAB-B-V3_4",
+  "note": "leases v3.4 cannot be reused after this RUN",
+  "remote_branch": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-b-v3_4",
+  "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
+  "schema": "lease-terminal-receipt/v1",
+  "status": "failed_validation",
+  "worktree_preserved": true
+}

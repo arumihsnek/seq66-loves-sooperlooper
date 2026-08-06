@@ -1,35 +1,28 @@
-# Current checkpoint — V3.4 functional-contract restoration
+# Current checkpoint — V3.4 authorized dispatch results
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-06-CP-060-v3-4-functional-contract-restoration.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-06-CP-061-v3-4-authorized-dispatch-results.md`
 
-Checkpoint ID: `CP-060`
+Checkpoint ID: `CP-061`
 Checkpoint date: 2026-08-06
-Supersedes: `CP-059` (2026-08-06, immutable)
+Supersedes: `CP-060` (2026-08-06, immutable)
 
 ## Current state
 
 - Manifest current_phase: `phase-5-exact-recording`; active task `P5-005` in_progress; P5-007 deferred.
-- Headless-lab packages: v3 / v3.1 / v3.2 / v3.3 IMMUTABLE_REJECTED_FOR_DISPATCH (historical evidence);
-  v3.4 EXACT_BYTES_REVIEWED_NOT_DISPATCHED.
-- Batch: `BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4`; package manifest
-  `63c371ba70491fa546ce4f8d980568440845c74fbb5af3a93502ff9b8c0a4da7`.
-- Dual senior review: functional continuity **accept** + strict workflow **accept** (0 blocking, 0 required) —
-  neither authorizes dispatch.
-- Technical dispatch eligibility: **PASS**; dispatch authorized: **false** (separate fields).
-- Stop gate: `HUMAN_DECISION_PENDING`; `redispatch_authorized=false`; `integration_authorized=false`;
-  `D0_D1_D2_authorized=false`.
-- Leases v3.4 planned only; zero LAB worktrees; zero leaves; D0/D1/D2 not executed.
-- Evidence worktrees of prior runs inventoried and preserved (no destructive authorization granted).
+- RUN_ID: `20260806T134656Z-v3-4-authorized-lab-dispatch`; dispatch authorized consumed (count=1); package v3.4 manifest `63c371ba...`.
+- LAB-A R=`0fd104ef2187346b8c00014829857e11ee9539ec` E=`a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3`; LAB-B R=`608cefef3a270a2ea6859b8d48ee931c636743f8` E=`2906dc4fd77e2d7455060c3248db73aabdeb010b` — **DISPATCH RESULT: DISPATCH_RESULT_REJECTED**
+  (no integration candidate set).
+- `integration_authorized=false`; `D0_D1_D2_authorized=false`; no integration performed.
+- Leases v3.4 consumed; leaf/evidence worktrees preserved (no destructive cleanup performed).
 
 ## Next action
 
-Human decision: authorize or reject a NEW LAB-A/LAB-B dispatch using EXCLUSIVELY the exact,
-functionally continuous, doubly reviewed v3.4 package (`receipts/headless-lab-v3.4/`),
-new branches, new worktrees and new leases.
+Human decision: review the exact failure evidence (envelope/binding rejection for both leaves;
+implementations pass the frozen literal tests 8/8). Decide a future correction. No integration
+candidate set.
 
 ## References
 
-- `PROJECT-MANIFEST.json` (live state)
-- `doc/sooperlooper/WORK-QUEUE.md` (P5-005)
-- `doc/sooperlooper/checkpoints/2026-08-06-CP-059-v3-3-strict-envelope-correction.md`
-- `receipts/headless-lab-v3.4/` and `receipts/headless-lab-v3.4-review-binding/`
+- `PROJECT-MANIFEST.json`; `doc/sooperlooper/WORK-QUEUE.md` (P5-005)
+- `receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/` (evidence)
+- `doc/sooperlooper/checkpoints/2026-08-06-CP-060-v3-4-functional-contract-restoration.md`

@@ -1,0 +1,88 @@
+{
+  "R": "608cefef3a270a2ea6859b8d48ee931c636743f8",
+  "all_exit_zero": true,
+  "count": 4,
+  "executed_at_utc": "2026-08-06T15:04:23Z",
+  "lab": "LAB-B",
+  "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
+  "tests": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "py_compile",
+        "tests/integration/headless_audio_lab/audio_oracle.py",
+        "tests/integration/headless_audio_lab/graph_assertions.py",
+        "tests/integration/headless_audio_lab/runner.py",
+        "tests/integration/headless_audio_lab/test_modules.py",
+        "tests/__init__.py",
+        "tests/integration/__init__.py"
+      ],
+      "command_sha256": "1c0ca05f5f01976fcdb9970392680b92b8aab43701bc7faf8ac69eb83e67662b",
+      "cwd": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/controller-acceptance/controller-checkout-LAB-B-R",
+      "ended_at_utc": "2026-08-06T15:04:23Z",
+      "exit_code": 0,
+      "id": "ft-b1",
+      "started_at_utc": "2026-08-06T15:04:23Z",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_tail": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_tail": "",
+      "timeout": 180
+    },
+    {
+      "argv": [
+        "python3",
+        "-c",
+        "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.audio_oracle import analyze_wav, analyze_loop_reproduction, AnalysisResult; from headless_audio_lab.graph_assertions import GraphAssertions; from headless_audio_lab.runner import LabRunner; print('ft-b2 imports ok')"
+      ],
+      "command_sha256": "da16c3fc9a063e4ff98a62e8fd0f11e6903615187086acad474077de4fb96fbf",
+      "cwd": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/controller-acceptance/controller-checkout-LAB-B-R",
+      "ended_at_utc": "2026-08-06T15:04:23Z",
+      "exit_code": 0,
+      "id": "ft-b2",
+      "started_at_utc": "2026-08-06T15:04:23Z",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_tail": "",
+      "stdout_sha256": "030f7b0d274d1a4c2fba245eb1fb615c28d53cc0d923373694fb6f0ec50495b4",
+      "stdout_tail": "ft-b2 imports ok\n",
+      "timeout": 180
+    },
+    {
+      "argv": [
+        "python3",
+        "-c",
+        "import os, struct, sys, tempfile, wave; sys.path.insert(0,'tests/integration'); from headless_audio_lab.audio_oracle import analyze_wav, AnalysisResult; rate=48000; n=4800\nfd,p=tempfile.mkstemp(suffix='.wav'); os.close(fd)\nw=wave.open(p,'wb'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(rate); w.writeframes(b'\\x00\\x00'*n); w.close()\ndata=open(p,'rb').read()\nassert b'\\x00' in data[44:], 'no real NUL PCM'\nassert b'\\\\x00' not in data[44:], 'escaped text found in PCM'\nr=analyze_wav(p, n, n, 120.0, 4, rate)\nassert isinstance(r, AnalysisResult), 'not AnalysisResult'\nassert r.verification == 'FAIL', 'silent WAV must FAIL, got %r' % r.verification\nassert r.captured_wav_frames == n, 'captured frames mismatch'\nos.unlink(p)\nprint('ft-b3 silent FAIL ok')"
+      ],
+      "command_sha256": "6b6405cc7005b5f82c72a622cef01b2a07958f97c1f8f6b0aac85f51d9833910",
+      "cwd": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/controller-acceptance/controller-checkout-LAB-B-R",
+      "ended_at_utc": "2026-08-06T15:04:23Z",
+      "exit_code": 0,
+      "id": "ft-b3",
+      "started_at_utc": "2026-08-06T15:04:23Z",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_tail": "",
+      "stdout_sha256": "cab72afebf85cb9a52e9600e422f7555814b5fb237129463dd7fec094fbc6582",
+      "stdout_tail": "ft-b3 silent FAIL ok\n",
+      "timeout": 180
+    },
+    {
+      "argv": [
+        "python3",
+        "-c",
+        "import os, subprocess, sys\nos.makedirs('build', exist_ok=True)\ncmds = [\n  ['gcc','-std=c11','-O2','-o','build/synthetic_source','tests/integration/virtual_studio/audio/synthetic_source.c','-ljack','-lm','-lpthread'],\n  ['gcc','-std=c11','-O2','-o','build/deterministic_capture','tests/integration/virtual_studio/audio/deterministic_capture.c','-ljack','-lm','-lpthread'],\n]\nfor c in cmds:\n    r = subprocess.run(c, capture_output=True, text=True)\n    if r.returncode != 0:\n        sys.stderr.write(r.stderr); sys.exit(r.returncode)\nprint('ft-b4 canonical helpers built ok')"
+      ],
+      "command_sha256": "c4dc864bf6d05d195927b3407bf594da87ef73b6688b7b98b5ecf43a3e1634dc",
+      "cwd": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/controller-acceptance/controller-checkout-LAB-B-R",
+      "ended_at_utc": "2026-08-06T15:04:23Z",
+      "exit_code": 0,
+      "id": "ft-b4",
+      "started_at_utc": "2026-08-06T15:04:23Z",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_tail": "",
+      "stdout_sha256": "084539d4bdc2dc0f62ac0280018a33ecfaea81e945de1bb68d0c38e156a375b7",
+      "stdout_tail": "ft-b4 canonical helpers built ok\n",
+      "timeout": 180
+    }
+  ]
+}

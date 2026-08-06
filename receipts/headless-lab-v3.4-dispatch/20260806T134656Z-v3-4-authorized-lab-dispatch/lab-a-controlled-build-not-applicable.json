@@ -1,0 +1,7 @@
+{
+  "controlled_rebuild": "not_applicable",
+  "lab": "LAB-A",
+  "reason": "no buildable output in LAB-A ownership",
+  "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
+  "schema": "controlled-rebuild-not-applicable/v1"
+}

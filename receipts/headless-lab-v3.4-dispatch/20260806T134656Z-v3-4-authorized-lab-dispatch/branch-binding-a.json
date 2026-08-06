@@ -1,0 +1,17 @@
+{
+  "E": "a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3",
+  "E_tree": "f9f75c992c209cc32fecee5f65adb042c503d77a",
+  "R": "0fd104ef2187346b8c00014829857e11ee9539ec",
+  "R_tree": "16e27313cfa542a85f7e6a36db4344e2d7e199cd",
+  "batch": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+  "branch": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-a-v3_4",
+  "envelope_blob_oid": "3d1d9eaadfd728760ad4727bb03ed4b560f93101",
+  "envelope_sha256": "42788dec6fcef7a53728c9e40bfd98df84a489f78885bde952d3709108b19fa6",
+  "expected_E": "a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3",
+  "lab": "LAB-A",
+  "remote_resolved_oid": "a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3",
+  "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
+  "schema": "branch-binding-receipt/v1",
+  "verdict": "PASS",
+  "verified_at_utc": "2026-08-06T15:03:57Z"
+}
