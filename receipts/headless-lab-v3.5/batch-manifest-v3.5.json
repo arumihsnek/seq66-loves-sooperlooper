@@ -1,0 +1,189 @@
+{
+  "batch_id": "BATCH-20260806T222325Z-DOGFOOD004-LAB-V3_5",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "execution_model": {
+    "A": "post-publication controller acceptance receipt, outside E",
+    "C": "candidate (existing)",
+    "E": "controller evidence container produced mechanically by mechanical-finalizer-v3.5.py (E^ == R)",
+    "R": "single implementation result commit produced by the leaf (R^ == C, R != C)"
+  },
+  "git_object_format": "sha1",
+  "labs": {
+    "LAB-A": {
+      "build_command": null,
+      "leaf_id": "LEAF-LAB-A-V3_5",
+      "lease_id": "LEASE-20260806T222325Z-LAB-A-V3_5",
+      "literal_tests": {
+        "ft-a1": {
+          "command": [
+            "python3",
+            "-m",
+            "py_compile",
+            "tests/integration/headless_audio_lab/process_supervisor.py",
+            "tests/integration/headless_audio_lab/jack_server.py",
+            "tests/integration/headless_audio_lab/osc_probe.py",
+            "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+            "tests/integration/headless_audio_lab/__init__.py"
+          ],
+          "command_sha256": "37f54b258e723449707c4a4327d136c219ad8d076fab931d7fe09e3b13462842",
+          "cwd": "checkout-root",
+          "description": "py_compile all LAB-A modules",
+          "id": "ft-a1",
+          "timeout_seconds": 180
+        },
+        "ft-a2": {
+          "command": [
+            "python3",
+            "-c",
+            "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor, ProcessInfo; from headless_audio_lab.jack_server import JackServer; from headless_audio_lab.osc_probe import OscProbe; from headless_audio_lab.sooperlooper_launcher import SooperLooperLauncher; print('ft-a2 imports ok')"
+          ],
+          "command_sha256": "d03cbaac8617b22794d05083b68cc249c0cdb18874538092f5798a5f9570d0ed",
+          "cwd": "checkout-root",
+          "description": "imports of full LAB-A contractual API",
+          "id": "ft-a2",
+          "timeout_seconds": 180
+        },
+        "ft-a3": {
+          "command": [
+            "python3",
+            "-c",
+            "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor; s=ProcessSupervisor(); assert s.get_owned_pids()==[], 'ledger not empty'; assert s.get_owned_pgids()==[], 'pgid ledger not empty'; print('ft-a3 ledger empty ok')"
+          ],
+          "command_sha256": "f0ca8a15341afe053b0c8dc2b5aa2c6abddb7a21bd0cdd72871816b97b118cab",
+          "cwd": "checkout-root",
+          "description": "initial owned ledger is empty",
+          "id": "ft-a3",
+          "timeout_seconds": 180
+        },
+        "ft-a4": {
+          "command": [
+            "python3",
+            "-c",
+            "import os, subprocess, sys, time; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor; f=None\ntry:\n    with ProcessSupervisor() as sup:\n        i=sup.start_process('probe',['/bin/sleep','2'],{},'.','/dev/null','/dev/null')\n        assert i.pid>0 and i.pid in sup.get_owned_pids(), 'owned not registered'\n        try:\n            sup.start_process('bad',['/nonexistent/binary-xyz'],{},'.','/dev/null','/dev/null')\n            raise SystemExit('bad command did not propagate')\n        except Exception:\n            pass\n        f=subprocess.Popen(['/bin/sleep','3'],start_new_session=True,\n                           stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n        assert f.pid not in sup.get_owned_pids(), 'foreign registered'\n        sup.cleanup(timeout=5.0)\n        assert not os.path.exists('/proc/%d'%i.pid), 'owned survived cleanup'\n        assert sup.verify_cleanup()==[], 'verify_cleanup not empty'\n        assert os.path.exists('/proc/%d'%f.pid), 'foreign killed by supervisor'\nfinally:\n    if f is not None and f.poll() is None:\n        f.terminate()\n        try:\n            f.wait(timeout=5.0)\n        except subprocess.TimeoutExpired:\n            f.kill(); f.wait(timeout=5.0)\nprint('ft-a4 owned/foreign/cleanup ok')"
+          ],
+          "command_sha256": "1fba32bd74986034c828c69e82f3853c37806215146d026d70199356fed29b7b",
+          "cwd": "checkout-root",
+          "description": "real owned/foreign/cleanup/failure-propagation cycle",
+          "id": "ft-a4",
+          "timeout_seconds": 180
+        }
+      },
+      "owned_paths": [
+        "tests/integration/headless_audio_lab/process_supervisor.py",
+        "tests/integration/headless_audio_lab/jack_server.py",
+        "tests/integration/headless_audio_lab/osc_probe.py",
+        "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+        "tests/integration/headless_audio_lab/__init__.py"
+      ],
+      "planned_branch_pattern": "result/<future-run-id>-lab-a-v3_5",
+      "result_evidence_path": "receipts/headless-lab-results-v3.5/lab-a-controller-evidence.json"
+    },
+    "LAB-B": {
+      "build_command": [
+        [
+          "gcc",
+          "-std=c11",
+          "-O2",
+          "-o",
+          "build/synthetic_source",
+          "tests/integration/virtual_studio/audio/synthetic_source.c",
+          "-ljack",
+          "-lm",
+          "-lpthread"
+        ],
+        [
+          "gcc",
+          "-std=c11",
+          "-O2",
+          "-o",
+          "build/deterministic_capture",
+          "tests/integration/virtual_studio/audio/deterministic_capture.c",
+          "-ljack",
+          "-lm",
+          "-lpthread"
+        ]
+      ],
+      "leaf_id": "LEAF-LAB-B-V3_5",
+      "lease_id": "LEASE-20260806T222325Z-LAB-B-V3_5",
+      "literal_tests": {
+        "ft-b1": {
+          "command": [
+            "python3",
+            "-m",
+            "py_compile",
+            "tests/integration/headless_audio_lab/audio_oracle.py",
+            "tests/integration/headless_audio_lab/graph_assertions.py",
+            "tests/integration/headless_audio_lab/runner.py",
+            "tests/integration/headless_audio_lab/test_modules.py",
+            "tests/__init__.py",
+            "tests/integration/__init__.py"
+          ],
+          "command_sha256": "1c0ca05f5f01976fcdb9970392680b92b8aab43701bc7faf8ac69eb83e67662b",
+          "cwd": "checkout-root",
+          "description": "py_compile of LAB-B modules and tests",
+          "id": "ft-b1",
+          "timeout_seconds": 180
+        },
+        "ft-b2": {
+          "command": [
+            "python3",
+            "-c",
+            "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.audio_oracle import analyze_wav, analyze_loop_reproduction, AnalysisResult; from headless_audio_lab.graph_assertions import GraphAssertions; from headless_audio_lab.runner import LabRunner; print('ft-b2 imports ok')"
+          ],
+          "command_sha256": "da16c3fc9a063e4ff98a62e8fd0f11e6903615187086acad474077de4fb96fbf",
+          "cwd": "checkout-root",
+          "description": "imports of analyze_wav, AnalysisResult, GraphAssertions, LabRunner",
+          "id": "ft-b2",
+          "timeout_seconds": 180
+        },
+        "ft-b3": {
+          "command": [
+            "python3",
+            "-c",
+            "import os, struct, sys, tempfile, wave; sys.path.insert(0,'tests/integration'); from headless_audio_lab.audio_oracle import analyze_wav, AnalysisResult; rate=48000; n=4800\nfd,p=tempfile.mkstemp(suffix='.wav'); os.close(fd)\nw=wave.open(p,'wb'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(rate); w.writeframes(b'\\x00\\x00'*n); w.close()\ndata=open(p,'rb').read()\nassert b'\\x00' in data[44:], 'no real NUL PCM'\nassert b'\\\\x00' not in data[44:], 'escaped text found in PCM'\nr=analyze_wav(p, n, n, 120.0, 4, rate)\nassert isinstance(r, AnalysisResult), 'not AnalysisResult'\nassert r.verification == 'FAIL', 'silent WAV must FAIL, got %r' % r.verification\nassert r.captured_wav_frames == n, 'captured frames mismatch'\nos.unlink(p)\nprint('ft-b3 silent FAIL ok')"
+          ],
+          "command_sha256": "6b6405cc7005b5f82c72a622cef01b2a07958f97c1f8f6b0aac85f51d9833910",
+          "cwd": "checkout-root",
+          "description": "real silent WAV with full 6-arg mandatory signature -> verification==FAIL",
+          "id": "ft-b3",
+          "timeout_seconds": 180
+        },
+        "ft-b4": {
+          "command": [
+            "python3",
+            "-c",
+            "import os, subprocess, sys\nos.makedirs('build', exist_ok=True)\ncmds = [\n  ['gcc','-std=c11','-O2','-o','build/synthetic_source','tests/integration/virtual_studio/audio/synthetic_source.c','-ljack','-lm','-lpthread'],\n  ['gcc','-std=c11','-O2','-o','build/deterministic_capture','tests/integration/virtual_studio/audio/deterministic_capture.c','-ljack','-lm','-lpthread'],\n]\nfor c in cmds:\n    r = subprocess.run(c, capture_output=True, text=True)\n    if r.returncode != 0:\n        sys.stderr.write(r.stderr); sys.exit(r.returncode)\nprint('ft-b4 canonical helpers built ok')"
+          ],
+          "command_sha256": "c4dc864bf6d05d195927b3407bf594da87ef73b6688b7b98b5ecf43a3e1634dc",
+          "cwd": "checkout-root",
+          "description": "compile both canonical C helpers with gcc/libjack",
+          "id": "ft-b4",
+          "timeout_seconds": 180
+        }
+      },
+      "owned_paths": [
+        "tests/__init__.py",
+        "tests/integration/__init__.py",
+        "tests/integration/headless_audio_lab/audio_oracle.py",
+        "tests/integration/headless_audio_lab/graph_assertions.py",
+        "tests/integration/headless_audio_lab/runner.py",
+        "tests/integration/headless_audio_lab/test_modules.py",
+        "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+        "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+        "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+        "tests/integration/headless_audio_lab/fixtures/.gitignore"
+      ],
+      "planned_branch_pattern": "result/<future-run-id>-lab-b-v3_5",
+      "result_evidence_path": "receipts/headless-lab-results-v3.5/lab-b-controller-evidence.json"
+    }
+  },
+  "package": "v3.5",
+  "schema": "batch-manifest/v3.5",
+  "supersedes": {
+    "batch_id": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+    "package": "v3.4",
+    "reason": "v3.4 dispatch rejected: leaves created envelopes (key drift, placeholders, force-push, R/E confusion, missing fixtures). v3.5 hardens: leaf produces R only; E produced by mechanical controller finalizer; A created post-publication."
+  }
+}

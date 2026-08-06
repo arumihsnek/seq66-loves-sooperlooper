@@ -1,0 +1,29 @@
+{
+  "ambiguous_push_consequence": "PUBLISH_STATE_AMBIGUOUS -> STOP (no automatic retry)",
+  "batch_id": "BATCH-20260806T222325Z-DOGFOOD004-LAB-V3_5",
+  "controller_sole_publisher": true,
+  "frozen_at_utc": "20260806T222325ZZ",
+  "required": [
+    "remote branch absent before finalization",
+    "prepublish verifier PASS before push",
+    "create-only push",
+    "no --force",
+    "no --force-with-lease",
+    "no remote update-ref",
+    "no reused branch",
+    "no second push"
+  ],
+  "schema": "publication-policy/v3.5",
+  "sequence": [
+    "check remote branch absent",
+    "validate R",
+    "create E mechanically",
+    "prepublish-finalization PASS",
+    "re-check remote branch absent",
+    "push create-only E -> branch",
+    "resolve remote branch",
+    "require remote == E",
+    "create A outside E",
+    "postpublish-binding PASS"
+  ]
+}

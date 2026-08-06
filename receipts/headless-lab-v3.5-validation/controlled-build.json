@@ -1,0 +1,100 @@
+{
+  "all_exit_zero": true,
+  "build_dir_after_cleanup_empty": true,
+  "compiles": [
+    {
+      "argv": [
+        "gcc",
+        "-std=c11",
+        "-O2",
+        "-o",
+        "/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build/build/synthetic_source",
+        "tests/integration/virtual_studio/audio/synthetic_source.c",
+        "-ljack",
+        "-lm",
+        "-lpthread"
+      ],
+      "compiler_realpath": "/usr/bin/aarch64-linux-gnu-gcc-13",
+      "compiler_version": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "cwd": "/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build",
+      "elf_magic": true,
+      "exit_code": 0,
+      "ldd_libraries": [
+        "/lib/ld-linux-aarch64.so.1",
+        "libc.so.6",
+        "libdb-5.3.so",
+        "libgcc_s.so.1",
+        "libjack.so.0",
+        "libm.so.6",
+        "libstdc++.so.6",
+        "linux-vdso.so.1"
+      ],
+      "output_exists": true,
+      "output_sha256": "054b8428810e24a3f435ac6579840918f6435ef61ac62069255c85faaedc6a81",
+      "output_size": 71864,
+      "source_blob_oid": "6f07457cd38a81c425b4ab080aeee46bf0c0e7de",
+      "source_path": "tests/integration/virtual_studio/audio/synthetic_source.c",
+      "source_sha256": "da688d3931a1b4a2dddbe788dc3e69c31ae86a35823d0391b6c97da17f3fd6b5",
+      "stderr_sha256": "b7299bfded6ea8334f30d13c83a5af13595cd738eb71b4865d03cacb9de70eda",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timestamp_end": "2026-08-06T22:37:27Z",
+      "timestamp_start": "2026-08-06T22:37:27Z"
+    },
+    {
+      "argv": [
+        "gcc",
+        "-std=c11",
+        "-O2",
+        "-o",
+        "/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build/build/deterministic_capture",
+        "tests/integration/virtual_studio/audio/deterministic_capture.c",
+        "-ljack",
+        "-lm",
+        "-lpthread"
+      ],
+      "compiler_realpath": "/usr/bin/aarch64-linux-gnu-gcc-13",
+      "compiler_version": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "cwd": "/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build",
+      "elf_magic": true,
+      "exit_code": 0,
+      "ldd_libraries": [
+        "/lib/ld-linux-aarch64.so.1",
+        "libc.so.6",
+        "libdb-5.3.so",
+        "libgcc_s.so.1",
+        "libjack.so.0",
+        "libm.so.6",
+        "libstdc++.so.6",
+        "linux-vdso.so.1"
+      ],
+      "output_exists": true,
+      "output_sha256": "fa3874b11d274e67fb425c3960c8b0149398eb907faf81dba02f33e71d327f29",
+      "output_size": 72408,
+      "source_blob_oid": "c6dd79fae6c49aea907b1e4814b0cc9d8d9f0994",
+      "source_path": "tests/integration/virtual_studio/audio/deterministic_capture.c",
+      "source_sha256": "3c36f74f9881e9349f79d0485e0196e0ab4b989f96a73afe8044bf339ae56c4a",
+      "stderr_sha256": "3a7f46911a66627c9997b8903cb1ead7c28be2e57de8ea7c0fdb0029b1bb4920",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timestamp_end": "2026-08-06T22:37:27Z",
+      "timestamp_start": "2026-08-06T22:37:27Z"
+    }
+  ],
+  "controller_owned": true,
+  "empty_build_dir_before": true,
+  "lab": "LAB-B",
+  "no_leaf_binaries": true,
+  "recorded_at_utc": "2026-08-06T22:36:00Z",
+  "schema": "controlled-build/v3.5",
+  "source_environment": {
+    "allow_list": [
+      "PATH",
+      "HOME",
+      "LANG",
+      "LC_ALL",
+      "TMPDIR",
+      "PKG_CONFIG_PATH"
+    ],
+    "cwd": "/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build"
+  },
+  "tracked_elf_in_repo": []
+}

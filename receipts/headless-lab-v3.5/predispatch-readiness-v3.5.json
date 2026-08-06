@@ -1,0 +1,13 @@
+{
+  "D0_D1_D2_authorized": false,
+  "batch_id": "BATCH-20260806T222325Z-DOGFOOD004-LAB-V3_5",
+  "dispatch_authorized": false,
+  "frozen_at_utc": "20260806T222325ZZ",
+  "integration_authorized": false,
+  "lab_worktrees": 0,
+  "leases_activated": false,
+  "leaves": 0,
+  "schema": "predispatch-readiness/v3.5",
+  "technical_readiness": "PENDING_REVIEW",
+  "update_rule": "after reviews, this file may be updated ONLY via an external binding receipt; never by modifying the frozen package payload"
+}

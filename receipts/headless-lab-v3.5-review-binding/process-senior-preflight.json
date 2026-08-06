@@ -1,0 +1,8 @@
+{
+  "mission_id": "seq66-lab-v3-5-r-only-mechanical-finalization",
+  "model_processes_consumed": 0,
+  "recorded_at_utc": "2026-08-06T22:38:00Z",
+  "schema": "senior-preflight/v3.5-process",
+  "status": "PREFLIGHT_VALID",
+  "valid": true
+}

@@ -1,0 +1,31 @@
+{
+  "created_after_push": true,
+  "description": "A: post-publication controller acceptance receipt, OUTSIDE E",
+  "fields": [
+    "schema",
+    "lab",
+    "batch",
+    "C",
+    "R",
+    "R tree",
+    "E",
+    "E tree",
+    "controller evidence blob OID",
+    "controller evidence SHA-256",
+    "remote",
+    "branch",
+    "remote resolved OID",
+    "publication command hash",
+    "publication transcript hash",
+    "create-only proof",
+    "controller tests",
+    "functional verdict",
+    "artifact verification",
+    "build provenance",
+    "clean before/after",
+    "final verdict",
+    "recorded_at_utc"
+  ],
+  "never_in_E": true,
+  "schema": "controller-acceptance-schema/v3.5"
+}

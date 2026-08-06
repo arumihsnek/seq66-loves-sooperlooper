@@ -1,0 +1,13 @@
+{
+  "evidence_reproduced_byte_exact": true,
+  "lab_a": {
+    "finalize_exit": 0,
+    "verifier_prepublish_exit": 0
+  },
+  "lab_b": {
+    "finalize_exit": 0,
+    "verifier_prepublish_exit": 0
+  },
+  "recorded_at_utc": "2026-08-06T22:35:00Z",
+  "schema": "finalizer-reproducibility/v3.5"
+}

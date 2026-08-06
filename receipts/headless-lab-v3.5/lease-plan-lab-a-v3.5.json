@@ -1,0 +1,13 @@
+{
+  "activated": false,
+  "authorization": false,
+  "batch_id": "BATCH-20260806T222325Z-DOGFOOD004-LAB-V3_5",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "frozen_at_utc": "20260806T222325ZZ",
+  "leaf_id": "LEAF-LAB-A-V3_5",
+  "lease_id": "LEASE-20260806T222325Z-LAB-A-V3_5",
+  "note": "lease is PLANNED ONLY. Activation requires a separate human dispatch authorization.",
+  "planned_result_branch": "result/<future-run-id>-lab-a-v3_5",
+  "schema": "lease-plan-lab-a/v3.5",
+  "status": "planned"
+}

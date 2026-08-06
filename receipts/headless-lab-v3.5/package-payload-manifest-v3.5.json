@@ -1,0 +1,81 @@
+{
+  "batch_id": "BATCH-20260806T222325Z-DOGFOOD004-LAB-V3_5",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "files": {
+    "acceptance-verifier-v3.5.py": {
+      "sha256": "2d06e8eff518baed2e0b581cf9fda2d6c129cc2a1e0b6ccd48822c07c3074e22",
+      "size": 34498
+    },
+    "batch-manifest-v3.5.json": {
+      "sha256": "53e5f10d1abdc8dc6e0f29f9eb105f16c221edb5b5dec86189042b2cd146412b",
+      "size": 10715
+    },
+    "build-provenance-policy-v3.5.json": {
+      "sha256": "23273876c13fb83444a53b9fe37bc902740c22b5d3a4bdc26e2c5d9d937e4164",
+      "size": 2764
+    },
+    "controller-acceptance-schema-v3.5.json": {
+      "sha256": "69f9d8dbc405f8bbb04bcb1d8c3e4c7740c7173a57c15f65e0943689e97590ba",
+      "size": 686
+    },
+    "controller-evidence-schema-v3.5.json": {
+      "sha256": "5c47bb2499d2b27c580306b4889e2511a2885c817211a4ff8714909c9d0f7ce1",
+      "size": 747
+    },
+    "dispatch-plan-v3.5.json": {
+      "sha256": "68befc53841eb591a38386ba3a3c604502c087f865c3897922f70e0e334e44ba",
+      "size": 1768
+    },
+    "functional-contract-baseline-v3.5.json": {
+      "sha256": "bbce9f59b10bd0cd233e4295231a512dd0705da37f4a3783c1198716406e6e46",
+      "size": 10433
+    },
+    "lab-api-contract-v3.5.json": {
+      "sha256": "15ddd5d3859777fa5cc7632722411e42aff5208bd9e7226baf266d301feef06e",
+      "size": 7017
+    },
+    "leaf-r-report-schema-v3.5.json": {
+      "sha256": "9d3ff38e31aaabb59b09504fbc5e46f93e128996eec7040b937c15752925d140",
+      "size": 724
+    },
+    "lease-plan-lab-a-v3.5.json": {
+      "sha256": "659ee5b27cbbb38672aa537e621fc05463c0afb898755a84352bfd645ceb46a5",
+      "size": 522
+    },
+    "lease-plan-lab-b-v3.5.json": {
+      "sha256": "cf654e0b87960a2f9b38eb49d0bf25d861fac9310836debec793e752f0a93f35",
+      "size": 522
+    },
+    "mechanical-finalizer-v3.5.py": {
+      "sha256": "c44e6fd64a001ea7c90e9f1a1ec352251bfa308a302aa8e715e9d6545ab0ff2c",
+      "size": 19830
+    },
+    "port-plan-v3.5.json": {
+      "sha256": "5dff4027fd58518d86acb698a8ffa7843839bf1ea018bdcc94945704440c8a38",
+      "size": 1040
+    },
+    "predispatch-readiness-v3.5.json": {
+      "sha256": "231b2f29e25baec68f90436ee4cc8f44a7df680ec5f64ff9d323e6e1a4b43e67",
+      "size": 496
+    },
+    "process-hardening-contract-v3.5.json": {
+      "sha256": "cf5e271c44a9418f0596017feadbd933ee9cdfa84601c89e92fe741b3e642c3f",
+      "size": 3032
+    },
+    "publication-policy-v3.5.json": {
+      "sha256": "9c7e08b51f996d2f552d4775aa4e7d1c5779fcec7c0ed0aa7ed26f036e4b5229",
+      "size": 847
+    },
+    "scope-freeze-v3.5.json": {
+      "sha256": "446e02d54edd409710ddae0ff8c012c51c5d977c0fe8e4d4fd7abb0bdfb1a522",
+      "size": 2389
+    }
+  },
+  "frozen_at_utc": "2026-08-06T22:37:00Z",
+  "operational_file_count": 17,
+  "review_exclusion_rule": "senior review bundles, verdicts, preflights and binding receipts are NEVER added to the payload manifest",
+  "schema": "package-payload-manifest/v3.5",
+  "self_exclusion_rule": "package-payload-manifest-v3.5.json is NOT included in its own files-map",
+  "zero_extra": true,
+  "zero_missing": true
+}

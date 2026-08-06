@@ -1,0 +1,38 @@
+{
+  "directory_file_count": 8,
+  "files": {
+    "functional-senior-bundle.json": {
+      "sha256": "0b065f514a491c33a9f56086276af450a77b41aed7bf1b447d7fbd6d82a01013",
+      "size": 10345
+    },
+    "functional-senior-preflight.json": {
+      "sha256": "799a036f82cb0f1244ae3126d0653b1aaa0c99f061bb3fcd86ca408ccd1ad952",
+      "size": 232
+    },
+    "functional-senior-verdict.json": {
+      "sha256": "1ae76d3e4ca0b31511cf747184194c19ed5b110a08de1cd5961b795b93489a4b",
+      "size": 588
+    },
+    "package-review-binding-v3.5.json": {
+      "sha256": "260c97091c8ea17264874212c350eef25aafbc28be83f427d1e1e3feed375693",
+      "size": 2923
+    },
+    "process-senior-bundle.json": {
+      "sha256": "a0523242061b2ac6fb62228f8e6983be95a87d9382305a81d9f6d14cd0370f22",
+      "size": 18768
+    },
+    "process-senior-preflight.json": {
+      "sha256": "91ef404edd50a6010b14ea33d404b2eb74bc2b32f57d927d8eff1b90090bbc6d",
+      "size": 238
+    },
+    "process-senior-verdict.json": {
+      "sha256": "c8aa85adb84f72ffcf9ef4433d4aa0b92f9fd03423bbcfb6e0d554a0faef44dc",
+      "size": 585
+    }
+  },
+  "indexed_file_count": 7,
+  "note": "directory_file_count == indexed_file_count + 1; no ambiguous count field.",
+  "schema": "package-publication-index/v3.5",
+  "self_excluded": true,
+  "self_excluded_filename": "package-publication-index-v3.5.json"
+}

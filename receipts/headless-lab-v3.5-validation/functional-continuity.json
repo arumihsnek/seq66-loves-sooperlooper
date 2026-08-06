@@ -1,0 +1,17 @@
+{
+  "all_deep_equal": true,
+  "canonical_sources_deep_equal": true,
+  "compile_commands_deep_equal": true,
+  "functions_classes_methods_deep_equal": true,
+  "literal_ids_deep_equal": true,
+  "literal_tests_preserved": true,
+  "modules_deep_equal_v34": true,
+  "ownership_deep_equal": true,
+  "ownership_intersection_empty": true,
+  "recorded_at_utc": "2026-08-06T22:35:00Z",
+  "returns_deep_equal": true,
+  "schema": "functional-continuity/v3.5",
+  "signatures_deep_equal": true,
+  "silence_semantics_deep_equal": true,
+  "v3_5_verification": "PASS"
+}

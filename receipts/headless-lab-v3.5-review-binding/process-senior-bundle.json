@@ -1,0 +1,235 @@
+{
+  "alternatives": [
+    {
+      "cons": [],
+      "name": "accept technical readiness",
+      "pros": [
+        "proceso endurecido verificado"
+      ]
+    },
+    {
+      "cons": [
+        "sin hallazgos conocidos"
+      ],
+      "name": "changes_required",
+      "pros": []
+    }
+  ],
+  "caller_required": [
+    "/alternatives",
+    "/candidate_decision",
+    "/code_excerpts",
+    "/constraints",
+    "/current_plan",
+    "/decision_needed",
+    "/diff",
+    "/escalation",
+    "/invalidated_assumptions",
+    "/objective",
+    "/observed_facts",
+    "/progress",
+    "/questions",
+    "/relevant_contracts",
+    "/risks_already_identified",
+    "/runtime_evidence",
+    "/snapshot/checkpoint_fingerprint",
+    "/snapshot/plan_fingerprint",
+    "/tests"
+  ],
+  "candidate_decision": {
+    "decision_type": "plan_review",
+    "description": "v3.5 payload manifest 31b3fd5518153727bc51785553b0dd3ab9223f957ec5a2d270eca90186e946f6; R-only/E-mechanical/A-postpublication",
+    "options": [
+      "accept",
+      "changes_required"
+    ],
+    "recommendation": "accept"
+  },
+  "code_excerpts": [
+    {
+      "excerpt": "checks R^==C, owned-only, required paths, evidence absent, clean detached checkout, zero untracked/ELF; executes literal tests; creates exactly one E (E^==R, diff R..E evidence-only); --reproduce regenerates byte-identical evidence",
+      "file": "mechanical-finalizer-v3.5.py",
+      "note": "Finalizer es el \u00daNICO mecanismo que crea E."
+    },
+    {
+      "excerpt": "[\"check remote branch absent\", \"validate R\", \"create E mechanically\", \"prepublish-finalization PASS\", \"re-check remote branch absent\", \"push create-only E -> branch\", \"resolve remote branch\", \"require remote == E\", \"create A outside E\", \"postpublish-binding PASS\"]",
+      "file": "publication-policy-v3.5.json",
+      "note": "Create-only, post-PASS, ambiguous => STOP."
+    },
+    {
+      "excerpt": "phases: functional-continuity, r-only-leaf-result, prepublish-finalization, postpublish-binding, full-completion",
+      "file": "acceptance-verifier-v3.5.py",
+      "note": "Verifier phases separadas."
+    }
+  ],
+  "constraints": [
+    "Single pass",
+    "No tools",
+    "No workspace reads",
+    "Advisory only",
+    "verdict=accept con 0 blocking y 0 required, bound manifest 31b3fd55... y 17 hashes; accept NO autoriza dispatch"
+  ],
+  "current_plan": {
+    "phases": [
+      "contracts",
+      "finalizer",
+      "verifier",
+      "validation",
+      "reviews",
+      "binding",
+      "CP-064",
+      "publication",
+      "CI"
+    ],
+    "version": "v3.5"
+  },
+  "decision_needed": "\u00bfEl paquete v3.5 queda t\u00e9cnicamente preparado (no autorizado) para un futuro dispatch LAB-A/LAB-B?",
+  "diff": {
+    "byte_size": 0,
+    "sha256": "462b0a35a0b76ea32d5ca2bc66eef7934798704cbcf8a00b95af04ee56a25121",
+    "summary": "v3.5 process-hardening package + validation evidence"
+  },
+  "escalation": {
+    "local_deterministic_checks": [
+      "selftest 20/20",
+      "reproduce byte-exact",
+      "controlled build real ELF",
+      "publication create-only"
+    ],
+    "material_impact": "Hardening de proceso; no autoriza dispatch ni integraci\u00f3n."
+  },
+  "invalidated_assumptions": [],
+  "mission_id": "seq66-lab-v3-5-r-only-mechanical-finalization",
+  "mode": "plan-review",
+  "objective": "Review that the v3.5 R-only leaf model + mechanical controller finalization is sound, reproducible, and process-hardened (all v3.4 failures reproduced and rejected).",
+  "observed_facts": [
+    "PR #34 OPEN/draft/mergeable head=129e5b50; CURRENT->CP-063; forensic closure CI runs 31128838866/31128838865 success on 129e5b50 (FORENSIC_CLOSURE_FINAL=PASS)",
+    "v3.5 package payload manifest SHA-256 = 31b3fd5518153727bc51785553b0dd3ab9223f957ec5a2d270eca90186e946f6; 17 operational artifacts; directory=18 (manifest self-excluded); zero missing/extra",
+    "v3.5 functional surface DEEP-EQUAL v3.4 (modules/functions/classes/methods/signatures/returns/silence=FAIL/AnalysisResult/GraphAssertions/LabRunner/ownership/literal IDs/sources/compile commands); functional-continuity.json all_deep_equal=true",
+    "selftest 20/20 PASS (PASS: valid R-only A/B, finalization A/B with real gcc, create-only publication, postpublication; REJECT: empty R, wrong parent, multi-parent, out-of-scope, required path missing, evidence in R, tracked ELF, leaf key 'exit code', evidence forbidden E, evidence missing field, silent substitution, wrong test ID, E^!=R, extra envelope commit, preexisting branch, force-push, acceptance-in-E, remote!=E)",
+    "negative-matrix.json: all negative cases REJECT (real verifier rejections, not declarative); reproductions of all v3.4 LAB-A/LAB-B failures anchored",
+    "controlled build LAB-B: gcc -std=c11 -O2 from empty build dir, 2/2 exit 0, real ELF (synthetic_source 71864 B, deterministic_capture 72408 B), ldd libraries captured, tracked ELF zero",
+    "finalizer-reproducibility.json: LAB-A and LAB-B finalize exit 0, verifier prepublish exit 0 (evidence bytes == blob bytes in E)",
+    "dispatch_result=DISPATCH_RESULT_REJECTED; no_integration_candidate_set=true; v3_5 dispatch_authorized=false; leases planned/activated=false; lab_worktrees=0; leaves=0",
+    "R-only leaf model: leaf produces exactly one R (R^==C, owned-only); E produced ONLY by mechanical-finalizer-v3.5.py (E^==R, R..E evidence-only, deterministic reproduce); A created post-publication outside E"
+  ],
+  "progress": {
+    "completed": [
+      "finalizer/verifier dise\u00f1ados y validados",
+      "selftest 20/20",
+      "negative matrix",
+      "controlled build"
+    ],
+    "current": "process senior review"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "\u00bfLa leaf s\u00f3lo puede producir R?"
+    },
+    {
+      "id": "Q2",
+      "text": "\u00bfLa leaf carece de autoridad efectiva de push?"
+    },
+    {
+      "id": "Q3",
+      "text": "\u00bfE s\u00f3lo puede producirse mediante el finalizador congelado?"
+    },
+    {
+      "id": "Q4",
+      "text": "\u00bfEl verifier reproduce byte-exactamente el evidence?"
+    },
+    {
+      "id": "Q5",
+      "text": "\u00bfEl controller no puede corregir implementaci\u00f3n?"
+    },
+    {
+      "id": "Q6",
+      "text": "\u00bfLa publicaci\u00f3n es create-only y posterior al PASS?"
+    },
+    {
+      "id": "Q7",
+      "text": "\u00bfLos fallos v3.4 est\u00e1n reproducidos y rechazados?"
+    },
+    {
+      "id": "Q8",
+      "text": "\u00bfR y E quedan inequ\u00edvocamente separados?"
+    },
+    {
+      "id": "Q9",
+      "text": "\u00bfS\u00f3lo R es integration-eligible?"
+    },
+    {
+      "id": "Q10",
+      "text": "\u00bfEl paquete est\u00e1 t\u00e9cnicamente preparado pero no autorizado para dispatch?"
+    }
+  ],
+  "relevant_contracts": [
+    "El senior es advisory y no ejecuta cambios.",
+    "Leaf NO tiene push authority.",
+    "E solo via finalizer congelado.",
+    "Create-only push; PUBLISH_STATE_AMBIGUOUS => STOP."
+  ],
+  "repository": {
+    "dirty": false,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    "CI del commit v3.5 se observar\u00e1 despu\u00e9s del push",
+    "Leases planned only"
+  ],
+  "runtime_evidence": [
+    {
+      "result": "{\"batch_id\": \"BATCH-20260806T222325Z-DOGFOOD004-LAB-V3_5\", \"candidate_head_sha\": \"509538784afc2b828f2d922f65cf8ca3a39b5ee7\", \"controller_authority\": {\"may\": [\"validate R\", \"re-execute tests\", \"run functional gates\", \"perform controlled build\", \"create E via the frozen finalizer\", \"verify E before push\", \"publish E via create-only push\", \"verify remote branch\", \"create A\"], \"may_not\": [\"edit implementation\", \"fix R\", \"add owned files to R\", \"act as leaf\", \"transform an invalid R into a valid one\"]}, \"execution_model\": {\"A\": {\"constraint\": \"created after push, binds C/R/E/branch exact\", \"description\": \"post-publication controller acceptance receipt, OUTSIDE E\", \"producer\": \"controller\"}, \"C\": {\"description\": \"candidate (existing)\", \"producer\": \"controller/repository\"}, \"E\": {\"constraint\": \"E^ == R, diff R..E == evidence path only\", \"description\": \"controller evidence container produced MECHANICALLY by mechanical-finalizer-v3.5.py\", \"producer\": \"controller (finalizer)\"}, \"R\": {\"constraint\": \"R^ == C, R != C, R non-empty, owned-only\", \"description\": \"unique implementation result commit produced by the leaf\", \"producer\": \"leaf\"}}, \"failure_model_anchored\": {\"LAB-A\": [\"leaf test fields incorrect (key 'exit code' instead of exit_code)\", \"exit -2 placeholders\", \"invalid envelope\", \"publication before PASS\", \"force-push (branch rewrite)\"], \"LAB-B\": [\"R misidentified (reported envelope commit as R)\", \"two envelope commits\", \"E^ != R\", \"out-of-scope LAB-A path in C..R\", \"owned fixtures absent from R\", \"untracked .c\", \"dirty worktree\", \"branch not published\", \"invalid build claim\"]}, \"frozen_at_utc\": \"20260806T222325ZZ\", \"leaf_authority\": {\"may\": [\"edit owned paths\", \"run local tests\", \"create exactly one R\", \"return full R SHA\", \"preserve its worktree\"], \"may_not\": [\"create envelope or E\", \"write under receipts/headless-lab-results-v3.5/\", \"push\", \"force-push\", \"create a remote branch\", \"declare remote binding\", \"declare controller acceptance\", \"create post-publication receipts\"]}, \"leaf_isolation\": {\"note\": \"publication controller-owned environment is separate from leaf environments; leaf does not need remote access to produce R; controller imports/resolves the R object from the preserved local environment.\", \"required\": [\"two isolated git environments\", \"exact candidate\", \"exclusive ownership\", \"no shared implementation worktree\", \"no GitHub write credentials inside the leaf\", \"no usable pushurl\", \"no credential helper with write permission\"]}, \"schema\": \"process-hardening-contract/v3.5\"}",
+      "source": "process-hardening-contract-v3.5.json"
+    },
+    {
+      "result": "{\"ambiguous_push_consequence\": \"PUBLISH_STATE_AMBIGUOUS -> STOP\", \"controller_sole_publisher\": true, \"create_only_evidence\": {\"bare_remote_push_create_only\": true, \"force_push_detected_rejected\": true, \"preexisting_branch_rejected\": true, \"remote_ne_E_rejected\": true, \"selftest_case\": \"createonly_publication_passes\"}, \"policy_sequence\": [\"check remote branch absent\", \"validate R\", \"create E mechanically\", \"prepublish-finalization PASS\", \"re-check remote branch absent\", \"push create-only E -> branch\", \"resolve remote branch\", \"require remote == E\", \"create A outside E\", \"postpublish-binding PASS\"], \"recorded_at_utc\": \"2026-08-06T22:37:00Z\", \"schema\": \"publication-create-only/v3.5\"}",
+      "source": "publication-policy-v3.5.json"
+    },
+    {
+      "result": "{\"case_count\": 20, \"cases\": {\"E_wrong_parent_rejected\": true, \"acceptance_inside_E_rejected\": true, \"createonly_publication_passes\": true, \"empty_R_rejected\": true, \"evidence_forbidden_E_rejected\": true, \"evidence_in_R_rejected\": true, \"evidence_missing_field_rejected\": true, \"extra_envelope_commit_rejected\": true, \"force_push_detected_rejected\": true, \"leaf_key_exit_code_rejected\": true, \"multi_parent_rejected\": true, \"out_of_scope_rejected\": true, \"preexisting_branch_rejected_by_policy\": true, \"remote_ne_E_rejected\": true, \"required_path_missing_rejected\": true, \"silent_substitution_rejected\": true, \"tracked_elf_rejected\": true, \"valid_LAB_A_R_only\": true, \"wrong_parent_rejected\": true, \"wrong_test_id_rejected\": true}, \"exit_code\": 0, \"global\": \"PASS\", \"recorded_at_utc\": \"2026-08-06T22:35:00Z\", \"schema\": \"selftest-results/v3.5\"}",
+      "source": "selftest-results.json"
+    },
+    {
+      "result": "{\"all_negative_cases_rejected\": true, \"cases\": {\"E_wrong_parent_rejected\": true, \"acceptance_inside_E_rejected\": true, \"empty_R_rejected\": true, \"evidence_forbidden_E_rejected\": true, \"evidence_in_R_rejected\": true, \"evidence_missing_field_rejected\": true, \"extra_envelope_commit_rejected\": true, \"force_push_detected_rejected\": true, \"leaf_key_exit_code_rejected\": true, \"multi_parent_rejected\": true, \"out_of_scope_rejected\": true, \"remote_ne_E_rejected\": true, \"required_path_missing_rejected\": true, \"silent_substitution_rejected\": true, \"tracked_elf_rejected\": true, \"wrong_parent_rejected\": true, \"wrong_test_id_rejected\": true}, \"recorded_at_utc\": \"2026-08-06T22:35:00Z\", \"reproductions_of_v34_failures\": [{\"rejected\": true, \"selftest_case\": \"leaf_key_exit_code_rejected\", \"v34_failure\": \"leaf test fields 'exit code'\"}, {\"rejected\": true, \"selftest_case\": \"leaf_key_exit_code_rejected (placeholder value)\", \"v34_failure\": \"exit -2 placeholders\"}, {\"rejected\": true, \"selftest_case\": \"force_push_detected_rejected\", \"v34_failure\": \"force-push\"}, {\"rejected\": true, \"selftest_case\": \"E_wrong_parent_rejected\", \"v34_failure\": \"R misidentified / E^ != R\"}, {\"rejected\": true, \"selftest_case\": \"extra_envelope_commit_rejected\", \"v34_failure\": \"two envelope commits / extra E\"}, {\"rejected\": true, \"selftest_case\": \"out_of_scope_rejected\", \"v34_failure\": \"out-of-scope LAB-A path\"}, {\"rejected\": true, \"selftest_case\": \"required_path_missing_rejected\", \"v34_failure\": \"fixtures owned ausentes\"}, {\"rejected\": true, \"selftest_case\": \"evidence_in_R_rejected (dirty evidence)\", \"v34_failure\": \"dirty worktree\"}, {\"rejected\": true, \"selftest_case\": \"remote_ne_E_rejected\", \"v34_failure\": \"branch no publicada\"}, {\"rejected\": true, \"selftest_case\": \"preexisting_branch_rejected_by_policy\", \"v34_failure\": \"publicaci\\u00f3n antes de PASS\"}], \"schema\": \"negative-matrix/v3.5\"}",
+      "source": "negative-matrix.json"
+    },
+    {
+      "result": "{\"evidence_reproduced_byte_exact\": true, \"lab_a\": {\"finalize_exit\": 0, \"verifier_prepublish_exit\": 0}, \"lab_b\": {\"finalize_exit\": 0, \"verifier_prepublish_exit\": 0}, \"recorded_at_utc\": \"2026-08-06T22:35:00Z\", \"schema\": \"finalizer-reproducibility/v3.5\"}",
+      "source": "finalizer-reproducibility.json"
+    },
+    {
+      "result": "{\"all_exit_zero\": true, \"build_dir_after_cleanup_empty\": true, \"compiles\": [{\"argv\": [\"gcc\", \"-std=c11\", \"-O2\", \"-o\", \"/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build/build/synthetic_source\", \"tests/integration/virtual_studio/audio/synthetic_source.c\", \"-ljack\", \"-lm\", \"-lpthread\"], \"compiler_realpath\": \"/usr/bin/aarch64-linux-gnu-gcc-13\", \"compiler_version\": \"gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\", \"cwd\": \"/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build\", \"elf_magic\": true, \"exit_code\": 0, \"ldd_libraries\": [\"/lib/ld-linux-aarch64.so.1\", \"libc.so.6\", \"libdb-5.3.so\", \"libgcc_s.so.1\", \"libjack.so.0\", \"libm.so.6\", \"libstdc++.so.6\", \"linux-vdso.so.1\"], \"output_exists\": true, \"output_sha256\": \"054b8428810e24a3f435ac6579840918f6435ef61ac62069255c85faaedc6a81\", \"output_size\": 71864, \"source_blob_oid\": \"6f07457cd38a81c425b4ab080aeee46bf0c0e7de\", \"source_path\": \"tests/integration/virtual_studio/audio/synthetic_source.c\", \"source_sha256\": \"da688d3931a1b4a2dddbe788dc3e69c31ae86a35823d0391b6c97da17f3fd6b5\", \"stderr_sha256\": \"b7299bfded6ea8334f30d13c83a5af13595cd738eb71b4865d03cacb9de70eda\", \"stdout_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"timestamp_end\": \"2026-08-06T22:37:27Z\", \"timestamp_start\": \"2026-08-06T22:37:27Z\"}, {\"argv\": [\"gcc\", \"-std=c11\", \"-O2\", \"-o\", \"/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build/build/deterministic_capture\", \"tests/integration/virtual_studio/audio/deterministic_capture.c\", \"-ljack\", \"-lm\", \"-lpthread\"], \"compiler_realpath\": \"/usr/bin/aarch64-linux-gnu-gcc-13\", \"compiler_version\": \"gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\", \"cwd\": \"/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build\", \"elf_magic\": true, \"exit_code\": 0, \"ldd_libraries\": [\"/lib/ld-linux-aarch64.so.1\", \"libc.so.6\", \"libdb-5.3.so\", \"libgcc_s.so.1\", \"libjack.so.0\", \"libm.so.6\", \"libstdc++.so.6\", \"linux-vdso.so.1\"], \"output_exists\": true, \"output_sha256\": \"fa3874b11d274e67fb425c3960c8b0149398eb907faf81dba02f33e71d327f29\", \"output_size\": 72408, \"source_blob_oid\": \"c6dd79fae6c49aea907b1e4814b0cc9d8d9f0994\", \"source_path\": \"tests/integration/virtual_studio/audio/deterministic_capture.c\", \"source_sha256\": \"3c36f74f9881e9349f79d0485e0196e0ab4b989f96a73afe8044bf339ae56c4a\", \"stderr_sha256\": \"3a7f46911a66627c9997b8903cb1ead7c28be2e57de8ea7c0fdb0029b1bb4920\", \"stdout_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"timestamp_end\": \"2026-08-06T22:37:27Z\", \"timestamp_start\": \"2026-08-06T22:37:27Z\"}], \"controller_owned\": true, \"empty_build_dir_before\": true, \"lab\": \"LAB-B\", \"no_leaf_binaries\": true, \"recorded_at_utc\": \"2026-08-06T22:36:00Z\", \"schema\": \"controlled-build/v3.5\", \"source_environment\": {\"allow_list\": [\"PATH\", \"HOME\", \"LANG\", \"LC_ALL\", \"TMPDIR\", \"PKG_CONFIG_PATH\"], \"cwd\": \"/home/ubuntu/.hermes/runs/20260806T222325Z-v3-5-process-hardening-package/controlled-git-model/controlled-build\"}, \"tracked_elf_in_repo\": []}",
+      "source": "controlled-build.json"
+    }
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "a62bb035bdb354b7ab345ce31986c868231c7ced99e2d81845e29e23d9b189c8",
+    "plan_fingerprint": "9fe17663a3091a85116555ffbd48f3aaa0d5d1015edbf27ab54478e9c34d51d2",
+    "repository_head": "129e5b50d5f4b2054ada99d6b483a0c5237f2b36",
+    "working_tree_fingerprint": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "tests": [
+    {
+      "command": "acceptance-verifier-v3.5.py --selftest",
+      "exit_code": 0,
+      "summary": "20/20 PASS; negative cases real REJECT"
+    },
+    {
+      "command": "mechanical-finalizer --mode finalize + verifier prepublish",
+      "exit_code": 0,
+      "summary": "LAB-A/LAB-B PASS; evidence bytes == blob bytes in E"
+    },
+    {
+      "command": "gcc controlled build LAB-B",
+      "exit_code": 0,
+      "summary": "2/2 exit 0 real ELF"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "batch_id": "BATCH-20260806T222325Z-DOGFOOD004-LAB-V3_5",
+  "forbidden_functional_change": true,
+  "frozen_at_utc": "20260806T222325ZZ",
+  "functional_drift_consequence": "FUNCTIONAL_CONTRACT_DRIFT -> PACKAGE_REJECTED",
+  "nature": "PROCESS_HARDENING PORT (functional surface unchanged)",
+  "ports": [
+    {
+      "change": "leaf produces R only; envelope removed from leaf; evidence E produced by controller finalizer",
+      "from": "v3.4",
+      "kind": "leaf result model",
+      "to": "v3.5"
+    },
+    {
+      "change": "controller sole publisher; create-only push; remote absent before finalization",
+      "from": "v3.4",
+      "kind": "publication",
+      "to": "v3.5"
+    },
+    {
+      "change": "post-publication controller acceptance receipt A outside E",
+      "from": "v3.4",
+      "kind": "acceptance",
+      "to": "v3.5"
+    },
+    {
+      "change": "NONE (deep-equal modules/signatures/semantics)",
+      "from": "v3.4",
+      "kind": "functional contract",
+      "to": "v3.5"
+    }
+  ],
+  "schema": "port-plan/v3.5"
+}
