@@ -9,10 +9,30 @@
     "remote_pushed": false,
     "worktree_clean_at_report": false
   },
+  "controller_verification": {
+    "controller_notes": "reported R is an envelope commit (2b774260); correct implementation commit is 608cefef. Remote branch NOT published. E^==2b774260 != R. diff C..R includes LAB-A owned tests/integration/headless_audio_lab/__init__.py. Owned fixtures synthetic_source/deterministic_capture ABSENT from R (confirmed by leaf's own 'cannot get blob at R'). Leaf worktree dirty at E. Controller re-execution of frozen ft-b1..ft-b4 on the R checkout: 4/4 exit 0.",
+    "controller_verdict": "REJECTED"
+  },
   "lab": "LAB-B",
   "leaf_id": "LEAF-LAB-B-V3_4",
+  "leaf_self_report": {
+    "declared_success": false,
+    "reported_E": "2906dc4fd77e2d7455060c3248db73aabdeb010b",
+    "reported_R": "2b774260ef54238dc3847e26385238766fd94499",
+    "reported_remote_branch": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-b-v3_4",
+    "self_build_claim": {
+      "status": "claimed_built"
+    },
+    "self_declared_reason": "leaf-envelope verifier exit_code 1 (REJECT); clean status False; owned fixtures synthetic_source/deterministic_capture missing at R ('cannot get blob at R')",
+    "self_literal_exit_codes": {
+      "ft-b1": 0,
+      "ft-b2": 0,
+      "ft-b3": 0,
+      "ft-b4": 0
+    }
+  },
   "lease_id": "LEASE-20260806T020249Z-LAB-B-V3_4",
-  "note": "Controller-observed record. Leaf self-report (untrusted) delivered separately via delegation summary.",
+  "note": "Leaf self-reports are UNTRUSTED claims; controller verification (git topology + frozen verifier + controller re-execution) is authoritative. Both leaves did NOT declare success; both are REJECTED.",
   "recorded_at_utc": "2026-08-06T15:04:49Z",
   "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
   "schema": "leaf-report/v1"
