@@ -29,3 +29,9 @@ rejected; verifier PASS required before publication). NOT authorized yet; not ex
 - `PROJECT-MANIFEST.json`; `doc/sooperlooper/WORK-QUEUE.md` (P5-005)
 - `receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/`
 - `doc/sooperlooper/checkpoints/2026-08-06-CP-061-v3-4-authorized-dispatch-results.md`
+
+## CI re-trigger note (2026-08-06)
+
+GitHub Actions did not emit a `pull_request` synchronize event for the first forensic-closure head
+(`fc54a04b`); zero workflow runs were created. This follow-up commit touches `CURRENT.md` (an allowed
+evidence path) to re-fire the exact-head CI on the new head. No evidence bytes changed.
