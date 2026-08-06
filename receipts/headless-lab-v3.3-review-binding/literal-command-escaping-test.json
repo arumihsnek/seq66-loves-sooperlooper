@@ -1,0 +1,20 @@
+{
+  "frozen_command_execution": {
+    "command_sha256_matches_batch": true,
+    "exit": 0,
+    "stderr_tail": "",
+    "stdout": "ft-b1 OK"
+  },
+  "frozen_command_sha256": "dcbe021269eb4679b97610fa189c70577f99845cf38da2ae3696916f93323524",
+  "json_roundtrip_byte_exact": true,
+  "recorded_at_utc": "2026-08-06T01:39:20Z",
+  "schema": "literal-command-escaping-test/v1",
+  "silent_wav": {
+    "all_pcm_samples_zero": true,
+    "contains_literal_escaped_text": false,
+    "contains_real_nul_bytes": true,
+    "path": "/home/ubuntu/.hermes/runs/20260806T011700Z-v3-3-strict-envelope-correction/validation/silent-fixture.wav",
+    "pcm_bytes": 8820,
+    "size": 8864
+  }
+}

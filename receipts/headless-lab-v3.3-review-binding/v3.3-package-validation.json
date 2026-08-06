@@ -1,0 +1,163 @@
+{
+  "checks": [
+    {
+      "detail": "",
+      "evidence": {
+        "bad": []
+      },
+      "name": "json-parse: all JSON files",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "scope: schema + batch + candidate exact",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "scope: lab paths overlap-free with result paths and each other",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "scope: no globs in owned paths",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "batch: schema/batch/candidate exact",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "batch: supersedes v3.2 with declared reason",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "batch: LAB-A identity exact",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "sha256": "61a927471527dca0d40936023de7679162087dbc30817fab87483f9f71039bab"
+      },
+      "name": "batch: LAB-A ft-a1 command list shape",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "batch: LAB-B identity exact",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "sha256": "dcbe021269eb4679b97610fa189c70577f99845cf38da2ae3696916f93323524"
+      },
+      "name": "batch: LAB-B ft-b1 command list shape",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "leaks": []
+      },
+      "name": "ids: no v2/v3.1/v3.2 ID/lease/path/schema reuse",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "dispatch: schema + auth flags false",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "port-plan: schema + supersedes v3.2 + reason",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "lease LAB-A: lease/leaf/envelope exact + planned/inactive",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "lease LAB-B: lease/leaf/envelope exact + planned/inactive",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "envelope-schema: model + allowed keys policy",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "envelope-schema: forbidden self/controller keys declared",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "controller-acceptance-schema: receipt schema + required verdicts",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "build-provenance: policy principle + lab rules",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "predispatch: schema + dispatch_ready false",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "acceptance-manifest: schema + batch + phases",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "note": "each command list json.dumps->json.loads is identity"
+      },
+      "name": "escaping: commands round-trip; no double-escaped literal bytes",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "artifact-integrity: kinds + R-only + non-empty rules declared",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "verifier: compiles + --selftest implemented",
+      "status": "PASS"
+    }
+  ],
+  "count": 24,
+  "fail": 0,
+  "package_dir": "/home/ubuntu/.hermes/runs/20260806T011700Z-v3-3-strict-envelope-correction/v3-3-package",
+  "schema": "v3.3-package-validation/v1",
+  "verdict": "VALIDATION: PASS (24/24)"
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "dispatch-plan/v3.3",
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "package": "v3.3",
+  "model": "two-commit-C-R-E",
+  "model_definition": {
+    "C": "candidate head (509538784afc2b828f2d922f65cf8ca3a39b5ee7)",
+    "R": "implementation result commit; parent(R)=C; R contains NO envelope; ONLY R is integration-eligible",
+    "E": "leaf envelope container commit; parent(E)=R; E contains EXACTLY the frozen leaf envelope; E is evidence-only",
+    "remote_branch": "remote branch points to E; binding recorded externally by the controller AFTER push",
+    "controller_acceptance_receipt_A": "separate receipt created by the controller after E is pushed; NEVER inside E"
+  },
+  "dispatch_authorization": false,
+  "redispatch_authorized": false,
+  "integration_authorized": false,
+  "D0_D1_D2_authorized": false,
+  "leases": {
+    "LAB-A": "LEASE-20260806T011700Z-LAB-A-V3_3",
+    "LAB-B": "LEASE-20260806T011700Z-LAB-B-V3_3"
+  },
+  "leaf_ids": {
+    "LAB-A": "LEAF-LAB-A-V3_3",
+    "LAB-B": "LEAF-LAB-B-V3_3"
+  },
+  "worktrees": 0,
+  "leaves": 0,
+  "note": "This plan is FROZEN but NOT executable without explicit human authorization of a new dispatch."
+}

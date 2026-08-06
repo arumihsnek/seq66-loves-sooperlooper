@@ -1,0 +1,45 @@
+{
+  "schema": "acceptance-manifest/v3.3",
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "package": "v3.3",
+  "verifier": "acceptance-verifier-v3.3.py",
+  "phases": {
+    "leaf-envelope": {
+      "description": "strict leaf envelope verification: model, identity, keys policy, literal test binding, artifact integrity, build claim, no controller-future claims",
+      "check_groups": [
+        "model (C/R/E existence, single-parent, diffs, envelope placement, R non-empty)",
+        "identity (schema/lab/batch/leaf/lease exact, OIDs exact, object format exact)",
+        "external branch binding (remote=origin, planned branch present/exact)",
+        "top-level keys policy (required present, unknown rejected, forbidden self/controller keys rejected)",
+        "leaf literal tests (exact ID set, command_sha256 byte-exact, exit 0, timestamps ordered)",
+        "artifacts (exact set == C..R, sha256/size from R blobs, kinds allowed, non-empty)",
+        "leaf build claim (LAB-A not_applicable w/o invented fields; LAB-B claimed_built structurally valid)",
+        "no controller-future claims inside E"
+      ]
+    },
+    "full-completion": {
+      "description": "leaf-envelope PLUS controller acceptance receipt verification and independent re-execution",
+      "check_groups": [
+        "all leaf-envelope checks",
+        "receipt schema/fields, equalities (E/tree/blob/sha256), remote branch == expected, remote resolved OID == E",
+        "controller literal tests: exact IDs, exit 0 declared AND reexecuted on clean R with stdout/stderr hashes",
+        "acceptance harness sha256 + verdict PASS on clean R",
+        "artifact verification PASS (recomputed)",
+        "controlled rebuild (LAB-B: empty build dir, frozen command, output sha256/size == leaf claim; LAB-A: not_applicable)",
+        "worktree clean before/after, completion criteria all true, final verdict PASS"
+      ]
+    },
+    "selftest": {
+      "description": "43 checks with real temporary git repositories; every positive and negative fixture is constructed fresh",
+      "count": 43
+    }
+  },
+  "functional_gates": {
+    "LAB-A": ["imports", "placeholder scan", "functional lifecycle probe (owned lifecycle, foreign survival, failure propagation, no global cleanup)"],
+    "LAB-B": ["analyze_wav signature", "test_modules negative gates", "audio probes (silent/non-silent/malformed)", ".gitignore byte-exact", "no ELF tracked", "scenarios parseable", "runner contractual APIs"]
+  },
+  "provenance": {
+    "principle": "equality/difference of hashes is never sufficient proof of copy or rebuild",
+    "leaf_claim_vs_controller_evidence": "leaf_build_claim is a claim only; controller acceptance receipt A records controller rebuild evidence; A never inside E"
+  }
+}

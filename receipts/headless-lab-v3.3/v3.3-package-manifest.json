@@ -1,0 +1,65 @@
+{
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "files": {
+    "acceptance-manifest-v3.3.json": {
+      "sha256": "2ff451fcaa374c28a25b17866e865eaeae25c87fefca7f445aa4b6a3caabdebb",
+      "size": 2766
+    },
+    "acceptance-verifier-v3.3.py": {
+      "sha256": "ecb3fba491d40c4bca0382accf44081eb24863231b64d64537a143393dbee895",
+      "size": 88018
+    },
+    "batch-manifest-v3.3.json": {
+      "sha256": "4d1ce39ffb9af5de8601638ff4d15cbba82ad804da046973d14eaada3781a8d8",
+      "size": 4389
+    },
+    "build-provenance-policy-v3.3.json": {
+      "sha256": "a36c8ac77a582bea91513ece0bfe2c6ecb7ce40175397f72689be1b645c661b2",
+      "size": 2244
+    },
+    "controller-acceptance-schema-v3.3.json": {
+      "sha256": "9026cf98f02560c7fd9a08df44863114ea8c76f4d0350e73bfaebff8056c14ee",
+      "size": 3107
+    },
+    "dispatch-plan-v3.3.json": {
+      "sha256": "084cf4d57cb7619caec9bdc1e9c72e796d73f8d4b353066fa7867112049b3943",
+      "size": 1184
+    },
+    "lab-api-contract-v3.3.json": {
+      "sha256": "94ce7696ff6114cc248a4214addec95c5aedb668011085c01a4a1286ac620614",
+      "size": 4455
+    },
+    "lease-plan-lab-a-v3.3.json": {
+      "sha256": "b7e19e62afeea93b3f32f24ec934b706317d92e2469489cd7cfcf8c016cd09cd",
+      "size": 546
+    },
+    "lease-plan-lab-b-v3.3.json": {
+      "sha256": "cfc52bace81b46d4e9c78b7839d1ae20d794bcefc8bde469d11a98b0fa1f096a",
+      "size": 546
+    },
+    "port-plan-v3.3.json": {
+      "sha256": "a84df36ae51ec56b961a01f2699690a1e4f718b3a68bac01741b2dbfa35830c5",
+      "size": 1670
+    },
+    "predispatch-readiness-v3.3.json": {
+      "sha256": "fb5372c4e03327b039b836e1a23819315b0dd4063a3c7ae0c699ebabe2b77632",
+      "size": 771
+    },
+    "result-envelope-schema-v3.3.json": {
+      "sha256": "8da16c319db3f9e85b6eac4da242fe96b190bf1fcec8431d44f6b6cdefbf2752",
+      "size": 5738
+    },
+    "scope-freeze-v3.3.json": {
+      "sha256": "318b280df03f0040659dacdd4d6e85ab066497550973328c327077e90e301c67",
+      "size": 2118
+    }
+  },
+  "frozen_at_utc": "2026-08-06T01:37:41Z",
+  "schema": "v3.3-package-manifest/v1",
+  "supersedes": {
+    "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+    "package": "v3.2",
+    "reason": "incomplete runtime enforcement of required envelope, artifact, literal-test and provenance fields"
+  }
+}

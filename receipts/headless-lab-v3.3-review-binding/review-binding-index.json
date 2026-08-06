@@ -1,0 +1,24 @@
+{
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "count": 16,
+  "files": {
+    "acceptance-v3.3-selftest-receipt.json": "806acab7c901b96d36c7a4a41bacce5d7582bc356f06295abfd269c4a3327a8d",
+    "artifact-integrity-test.json": "c557f9ba5f65a84e2ea070e827c2f2854fcda2f6d378038f673e2c69f7ebb992",
+    "literal-command-escaping-test.json": "9de805afa9ba179381831fef3da640038c14d4958eab465de42dba07897e6e71",
+    "rejected-head-v3.3-test-receipt.json": "1ee256b1c1565fb7ff26d7dca4729045152f54e8310de1e19fc5ce142f346b00",
+    "review-binding-receipt.json": "bf774a08664355105b3b229dd843bbf7b11d68e17d3dd4e4c9342d1fabd7eee9",
+    "senior-preflight-receipt.json": "f4f7139816a43634c33f9a32a29e8728f81957c418f2f00120949c1402c5d7a5",
+    "senior-review-bundle.json": "ae6c0761b52f5f84a26e3adc3eeede0ff8f2b3c185c99472e7d562dda6c1b573",
+    "senior-verdict.json": "49559dcdebecb3905581886b1d7f71a38f4be3dcfeb4bc2fde70ae408614bea8",
+    "strict-envelope-negative-matrix.json": "c62609a08be62679f5c26fb955de189610f163ab4774edf7fd2c9c06b1f29535",
+    "tracked-v3.3-hashes.json": "21a46f356adc6a51b6c6ec70392b10a214fdee8e36e5cdbb73f8ed8766aa0ed7",
+    "v3.2-incomplete-envelope-reproduction.json": "d474b0a9c9aa485a77a5680d313146a89994eb4596a2e68ccb83a97bc4fb1178",
+    "v3.2-negative-matrix.json": "bb25d66f69d981c36d953f236624cb84f9980de40ce9dc778acb7ab32e9140f9",
+    "v3.3-package-manifest-validation.json": "0031c0928fa284b237a782ad060a4cddc12056da948977290f56601d0bd1dd69",
+    "v3.3-package-validation.json": "9351b21e938613b30c6b7037df38780fbee7823c7d0e1381f00538ce52171a7d",
+    "valid-full-completion-test.json": "1a710a8ae1a1c1295b006292d7c514beab80a82645151c6b706c5ac6ef767f30",
+    "valid-leaf-envelope-test.json": "6e52cb5d581975ddff0f05df05aa4724380a7d29a87ba3a988f71cf588ec4b4b"
+  },
+  "recorded_at_utc": "2026-08-06T01:43:47Z",
+  "schema": "review-binding-index/v1"
+}

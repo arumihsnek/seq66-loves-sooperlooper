@@ -1,0 +1,296 @@
+{
+  "schema": "headless-lab-result-envelope/v3.3",
+  "version": "1.0.0",
+  "mode": "selftest",
+  "checks": [
+    {
+      "name": "selftest: valid C->R->E leaf envelope PASS",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": []
+      }
+    },
+    {
+      "name": "selftest: v3.2 minimal envelope rejected by v3.3",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "env: schema EXACT",
+          "env: lab EXACT",
+          "env: batch_id EXACT",
+          "env: leaf_id EXACT",
+          "env: lease_id EXACT",
+          "env: external_branch_binding.remote == origin",
+          "env: planned_branch present (non-empty)",
+          "env: all required top-level keys present",
+          "env: leaf_literal_tests is a dict",
+          "env: literal test ID set exact",
+          "env: literal test ft-a1 present",
+          "env: artifact set == C..R tracked changes (owned only)",
+          "env: artifacts non-empty (R non-empty enforced)",
+          "env: leaf_build_claim present",
+          "env: leaf_build_claim.status allowed",
+          "env: LAB-A build claim not_applicable (no invented fields)"
+        ]
+      }
+    },
+    {
+      "name": "selftest: missing schema REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong schema REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong lab REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong batch REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong leaf REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong lease REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: unknown top-level key REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: missing planned branch REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong planned branch REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: R empty REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: R merge commit REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: E merge commit REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: envelope in R REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: implementation change in E REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: missing leaf_literal_tests REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: missing authoritative test ID REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: extra test ID REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong command hash REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: nonzero leaf test REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: invalid timestamp ordering REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: artifacts empty REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: missing artifact REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: extra artifact REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong artifact hash REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: wrong artifact size REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: artifact outside R REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: artifact outside ownership REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: missing leaf build claim REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: invalid LAB-A build claim REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: incomplete LAB-B build claim REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: valid full controller completion PASS (LAB-A)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": []
+      }
+    },
+    {
+      "name": "selftest: missing controller receipt REJECT in full-completion",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: remote branch mismatch REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: controller test failure REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "failing": [
+          "receipt: ft-a1 controller exit_code == 0",
+          "completion: ft-a1 literal test reexec exit 0",
+          "completion: ft-a1 stderr hash matches receipt",
+          "lab-a: functional lifecycle"
+        ]
+      }
+    },
+    {
+      "name": "selftest: acceptance harness failure REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: artifact verification failure REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: controlled rebuild failure REJECT (LAB-B)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: dirty controller checkout REJECT",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: correct external branch binding accepted",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: zero residual worktrees in fixture repo",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    },
+    {
+      "name": "selftest: zero temporary directories (TemporaryDirectory auto-clean)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": null
+    }
+  ],
+  "env_notes": []
+}

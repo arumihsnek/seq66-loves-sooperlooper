@@ -1,0 +1,120 @@
+{
+  "schema": "result-envelope-schema/v3.3",
+  "model": "two-commit-non-self-referential-with-strict-enforcement",
+  "rationale": "v3.2 enforced only the four OID fields and a safety check on artifacts, silently accepting envelopes that omitted schema/lab/batch/leaf/lease/external-branch-binding/literal-tests/build-provenance and that never verified artifact hashes, sizes or the exact artifact set, nor R non-emptiness. v3.3 keeps the C->R->E two-commit model (R = implementation result with parent C; E = envelope container with parent R; remote branch -> E; ONLY R is integration-eligible) and adds strict runtime enforcement of every normative field.",
+  "top_level_keys": {
+    "allowed": [
+      "schema",
+      "lab",
+      "batch_id",
+      "leaf_id",
+      "lease_id",
+      "candidate_commit_oid",
+      "implementation_result_commit_oid",
+      "implementation_result_tree_oid",
+      "git_object_format",
+      "external_branch_binding",
+      "leaf_literal_tests",
+      "leaf_build_claim",
+      "artifacts"
+    ],
+    "policy": "all required keys present; unknown top-level keys rejected; forbidden self-binding keys rejected; no optional/ambiguous fields are permitted unless enumerated here"
+  },
+  "forbidden_self_binding_keys": [
+    "container_commit_oid",
+    "container_tree_oid",
+    "envelope_blob_oid",
+    "envelope_sha256",
+    "self_sha256",
+    "remote_branch_resolved_sha"
+  ],
+  "forbidden_controller_future_keys": [
+    "controller_clean_checkout_rerun",
+    "controller_acceptance_pass",
+    "controller_acceptance",
+    "remote_branch_resolved_sha",
+    "controller_controlled_rebuild_pass",
+    "completion_verdict",
+    "final_verdict"
+  ],
+  "key_patterns": {
+    "reject_prefixes": ["controller_"],
+    "reject_suffixes": ["_resolved_sha", "_verdict", "_pass", "_done"]
+  },
+  "leaf_envelope_example": {
+    "schema": "headless-lab-result-envelope/v3.3",
+    "lab": "LAB-A",
+    "batch_id": "<exact-v3.3-batch>",
+    "leaf_id": "<exact-leaf-id>",
+    "lease_id": "<exact-lease-id>",
+    "candidate_commit_oid": "<C>",
+    "implementation_result_commit_oid": "<R>",
+    "implementation_result_tree_oid": "<R_TREE>",
+    "git_object_format": "sha1",
+    "external_branch_binding": {
+      "remote": "origin",
+      "planned_branch": "<exact-future-branch>"
+    },
+    "leaf_literal_tests": {
+      "ft-a1": {
+        "command_sha256": "<sha256 of authoritative command bytes>",
+        "exit_code": 0,
+        "stdout_sha256": "<sha256>",
+        "stderr_sha256": "<sha256>",
+        "started_at_utc": "<timestamp>",
+        "ended_at_utc": "<timestamp>"
+      }
+    },
+    "leaf_build_claim": {
+      "status": "not_applicable | claimed_built",
+      "sources": [],
+      "compiler_path": null,
+      "compiler_version": null,
+      "commands": [],
+      "outputs": [],
+      "transcript_sha256": null
+    },
+    "artifacts": {
+      "<tracked path present in R>": {
+        "kind": "source | test | scenario | ignore-rule",
+        "sha256": "<sha256 of exact blob bytes>",
+        "size": 0
+      }
+    }
+  },
+  "validation_rules": [
+    "C, R, E resolvable as commits",
+    "R has exactly one parent and R^ == C",
+    "E has exactly one parent and E^ == R",
+    "R != C",
+    "git diff --quiet C R returns nonzero (C..R non-empty)",
+    "envelope ABSENT from C and R; PRESENT in E",
+    "diff C..R non-empty and owned-only",
+    "diff R..E exactly the single frozen envelope path",
+    "schema EXACT == headless-lab-result-envelope/v3.3",
+    "lab EXACT == batch-manifest lab for the requested lab",
+    "batch_id EXACT == batch-manifest batch_id",
+    "leaf_id EXACT == batch-manifest leaf_id",
+    "lease_id EXACT == batch-manifest lease_id",
+    "git_object_format EXACT == repo object format",
+    "candidate_commit_oid == C; implementation_result_commit_oid == R; implementation_result_tree_oid == R^{tree}",
+    "external_branch_binding.remote == origin and planned_branch EXACT",
+    "required top-level keys present; unknown keys rejected; forbidden self-binding/controller-future keys rejected",
+    "leaf_literal_tests: EXACT set of test IDs == authoritative batch-manifest test IDs",
+    "leaf_literal_tests[].command_sha256 == sha256(UTF-8 bytes of the frozen authoritative command)",
+    "leaf_literal_tests[].exit_code == 0",
+    "leaf_literal_tests[].started_at_utc/ended_at_utc parseable and started <= ended",
+    "artifacts: EXACT set == set of tracked files modified or added in C..R (owned paths only)",
+    "artifacts: each path present in R; sha256 == blob sha256; size == blob size; kind in allowed set",
+    "artifacts may NOT contain the envelope, E-only files, untracked/ignored binaries, unchanged paths, or out-of-ownership paths",
+    "artifacts NEVER empty for a valid result (R non-empty enforced)",
+    "leaf_build_claim: present and structurally valid per lab (LAB-A: not_applicable with null compiler fields; LAB-B: claimed_built with sources/commands/outputs)",
+    "no controller-future claims inside E (leaf envelope declares leaf facts only; controller acceptance is a SEPARATE receipt created after E is pushed)"
+  ],
+  "naming_rule": "Git object IDs use *_commit_oid / *_tree_oid / git_object_format; the term 'SHA-256' is never used for Git object IDs. Ordinary file hashes keep the suffix '_sha256'.",
+  "separation_of_evidence": {
+    "leaf_envelope_E": "binds C/R; leaf test claims; leaf build claim; tracked artifact manifest",
+    "controller_acceptance_receipt_A": "created AFTER E is pushed; binds remote branch -> E; independently reruns literal tests on clean R; runs acceptance harness on clean R; independently verifies artifacts; performs controlled rebuild; records final completion verdict",
+    "rule": "A is NEVER included inside E"
+  }
+}

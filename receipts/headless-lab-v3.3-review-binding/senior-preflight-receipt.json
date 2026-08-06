@@ -1,0 +1,10 @@
+{
+  "bundle_sha256": "bacab04c3e933c273a33b5308857a7c7074f1e05cf3e49697c97e024dfc8a8ea",
+  "mission_id": "seq66-lab-v3-3-strict-envelope-package",
+  "mode": "plan-review",
+  "model_processes_consumed": 0,
+  "recorded_at_utc": "2026-08-06T01:43:47Z",
+  "schema": "senior-preflight-receipt/v1",
+  "status": "PREFLIGHT_VALID",
+  "valid": true
+}

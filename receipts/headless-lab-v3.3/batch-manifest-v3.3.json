@@ -1,0 +1,76 @@
+{
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "git_object_format": "sha1",
+  "labs": {
+    "LAB-A": {
+      "build_command": null,
+      "envelope_path": "receipts/headless-lab-results-v3.3/lab-a-result.json",
+      "leaf_id": "LEAF-LAB-A-V3_3",
+      "lease_id": "LEASE-20260806T011700Z-LAB-A-V3_3",
+      "literal_tests": {
+        "ft-a1": {
+          "command": [
+            "python3",
+            "-c",
+            "import os,sys,time; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor; out={}; f=None\ntry:\n    with ProcessSupervisor() as sup:\n        i=sup.start_process('probe',['/bin/sleep','1'],{},'.','/dev/null','/dev/null'); out['pid']=i.pid\n        assert i.pid>0, 'pid not positive'\n        assert i.pid in sup.get_owned_pids(), 'pid not registered'\n        assert os.path.exists('/proc/%d'%i.pid), 'owned child not alive before cleanup'\n        try:\n            sup.start_process('bad',['/nonexistent/binary-xyz'],{},'.','/dev/null','/dev/null')\n            raise SystemExit('bad command did not propagate error')\n        except Exception:\n            pass\n        sup.cleanup(timeout=5.0)\n        assert not os.path.exists('/proc/%d'%i.pid), 'owned child survived cleanup'\n        assert sup.verify_cleanup()==[], 'verify_cleanup not empty'\nfinally:\n    pass\nprint('ft-a1 OK')"
+          ],
+          "cwd": "checkout-root",
+          "description": "ProcessSupervisor owned-lifecycle probe",
+          "timeout_seconds": 120
+        }
+      },
+      "owned_paths": [
+        "tests/integration/headless_audio_lab/__init__.py",
+        "tests/integration/headless_audio_lab/process_supervisor.py",
+        "tests/integration/headless_audio_lab/jack_server.py",
+        "tests/integration/headless_audio_lab/osc_probe.py",
+        "tests/integration/headless_audio_lab/sooperlooper_launcher.py"
+      ],
+      "planned_branch_pattern": "result/<run-id>-lab-a-v3_3"
+    },
+    "LAB-B": {
+      "build_command": [
+        "python3",
+        "-c",
+        "import hashlib,os; os.makedirs('build',exist_ok=True); v=hashlib.sha256(b'v3.3-oracle-claim').hexdigest(); open('build/lab-b-oracle-claim.json','w').write(v+chr(10))"
+      ],
+      "envelope_path": "receipts/headless-lab-results-v3.3/lab-b-result.json",
+      "leaf_id": "LEAF-LAB-B-V3_3",
+      "lease_id": "LEASE-20260806T011700Z-LAB-B-V3_3",
+      "literal_tests": {
+        "ft-b1": {
+          "command": [
+            "python3",
+            "-c",
+            "import struct,sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.audio_oracle import analyze_wav\nrate=44100; n=4410; data=b'RIFF'+struct.pack('<I4s4sIHHIIHH4sI',36+n*2,b'WAVE',b'fmt ',16,1,1,rate,rate*2,2,16,b'data',n*2)+b'\\x00'*(n*2)\nr=analyze_wav(data)\nassert isinstance(r,dict), 'not a dict'\nassert r.get('rate')==rate, 'rate mismatch'\nassert r.get('channels')==1, 'channels mismatch'\nassert r.get('frames')==n, 'frames mismatch'\nassert r.get('silent') is True, 'silent not True'\nprint('ft-b1 OK')"
+          ],
+          "cwd": "checkout-root",
+          "description": "audio_oracle silent-WAV analysis probe",
+          "timeout_seconds": 120
+        }
+      },
+      "owned_paths": [
+        "tests/__init__.py",
+        "tests/integration/__init__.py",
+        "tests/integration/headless_audio_lab/audio_oracle.py",
+        "tests/integration/headless_audio_lab/graph_assertions.py",
+        "tests/integration/headless_audio_lab/runner.py",
+        "tests/integration/headless_audio_lab/test_modules.py",
+        "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+        "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+        "tests/integration/headless_audio_lab/fixtures/deterministic_capture"
+      ],
+      "planned_branch_pattern": "result/<run-id>-lab-b-v3_3"
+    }
+  },
+  "package": "v3.3",
+  "schema": "batch-manifest/v3.3",
+  "supersedes": {
+    "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+    "package": "v3.2",
+    "reason": "incomplete runtime enforcement of required envelope, artifact, literal-test and provenance fields"
+  }
+}
