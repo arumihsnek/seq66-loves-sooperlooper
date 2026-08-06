@@ -1,0 +1,83 @@
+{
+  "schema": "headless-lab-result-envelope/v3.4",
+  "lab": "LAB-A",
+  "batch_id": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+  "leaf_id": "LEAF-LAB-A-V3_4",
+  "lease_id": "LEASE-20260806T020249Z-LAB-A-V3_4",
+  "candidate_commit_oid": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "implementation_result_commit_oid": "0fd104ef2187346b8c00014829857e11ee9539ec",
+  "implementation_result_tree_oid": "16e27313cfa542a85f7e6a36db4344e2d7e199cd",
+  "git_object_format": "sha1",
+  "external_branch_binding": {
+    "remote": "origin",
+    "planned_branch": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-a-v3_4"
+  },
+  "leaf_literal_tests": {
+    "ft-a1": {
+      "id": "ft-a1",
+      "command_sha256": "37f54b258e723449707c4a4327d136c219ad8d076fab931d7fe09e3b13462842",
+      "exit code": -2,
+      "stdout SHA-256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr SHA-256": "06ad9680a4681a789cbbda880fa4e41b777a174c0becae77c555786cd6d6f8cd",
+      "started_at_utc": "2026-08-06T14:51:58.160131+00:00",
+      "ended_at_utc": "2026-08-06T14:51:58.160437+00:00"
+    },
+    "ft-a2": {
+      "id": "ft-a2",
+      "command_sha256": "d03cbaac8617b22794d05083b68cc249c0cdb18874538092f5798a5f9570d0ed",
+      "exit code": -2,
+      "stdout SHA-256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr SHA-256": "06ad9680a4681a789cbbda880fa4e41b777a174c0becae77c555786cd6d6f8cd",
+      "started_at_utc": "2026-08-06T14:51:58.160484+00:00",
+      "ended_at_utc": "2026-08-06T14:51:58.160750+00:00"
+    },
+    "ft-a3": {
+      "id": "ft-a3",
+      "command_sha256": "f0ca8a15341afe053b0c8dc2b5aa2c6abddb7a21bd0cdd72871816b97b118cab",
+      "exit code": -2,
+      "stdout SHA-256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr SHA-256": "06ad9680a4681a789cbbda880fa4e41b777a174c0becae77c555786cd6d6f8cd",
+      "started_at_utc": "2026-08-06T14:51:58.160777+00:00",
+      "ended_at_utc": "2026-08-06T14:51:58.161053+00:00"
+    },
+    "ft-a4": {
+      "id": "ft-a4",
+      "command_sha256": "1fba32bd74986034c828c69e82f3853c37806215146d026d70199356fed29b7b",
+      "exit code": -2,
+      "stdout SHA-256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr SHA-256": "06ad9680a4681a789cbbda880fa4e41b777a174c0becae77c555786cd6d6f8cd",
+      "started_at_utc": "2026-08-06T14:51:58.161086+00:00",
+      "ended_at_utc": "2026-08-06T14:51:58.161328+00:00"
+    }
+  },
+  "leaf_build_claim": {
+    "status": "not_applicable"
+  },
+  "artifacts": {
+    "tests/integration/headless_audio_lab/__init__.py": {
+      "kind": "source",
+      "sha256": "903ac2729fc1ac686b55287ab4101bcd6f86cdd1cc7d825a6b8986fd359a63a2",
+      "size": 203
+    },
+    "tests/integration/headless_audio_lab/jack_server.py": {
+      "kind": "source",
+      "sha256": "7b481699336444e0dd86150db33153941cb1334cd0ce6d87f7f14616272e47a3",
+      "size": 2532
+    },
+    "tests/integration/headless_audio_lab/osc_probe.py": {
+      "kind": "source",
+      "sha256": "36782b678a59efa1f6f2c61356c06aefbbcc4be3d85068635b6a63e073d96259",
+      "size": 2394
+    },
+    "tests/integration/headless_audio_lab/process_supervisor.py": {
+      "kind": "source",
+      "sha256": "d72f6c731188f65f02d2e425ca3af53a3e6102f0d0e82cc8c1e54347690665c4",
+      "size": 3755
+    },
+    "tests/integration/headless_audio_lab/sooperlooper_launcher.py": {
+      "kind": "source",
+      "sha256": "3e55fa997af538d9bd3f8922067f64260e95ed2166ee10ff18ef464e85efd4f8",
+      "size": 2955
+    }
+  }
+}
