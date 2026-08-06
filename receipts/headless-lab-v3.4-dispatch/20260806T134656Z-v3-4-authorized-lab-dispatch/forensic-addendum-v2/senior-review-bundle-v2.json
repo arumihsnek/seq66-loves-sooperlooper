@@ -1,0 +1,267 @@
+{
+  "alternatives": [
+    {
+      "cons": [
+        "CI pendiente externo"
+      ],
+      "name": "gen3 accept con contrato de materializaci\u00f3n",
+      "pros": [
+        "evidencia individualizada completa",
+        "verdict liga hashes exactos",
+        "sin autorreferencia"
+      ]
+    },
+    {
+      "cons": [
+        "outage externo indeterminado; evidencia v2 ya completa"
+      ],
+      "name": "esperar a CI antes de consultar",
+      "pros": [
+        "CI resuelto"
+      ]
+    }
+  ],
+  "caller_required": [
+    "/alternatives",
+    "/candidate_decision",
+    "/code_excerpts",
+    "/constraints",
+    "/current_plan",
+    "/decision_needed",
+    "/diff",
+    "/escalation",
+    "/invalidated_assumptions",
+    "/objective",
+    "/observed_facts",
+    "/progress",
+    "/questions",
+    "/relevant_contracts",
+    "/risks_already_identified",
+    "/runtime_evidence",
+    "/snapshot/checkpoint_fingerprint",
+    "/snapshot/plan_fingerprint",
+    "/tests"
+  ],
+  "candidate_decision": {
+    "decision_type": "plan_review",
+    "description": "V2 NON-CIRCULAR BINDING (ejecutado + contrato de materializaci\u00f3n). Verdict final = salida de esta consulta; se materializar\u00e1 en senior-verdict-v2.json con execution_id, fingerprint, manifest a9a1de5b... y los 10 hashes individuales. review-binding-receipt-v2.json y publication-index-v2.json se crear\u00e1n DESPU\u00c9S del verdict, fuera del payload congelado (sin autorreferencia).",
+    "options": [
+      "accept",
+      "changes_required"
+    ],
+    "recommendation": "accept"
+  },
+  "code_excerpts": [
+    {
+      "excerpt": "{\"blob_oid_commit_path_examples\": [[\"amended-leaf-a-report-e88f6300.json\", \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-e88f6300.json\"], [\"amended-leaf-b-report-e88f6300.json\", \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-e88f6300.json\"], [\"current-dispatch-index-e88f6300.json\", \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-e88f6300.json\"], [\"original-dispatch-index-889f759b.json\", \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-889f759b.json\"], [\"original-leaf-a-report-889f759b.json\", \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-889f759b.json\"], [\"original-leaf-b-report-889f759b.json\", \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-889f759b.json\"]], \"blob_oid_commit_path_format_count\": 6, \"blob_oid_field_present_count\": 18, \"blob_oid_non_null_count\": 6, \"count_consistent\": false, \"declared_count\": 19, \"directory_file_count\": 20, \"files_map_entries\": 18, \"matches_v1_published\": true, \"published_manifest_sha256\": \"78b57464250afc9d7c79df65f054240b8647d61fd2b301e7136d68ea7d424fc0\", \"schema\": \"v1-manifest-audit/v1\"}",
+      "file": "payload/v1-manifest-audit.json",
+      "note": "Evidencia concreta Q1: published 78b57464 vs reviewed 6131be04; count 19 vs map 18."
+    },
+    {
+      "excerpt": "{\"matches_v1_reviewed\": true, \"published_exactly_reviewed\": false, \"published_manifest_sha256\": \"78b57464250afc9d7c79df65f054240b8647d61fd2b301e7136d68ea7d424fc0\", \"reviewed_manifest_sha256\": \"6131be045b23369d32d3c0277ad32128eea98fa80e61918d92c4cb116d7a2d50\", \"schema\": \"v1-review-generation-comparison/v1\", \"senior_bundle_repository_dirty\": true, \"verdict\": \"accept\", \"verdict_execution_id\": \"bd930aae-f912-4c5b-8b47-eba053d84dea\", \"verdict_fingerprint\": \"3c3f33926d1bb6c5b2e4ce0ecc466bb8a8d38de458a9cd20d54d5ee69cc665ef\"}",
+      "file": "payload/v1-review-generation-comparison.json",
+      "note": "matches_v1_reviewed=true; published_exactly_reviewed=false; senior_bundle_repository_dirty=true."
+    },
+    {
+      "excerpt": "{\"entries_invalid_commit_path_format\": 6, \"entries\": [{\"blob_exists\": null, \"declared_blob_oid\": \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-e88f6300.json\", \"filename\": \"amended-leaf-a-report-e88f6300.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-e88f6300.json\", \"filename\": \"amended-leaf-b-report-e88f6300.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-e88f6300.json\", \"filename\": \"current-dispatch-index-e88f6300.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-889f759b.json\", \"filename\": \"original-dispatch-index-889f759b.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-889f759b.json\", \"filename\": \"original-leaf-a-report-889f759b.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-889f759b.json\", \"filename\": \"original-leaf-b-report-889f759b.json\", \"resolved_blob_from_commit_path\": \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-889f759b.json\", \"resolved_ok\": false, \"valid\": false, \"valid_oid_format\": false}]}",
+      "file": "payload/v1-blob-oid-audit.json",
+      "note": "Evidencia concreta Q4: 6 blob_oid commit:path inv\u00e1lidos; OIDs reales verificados."
+    },
+    {
+      "excerpt": "{\"branch_live_state_vs_dispatch_verdict_revalidation_identical\": true, \"duplicate_groups\": [{\"blob_oid\": \"6e51fc744065c2239ea8cc6ce3a2889c259e2ab3\", \"filenames\": [\"current-dispatch-index-e88f6300.json\", \"original-dispatch-index-889f759b.json\"], \"size\": 2059}, {\"blob_oid\": \"c4562a3839f171262b28f0c61a547079117f6ecd\", \"filenames\": [\"branch-live-state.json\", \"dispatch-verdict-revalidation.json\"], \"size\": 1615}], \"schema\": \"v1-duplicate-content-audit/v1\"}",
+      "file": "payload/v1-duplicate-content-audit.json",
+      "note": "branch-live-state == dispatch-verdict-revalidation (blob c4562a38); indexes duplicados (6e51fc74)."
+    },
+    {
+      "excerpt": "{\"schema\": \"payload-manifest-v2/v1\", \"payload_file_count\": 10, \"files\": {\"ci-source-state.json\": \"29554cc7d1b577773c005f1dc3c7293eb4482fee5a858e609be28ecc48a029e6\", \"dispatch-state-revalidation.json\": \"4113337eebeb574ef1c56fa248b1119cf6bceb2d36c4fe8b4eb552ac47a62e3a\", \"forensic-v2-classification.json\": \"b4df5496d8373c93ffe3752c96313f7300e6d436a8ef3fd5c67681229163635d\", \"payload-manifest-v2.json\": \"a9a1de5b6e0bab45169ff0cd710a5a79bd9705c150f52b8181216fe7e65e8008\", \"source-state.json\": \"d3c496cf72d73a7a1b75d76244eb17f4df08490ada106c678421267418e8ca41\", \"v1-blob-oid-audit.json\": \"016acf6b82e0c8bf9dc59e8bb43465f06396becc1e1b7e1cb4d760f402c5cbb2\", \"v1-directory-inventory.json\": \"440257a0cf4690fad6d34a0c97aa0a3b7124cd338997fc9e59b8e20a01d72822\", \"v1-duplicate-content-audit.json\": \"05328ada97f9f91dc70f8009209483f65ca37b45bf481079a8b8ea5df530bed2\", \"v1-index-audit.json\": \"849c39e4117552bdb1a3826ca83b4666f63de11855e1fb5d5ecf97e576fa2ca2\", \"v1-manifest-audit.json\": \"ccdbf627de5a4ba58cc7ab79786abcec6888fec404245f65bfcb1dadfb324aab\", \"v1-review-generation-comparison.json\": \"470a9b2afb2e1476f4f186ddcfbbd31bdbab1a072defbbf50de090013345b5bd\"}, \"self_exclusion_rule\": \"payload-manifest-v2.json NOT in own files-map\", \"review_artifact_exclusion_rule\": \"senior-preflight/review-bundle/verdict/review-binding-receipt/publication-index NEVER in payload\"}",
+      "file": "payload-manifest-v2.json",
+      "note": "Reglas de exclusi\u00f3n (Q3/Q5/Q8) + hashes individuales (Q7)."
+    }
+  ],
+  "constraints": [
+    "Single pass",
+    "No tools",
+    "No workspace reads",
+    "Advisory only",
+    "verdict=accept con 0 blocking y 0 required",
+    "El verdict final (esta consulta) ligar\u00e1 manifest a9a1de5b... + 10 payload hashes",
+    "review-binding-receipt-v2 y publication-index-v2 se crean POST-verdict fuera del payload"
+  ],
+  "current_plan": {
+    "phases": [
+      "gen1/2 reviews",
+      "evidencia individualizada",
+      "gen3 review",
+      "materializar verdict+receipt+index",
+      "CP-063",
+      "publicacion",
+      "CI observado"
+    ],
+    "version": "v2-gen3"
+  },
+  "decision_needed": "\u00bfEl paquete v2 es no-circular y apto como evidencia durable para la decisi\u00f3n humana sobre v3.5, con el entendimiento de que el verdict de ESTA consulta ser\u00e1 materializado en senior-verdict-v2.json ligando el manifest a9a1de5b... y los 10 payload hashes, y que review-binding-receipt-v2 y publication-index-v2 se crear\u00e1n despu\u00e9s, fuera del payload?",
+  "diff": {
+    "byte_size": 0,
+    "sha256": "04ef833391fca21106dd4832e4bcaf387988e563d73ffd812c85a2dd85c18418",
+    "summary": "forensic-addendum-v2 + CP-063 + CURRENT; v1 intacto"
+  },
+  "escalation": {
+    "local_deterministic_checks": [
+      "validator PASS x2",
+      "post-freeze 10/10",
+      "4 OIDs cat-file OK",
+      "v1 diff vacio"
+    ],
+    "material_impact": "Correcci\u00f3n append-only del binding forense; no toca c\u00f3digo, no autoriza dispatch ni v3.5."
+  },
+  "invalidated_assumptions": [],
+  "mission_id": "seq66-v3-4-forensic-addendum-v2-noncircular-binding-gen3",
+  "mode": "plan-review",
+  "objective": "Validar la correcci\u00f3n forense v2 ejecutada (forensic-addendum-v2): payload congelado byte-id\u00e9ntico, manifest a9a1de5b... con exclusi\u00f3n expl\u00edcita, auditor\u00eda v1 completa con evidencia concreta, y contrato de materializaci\u00f3n final (verdict + receipt + index) posterior al review.",
+  "observed_facts": [
+    "AUDITOR\u00cdA v1 COMPLETA (contenido en code_excerpts): v1-manifest-audit.json (published=78b57464..., declared_count=19, files-map=18, dir=20), v1-review-generation-comparison.json (reviewed=6131be04..., matches_v1_reviewed=true, published_exactly_reviewed=false), v1-index-audit.json (declared_count=20, files-map=19, self-exclusion no expl\u00edcita), v1-blob-oid-audit.json (6 entradas commit:path inv\u00e1lidas; OIDs reales d7313cbe/99463244/4fecb912/aa30bc11 existen), v1-duplicate-content-audit.json (2 grupos duplicados).",
+    "PAYLOAD V2 CONGELADO: 10 archivos byte-id\u00e9nticos; payload-manifest-v2.json sha256=a9a1de5b6e0bab45169ff0cd710a5a79bd9705c150f52b8181216fe7e65e8008; validator 50/50 PASS x2 (antes y despu\u00e9s de Capa C); post-freeze-identity.json all_unchanged=true.",
+    "PAYLOAD HASHES INDIVIDUALES (10): {\"ci-source-state.json\": \"29554cc7d1b577773c005f1dc3c7293eb4482fee5a858e609be28ecc48a029e6\", \"dispatch-state-revalidation.json\": \"4113337eebeb574ef1c56fa248b1119cf6bceb2d36c4fe8b4eb552ac47a62e3a\", \"forensic-v2-classification.json\": \"b4df5496d8373c93ffe3752c96313f7300e6d436a8ef3fd5c67681229163635d\", \"payload-manifest-v2.json\": \"a9a1de5b6e0bab45169ff0cd710a5a79bd9705c150f52b8181216fe7e65e8008\", \"source-state.json\": \"d3c496cf72d73a7a1b75d76244eb17f4df08490ada106c678421267418e8ca41\", \"v1-blob-oid-audit.json\": \"016acf6b82e0c8bf9dc59e8bb43465f06396becc1e1b7e1cb4d760f402c5cbb2\", \"v1-directory-inventory.json\": \"440257a0cf4690fad6d34a0c97aa0a3b7124cd338997fc9e59b8e20a01d72822\", \"v1-duplicate-content-audit.json\": \"05328ada97f9f91dc70f8009209483f65ca37b45bf481079a8b8ea5df530bed2\", \"v1-index-audit.json\": \"849c39e4117552bdb1a3826ca83b4666f63de11855e1fb5d5ecf97e576fa2ca2\", \"v1-manifest-audit.json\": \"ccdbf627de5a4ba58cc7ab79786abcec6888fec404245f65bfcb1dadfb324aab\", \"v1-review-generation-comparison.json\": \"470a9b2afb2e1476f4f186ddcfbbd31bdbab1a072defbbf50de090013345b5bd\"}",
+    "Capa C materializada tras gen1: senior-preflight-v2.json (PREFLIGHT_VALID), senior-review-bundle-v2.json, senior-verdict-v2.json (gen1 changes_required 2/4), post-freeze-identity.json. Capa C NO est\u00e1 en payload/.",
+    "PR #34 OPEN/draft/mergeable head=e2183003; CI runs 31127675599/31127675627 status=queued conclusion=null -> NO success (no se declara).",
+    "dispatch_result=DISPATCH_RESULT_REJECTED; no_integration_candidate_set=true; v1 byte-id\u00e9ntica vs fc54a04b.",
+    "Gen1 (80c5efea) y gen2 (b368381d) devolvieron changes_required con direcciones de dise\u00f1o afirmativas; esta gen3 aporta evidencia concreta individualizada."
+  ],
+  "progress": {
+    "completed": [
+      "auditoria con evidencia concreta",
+      "payload frozen",
+      "validator x2 PASS",
+      "Capa C drafts",
+      "post-freeze proof"
+    ],
+    "current": "gen3 review final (verdict se materializar\u00e1 tras accept)"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "\u00bfLa auditor\u00eda identifica correctamente la diferencia entre el manifest revisado 6131be04... y el publicado 78b57464...?"
+    },
+    {
+      "id": "Q2",
+      "text": "\u00bfLa generaci\u00f3n v1 permanece preservada sin modificaci\u00f3n alguna?"
+    },
+    {
+      "id": "Q3",
+      "text": "\u00bfLos counts efectivos y las reglas de autoexclusi\u00f3n v2 son coherentes?"
+    },
+    {
+      "id": "Q4",
+      "text": "\u00bfTodos los blob_oid v2 son OIDs Git reales y verificables (o null precommit)?"
+    },
+    {
+      "id": "Q5",
+      "text": "\u00bfEl payload manifest v2 excluye todos los artifacts de review y binding?"
+    },
+    {
+      "id": "Q6",
+      "text": "\u00bfEl payload revisado permanece byte-id\u00e9ntico despu\u00e9s del freeze y tras materializar la Capa C?"
+    },
+    {
+      "id": "Q7",
+      "text": "\u00bfEl verdict final liga exactamente PAYLOAD_MANIFEST_SHA256 a9a1de5b... y todos los payload hashes?"
+    },
+    {
+      "id": "Q8",
+      "text": "\u00bfEl review-binding receipt posterior evita autorreferencia?"
+    },
+    {
+      "id": "Q9",
+      "text": "\u00bfEl dispatch contin\u00faa REJECTED y sin candidato de integraci\u00f3n?"
+    },
+    {
+      "id": "Q10",
+      "text": "\u00bfLa evidencia queda lista para una decisi\u00f3n humana posterior sobre preparar v3.5?"
+    }
+  ],
+  "relevant_contracts": [
+    "El senior es advisory y no ejecuta cambios.",
+    "El accept NO autoriza v3.5 ni dispatch.",
+    "v1 es inmutable; v2 es append-only.",
+    "CI success NO se declara sin observarlo (queued)."
+  ],
+  "repository": {
+    "dirty": false,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    "GitHub Partial System Outage: CI queued; registrado, no fabricado.",
+    "Materializaci\u00f3n post-verdict es el mecanismo anti-autorreferencia definido por la misi\u00f3n."
+  ],
+  "runtime_evidence": [
+    {
+      "result": "{\"blob_oid_commit_path_examples\": [[\"amended-leaf-a-report-e88f6300.json\", \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-e88f6300.json\"], [\"amended-leaf-b-report-e88f6300.json\", \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-e88f6300.json\"], [\"current-dispatch-index-e88f6300.json\", \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-e88f6300.json\"], [\"original-dispatch-index-889f759b.json\", \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-889f759b.json\"], [\"original-leaf-a-report-889f759b.json\", \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-889f759b.json\"], [\"original-leaf-b-report-889f759b.json\", \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-889f759b.json\"]], \"blob_oid_commit_path_format_count\": 6, \"blob_oid_field_present_count\": 18, \"blob_oid_non_null_count\": 6, \"count_consistent\": false, \"declared_count\": 19, \"directory_file_count\": 20, \"files_map_entries\": 18, \"matches_v1_published\": true, \"published_manifest_sha256\": \"78b57464250afc9d7c79df65f054240b8647d61fd2b301e7136d68ea7d424fc0\", \"schema\": \"v1-manifest-audit/v1\"}",
+      "source": "payload/v1-manifest-audit.json"
+    },
+    {
+      "result": "{\"matches_v1_reviewed\": true, \"published_exactly_reviewed\": false, \"published_manifest_sha256\": \"78b57464250afc9d7c79df65f054240b8647d61fd2b301e7136d68ea7d424fc0\", \"reviewed_manifest_sha256\": \"6131be045b23369d32d3c0277ad32128eea98fa80e61918d92c4cb116d7a2d50\", \"schema\": \"v1-review-generation-comparison/v1\", \"senior_bundle_repository_dirty\": true, \"verdict\": \"accept\", \"verdict_execution_id\": \"bd930aae-f912-4c5b-8b47-eba053d84dea\", \"verdict_fingerprint\": \"3c3f33926d1bb6c5b2e4ce0ecc466bb8a8d38de458a9cd20d54d5ee69cc665ef\"}",
+      "source": "payload/v1-review-generation-comparison.json"
+    },
+    {
+      "result": "{\"count_consistent\": false, \"declared_count\": 20, \"directory_file_count\": 20, \"files_map_entries\": 19, \"index_sha256\": \"b771e5d65756a3fcddfd84a6868c8624d7fd724e084dc0b7e07557046cc47196\", \"schema\": \"v1-index-audit/v1\", \"self_excluded_filename\": null, \"self_exclusion_declared\": \"MISSING\", \"self_exclusion_rule_explicit\": false}",
+      "source": "payload/v1-index-audit.json"
+    },
+    {
+      "result": "{\"entries\": [{\"blob_exists\": null, \"declared_blob_oid\": \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-e88f6300.json\", \"filename\": \"amended-leaf-a-report-e88f6300.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-e88f6300.json\", \"filename\": \"amended-leaf-b-report-e88f6300.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-e88f6300.json\", \"filename\": \"current-dispatch-index-e88f6300.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-889f759b.json\", \"filename\": \"original-dispatch-index-889f759b.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-889f759b.json\", \"filename\": \"original-leaf-a-report-889f759b.json\", \"valid\": false, \"valid_oid_format\": false}, {\"blob_exists\": null, \"declared_blob_oid\": \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-889f759b.json\", \"filename\": \"original-leaf-b-report-889f759b.json\", \"resolved_blob_from_commit_path\": \"889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-889f759b.json\", \"resolved_ok\": false, \"valid\": false, \"valid_oid_format\": false}], \"entries_invalid_commit_path_format\": 6, \"entries_non_null\": 6, \"entries_valid_oid_format\": 0, \"entries_with_blob_oid_field\": 18, \"schema\": \"v1-blob-oid-audit/v1\"}",
+      "source": "payload/v1-blob-oid-audit.json"
+    },
+    {
+      "result": "{\"branch_live_state_vs_dispatch_verdict_revalidation_identical\": true, \"duplicate_groups\": [{\"blob_oid\": \"6e51fc744065c2239ea8cc6ce3a2889c259e2ab3\", \"filenames\": [\"current-dispatch-index-e88f6300.json\", \"original-dispatch-index-889f759b.json\"], \"size\": 2059}, {\"blob_oid\": \"c4562a3839f171262b28f0c61a547079117f6ecd\", \"filenames\": [\"branch-live-state.json\", \"dispatch-verdict-revalidation.json\"], \"size\": 1615}], \"schema\": \"v1-duplicate-content-audit/v1\"}",
+      "source": "payload/v1-duplicate-content-audit.json"
+    },
+    {
+      "result": "{\"dispatch_verdict_unchanged\": true, \"no_dispatch\": true, \"no_integration_candidate_set\": true, \"no_package_work\": true, \"recorded_at_utc\": \"2026-08-06T21:35:00Z\", \"schema\": \"forensic-v2-classification/v1\", \"v1_duplicate_content_groups\": 2, \"v1_final_exact_byte_review_binding_invalid\": true, \"v1_historical_senior_review_preserved\": true, \"v1_index_count_semantics_explicit\": false, \"v1_index_self_exclusion_probable\": true, \"v1_manifest_blob_oid_fields_valid\": false, \"v1_manifest_count_consistent\": false, \"v1_preserved\": true, \"v1_published_bytes_exactly_senior_reviewed\": false, \"v1_published_generation_preserved\": true, \"v1_review_binding_circularity\": true, \"v1_reviewed_generation_preserved\": true, \"v1_snapshot_hash_receipts_contain_real_oids\": true, \"v2_correction_append_only\": true}",
+      "source": "payload/forensic-v2-classification.json"
+    },
+    {
+      "result": "payload 11 archivos byte-id\u00e9nticos; manifest a9a1de5b6e0bab45169ff0cd710a5a79bd9705c150f52b8181216fe7e65e8008; all_unchanged=true",
+      "source": "binding/post-freeze-identity.json"
+    },
+    {
+      "result": "VALIDATOR_GLOBAL=PASS (50/50 + F1-F6 REJECT + F7 PASS), ejecutado 2x",
+      "source": "validator_v2.py"
+    },
+    {
+      "result": "status=queued, conclusion=null -> NOT success",
+      "source": "CI runs 31127675599/31127675627"
+    }
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "38f3b01a4d89b87d502bb26e56168ab66b882bc4342f4e22237f548399e48762",
+    "plan_fingerprint": "be224a7a306440eb7a351e0b401e68d3534008e827390dbf2dadc3dae20b801b",
+    "repository_head": "e218300361e3128d0154f24b1b55fe6cdfba4bff",
+    "working_tree_fingerprint": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "tests": [
+    {
+      "command": "python3 validator_v2.py",
+      "exit_code": 0,
+      "summary": "50/50 + 7/7 fixtures; post-freeze identity 10/10"
+    },
+    {
+      "command": "git diff --name-status fc54a04b e2183003 -- forensic-addendum-v1/",
+      "exit_code": 0,
+      "summary": "empty -> v1 preserved"
+    },
+    {
+      "command": "git cat-file -e d7313cbe/99463244/4fecb912/aa30bc11",
+      "exit_code": 0,
+      "summary": "4 snapshot OIDs reales existen"
+    },
+    {
+      "command": "sha256 comparaci\u00f3n payload frozen vs re-run",
+      "exit_code": 0,
+      "summary": "10/10 hashes id\u00e9nticos tras Capa C"
+    }
+  ]
+}

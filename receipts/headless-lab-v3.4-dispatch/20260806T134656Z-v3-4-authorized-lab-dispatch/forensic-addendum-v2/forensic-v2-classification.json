@@ -1,0 +1,22 @@
+{
+  "dispatch_verdict_unchanged": true,
+  "no_dispatch": true,
+  "no_integration_candidate_set": true,
+  "no_package_work": true,
+  "recorded_at_utc": "2026-08-06T21:35:00Z",
+  "schema": "forensic-v2-classification/v1",
+  "v1_duplicate_content_groups": 2,
+  "v1_final_exact_byte_review_binding_invalid": true,
+  "v1_historical_senior_review_preserved": true,
+  "v1_index_count_semantics_explicit": false,
+  "v1_index_self_exclusion_probable": true,
+  "v1_manifest_blob_oid_fields_valid": false,
+  "v1_manifest_count_consistent": false,
+  "v1_preserved": true,
+  "v1_published_bytes_exactly_senior_reviewed": false,
+  "v1_published_generation_preserved": true,
+  "v1_review_binding_circularity": true,
+  "v1_reviewed_generation_preserved": true,
+  "v1_snapshot_hash_receipts_contain_real_oids": true,
+  "v2_correction_append_only": true
+}

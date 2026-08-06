@@ -1,0 +1,167 @@
+{
+  "directory_file_count": 20,
+  "files": [
+    {
+      "blob_oid": "4fecb91240a5572add93a795467812aa0d02eda4",
+      "filename": "amended-leaf-a-report-e88f6300.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/amended-leaf-a-report-e88f6300.json",
+      "sha256": "1dfb196ee3d6b653783f7d6c5c1bab7f366f967eb54879935898241b1af72b8f",
+      "size": 2095
+    },
+    {
+      "blob_oid": "aa30bc117a027b3cc7f1c0a5526cb490465fc02e",
+      "filename": "amended-leaf-b-report-e88f6300.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/amended-leaf-b-report-e88f6300.json",
+      "sha256": "68697e2133333a83a738036a1f3f68a9337a6b3dd0ecdceb3419121ee23ea3c2",
+      "size": 2059
+    },
+    {
+      "blob_oid": "2af33a8f6254edf25f496b5bcc2abf3a55e70174",
+      "filename": "amended-snapshot-hashes.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/amended-snapshot-hashes.json",
+      "sha256": "9062e9a0944bba8ce2c03d365f1601bdfe8066292e804b3389b79fb8f4d44ecc",
+      "size": 1836
+    },
+    {
+      "blob_oid": "c4562a3839f171262b28f0c61a547079117f6ecd",
+      "filename": "branch-live-state.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/branch-live-state.json",
+      "sha256": "fb7d9dff15b5324d112d1b632f1b2fbea66c5bd2377fb534967c955f66c01f9a",
+      "size": 1615
+    },
+    {
+      "blob_oid": "142818bbf2e568b534bdd83ec21d19030e3b360a",
+      "filename": "commit-comparison.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/commit-comparison.json",
+      "sha256": "af40aab5cb65dd7a2bc9f942abe28f3c68e2ed31653a9b4f2e7754adbb2a1d86",
+      "size": 1037
+    },
+    {
+      "blob_oid": "6e51fc744065c2239ea8cc6ce3a2889c259e2ab3",
+      "filename": "current-dispatch-index-e88f6300.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/current-dispatch-index-e88f6300.json",
+      "sha256": "60c415ca2c54df9b352563339b127b974243c7705a4fca80b6356c8668cdf150",
+      "size": 2059
+    },
+    {
+      "blob_oid": "c4562a3839f171262b28f0c61a547079117f6ecd",
+      "filename": "dispatch-verdict-revalidation.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/dispatch-verdict-revalidation.json",
+      "sha256": "fb7d9dff15b5324d112d1b632f1b2fbea66c5bd2377fb534967c955f66c01f9a",
+      "size": 1615
+    },
+    {
+      "blob_oid": "4477ccb193d360696bb62bc14d630f28ca54919e",
+      "filename": "forensic-addendum-index.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/forensic-addendum-index.json",
+      "sha256": "b771e5d65756a3fcddfd84a6868c8624d7fd724e084dc0b7e07557046cc47196",
+      "size": 2194
+    },
+    {
+      "blob_oid": "f8e3cbe0af79e996a015f57d00c3e72342ee6c7d",
+      "filename": "forensic-addendum-manifest.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/forensic-addendum-manifest.json",
+      "sha256": "78b57464250afc9d7c79df65f054240b8647d61fd2b301e7136d68ea7d424fc0",
+      "size": 6475
+    },
+    {
+      "blob_oid": "e65cb131e3227fad2aa4a83b0743203cb68cada1",
+      "filename": "forensic-classification.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/forensic-classification.json",
+      "sha256": "a7ac8e573abd1cf4447fcaef2c179c590d5a3ebebbab18dc06728a9dca347bbd",
+      "size": 2163
+    },
+    {
+      "blob_oid": "74a67cd38b0ec81ba509380afb89d95ff67fa98d",
+      "filename": "index-validation-at-889f759b.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/index-validation-at-889f759b.json",
+      "sha256": "6a470944ac0a9e6c23cd806fac9537d6ec555bb3684193c69621ec9cedd37c1e",
+      "size": 471
+    },
+    {
+      "blob_oid": "587d77f858bfd8f81a703f46e8fdf60d91b795ed",
+      "filename": "index-validation-at-e88f6300.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/index-validation-at-e88f6300.json",
+      "sha256": "94f6b663cb9876ba4bef067727b10702e2744af235788fe0659b74d0839c49f8",
+      "size": 968
+    },
+    {
+      "blob_oid": "6e51fc744065c2239ea8cc6ce3a2889c259e2ab3",
+      "filename": "original-dispatch-index-889f759b.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/original-dispatch-index-889f759b.json",
+      "sha256": "60c415ca2c54df9b352563339b127b974243c7705a4fca80b6356c8668cdf150",
+      "size": 2059
+    },
+    {
+      "blob_oid": "d7313cbecf68e50fd6bb8f880f9d6ca5fc20bbbc",
+      "filename": "original-leaf-a-report-889f759b.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/original-leaf-a-report-889f759b.json",
+      "sha256": "8bde156aedcfebf7982bf866138fbaf70ec42798db46ad010d8906d88b9134a1",
+      "size": 779
+    },
+    {
+      "blob_oid": "994632441f85bade78abc981f1587870ece64967",
+      "filename": "original-leaf-b-report-889f759b.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/original-leaf-b-report-889f759b.json",
+      "sha256": "29d975fe9f3903c4647e585c61847b35c020fda8267ab996a950a1989025b81c",
+      "size": 781
+    },
+    {
+      "blob_oid": "9b334b6e9742c77338c57a6648418e80623f0d90",
+      "filename": "original-snapshot-hashes.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/original-snapshot-hashes.json",
+      "sha256": "09549ac5083e9923ab318f8645412d3e22cb02eb1407e511ffca13de641cfbfb",
+      "size": 1834
+    },
+    {
+      "blob_oid": "d118942afd01ac57fec9e8fd841fc2795c503387",
+      "filename": "senior-preflight.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/senior-preflight.json",
+      "sha256": "e2a39ea27c86cf0a2ba0f10c33db354e8b4674e261a9684c684d2c77752b3cc5",
+      "size": 262
+    },
+    {
+      "blob_oid": "dc227e784752e65e053f7e8718a4dceeb94b4e43",
+      "filename": "senior-review-bundle.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/senior-review-bundle.json",
+      "sha256": "38ac5ae249a65857c8e89eb91db7328d9c3bf8ef2b471b2866faee1285cb8c0b",
+      "size": 17639
+    },
+    {
+      "blob_oid": "b396fa11a855bfc3f1e7749660310b6e575acaaf",
+      "filename": "senior-verdict.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/senior-verdict.json",
+      "sha256": "20cbdb3382be97966875ecd39c589b876a6732ab2323d92f3208fc6af505fbaa",
+      "size": 2004
+    },
+    {
+      "blob_oid": "30c15dc9867ed7251cfe201bed1325b18bfcecf0",
+      "filename": "source-state.json",
+      "json_parse": true,
+      "path": "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/forensic-addendum-v1/source-state.json",
+      "sha256": "3eddf03fff9f0591bd2a4cae956cb542d123ddcf196c318266501f1352988fa0",
+      "size": 609
+    }
+  ],
+  "schema": "v1-directory-inventory/v1",
+  "source_commit": "fc54a04b32b6f8940d336dd6f00e52251772a0f4"
+}

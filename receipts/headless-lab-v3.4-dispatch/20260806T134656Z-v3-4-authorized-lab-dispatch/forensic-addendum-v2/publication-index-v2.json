@@ -1,0 +1,70 @@
+{
+  "directory_file_count": 16,
+  "files": {
+    "ci-source-state.json": {
+      "sha256": "29554cc7d1b577773c005f1dc3c7293eb4482fee5a858e609be28ecc48a029e6",
+      "size": 812
+    },
+    "dispatch-state-revalidation.json": {
+      "sha256": "4113337eebeb574ef1c56fa248b1119cf6bceb2d36c4fe8b4eb552ac47a62e3a",
+      "size": 554
+    },
+    "forensic-v2-classification.json": {
+      "sha256": "b4df5496d8373c93ffe3752c96313f7300e6d436a8ef3fd5c67681229163635d",
+      "size": 837
+    },
+    "payload-manifest-v2.json": {
+      "sha256": "a9a1de5b6e0bab45169ff0cd710a5a79bd9705c150f52b8181216fe7e65e8008",
+      "size": 3056
+    },
+    "review-binding-receipt-v2.json": {
+      "sha256": "408be1057c76bef123ea803aff8dd9fab26c55446ef4b859a12d9be39d9e032a",
+      "size": 2409
+    },
+    "senior-preflight-v2.json": {
+      "sha256": "5a562a3b2324eab801127ee90560203c63af804d6e77cf5522199b5a9c3bdbba",
+      "size": 346
+    },
+    "senior-review-bundle-v2.json": {
+      "sha256": "e082150d5dc8a7a7f0986bd5f4259d083438af17be139b8044db2e24815f9a17",
+      "size": 23874
+    },
+    "senior-verdict-v2.json": {
+      "sha256": "a58b54fb4bf47cd41f8a94c067b73873cb331db44ba80a7ca6e6e23e19aab67f",
+      "size": 1913
+    },
+    "source-state.json": {
+      "sha256": "d3c496cf72d73a7a1b75d76244eb17f4df08490ada106c678421267418e8ca41",
+      "size": 638
+    },
+    "v1-blob-oid-audit.json": {
+      "sha256": "016acf6b82e0c8bf9dc59e8bb43465f06396becc1e1b7e1cb4d760f402c5cbb2",
+      "size": 2416
+    },
+    "v1-directory-inventory.json": {
+      "sha256": "440257a0cf4690fad6d34a0c97aa0a3b7124cd338997fc9e59b8e20a01d72822",
+      "size": 8258
+    },
+    "v1-duplicate-content-audit.json": {
+      "sha256": "05328ada97f9f91dc70f8009209483f65ca37b45bf481079a8b8ea5df530bed2",
+      "size": 570
+    },
+    "v1-index-audit.json": {
+      "sha256": "849c39e4117552bdb1a3826ca83b4666f63de11855e1fb5d5ecf97e576fa2ca2",
+      "size": 346
+    },
+    "v1-manifest-audit.json": {
+      "sha256": "ccdbf627de5a4ba58cc7ab79786abcec6888fec404245f65bfcb1dadfb324aab",
+      "size": 1741
+    },
+    "v1-review-generation-comparison.json": {
+      "sha256": "470a9b2afb2e1476f4f186ddcfbbd31bdbab1a072defbbf50de090013345b5bd",
+      "size": 543
+    }
+  },
+  "indexed_file_count": 15,
+  "note": "directory_file_count == indexed_file_count + 1; files-map length == indexed_file_count; no ambiguous 'count' field.",
+  "schema": "publication-index-v2/v1",
+  "self_excluded": true,
+  "self_excluded_filename": "publication-index-v2.json"
+}

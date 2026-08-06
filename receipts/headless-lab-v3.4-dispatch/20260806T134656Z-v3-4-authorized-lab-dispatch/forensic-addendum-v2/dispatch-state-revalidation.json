@@ -1,0 +1,14 @@
+{
+  "d0_d1_d2_authorized": false,
+  "dispatch_authorized": false,
+  "dispatch_result": "DISPATCH_RESULT_REJECTED",
+  "evidence": "forensic-addendum-v1 preserved byte-identical at fc54a04b; v2 is append-only correction",
+  "integration_authorized": false,
+  "lab_a_result_head": "a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3",
+  "lab_b_result_head": "not_published",
+  "leases_v3_4": "consumed",
+  "no_integration_candidate_set": true,
+  "pr_merge_authorized": false,
+  "recorded_at_utc": "2026-08-06T21:35:00Z",
+  "schema": "dispatch-state-revalidation/v1"
+}
