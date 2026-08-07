@@ -1,37 +1,37 @@
-# Current checkpoint — V3.7 runtime contract correction package
+# Current checkpoint — V3.7 control-plane conformance recovery
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-07-CP-066-v3-7-runtime-contract-correction.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-07-CP-067-v3-7-control-plane-conformance-recovery.md`
 
-Checkpoint ID: `CP-066`
+Checkpoint ID: `CP-067`
 Checkpoint date: 2026-08-07
-Supersedes: `CP-064` (2026-08-06, immutable)
+Supersedes: `CP-066` (2026-08-07, immutable)
 
 ## Current state
 
 - Manifest current_phase: `phase-5-exact-recording`; active task `P5-005` in_progress; P5-007 deferred.
-- v3.6 package (20260806T234554Z) REJECTED for dispatch (fc-f1/fc-f2/fc-f3); preserved frozen; NOT unfrozen/patched/published.
-- v3.7 correction package prepared: `v3_7_status=EXACT_BYTES_REVIEWED_NOT_DISPATCHED`;
-  `v3_7_technical_dispatch_eligibility=PASS`
-- `dispatch_authorized=false`; `integration_authorized=false`; `D0_D1_D2_authorized=false`;
-  `PR_merge_authorized=false`; leases=planned (activated=false); lab_worktrees=0; leaves=0;
-  remote_result_branches=0
-- Package payload manifest SHA-256:
-  `7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3` (supersedes v3.6)
-- Triple senior review: functional-continuity accept 0/0 (`eedfae43`), fail-closed-process
-  accept 0/0 (`6b4b5dad`), adversarial-validity accept 0/0 (`0e3bdc1d`); accept does NOT
-  authorize dispatch.
-- Selftest 32/32 PASS; static validator PASS (production_findings=0, debug_markers=0);
-  fail-closed 8/8; command-hash 8/8; ownership diff clean both labs; runtime-contract
-  negative matrix 12/12.
+- CP-066 remains byte-identical (historical, immutable). CP-067 supersedes it
+  only as the current control-plane checkpoint; the frozen v3.7 payload is
+  unchanged.
+- v3.7 package: `v3_7_status=EXACT_BYTES_REVIEWED_NOT_DISPATCHED`; payload
+  manifest SHA-256
+  `7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3` unchanged;
+  review binding unchanged.
+- `dispatch_authorized=false`; `integration_authorized=false`;
+  `D0_D1_D2_authorized=false`; `PR_merge_authorized=false`; leases_activated=false;
+  lab_execution_worktrees=0; leaves=0; remote_result_branches=0.
+- CP-067 adds no functional/process package behavior — control-plane conformance
+  recovery only.
+- exact_head_ci = PENDING (previous run #166 failed on CP-066 structure; fresh
+  exact-head CI observed after publication).
 
 ## Next action
 
-Human decision: authorize or reject ONE fresh v3.7 LAB-A/LAB-B dispatch using exclusively the
-frozen v3.7 package (new branches, new worktrees, new leases). NOT authorized yet; not executed.
+Observe exact-head CI after publishing CP-067 (Project control plane, Audio
+integration core on the new publication SHA). Not dispatch.
 
 ## References
 
 - `PROJECT-MANIFEST.json`; `doc/sooperlooper/WORK-QUEUE.md` (P5-005)
 - `receipts/headless-lab-v3.7/` (17 artifacts + package-payload-manifest-v3.7.json)
 - `receipts/headless-lab-v3.7-validation/`; `receipts/headless-lab-v3.7-review-binding/`
-- `doc/sooperlooper/checkpoints/2026-08-06-CP-064-v3-5-process-hardening-package.md`
+- `doc/sooperlooper/checkpoints/2026-08-07-CP-066-v3-7-runtime-contract-correction.md`
