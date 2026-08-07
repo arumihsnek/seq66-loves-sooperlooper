@@ -1,0 +1,48 @@
+{
+ "blocking_findings": [],
+ "bound_manifest_sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+ "detailed_status": "VALID_ADVISORY_VERDICT",
+ "execution_id": "0e3bdc1d-06b8-421f-9ca1-d64c3beb09e4",
+ "findings": [],
+ "mission_id": "seq66-lab-v3-7-adversarial-validity-v3",
+ "mission_id_note": "v1 produced changes_required (F1 evidence insufficiency, F2 non-blocking); evidence closed with source slices + full selftest transcript; retried under -v2 (protocol failures only) then -v3 (replacement of 6658660d succeeded); payload byte-identical",
+ "model_processes_consumed": 1,
+ "question_answers": [
+  {
+   "answer": "S\u00ed. El selftest 32/32 y las matrices reportan real_cli=true; los negativos ejecutan el finalizer mediante subprocess.",
+   "id": "q1"
+  },
+  {
+   "answer": "S\u00ed. Los casos de wrong return shape son rechazados por el CLI real, con salida no cero y efectos laterales comprobados.",
+   "id": "q2"
+  },
+  {
+   "answer": "S\u00ed. Los casos N13\u2013N24 cubren firma, orden, tipo, default, anotaci\u00f3n, forma de retorno y campos; todos fueron rechazados por el CLI real.",
+   "id": "q3"
+  },
+  {
+   "answer": "S\u00ed. N1 y fc-command-hash-mismatch muestran exit 1, rechazo y ausencia de evidencia aunque el test termine con exit 0.",
+   "id": "q4"
+  },
+  {
+   "answer": "S\u00ed. N22 out-of-scope path fue rechazado por forbidden_changed con exit no cero.",
+   "id": "q5"
+  },
+  {
+   "answer": "S\u00ed. El validador est\u00e1tico reporta 0 findings y la evidencia muestra que los resultados derivan de subprocess exit, sin auto-PASS declarativo.",
+   "id": "q6"
+  },
+  {
+   "answer": "S\u00ed. La matriz heredada v3.6 mantiene 29/29 negativos aprobados; no se observa reducci\u00f3n de cobertura.",
+   "id": "q7"
+  }
+ ],
+ "recorded_at_utc": "2026-08-07T20:13:34Z",
+ "required_actions": [],
+ "response_fingerprint": "6570ef97bd5fa2834d5e840cb0a2e8df132d5690390117353178b5c3604b0528",
+ "review_label": "seq66-lab-v3-7-adversarial-validity",
+ "schema": "senior-verdict/v3.7",
+ "status": "COMPLETED",
+ "summary": "La evidencia suministrada respalda afirmativamente las siete preguntas para el paquete congelado v3.7, ligado al manifiesto SHA 7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3. La aceptaci\u00f3n es \u00fanicamente de revisi\u00f3n del paquete y no autoriza dispatch, integraci\u00f3n ni ejecuci\u00f3n.",
+ "verdict": "accept"
+}

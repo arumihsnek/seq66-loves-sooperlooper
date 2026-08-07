@@ -1,0 +1,14 @@
+{
+ "PREFLIGHT_VALID": true,
+ "manifest_sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+ "mission_id": "seq66-lab-v3-7-fail-closed-process",
+ "mode": "integrated-review",
+ "model_processes": 0,
+ "payload_byte_exact_to_manifest": true,
+ "payload_file_count": 17,
+ "recorded_at_utc": "2026-08-07T20:02:32Z",
+ "review_worktree_detached": true,
+ "schema": "senior-preflight/v3.7",
+ "worktree_clean": true,
+ "worktree_head": "443e37822cd2cd4d4c1305e66009e94ec5e60ff4"
+}
