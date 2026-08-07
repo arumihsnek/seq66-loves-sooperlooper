@@ -1,0 +1,165 @@
+{
+ "artifact_hashes": [
+  {
+   "artifact": "scope-freeze-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "3f78138c9c3273efee3625f23e2dfaef0ba7bef30a90ddc9b40dcc64c673228f",
+   "v37_sha256": "d16394e41b77dfdc188ba7b1d08a4526697969adf871099b6368e48a7f3c291c"
+  },
+  {
+   "artifact": "functional-contract-baseline-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "f1fef07e17014168698eab5e904637b6c04e2a0bbc437a4144e47f1c39a8d55c",
+   "v37_sha256": "1badfced980776f7c08d426592bf798e5939b173f612cff52f834af3e4a03126"
+  },
+  {
+   "artifact": "lab-api-contract-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "f29e37e1af0ceba9442e02e2686e070a3df8ae6a65fc0a3af62b986df7824633",
+   "v37_sha256": "0b59df8017d6f5ab47fb082f6a2a10a184237826d9bfd5f6647263f0d07ffe57"
+  },
+  {
+   "artifact": "process-hardening-contract-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "e878703cc94b3467816d7c8981bb57e6a4dd9cd398b356038adba006c2d3619d",
+   "v37_sha256": "4d0629ebc877366ed080a2085bba892e5d09a2915d77fb6a6a12ca1c1f7b731a"
+  },
+  {
+   "artifact": "batch-manifest-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "eb79d9984a36fc0670a6fa7bca77086a8e88dfbda3e110402b2290d1caccaadd",
+   "v37_sha256": "710c76fef2ccf45d31d6f63488026df62076d22a8eb59d896b9565c29b0ff812"
+  },
+  {
+   "artifact": "dispatch-plan-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "db10d93c1b12b40466288ce31d8c533ad44cb00ad4c7e8979174f6d69042c67e",
+   "v37_sha256": "b16bbe7437da806af8b4fcc41bcf958bfdbdcea2a9eaaac54f1ab88e13de31ac"
+  },
+  {
+   "artifact": "port-plan-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "b6bfff13b885377fd4bce784bd6b6a6bd259cb80505177fa82dfa46a2c33fe2e",
+   "v37_sha256": "0422c02f00fe0116e7ba5fa1f368a680799c7348d07998434d2d8edca51ffd4f"
+  },
+  {
+   "artifact": "lease-plan-lab-a-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "99cfcab8e01f9f947be0bc24ddac2144364ab0b60dad7f55325d4676faa108cc",
+   "v37_sha256": "5b65e9b64cd2ea2c6ee2ce8fff05a0ea97a3140329d55efb27febd0a6554e442"
+  },
+  {
+   "artifact": "lease-plan-lab-b-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "07ffecfe191c0c9d3229aab2342f2ee427e7e8a3642c082b6db922c04872b653",
+   "v37_sha256": "db73480d9e839dc989505d5c13eec66bedc12bfc66bf5cf07ed4418947b0096c"
+  },
+  {
+   "artifact": "leaf-r-report-schema-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "84ff17bb6ba283309d643b8eb098928691ba3c9d0c4e7edaffde48de5c34a159",
+   "v37_sha256": "9b52946a9d8d2a847e24f83658d67c83d5d04ccf55e0be7f55e870a2a0bde29f"
+  },
+  {
+   "artifact": "controller-evidence-schema-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "0f6c18198c347a9b0b7c9815a9af03da0b0f2cc7dbf2851dc4ba96367f565995",
+   "v37_sha256": "03aace2c23666cf362c35744db4181fd8fdf9cb301e0c74d74fa6ebc48fe3f9a"
+  },
+  {
+   "artifact": "controller-acceptance-schema-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "1a7c6c45e9bfa1152082fae3d1989bb0c6e42061470d8a02b02efb188a3b4ee6",
+   "v37_sha256": "499657ef8f1318da48b9b33369b802d09b7c6b8eaf621232d81603e229325100"
+  },
+  {
+   "artifact": "mechanical-finalizer-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "a3d121e8a03008e8c4293c9524a8c51e2923f801671bc9068bf210110ec6b3ad",
+   "v37_sha256": "312fef8ea635293d8b2026f18568da7b2eabfa8fe614f8515a656ae694b8550f"
+  },
+  {
+   "artifact": "acceptance-verifier-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "08cdcbf7617a12d4991c9abbe05dfdc95b16c921e867ed67e69035ac17101ae6",
+   "v37_sha256": "f31288ee4f4d095d45deda7b8066da3f48cf6cf6ec8a773d5aadbbdf4335e87c"
+  },
+  {
+   "artifact": "build-provenance-policy-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "9d8318ce6dab78760708e4c09449f48c13a13777735ae131be3eacd1f8470778",
+   "v37_sha256": "d38cbb0e7e4aa204af58b21136481d26e3da844240b99d77a13843b4ad9fdb80"
+  },
+  {
+   "artifact": "publication-policy-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "7429856fd36773a671c7e30b9a0d11945e03d9af41afc1085f3ae12f926b6d19",
+   "v37_sha256": "0d528c51946716de0718340ea142c2ed5a6d71835429104d958bad41e5c4110b"
+  },
+  {
+   "artifact": "predispatch-readiness-v3.7",
+   "classification": null,
+   "identical": false,
+   "v36_sha256": "757f754017019c40adc34b4ddf69f5b9655cdc8d63fb78c5b87485452ccc84cd",
+   "v37_sha256": "6e3855ed7ba4f860a8b2cb027deb22be8d17fc46921616e43fc05feed81330fc"
+  }
+ ],
+ "classification": {
+  "fc-f1": [
+   "mechanical-finalizer: functional_gates -> runtime_full_contract (structural_contract_check, runtime_return_shape_check, external_runtime_semantics, constraint_coverage)",
+   "mechanical-finalizer: ownership_diff gate (FC-F3)",
+   "mechanical-finalizer: command_hash_evidence section (FC-F2)",
+   "functional-contract-baseline: arg kinds + class field_types + supersedes (normative enrichment)",
+   "acceptance-verifier: fixture audio_oracle annotations matching the normative baseline",
+   "acceptance-verifier: phase_functional_continuity checks baseline kinds/returns/supersedes",
+   "acceptance-verifier: phase_r_only complete ownership diff (FC-F3)",
+   "acceptance-verifier: phase_prepublish independent command-hash recompute (FC-F2)",
+   "acceptance-verifier: selftest N13..N24 runtime-contract + ownership negatives"
+  ],
+  "fc-f2": [
+   "batch-manifest + finalizer command_hash_evidence per-test recomputation",
+   "command-hash-verification-lab-a/b.json receipts (8/8 independent recompute)"
+  ],
+  "fc-f3": [
+   "finalizer ownership_diff evidence + verifier phase_r_only full diff",
+   "ownership-diff-verification-lab-a/b.json receipts"
+  ],
+  "version rename": [
+   "all 17 artifacts renamed v3.6 -> v3.7",
+   "batch/lease/leaf IDs -> BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7 etc.",
+   "result paths -> receipts/headless-lab-results-v3.7/...",
+   "planned branches -> result/<future-run-id>-lab-{a,b}-v3_7"
+  ]
+ },
+ "recorded_at_utc": "2026-08-07T20:00:48Z",
+ "rule": "every difference classified as fc-f1 | fc-f2 | fc-f3 | version rename; anything else = UNAUTHORIZED_V3_7_SCOPE_EXPANSION",
+ "schema": "v3.6-v3.7-semantic-diff/v1",
+ "scope_expansion": "NONE",
+ "semantically_identical": [
+  "functional product contract (module set, ownership, literal test IDs, canonical sources)",
+  "R-only leaf model (C->R->E)",
+  "fail-closed finalizer (gate registry, prepass, no E on FAIL)",
+  "strict build provenance (source hash, ELF, ldd, JACK, cleanliness)",
+  "real ls-remote branch check",
+  "create-only publication",
+  "postpublication binding (exact values)",
+  "full-completion orchestration",
+  "negative gates inherited from v3.6 (N1..N12)"
+ ]
+}

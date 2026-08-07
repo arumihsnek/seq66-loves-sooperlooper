@@ -1,0 +1,85 @@
+{
+ "all_8_match": false,
+ "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+ "count": 4,
+ "lab": "LAB-A",
+ "negative_fixture": {
+  "E_absent": true,
+  "case": "N1_command_hash_mismatch_reject",
+  "declared_hash_mutated": true,
+  "exit_nonzero": true,
+  "note": "selftest N1 mutates declared command_sha256 (valid argv, real exit 0 command) -> finalizer REJECT, E absent",
+  "real_cli": true
+ },
+ "note": "recomputed independently; never recomputed = declared by policy",
+ "recomputation_algorithm": "sha256(json.dumps(argv, separators=(',', ':'), sort_keys=True).encode('utf-8'))",
+ "recorded_at_utc": "2026-08-07T20:00:42Z",
+ "schema": "command-hash-verification/v3.7",
+ "tests": [
+  {
+   "canonical_argv": [
+    "python3",
+    "-m",
+    "py_compile",
+    "tests/integration/headless_audio_lab/process_supervisor.py",
+    "tests/integration/headless_audio_lab/jack_server.py",
+    "tests/integration/headless_audio_lab/osc_probe.py",
+    "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+    "tests/integration/headless_audio_lab/__init__.py"
+   ],
+   "canonical_serialization_bytes_sha256": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e",
+   "controller_recomputed_command_sha256": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e",
+   "cwd": "checkout-root",
+   "declared_command_sha256": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e",
+   "match": true,
+   "source_payload_path": "batch-manifest-v3.7.json/labs/LAB-A/literal_tests/ft-a1",
+   "test_id": "ft-a1",
+   "timeout_seconds": 180
+  },
+  {
+   "canonical_argv": [
+    "python3",
+    "-c",
+    "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor, ProcessInfo; from headless_audio_lab.jack_server import JackServer; from headless_audio_lab.osc_probe import OscProbe; from headless_audio_lab.sooperlooper_launcher import SooperLooperLauncher; print('ft-a2 imports ok')"
+   ],
+   "canonical_serialization_bytes_sha256": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88",
+   "controller_recomputed_command_sha256": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88",
+   "cwd": "checkout-root",
+   "declared_command_sha256": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88",
+   "match": true,
+   "source_payload_path": "batch-manifest-v3.7.json/labs/LAB-A/literal_tests/ft-a2",
+   "test_id": "ft-a2",
+   "timeout_seconds": 180
+  },
+  {
+   "canonical_argv": [
+    "python3",
+    "-c",
+    "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor; s=ProcessSupervisor(); assert s.get_owned_pids()==[], 'ledger not empty'; assert s.get_owned_pgids()==[], 'pgid ledger not empty'; print('ft-a3 ledger empty ok')"
+   ],
+   "canonical_serialization_bytes_sha256": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f",
+   "controller_recomputed_command_sha256": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f",
+   "cwd": "checkout-root",
+   "declared_command_sha256": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f",
+   "match": true,
+   "source_payload_path": "batch-manifest-v3.7.json/labs/LAB-A/literal_tests/ft-a3",
+   "test_id": "ft-a3",
+   "timeout_seconds": 180
+  },
+  {
+   "canonical_argv": [
+    "python3",
+    "-c",
+    "import os, subprocess, sys, time; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor; f=None\ntry:\n    with ProcessSupervisor() as sup:\n        i=sup.start_process('probe',['/bin/sleep','2'],{},'.','/dev/null','/dev/null')\n        assert i.pid>0 and i.pid in sup.get_owned_pids(), 'owned not registered'\n        try:\n            sup.start_process('bad',['/nonexistent/binary-xyz'],{},'.','/dev/null','/dev/null')\n            raise SystemExit('bad command did not propagate')\n        except Exception:\n            pass\n        f=subprocess.Popen(['/bin/sleep','3'],start_new_session=True,\n                           stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n        assert f.pid not in sup.get_owned_pids(), 'foreign registered'\n        sup.cleanup(timeout=5.0)\n        assert not os.path.exists('/proc/%d'%i.pid), 'owned survived cleanup'\n        assert sup.verify_cleanup()==[], 'verify_cleanup not empty'\n        assert os.path.exists('/proc/%d'%f.pid), 'foreign killed by supervisor'\nfinally:\n    if f is not None and f.poll() is None:\n        f.terminate()\n        try:\n            f.wait(timeout=5.0)\n        except subprocess.TimeoutExpired:\n            f.kill(); f.wait(timeout=5.0)\nprint('ft-a4 owned/foreign/cleanup ok')"
+   ],
+   "canonical_serialization_bytes_sha256": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408",
+   "controller_recomputed_command_sha256": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408",
+   "cwd": "checkout-root",
+   "declared_command_sha256": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408",
+   "match": true,
+   "source_payload_path": "batch-manifest-v3.7.json/labs/LAB-A/literal_tests/ft-a4",
+   "test_id": "ft-a4",
+   "timeout_seconds": 180
+  }
+ ]
+}

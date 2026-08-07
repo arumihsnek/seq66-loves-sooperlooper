@@ -1,0 +1,87 @@
+{
+ "all_publication_cases": true,
+ "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+ "cases": {
+  "ambiguous_lsremote_REJECT": {
+   "PASS": true,
+   "ambiguous": true,
+   "rc": 128,
+   "stdout_empty": true
+  },
+  "create_only_PASS": {
+   "E": "1b44010e54d26808060507c519c3e1d8b88cc04f",
+   "PASS": true,
+   "absence_pre_push": {
+    "absent": true,
+    "rc": 2,
+    "stdout": ""
+   },
+   "remote_equals_E": true,
+   "remote_resolved_oid": "1b44010e54d26808060507c519c3e1d8b88cc04f",
+   "single_ordinary_push": {
+    "argv": [
+     "git",
+     "-C",
+     "/tmp/v37-harness-j6s8vqrj/s5-pass",
+     "push",
+     "origin",
+     "1b44010e54d26808060507c519c3e1d8b88cc04f:refs/heads/result/ctl-lab-a-v3_6"
+    ],
+    "exit_code": 0,
+    "stderr_sha256": "4d6b6109a074241cfc561b4f4116f0eb7ed93c86b7468833c2050eed83fbdb16",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  },
+  "force_push_REJECT": {
+   "E": "8f1e74a8b05eeb6571b59c60b52ae983e500a1a4",
+   "PASS": true,
+   "force_push_argv": [
+    "git",
+    "-C",
+    "/tmp/v37-harness-j6s8vqrj/s5-force",
+    "push",
+    "-f",
+    "origin",
+    "9a0cc48556758581587d8e27da1e29f5a0398fbb:refs/heads/result/ctl-lab-a-v3_6"
+   ],
+   "force_push_exit": 0,
+   "remote_no_longer_E": true,
+   "remote_now": "9a0cc48556758581587d8e27da1e29f5a0398fbb"
+  },
+  "preexisting_branch_REJECT": {
+   "PASS": true,
+   "rejected": true,
+   "verifier_exit": 1
+  },
+  "second_push_REJECT": {
+   "E": "842f68bf3153822a8213b05e67b72693892b2bf6",
+   "PASS": true,
+   "refused_non_ff": true,
+   "remote_now": "842f68bf3153822a8213b05e67b72693892b2bf6",
+   "remote_stays_E": true,
+   "second_push_argv": [
+    "git",
+    "-C",
+    "/tmp/v37-harness-j6s8vqrj/s5-second",
+    "push",
+    "origin",
+    "359f68361ff25eb9a4f032f0b802d16226883fbc:refs/heads/result/ctl-lab-a-v3_6"
+   ],
+   "second_push_exit": 1
+  }
+ },
+ "policy_sequence": [
+  "check remote branch absent (ls-remote rc=2)",
+  "validate R",
+  "create E mechanically",
+  "prepublish-finalization PASS",
+  "re-check remote branch absent",
+  "push create-only E -> branch",
+  "resolve remote branch",
+  "require remote == E",
+  "create A outside E",
+  "postpublish-binding PASS"
+ ],
+ "recorded_at_utc": "2026-08-07T20:00:28Z",
+ "schema": "publication-create-only/v3.6"
+}
