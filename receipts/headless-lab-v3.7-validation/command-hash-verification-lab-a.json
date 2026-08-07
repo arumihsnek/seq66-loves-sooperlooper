@@ -1,19 +1,12 @@
 {
- "all_8_match": false,
+ "aggregate_across_labs": "8 literal tests total (4 per lab); the paired receipt completes the 8/8",
+ "all_tests_match_in_this_lab": true,
  "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
  "count": 4,
  "lab": "LAB-A",
- "negative_fixture": {
-  "E_absent": true,
-  "case": "N1_command_hash_mismatch_reject",
-  "declared_hash_mutated": true,
-  "exit_nonzero": true,
-  "note": "selftest N1 mutates declared command_sha256 (valid argv, real exit 0 command) -> finalizer REJECT, E absent",
-  "real_cli": true
- },
  "note": "recomputed independently; never recomputed = declared by policy",
  "recomputation_algorithm": "sha256(json.dumps(argv, separators=(',', ':'), sort_keys=True).encode('utf-8'))",
- "recorded_at_utc": "2026-08-07T20:00:42Z",
+ "recorded_at_utc": "2026-08-07T20:08:55Z",
  "schema": "command-hash-verification/v3.7",
  "tests": [
   {
@@ -81,5 +74,6 @@
    "test_id": "ft-a4",
    "timeout_seconds": 180
   }
- ]
+ ],
+ "tests_in_this_lab": 4
 }
