@@ -1,0 +1,62 @@
+{
+ "accept_count": 3,
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "blocking_count": 0,
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "created_after_reviews": true,
+ "dispatch_authorized": false,
+ "manifest_exact": true,
+ "manifest_sha256": "71596b8472b459940ee79fe9df8d3687dd3dbbdf5bf4696d897a9e4a1bdb3bba",
+ "non_circular": true,
+ "note": "Binding does not embed the future control-plane commit SHA; created from frozen package bytes only.",
+ "operational_file_count": 21,
+ "package": "v3.9",
+ "payload_hashes_exact": true,
+ "required_actions_count": 0,
+ "reviews": [
+  {
+   "blocking_findings": 0,
+   "detailed_status": "VALID_ADVISORY_VERDICT",
+   "execution_id": "5e86f9c8-5254-485a-bee1-85cac9708b81",
+   "mission_id": "seq66-v3-9-review1-functional-continuity",
+   "required_actions": 0,
+   "response_artifact": "9e86515150e6fd92594c8d07d489a9f6fa1e94c8fdd4e19896ac3e56f1830508",
+   "response_fingerprint": "9e86515150e6fd92594c8d07d489a9f6fa1e94c8fdd4e19896ac3e56f1830508",
+   "review": 1,
+   "status": "COMPLETED",
+   "verdict": "accept",
+   "verdict_hash": "aba31d4eb710b05f882ee62c4b091c886c6968541a34f9015a214d05388e9f7c"
+  },
+  {
+   "blocking_findings": 0,
+   "detailed_status": "VALID_ADVISORY_VERDICT",
+   "execution_id": "753f1500-6043-47ed-a50f-b62251c28ae9",
+   "mission_id": "seq66-v3-9-review2-normative-alignment",
+   "required_actions": 0,
+   "response_artifact": "54498d6d6358c740aeac1479c059d58b50b56588f8854e9c881c95637265fc6f",
+   "response_fingerprint": "54498d6d6358c740aeac1479c059d58b50b56588f8854e9c881c95637265fc6f",
+   "review": 2,
+   "status": "COMPLETED",
+   "verdict": "accept",
+   "verdict_hash": "631b19d802987166d779249fde482a72a3eaede2d119732b6da61b75757efe76"
+  },
+  {
+   "blocking_findings": 0,
+   "detailed_status": "VALID_ADVISORY_VERDICT",
+   "execution_id": "55904bee-05f3-4acc-b76c-6f3a97a54ab0",
+   "mission_id": "seq66-v3-9-review3-adversarial-validity",
+   "required_actions": 0,
+   "response_artifact": "d3e46001b8a4ee7bb938503f426c58b0e00f6e35cce5fd202e8d98ec6805f6a8",
+   "response_fingerprint": "d3e46001b8a4ee7bb938503f426c58b0e00f6e35cce5fd202e8d98ec6805f6a8",
+   "review": 3,
+   "status": "COMPLETED",
+   "verdict": "accept",
+   "verdict_hash": "27c3f7c03dd2d854665aec2407abfb488ac6f8dd6e1c0ca88f84d310e5186a8e"
+  }
+ ],
+ "schema": "review-binding/v3.9",
+ "self_reviewed": false,
+ "technical_dispatch_eligibility": "PASS",
+ "v3_8_status": "REJECTED_AND_FORENSICALLY_CLOSED",
+ "v3_9_status": "EXACT_BYTES_REVIEWED_NOT_DISPATCHED"
+}

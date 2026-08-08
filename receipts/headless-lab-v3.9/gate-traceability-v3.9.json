@@ -1,0 +1,383 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "gates": [
+  {
+   "gate_id": "c-and-r-exist-26183b",
+   "gate_name": "C and R exist",
+   "gate_names": [
+    "C and R exist"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "dispatch-plan-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/dispatch-plan-v3.9.json",
+   "normative_requirement": "C and R must exist as commits",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "c-r-non-empty-0dd609",
+   "gate_name": "C..R non-empty",
+   "gate_names": [
+    "C..R non-empty"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "dispatch-plan-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/dispatch-plan-v3.9.json",
+   "normative_requirement": "C..R must be non-empty (implementation commit)",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "c-r-owned-only-f6a7de",
+   "gate_name": "C..R owned-only",
+   "gate_names": [
+    "C..R owned-only"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "scope-freeze-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/scope-freeze-v3.9.json",
+   "normative_requirement": "leaf changes only owned paths; changed_not_owned=[] forbidden_changed=[]",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "r-c-122b92",
+   "gate_name": "R != C",
+   "gate_names": [
+    "R != C"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "dispatch-plan-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/dispatch-plan-v3.9.json",
+   "normative_requirement": "R must differ from C",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "r-exactly-one-parent-2e900d",
+   "gate_name": "R exactly one parent",
+   "gate_names": [
+    "R exactly one parent"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "dispatch-plan-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/dispatch-plan-v3.9.json",
+   "normative_requirement": "R has exactly one parent",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "r-c-7bb3b6",
+   "gate_name": "R^ == C",
+   "gate_names": [
+    "R^ == C"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "dispatch-plan-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/dispatch-plan-v3.9.json",
+   "normative_requirement": "R parent must equal candidate C",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "all-command-hashes-exact-fb62f9",
+   "gate_name": "all command hashes exact",
+   "gate_names": [
+    "all command hashes exact"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "batch-manifest-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/batch-manifest-v3.9.json",
+   "normative_requirement": "actual argv sha256 == declared command_sha256 (canonical serialization)",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "all-test-ids-exact-29e652",
+   "gate_name": "all test IDs exact",
+   "gate_names": [
+    "all test IDs exact"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "batch-manifest-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/batch-manifest-v3.9.json",
+   "normative_requirement": "literal test IDs must match the frozen set exactly",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "all-tests-exit-0-58e9d6",
+   "gate_name": "all tests exit 0",
+   "gate_names": [
+    "all tests exit 0"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "batch-manifest-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/batch-manifest-v3.9.json",
+   "normative_requirement": "all literal tests must exit 0",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "artifact-verification-pass-553a98",
+   "gate_name": "artifact verification PASS",
+   "gate_names": [
+    "artifact verification PASS"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "controller-evidence-schema-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/controller-evidence-schema-v3.9.json",
+   "normative_requirement": "owned artifacts present and hashed",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "cleanliness-after-pass-74e6d4",
+   "gate_name": "cleanliness_after PASS",
+   "gate_names": [
+    "cleanliness_after PASS"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "build-provenance-policy-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/build-provenance-policy-v3.9.json",
+   "normative_requirement": "worktree clean after build; zero ignored build outputs",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "controlled-build-pass-not-applicable-a6e22d",
+   "gate_name": "controlled build PASS/not_applicable",
+   "gate_names": [
+    "controlled build PASS/not_applicable"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "build-provenance-policy-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/build-provenance-policy-v3.9.json",
+   "normative_requirement": "canonical compile from candidate C sources into empty build dir; ELF/ldd/JACK; cleanup",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "detached-checkout-clean-458a1e",
+   "gate_name": "detached checkout clean",
+   "gate_names": [
+    "detached checkout clean"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "dispatch-plan-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/dispatch-plan-v3.9.json",
+   "normative_requirement": "detached R checkout clean",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "empty-build-dir-entries-before-45e4be",
+   "gate_name": "empty build dir (entries_before=[])",
+   "gate_names": [
+    "empty build dir (entries_before=[])"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "build-provenance-policy-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/build-provenance-policy-v3.9.json",
+   "normative_requirement": "empty build dir before compiling",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "evidence-absent-from-c-and-r-a8d4bf",
+   "gate_name": "evidence absent from C and R",
+   "gate_names": [
+    "evidence absent from C and R"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "scope-freeze-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/scope-freeze-v3.9.json",
+   "normative_requirement": "controller evidence path absent from C and R (leaf must not create evidence)",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "identity-abe96b",
+   "gate_name": "identity:",
+   "gate_names": [
+    "identity: "
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "package-identity-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/package-identity-v3.9.json",
+   "normative_requirement": "all identity sources (batch, candidate, leaf, lease, result path) agree",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "ownership-diff-evidence-pass-acc8ed",
+   "gate_name": "ownership diff evidence PASS",
+   "gate_names": [
+    "ownership diff evidence PASS"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "scope-freeze-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/scope-freeze-v3.9.json",
+   "normative_requirement": "changed paths owned-only; no forbidden paths",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "remote-absence-pre-evidence-c2da10",
+   "gate_name": "remote absence (pre-evidence)",
+   "gate_names": [
+    "remote absence (pre-evidence)"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "publication-policy-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/publication-policy-v3.9.json",
+   "normative_requirement": "planned result branch absent remotely before E (ls-remote --exit-code rc=2)",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "required-paths-complete-ca2265",
+   "gate_name": "required paths complete",
+   "gate_names": [
+    "required paths complete"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "scope-freeze-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/scope-freeze-v3.9.json",
+   "normative_requirement": "all owned paths present in R",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "runtime-full-contract-pass-c6c1d5",
+   "gate_name": "runtime full contract PASS",
+   "gate_names": [
+    "runtime full contract PASS"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "functional-contract-baseline-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/functional-contract-baseline-v3.9.json",
+   "normative_requirement": "structural API + semantic annotations + valid-input return shapes conform to baseline",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "static-source-validation-pass-5405ab",
+   "gate_name": "static source validation PASS",
+   "gate_names": [
+    "static source validation PASS"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "process-hardening-contract-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/process-hardening-contract-v3.9.json",
+   "normative_requirement": "no forbidden bypass patterns in controller source",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "traceability-assertion-pass-73ff89",
+   "gate_name": "traceability assertion PASS",
+   "gate_names": [
+    "traceability assertion PASS"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "gate-traceability-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/gate-traceability-v3.9.json",
+   "normative_requirement": "every blocking gate has normative authority; no orphan gates",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "zero-tracked-elf-cd7acc",
+   "gate_name": "zero tracked ELF",
+   "gate_names": [
+    "zero tracked ELF"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "build-provenance-policy-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/build-provenance-policy-v3.9.json",
+   "normative_requirement": "R must contain zero tracked ELF binaries",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "zero-unexpected-ignored-outputs-2eb9cd",
+   "gate_name": "zero unexpected ignored outputs",
+   "gate_names": [
+    "zero unexpected ignored outputs"
+   ],
+   "leaf_required_to_read": false,
+   "leaf_visible": false,
+   "negative_fixture": null,
+   "normative_artifact": "dispatch-plan-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/dispatch-plan-v3.9.json",
+   "normative_requirement": "zero unexpected ignored build outputs",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  },
+  {
+   "gate_id": "zero-untracked-0b3cb2",
+   "gate_name": "zero untracked",
+   "gate_names": [
+    "zero untracked"
+   ],
+   "leaf_required_to_read": true,
+   "leaf_visible": true,
+   "negative_fixture": null,
+   "normative_artifact": "dispatch-plan-v3.9.json",
+   "normative_path": "receipts/headless-lab-v3.9/dispatch-plan-v3.9.json",
+   "normative_requirement": "zero untracked files in R checkout",
+   "phase": "prepublication",
+   "verification_method": "finalizer executable gate"
+  }
+ ],
+ "note": "A rejection gate is valid only if normative_artifact exists, the normative requirement is explicit, leaf_visible=true when it affects leaf implementation, and the verification method tests exactly that requirement. Selftest fixture behavior, finalizer source behavior, historical convention or one canonical implementation example are NOT sufficient justification.",
+ "principle": "NO EXECUTABLE REJECTION GATE WITHOUT NORMATIVE AUTHORITY",
+ "schema": "gate-traceability/v3.9"
+}

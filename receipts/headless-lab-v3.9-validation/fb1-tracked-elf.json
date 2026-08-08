@@ -1,0 +1,12 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "evidence": [
+  "NA5 selftest: tracked ELF under fixture path -> REJECT (exit 1)",
+  "replay R_B: zero tracked ELF still rejects",
+  "leaf-requirements-v3.9.json R-B6 makes the requirement leaf-visible"
+ ],
+ "finding": "F-B1",
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "schema": "validation/v3.9",
+ "verdict": "PASS (normative rejection retained)"
+}

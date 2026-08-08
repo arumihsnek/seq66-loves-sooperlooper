@@ -1,0 +1,19 @@
+{
+ "R_A": {
+  "forensic_only": true,
+  "no_longer_rejected_for_F_A1": true,
+  "not_integration_eligible": true,
+  "remaining_failure": "osc_probe method signature drift (genuine baseline non-conformance)"
+ },
+ "R_B": {
+  "F_B1_still_rejects": true,
+  "F_B2_no_longer_rejects_evaluated_annotations": true,
+  "F_B3_valid_wav_return_shape": "PASS",
+  "forensic_only": true,
+  "remaining_failure": "diff_snapshots(before, after) signature drift + tracked ELF"
+ },
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "schema": "validation/v3.9",
+ "verdict": "CONFORMS"
+}

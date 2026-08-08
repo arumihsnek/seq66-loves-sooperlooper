@@ -1,0 +1,7 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "note": "8/8 literal test argv byte-identical v3.8->v3.9; declared hashes verified",
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "result": "PASS",
+ "schema": "validation/v3.9"
+}

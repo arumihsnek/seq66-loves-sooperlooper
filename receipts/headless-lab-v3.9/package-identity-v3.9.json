@@ -1,0 +1,51 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "branch_patterns": {
+  "lab_a": "result/<future-run-id>-lab-a-v3_9",
+  "lab_b": "result/<future-run-id>-lab-b-v3_9"
+ },
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "dispatch_authorized": false,
+ "labs": {
+  "LAB-A": {
+   "leaf_id": "LEAF-LAB-A-V3_9",
+   "lease_id": "20260808T233306Z-LAB-A-V3_9",
+   "planned_result_branch": "result/<future-run-id>-lab-a-v3_9",
+   "result_evidence_path": "receipts/headless-lab-results-v3.9/lab-a-controller-evidence.json"
+  },
+  "LAB-B": {
+   "leaf_id": "LEAF-LAB-B-V3_9",
+   "lease_id": "20260808T233306Z-LAB-B-V3_9",
+   "planned_result_branch": "result/<future-run-id>-lab-b-v3_9",
+   "result_evidence_path": "receipts/headless-lab-results-v3.9/lab-b-controller-evidence.json"
+  }
+ },
+ "leases_activated": false,
+ "leaves": 0,
+ "note": "v3.9 supersedes the v3.8 package whose technical dispatch eligibility was REVOKED by the rejected-dispatch forensic review (CP-073; senior execution 0631a805-a40b-44f4-836c-f2a194c2b43e).",
+ "operational_files": [
+  "package-identity-v3.9.json",
+  "scope-freeze-v3.9.json",
+  "batch-manifest-v3.9.json",
+  "dispatch-plan-v3.9.json",
+  "lease-plan-lab-a-v3.9.json",
+  "lease-plan-lab-b-v3.9.json",
+  "mechanical-finalizer-v3.9.py",
+  "acceptance-verifier-v3.9.py",
+  "cross-manifest-coherence-validator.py"
+ ],
+ "package": "v3.9",
+ "package_generation": "v3.9",
+ "result_paths": {
+  "lab_a_controller_evidence": "receipts/headless-lab-results-v3.9/lab-a-controller-evidence.json",
+  "lab_b_controller_evidence": "receipts/headless-lab-results-v3.9/lab-b-controller-evidence.json"
+ },
+ "schema": "package-identity/v3.9",
+ "supersedes": {
+  "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+  "manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+  "package": "v3.8",
+  "status": "REJECTED_AND_FORENSICALLY_CLOSED",
+  "technical_dispatch_eligibility": "REVOKED"
+ }
+}

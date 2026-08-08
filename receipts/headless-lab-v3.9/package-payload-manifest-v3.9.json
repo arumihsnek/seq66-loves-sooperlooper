@@ -1,0 +1,129 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "files": [
+  {
+   "name": "acceptance-verifier-v3.9.py",
+   "sha256": "9639169de7b8e8898eb762e04cfe788e21d7163e68c6ca691043ba9fae144422",
+   "size": 30218
+  },
+  {
+   "name": "batch-manifest-v3.9.json",
+   "sha256": "a8453405b7705919ccdc3aa4b7c1aefdf192756081879aaa134cde7b4feae11c",
+   "size": 11081
+  },
+  {
+   "name": "build-provenance-policy-v3.9.json",
+   "sha256": "d7000fe8a18d128bffa3a0afffa0da0ae763766dd460fe72b324bf4f86cb94d8",
+   "size": 2220
+  },
+  {
+   "name": "controller-acceptance-schema-v3.9.json",
+   "sha256": "40db5eba0387aa7486671a86845daee6faf049050dd7e9616c9cf6b9144d17a0",
+   "size": 1067
+  },
+  {
+   "name": "controller-evidence-schema-v3.9.json",
+   "sha256": "8787ebdc484d65883e98aa8b99a1e1e61f3399d2f34ecc1b417fe91c5025d73c",
+   "size": 1181
+  },
+  {
+   "name": "cross-manifest-coherence-validator.py",
+   "sha256": "02dc9ef667f888c4104781328b2bd726a248f4c378fb8cecd560ad7e7cd67411",
+   "size": 8483
+  },
+  {
+   "name": "dispatch-plan-v3.9.json",
+   "sha256": "384dc654906e73300cc36a23eeeb6272553a32f1a3711ef521881a04baefd486",
+   "size": 1637
+  },
+  {
+   "name": "functional-contract-baseline-v3.9.json",
+   "sha256": "54994ff5766bbaaf353ebe8c77f0da4bb22fe2efb2557825a3b25ceadd872d45",
+   "size": 9693
+  },
+  {
+   "name": "gate-traceability-v3.9.json",
+   "sha256": "283d45bb4201942aa4e2c2f7a867dfd979f08d2450023f586a5ba01708570464",
+   "size": 13982
+  },
+  {
+   "name": "lab-api-contract-v3.9.json",
+   "sha256": "b960725e6467db449a757737f0ae486dc97ef5e87f6a992b764a266a421f13e8",
+   "size": 6546
+  },
+  {
+   "name": "leaf-r-report-schema-v3.9.json",
+   "sha256": "39f8767ec6688328927abffd588f8a733fd28d8d00a1843f874bca24fc5097c0",
+   "size": 820
+  },
+  {
+   "name": "leaf-requirements-v3.9.json",
+   "sha256": "46774c6999081368f6caa0ce1bf1744a4060e72d2e9a8d8ecea7f8eaf90d341d",
+   "size": 7257
+  },
+  {
+   "name": "lease-plan-lab-a-v3.9.json",
+   "sha256": "09715128492a77222ee2476ddf9b14f96d396148cbf3ffed348fa169ff17f41f",
+   "size": 588
+  },
+  {
+   "name": "lease-plan-lab-b-v3.9.json",
+   "sha256": "d7dc93a247bdd1ea60f0f56bbe5b4b6a4b25b1a244290396e207030be0a6bfc0",
+   "size": 588
+  },
+  {
+   "name": "mechanical-finalizer-v3.9.py",
+   "sha256": "718e1b3b6a074e9048c5aad12300b3e6585e78c1d9910d2597c9a7e3cbd8bfc0",
+   "size": 75788
+  },
+  {
+   "name": "package-identity-v3.9.json",
+   "sha256": "21dd323929c94992bc1d9fbb85fe2f7b15444f712855d1cf88f337b7cd9bdf2c",
+   "size": 1958
+  },
+  {
+   "name": "port-plan-v3.9.json",
+   "sha256": "7823280f14850c98e539c1717548a405202d6c105ef9ac9677244e0c581fc453",
+   "size": 1429
+  },
+  {
+   "name": "predispatch-readiness-v3.9.json",
+   "sha256": "52b5052d6eeb7f34ee145b36a064eecb55ab0813949a5bfe531c193dac657b29",
+   "size": 549
+  },
+  {
+   "name": "process-hardening-contract-v3.9.json",
+   "sha256": "31713ea2ae422b643f071fa8ac2cba4a27d696c86f375ac9b8761b24f77ceb6b",
+   "size": 3962
+  },
+  {
+   "name": "publication-policy-v3.9.json",
+   "sha256": "628758dd3630ec6034e7975ebffca847c299424c2e0a20d5577fd2a77bb7f444",
+   "size": 1149
+  },
+  {
+   "name": "scope-freeze-v3.9.json",
+   "sha256": "317a72b8ff5e72fdd9871de82d6bd576afec4d853e89cc1c64f7e62c60f9fdd3",
+   "size": 2429
+  }
+ ],
+ "manifest_self_excluded": true,
+ "operational_file_count": 21,
+ "package": "v3.9",
+ "review_exclusion": "review binding and validation receipts are NOT part of this payload",
+ "schema": "package-payload-manifest/v3.9",
+ "supersedes": {
+  "manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+  "package": "v3.8",
+  "status": "REJECTED_AND_FORENSICALLY_CLOSED",
+  "supersession_findings": [
+   "F-A1 FINALIZER_OVERCONSTRAINT corrected",
+   "F-B2 FINALIZER_REPRESENTATION_OVERCONSTRAINT corrected",
+   "F-B3 FINALIZER_OVERCONSTRAINT corrected",
+   "F-B1 LEAF_CONTRACT_VIOLATION \u2014 tracked ELF prohibition retained and made leaf-visible"
+  ]
+ },
+ "zero_extra": true,
+ "zero_missing": true
+}

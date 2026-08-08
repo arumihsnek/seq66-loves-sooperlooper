@@ -1,0 +1,13 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "evidence": [
+  "NA4/C1: valid controlled WAVs -> analyze_loop_reproduction returns dict -> PASS",
+  "C2: valid WAVs wrong return type -> REJECT",
+  "C3: nonexistent paths -> diagnostic only (gate_effect none)",
+  "replay R_B: return_shape=PASS with valid WAVs"
+ ],
+ "finding": "F-B3",
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "schema": "validation/v3.9",
+ "verdict": "PASS"
+}
