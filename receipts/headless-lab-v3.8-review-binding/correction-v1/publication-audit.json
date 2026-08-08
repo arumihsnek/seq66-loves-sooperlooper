@@ -1,0 +1,38 @@
+{
+ "PUB-F1": {
+  "finding": "a14c3f6c was pushed to fork-main",
+  "remote_fork_main": "a14c3f6c4acf89fc24602576ceb7806e81c830a1",
+  "verified": true
+ },
+ "PUB-F2": {
+  "finding": "fork-main is PR #34 base branch",
+  "verified": true
+ },
+ "PUB-F3": {
+  "finding": "PR_MERGE_AUTHORIZED=false",
+  "verified": true
+ },
+ "PUB-F4": {
+  "finding": "PR source head remained 3090f2e0",
+  "remote_source_head": "3090f2e078ca29762f7654b9e5a872f58ad4ac5b",
+  "verified": true
+ },
+ "PUB-F5": {
+  "finding": "local de585b39 was never remotely published",
+  "verified": true
+ },
+ "PUB-F6": {
+  "finding": "base/head diverged from merge-base 3585334c",
+  "merge_base": "3585334c07accc6f6036d04a7487bea6c6610894",
+  "verified": true
+ },
+ "attribution": "no fraud or malice; base branch publication was performed by the prior controller session under a mistaken assumption about PR topology; preserved, not rewritten",
+ "clasificacion": {
+  "FORCE_REWIND_RECOMMENDED": false,
+  "HISTORY_REWRITE_RECOMMENDED": false,
+  "UNAUTHORIZED_BASE_BRANCH_PUBLICATION": true
+ },
+ "fork_main_unchanged": true,
+ "recorded_at_utc": "2026-08-08T21:12:13Z",
+ "schema": "correction-v1/publication-audit"
+}

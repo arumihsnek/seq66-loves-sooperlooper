@@ -1,0 +1,10 @@
+{
+ "bundle_sha256": "29b20197ae05cc995a86274ac87246581d94d7fd7d90e2c3e4e544e6f29a47ff",
+ "mission_id": "hermes-v38-adversarial-final-acceptance",
+ "mode": "final-review",
+ "model_processes_consumed": 0,
+ "preflight_status": "PREFLIGHT_VALID",
+ "preflight_valid": true,
+ "recorded_at_utc": "2026-08-08T21:14:01Z",
+ "schema": "correction-v1/adversarial-final-preflight"
+}

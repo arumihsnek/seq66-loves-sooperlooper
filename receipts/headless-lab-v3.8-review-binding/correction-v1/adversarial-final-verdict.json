@@ -1,0 +1,107 @@
+{
+ "blocking_findings": null,
+ "bound_manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+ "bound_payload_count": 19,
+ "codex_exec_processes": 1,
+ "detailed_status": "VALID_ADVISORY_VERDICT",
+ "execution_id": "75dc7df0-ec42-424a-b67b-799b0217c6e2",
+ "follow_up_turns": 0,
+ "mission_id": "hermes-v38-adversarial-final-acceptance",
+ "mode": null,
+ "model_turns_observed": 1,
+ "operational_usability": true,
+ "recorded_at_utc": "2026-08-08T21:14:01Z",
+ "required_actions": null,
+ "response": {
+  "claim_classifications": [
+   {
+    "claim": "El payload v3.8 est\u00e1 congelado y ligado byte-exactamente al manifiesto bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18 con 19 artefactos.",
+    "classification": "supported",
+    "evidence": [
+     "package-validation PASS: 19/19",
+     "PAYLOAD_BYTE_DRIFT=false",
+     "payload_hashes_evidence enumera los 19 hashes"
+    ]
+   },
+   {
+    "claim": "Las defensas de identidad fallan de forma cerrada y permiten el control v\u00e1lido.",
+    "classification": "supported",
+    "evidence": [
+     "identity-negative-matrix PASS: 15/15 REJECT + control PASS",
+     "finalizer-fail-closed: 8/8 PASS",
+     "cross-manifest-coherence: 59 fuentes, 0 mismatches"
+    ]
+   },
+   {
+    "claim": "La cobertura funcional y adversarial heredada de v3.7 permanece intacta.",
+    "classification": "supported",
+    "evidence": [
+     "negative matrix 29/29",
+     "runtime negatives 12/12",
+     "selftest 32/32",
+     "functional-continuity PASS",
+     "manifest v3.7 preservado byte-exactamente"
+    ]
+   },
+   {
+    "claim": "El paquete est\u00e1 t\u00e9cnicamente preparado para un \u00fanico dispatch futuro sujeto a autorizaci\u00f3n humana.",
+    "classification": "supported",
+    "evidence": [
+     "eligibility PASS seg\u00fan el bundle",
+     "dispatch_authorized=false",
+     "leases planned, no activadas",
+     "integration/D0/D1/D2/merge=false"
+    ]
+   },
+   {
+    "claim": "No existen bloqueos ni acciones obligatorias antes de aceptar t\u00e9cnicamente el paquete congelado.",
+    "classification": "supported",
+    "evidence": [
+     "revisiones funcional e identidad: accept 0/0",
+     "revisi\u00f3n adversarial original: continue 0/0",
+     "pruebas y validadores suministrados sin fallos"
+    ]
+   }
+  ],
+  "next_safe_step": "Mantener el payload inmutable y dispatch_authorized=false; solo una autorizaci\u00f3n humana expl\u00edcita puede habilitar un \u00fanico dispatch fresco v3.8 LAB-A/LAB-B.",
+  "question_answers": [
+   {
+    "answer": "S\u00ed. La evidencia suministrada registra 15/15 mutaciones rechazadas mediante CLI real; los casos de identidad terminan con exit 3 e IDENTITY_MISMATCH, y N12\u2013N14 son rechazados por el validador cross-manifest con exit 1 y comprobaciones supersedes identificadas.",
+    "id": "Q1"
+   },
+   {
+    "answer": "S\u00ed. El control con identidad correcta pasa y crea el artefacto E usando el C real, demostrando que el harness no rechaza indiscriminadamente.",
+    "id": "Q2"
+   },
+   {
+    "answer": "S\u00ed. N15 reproduce el mixed-batch mismatch de v3.7 \u2014scope 20260806T234554Z frente a package 20260807T161935Z\u2014 y obtiene REJECT.",
+    "id": "Q3"
+   },
+   {
+    "answer": "S\u00ed. La cobertura heredada permanece intacta: 29/29 negativos, 12/12 negativos de runtime, hashes 8/8, ownership 2/2, selftest 32/32 y functional-continuity PASS.",
+    "id": "Q4"
+   },
+   {
+    "answer": "S\u00ed. El paquete congelado ligado al manifiesto bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18 y sus 19 hashes es t\u00e9cnicamente elegible para un \u00fanico dispatch posterior. Este dictamen no autoriza el dispatch; dispatch_authorized contin\u00faa siendo false y la autorizaci\u00f3n humana sigue siendo condici\u00f3n operativa.",
+    "id": "Q5"
+   },
+   {
+    "answer": "No. Dentro de la evidencia suministrada no queda ning\u00fan blocking finding ni required action previo a la aceptaci\u00f3n t\u00e9cnica: blocking_findings=0 y required_actions=0.",
+    "id": "Q6"
+   }
+  ],
+  "schema_version": "codex-senior-consult-response/v3",
+  "summary": "blocking_findings=0; required_actions=0. Se acepta t\u00e9cnicamente el payload v3.8 congelado para ser elegible para un \u00fanico dispatch posterior. La aceptaci\u00f3n no constituye autorizaci\u00f3n de dispatch y no altera el payload.",
+  "verdict": "accept"
+ },
+ "response_artifact": {
+  "artifact_schema": "codex-senior-consult-response-artifact/v1",
+  "fingerprint": "24f509205ab7a012a4cafba9ee30fc855cd3b0c0c5eaa9ade1d9a0cd786aaddc",
+  "relative_path": "responses/24f509205ab7a012a4cafba9ee30fc855cd3b0c0c5eaa9ade1d9a0cd786aaddc.json"
+ },
+ "response_fingerprint": "24f509205ab7a012a4cafba9ee30fc855cd3b0c0c5eaa9ade1d9a0cd786aaddc",
+ "schema": "correction-v1/adversarial-final-verdict",
+ "status": "COMPLETED",
+ "tool_calls_observed": 0,
+ "verdict": "accept"
+}

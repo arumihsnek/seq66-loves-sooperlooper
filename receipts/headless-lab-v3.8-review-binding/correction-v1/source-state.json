@@ -1,0 +1,40 @@
+{
+ "PR": {
+  "base_ref_name": "fork-main",
+  "draft": true,
+  "head_ref_name": "integration/baseline-qualification-20260805",
+  "head_ref_oid": "3090f2e078ca29762f7654b9e5a872f58ad4ac5b",
+  "mergeable": "CONFLICTING",
+  "number": 34,
+  "state": "open"
+ },
+ "a14c3f6c_exists": true,
+ "ci": {
+  "audio_integration_core_31226194221": {
+   "conclusion": "success",
+   "head_sha": "3090f2e078ca29762f7654b9e5a872f58ad4ac5b",
+   "status": "completed"
+  },
+  "project_control_plane_31226194220": {
+   "conclusion": "success",
+   "head_sha": "3090f2e078ca29762f7654b9e5a872f58ad4ac5b",
+   "status": "completed"
+  }
+ },
+ "conclusion": "SOURCE_STATE_VALID",
+ "de585b39_remote": {
+  "actual": "not present on source branch (still 3090f2e0)",
+  "expected": false
+ },
+ "expected_head": "3090f2e078ca29762f7654b9e5a872f58ad4ac5b",
+ "fork_main": {
+  "contains_a14c3f6c": true,
+  "remote_head": "a14c3f6c4acf89fc24602576ceb7806e81c830a1"
+ },
+ "head_match": true,
+ "merge_base_forkmain_prsource": "3585334c07accc6f6036d04a7487bea6c6610894",
+ "mergeable_note": "CONFLICTING because fork-main advanced to a14c3f6c (unauthorized base publication) while PR head stayed at 3090f2e0 \u2014 expected divergence, documented in publication-audit.json",
+ "recorded_at_utc": "2026-08-08T21:12:13Z",
+ "remote_v3_8_result_branches": [],
+ "schema": "correction-v1/source-state"
+}
