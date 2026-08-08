@@ -1,0 +1,19 @@
+{
+ "D0_D1_D2_authorized": false,
+ "PR_merge_authorized": false,
+ "authorization_timestamp_utc": "2026-08-08T22:39:16Z",
+ "controller_evidence_recorded_at_utc": "2026-08-08T22:41:37Z",
+ "dispatch_run_id": "20260808T223904Z-v3-8-authorized-lab-dispatch",
+ "force_push_authorized": false,
+ "integration_authorized": false,
+ "lab_a_lease_activation_authorized": true,
+ "lab_b_lease_activation_authorized": true,
+ "package": "v3.8",
+ "replacement_leaf_authorized": false,
+ "schema": "human-dispatch-authorization/v3.8",
+ "second_dispatch_authorized": false,
+ "source": "Julio/Telegram explicit human authorization, v3.8 dispatch mission",
+ "v3_8_dispatch_authorized": true,
+ "v3_8_dispatch_count_authorized": 1,
+ "worktree_deletion_authorized": false
+}

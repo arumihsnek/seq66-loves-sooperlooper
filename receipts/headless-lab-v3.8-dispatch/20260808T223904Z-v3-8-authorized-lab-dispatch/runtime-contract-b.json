@@ -1,0 +1,13 @@
+{
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "dispatch_run_id": "20260808T223904Z-v3-8-authorized-lab-dispatch",
+ "finalizer_findings": "structural=FAIL (param annotations mismatch: expected 'str | Path'/'int'/'float'/'AnalysisResult' literal annotations, actual evaluated typing.Union/class objects \u2014 module lacks 'from __future__ import annotations'); return_shape=FAIL (analyze_loop_reproduction('x.wav','y.wav',4800) raises FileNotFoundError instead of returning dict); constraints_ok=False",
+ "finalizer_runtime_full_contract": "FAIL",
+ "lab": "LAB-B",
+ "package": "v3.8",
+ "recorded_at_utc": "2026-08-08T22:58:09Z",
+ "verdict": "FAIL",
+ "verifier_functional_continuity": "PASS",
+ "verifier_identity_coherence": "PASS"
+}

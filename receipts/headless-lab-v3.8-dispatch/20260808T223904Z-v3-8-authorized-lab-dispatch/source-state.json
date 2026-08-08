@@ -1,0 +1,33 @@
+{
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "ci_audio_core_run": {
+  "conclusion": "success",
+  "exact": true,
+  "head_sha": "4176fc85cdb9d573acd77eb01c310657d8c2bc8c",
+  "run": 31281504161,
+  "status": "completed"
+ },
+ "ci_control_plane_run": {
+  "conclusion": "success",
+  "exact": true,
+  "head_sha": "4176fc85cdb9d573acd77eb01c310657d8c2bc8c",
+  "run": 31281504150,
+  "status": "completed"
+ },
+ "current_checkpoint": "CP-071",
+ "package": "v3.8",
+ "package_manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+ "pr_base_branch": "fork-main",
+ "pr_draft": true,
+ "pr_mergeable": true,
+ "pr_number": 34,
+ "pr_source_branch": "integration/baseline-qualification-20260805",
+ "pr_state": "open",
+ "pre_dispatch_control_pr_head": "4176fc85cdb9d573acd77eb01c310657d8c2bc8c",
+ "recorded_at_utc": "2026-08-08T22:41:37Z",
+ "schema": "source-state/v3.8",
+ "zero_activated_v3_8_leases": true,
+ "zero_v3_8_leaves": true,
+ "zero_v3_8_remote_branches": true
+}

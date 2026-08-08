@@ -1,0 +1,12 @@
+{
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "branch": "result/20260808T223904Z-v3-8-authorized-lab-dispatch-lab-a-v3_8",
+ "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "dispatch_run_id": "20260808T223904Z-v3-8-authorized-lab-dispatch",
+ "lab": "LAB-A",
+ "package": "v3.8",
+ "pre_evidence_absent": true,
+ "pre_push_absent": true,
+ "recorded_at_utc": "2026-08-08T22:58:21Z",
+ "verdict": "PASS"
+}
