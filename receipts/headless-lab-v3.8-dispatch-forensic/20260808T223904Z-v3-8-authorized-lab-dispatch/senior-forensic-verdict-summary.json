@@ -1,0 +1,32 @@
+{
+ "actionable": true,
+ "advisory_only": true,
+ "blocking_findings": [
+  "F-B1 leaf violation: R_B tracked two ELF fixtures (72,408B/71,864B, 100755)",
+  "F-A1 overconstraint: finalizer spec_from_file_location loader rejects package-correct relative import",
+  "F-B2 overconstraint: finalizer requires literal annotation string representation; semantic equivalence ignored",
+  "F-B3 overconstraint: finalizer requires normal return for nonexistent placeholder paths",
+  "SELFTEST_GLOBAL=PASS does not establish normative alignment"
+ ],
+ "decision_recommendation": "Alternative B: ONE_OR_MORE_FINALIZER_OVERCONSTRAINTS_CONFIRMED",
+ "detailed_status": "VALID_ADVISORY_VERDICT",
+ "does_not_authorize": [
+  "new v3.8 dispatch",
+  "v3.9 preparation"
+ ],
+ "execution_id": "0631a805-a40b-44f4-836c-f2a194c2b43e",
+ "key_conclusions": {
+  "Q1": "F-B1 is the only genuine leaf contract violation (tracked ELF explicit in Layer 1)",
+  "Q2": "F-A1/F-B2/F-B3 are finalizer overconstraints (standalone loading, annotation string representation, missing-file behavior)",
+  "Q3": "SELFTEST_GLOBAL=PASS proves internal consistency, NOT normative alignment",
+  "Q4": "v3.8 NOT safe for another dispatch unchanged -> REVOKED",
+  "Q5": "v3.9 package correction required (separate human authorization)",
+  "Q6": "No failed R eligible for integration"
+ },
+ "mission_id": "seq66-v3-8-rejected-dispatch-contract-alignment",
+ "mode": "integrated-review",
+ "response_fingerprint": "7c73c73f7462cb04f1e851e9c8b4b4d9e2c318b77d01f33d5e1a54fa1f5100e7",
+ "schema": "senior-forensic-verdict/v3.8",
+ "status": "COMPLETED",
+ "verdict": "changes_required"
+}

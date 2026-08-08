@@ -1,0 +1,59 @@
+{
+ "author_committer_metadata": "Hermes Leaf LAB-A <hermes-leaf@nousresearch.com> 1786228931\nHermes Leaf LAB-A <hermes-leaf@nousresearch.com> 1786228931\n509538784afc2b828f2d922f65cf8ca3a39b5ee7\n16e27313cfa542a85f7e6a36db4344e2d7e199cd",
+ "blobs": [
+  {
+   "blob_oid": "e4a42eb924f7814dc60f410956f47c88f432f293",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/__init__.py",
+   "sha256": "903ac2729fc1ac686b55287ab4101bcd6f86cdd1cc7d825a6b8986fd359a63a2",
+   "size": 203,
+   "status": "A"
+  },
+  {
+   "blob_oid": "9fd37d76e5120ad05cfe7f04d3f9d145e5330ae1",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/jack_server.py",
+   "sha256": "7b481699336444e0dd86150db33153941cb1334cd0ce6d87f7f14616272e47a3",
+   "size": 2532,
+   "status": "A"
+  },
+  {
+   "blob_oid": "ffc5b6879f0547b8c75feaa64d70f8eb16d22355",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/osc_probe.py",
+   "sha256": "36782b678a59efa1f6f2c61356c06aefbbcc4be3d85068635b6a63e073d96259",
+   "size": 2394,
+   "status": "A"
+  },
+  {
+   "blob_oid": "89ae86c7532be822d36fe9011b4075abff936d82",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/process_supervisor.py",
+   "sha256": "d72f6c731188f65f02d2e425ca3af53a3e6102f0d0e82cc8c1e54347690665c4",
+   "size": 3755,
+   "status": "A"
+  },
+  {
+   "blob_oid": "3cd4d9e0d42611ef86bf114a0a4642264ab27e63",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+   "sha256": "3e55fa997af538d9bd3f8922067f64260e95ed2166ee10ff18ef464e85efd4f8",
+   "size": 2955,
+   "status": "A"
+  }
+ ],
+ "changed_paths": [
+  "tests/integration/headless_audio_lab/__init__.py",
+  "tests/integration/headless_audio_lab/jack_server.py",
+  "tests/integration/headless_audio_lab/osc_probe.py",
+  "tests/integration/headless_audio_lab/process_supervisor.py",
+  "tests/integration/headless_audio_lab/sooperlooper_launcher.py"
+ ],
+ "commit_object_bytes": 337,
+ "commit_object_sha256": "6bd0345c94474469ace014bff0f79a094caf25e0ba991b7450a9916196b2a466",
+ "commit_sha": "9a09b5f6cd4019873886c7714276312b62c7e4f5",
+ "diff_name_status_C_to_R": "A\ttests/integration/headless_audio_lab/__init__.py\nA\ttests/integration/headless_audio_lab/jack_server.py\nA\ttests/integration/headless_audio_lab/osc_probe.py\nA\ttests/integration/headless_audio_lab/process_supervisor.py\nA\ttests/integration/headless_audio_lab/sooperlooper_launcher.py",
+ "parent": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "schema": "failed-r-preservation/v3.8",
+ "tree": "16e27313cfa542a85f7e6a36db4344e2d7e199cd"
+}

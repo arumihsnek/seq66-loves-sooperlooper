@@ -1,0 +1,11 @@
+{
+ "classification": "LEAF_CONTRACT_VIOLATION",
+ "finding": "F-B1",
+ "layer1_explicit": [
+  "tracked ELF rejected (build-provenance-policy policy)",
+  "controller ignores leaf-produced binaries (build-provenance-policy policy)",
+  "zero tracked ELF (dispatch-plan gate)"
+ ],
+ "nuance": "Controller instruction to the leaf explicitly said compile and copy binaries to fixtures; canonical fixture representation (directories + .gitkeep) is NOT normative in Layer 1 - only absence of tracked ELF is.",
+ "observed": "R_B tracked two ELF binaries under fixtures/"
+}
