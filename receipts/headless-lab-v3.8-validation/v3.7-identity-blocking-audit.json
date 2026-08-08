@@ -1,0 +1,215 @@
+{
+  "schema": "v3.7-identity-blocking-audit/v3.8",
+  "generated_from": "EXACT_BYTES_AT_3090f2e078ca29762f7654b9e5a872f58ad4ac5b",
+  "run_id": "20260808T132428Z-v3-8-identity-coherence-package",
+  "v3_7_package_manifest_sha256_expected": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+  "v3_7_package_manifest_sha256_observed": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+  "manifest_sha256_match": true,
+  "package_manifest_files_count": 17,
+  "package_manifest_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+  "batch_manifest_supersedes": {
+    "batch_id": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_7",
+    "manifest_sha256": "b287266501507e454b8ee9d8f39983a5f06ba1e8f2377982ac35939edaa741bd",
+    "package": "v3.6",
+    "reason": "v3.6 frozen locally, senior functional-continuity review returned changes_required (fc-f1 full runtime contract, fc-f2 command-hash evidence, fc-f3 ownership-diff evidence). v3.7 closes the three findings; semantic surface otherwise inherited.",
+    "supersession_findings": [
+      "fc-f1",
+      "fc-f2",
+      "fc-f3"
+    ]
+  },
+  "batch_rows": [
+    {
+      "source": "package-manifest",
+      "file": "package-payload-manifest-v3.7.json",
+      "file_blob_oid": "a5e10d702e944deec2ee2e491fb4fa06c76a00f7",
+      "file_sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+      "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "matches_expected": true
+    },
+    {
+      "source": "batch-manifest",
+      "file": "batch-manifest-v3.7.json",
+      "file_blob_oid": "1ddb108fab02be33d4dfa324785c6264e7ea4dc6",
+      "file_sha256": "710c76fef2ccf45d31d6f63488026df62076d22a8eb59d896b9565c29b0ff812",
+      "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "matches_expected": true
+    },
+    {
+      "source": "dispatch-plan",
+      "file": "dispatch-plan-v3.7.json",
+      "file_blob_oid": "e0c8a8bb0791cc5ddab2e01822959e276b93142c",
+      "file_sha256": "b16bbe7437da806af8b4fcc41bcf958bfdbdcea2a9eaaac54f1ab88e13de31ac",
+      "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "matches_expected": true
+    },
+    {
+      "source": "lease A",
+      "file": "lease-plan-lab-a-v3.7.json",
+      "file_blob_oid": "9ca3f2a4f0bd620b5a124297150f397052ed8ff1",
+      "file_sha256": "5b65e9b64cd2ea2c6ee2ce8fff05a0ea97a3140329d55efb27febd0a6554e442",
+      "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "matches_expected": true
+    },
+    {
+      "source": "lease B",
+      "file": "lease-plan-lab-b-v3.7.json",
+      "file_blob_oid": "37947eeb9247dd21f4f57639cc746fa9d1dee049",
+      "file_sha256": "db73480d9e839dc989505d5c13eec66bedc12bfc66bf5cf07ed4418947b0096c",
+      "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+      "matches_expected": true
+    },
+    {
+      "source": "scope-freeze",
+      "file": "scope-freeze-v3.7.json",
+      "file_blob_oid": "98e300d0a811ba7a4f10b4b87fe9644d8ddbb996",
+      "file_sha256": "d16394e41b77dfdc188ba7b1d08a4526697969adf871099b6368e48a7f3c291c",
+      "recorded_batch_id": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_7",
+      "expected_batch_id": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_7",
+      "matches_expected": true
+    },
+    {
+      "source": "v3.6 frozen payload (historical reference)",
+      "file": "batch-manifest-v3.6.json",
+      "recorded_batch_id": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_6",
+      "note": "local frozen payload, not at repo head"
+    }
+  ],
+  "scope_batch": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_7",
+  "package_batch": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+  "findings": [
+    {
+      "id": "ID-F1_SCOPE_BATCH_MISMATCH",
+      "severity": "BLOCKING",
+      "finding": "The v3.7 scope-freeze carries batch_id BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_7 (the v3.6 run timestamp) while package-manifest, batch-manifest, dispatch-plan and both lease plans carry BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7. No single authoritative batch identity across manifests.",
+      "observed": [
+        {
+          "source": "package-manifest",
+          "file": "package-payload-manifest-v3.7.json",
+          "file_blob_oid": "a5e10d702e944deec2ee2e491fb4fa06c76a00f7",
+          "file_sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+          "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "matches_expected": true
+        },
+        {
+          "source": "batch-manifest",
+          "file": "batch-manifest-v3.7.json",
+          "file_blob_oid": "1ddb108fab02be33d4dfa324785c6264e7ea4dc6",
+          "file_sha256": "710c76fef2ccf45d31d6f63488026df62076d22a8eb59d896b9565c29b0ff812",
+          "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "matches_expected": true
+        },
+        {
+          "source": "dispatch-plan",
+          "file": "dispatch-plan-v3.7.json",
+          "file_blob_oid": "e0c8a8bb0791cc5ddab2e01822959e276b93142c",
+          "file_sha256": "b16bbe7437da806af8b4fcc41bcf958bfdbdcea2a9eaaac54f1ab88e13de31ac",
+          "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "matches_expected": true
+        },
+        {
+          "source": "lease A",
+          "file": "lease-plan-lab-a-v3.7.json",
+          "file_blob_oid": "9ca3f2a4f0bd620b5a124297150f397052ed8ff1",
+          "file_sha256": "5b65e9b64cd2ea2c6ee2ce8fff05a0ea97a3140329d55efb27febd0a6554e442",
+          "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "matches_expected": true
+        },
+        {
+          "source": "lease B",
+          "file": "lease-plan-lab-b-v3.7.json",
+          "file_blob_oid": "37947eeb9247dd21f4f57639cc746fa9d1dee049",
+          "file_sha256": "db73480d9e839dc989505d5c13eec66bedc12bfc66bf5cf07ed4418947b0096c",
+          "recorded_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "expected_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+          "matches_expected": true
+        },
+        {
+          "source": "scope-freeze",
+          "file": "scope-freeze-v3.7.json",
+          "file_blob_oid": "98e300d0a811ba7a4f10b4b87fe9644d8ddbb996",
+          "file_sha256": "d16394e41b77dfdc188ba7b1d08a4526697969adf871099b6368e48a7f3c291c",
+          "recorded_batch_id": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_7",
+          "expected_batch_id": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_7",
+          "matches_expected": true
+        },
+        {
+          "source": "v3.6 frozen payload (historical ground truth)",
+          "file": "batch-manifest-v3.6.json",
+          "recorded_batch_id": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_6",
+          "note": "The scope-freeze-v3.7.json batch_id (20260806T234554Z-...-V3_7) is the v3.6 run timestamp with a V3_7 suffix - not the real v3.6 batch (LAB-V3_6)."
+        }
+      ],
+      "classification": "BLOCKING",
+      "attribution_note": "No fraud or malice attributed; documented as identity drift in frozen v3.7 bytes."
+    },
+    {
+      "id": "ID-F2_SUPERSEDES_IDENTITY_DRIFT",
+      "severity": "BLOCKING",
+      "finding": "batch-manifest-v3.7.json supersedes declares package v3.6 but references batch_id BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_7 which is NOT the real v3.6 batch ID (real: BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_6, verified from the v3.6 frozen payload /home/ubuntu/.hermes/runs/20260806T234554Z-v3-6-fail-closed-package/frozen-payload/batch-manifest-v3.6.json). The superseded batch ID carries the V3_7 generation suffix and therefore does not correctly identify v3.6. No fraud or malice attributed.",
+      "observed": {
+        "superseded_package": "v3.6",
+        "superseded_batch_id": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_7",
+        "superseded_manifest_sha256": "b287266501507e454b8ee9d8f39983a5f06ba1e8f2377982ac35939edaa741bd",
+        "id_ends_in_V3_7": false,
+        "real_v3_6_batch_id_from_frozen_payload": "BATCH-20260806T234554Z-DOGFOOD004-LAB-V3_6",
+        "superseded_batch_id_matches_real_v3_6_batch": false,
+        "literal_suffix_check": {
+          "ends_with__V3_7": false,
+          "generation_suffix": "V3_7",
+          "note": "Batch ID format is BATCH-<UTC>-DOGFOOD004-LAB-V3_<N>; the superseded ID carries generation suffix V3_7 while identifying package v3.6, and does not match the real v3.6 batch ID (LAB-V3_6)."
+        }
+      },
+      "classification": "BLOCKING",
+      "attribution_note": "No fraud or malice attributed; the v3.6 batch was historically named with a V3_7 suffix."
+    },
+    {
+      "id": "ID-F3_CROSS_MANIFEST_IDENTITY_NOT_ENFORCED",
+      "severity": "BLOCKING",
+      "finding": "mechanical-finalizer-v3.7.py loads the scope freeze (line 189), loads the batch manifest (line 190) and accepts --batch (line 183; add_argument line 1056), but never requires args.batch == scope.batch_id == batch_manifest.batch_id. The CLI batch is used as the single source (lines 369, 936) with no equality gate.",
+      "evidence": {
+        "line_183": "self.batch = args.batch",
+        "line_189": "self.scope = load_json(args.scope_freeze)",
+        "line_190": "self.batch_manifest = load_json(args.batch_manifest)",
+        "line_1056": "ap.add_argument('--batch')",
+        "cross_identity_equality_check": "ABSENT",
+        "file_blob_oid": "d0cac9534169a4088c995d9b593a7b7f9c4c3a18",
+        "file_sha256": "312fef8ea635293d8b2026f18568da7b2eabfa8fe614f8515a656ae694b8550f"
+      },
+      "classification": "BLOCKING"
+    },
+    {
+      "id": "ID-F4_VERIFIER_IDENTITY_BINDING_INCOMPLETE",
+      "severity": "BLOCKING",
+      "finding": "acceptance-verifier-v3.7.py binds some identity fields (candidate_head_sha == baseline candidate line 109; supersedes package == v3.6 line 124; envelope exact identity mismatch line 223) but does not build a complete cross-manifest identity graph: no scope-freeze.batch_id == batch-manifest.batch_id == envelope/CLI batch, no crossing of evidence against lease leaf/lease IDs, result evidence paths or planned branch patterns.",
+      "evidence": {
+        "line_106": "batch = load_json(os.path.join(pkg_dir, 'batch-manifest-v3.7.json'))",
+        "line_109": "self.require(batch['candidate_head_sha'] == baseline['candidate_head'], 'candidate binding')",
+        "line_124": "self.require(batch['supersedes']['package'] == 'v3.6', 'supersedes v3.6 recorded')",
+        "line_223": "errs.append(f'exact identity mismatch {k}: {ev.get(k)} != {want}')",
+        "scope_freege_batch_crosscheck": "ABSENT",
+        "lease_leaf_identity_crosscheck": "ABSENT",
+        "file_blob_oid": "3683b7b27f58d27f7a389fb6b01ee9babc26317a",
+        "file_sha256": "f31288ee4f4d095d45deda7b8066da3f48cf6cf6ec8a773d5aadbbdf4335e87c"
+      },
+      "classification": "BLOCKING"
+    }
+  ],
+  "summary": {
+    "ID-F1_SCOPE_BATCH_MISMATCH": "BLOCKING",
+    "ID-F2_SUPERSEDES_IDENTITY_DRIFT": "BLOCKING",
+    "ID-F3_CROSS_MANIFEST_IDENTITY_NOT_ENFORCED": "BLOCKING",
+    "ID-F4_VERIFIER_IDENTITY_BINDING_INCOMPLETE": "BLOCKING"
+  },
+  "v3_7_exact_bytes_preserved": true,
+  "v3_7_dispatch_rejected": true
+}

@@ -1,0 +1,12 @@
+{
+ "bundle_path": "/home/ubuntu/.hermes/runs/20260808T132428Z-v3-8-identity-coherence-package/receipts/headless-lab-v3.8-review-binding/package-identity-coherence-bundle.json",
+ "bundle_sha256": "5b4abbe6a13185c9fee1668fc0a48a0959c614663daace5a47cb11e765f56bf4",
+ "label": "package-identity-coherence",
+ "mission_id": "hermes-v38-package-identity-coherence",
+ "mode": null,
+ "model_processes_consumed": 0,
+ "preflight_at_utc": "2026-08-08T20:50:00Z",
+ "preflight_status": "PREFLIGHT_VALID",
+ "preflight_valid": true,
+ "schema": "senior-preflight/v1"
+}

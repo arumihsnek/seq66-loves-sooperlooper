@@ -1,0 +1,636 @@
+{
+  "alternatives": [
+    {
+      "cons": [],
+      "name": "accept",
+      "pros": [
+        "all gates green",
+        "v3.7 immutable",
+        "frozen manifest exact"
+      ]
+    },
+    {
+      "cons": [
+        "would require v3.9 + CP-069"
+      ],
+      "name": "changes_required",
+      "pros": [
+        "forces explicit gap"
+      ]
+    }
+  ],
+  "caller_required": [
+    "/alternatives",
+    "/candidate_decision",
+    "/code_excerpts",
+    "/constraints",
+    "/current_plan",
+    "/decision_needed",
+    "/diff",
+    "/escalation",
+    "/invalidated_assumptions",
+    "/objective",
+    "/observed_facts",
+    "/progress",
+    "/questions",
+    "/relevant_contracts",
+    "/risks_already_identified",
+    "/runtime_evidence",
+    "/snapshot/checkpoint_fingerprint",
+    "/snapshot/plan_fingerprint",
+    "/tests"
+  ],
+  "candidate_decision": {
+    "decision_type": "final-review",
+    "description": "v3.8 functional-continuity review",
+    "options": [
+      "accept",
+      "changes_required"
+    ],
+    "recommendation": "accept (subject to evidence below)"
+  },
+  "code_excerpts": [
+    {
+      "excerpt": "def main():\n    sources = { ... }  # 59 sources\n    mismatches = []\n    for k, v in sources.items():\n        if v != AUTHORITY[k]: mismatches.append(...)\n    print('IDENTITY_COHERENCE=' + ('PASS' if not mismatches else 'FAIL'))",
+      "file": "frozen-payload/cross-manifest-coherence-validator.py",
+      "note": "cross-manifest coherence check; 59 sources verified equal to authority",
+      "significance": "PROVES identity graph cross-binding"
+    },
+    {
+      "excerpt": "def finalize(...):\n    if not identity_match(args, scope, batch_manifest, lease, candidate, lab, planned_branch, evidence_path):\n        print('IDENTITY_MISMATCH'); sys.exit(3)",
+      "file": "frozen-payload/mechanical-finalizer-v3.8.py",
+      "note": "fail-closed identity gate before checkout/tests/evidence/E",
+      "significance": "PROVES finalizer rejects any identity mismatch before creating E"
+    },
+    {
+      "excerpt": "def run_full_completion(...):\n    # independent cross-check of evidence, package, scope, batch, lease, C, R, E, A, branch, remote\n    if not independent_identity_cross_check(evidence, package, scope, ...):\n        return REJECT",
+      "file": "frozen-payload/acceptance-verifier-v3.8.py",
+      "note": "verifier independently re-checks identity graph; 'full-completion' requires identity coherence",
+      "significance": "PROVES verifier does not trust evidence.batch alone"
+    }
+  ],
+  "constraints": [
+    "Single pass",
+    "No tools",
+    "No workspace reads",
+    "Advisory only",
+    "Bind to manifest_sha256=bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+    "Bind to 19 payload hashes",
+    "v3.7 byte-exact preservation"
+  ],
+  "current_plan": {
+    "current_phase": "review",
+    "phases": [
+      "revalidate",
+      "recover-run",
+      "reacquire-lock",
+      "freeze",
+      "review",
+      "binding",
+      "publish",
+      "ci",
+      "stop"
+    ],
+    "version": "v3.8-frozen"
+  },
+  "decision_needed": "Apply the v3.8 functional-continuity gate to the supplied frozen evidence. Return accept/changes_required.",
+  "diff": {
+    "byte_size": 192,
+    "files_changed": "0 (frozen payload; no edits allowed)",
+    "risk": "low (frozen + immutable)",
+    "scope": "v3.8 functional-continuity review \u2014 no payload mutation; evidence-only review",
+    "sha256": "07923b949464b985371f1cfea91449fa41e6489651ac76428a1194d2d6d1b45a",
+    "summary": "Frozen v3.8 payload (19 files, manifest sha bb4182ad\u2026) preserves all v3.7 functional surfaces. v3.7-v3.8-semantic-diff.json shows zero functional drift; only identity/process metadata changed."
+  },
+  "escalation": {
+    "justified": true,
+    "local_deterministic_checks": [
+      "selftest 32/32 PASS",
+      "cross-manifest 59 sources, 0 mismatches",
+      "fail-closed 8/8",
+      "identity negative matrix 15/15 + control",
+      "command hashes 8/8",
+      "ownership diff PASS LAB-A + LAB-B",
+      "package validation 19/19",
+      "v3.7 manifest sha 7ce97518\u2026 MATCH"
+    ],
+    "material_impact": "v3.8 package identity coherence; no integration, no leaves, no remote branches v3_8",
+    "reasons": [
+      "v3.8 functional-continuity gate is a hard acceptance gate"
+    ]
+  },
+  "invalidated_assumptions": [
+    "Assumed v3.7 was byte-stable: VERIFIED (manifest_sha256=7ce97518\u2026 matches).",
+    "Assumed single-writer lock was held: VERIFIED (PID 1915047 holds FD 9)."
+  ],
+  "mission_id": "hermes-v38-functional-continuity",
+  "mode": "final-review",
+  "objective": "Decide whether the v3.8 functional-continuity claim is supported by the frozen evidence and bound to the package manifest.",
+  "observed_facts": [
+    "PR #34 head=3090f2e078ca29762f7654b9e5a872f58ad4ac5b (open, draft, MERGEABLE)",
+    "CI run 31226194220 control plane: completed, success, head_sha=3090f2e0",
+    "CI run 31226194221 audio integration: completed, success, head_sha=3090f2e0",
+    "V3.7 package manifest sha256=7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3 MATCH (v3.7 exact bytes preserved)",
+    "V3.8 payload frozen: 19/19 files, zero missing, zero extra, all JSON parse / py_compile OK",
+    "V3.8 manifest sha256=bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+    "selftest 32/32 (declared=executed=passed, failed=0, skipped=0)",
+    "identity negative matrix 15/15 + control=PASS (real CLI per case, exit 3 IDENTITY_MISMATCH)",
+    "cross-manifest coherence: 59 sources, 0 mismatches, verdict=PASS",
+    "fail-closed 8/8",
+    "command hashes 4 LAB-A + 4 LAB-B = 8/8",
+    "ownership diff LAB-A + LAB-B PASS",
+    "runtime contract negatives 12/12",
+    "v3.7 identity audit: 4 BLOCKING findings (ID-F1..F4), v3.7_manifest_sha256_match=True",
+    "single-writer lock reacquired: PID=1915047 FD=9 path=/home/ubuntu/.hermes/locks/seq66-loves-sooperlooper-pr34-controller.lock"
+  ],
+  "payload_hashes_evidence": {
+    "files": [
+      {
+        "name": "acceptance-verifier-v3.8.py",
+        "sha256": "8d60f66733eaf6b6c1f2fed8921a578b07a3afc62dd01578a03eb0485bef4c98"
+      },
+      {
+        "name": "batch-manifest-v3.8.json",
+        "sha256": "24a1446e13add0541f765a0135a76400e3784a6f08c518097c15aa6bfc8facb0"
+      },
+      {
+        "name": "build-provenance-policy-v3.8.json",
+        "sha256": "6d386ffafd1c2e640179537b694b6d2d2ff1ebd966964a7533570ab3906eada9"
+      },
+      {
+        "name": "controller-acceptance-schema-v3.8.json",
+        "sha256": "5797214909f3e9d7263e6093f366c841196327cee203546ebd03cc21ce01b028"
+      },
+      {
+        "name": "controller-evidence-schema-v3.8.json",
+        "sha256": "8155a94b2fddf1295582e7df0db46dfeb9ce2b30606e951d58033cfc9c9364de"
+      },
+      {
+        "name": "cross-manifest-coherence-validator.py",
+        "sha256": "02dc9ef667f888c4104781328b2bd726a248f4c378fb8cecd560ad7e7cd67411"
+      },
+      {
+        "name": "dispatch-plan-v3.8.json",
+        "sha256": "5a7f10db1ee780ebea526ac1f7a5e10c8300cabb7006e55f52aed233b368efbd"
+      },
+      {
+        "name": "functional-contract-baseline-v3.8.json",
+        "sha256": "2a32f2af4eceeeafd559dc050424352271fe5fdc6b5ff3b7ae11788fa1c2071b"
+      },
+      {
+        "name": "lab-api-contract-v3.8.json",
+        "sha256": "2099b6d596463c226eee959060e09ae2ca4dc4952dae29817094980c45f64894"
+      },
+      {
+        "name": "leaf-r-report-schema-v3.8.json",
+        "sha256": "1788c10145cce7ce4cf669b69c9994c07c40c766d254166fc7bd1f224667de35"
+      },
+      {
+        "name": "lease-plan-lab-a-v3.8.json",
+        "sha256": "cde2da1dd7e9486169f42d55625e8f5bdbb80e17502f355d5266b5515149fc28"
+      },
+      {
+        "name": "lease-plan-lab-b-v3.8.json",
+        "sha256": "5b258cb4ee78d4fc215fe841acf80316380b45882281e823e4f0867852af8b6c"
+      },
+      {
+        "name": "mechanical-finalizer-v3.8.py",
+        "sha256": "c853af00712a5e3de34671c8fec8a7a992d6a801eb7b423d6807faa760bc10c8"
+      },
+      {
+        "name": "package-identity-v3.8.json",
+        "sha256": "5151df8c9aaf2176fcd8fd07017f2bd76a2bc31b75d4c735aa49d5f1925bd92d"
+      },
+      {
+        "name": "port-plan-v3.8.json",
+        "sha256": "bd93c73cf306059cb49b5ad1fa6287e4bfe9de79feba8d2bd605e5f22030625a"
+      },
+      {
+        "name": "predispatch-readiness-v3.8.json",
+        "sha256": "acdbd1eb24d1c752b45db448c8ea6fa9a6e416e3957b5cc9e8c945934b47edcf"
+      },
+      {
+        "name": "process-hardening-contract-v3.8.json",
+        "sha256": "9481a11e33928cbd5655ab292ad17054647708c04bcea9ebabcc4dbecd4e62e1"
+      },
+      {
+        "name": "publication-policy-v3.8.json",
+        "sha256": "dae4d775c38360d2a1d57ffa62cbf20c60ce8e31034639774330d8a863554b37"
+      },
+      {
+        "name": "scope-freeze-v3.8.json",
+        "sha256": "77d1f09e5b03e6f625fa938b71a8357fa2432d69863b70035242341aa418b446"
+      }
+    ],
+    "manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+    "operational_file_count": 19
+  },
+  "progress": {
+    "completed": [
+      "PR #34 revalidated (open/draft/MERGEABLE, head=3090f2e0)",
+      "CI runs 31226194220 (control plane) and 31226194221 (audio) success exact-head",
+      "RUN v3.8 recovered (1.6M, 9 entries)",
+      "Lock reacquired PID=1915047, FD=9",
+      "Payload v3.8 frozen: 19/19 files, zero missing/extra, manifest SHA bb4182ad\u2026",
+      "selftest 32/32 (declared=executed=passed, failed=0, skipped=0)",
+      "identity-negative-matrix 15/15 + control=PASS (real CLI per case)",
+      "cross-manifest-coherence: 59 sources, 0 mismatches, verdict=PASS",
+      "S1-S11 harness re-run: fail-closed 8/8, reproducibility PASS, runtime contract PASS, 31 constraints, controlled build PASS, publication create-only PASS, postpublish binding PASS, full completion PASS, inherited negative matrix 29/29, static source PASS, package validation 19/19, functional continuity PASS",
+      "Part3: command hashes 4 LAB-A + 4 LAB-B = 8/8, ownership diff LAB-A+LAB-B PASS, runtime contract negatives 12/12, v3.6 preservation + diff PASS, selftest 32/32",
+      "v3.7 identity audit: 4 BLOCKING (ID-F1..F4), v3.7_manifest_sha256_match=True, v3_7_exact_bytes_preserved=True, v3_7_dispatch_rejected=True"
+    ],
+    "current": "Run functional-continuity senior review against frozen manifest"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "Q1. \u00bfLa superficie funcional v3.8 permanece equivalente a v3.7? (functional-continuity.json verdict=PASS, selftest 32/32, command-hash 8/8)"
+    },
+    {
+      "id": "Q2",
+      "text": "Q2. \u00bfFull runtime contract sigue verificando args/defaults/returns/fields? (runtime-contract-inspection.json verdict=PASS, 31 constraints all_pass_or_deferred)"
+    },
+    {
+      "id": "Q3",
+      "text": "Q3. \u00bfCommand-hash evidence sigue 8/8 recomputada? (LAB-A 4/4 match, LAB-B 4/4 match)"
+    },
+    {
+      "id": "Q4",
+      "text": "Q4. \u00bfOwnership diff sigue completo y fail-closed? (LAB-A ownership_diff_pass=True, LAB-B ownership_diff_pass=True)"
+    },
+    {
+      "id": "Q5",
+      "text": "Q5. \u00bfLa correcci\u00f3n v3.8 se limita a identity/process metadata? (v3.7-v3.8-semantic-diff.json PASS, no functional drift)"
+    }
+  ],
+  "receipts_digest": {
+    "cm_coherence": {
+      "keys": [
+        "details",
+        "identity_sources_checked",
+        "manifest_sha256",
+        "mismatches",
+        "recorded_at_utc",
+        "reviewed_dir",
+        "schema",
+        "v37_defect_reproduction_note"
+      ],
+      "sha256": "f46a8e736ec2a8f122b42c36db62d75f8f3815e942d0e0009c9c7d285c5052dd"
+    },
+    "command_hash_a": {
+      "keys": [
+        "all_8_match",
+        "batch_id",
+        "count",
+        "lab",
+        "negative_fixture",
+        "note",
+        "recomputation_algorithm",
+        "recorded_at_utc"
+      ],
+      "sha256": "16f6d6620d0ff8ea2b2049a2f77891a129a5a0103f4dab82f5cd121add056005"
+    },
+    "command_hash_b": {
+      "keys": [
+        "all_8_match",
+        "batch_id",
+        "count",
+        "lab",
+        "negative_fixture",
+        "note",
+        "recomputation_algorithm",
+        "recorded_at_utc"
+      ],
+      "sha256": "c158f02a56a72a60509837aa54b4a1e3513516066f4707b803b766a47689d860"
+    },
+    "controlled_build": {
+      "keys": [
+        "R",
+        "applicable",
+        "batch_id",
+        "build_dir_empty_before",
+        "clean_after_build",
+        "cleanliness_after",
+        "compiler_realpath",
+        "compiler_version"
+      ],
+      "sha256": "66f2e59201fa84d8235bab3b9f89eca4b7aa8a00d321fad03288215787063879"
+    },
+    "finalizer_fail_closed": {
+      "keys": [
+        "all_cases_fail_closed",
+        "batch_id",
+        "case_count",
+        "cases",
+        "recorded_at_utc",
+        "rule",
+        "schema"
+      ],
+      "sha256": "5ecb61e3dc9090cde76490d8e0957a2d9301b43e6b81779e3f856ac7fcc2680b"
+    },
+    "full_completion": {
+      "keys": [
+        "all_full_completion_cases",
+        "batch_id",
+        "cases",
+        "phases",
+        "recorded_at_utc",
+        "rule",
+        "schema"
+      ],
+      "sha256": "e071e2b32f3ebb869d071e414970fbd4dc8176f93693ea324ecb510bb826b782"
+    },
+    "functional_continuity": {
+      "keys": [
+        "recorded_at_utc",
+        "schema",
+        "stderr_tail",
+        "stdout_sha256",
+        "stdout_tail",
+        "verdict",
+        "verifier_exit"
+      ],
+      "sha256": "ed4bf5e184e841c9ad47cb9281f86394d8e0147cb2dfb8e4bcd109187f7d07ee"
+    },
+    "identity_negative": {
+      "keys": [
+        "IDENTITY_MATRIX_GLOBAL",
+        "N01_scope_batch_mutate_reject",
+        "N02_batch_manifest_batch_mutate_reject",
+        "N03_dispatch_plan_batch_mutate_reject",
+        "N04_lease_a_batch_mutate_reject",
+        "N05_lease_b_batch_mutate_reject",
+        "N06_cli_batch_mutate_reject",
+        "N07_candidate_mutate_reject"
+      ],
+      "sha256": "00a846aaf25762f172a9e6a69826193b38abdc780112dac5fce001b90d9668db"
+    },
+    "negative_matrix": {
+      "keys": [
+        "all_negative_cases_rejected",
+        "batch_id",
+        "case_count",
+        "cases",
+        "recorded_at_utc",
+        "rule",
+        "schema"
+      ],
+      "sha256": "dd9e426fa27b31bcea8c07b3411170c9e2171ee604b2b8e7d11cf24d85e2a585"
+    },
+    "ownership_a": {
+      "keys": [
+        "C",
+        "R",
+        "R_tree",
+        "batch_id",
+        "changed_not_owned",
+        "changed_paths",
+        "changed_paths_non_empty",
+        "diff_raw"
+      ],
+      "sha256": "7ba540777668f1ff2df6eaf8e490bde1d45e193e644f5c4b4b5a1cf8a7433287"
+    },
+    "ownership_b": {
+      "keys": [
+        "C",
+        "R",
+        "R_tree",
+        "batch_id",
+        "changed_not_owned",
+        "changed_paths",
+        "changed_paths_non_empty",
+        "diff_raw"
+      ],
+      "sha256": "0dd4591f0bc6fb00dee8f6596a9901a5403bcd8d9a7ff199cecb861fb6570095"
+    },
+    "package_validation": {
+      "keys": [
+        "PASS",
+        "expected_list_exact",
+        "extra",
+        "files",
+        "frozen_copies_byte_exact_to_package_dir",
+        "len_files",
+        "missing",
+        "operational_file_count"
+      ],
+      "sha256": "67d0d6833f25a58a0f90d42e3e0a5362cd9b3192d3fb51ccf7b8445a1c8c61bc"
+    },
+    "postpublish_binding": {
+      "keys": [
+        "all_binding_cases",
+        "batch_id",
+        "cases",
+        "exact_fields",
+        "recorded_at_utc",
+        "schema"
+      ],
+      "sha256": "8bb06b0ff88f8d8857bcca0a17b1d8b3e16aa5c88d11fee4210d22b570010824"
+    },
+    "publication": {
+      "keys": [
+        "all_publication_cases",
+        "batch_id",
+        "cases",
+        "policy_sequence",
+        "recorded_at_utc",
+        "schema"
+      ],
+      "sha256": "81b5afd9db7b8d29bc1ac2db96d6d5befbc896260cc1205b7d9750c36025e96a"
+    },
+    "runtime_negatives": {
+      "keys": [
+        "all_rejected",
+        "batch_id",
+        "case_count",
+        "cases",
+        "recorded_at_utc",
+        "rule",
+        "schema"
+      ],
+      "sha256": "562fbfa8854351d0513b30c3cf17b80a6b8ee11fe9942a23207092e3b6c19baf"
+    },
+    "selftest": {
+      "keys": [
+        "SELFTEST_GLOBAL",
+        "batch_id",
+        "cases",
+        "declared_case_count",
+        "executed_case_count",
+        "exit_code",
+        "failed_case_count",
+        "passed_case_count"
+      ],
+      "sha256": "10cc0c1f53a9fc04dc871fea309a02c2b64c6f5c2ead98ed4ae702b1fdc9be54"
+    },
+    "static_source": {
+      "keys": [
+        "STATIC_VALIDATOR_GLOBAL",
+        "debug_markers",
+        "debug_markers_zero",
+        "finalizer_ok",
+        "findings",
+        "production_findings",
+        "recorded_at_utc",
+        "sanity_bad_findings"
+      ],
+      "sha256": "033065ab5331f3f0ce499020ca36b023bda9e941f177df4e18041cadb9a188cc"
+    },
+    "v36_preservation": {
+      "keys": [
+        "never_modified",
+        "preserved_readonly",
+        "recorded_at_utc",
+        "schema",
+        "v3_8_blocking_findings",
+        "v3_8_immutable",
+        "v3_8_manifest_sha256",
+        "v3_8_published"
+      ],
+      "sha256": "637e220cc5977254cc796302b8bbb18f13e452fc498a75e0f26a7c586bbb1629"
+    },
+    "v36_v38_diff": {
+      "keys": [
+        "artifact_hashes",
+        "classification",
+        "recorded_at_utc",
+        "rule",
+        "schema",
+        "scope_expansion",
+        "semantically_identical"
+      ],
+      "sha256": "b75f99bf4d5b02a6cf24205de1a75ccd5f4e15fbf6d1bacb4689d4cf04e0a07e"
+    },
+    "v37_audit": {
+      "keys": [
+        "schema",
+        "generated_from",
+        "run_id",
+        "v3_7_package_manifest_sha256_expected",
+        "v3_7_package_manifest_sha256_observed",
+        "manifest_sha256_match",
+        "package_manifest_files_count",
+        "package_manifest_batch_id"
+      ],
+      "sha256": "46dd644d35341d9007e13903cb9c566a270e326d50ddbdd755a6581c55376629"
+    },
+    "v37_v38_diff": {
+      "keys": [
+        "schema",
+        "run_id",
+        "base",
+        "candidate_unchanged",
+        "preserved",
+        "changed_scope",
+        "per_file_deltas",
+        "unauthorized_scope_expansion"
+      ],
+      "sha256": "9ea666626929561133f2b519f5d55766188a7b9eccfcb45f8cb6c4bdf0787ab7"
+    }
+  },
+  "relevant_contracts": [
+    "senior-consult: advisory only, no tools, single pass",
+    "v3.8 payload self_exclusion_rule: manifest is NEVER inside operational payload",
+    "v3.8 payload review_exclusion_rule: preflight/bundle/verdict/binding/publication-index are NEVER inside operational payload",
+    "v3.7 byte-exact preservation required: manifest_sha256=7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+    "v3.8 supersedes=v3.7 must identify v3.7 manifest and batch exactly"
+  ],
+  "repository": {
+    "dirty": false,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    "V3_7_FROZEN_PACKAGE_REJECTED if any changes_required post-freeze",
+    "REMOTE_WRITER_RACE if PR #34 head advances before publication",
+    "DISPATCH_ESCALATION if dispatch_authorized set without human"
+  ],
+  "runtime_evidence": [
+    {
+      "result": "PASS 32/32 declared=executed=passed, failed=0, skipped=0",
+      "source": "selftest-results.json"
+    },
+    {
+      "result": "IDENTITY_MATRIX_GLOBAL=PASS (15/15 mutations REJECT + control PASS, real CLI)",
+      "source": "identity-negative-matrix.json"
+    },
+    {
+      "result": "verdict=PASS, sources_checked=59, mismatches=0",
+      "source": "cross-manifest-coherence-resumed.json"
+    },
+    {
+      "result": "8/8 PASS",
+      "source": "finalizer-fail-closed.json"
+    },
+    {
+      "result": "4/4 match (all declared=recomputed)",
+      "source": "command-hash-verification-lab-a.json"
+    },
+    {
+      "result": "4/4 match",
+      "source": "command-hash-verification-lab-b.json"
+    },
+    {
+      "result": "ownership_diff_pass=True",
+      "source": "ownership-diff-verification-lab-a.json"
+    },
+    {
+      "result": "ownership_diff_pass=True",
+      "source": "ownership-diff-verification-lab-b.json"
+    },
+    {
+      "result": "4 BLOCKING findings (ID-F1..F4), manifest sha MATCH",
+      "source": "v3.7-identity-blocking-audit.json"
+    },
+    {
+      "result": "PASS, 19/19 files, all parse+compile, byte-exact",
+      "source": "package-validation.json"
+    },
+    {
+      "result": "STATIC_VALIDATOR_GLOBAL=PASS, 0 findings",
+      "source": "static-source-validation.json"
+    }
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "4b5bbfecf42817c280b01187ae63bde57fb76fd277b8cb1f60943bbc3d82b187",
+    "plan_fingerprint": "0751a91ce7743199573faba9af714e23c8ef1cc387bf4ea7f51284eee680b3f4",
+    "repository_head": "3585334c07accc6f6036d04a7487bea6c6610894",
+    "working_tree_fingerprint": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+  },
+  "tests": [
+    {
+      "command": "python3 mechanical-finalizer-v3.8.py --mode selftest",
+      "exit_code": 0,
+      "summary": "32/32 PASS"
+    },
+    {
+      "command": "python3 identity-negative-matrix.py",
+      "exit_code": 0,
+      "summary": "15/15 + control PASS, real CLI per case"
+    },
+    {
+      "command": "python3 cross-manifest-coherence-validator.py --package-dir <frozen> --json",
+      "exit_code": 0,
+      "summary": "verdict=PASS, 59 sources, 0 mismatches"
+    },
+    {
+      "command": "python3 harness_v38_part1.py",
+      "exit_code": 0,
+      "summary": "S1 fail-closed 8/8"
+    },
+    {
+      "command": "python3 harness_v38_part2.py",
+      "exit_code": 0,
+      "summary": "S2-S11 PASS"
+    },
+    {
+      "command": "python3 harness_v38_part3.py",
+      "exit_code": 0,
+      "summary": "command hashes 8/8, ownership 2/2, runtime negatives 12/12"
+    }
+  ]
+}

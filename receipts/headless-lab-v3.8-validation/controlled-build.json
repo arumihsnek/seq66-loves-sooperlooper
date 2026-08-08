@@ -1,0 +1,112 @@
+{
+ "R": "24598ffdb8c01f83198b3224bf83188e34e803f8",
+ "applicable": true,
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "build_dir_empty_before": true,
+ "clean_after_build": true,
+ "cleanliness_after": true,
+ "compiler_realpath": "/usr/bin/aarch64-linux-gnu-gcc-13",
+ "compiler_version": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "compiles": [
+  {
+   "argv": [
+    "gcc",
+    "-std=c11",
+    "-O2",
+    "-o",
+    "<build-dir>/synthetic_source",
+    "tests/integration/virtual_studio/audio/synthetic_source.c",
+    "-ljack",
+    "-lm",
+    "-lpthread"
+   ],
+   "cwd": "/tmp/finalizer-v38-a9dn79nx",
+   "elf_magic": true,
+   "end_utc": "2026-08-08T20:34:03Z",
+   "env_allowlist": {
+    "HOME": "/home/ubuntu",
+    "LANG": "C.UTF-8",
+    "PATH": "/home/ubuntu/.local/node-current/bin:/home/ubuntu/.kimi-code/bin:/home/ubuntu/.local/bin:/home/ubuntu/.local/node-v22.20.0-linux-arm64/bin:/home/ubuntu/.local/node-v22.20.0-linux-arm64/bin:/home/ubuntu/.local/bin:/usr/local/bin:/home/ubuntu/hermes-agent/venv/bin:/home/ubuntu/hermes-agent/node_modules/.bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+   },
+   "exit_code": 0,
+   "jack_dependency_visible": true,
+   "ldd_exit": 0,
+   "ldd_libraries": [
+    "/lib/ld-linux-aarch64.so.1",
+    "libc.so.6",
+    "libdb-5.3.so",
+    "libgcc_s.so.1",
+    "libjack.so.0",
+    "libm.so.6",
+    "libstdc++.so.6",
+    "linux-vdso.so.1"
+   ],
+   "output_exists": true,
+   "output_matrix_pass": true,
+   "output_sha256": "054b8428810e24a3f435ac6579840918f6435ef61ac62069255c85faaedc6a81",
+   "output_size": 71864,
+   "source_blob_oid": "6f07457cd38a81c425b4ab080aeee46bf0c0e7de",
+   "source_hash_matches": true,
+   "source_path": "tests/integration/virtual_studio/audio/synthetic_source.c",
+   "source_sha256_actual": "da688d3931a1b4a2dddbe788dc3e69c31ae86a35823d0391b6c97da17f3fd6b5",
+   "source_sha256_expected": "da688d3931a1b4a2dddbe788dc3e69c31ae86a35823d0391b6c97da17f3fd6b5",
+   "start_utc": "2026-08-08T20:34:03Z",
+   "stderr_sha256": "b7299bfded6ea8334f30d13c83a5af13595cd738eb71b4865d03cacb9de70eda",
+   "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "argv": [
+    "gcc",
+    "-std=c11",
+    "-O2",
+    "-o",
+    "<build-dir>/deterministic_capture",
+    "tests/integration/virtual_studio/audio/deterministic_capture.c",
+    "-ljack",
+    "-lm",
+    "-lpthread"
+   ],
+   "cwd": "/tmp/finalizer-v38-a9dn79nx",
+   "elf_magic": true,
+   "end_utc": "2026-08-08T20:34:03Z",
+   "env_allowlist": {
+    "HOME": "/home/ubuntu",
+    "LANG": "C.UTF-8",
+    "PATH": "/home/ubuntu/.local/node-current/bin:/home/ubuntu/.kimi-code/bin:/home/ubuntu/.local/bin:/home/ubuntu/.local/node-v22.20.0-linux-arm64/bin:/home/ubuntu/.local/node-v22.20.0-linux-arm64/bin:/home/ubuntu/.local/bin:/usr/local/bin:/home/ubuntu/hermes-agent/venv/bin:/home/ubuntu/hermes-agent/node_modules/.bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+   },
+   "exit_code": 0,
+   "jack_dependency_visible": true,
+   "ldd_exit": 0,
+   "ldd_libraries": [
+    "/lib/ld-linux-aarch64.so.1",
+    "libc.so.6",
+    "libdb-5.3.so",
+    "libgcc_s.so.1",
+    "libjack.so.0",
+    "libm.so.6",
+    "libstdc++.so.6",
+    "linux-vdso.so.1"
+   ],
+   "output_exists": true,
+   "output_matrix_pass": true,
+   "output_sha256": "fa3874b11d274e67fb425c3960c8b0149398eb907faf81dba02f33e71d327f29",
+   "output_size": 72408,
+   "source_blob_oid": "c6dd79fae6c49aea907b1e4814b0cc9d8d9f0994",
+   "source_hash_matches": true,
+   "source_path": "tests/integration/virtual_studio/audio/deterministic_capture.c",
+   "source_sha256_actual": "3c36f74f9881e9349f79d0485e0196e0ab4b989f96a73afe8044bf339ae56c4a",
+   "source_sha256_expected": "3c36f74f9881e9349f79d0485e0196e0ab4b989f96a73afe8044bf339ae56c4a",
+   "start_utc": "2026-08-08T20:34:03Z",
+   "stderr_sha256": "3a7f46911a66627c9997b8903cb1ead7c28be2e57de8ea7c0fdb0029b1bb4920",
+   "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+ ],
+ "entries_before": [],
+ "finalizer_exit": 0,
+ "overall": "PASS",
+ "recorded_at_utc": "2026-08-08T20:34:03Z",
+ "schema": "controlled-build/v3.8",
+ "verdict": "PASS",
+ "zero_ignored_after_build": true,
+ "zero_untracked_after_build": true
+}

@@ -1,0 +1,23 @@
+{
+ "IDENTITY_MATRIX_GLOBAL": "PASS",
+ "N01_scope_batch_mutate_reject": true,
+ "N02_batch_manifest_batch_mutate_reject": true,
+ "N03_dispatch_plan_batch_mutate_reject": true,
+ "N04_lease_a_batch_mutate_reject": true,
+ "N05_lease_b_batch_mutate_reject": true,
+ "N06_cli_batch_mutate_reject": true,
+ "N07_candidate_mutate_reject": true,
+ "N08_leaf_id_mutate_reject": true,
+ "N09_lease_id_mutate_reject": true,
+ "N10_evidence_path_mutate_reject": true,
+ "N11_planned_branch_mutate_reject": true,
+ "N12_supersedes_package_mutate_reject": true,
+ "N13_supersedes_manifest_mutate_reject": true,
+ "N14_supersedes_batch_mutate_reject": true,
+ "N15_v37_reproduction_reject": true,
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "case_count": 15,
+ "control_correct_identity_PASS": true,
+ "fixture_note": "real temp git repos, real candidate C, real finalizer CLI; each mutation REJECTs with IDENTITY_MISMATCH naming the mutated check; v3.7 mixed-batch reproduction REJECTs",
+ "schema": "identity-negative-matrix/v3.8"
+}

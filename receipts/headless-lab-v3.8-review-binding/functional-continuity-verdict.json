@@ -1,0 +1,106 @@
+{
+ "blocking_findings": null,
+ "bound_manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+ "bound_payload_hashes_count": 19,
+ "bound_payload_hashes_match": true,
+ "codex_exec_processes": 1,
+ "detailed_status": "VALID_ADVISORY_VERDICT",
+ "execution_id": "c8469792-5d75-45bd-9690-23fd4143cb00",
+ "follow_up_turns": 0,
+ "label": "functional-continuity",
+ "mission_id": "hermes-v38-functional-continuity",
+ "mode": null,
+ "model_turns_observed": 1,
+ "non_blocking_observations": null,
+ "operational_usability": true,
+ "required_actions": null,
+ "response": {
+  "claim_classifications": [
+   {
+    "claim": "La superficie funcional v3.8 conserva continuidad con v3.7.",
+    "classification": "supported",
+    "evidence": [
+     "functional-continuity verdict=PASS",
+     "selftest 32/32 PASS",
+     "command hashes LAB-A 4/4 y LAB-B 4/4",
+     "v3.7-v3.8 semantic diff PASS sin functional drift"
+    ]
+   },
+   {
+    "claim": "El payload congelado est\u00e1 \u00edntegramente ligado al manifest v3.8.",
+    "classification": "supported",
+    "evidence": [
+     "manifest_sha256=bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+     "19/19 archivos presentes, cero faltantes y cero extras",
+     "package validation PASS y copias byte-exactas",
+     "cross-manifest coherence: 59 fuentes, 0 discrepancias"
+    ]
+   },
+   {
+    "claim": "v3.7 permanece byte-exacta.",
+    "classification": "supported",
+    "evidence": [
+     "manifest_sha256 v3.7 observado coincide con 7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+     "v3_7_exact_bytes_preserved=True"
+    ]
+   },
+   {
+    "claim": "Los controles de identidad y finalizaci\u00f3n fallan de forma cerrada.",
+    "classification": "supported",
+    "evidence": [
+     "identity negative matrix 15/15 mutaciones rechazadas m\u00e1s control PASS",
+     "finalizer fail-closed 8/8",
+     "el finalizador termina con exit 3 ante IDENTITY_MISMATCH",
+     "el verificador realiza una comprobaci\u00f3n independiente del grafo de identidad"
+    ]
+   },
+   {
+    "claim": "Ownership y contrato runtime siguen conformes.",
+    "classification": "supported",
+    "evidence": [
+     "ownership diff PASS en LAB-A y LAB-B",
+     "runtime contract inspection PASS",
+     "31 restricciones all_pass_or_deferred",
+     "runtime negatives 12/12 rechazados"
+    ]
+   }
+  ],
+  "next_safe_step": "Proceder con binding/publicaci\u00f3n usando exclusivamente el payload congelado de 19 archivos y el manifest SHA-256 bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18; antes de publicar, confirmar que el head de PR #34 no haya avanzado y mantener dispatch_authorized sujeto a aprobaci\u00f3n humana.",
+  "question_answers": [
+   {
+    "answer": "S\u00ed. La evidencia suministrada respalda equivalencia funcional v3.8 respecto de v3.7: functional-continuity=PASS, selftest 32/32 y command hashes 8/8.",
+    "id": "Q1"
+   },
+   {
+    "answer": "S\u00ed. El contrato runtime completo permanece verificado para argumentos, valores predeterminados, retornos y campos: inspecci\u00f3n=PASS, 31 restricciones conformes o expl\u00edcitamente diferidas, y negativos 12/12 rechazados.",
+    "id": "Q2"
+   },
+   {
+    "answer": "S\u00ed. La recomputaci\u00f3n de command hashes coincide 8/8: LAB-A 4/4 y LAB-B 4/4.",
+    "id": "Q3"
+   },
+   {
+    "answer": "S\u00ed. Ownership diff est\u00e1 completo y conforme en ambos laboratorios; LAB-A y LAB-B registran ownership_diff_pass=True, respaldado por comprobaciones fail-closed 8/8.",
+    "id": "Q4"
+   },
+   {
+    "answer": "S\u00ed. El diff sem\u00e1ntico v3.7\u2192v3.8 registra PASS, sin deriva funcional ni expansi\u00f3n de alcance no autorizada; los cambios quedan limitados a identidad y metadatos de proceso.",
+    "id": "Q5"
+   }
+  ],
+  "schema_version": "codex-senior-consult-response/v3",
+  "summary": "Aceptado para la compuerta de continuidad funcional v3.8. La evidencia congelada respalda continuidad funcional, preservaci\u00f3n byte-exacta de v3.7, coherencia de identidad y manifest, contrato runtime, command hashes y ownership. No hay hallazgos bloqueantes, acciones obligatorias previas a la aceptaci\u00f3n ni contradicciones materiales en el bundle.",
+  "verdict": "accept"
+ },
+ "response_artifact": {
+  "artifact_schema": "codex-senior-consult-response-artifact/v1",
+  "fingerprint": "d89ae94526e617727178150e460d736d5905a7f6e10414a12567daca1bfe0841",
+  "relative_path": "responses/d89ae94526e617727178150e460d736d5905a7f6e10414a12567daca1bfe0841.json"
+ },
+ "response_fingerprint": "d89ae94526e617727178150e460d736d5905a7f6e10414a12567daca1bfe0841",
+ "schema": "senior-verdict/v1",
+ "status": "COMPLETED",
+ "tool_calls_observed": 0,
+ "verdict": "accept",
+ "verdict_at_utc": "2026-08-08T20:52:00Z"
+}

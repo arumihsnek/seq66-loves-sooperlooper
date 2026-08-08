@@ -1,0 +1,106 @@
+{
+ "all_rejected": true,
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "case_count": 12,
+ "cases": {
+  "N13_wrong_param_order_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N13_wrong_param_order_reject",
+   "side_effects_checked": true
+  },
+  "N14_wrong_param_kind_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N14_wrong_param_kind_reject",
+   "side_effects_checked": true
+  },
+  "N15_wrong_param_default_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N15_wrong_param_default_reject",
+   "side_effects_checked": true
+  },
+  "N16_wrong_return_annotation_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N16_wrong_return_annotation_reject",
+   "side_effects_checked": true
+  },
+  "N17_analyze_wav_returns_dict_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N17_analyze_wav_returns_dict_reject",
+   "side_effects_checked": true
+  },
+  "N18_AnalysisResult_missing_field_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N18_AnalysisResult_missing_field_reject",
+   "side_effects_checked": true
+  },
+  "N19_loop_reproduction_non_dict_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N19_loop_reproduction_non_dict_reject",
+   "side_effects_checked": true
+  },
+  "N20_silent_wav_pass_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N20_silent_wav_pass_reject",
+   "side_effects_checked": true
+  },
+  "N21_GraphAssertions_missing_method_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N21_GraphAssertions_missing_method_reject",
+   "side_effects_checked": true
+  },
+  "N22_out_of_scope_path_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N22_out_of_scope_path_reject",
+   "side_effects_checked": true
+  },
+  "N23_LabRunner_signature_drift_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N23_LabRunner_signature_drift_reject",
+   "side_effects_checked": true
+  },
+  "N24_lab_a_method_drift_reject": {
+   "PASS": true,
+   "exit_recorded": true,
+   "real_cli": true,
+   "rejected": true,
+   "selftest_case": "N24_lab_a_method_drift_reject",
+   "side_effects_checked": true
+  }
+ },
+ "recorded_at_utc": "2026-08-08T20:39:53Z",
+ "rule": "each negative runs REAL finalizer CLI; rejection may come from the runtime-full-contract gate or an earlier fail-closed gate; side effects (E absent) verified",
+ "schema": "runtime-contract-negative-matrix/v3.8"
+}

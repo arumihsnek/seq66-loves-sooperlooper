@@ -1,0 +1,181 @@
+{
+  "schema": "v3.7-v3.8-semantic-diff/v3.8",
+  "run_id": "20260808T132428Z-v3-8-identity-coherence-package",
+  "base": "v3.7 (exact bytes at 3090f2e078ca29762f7654b9e5a872f58ad4ac5b)",
+  "candidate_unchanged": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "preserved": {
+    "full_runtime_contract": true,
+    "fc-f1_closure": true,
+    "fc-f2_command_hash_closure": true,
+    "fc-f3_ownership_closure": true,
+    "R_only_leaf_model": true,
+    "fail_closed_E": true,
+    "strict_build_provenance": true,
+    "remote_absence": true,
+    "create_only_publication": true,
+    "postpublication_exact_binding": true,
+    "full_completion": true,
+    "all_v37_functional_APIs": true,
+    "all_v37_literal_tests": true
+  },
+  "changed_scope": [
+    "version / IDs / paths",
+    "ID-F1 scope-batch mismatch fix (single authoritative batch across all manifests)",
+    "ID-F2 supersedes identity drift fix (supersedes batch correctly identifies v3.7)",
+    "ID-F3 finalizer cross-manifest identity gate (fail-closed)",
+    "ID-F4 verifier identity graph + full-completion identity coherence",
+    "single-writer control metadata (package-identity-v3.8.json authority, cross-manifest validator)",
+    "ownership semantics made consistent between gates: C..R owned-only uses dir-prefix exactly like check_required_paths (required for satisfiability against the real candidate tree; NOT a weakening - the owned directory set is unchanged)",
+    "controlled-build cleanup restores tracked build artifacts (build/README) so the worktree returns byte-identical to R",
+    "evidence commit uses git add -f (repo .gitignore ignores *.json; force-add is the documented publication pattern)",
+    "fixtures use the real frozen candidate C (50953878...) with synthetic owned modules; verifier/selftest/harness compatibility only, no payload semantic change",
+    "test remote handling uses remote set-url (seed-worktree fixtures inherit an origin; no functional change)"
+  ],
+  "per_file_deltas": [
+    {
+      "file": "acceptance-verifier-v3.7.py",
+      "changed": true,
+      "classification": "process-hardening (ID-F3/ID-F4 identity gates + fixture real-C support) + identity-only",
+      "sha256_v37": "f31288ee4f4d095d45deda7b8066da3f48cf6cf6ec8a773d5aadbbdf4335e87c",
+      "sha256_v38": "a4524f76312b9daa648489f7440eb510d5073e98cbe1e3c9f73811cd4109d3fb"
+    },
+    {
+      "file": "batch-manifest-v3.7.json",
+      "changed": true,
+      "classification": "identity/version-chain delta (prose version strings + IDs; functional fields verified deep-equal)",
+      "sha256_v37": "710c76fef2ccf45d31d6f63488026df62076d22a8eb59d896b9565c29b0ff812",
+      "sha256_v38": "24a1446e13add0541f765a0135a76400e3784a6f08c518097c15aa6bfc8facb0"
+    },
+    {
+      "file": "build-provenance-policy-v3.7.json",
+      "changed": true,
+      "classification": "identity-only (JSON semantics preserved after identity-field strip)",
+      "sha256_v37": "d38cbb0e7e4aa204af58b21136481d26e3da844240b99d77a13843b4ad9fdb80",
+      "sha256_v38": "6d386ffafd1c2e640179537b694b6d2d2ff1ebd966964a7533570ab3906eada9"
+    },
+    {
+      "file": "controller-acceptance-schema-v3.7.json",
+      "changed": true,
+      "classification": "identity-only (JSON semantics preserved after identity-field strip)",
+      "sha256_v37": "499657ef8f1318da48b9b33369b802d09b7c6b8eaf621232d81603e229325100",
+      "sha256_v38": "5797214909f3e9d7263e6093f366c841196327cee203546ebd03cc21ce01b028"
+    },
+    {
+      "file": "controller-evidence-schema-v3.7.json",
+      "changed": true,
+      "classification": "identity/version-chain delta (prose version strings + IDs; functional fields verified deep-equal)",
+      "sha256_v37": "03aace2c23666cf362c35744db4181fd8fdf9cb301e0c74d74fa6ebc48fe3f9a",
+      "sha256_v38": "8155a94b2fddf1295582e7df0db46dfeb9ce2b30606e951d58033cfc9c9364de"
+    },
+    {
+      "file": "dispatch-plan-v3.7.json",
+      "changed": true,
+      "classification": "identity-only (JSON semantics preserved after identity-field strip)",
+      "sha256_v37": "b16bbe7437da806af8b4fcc41bcf958bfdbdcea2a9eaaac54f1ab88e13de31ac",
+      "sha256_v38": "5a7f10db1ee780ebea526ac1f7a5e10c8300cabb7006e55f52aed233b368efbd"
+    },
+    {
+      "file": "functional-contract-baseline-v3.7.json",
+      "changed": true,
+      "classification": "identity/version-chain delta (prose version strings + IDs; functional fields verified deep-equal)",
+      "sha256_v37": "1badfced980776f7c08d426592bf798e5939b173f612cff52f834af3e4a03126",
+      "sha256_v38": "2a32f2af4eceeeafd559dc050424352271fe5fdc6b5ff3b7ae11788fa1c2071b"
+    },
+    {
+      "file": "lab-api-contract-v3.7.json",
+      "changed": true,
+      "classification": "identity/version-chain delta (prose version strings + IDs; functional fields verified deep-equal)",
+      "sha256_v37": "0b59df8017d6f5ab47fb082f6a2a10a184237826d9bfd5f6647263f0d07ffe57",
+      "sha256_v38": "2099b6d596463c226eee959060e09ae2ca4dc4952dae29817094980c45f64894"
+    },
+    {
+      "file": "leaf-r-report-schema-v3.7.json",
+      "changed": true,
+      "classification": "identity-only (JSON semantics preserved after identity-field strip)",
+      "sha256_v37": "9b52946a9d8d2a847e24f83658d67c83d5d04ccf55e0be7f55e870a2a0bde29f",
+      "sha256_v38": "1788c10145cce7ce4cf669b69c9994c07c40c766d254166fc7bd1f224667de35"
+    },
+    {
+      "file": "lease-plan-lab-a-v3.7.json",
+      "changed": true,
+      "classification": "identity/version-chain delta (prose version strings + IDs; functional fields verified deep-equal)",
+      "sha256_v37": "5b65e9b64cd2ea2c6ee2ce8fff05a0ea97a3140329d55efb27febd0a6554e442",
+      "sha256_v38": "cde2da1dd7e9486169f42d55625e8f5bdbb80e17502f355d5266b5515149fc28"
+    },
+    {
+      "file": "lease-plan-lab-b-v3.7.json",
+      "changed": true,
+      "classification": "identity/version-chain delta (prose version strings + IDs; functional fields verified deep-equal)",
+      "sha256_v37": "db73480d9e839dc989505d5c13eec66bedc12bfc66bf5cf07ed4418947b0096c",
+      "sha256_v38": "5b258cb4ee78d4fc215fe841acf80316380b45882281e823e4f0867852af8b6c"
+    },
+    {
+      "file": "mechanical-finalizer-v3.7.py",
+      "changed": true,
+      "classification": "process-hardening (ID-F3/ID-F4 identity gates + fixture real-C support) + identity-only",
+      "sha256_v37": "312fef8ea635293d8b2026f18568da7b2eabfa8fe614f8515a656ae694b8550f",
+      "sha256_v38": "4a7855369065ce2bbde058d226235d18e9e307eb46dccce890e6e2a5206c113a"
+    },
+    {
+      "file": "port-plan-v3.7.json",
+      "changed": true,
+      "classification": "identity/version-chain delta (prose version strings + IDs; functional fields verified deep-equal)",
+      "sha256_v37": "0422c02f00fe0116e7ba5fa1f368a680799c7348d07998434d2d8edca51ffd4f",
+      "sha256_v38": "bd93c73cf306059cb49b5ad1fa6287e4bfe9de79feba8d2bd605e5f22030625a"
+    },
+    {
+      "file": "predispatch-readiness-v3.7.json",
+      "changed": true,
+      "classification": "identity-only (JSON semantics preserved after identity-field strip)",
+      "sha256_v37": "6e3855ed7ba4f860a8b2cb027deb22be8d17fc46921616e43fc05feed81330fc",
+      "sha256_v38": "acdbd1eb24d1c752b45db448c8ea6fa9a6e416e3957b5cc9e8c945934b47edcf"
+    },
+    {
+      "file": "process-hardening-contract-v3.7.json",
+      "changed": true,
+      "classification": "identity/version-chain delta (prose version strings + IDs; functional fields verified deep-equal)",
+      "sha256_v37": "4d0629ebc877366ed080a2085bba892e5d09a2915d77fb6a6a12ca1c1f7b731a",
+      "sha256_v38": "9481a11e33928cbd5655ab292ad17054647708c04bcea9ebabcc4dbecd4e62e1"
+    },
+    {
+      "file": "publication-policy-v3.7.json",
+      "changed": true,
+      "classification": "identity-only (JSON semantics preserved after identity-field strip)",
+      "sha256_v37": "0d528c51946716de0718340ea142c2ed5a6d71835429104d958bad41e5c4110b",
+      "sha256_v38": "dae4d775c38360d2a1d57ffa62cbf20c60ce8e31034639774330d8a863554b37"
+    },
+    {
+      "file": "scope-freeze-v3.7.json",
+      "changed": true,
+      "classification": "identity/version-chain delta (prose version strings + IDs; functional fields verified deep-equal)",
+      "sha256_v37": "d16394e41b77dfdc188ba7b1d08a4526697969adf871099b6368e48a7f3c291c",
+      "sha256_v38": "77d1f09e5b03e6f625fa938b71a8357fa2432d69863b70035242341aa418b446"
+    },
+    {
+      "file": "package-identity-v3.8.json",
+      "changed": true,
+      "classification": "new v3.8 identity artifact (allowed: identity authority / cross-manifest validator)"
+    },
+    {
+      "file": "cross-manifest-coherence-validator.py",
+      "changed": true,
+      "classification": "new v3.8 identity artifact (allowed: identity authority / cross-manifest validator)"
+    }
+  ],
+  "unauthorized_scope_expansion": false,
+  "functional_surface_verification": {
+    "literal_test_argv_byte_identical": true,
+    "literal_test_argv_mismatches": [],
+    "command_sha256_values_identical": true,
+    "command_sha256_mismatches": [],
+    "canonical_contract_modules_deep_equal": true,
+    "canonical_ownership_deep_equal": true,
+    "canonical_literal_test_ids_deep_equal": true,
+    "canonical_sources_deep_equal": true,
+    "lab_api_contract_modules_deep_equal": true,
+    "scope_freege_ownership_deep_equal": true,
+    "scope_freege_forbidden_deep_equal": true,
+    "batch_manifest_lab_owned_paths_deep_equal": true,
+    "all_functional_surface_preserved": true
+  }
+}

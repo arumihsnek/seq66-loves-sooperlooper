@@ -1,0 +1,25 @@
+{
+ "never_modified": true,
+ "preserved_readonly": [
+  "payload operativo (17 artifacts)",
+  "package-payload-manifest-v3.6.json",
+  "functional-senior-preflight.json",
+  "functional-senior-bundle.json",
+  "functional-senior-verdict.json",
+  "v3-6-frozen-package-rejected.json"
+ ],
+ "recorded_at_utc": "2026-08-08T20:39:53Z",
+ "schema": "v3.6-frozen-rejection-preservation/v3.8",
+ "v3_8_blocking_findings": [
+  "fc-f1",
+  "fc-f2",
+  "fc-f3"
+ ],
+ "v3_8_immutable": true,
+ "v3_8_manifest_sha256": "b287266501507e454b8ee9d8f39983a5f06ba1e8f2377982ac35939edaa741bd",
+ "v3_8_published": false,
+ "v3_8_run_dir": "/home/ubuntu/.hermes/runs/20260806T234554Z-v3-6-fail-closed-package",
+ "v3_8_senior_execution": "b5f76f1c-3139-4364-b319-dc9a3c5ed762",
+ "v3_8_senior_verdict": "changes_required",
+ "v3_8_status": "FROZEN_LOCAL_REJECTED_NOT_PUBLISHED"
+}
