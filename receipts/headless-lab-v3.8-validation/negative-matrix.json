@@ -1,0 +1,238 @@
+{
+ "all_negative_cases_rejected": true,
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "case_count": 29,
+ "cases": {
+  "evidence-hash-covers-C-R-lab-batch": {
+   "PASS": true,
+   "description": "evidence C/R/lab/batch incorrecto (ligado por evidence_sha256 exacto)",
+   "real_cli": true,
+   "reason": "A binds evidence_sha256 exacto; cualquier campo de evidencia distinto cambia el hash y REJECT",
+   "receipt": "postpublication-binding.json"
+  },
+  "fc-functional-runtime-failure": {
+   "PASS": true,
+   "case": "fc-functional-runtime-failure",
+   "description": "functional JSON deep-equal pero R API drift",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "finalizer-fail-closed.json"
+  },
+  "finalizer-sha-incorrecto": {
+   "PASS": true,
+   "description": "finalizer SHA incorrecto",
+   "evidence_finalizer_sha256": "6b12c6badc64c5f75899e3c5343e90898237a1f0b3dc17b48162b0d106341dd7",
+   "mismatch_detected": true,
+   "payload_finalizer_sha256": "c853af00712a5e3de34671c8fec8a7a992d6a801eb7b423d6807faa760bc10c8",
+   "real_cli": true,
+   "receipt": "finalizer-fail-closed.json"
+  },
+  "full-without-A": {
+   "PASS": true,
+   "description": "full-completion sin A",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "full-completion.json"
+  },
+  "full-without-postpublish": {
+   "PASS": true,
+   "description": "full-completion sin postpublish",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "full-completion.json"
+  },
+  "planned-branch-incorrecta": {
+   "PASS": true,
+   "description": "planned branch incorrecta (ID-F3 identity gate rejects)",
+   "evidence_planned_branch": null,
+   "lease_planned_branch": "result/<future-run-id>-lab-a-v3_8",
+   "real_cli": true,
+   "reason": "v3.8 finalizer identity gate fail-closes on wrong planned branch (exit 3 IDENTITY_MISMATCH)",
+   "receipt": "finalizer-fail-closed.json"
+  },
+  "postpublish-create_only_proof_bool_REJECT": {
+   "PASS": true,
+   "case": "create_only_proof_bool_REJECT",
+   "description": "create_only_proof sin receipts",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "postpublication-binding.json"
+  },
+  "postpublish-wrong_C_REJECT": {
+   "PASS": true,
+   "case": "wrong_C_REJECT",
+   "description": "A.C incorrecto",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "postpublication-binding.json"
+  },
+  "postpublish-wrong_R_REJECT": {
+   "PASS": true,
+   "case": "wrong_R_REJECT",
+   "description": "A.R truthy pero incorrecto (postpublish)",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "postpublication-binding.json"
+  },
+  "postpublish-wrong_branch_REJECT": {
+   "PASS": true,
+   "case": "wrong_branch_REJECT",
+   "description": "A.branch incorrecta",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "postpublication-binding.json"
+  },
+  "postpublish-wrong_evidence_sha256_REJECT": {
+   "PASS": true,
+   "case": "wrong_evidence_sha256_REJECT",
+   "description": "A evidence hash incorrecto",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "postpublication-binding.json"
+  },
+  "postpublish-wrong_remote_REJECT": {
+   "PASS": true,
+   "case": "wrong_remote_REJECT",
+   "description": "A.remote incorrecto",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "postpublication-binding.json"
+  },
+  "pub-ambiguous-lsremote": {
+   "PASS": true,
+   "description": "ls-remote ambiguous",
+   "rc": 128,
+   "real_cli": true,
+   "receipt": "publication-create-only.json"
+  },
+  "pub-force-push": {
+   "PASS": true,
+   "description": "force-push real",
+   "real_cli": true,
+   "receipt": "publication-create-only.json",
+   "remote_now": "509538784afc2b828f2d922f65cf8ca3a39b5ee7"
+  },
+  "pub-preexisting-branch": {
+   "PASS": true,
+   "description": "remote branch preexistente (prepublish)",
+   "exit": 1,
+   "real_cli": true,
+   "receipt": "publication-create-only.json"
+  },
+  "pub-second-push": {
+   "PASS": true,
+   "description": "second push real",
+   "real_cli": true,
+   "receipt": "publication-create-only.json",
+   "remote_now": "54494db7fa68fb2140ea36ff73edf97a7e62844f"
+  },
+  "selftest-N10_full_without_acceptance_reject": {
+   "PASS": true,
+   "description": "full-completion sin A",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N10_full_without_acceptance_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N11_gcc_non_elf_reject": {
+   "PASS": true,
+   "description": "gcc exit 0 output no ELF",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N11_gcc_non_elf_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N12_ldd_failure_reject": {
+   "PASS": true,
+   "description": "ldd failure",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N12_ldd_failure_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N1_command_hash_mismatch_reject": {
+   "PASS": true,
+   "description": "command hash mismatch con test exit 0",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N1_command_hash_mismatch_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N2_prepublish_fail_no_E": {
+   "PASS": true,
+   "description": "prepublication FAIL intenta finalize",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N2_prepublish_fail_no_E",
+   "selftest_global": "PASS"
+  },
+  "selftest-N3_ignored_build_output_reject": {
+   "PASS": true,
+   "description": "ignored build output",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N3_ignored_build_output_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N4_dirty_after_build_reject": {
+   "PASS": true,
+   "description": "dirty-after-build",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N4_dirty_after_build_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N5_source_hash_mismatch_reject": {
+   "PASS": true,
+   "description": "actual source hash mismatch",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N5_source_hash_mismatch_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N6_gcc_no_output_reject": {
+   "PASS": true,
+   "description": "gcc exit 0 sin output",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N6_gcc_no_output_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N7_lsremote_ambiguous_reject": {
+   "PASS": true,
+   "description": "ls-remote error ambiguo",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N7_lsremote_ambiguous_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N8_remote_branch_preexisting_reject": {
+   "PASS": true,
+   "description": "remote branch preexistente",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N8_remote_branch_preexisting_reject",
+   "selftest_global": "PASS"
+  },
+  "selftest-N9_A_wrong_R_reject": {
+   "PASS": true,
+   "description": "A.R truthy pero incorrecto",
+   "exit_recorded": true,
+   "real_cli": true,
+   "selftest_case": "N9_A_wrong_R_reject",
+   "selftest_global": "PASS"
+  },
+  "verifier-sha-incorrecto": {
+   "PASS": true,
+   "description": "verifier SHA incorrecto",
+   "evidence_verifier_sha256": "7e13fdcf23724e4ce5bee770a2d99864457a7c3b4f1422a7b352ecfaac596d60",
+   "mismatch_detected": true,
+   "payload_verifier_sha256": "8d60f66733eaf6b6c1f2fed8921a578b07a3afc62dd01578a03eb0485bef4c98",
+   "real_cli": true,
+   "receipt": "finalizer-fail-closed.json"
+  }
+ },
+ "recorded_at_utc": "2026-08-08T20:38:27Z",
+ "rule": "each negative runs REAL CLI, records exit + side effects, no auto-PASS",
+ "schema": "negative-matrix/v3.8"
+}

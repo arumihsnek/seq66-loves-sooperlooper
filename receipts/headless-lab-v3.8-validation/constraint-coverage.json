@@ -1,0 +1,353 @@
+{
+ "all_pass_or_deferred": true,
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "constraints": [
+  {
+   "constraint": "silent WAV MUST produce verification=FAIL",
+   "constraint_id": "c-01",
+   "evidence": "silent_wav verification=FAIL observed",
+   "normative_source": "audio_oracle.py:analyze_wav",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "runtime_return_shape_check"
+  },
+  {
+   "constraint": "no subprocess",
+   "constraint_id": "c-02",
+   "evidence": "module source scan: no subprocess usage",
+   "normative_source": "audio_oracle.py:analyze_wav",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "static_source_scan"
+  },
+  {
+   "constraint": "no absolute paths",
+   "constraint_id": "c-03",
+   "evidence": "module source scan: no os.path.abspath/absolute constants",
+   "normative_source": "audio_oracle.py:analyze_wav",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "static_source_scan"
+  },
+  {
+   "constraint": "frame ratio contract",
+   "constraint_id": "c-04",
+   "evidence": "analyze_loop_reproduction returns dict with frame_ratio_ok/silence_rejected",
+   "normative_source": "audio_oracle.py:analyze_loop_reproduction",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "runtime_return_shape_check"
+  },
+  {
+   "constraint": "silence rejected",
+   "constraint_id": "c-05",
+   "evidence": "analyze_loop_reproduction returns dict with frame_ratio_ok/silence_rejected",
+   "normative_source": "audio_oracle.py:analyze_loop_reproduction",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "runtime_return_shape_check"
+  },
+  {
+   "constraint": "verification in {PASS, FAIL, ERROR}",
+   "constraint_id": "c-06",
+   "evidence": "AnalysisResult.verification enum observed",
+   "normative_source": "audio_oracle.py:AnalysisResult",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "runtime_return_shape_check"
+  },
+  {
+   "constraint": "to_dict()",
+   "constraint_id": "c-07",
+   "evidence": "structural contract check",
+   "normative_source": "audio_oracle.py:AnalysisResult",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "structural_contract_check"
+  },
+  {
+   "constraint": "via jack_lsp with bounded timeout",
+   "constraint_id": "c-08",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "graph_assertions.py:GraphAssertions",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "no process termination",
+   "constraint_id": "c-09",
+   "evidence": "structural contract check",
+   "normative_source": "graph_assertions.py:GraphAssertions",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "structural_contract_check"
+  },
+  {
+   "constraint": "launch jackd --name <server> --no-realtime -d dummy in own group",
+   "constraint_id": "c-10",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "jack_server.py:JackServer",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "cleanup owned only",
+   "constraint_id": "c-11",
+   "evidence": "ownership_diff_evidence: changed_not_owned=[] forbidden_changed=[]",
+   "normative_source": "jack_server.py:JackServer",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "ownership_diff_evidence"
+  },
+  {
+   "constraint": "manual SooperLooper OSC protocol per doc/sooperlooper/OSC-CONTROL-AND-FEEDBACK.md",
+   "constraint_id": "c-12",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "osc_probe.py:OscProbe",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "no process operations",
+   "constraint_id": "c-13",
+   "evidence": "structural contract check",
+   "normative_source": "osc_probe.py:OscProbe",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "structural_contract_check"
+  },
+  {
+   "constraint": "os.setsid to create own process group",
+   "constraint_id": "c-14",
+   "evidence": "ft-a4 owned/foreign/cleanup semantics executed",
+   "normative_source": "process_supervisor.py:ProcessSupervisor",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "runtime_literal_test"
+  },
+  {
+   "constraint": "termination only over owned PIDs/PGIDs",
+   "constraint_id": "c-15",
+   "evidence": "ownership_diff_evidence: changed_not_owned=[] forbidden_changed=[]",
+   "normative_source": "process_supervisor.py:ProcessSupervisor",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "ownership_diff_evidence"
+  },
+  {
+   "constraint": "SIGTERM -> wait -> SIGKILL bounded",
+   "constraint_id": "c-16",
+   "evidence": "structural contract check",
+   "normative_source": "process_supervisor.py:ProcessSupervisor",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "structural_contract_check"
+  },
+  {
+   "constraint": "no pkill/killall/pgrep/ipcrm/shell=True",
+   "constraint_id": "c-17",
+   "evidence": "forbidden process-tool names absent from module source",
+   "normative_source": "process_supervisor.py:ProcessSupervisor",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "static_source_scan"
+  },
+  {
+   "constraint": "processes created by start_process ARE owned",
+   "constraint_id": "c-18",
+   "evidence": "structural contract check",
+   "normative_source": "process_supervisor.py:ProcessSupervisor",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "structural_contract_check"
+  },
+  {
+   "constraint": "cleanup(timeout) MUST terminate all and only owned processes",
+   "constraint_id": "c-19",
+   "evidence": "ownership_diff_evidence: changed_not_owned=[] forbidden_changed=[]",
+   "normative_source": "process_supervisor.py:ProcessSupervisor",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "ownership_diff_evidence"
+  },
+  {
+   "constraint": "verify_cleanup() MUST report no remaining owned PIDs after cleanup",
+   "constraint_id": "c-20",
+   "evidence": "ft-a4 owned/foreign/cleanup semantics executed",
+   "normative_source": "process_supervisor.py:ProcessSupervisor",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "runtime_literal_test"
+  },
+  {
+   "constraint": "the acceptance harness MUST create foreign-survival probe processes OUTSIDE the supervisor via subprocess.Popen(start_new_session=True); foreign processes are NEVER registered as owned",
+   "constraint_id": "c-21",
+   "evidence": "ft-a4 foreign-survival probe created outside supervisor",
+   "normative_source": "process_supervisor.py:ProcessSupervisor",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "runtime_literal_test"
+  },
+  {
+   "constraint": "pid MUST be a real positive OS pid when a process is started",
+   "constraint_id": "c-22",
+   "evidence": "ft-a4 real process start observes positive OS pid",
+   "normative_source": "process_supervisor.py:ProcessInfo",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "runtime_literal_test"
+  },
+  {
+   "constraint": "CLI D0/D1 consuming ONLY the contractual API",
+   "constraint_id": "c-23",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "runner.py:LabRunner",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "launch/readiness of SooperLooper in sooperlooper_launcher.py (LAB-A)",
+   "constraint_id": "c-24",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "runner.py:LabRunner",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "no absolute paths",
+   "constraint_id": "c-25",
+   "evidence": "module source scan: no os.path.abspath/absolute constants",
+   "normative_source": "runner.py:LabRunner",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "static_source_scan"
+  },
+  {
+   "constraint": "run_dir repo-scoped",
+   "constraint_id": "c-26",
+   "evidence": "module source scan: no os.path.abspath/absolute constants",
+   "normative_source": "runner.py:LabRunner",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "static_source_scan"
+  },
+  {
+   "constraint": "termination only via owned",
+   "constraint_id": "c-27",
+   "evidence": "ownership_diff_evidence: changed_not_owned=[] forbidden_changed=[]",
+   "normative_source": "runner.py:LabRunner",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "ownership_diff_evidence"
+  },
+  {
+   "constraint": "launch via ProcessSupervisor owned",
+   "constraint_id": "c-28",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "readiness via OSC ping",
+   "constraint_id": "c-29",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "stderr to run_dir",
+   "constraint_id": "c-30",
+   "evidence": "structural contract check",
+   "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "structural_contract_check"
+  },
+  {
+   "constraint": "cleanup owned",
+   "constraint_id": "c-31",
+   "evidence": "structural contract check",
+   "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+   "phase": "prepublication",
+   "verdict": "PASS",
+   "verification_method": "structural_contract_check"
+  }
+ ],
+ "deferred_by_design": [
+  {
+   "constraint": "via jack_lsp with bounded timeout",
+   "constraint_id": "c-08",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "graph_assertions.py:GraphAssertions",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "launch jackd --name <server> --no-realtime -d dummy in own group",
+   "constraint_id": "c-10",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "jack_server.py:JackServer",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "manual SooperLooper OSC protocol per doc/sooperlooper/OSC-CONTROL-AND-FEEDBACK.md",
+   "constraint_id": "c-12",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "osc_probe.py:OscProbe",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "CLI D0/D1 consuming ONLY the contractual API",
+   "constraint_id": "c-23",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "runner.py:LabRunner",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "launch/readiness of SooperLooper in sooperlooper_launcher.py (LAB-A)",
+   "constraint_id": "c-24",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "runner.py:LabRunner",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "launch via ProcessSupervisor owned",
+   "constraint_id": "c-28",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  },
+  {
+   "constraint": "readiness via OSC ping",
+   "constraint_id": "c-29",
+   "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+   "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+   "phase": "dispatch",
+   "verdict": "deferred_by_design",
+   "verification_method": "dispatch_phase"
+  }
+ ],
+ "normative_source": "functional-contract-baseline-v3.8.json constraints",
+ "recorded_at_utc": "2026-08-08T20:34:03Z",
+ "schema": "constraint-coverage/v3.8"
+}

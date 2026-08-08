@@ -1,0 +1,60 @@
+{
+ "all_binding_cases": true,
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "cases": {
+  "create_only_proof_bool_REJECT": {
+   "PASS": true,
+   "verifier_exit": 1
+  },
+  "exact_A_PASS": {
+   "PASS": true,
+   "verifier_exit": 0
+  },
+  "wrong_C_REJECT": {
+   "PASS": true,
+   "verifier_exit": 1
+  },
+  "wrong_R_REJECT": {
+   "PASS": true,
+   "verifier_exit": 1
+  },
+  "wrong_branch_REJECT": {
+   "PASS": true,
+   "verifier_exit": 1
+  },
+  "wrong_evidence_sha256_REJECT": {
+   "PASS": true,
+   "verifier_exit": 1
+  },
+  "wrong_remote_REJECT": {
+   "PASS": true,
+   "verifier_exit": 1
+  }
+ },
+ "exact_fields": [
+  "C",
+  "R",
+  "E",
+  "E_tree",
+  "lab",
+  "batch",
+  "remote",
+  "branch",
+  "remote_resolved_oid",
+  "evidence_path",
+  "evidence_blob_oid",
+  "evidence_sha256",
+  "push_argv_hash",
+  "push_transcript_hash",
+  "pre_absence_receipt",
+  "prepush_absence_receipt",
+  "functional_result",
+  "test_result",
+  "build_result",
+  "clean_before",
+  "clean_after",
+  "final_verdict"
+ ],
+ "recorded_at_utc": "2026-08-08T20:34:41Z",
+ "schema": "postpublication-binding/v3.8"
+}

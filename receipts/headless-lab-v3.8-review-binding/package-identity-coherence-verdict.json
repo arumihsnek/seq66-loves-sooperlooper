@@ -1,0 +1,69 @@
+{
+ "blocking_findings": null,
+ "bound_manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+ "bound_payload_hashes_count": 19,
+ "bound_payload_hashes_match": true,
+ "codex_exec_processes": 1,
+ "detailed_status": "VALID_ADVISORY_VERDICT",
+ "execution_id": "8d738e09-ea1c-4350-af24-844f4bdc2188",
+ "follow_up_turns": 0,
+ "label": "package-identity-coherence",
+ "mission_id": "hermes-v38-package-identity-coherence",
+ "mode": null,
+ "model_turns_observed": 1,
+ "non_blocking_observations": null,
+ "operational_usability": true,
+ "required_actions": null,
+ "response": {
+  "decision": {
+   "rationale": "Todos los gates suministrados est\u00e1n en verde y convergen sobre la misma autoridad de identidad. El paquete est\u00e1 ligado al manifest SHA-256 requerido y a los 19 hashes, preserva v3.7 byte por byte e identifica correctamente lo que supersede. Los controles negativos, el finalizer y el verifier demuestran rechazo fail-closed e independencia suficiente. Los cuatro hallazgos hist\u00f3ricos de v3.7 justifican la correcci\u00f3n de v3.8, pero no bloquean este paquete inmutable.",
+   "recommendation": "accept"
+  },
+  "findings": [],
+  "next_safe_step": "Proceder con binding/publicaci\u00f3n \u00fanicamente bajo el manifiesto y los 19 hashes revisados, conservando el single-writer lease y abortando si la relectura previa detecta un cambio del head remoto.",
+  "question_answers": [
+   {
+    "answer": "S\u00ed. La evidencia identifica package-identity-v3.8.json como la \u00fanica autoridad de identidad y vincula el paquete al manifest_sha256 bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18 y a los 19 hashes operacionales declarados.",
+    "id": "Q1"
+   },
+   {
+    "answer": "S\u00ed. El control de coherencia compar\u00f3 59 fuentes y obtuvo 0 discrepancias, con veredicto PASS; esto respalda la coincidencia sem\u00e1ntica de scope, package, batch y leases.",
+    "id": "Q2"
+   },
+   {
+    "answer": "S\u00ed. Supersedes identifica v3.7 mediante su versi\u00f3n, batch y manifest SHA-256 7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3. La preservaci\u00f3n byte-exacta de v3.7 tambi\u00e9n fue verificada.",
+    "id": "Q3"
+   },
+   {
+    "answer": "S\u00ed. El finalizer comprueba la identidad antes de generar E. Las pruebas fail-closed 8/8 y la matriz negativa 15/15 m\u00e1s control demuestran rechazo por exit 3 e IDENTITY_MISMATCH ante las mutaciones ensayadas.",
+    "id": "Q4"
+   },
+   {
+    "answer": "S\u00ed. El verifier realiza un cross-check independiente de authority, package, scope, batch, leases y dem\u00e1s bindings, e inyecta la autoridad de identidad y los planes de lease en las llamadas al finalizer; no conf\u00eda \u00fanicamente en evidence.batch.",
+    "id": "Q5"
+   },
+   {
+    "answer": "S\u00ed. La evidencia de full-completion sit\u00faa la coherencia de identidad como condici\u00f3n previa al PASS, y el conjunto de pruebas correspondiente pas\u00f3.",
+    "id": "Q6"
+   },
+   {
+    "answer": "S\u00ed, para el alcance evidenciado. El writer lease exclusivo fue readquirido por PID 1915047 sobre FD 9 y se exige releer el remoto antes del push. Esto evita carreras silenciosas mientras esas condiciones permanezcan vigentes; un avance posterior del head sigue siendo un riesgo operativo controlado por esa relectura.",
+    "id": "Q7"
+   }
+  ],
+  "schema_version": "codex-senior-consult-response/v3",
+  "summary": "La evidencia congelada respalda la coherencia de identidad del paquete v3.8: manifiesto vinculado exactamente, 19/19 payloads validados, 59 bindings sin discrepancias, controles independientes y comportamiento fail-closed verificado. No se identifican hechos que impidan la aceptaci\u00f3n ni acciones obligatorias previas.",
+  "verdict": "accept"
+ },
+ "response_artifact": {
+  "artifact_schema": "codex-senior-consult-response-artifact/v1",
+  "fingerprint": "dd509260e7982db83b01d8e1ddaf2cc6dbc7af07b5399bcc39e6591df0854a26",
+  "relative_path": "responses/dd509260e7982db83b01d8e1ddaf2cc6dbc7af07b5399bcc39e6591df0854a26.json"
+ },
+ "response_fingerprint": "dd509260e7982db83b01d8e1ddaf2cc6dbc7af07b5399bcc39e6591df0854a26",
+ "schema": "senior-verdict/v1",
+ "status": "COMPLETED",
+ "tool_calls_observed": 0,
+ "verdict": "accept",
+ "verdict_at_utc": "2026-08-08T20:52:00Z"
+}

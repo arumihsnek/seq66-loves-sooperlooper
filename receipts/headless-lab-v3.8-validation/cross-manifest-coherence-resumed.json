@@ -1,0 +1,17 @@
+{
+ "details": {
+  "identity_sources_checked": 59,
+  "mismatches": [],
+  "pass": true,
+  "schema": "cross-manifest-coherence/v3.8",
+  "verdict": "PASS"
+ },
+ "identity_sources_checked": 59,
+ "manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+ "mismatches": [],
+ "recorded_at_utc": "2026-08-08T20:33:30Z",
+ "reviewed_dir": "/tmp/v38_cm_review2",
+ "schema": "cross-manifest-coherence-resumed/v3.8",
+ "v37_defect_reproduction_note": "Reproduced conceptually in v3.7-identity-blocking-audit.json: scope=20260806T234554Z, package=20260807T161935Z (mismatch). v3.8 validator returns PASS only when ALL sources agree.",
+ "verdict": "PASS"
+}

@@ -1,0 +1,85 @@
+{
+ "blocking_findings": null,
+ "bound_manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+ "bound_payload_hashes_count": 19,
+ "bound_payload_hashes_match": true,
+ "codex_exec_processes": 1,
+ "detailed_status": "VALID_ADVISORY_VERDICT",
+ "execution_id": "576c2d81-b0de-46af-8ac1-2e6ee0bc86bc",
+ "follow_up_turns": 0,
+ "label": "adversarial-identity-validity",
+ "mission_id": "hermes-v38-adversarial-identity-validity",
+ "mode": null,
+ "model_turns_observed": 1,
+ "non_blocking_observations": null,
+ "operational_usability": true,
+ "required_actions": null,
+ "response": {
+  "controls": [
+   "Aceptar \u00fanicamente el payload operacional exacto de 19 archivos ligado a manifest_sha256=bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18 y a los 19 hashes suministrados.",
+   "Mantener la preservaci\u00f3n byte-exacta de v3.7, cuyo manifest SHA-256 es 7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3.",
+   "Conservar las puertas fail-closed del finalizador y la verificaci\u00f3n independiente de identidad del acceptance verifier.",
+   "Aplicar las reglas de autoexclusi\u00f3n y exclusi\u00f3n de revisi\u00f3n: manifest, preflight, bundle, verdict, binding y publication-index no forman parte del payload operacional.",
+   "Antes de publicaci\u00f3n, volver a comprobar que la cabeza de PR #34 sigue siendo 3090f2e078ca29762f7654b9e5a872f58ad4ac5b y que el escritor \u00fanico conserva el lock.",
+   "No establecer dispatch_authorized sin autorizaci\u00f3n humana expl\u00edcita."
+  ],
+  "next_safe_step": "Proceder a binding/publicaci\u00f3n solamente tras confirmar de forma fail-closed el manifest SHA-256 exacto, los 19 hashes, la cabeza exacta de PR #34 y la titularidad vigente del lock; abortar ante cualquier divergencia.",
+  "question_answers": [
+   {
+    "answer": "S\u00ed. La evidencia suministrada registra 15 mutaciones ejecutadas mediante CLI real, con real_cli=True por caso; todas fueron rechazadas.",
+    "id": "Q1"
+   },
+   {
+    "answer": "S\u00ed. N01\u2013N11 terminan con c\u00f3digo 3 e IDENTITY_MISMATCH asociado a una comprobaci\u00f3n identificada; N12\u2013N14 terminan con c\u00f3digo 1 en el validador cross-manifest y una comprobaci\u00f3n supersedes identificada. Todos son fallos no-cero y fail-closed.",
+    "id": "Q2"
+   },
+   {
+    "answer": "S\u00ed. N15 reproduce el desacoplamiento de identidad de v3.7 \u2014scope 20260806T234554Z frente a package 20260807T161935Z\u2014 y el resultado es REJECT.",
+    "id": "Q3"
+   },
+   {
+    "answer": "S\u00ed. El control de identidad v\u00e1lida ejecuta el finalizador completo con C real, pasa y crea el artefacto E; las mutaciones rechazadas no lo crean.",
+    "id": "Q4"
+   },
+   {
+    "answer": "S\u00ed. No se observa auto-PASS meramente declarativo: cada caso comprueba c\u00f3digo de salida, puerta nombrada y efectos laterales, incluida la ausencia o presencia de E.",
+    "id": "Q5"
+   },
+   {
+    "answer": "S\u00ed. La cobertura heredada permanece intacta: matriz negativa 29/29, negativos de runtime 12/12, hashes de comandos 8/8, selftest 32/32 y preservaci\u00f3n de v3.6 PASS. Adem\u00e1s, v3.7 conserva exactamente sus bytes con el manifest esperado.",
+    "id": "Q6"
+   }
+  ],
+  "residual_risks": [
+   {
+    "id": "RR1",
+    "impact": "La vinculaci\u00f3n exacta con el estado revisado dejar\u00eda de ser v\u00e1lida; debe abortarse la publicaci\u00f3n si cambia.",
+    "risk": "La cabeza remota de PR #34 podr\u00eda avanzar despu\u00e9s de la evidencia congelada y antes de la publicaci\u00f3n."
+   },
+   {
+    "id": "RR2",
+    "impact": "Una carrera remota puede invalidar el binding aunque la exclusi\u00f3n local siga funcionando.",
+    "risk": "El lock local no impide por s\u00ed solo escrituras remotas ajenas."
+   },
+   {
+    "id": "RR3",
+    "impact": "La aceptaci\u00f3n es v\u00e1lida para la evidencia congelada y sus hashes declarados, no para contenido distinto o posteriormente modificado.",
+    "risk": "La auditor\u00eda depende exclusivamente del bundle suministrado y no verific\u00f3 directamente archivos ni ejecuciones."
+   }
+  ],
+  "risks": [],
+  "schema_version": "codex-senior-consult-response/v3",
+  "verdict": "continue"
+ },
+ "response_artifact": {
+  "artifact_schema": "codex-senior-consult-response-artifact/v1",
+  "fingerprint": "b98697762f5bd74ba647e8085978793f6d8cef17f5fdb64ff92493964888eac3",
+  "relative_path": "responses/b98697762f5bd74ba647e8085978793f6d8cef17f5fdb64ff92493964888eac3.json"
+ },
+ "response_fingerprint": "b98697762f5bd74ba647e8085978793f6d8cef17f5fdb64ff92493964888eac3",
+ "schema": "senior-verdict/v1",
+ "status": "COMPLETED",
+ "tool_calls_observed": 0,
+ "verdict": "continue",
+ "verdict_at_utc": "2026-08-08T20:52:00Z"
+}

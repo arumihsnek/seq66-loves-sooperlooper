@@ -1,0 +1,34 @@
+{
+ "C": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "R": "c85f42ef92b987192595d761479a9101ce9317be",
+ "R_tree": "a1f77583e5a330839bdb57c73d5bb46585fd7e77",
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "changed_not_owned": [],
+ "changed_paths": [
+  "tests/integration/headless_audio_lab/__init__.py",
+  "tests/integration/headless_audio_lab/jack_server.py",
+  "tests/integration/headless_audio_lab/osc_probe.py",
+  "tests/integration/headless_audio_lab/process_supervisor.py",
+  "tests/integration/headless_audio_lab/sooperlooper_launcher.py"
+ ],
+ "changed_paths_non_empty": true,
+ "diff_raw": "A\ttests/integration/headless_audio_lab/__init__.py\nA\ttests/integration/headless_audio_lab/jack_server.py\nA\ttests/integration/headless_audio_lab/osc_probe.py\nA\ttests/integration/headless_audio_lab/process_supervisor.py\nA\ttests/integration/headless_audio_lab/sooperlooper_launcher.py",
+ "forbidden_changed": [],
+ "lab": "LAB-A",
+ "negative_fixtures": {
+  "N22_out_of_scope_path_reject": true,
+  "note": "N22 adds doc/sooperlooper/UNTOUCHABLE.md in R -> forbidden_changed -> REJECT (real CLI)"
+ },
+ "owned_paths": [
+  "tests/integration/headless_audio_lab/process_supervisor.py",
+  "tests/integration/headless_audio_lab/jack_server.py",
+  "tests/integration/headless_audio_lab/osc_probe.py",
+  "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+  "tests/integration/headless_audio_lab/__init__.py"
+ ],
+ "ownership_diff_pass": true,
+ "recorded_at_utc": "2026-08-08T20:39:53Z",
+ "required_paths_missing": [],
+ "required_paths_satisfied": true,
+ "schema": "ownership-diff-verification/v3.8"
+}

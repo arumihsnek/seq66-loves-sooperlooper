@@ -1,0 +1,12 @@
+{
+ "bundle_path": "/home/ubuntu/.hermes/runs/20260808T132428Z-v3-8-identity-coherence-package/receipts/headless-lab-v3.8-review-binding/adversarial-identity-validity-bundle.json",
+ "bundle_sha256": "a6b21bdc894efda0a979553941f88fec5375645093765727955fba56ed909f16",
+ "label": "adversarial-identity-validity",
+ "mission_id": "hermes-v38-adversarial-identity-validity",
+ "mode": null,
+ "model_processes_consumed": 0,
+ "preflight_at_utc": "2026-08-08T20:50:00Z",
+ "preflight_status": "PREFLIGHT_VALID",
+ "preflight_valid": true,
+ "schema": "senior-preflight/v1"
+}
