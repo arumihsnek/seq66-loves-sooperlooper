@@ -1,0 +1,121 @@
+{
+  "schema": "package-payload-manifest/v3.8",
+  "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "frozen_at_utc": "2026-08-08T14:09:57Z",
+  "git_object_format": "sha1",
+  "len_files": 19,
+  "files": [
+    {
+      "name": "acceptance-verifier-v3.8.py",
+      "sha256": "8d60f66733eaf6b6c1f2fed8921a578b07a3afc62dd01578a03eb0485bef4c98",
+      "size": 85142
+    },
+    {
+      "name": "batch-manifest-v3.8.json",
+      "sha256": "24a1446e13add0541f765a0135a76400e3784a6f08c518097c15aa6bfc8facb0",
+      "size": 11989
+    },
+    {
+      "name": "build-provenance-policy-v3.8.json",
+      "sha256": "6d386ffafd1c2e640179537b694b6d2d2ff1ebd966964a7533570ab3906eada9",
+      "size": 2353
+    },
+    {
+      "name": "controller-acceptance-schema-v3.8.json",
+      "sha256": "5797214909f3e9d7263e6093f366c841196327cee203546ebd03cc21ce01b028",
+      "size": 1135
+    },
+    {
+      "name": "controller-evidence-schema-v3.8.json",
+      "sha256": "8155a94b2fddf1295582e7df0db46dfeb9ce2b30606e951d58033cfc9c9364de",
+      "size": 1272
+    },
+    {
+      "name": "cross-manifest-coherence-validator.py",
+      "sha256": "02dc9ef667f888c4104781328b2bd726a248f4c378fb8cecd560ad7e7cd67411",
+      "size": 8483
+    },
+    {
+      "name": "dispatch-plan-v3.8.json",
+      "sha256": "5a7f10db1ee780ebea526ac1f7a5e10c8300cabb7006e55f52aed233b368efbd",
+      "size": 1771
+    },
+    {
+      "name": "functional-contract-baseline-v3.8.json",
+      "sha256": "2a32f2af4eceeeafd559dc050424352271fe5fdc6b5ff3b7ae11788fa1c2071b",
+      "size": 11324
+    },
+    {
+      "name": "lab-api-contract-v3.8.json",
+      "sha256": "2099b6d596463c226eee959060e09ae2ca4dc4952dae29817094980c45f64894",
+      "size": 7944
+    },
+    {
+      "name": "leaf-r-report-schema-v3.8.json",
+      "sha256": "1788c10145cce7ce4cf669b69c9994c07c40c766d254166fc7bd1f224667de35",
+      "size": 873
+    },
+    {
+      "name": "lease-plan-lab-a-v3.8.json",
+      "sha256": "cde2da1dd7e9486169f42d55625e8f5bdbb80e17502f355d5266b5515149fc28",
+      "size": 612
+    },
+    {
+      "name": "lease-plan-lab-b-v3.8.json",
+      "sha256": "5b258cb4ee78d4fc215fe841acf80316380b45882281e823e4f0867852af8b6c",
+      "size": 612
+    },
+    {
+      "name": "mechanical-finalizer-v3.8.py",
+      "sha256": "c853af00712a5e3de34671c8fec8a7a992d6a801eb7b423d6807faa760bc10c8",
+      "size": 63134
+    },
+    {
+      "name": "package-identity-v3.8.json",
+      "sha256": "5151df8c9aaf2176fcd8fd07017f2bd76a2bc31b75d4c735aa49d5f1925bd92d",
+      "size": 1867
+    },
+    {
+      "name": "port-plan-v3.8.json",
+      "sha256": "bd93c73cf306059cb49b5ad1fa6287e4bfe9de79feba8d2bd605e5f22030625a",
+      "size": 1523
+    },
+    {
+      "name": "predispatch-readiness-v3.8.json",
+      "sha256": "acdbd1eb24d1c752b45db448c8ea6fa9a6e416e3957b5cc9e8c945934b47edcf",
+      "size": 567
+    },
+    {
+      "name": "process-hardening-contract-v3.8.json",
+      "sha256": "9481a11e33928cbd5655ab292ad17054647708c04bcea9ebabcc4dbecd4e62e1",
+      "size": 4246
+    },
+    {
+      "name": "publication-policy-v3.8.json",
+      "sha256": "dae4d775c38360d2a1d57ffa62cbf20c60ce8e31034639774330d8a863554b37",
+      "size": 1196
+    },
+    {
+      "name": "scope-freeze-v3.8.json",
+      "sha256": "77d1f09e5b03e6f625fa938b71a8357fa2432d69863b70035242341aa418b446",
+      "size": 2824
+    }
+  ],
+  "missing": [],
+  "extra": [],
+  "zero_missing": true,
+  "zero_extra": true,
+  "operational_file_count": 19,
+  "review_exclusion_rule": "senior-preflight / senior-review-bundle / senior-verdict / review-binding / publication-index are NEVER inside the operational payload",
+  "self_exclusion_rule": "package-payload-manifest-v3.8.json is NEVER inside the operational payload",
+  "supersedes": "v3.7",
+  "supersedes_manifest_sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+  "supersedes_batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+  "supersession_findings": [
+    "ID-F1",
+    "ID-F2",
+    "ID-F3",
+    "ID-F4"
+  ]
+}

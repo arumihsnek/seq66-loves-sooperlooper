@@ -1,0 +1,49 @@
+{
+  "schema": "package-identity/v3.8",
+  "package": "v3.8",
+  "package_generation": "v3.8",
+  "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "supersedes": {
+    "package": "v3.7",
+    "manifest_sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+    "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7"
+  },
+  "labs": {
+    "LAB-A": {
+      "leaf_id": "LEAF-LAB-A-V3_8",
+      "lease_id": "LEASE-20260808T132428Z-LAB-A-V3_8",
+      "planned_result_branch": "result/<future-run-id>-lab-a-v3_8",
+      "result_evidence_path": "receipts/headless-lab-results-v3.8/lab-a-controller-evidence.json"
+    },
+    "LAB-B": {
+      "leaf_id": "LEAF-LAB-B-V3_8",
+      "lease_id": "LEASE-20260808T132428Z-LAB-B-V3_8",
+      "planned_result_branch": "result/<future-run-id>-lab-b-v3_8",
+      "result_evidence_path": "receipts/headless-lab-results-v3.8/lab-b-controller-evidence.json"
+    }
+  },
+  "result_paths": {
+    "lab_a_controller_evidence": "receipts/headless-lab-results-v3.8/lab-a-controller-evidence.json",
+    "lab_b_controller_evidence": "receipts/headless-lab-results-v3.8/lab-b-controller-evidence.json"
+  },
+  "branch_patterns": {
+    "lab_a": "result/<future-run-id>-lab-a-v3_8",
+    "lab_b": "result/<future-run-id>-lab-b-v3_8"
+  },
+  "operational_files": [
+    "package-identity-v3.8.json",
+    "scope-freeze-v3.8.json",
+    "batch-manifest-v3.8.json",
+    "dispatch-plan-v3.8.json",
+    "lease-plan-lab-a-v3.8.json",
+    "lease-plan-lab-b-v3.8.json",
+    "mechanical-finalizer-v3.8.py",
+    "acceptance-verifier-v3.8.py",
+    "cross-manifest-coherence-validator.py"
+  ],
+  "dispatch_authorized": false,
+  "leases_activated": false,
+  "leaves": 0,
+  "note": "Single normative identity source for v3.8. All other artifacts derive/verify these values."
+}
