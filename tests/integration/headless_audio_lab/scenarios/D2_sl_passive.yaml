@@ -1,0 +1,6 @@
+# D2 sl passive scenario
+description: SooperLooper passive scenario for audio loop reproduction
+parameters:
+  source_type: sl_passive
+  expected_loop_frames: 4800
+  tolerance_percent: 10.0

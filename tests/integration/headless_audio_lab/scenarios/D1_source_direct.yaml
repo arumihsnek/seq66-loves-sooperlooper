@@ -1,0 +1,6 @@
+# D1 source direct scenario
+description: Direct source scenario for audio loop reproduction
+parameters:
+  source_type: direct
+  expected_loop_frames: 4800
+  tolerance_percent: 10.0

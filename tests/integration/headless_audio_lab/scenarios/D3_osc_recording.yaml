@@ -1,0 +1,6 @@
+# D3 osc recording scenario
+description: OSC recording scenario for audio loop reproduction
+parameters:
+  source_type: osc_recording
+  expected_loop_frames: 4800
+  tolerance_percent: 10.0
