@@ -1,0 +1,27 @@
+{
+ "all_new_not_old": true,
+ "new_batch": "BATCH-20260809T205317Z-DOGFOOD004-LAB-V3_10",
+ "new_leaf_ids": [
+  "LEAF-LAB-A-V3_10",
+  "LEAF-LAB-B-V3_10"
+ ],
+ "new_lease_ids": [
+  "LEASE-20260809T205317Z-LAB-A-V3_10",
+  "LEASE-20260809T205317Z-LAB-B-V3_10"
+ ],
+ "new_result_paths": [
+  "receipts/headless-lab-results-v3.10/lab-a-controller-evidence.json",
+  "receipts/headless-lab-results-v3.10/lab-b-controller-evidence.json"
+ ],
+ "old_batch": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "old_leaf_ids": [
+  "LEAF-LAB-A-V3_9",
+  "LEAF-LAB-B-V3_9"
+ ],
+ "old_lease_ids": [
+  "20260808T233306Z-LAB-A-V3_9",
+  "20260808T233306Z-LAB-B-V3_9"
+ ],
+ "schema": "execution-identity-freshness/v1",
+ "status": "PASS"
+}

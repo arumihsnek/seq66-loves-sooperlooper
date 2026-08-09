@@ -1,0 +1,10 @@
+{
+ "actor_provenance_gates": true,
+ "dispatch_authorized": false,
+ "functional_semantic_drift": 0,
+ "functional_surface": false,
+ "leases_activated": false,
+ "leaves": 0,
+ "schema": "full-completion/v3.10",
+ "status": "PASS"
+}

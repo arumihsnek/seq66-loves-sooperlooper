@@ -1,0 +1,109 @@
+{
+ "$id": "https://hermes.local/leaf-provenance-receipt/v3.10",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "properties": {
+  "R": {
+   "pattern": "^[0-9a-f]{40}$"
+  },
+  "R_parent": {
+   "pattern": "^[0-9a-f]{40}$"
+  },
+  "R_tree": {
+   "pattern": "^[0-9a-f]{40}$"
+  },
+  "batch": {
+   "const": "BATCH-20260809T205317Z-DOGFOOD004-LAB-V3_10"
+  },
+  "candidate_commit": {
+   "const": "509538784afc2b828f2d922f65cf8ca3a39b5ee7"
+  },
+  "controller_execution_id": {
+   "type": "string"
+  },
+  "controller_git_add_count_in_leaf_worktree": {
+   "const": 0
+  },
+  "controller_git_commit_count_in_leaf_worktree": {
+   "const": 0
+  },
+  "controller_implementation_edit_count_after_leaf_start": {
+   "const": 0
+  },
+  "lab": {
+   "enum": [
+    "LAB-A",
+    "LAB-B"
+   ]
+  },
+  "leaf_end_utc": {
+   "type": "string"
+  },
+  "leaf_execution_id": {
+   "minLength": 1,
+   "type": "string"
+  },
+  "leaf_final_git_status": {
+   "type": "array"
+  },
+  "leaf_final_rev_parse_HEAD": {
+   "pattern": "^[0-9a-f]{40}$"
+  },
+  "leaf_git_add_evidence": {
+   "type": "object"
+  },
+  "leaf_git_commit_evidence": {
+   "type": "object"
+  },
+  "leaf_id": {
+   "type": "string"
+  },
+  "leaf_start_utc": {
+   "type": "string"
+  },
+  "lease_id": {
+   "type": "string"
+  },
+  "terminal_status": {
+   "enum": [
+    "completed",
+    "failed",
+    "timeout",
+    "crash",
+    "tool_failure",
+    "max_iterations"
+   ]
+  },
+  "transcript_artifact": {
+   "type": "string"
+  },
+  "transcript_sha256": {
+   "pattern": "^[0-9a-f]{64}$"
+  }
+ },
+ "required": [
+  "lab",
+  "batch",
+  "leaf_id",
+  "lease_id",
+  "candidate_commit",
+  "leaf_execution_id",
+  "leaf_start_utc",
+  "leaf_end_utc",
+  "terminal_status",
+  "transcript_artifact",
+  "transcript_sha256",
+  "R",
+  "R_tree",
+  "R_parent",
+  "leaf_git_add_evidence",
+  "leaf_git_commit_evidence",
+  "leaf_final_rev_parse_HEAD",
+  "leaf_final_git_status",
+  "controller_execution_id",
+  "controller_implementation_edit_count_after_leaf_start",
+  "controller_git_add_count_in_leaf_worktree",
+  "controller_git_commit_count_in_leaf_worktree"
+ ],
+ "title": "Leaf provenance receipt v3.10",
+ "type": "object"
+}

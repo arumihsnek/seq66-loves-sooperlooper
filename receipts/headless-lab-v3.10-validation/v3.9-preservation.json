@@ -1,0 +1,297 @@
+{
+ "E_A": "7db1a1b7572eabf6913ad8219a7647adca4f15c8",
+ "E_B": "71a630659310782940705f484104465ad1c2308a",
+ "R_A": "46bd5f526b9a6a90ee96093e1924d42b15cbc063",
+ "R_B": "122303ee22cf79d58faaaca09c60e908c656fc09",
+ "file_count": 57,
+ "files": [
+  {
+   "name": "receipts/headless-lab-v3.9-review-binding/v3-9-review-binding.json",
+   "sha256": "8dc80f6293b77904b3581171672f689f2c38ca2602dfc4661dedb26ec32b21a4",
+   "size": 2517
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/acceptance-verifier-v3.9.py",
+   "sha256": "9639169de7b8e8898eb762e04cfe788e21d7163e68c6ca691043ba9fae144422",
+   "size": 30218
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/batch-manifest-v3.9.json",
+   "sha256": "a8453405b7705919ccdc3aa4b7c1aefdf192756081879aaa134cde7b4feae11c",
+   "size": 11081
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/build-provenance-policy-v3.9.json",
+   "sha256": "d7000fe8a18d128bffa3a0afffa0da0ae763766dd460fe72b324bf4f86cb94d8",
+   "size": 2220
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/controller-acceptance-schema-v3.9.json",
+   "sha256": "40db5eba0387aa7486671a86845daee6faf049050dd7e9616c9cf6b9144d17a0",
+   "size": 1067
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/controller-evidence-schema-v3.9.json",
+   "sha256": "8787ebdc484d65883e98aa8b99a1e1e61f3399d2f34ecc1b417fe91c5025d73c",
+   "size": 1181
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/cross-manifest-coherence-validator.py",
+   "sha256": "02dc9ef667f888c4104781328b2bd726a248f4c378fb8cecd560ad7e7cd67411",
+   "size": 8483
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/dispatch-plan-v3.9.json",
+   "sha256": "384dc654906e73300cc36a23eeeb6272553a32f1a3711ef521881a04baefd486",
+   "size": 1637
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/functional-contract-baseline-v3.9.json",
+   "sha256": "54994ff5766bbaaf353ebe8c77f0da4bb22fe2efb2557825a3b25ceadd872d45",
+   "size": 9693
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/gate-traceability-v3.9.json",
+   "sha256": "283d45bb4201942aa4e2c2f7a867dfd979f08d2450023f586a5ba01708570464",
+   "size": 13982
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/lab-api-contract-v3.9.json",
+   "sha256": "b960725e6467db449a757737f0ae486dc97ef5e87f6a992b764a266a421f13e8",
+   "size": 6546
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/leaf-r-report-schema-v3.9.json",
+   "sha256": "39f8767ec6688328927abffd588f8a733fd28d8d00a1843f874bca24fc5097c0",
+   "size": 820
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/leaf-requirements-v3.9.json",
+   "sha256": "46774c6999081368f6caa0ce1bf1744a4060e72d2e9a8d8ecea7f8eaf90d341d",
+   "size": 7257
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/lease-plan-lab-a-v3.9.json",
+   "sha256": "09715128492a77222ee2476ddf9b14f96d396148cbf3ffed348fa169ff17f41f",
+   "size": 588
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/lease-plan-lab-b-v3.9.json",
+   "sha256": "d7dc93a247bdd1ea60f0f56bbe5b4b6a4b25b1a244290396e207030be0a6bfc0",
+   "size": 588
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/mechanical-finalizer-v3.9.py",
+   "sha256": "718e1b3b6a074e9048c5aad12300b3e6585e78c1d9910d2597c9a7e3cbd8bfc0",
+   "size": 75788
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/package-identity-v3.9.json",
+   "sha256": "21dd323929c94992bc1d9fbb85fe2f7b15444f712855d1cf88f337b7cd9bdf2c",
+   "size": 1958
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/package-payload-manifest-v3.9.json",
+   "sha256": "71596b8472b459940ee79fe9df8d3687dd3dbbdf5bf4696d897a9e4a1bdb3bba",
+   "size": 4011
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/port-plan-v3.9.json",
+   "sha256": "7823280f14850c98e539c1717548a405202d6c105ef9ac9677244e0c581fc453",
+   "size": 1429
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/predispatch-readiness-v3.9.json",
+   "sha256": "52b5052d6eeb7f34ee145b36a064eecb55ab0813949a5bfe531c193dac657b29",
+   "size": 549
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/process-hardening-contract-v3.9.json",
+   "sha256": "31713ea2ae422b643f071fa8ac2cba4a27d696c86f375ac9b8761b24f77ceb6b",
+   "size": 3962
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/publication-policy-v3.9.json",
+   "sha256": "628758dd3630ec6034e7975ebffca847c299424c2e0a20d5577fd2a77bb7f444",
+   "size": 1149
+  },
+  {
+   "name": "receipts/headless-lab-v3.9/scope-freeze-v3.9.json",
+   "sha256": "317a72b8ff5e72fdd9871de82d6bd576afec4d853e89cc1c64f7e62c60f9fdd3",
+   "size": 2429
+  },
+  {
+   "name": "receipts/headless-lab-results-v3.9/lab-a-controller-evidence.json",
+   "sha256": "43d22bbb4584437fc37a815e536bebf334b72f7991d7108565d980781557a5a5",
+   "size": 39054
+  },
+  {
+   "name": "receipts/headless-lab-results-v3.9/lab-b-controller-evidence.json",
+   "sha256": "db58c35dafe4fbefecfdacefcc65b2390f1225dc8d945946750649209293a262",
+   "size": 49490
+  },
+  {
+   "name": "receipts/headless-lab-results-v3.9/postpublish-binding.json",
+   "sha256": "3f43fb9f3008e391dca755b2e1b6570f14bfb57c6788478f3b750547807118cd",
+   "size": 664
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-post-merge-forensic/ancestry-audit.json",
+   "sha256": "eb1ac1ac7ae1d4ff448dee84477dd77f3ea382863a289dd30505d2ec10379d7d",
+   "size": 276
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-post-merge-forensic/commit-identity-audit.json",
+   "sha256": "9f8db92293826a9e08da2ef8b9a061b446089cd25b994b5b78640f94c17d1ae0",
+   "size": 1118
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-post-merge-forensic/cp076-claim-audit.json",
+   "sha256": "326dcbccda2dbb368d72b69dae0855026e2b4ff6fce7dbf43b25595dae514375",
+   "size": 309
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-post-merge-forensic/human-authorization-forensic-binding.json",
+   "sha256": "0fadaa03e152ae577da6db2109a6094cb26a4902bc736908c10a0a07f505445a",
+   "size": 1005
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-post-merge-forensic/integration-blob-matrix.json",
+   "sha256": "536310365ac2d837c28635d2856f2337440c4af39f881d77bf351671940c599b",
+   "size": 3492
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-post-merge-forensic/post-merge-ci-audit.json",
+   "sha256": "54462d964e7085b3438d9a7bdf8bf7120e465cd1a73a2c4b77c639a31bf425db",
+   "size": 293
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-post-merge-forensic/provenance-timeline.json",
+   "sha256": "8d0c6d7dc30e38cb9f9b44df01bde012338e108401040d35704623aeefadbb2d",
+   "size": 1789
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-post-merge-forensic/senior-forensic-review.json",
+   "sha256": "7ea712ecef51923467819cf0ec38a590f21128bad758471e481cdd37632c70c8",
+   "size": 6415
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-post-merge-forensic/senior-merge-review-forensic-binding.json",
+   "sha256": "4e2205b3b26c01587971a08ed4864e63364c127617926428f779f0f60f56bf1a",
+   "size": 577
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/adversarial-matrix.json",
+   "sha256": "423188f024ffa292b0bfcb5a642ca5f809fa135bfcdcbc796233dde816c13272",
+   "size": 2688
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/command-hash.json",
+   "sha256": "06625bd73e6ff4e1eb0cb4a2a3a800b30faab751af65340263d58f7056d576b4",
+   "size": 234
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/controlled-build.json",
+   "sha256": "559118de3e43b55f0e34fd6ba70b26dde6e8dea014356d74809890a238beea3c",
+   "size": 332
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/cp073-forensic-source-binding.json",
+   "sha256": "d4a1dc2d05799bf0610a00345292bb0e886047b123d0484db500884f61281463",
+   "size": 586
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/fa1-package-loader.json",
+   "sha256": "11a2134cb283dbffb8c9d7a1645175a5b0d739fdf2fa1cca4c464b837c868bd5",
+   "size": 531
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/fb1-tracked-elf.json",
+   "sha256": "67a853b504614d30ccb60536d50e42491d2640e1d2c2f143d5efd8ce64f1d855",
+   "size": 408
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/fb2-semantic-annotations.json",
+   "sha256": "d45215bd1f2a29dc4b22ac8d3724258bef025cbfb5c9cdfb58d4a82e5a782c77",
+   "size": 572
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/fb3-valid-input-return-shape.json",
+   "sha256": "fd3679d543e911a4a0033efbc60c718af1095342ce1c26823b0db1a98026937e",
+   "size": 436
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/full-completion.json",
+   "sha256": "e6185e134d68172d708a9270dcc421020d1007b8d11975456afdc6407fed683c",
+   "size": 245
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/gate-traceability-validation.json",
+   "sha256": "2f21c143090f1b7701d95ccfed5b72a2776dce5dfa79db5b6c6696bb2f7e9eeb",
+   "size": 406
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/identity-coherence.json",
+   "sha256": "537fb182c4cacc167c418d8f5ad392ac25f1d64299c2d4c446892f22ca60fbaf",
+   "size": 276
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/internal-consistency-selftests.json",
+   "sha256": "1c5eaf4e2e17ee341c3b1216345caec940604ee8541001873345e1f1f77667e3",
+   "size": 274
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/leaf-requirements-visibility.json",
+   "sha256": "107a5accfd20edbfed2d7b2dc3e79478d15f946dc9127518f2144ff7a953a614",
+   "size": 476
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/normative-alignment-selftests.json",
+   "sha256": "f2f04e3bc69d09a38fbfb4351141457b5f9ff585a9bd6b63f2a44afa963ac662",
+   "size": 510
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/ownership.json",
+   "sha256": "e111f5540738ce82360ff6e55d5149480b70c9361232aca136301b19f2acf851",
+   "size": 249
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/package-validation.json",
+   "sha256": "868a9641656d0eb8f104a25fc07e31b416b589076c14b79d07ff1740d4fa37cc",
+   "size": 287
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/postpublication-binding.json",
+   "sha256": "9a51aed4188e67006d7a631e692eb9ea3b07f59a9e33600265669037672d9f86",
+   "size": 226
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/publication-create-only.json",
+   "sha256": "1d80871773e323a63d5d61c7de73f89bdf27e7947164d08f9673a13c619fdb8e",
+   "size": 299
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/rejected-r-diagnostic-replay.json",
+   "sha256": "016d002c36097ae20acf770fc7b7af7e307176095df1e2279a3d1eee437cadbf",
+   "size": 611
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/scope-freeze-v3.9.json",
+   "sha256": "6aeb5856e760cbe6fe69f32857d3c7ae0c79b6cdb7b98a1cd048e7f7e636bbe9",
+   "size": 2409
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/v3-8-v3-9-semantic-diff.json",
+   "sha256": "901043e1f3c5a3b438f37405e69777bbb1e4ccb048ef363371caefa79b7d7fe1",
+   "size": 4079
+  },
+  {
+   "name": "receipts/headless-lab-v3.9-validation/v3.8-preservation.json",
+   "sha256": "15b14f53746256669f29518518356317e497f288ec11ac83cc5ce088ab0902bf",
+   "size": 577
+  }
+ ],
+ "schema": "v3.9-preservation/v1",
+ "source_head": "c965340f6be7655e2f4d796582e5acd7dc163a82",
+ "status": "PASS"
+}

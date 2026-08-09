@@ -1,0 +1,9 @@
+{
+ "contract": "leaf-provenance-contract-v3.10.json",
+ "controller_rescue_forbidden": true,
+ "identity_name_not_proof": true,
+ "principle_present": true,
+ "schema": "actor-provenance-contract-validation/v1",
+ "status": "PASS",
+ "termination_rule_fail_closed": true
+}

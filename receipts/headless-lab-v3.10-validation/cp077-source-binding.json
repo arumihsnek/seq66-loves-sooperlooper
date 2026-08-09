@@ -1,0 +1,14 @@
+{
+ "current_checkpoint": "CP-077",
+ "required_findings": [
+  "v3_9_functional_R_validity=PASS",
+  "v3_9_workflow_R_provenance_validity=FAIL",
+  "v3_9_product_integration_validity=FAIL",
+  "v3_9_result_publication_validity=PASS",
+  "WF-F1_ACTOR_PROVENANCE_NOT_ENFORCED"
+ ],
+ "schema": "cp077-source-binding/v1",
+ "source_fork_main": "c965340f6be7655e2f4d796582e5acd7dc163a82",
+ "status": "PASS",
+ "verified_from": "GitHub c965340f6be7655e2f4d796582e5acd7dc163a82"
+}

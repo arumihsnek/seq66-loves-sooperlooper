@@ -1,0 +1,89 @@
+{
+ "authorized_delta": [
+  "fresh identities",
+  "true-leaf actor-provenance contract",
+  "actor-provenance artifacts/gates",
+  "controller non-intervention gate",
+  "historical invalid-dispatch binding"
+ ],
+ "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "command_hash_checks": {
+  "LAB-A": [
+   {
+    "id": "ft-a1",
+    "match": true,
+    "v3.10": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e",
+    "v3.9": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e"
+   },
+   {
+    "id": "ft-a2",
+    "match": true,
+    "v3.10": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88",
+    "v3.9": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88"
+   },
+   {
+    "id": "ft-a3",
+    "match": true,
+    "v3.10": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f",
+    "v3.9": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f"
+   },
+   {
+    "id": "ft-a4",
+    "match": true,
+    "v3.10": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408",
+    "v3.9": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408"
+   }
+  ],
+  "LAB-B": [
+   {
+    "id": "ft-b1",
+    "match": true,
+    "v3.10": "e8019f25f064bdc76c4989cd244ad4826c32fb0b437697c47e0443cd9d08f558",
+    "v3.9": "e8019f25f064bdc76c4989cd244ad4826c32fb0b437697c47e0443cd9d08f558"
+   },
+   {
+    "id": "ft-b2",
+    "match": true,
+    "v3.10": "f03678d5fdfb5698e784ced6a512af3d38c498c54b97a1ab449ca9bd4a9fe3c3",
+    "v3.9": "f03678d5fdfb5698e784ced6a512af3d38c498c54b97a1ab449ca9bd4a9fe3c3"
+   },
+   {
+    "id": "ft-b3",
+    "match": true,
+    "v3.10": "faf07d52b3ce809c7cb37c315a09b1928d57831e03ec57db365f28f7fbc18908",
+    "v3.9": "faf07d52b3ce809c7cb37c315a09b1928d57831e03ec57db365f28f7fbc18908"
+   },
+   {
+    "id": "ft-b4",
+    "match": true,
+    "v3.10": "ac05151a23248cb6f5f1777a97b9aa4919737d412f5fcb1ac166b503ee02ca0f",
+    "v3.9": "ac05151a23248cb6f5f1777a97b9aa4919737d412f5fcb1ac166b503ee02ca0f"
+   }
+  ]
+ },
+ "functional_semantic_drift": 0,
+ "functional_semantic_drift_status": "PASS",
+ "functional_surface_checks": {
+  "allowed_differences_metadata": true,
+  "canonical_compile_commands": true,
+  "canonical_contract_modules": true,
+  "canonical_literal_test_ids": true,
+  "canonical_ownership": true,
+  "canonical_silence_semantics": true,
+  "canonical_sources": true,
+  "forbidden_differences": true
+ },
+ "literal_test_checks": {
+  "LAB-A": true,
+  "LAB-B": true
+ },
+ "metadata_only_differences": [
+  "allowed_differences generation label v3.9 -> v3.10"
+ ],
+ "ownership_checks": {
+  "LAB-A": true,
+  "LAB-B": true
+ },
+ "schema": "semantic-diff/v3.10",
+ "v3_9_manifest_sha256": "71596b8472b459940ee79fe9df8d3687dd3dbbdf5bf4696d897a9e4a1bdb3bba"
+}

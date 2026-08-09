@@ -1,0 +1,48 @@
+{
+ "authorized_semantic_delta": [
+  "fresh package/batch/leaf/lease/result identities",
+  "true-leaf actor-provenance contract",
+  "actor-provenance evidence schema",
+  "actor-provenance finalizer/verifier gates",
+  "controller non-intervention gate",
+  "historical v3.9 invalid-dispatch binding"
+ ],
+ "batch_id": "BATCH-20260809T205317Z-DOGFOOD004-LAB-V3_10",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "forbidden": [
+  "any functional product API change",
+  "any literal test argv change",
+  "weakening tracked ELF rejection",
+  "any change not listed in authorized_semantic_delta",
+  "v3.10 dispatch / leaves / leases activation / result branches / D0/D1/D2 / integration / PR merge",
+  "controller implementation edits in leaf worktree",
+  "controller git add/commit/amend creating R",
+  "controller cherry-pick/fixup/rebase of leaf R",
+  "reusing v3.9 leases or result branches",
+  "any product/functional API change"
+ ],
+ "frozen_at_utc": "2026-08-08T23:33:26Z",
+ "nature": "NORMATIVE CONTRACT <-> EXECUTABLE GATE ALIGNMENT. Corrects finalizer/verifier overconstraints identified by the v3.8 rejected-dispatch forensic review (F-A1, F-B2, F-B3) and makes the tracked-ELF prohibition leaf-visible (F-B1). Adds normative-gate traceability and leaf requirement visibility. NO functional product API change.",
+ "package": "v3.10",
+ "schema": "scope-freeze/v3.10",
+ "semantically_unchanged": [
+  "functional product API (modules, functions, classes, methods, signatures, returns)",
+  "ownership (LAB-A 5 paths, LAB-B 12 paths)",
+  "literal test argv (ft-a1..a4, ft-b1..b4 byte-identical commands)",
+  "R-only leaf model (C -> R -> E -> A)",
+  "identity coherence (batch/candidate/leaf/lease/result paths)",
+  "command hash enforcement (sha256 canonical serialization)",
+  "cleanliness (clean checkout, zero untracked, zero unexpected ignored)",
+  "tracked ELF rejection (R must contain zero tracked ELF)",
+  "controlled build (canonical compile into empty build dir from candidate C sources)",
+  "remote absence (real ls-remote --exit-code; rc=2 absent)",
+  "create-only publication (no force, no reuse, no second push)",
+  "postpublication binding",
+  "full completion (accumulated gates)",
+  "process ownership safety (no pkill/killall; owned-only termination)"
+ ],
+ "supersedes": {
+  "manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+  "package": "v3.8"
+ }
+}

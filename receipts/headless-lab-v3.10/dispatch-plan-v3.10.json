@@ -1,0 +1,61 @@
+{
+ "batch_id": "BATCH-20260809T205317Z-DOGFOOD004-LAB-V3_10",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "controller_rescue_forbidden": true,
+ "dispatch_authorized": false,
+ "frozen_at_utc": "2026-08-06T23:45:54Z",
+ "phases": [
+  {
+   "gate": "human decision required",
+   "phase": "authorize"
+  },
+  {
+   "gate": "no shared worktree, no write credentials",
+   "phase": "create isolated leaf environments"
+  },
+  {
+   "gate": "each leaf produces exactly one R (R^ == C)",
+   "phase": "dispatch LAB-A and LAB-B leaves"
+  },
+  {
+   "gate": "R^ == C, non-empty, owned-only, required paths present, clean detached checkout, zero untracked, zero tracked ELF",
+   "phase": "controller validates R"
+  },
+  {
+   "gate": "4/4 exit 0 per lab",
+   "phase": "controller re-executes frozen literal tests"
+  },
+  {
+   "gate": "deep-equal baseline",
+   "phase": "controller runs functional acceptance gates"
+  },
+  {
+   "gate": "gcc canonical commands, empty build dir",
+   "phase": "controller performs controlled build (LAB-B)"
+  },
+  {
+   "gate": "E^ == R, diff R..E evidence-only, deterministic reproducibility",
+   "phase": "mechanical finalizer creates E"
+  },
+  {
+   "gate": "verifier phase PASS before push",
+   "phase": "prepublish-finalization PASS"
+  },
+  {
+   "gate": "remote branch absent before push; no force; remote == E after",
+   "phase": "create-only push E -> planned branch"
+  },
+  {
+   "gate": "A outside E, binds C/R/E/branch",
+   "phase": "controller creates A"
+  },
+  {
+   "gate": "remote exists, remote == E, create-only proof",
+   "phase": "postpublish-binding PASS"
+  }
+ ],
+ "schema": "dispatch-plan/v3.10",
+ "status": "PLANNED_NOT_AUTHORIZED",
+ "termination_rule": "LEAF_FAILED_TO_PRODUCE_R => lease consumed=true, result=FAIL; controller may not continue/edit/commit/rescue",
+ "true_leaf_required": true
+}

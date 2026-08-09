@@ -1,0 +1,15 @@
+{
+ "fixture": "P1 true leaf edits + commits R",
+ "schema": "actor-provenance-positive/v1",
+ "status": "PASS",
+ "verdict": {
+  "case": "P1",
+  "exit_code": 0,
+  "expected": "PASS",
+  "mode": "P1",
+  "pass": true,
+  "primary_codes": [],
+  "verdict": "PASS"
+ },
+ "verifier_path": "transcript-bound-verifier-v3.10.py"
+}

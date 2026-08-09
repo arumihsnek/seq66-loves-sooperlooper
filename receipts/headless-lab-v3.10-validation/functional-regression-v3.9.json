@@ -1,0 +1,23 @@
+{
+ "baseline_manifest_sha256": "71596b8472b459940ee79fe9df8d3687dd3dbbdf5bf4696d897a9e4a1bdb3bba",
+ "checks": {
+  "F-A1_package_import_correction": "preserved",
+  "F-B1_tracked_ELF_REJECT": "preserved",
+  "F-B2_semantic_annotations": "preserved",
+  "F-B3_valid_WAV_return_gate": "preserved",
+  "cleanliness": "preserved",
+  "command_hash": "preserved",
+  "controlled_build": "preserved",
+  "create_only_publication": "preserved",
+  "full_completion": "preserved",
+  "identity_coherence": "preserved",
+  "ownership": "preserved",
+  "postpublish_binding": "preserved",
+  "remote_absence": "preserved",
+  "runtime_contract": "preserved",
+  "silent_WAV_FAIL": "preserved"
+ },
+ "functional_semantic_drift": 0,
+ "schema": "functional-regression/v3.10",
+ "status": "PASS"
+}

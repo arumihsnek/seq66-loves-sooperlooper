@@ -1,0 +1,116 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_10",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "controller_authority": {
+  "may": [
+   "validate R",
+   "re-execute literal tests",
+   "run functional runtime inspection",
+   "run strict controlled build",
+   "create E only via fail-closed finalizer",
+   "verify prepublish",
+   "create-only push",
+   "create A"
+  ],
+  "may_not": [
+   "fix implementation",
+   "use leaf-provided values as evidence",
+   "bypass any gate",
+   "dispatch leaves",
+   "activate leases",
+   "integrate",
+   "execute D0/D1/D2"
+  ]
+ },
+ "execution_model": {
+  "A": "post-publication controller acceptance receipt A, OUTSIDE E, bound to exact C/R/E/branch/remote/evidence hash/push argv hash/transcript hash",
+  "C": {
+   "description": "candidate (existing)",
+   "producer": "controller/repository"
+  },
+  "E": "controller evidence container produced mechanically by fail-closed mechanical-finalizer-v3.10.py (E^ == R); no gate failure => no E; prepublication_verdict=FAIL => no evidence write, no git add, no git commit, exit nonzero",
+  "R": {
+   "constraint": "R^ == C, R != C, R non-empty, owned-only",
+   "description": "unique implementation result commit produced by the leaf",
+   "producer": "leaf"
+  }
+ },
+ "fail_closed_rules": {
+  "build_strict": "source hash from R blob required; output exists/size/ELF/ldd/JACK required; entries_before=[]; cleanup; cleanliness_after=PASS",
+  "command_hash_strict": "actual_command_sha256 == declared_command_sha256; mismatch => exit nonzero, E absent, verifier REJECT",
+  "no_gate_failure_exit_zero_forbidden": true,
+  "no_gate_failure_no_E": true,
+  "prepublication_FAIL_no_evidence_write": true,
+  "prepublication_FAIL_no_git_add": true,
+  "prepublication_FAIL_no_git_commit": true,
+  "remote_absence_real": "git ls-remote --exit-code; rc=0 => exists REJECT; rc=2 => absent PASS; else PUBLISH_STATE_AMBIGUOUS STOP",
+  "selftests_executable": "every negative case runs the real CLI via subprocess; no policy-only auto-PASS"
+ },
+ "failure_model_anchored": {
+  "LAB-A": [
+   "v3.4 key-name drift 'exit code'",
+   "placeholders -2",
+   "envelope in same commit as impl",
+   "publish pre-PASS",
+   "force-push 37f8ecb8 -> a30e3c9d"
+  ],
+  "LAB-B": [
+   "R misidentified (2b774260 vs 608cefef)",
+   "two envelope commits",
+   "E^ != R",
+   "out-of-scope LAB-A path",
+   "owned fixtures absent",
+   "untracked .c",
+   "dirty worktree",
+   "branch not published",
+   "invalid build claim"
+  ],
+  "v3.5": [
+   "BF-01 command hash bypass or True",
+   "BF-02 hash not in prepass",
+   "BF-03 E on FAIL",
+   "BF-04 hardcoded remote-absence",
+   "BF-05 full-completion r-only only",
+   "BF-06 A.R truthy",
+   "BF-07 create_only_proof trusted",
+   "BF-08 no exact binding",
+   "BF-09 source sha copied",
+   "BF-10 build PASS exit-only",
+   "BF-11 output/ELF/ldd not required",
+   "BF-12 empty-build proof after build",
+   "BF-13 cleanliness_after omitted",
+   "BF-14 ignored outputs omitted",
+   "BF-15..18 selftests not executable"
+  ]
+ },
+ "frozen_at_utc": "2026-08-06T23:45:54Z",
+ "leaf_authority": {
+  "may": [
+   "edit owned paths only",
+   "run tests locally",
+   "create exactly one R",
+   "report R OID via leaf report"
+  ],
+  "may_not": [
+   "create E/envelope",
+   "write under receipts/headless-lab-results-v3.10/",
+   "push/force-push",
+   "create remote branch",
+   "bind/accept",
+   "modify contracts"
+  ]
+ },
+ "leaf_isolation": {
+  "note": "publication controller-owned environment is separate from leaf environments; leaf does not need remote access to produce R; controller imports/resolves the R object from the preserved local environment.",
+  "required": [
+   "two isolated git environments",
+   "exact candidate",
+   "exclusive ownership",
+   "no shared implementation worktree",
+   "no GitHub write credentials inside the leaf",
+   "no usable pushurl",
+   "no credential helper with write permission"
+  ]
+ },
+ "schema": "process-hardening-contract/v3.10"
+}

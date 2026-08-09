@@ -1,0 +1,25 @@
+{
+ "batch_id": "BATCH-20260809T205317Z-DOGFOOD004-LAB-V3_10",
+ "forbidden_between_termination_and_validation": [
+  "implementation mutation by controller",
+  "controller-created R",
+  "controller amend"
+ ],
+ "package": "v3.10",
+ "required_temporal_fields": [
+  "leaf_worktree_initial_tree",
+  "leaf_start_utc",
+  "leaf_termination_utc",
+  "R_discovered_utc",
+  "controller_command_log_artifact",
+  "filesystem_git_evidence_artifact"
+ ],
+ "rules": {
+  "controller_cannot_create_R": true,
+  "controller_git_mutation_zero": true,
+  "no_post_leaf_mutation": true,
+  "r_exists_at_termination": true
+ },
+ "schema": "controller-nonintervention/v3.10",
+ "violation": "CONTROLLER_ACTED_AS_LEAF"
+}

@@ -1,41 +1,49 @@
-# Current checkpoint — V3.9 post-merge workflow forensics (CP-077)
+# Current checkpoint — V3.10 true-leaf provenance recovery package (CP-078)
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-09-CP-077-v3-9-post-merge-workflow-forensics.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-09-CP-078-v3-10-true-leaf-provenance-recovery-package.md`
 
-Checkpoint ID: `CP-077`
+Checkpoint ID: `CP-078`
 Checkpoint date: 2026-08-09
-Phase: `post-merge forensic recovery`
+Supersedes: `CP-077` (CP-077 remains immutable)
+Phase: `V3.10 true-leaf provenance recovery package`
 Current phase: `phase-5-exact-recording`
-Active task: P5-005 (M5 exact musical recording — post-merge forensics)
-Status: `POST_MERGE_FORENSIC_RECOVERY — HUMAN_DECISION_PENDING`
-Branch: `recovery/v3-9-post-merge-forensics-20260809T…` (recovery PR → fork-main)
+Active task: P5-005 (M5 exact musical recording — V3.10 provenance package)
+Status: `EXACT_BYTES_REVIEWED_NOT_DISPATCHED — HUMAN_DECISION_PENDING`
 
-Fork-main base: `2fbd2ba5ca9b5f4c599d0c6c3c61771732043f5d` (PR #34 merged — preserved as historical fact).
-Exact-head CI: required on the recovery PR head (Project control plane + Audio integration core).
+## Current state
+
+- `CURRENT -> CP-078`.
+- `V3_9_STATUS=FUNCTIONALLY_PASS_WORKFLOW_PROVENANCE_INVALID_NOT_INTEGRATED`.
+- `V3_9_SECOND_DISPATCH_AUTHORIZED=false`;
+  `V3_9_LEASE_REUSE_AUTHORIZED=false`.
+- `V3_10_STATUS=EXACT_BYTES_REVIEWED_NOT_DISPATCHED`.
+- `V3_10_TECHNICAL_DISPATCH_ELIGIBILITY=PASS`;
+  `V3_10_DISPATCH_AUTHORIZED=false`.
+- `fresh_leases=planned`; `fresh_leases_activated=false`; `leaves=0`;
+  `v3_10_result_branches=0`.
+- `NEW_PRODUCT_IMPLEMENTATION_AUTHORIZED=false`;
+  `INTEGRATION_AUTHORIZED=false`; `D0_D1_D2_AUTHORIZED=false`;
+  `PR_MERGE_AUTHORIZED=false`.
+- `RESULT_BRANCH_DELETION_AUTHORIZED=false`;
+  `FORCE_PUSH_AUTHORIZED=false`; `FORK_MAIN_REWIND_AUTHORIZED=false`.
+- V3.10 payload is frozen at manifest SHA-256
+  `4ca2f2686f36e5b3455d2ec4bb6b5edb4e22099e1e1b13f0cfbb4899160c550d`.
+- Planned publication: new draft recovery PR from exact fork-main
+  `c965340f6be7655e2f4d796582e5acd7dc163a82`, branch
+  `recovery/v3-10-true-leaf-provenance-20260809T205317Z`.
+- No V3.10 leaves, leases, result branches, R commits, integration, or merge
+  has occurred.
 
 ## Verification summary
 
-- PR #34 physically merged (2fbd2ba5); HISTORY_REWRITE=false.
-- CURRENT@fork-main = CP-075; CP-076 NOT reachable from fork-main (only on
-  control-plane branch, post-merge push) → REPORT-F1 CONFIRMED.
-- R_A/R_B provenance FAIL (controller-as-leaf; commits executed by controller
-  with LEAF-* identities; leaves ended 09:37:08Z with 0 git actions).
-- IMPLEMENTATION_R_MERGED=false: 0/17 R blobs in fork-main; R/E not ancestors.
-- Senior forensic review accept (exec dd700466): provenance FAIL, product
-  integration FAIL, closure FAIL — advisory; no implementation authorized.
-- Functional axes still PASS (finalizer, tests, result branches, postpublish
-  binding).
-
-## Authorization scope (this checkpoint)
-
-- new_dispatch=false; new_implementation=false; integration=false; D0/D1/D2=false;
-  PR_merge=false; force_rewrite=false; result_branch_deletion=false.
-- Single-writer lock held for this session.
+- Triple senior review: 3× `accept`, blocking=0, required=0; non-circular
+  binding `created_after_reviews=true`, `self_reviewed=false`.
+- Functional semantic drift: `0`.
+- V3.9 result branches preserved exactly; no V3.9 evidence reused as an input.
 
 ## Next action
 
-Human decision (exactly one, derived from the senior forensic verdict):
-A. authorize canonical re-execution with fresh true leaves;
-B. authorize explicit product integration recovery;
-C. authorize both as a new controlled recovery generation;
-D. reject / alternative.
+Publish the frozen package and require exact-head Project control plane and Audio
+integration core CI on the new draft PR. The next human decision is exactly one
+fresh V3.10 LAB-A/LAB-B dispatch authorization with true leaves; that decision
+excludes product integration.

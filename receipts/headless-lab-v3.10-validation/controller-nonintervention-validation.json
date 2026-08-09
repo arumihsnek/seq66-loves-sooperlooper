@@ -1,0 +1,20 @@
+{
+ "forbidden_between_termination_and_validation": [
+  "implementation mutation",
+  "controller-created R",
+  "controller amend"
+ ],
+ "negative_codes": [
+  "CONTROLLER_ACTED_AS_LEAF",
+  "CONTROLLER_AMEND_AFTER_LEAF"
+ ],
+ "schema": "controller-nonintervention-validation/v1",
+ "schema_file": "controller-nonintervention-schema-v3.10.json",
+ "selftest_cases": [
+  "N2",
+  "N3",
+  "N5",
+  "N8"
+ ],
+ "status": "PASS"
+}
