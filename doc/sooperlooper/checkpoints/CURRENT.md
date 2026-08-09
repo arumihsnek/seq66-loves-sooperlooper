@@ -1,41 +1,35 @@
-# Current checkpoint — V3.9 authorized lab dispatch completed (CP-075)
+# Current checkpoint — V3.9 dispatch integrated and merged (CP-076)
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-09-CP-075-v3-9-authorized-lab-dispatch.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-09-CP-076-v3-9-dispatch-integrated-and-merged.md`
 
-Checkpoint ID: `CP-075`
+Checkpoint ID: `CP-076`
 Checkpoint date: 2026-08-09
 Phase: `phase-5-exact-recording`
 Active task: P5-005 (M5 exact musical recording — v3.9 authorized lab dispatch)
-Status: `V3.9 DISPATCH COMPLETED — exact-head senior merge review pending`
-Branch: `integration/baseline-qualification-20260805`
+Status: `V3.9 DISPATCH INTEGRATED AND MERGED — HUMAN_DECISION_COMPLETE`
+Branch: `fork-main` (merged via PR #34)
 
-Published source head: resolved externally after publication.
-Exact-head CI: required on resulting PR head (Project control plane +
-Audio integration core, head_sha == new PR head).
+Merged fork-main head: `2fbd2ba5ca9b5f4c599d0c6c3c61771732043f5d`
+Pre-merge fork-main: `a14c3f6c4acf89fc24602576ceb7806e81c830a1` (expected-head held)
+PR #34: merged/closed (merge commit "Merge pull request #34").
 
 ## Verification summary
 
-- v3.9 dispatch executed with frozen package `71596b84…` (3×accept binding):
-  leaves LAB-A/LAB-B → R_A `46bd5f52…` / R_B `122303ee…` (both R^==C, clean,
-  zero tracked ELF, 8/8 frozen literal tests exit 0).
-- Finalizer v3.9: prepublication_verdict PASS for both (zero gate failures).
-- Result branches published (create-only) at E commits
-  `7db1a1b7…` (lab-a) / `71a63065…` (lab-b); postpublish binding PASS.
-- D0/D1/D2 complete: dispatch, postpublish binding + evidence publication,
-  checkpoint/PR/CI.
-- v3_9_dispatch_authorized=true (human) — consumed; leases active; leaves=2;
-  remote_result_branches=2.
+- Senior merge review (merge-gate) accept at head `20e8b560…`:
+  exec `ca424c67`, blocking=0, required=0, safe_to_merge=true.
+- Exact-head CI on PR head success (2/2); post-merge validate-control-plane
+  success on fork-main head.
+- v3.9 package `71596b84…` (frozen, 3×accept), dispatch evidence
+  (`lab-a/lab-b-controller-evidence.json`, both prepublication PASS),
+  postpublish binding PASS, checkpoints CP-073/CP-074/CP-075/CP-076 on fork-main.
+- v3.8 REJECTED_AND_FORENSICALLY_CLOSED (immutable).
+- Result branches (2) remain as ephemeral lab artifacts, NOT in fork-main.
 
-## Authorization scope (this checkpoint)
+## Authorization scope (consumed)
 
-- integration_authorized=true, D0_D1_D2_authorized=true (consumed),
-  PR_merge_authorized=true (pending exact-head senior merge review).
-- force_push=false; worktree_deletion=false.
-- Single-writer lock held for this session.
+- dispatch/leaves/leases/integration/D0_D1_D2/PR_merge authorized by Julio
+  2026-08-09; all consumed. force_push=false; no force pushes performed.
 
 ## Next action
 
-1. Exact-head senior merge review (merge-gate) on the new control-plane head.
-2. On accept (blocking=0): merge PR #34 to fork-main with expected-head
-   protection per AUTONOMOUS-MERGE.md.
-3. Post-transition checkpoint.
+None for this lineage. The v3.9 dispatch mission is complete.
