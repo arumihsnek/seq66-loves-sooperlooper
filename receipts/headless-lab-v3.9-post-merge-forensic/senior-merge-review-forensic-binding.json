@@ -1,0 +1,16 @@
+{
+ "blocking": 0,
+ "bundle_omitted": [
+  "controller-completed after subagent partial output",
+  "controller actor provenance",
+  "R blob non-integration into PR"
+ ],
+ "classification": "MERGE_REVIEW_INPUT_OMITTED_MATERIAL_WORKFLOW_FACT=true (does not automatically invalidate the review; records actual review scope)",
+ "created_before_merge": true,
+ "execution_id": "ca424c67-02ac-43b5-8341-5f59615fbb84",
+ "merged_at_utc": "2026-08-09T09:50:52Z",
+ "required": 0,
+ "reviewed_pr_head": "20e8b560d636c666409eef650707d42322853df4",
+ "safe_to_merge": true,
+ "verdict": "accept"
+}

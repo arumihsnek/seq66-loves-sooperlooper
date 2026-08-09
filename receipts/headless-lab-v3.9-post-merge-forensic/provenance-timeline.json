@@ -1,0 +1,54 @@
+{
+ "binding_gate": {
+  "R_CANONICAL_PROVENANCE": "FAIL",
+  "reason": "CONTROLLER_ACTED_AS_LEAF (controller executed the commit the leaf was obliged to produce; for LAB-A also altered owned implementation after leaf stop)"
+ },
+ "classification": {
+  "lab_a": "CONTROLLER_COMPLETED_R",
+  "lab_b": "CONTROLLER_COMPLETED_R (leaf authored audio_oracle.py content; controller removed out-of-scope files and executed the commit)"
+ },
+ "lab_a": {
+  "controller_commit": {
+   "R": "46bd5f526b9a6a90ee96093e1924d42b15cbc063",
+   "identity_used": "LEAF-LAB-A-V3_9 <lab-a-v3.9@hermes.local>",
+   "reflog": "09:39:15 commit d0ac7874; 09:40:29 commit (amend) 46bd5f52"
+  },
+  "controller_edits_after_leaf": [
+   {
+    "change": "set_control(value) -> set_control()",
+    "file": "osc_probe.py",
+    "mtime_utc": "09:38:41"
+   },
+   {
+    "change": "__exit__ signature restore for context manager",
+    "file": "process_supervisor.py",
+    "mtime_utc": "09:40:09"
+   }
+  ],
+  "leaf_commit": false,
+  "leaf_last_action_utc": "09:35:08 (py_compile)"
+ },
+ "lab_b": {
+  "controller_actions_after_leaf": [
+   {
+    "action": "removed non-owned LAB-A modules from worktree (jack_server/osc_probe/sooperlooper_launcher)"
+   }
+  ],
+  "controller_commit": {
+   "R": "122303ee22cf79d58faaaca09c60e908c656fc09",
+   "identity_used": "LEAF-LAB-B-V3_9 <lab-b-v3.9@hermes.local>",
+   "reflog": "09:40:52 commit 122303ee"
+  },
+  "leaf_commit": false,
+  "leaf_last_action_utc": "09:35:42 (patch audio_oracle.py)"
+ },
+ "leaf_batch": "deleg_198674c0",
+ "leaf_exit_reason": "max_iterations (iteration budget exhausted)",
+ "leaf_git_actions": {
+  "git_add": 0,
+  "git_commit": 0
+ },
+ "leaves_ended_utc": "2026-08-09T09:37:08Z",
+ "run_id": "20260809T090829Z-v3-9-authorized-lab-dispatch",
+ "schema": "provenance-timeline/v1"
+}

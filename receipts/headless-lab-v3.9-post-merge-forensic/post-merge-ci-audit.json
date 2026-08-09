@@ -1,0 +1,12 @@
+{
+ "POST_MERGE_2fbd2ba5": {
+  "compile_and_test": "NO_RUN_OBSERVED",
+  "validate_control_plane": "success"
+ },
+ "POST_MERGE_AUDIO_CORE": "NOT_OBSERVED",
+ "POST_MERGE_PROJECT_CONTROL_PASS": true,
+ "PR_HEAD_20e8b560": {
+  "compile_and_test": "success",
+  "validate_control_plane": "success"
+ }
+}
