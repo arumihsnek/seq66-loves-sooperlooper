@@ -1,0 +1,138 @@
+[
+ {
+  "path": "tests/__init__.py",
+  "r_a": null,
+  "r_b": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/__init__.py",
+  "r_a": null,
+  "r_b": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/__init__.py",
+  "r_a": "e9371c5792d299182d0bea27cecb92fa2f891b49",
+  "r_b": null,
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/audio_oracle.py",
+  "r_a": null,
+  "r_b": "8d71929db1e36a854f640f09d10ec6e545402d2a",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/fixtures/.gitignore",
+  "r_a": null,
+  "r_b": "55fba991a275e274aefd34c4460eb08a607ffb26",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/fixtures/deterministic_capture/.gitkeep",
+  "r_a": null,
+  "r_b": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/fixtures/synthetic_source/.gitkeep",
+  "r_a": null,
+  "r_b": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/graph_assertions.py",
+  "r_a": null,
+  "r_b": "d36c681daac9f07250baafd6e643015e6cb877c6",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/jack_server.py",
+  "r_a": "1a4226275ade4f7157344b293052b0f51d07d132",
+  "r_b": null,
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/osc_probe.py",
+  "r_a": "614d67180d736add94f8fd96455afdd0325a3e38",
+  "r_b": null,
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/process_supervisor.py",
+  "r_a": "25fb8426d8e8867525d4c804d68a2f518e25edef",
+  "r_b": null,
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/runner.py",
+  "r_a": null,
+  "r_b": "854696a70eca9a344de37d991e8839811f1f4e39",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+  "r_a": null,
+  "r_b": "5f7de2281d223ae4bb0bb77c1bff8dc16c76133e",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+  "r_a": null,
+  "r_b": "a2b1a03392ff8b63d0446970383505488658987e",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+  "r_a": null,
+  "r_b": "33049a04a368e0d8f5ff46f8752dd639f2d092a2",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+  "r_a": "5bd9490c00ce3a7f12b89e01bb6c27b2555a1da5",
+  "r_b": null,
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ },
+ {
+  "path": "tests/integration/headless_audio_lab/test_modules.py",
+  "r_a": null,
+  "r_b": "72c7f1f17128b0998d606fb19c430ad1c41ebf92",
+  "fm_exists": false,
+  "fm_oid": null,
+  "fm_equals_r": null
+ }
+]

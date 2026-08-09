@@ -1,0 +1,19 @@
+{
+ "authorization_timestamp_utc": "2026-08-09T09:08:00Z",
+ "derived_claim_in_cp075": "CP-075 states human authorization granted 2026-08-09; primary evidence = clarify response (session record), not CP-075 itself",
+ "exact_scope": [
+  "dispatch v3.9 completo",
+  "leaves LAB-A/LAB-B",
+  "leases",
+  "results",
+  "D0/D1/D2",
+  "integraci\u00f3n",
+  "merge del PR #34"
+ ],
+ "exact_user_response": "Autorizar el dispatch v3.9 completo: leaves LAB-A/LAB-B + leases + results + D0/D1/D2 + integraci\u00f3n + merge del PR (authorization plena)",
+ "note": "Primary evidence is the session clarify interaction; a persisted session transcript is the authoritative store. No separate signed authorization receipt file exists.",
+ "primary_evidence": "clarify tool user_response in Hermes session (Telegram DM with Julio, 2026-08-09)",
+ "primary_evidence_present": true,
+ "schema": "human-authorization-forensic-binding/v1",
+ "user_response_sha256": "f64c775d1ca46dc417bee2397f6b9b64d93901550b098c39ee2667e15818ced4"
+}

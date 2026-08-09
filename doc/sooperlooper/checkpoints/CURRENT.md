@@ -1,41 +1,40 @@
-# Current checkpoint — V3.9 authorized lab dispatch completed (CP-075)
+# Current checkpoint — V3.9 post-merge workflow forensics (CP-077)
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-09-CP-075-v3-9-authorized-lab-dispatch.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-09-CP-077-v3-9-post-merge-workflow-forensics.md`
 
-Checkpoint ID: `CP-075`
+Checkpoint ID: `CP-077`
 Checkpoint date: 2026-08-09
-Phase: `phase-5-exact-recording`
-Active task: P5-005 (M5 exact musical recording — v3.9 authorized lab dispatch)
-Status: `V3.9 DISPATCH COMPLETED — exact-head senior merge review pending`
-Branch: `integration/baseline-qualification-20260805`
+Phase: `post-merge forensic recovery`
+Active task: P5-005 (M5 exact musical recording — post-merge forensics)
+Status: `POST_MERGE_FORENSIC_RECOVERY — HUMAN_DECISION_PENDING`
+Branch: `recovery/v3-9-post-merge-forensics-20260809T…` (recovery PR → fork-main)
 
-Published source head: resolved externally after publication.
-Exact-head CI: required on resulting PR head (Project control plane +
-Audio integration core, head_sha == new PR head).
+Fork-main base: `2fbd2ba5ca9b5f4c599d0c6c3c61771732043f5d` (PR #34 merged — preserved as historical fact).
+Exact-head CI: required on the recovery PR head (Project control plane + Audio integration core).
 
 ## Verification summary
 
-- v3.9 dispatch executed with frozen package `71596b84…` (3×accept binding):
-  leaves LAB-A/LAB-B → R_A `46bd5f52…` / R_B `122303ee…` (both R^==C, clean,
-  zero tracked ELF, 8/8 frozen literal tests exit 0).
-- Finalizer v3.9: prepublication_verdict PASS for both (zero gate failures).
-- Result branches published (create-only) at E commits
-  `7db1a1b7…` (lab-a) / `71a63065…` (lab-b); postpublish binding PASS.
-- D0/D1/D2 complete: dispatch, postpublish binding + evidence publication,
-  checkpoint/PR/CI.
-- v3_9_dispatch_authorized=true (human) — consumed; leases active; leaves=2;
-  remote_result_branches=2.
+- PR #34 physically merged (2fbd2ba5); HISTORY_REWRITE=false.
+- CURRENT@fork-main = CP-075; CP-076 NOT reachable from fork-main (only on
+  control-plane branch, post-merge push) → REPORT-F1 CONFIRMED.
+- R_A/R_B provenance FAIL (controller-as-leaf; commits executed by controller
+  with LEAF-* identities; leaves ended 09:37:08Z with 0 git actions).
+- IMPLEMENTATION_R_MERGED=false: 0/17 R blobs in fork-main; R/E not ancestors.
+- Senior forensic review accept (exec dd700466): provenance FAIL, product
+  integration FAIL, closure FAIL — advisory; no implementation authorized.
+- Functional axes still PASS (finalizer, tests, result branches, postpublish
+  binding).
 
 ## Authorization scope (this checkpoint)
 
-- integration_authorized=true, D0_D1_D2_authorized=true (consumed),
-  PR_merge_authorized=true (pending exact-head senior merge review).
-- force_push=false; worktree_deletion=false.
+- new_dispatch=false; new_implementation=false; integration=false; D0/D1/D2=false;
+  PR_merge=false; force_rewrite=false; result_branch_deletion=false.
 - Single-writer lock held for this session.
 
 ## Next action
 
-1. Exact-head senior merge review (merge-gate) on the new control-plane head.
-2. On accept (blocking=0): merge PR #34 to fork-main with expected-head
-   protection per AUTONOMOUS-MERGE.md.
-3. Post-transition checkpoint.
+Human decision (exactly one, derived from the senior forensic verdict):
+A. authorize canonical re-execution with fresh true leaves;
+B. authorize explicit product integration recovery;
+C. authorize both as a new controlled recovery generation;
+D. reject / alternative.

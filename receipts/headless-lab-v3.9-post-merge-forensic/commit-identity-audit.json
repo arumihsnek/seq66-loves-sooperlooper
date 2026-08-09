@@ -1,0 +1,21 @@
+{
+ "R_A": {
+  "actual_invoker": "controller (Hermes) via git -c user.name=LEAF-LAB-A-V3_9 commit; reflog shows commit+amend",
+  "gpg": "none",
+  "parent": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "raw_author": "LEAF-LAB-A-V3_9 <lab-a-v3.9@hermes.local> 1786268355 +0000",
+  "raw_committer": "LEAF-LAB-A-V3_9 <lab-a-v3.9@hermes.local> 1786268429 +0000",
+  "tree": "ba67a70130f444c7dcf3ba5caf400fbd93fa20aa"
+ },
+ "R_B": {
+  "actual_invoker": "controller (Hermes) via git -c user.name=LEAF-LAB-B-V3_9 commit",
+  "gpg": "none",
+  "parent": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "raw_author": "LEAF-LAB-B-V3_9 <lab-b-v3.9@hermes.local> 1786268452 +0000",
+  "raw_committer": "LEAF-LAB-B-V3_9 <lab-b-v3.9@hermes.local> 1786268452 +0000",
+  "tree": "6f19b1f293621988ba16e53850bf95c7cf492116"
+ },
+ "conclusion": "COMMIT_IDENTITY_DOES_NOT_PROVE_LEAF_EXECUTION",
+ "note": "git author/committer identity is a self-declared field; no GPG signature; actual process that invoked git commit was the controller. Described as provenance mismatch, not fraud (no evidence of intent).",
+ "schema": "commit-identity-audit/v1"
+}

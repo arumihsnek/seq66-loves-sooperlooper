@@ -1,0 +1,8 @@
+{
+ "CP076_REACHABLE_FROM_FORK_MAIN": false,
+ "CP076_REMOTE_PRESENT": true,
+ "CP076_location": "control-plane branch 2aab47f7 (post-merge push, no PR)",
+ "CURRENT_at_fork_main": "CP-075",
+ "classification": "REPORT-F1_POST_TRANSITION_CHECKPOINT_CLAIM_MISMATCH=CONFIRMED",
+ "report_claim": "CURRENT -> CP-076"
+}
