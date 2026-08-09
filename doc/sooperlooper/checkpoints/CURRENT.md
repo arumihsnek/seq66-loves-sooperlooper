@@ -1,12 +1,12 @@
-# Current checkpoint — V3.9 normative gate alignment package (CP-074)
+# Current checkpoint — V3.9 authorized lab dispatch completed (CP-075)
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-08-CP-074-v3-9-normative-gate-alignment-package.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-09-CP-075-v3-9-authorized-lab-dispatch.md`
 
-Checkpoint ID: `CP-074`
-Checkpoint date: 2026-08-08
+Checkpoint ID: `CP-075`
+Checkpoint date: 2026-08-09
 Phase: `phase-5-exact-recording`
-Active task: P5-005 (M5 exact musical recording — v3.9 normative gate alignment package)
-Status: `V3.9 EXACT_BYTES_REVIEWED_NOT_DISPATCHED — HUMAN_DECISION_PENDING`
+Active task: P5-005 (M5 exact musical recording — v3.9 authorized lab dispatch)
+Status: `V3.9 DISPATCH COMPLETED — exact-head senior merge review pending`
 Branch: `integration/baseline-qualification-20260805`
 
 Published source head: resolved externally after publication.
@@ -15,40 +15,27 @@ Audio integration core, head_sha == new PR head).
 
 ## Verification summary
 
-- v3.9 package frozen and triple-reviewed (3 × accept, blocking=0,
-  required=0): manifest `71596b8472b459940ee79fe9df8d3687dd3dbbdf5bf4696d897a9e4a1bdb3bba`,
-  21 operational files, supersedes v3.8 (`bb4182…`, REJECTED_AND_FORENSICALLY_CLOSED).
-- F-A1 corrected (package import context, NA1 PASS); F-B2 corrected (semantic
-  annotations, NA2/NA3 PASS, I2/I3 REJECT); F-B3 corrected (valid WAV return
-  shape, NA4/C1 PASS, C2 REJECT, C3 no-block); F-B1 retained fail-closed and
-  leaf-visible (NA5/D1 REJECT, D2 PASS).
-- SELFTEST_INTERNAL_CONSISTENCY=PASS, SELFTEST_NORMATIVE_ALIGNMENT=PASS,
-  SELFTEST_GLOBAL=PASS.
-- Gate traceability: 25 gates with normative authority; orphan gate REJECT
-  (NA6); leaf-requirements-v3.9.json LAB-A 10 / LAB-B 12.
-- Review binding created (3 exec IDs: 5e86f9c8, 753f1500, 55904bee;
-  accept_count=3; blocking=0; required=0; non-circular).
-- Replay: R_A no longer rejected for F-A1; R_B still rejected (tracked ELF +
-  diff_snapshots drift); both forensic-only.
-- v3_8_status=REJECTED_AND_FORENSICALLY_CLOSED;
-  v3_8_technical_dispatch_eligibility=REVOKED;
-  v3_9_technical_dispatch_eligibility=PASS; v3_9_dispatch_authorized=false.
+- v3.9 dispatch executed with frozen package `71596b84…` (3×accept binding):
+  leaves LAB-A/LAB-B → R_A `46bd5f52…` / R_B `122303ee…` (both R^==C, clean,
+  zero tracked ELF, 8/8 frozen literal tests exit 0).
+- Finalizer v3.9: prepublication_verdict PASS for both (zero gate failures).
+- Result branches published (create-only) at E commits
+  `7db1a1b7…` (lab-a) / `71a63065…` (lab-b); postpublish binding PASS.
+- D0/D1/D2 complete: dispatch, postpublish binding + evidence publication,
+  checkpoint/PR/CI.
+- v3_9_dispatch_authorized=true (human) — consumed; leases active; leaves=2;
+  remote_result_branches=2.
 
 ## Authorization scope (this checkpoint)
 
-- v3_9_package_preparation_authorized = true (CONSUMED).
-- v3_9_dispatch_authorized = false; leaves = 0; leases = planned,
-  leases_activated = false; remote_result_branches = 0.
-- integration_authorized = false; D0_D1_D2_authorized = false;
-  PR_merge_authorized = false; force_push = false; worktree_deletion = false.
-- Single-writer lock held for this session
-  (`~/.hermes/locks/seq66-loves-sooperlooper-pr34-controller.lock`).
+- integration_authorized=true, D0_D1_D2_authorized=true (consumed),
+  PR_merge_authorized=true (pending exact-head senior merge review).
+- force_push=false; worktree_deletion=false.
+- Single-writer lock held for this session.
 
 ## Next action
 
-Human decision required (exactly one):
-1. **Authorize exactly ONE fresh v3.9 LAB-A/LAB-B dispatch** (technical
-   eligibility PASS, binding 3×accept), or
-2. Reject.
-
-No integration, no D0/D1/D2, no PR merge authorized by this checkpoint.
+1. Exact-head senior merge review (merge-gate) on the new control-plane head.
+2. On accept (blocking=0): merge PR #34 to fork-main with expected-head
+   protection per AUTONOMOUS-MERGE.md.
+3. Post-transition checkpoint.
