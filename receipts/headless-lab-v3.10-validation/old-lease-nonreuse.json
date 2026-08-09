@@ -1,0 +1,11 @@
+{
+ "activated": false,
+ "authorization": false,
+ "consumed": false,
+ "new_leases_status": "planned",
+ "old_leases_preserved_only_as_history": true,
+ "schema": "old-lease-nonreuse/v1",
+ "status": "PASS",
+ "v3_9_execution_identities_already_used": true,
+ "v3_9_fresh_lease_reuse_safe": false
+}

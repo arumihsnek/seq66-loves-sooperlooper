@@ -1,0 +1,154 @@
+{
+ "batch_id": "BATCH-20260809T205317Z-DOGFOOD004-LAB-V3_10",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "files": [
+  {
+   "name": "acceptance-verifier-v3.10.py",
+   "sha256": "388d7e77f523c1ed853a865aed1dba6c89542459d1486911e85e7d11cabb3c20",
+   "size": 30265
+  },
+  {
+   "name": "actor-provenance-selftests-v3.10.py",
+   "sha256": "2942fde137cac17556ae3aa2f5cab30c9f7943ead749b749455d05e82a3bbdae",
+   "size": 10086
+  },
+  {
+   "name": "batch-manifest-v3.10.json",
+   "sha256": "bad1f18ef7f35512a00f7cae77f694ffc95dab425d76c14971d7e0ae7d9d0a5d",
+   "size": 11098
+  },
+  {
+   "name": "build-provenance-policy-v3.10.json",
+   "sha256": "919ecff966f94b46ab24d353a9b0fb9d6f9e9a065e698319e28b8e0aa17e883b",
+   "size": 2223
+  },
+  {
+   "name": "controller-acceptance-schema-v3.10.json",
+   "sha256": "30c37908c3a7184c2e17e3ca8bc1f185b602f5948ba0ccc42e057653f5008c83",
+   "size": 1071
+  },
+  {
+   "name": "controller-evidence-schema-v3.10.json",
+   "sha256": "b2fb4d9fec2de5a3cd24c6dc53923a404a971101c547e6359af43c9abfc2812c",
+   "size": 1187
+  },
+  {
+   "name": "controller-nonintervention-schema-v3.10.json",
+   "sha256": "76c243896644d41ea23e20ce98d0644e0927bd8357a791ef303e6210aef0099e",
+   "size": 688
+  },
+  {
+   "name": "cross-manifest-coherence-validator.py",
+   "sha256": "02dc9ef667f888c4104781328b2bd726a248f4c378fb8cecd560ad7e7cd67411",
+   "size": 8483
+  },
+  {
+   "name": "dispatch-plan-v3.10.json",
+   "sha256": "fe0c31de2320ef75d6cd9218fe0449c066edafdc2c131eaaf91201c6ce2b945a",
+   "size": 1846
+  },
+  {
+   "name": "functional-contract-baseline-v3.10.json",
+   "sha256": "df8cc18698238abca44a310655605213227112dca35b64d026b0a848c38b0236",
+   "size": 9697
+  },
+  {
+   "name": "gate-traceability-v3.10.json",
+   "sha256": "16773eb30826a14bf89386ca1cbed23c7741ca1ef5b462d8d14464fff76d6124",
+   "size": 20456
+  },
+  {
+   "name": "lab-api-contract-v3.10.json",
+   "sha256": "b1d1d981e0f002f6bce3a1604378610f1272451eca9e344f72ea7816d640f4b6",
+   "size": 6551
+  },
+  {
+   "name": "leaf-provenance-contract-v3.10.json",
+   "sha256": "3918a9f4548ae7429ba3c12e7c154b1b1e1b42652b62750807471ae65182dad1",
+   "size": 1357
+  },
+  {
+   "name": "leaf-provenance-receipt-schema-v3.10.json",
+   "sha256": "1df915ca642525f5ff03188fdc0243235a292da33b64ace9f8359ab32b7053cb",
+   "size": 2132
+  },
+  {
+   "name": "leaf-r-report-schema-v3.10.json",
+   "sha256": "b334f3dd5e6cc5f30e1a38802db6b3dcaaef3089f171b8b2d2ea04d7b0a57c0f",
+   "size": 824
+  },
+  {
+   "name": "leaf-requirements-v3.10.json",
+   "sha256": "3bcb581a5b61824e773b9eea17e6b3a3f560a347c55514435c076aa08d9ada21",
+   "size": 8194
+  },
+  {
+   "name": "lease-plan-lab-a-v3.10.json",
+   "sha256": "f6de2cd6645a79eea2587105daa5c129276c3c44be19f01960d1c28b9db43474",
+   "size": 612
+  },
+  {
+   "name": "lease-plan-lab-b-v3.10.json",
+   "sha256": "06edb18fd9418f638161bc6077c3b234f53a5fba6f3578b1bb0bb908074755c1",
+   "size": 612
+  },
+  {
+   "name": "mechanical-finalizer-v3.10.py",
+   "sha256": "77c65f948d34dba1f366f9ebf00fb9238d32ddddcc59ea7f12a440b2b408b560",
+   "size": 75798
+  },
+  {
+   "name": "package-identity-v3.10.json",
+   "sha256": "625e3c62734be9d18775f2a259101b4811825fa54027da15e21b214895fed7f5",
+   "size": 2809
+  },
+  {
+   "name": "port-plan-v3.10.json",
+   "sha256": "813e85aa6a68ec176733e5f2e5ab586755f66e929cf143f0b617092b2be926ae",
+   "size": 1437
+  },
+  {
+   "name": "predispatch-readiness-v3.10.json",
+   "sha256": "e8e836139ad228ee8253efee1351f59367caf0af46b277c1e96cd2b5e606f770",
+   "size": 552
+  },
+  {
+   "name": "process-hardening-contract-v3.10.json",
+   "sha256": "911d416c0f6086dd2bdad21c56fd69314d0af3fbc71d2fea83f0a6da9e770287",
+   "size": 3967
+  },
+  {
+   "name": "provenance-finalizer-v3.10.py",
+   "sha256": "836a3d4ea578e569b1b8ba3d9daa79ebaa76c60b1a3da36d6a7bf3c8bdcc1969",
+   "size": 1430
+  },
+  {
+   "name": "publication-policy-v3.10.json",
+   "sha256": "3530fce54f0761c6eaf6b64680f958070e20e9951a495029ea80c8b0c78c4192",
+   "size": 1152
+  },
+  {
+   "name": "scope-freeze-v3.10.json",
+   "sha256": "bd0f30ea2f8b9713d507cc2bda2fb35a7e236579532db4867e4eb075c0b3a786",
+   "size": 2425
+  },
+  {
+   "name": "transcript-bound-verifier-v3.10.py",
+   "sha256": "874300c6e6f32bb3e461ebb4af7fccc0838b7fb0e382dd72715a636c189a8205",
+   "size": 9187
+  }
+ ],
+ "manifest_self_excluded": true,
+ "operational_file_count": 27,
+ "package": "v3.10",
+ "review_exclusion": "exclude package payload manifest itself and all validation/review-binding receipts",
+ "schema": "package-payload-manifest/v3.10",
+ "supersedes": {
+  "manifest_sha256": "71596b8472b459940ee79fe9df8d3687dd3dbbdf5bf4696d897a9e4a1bdb3bba",
+  "package": "v3.9",
+  "reason": "WF-F1 actor provenance not enforced; v3.9 execution identities already used by invalid canonical dispatch",
+  "status": "FUNCTIONALLY_PASS_WORKFLOW_PROVENANCE_INVALID_NOT_INTEGRATED"
+ },
+ "zero_extra": true,
+ "zero_missing": true
+}

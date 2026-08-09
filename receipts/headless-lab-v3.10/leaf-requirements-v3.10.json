@@ -1,0 +1,140 @@
+{
+ "batch_id": "BATCH-20260809T205317Z-DOGFOOD004-LAB-V3_10",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "labs": {
+  "LAB-A": {
+   "leaf_id": "LEAF-LAB-A-V3_10",
+   "lease_id": "LEASE-20260808T233306Z-LAB-A-V3_10",
+   "requirements": [
+    {
+     "category": "ownership",
+     "id": "R-A1",
+     "requirement": "Modify ONLY the owned paths: tests/integration/headless_audio_lab/process_supervisor.py, jack_server.py, osc_probe.py, sooperlooper_launcher.py, __init__.py. changed_not_owned must be empty; forbidden paths (receipts/, doc/, PROJECT-*, CURRENT.md, WORK-QUEUE.md, .github/, scripts/, tools/) must be unchanged."
+    },
+    {
+     "category": "required-apis",
+     "id": "R-A2",
+     "requirement": "Provide the contractual API per lab-api-contract-v3.10.json and functional-contract-baseline-v3.10.json: ProcessSupervisor (get_owned_pids, get_owned_pgids, start_process, cleanup, verify_cleanup, snapshot, get_process_info, context manager), ProcessInfo (pid, pgid), JackServer, OscProbe, SooperLooperLauncher (launch, readiness_ping, cleanup)."
+    },
+    {
+     "category": "method-signatures",
+     "id": "R-A3",
+     "requirement": "Method signatures (names, order, defaults, kinds) must match the baseline exactly. Annotations are compared SEMANTICALLY (typing.get_type_hints equivalence) — both evaluated annotations and 'from __future__ import annotations' are accepted when they resolve to the same normative type."
+    },
+    {
+     "category": "process-safety",
+     "id": "R-A4",
+     "requirement": "ProcessSupervisor must register owned PIDs/PGIDs only; foreign processes must not be registered; cleanup terminates only owned processes; failure to start a command must propagate; no pkill/killall/ipcrm; no killing foreign processes."
+    },
+    {
+     "category": "package-import-context",
+     "id": "R-A5",
+     "requirement": "Modules must import correctly in the CONTRACTUAL PACKAGE context (tests/integration on sys.path; import headless_audio_lab.<module>). Relative package imports are ALLOWED and expected. The finalizer inspects the exact R checkout file via package import; the resolved module __file__ must equal the R checkout path."
+    },
+    {
+     "category": "literal-tests",
+     "id": "R-A6",
+     "requirement": "Literal tests ft-a1..ft-a4 must be run exactly as defined in batch-manifest-v3.10.json (frozen argv; sha256(json.dumps(argv, separators=(',',':'), sort_keys=True)) must match declared command_sha256; all exit 0)."
+    },
+    {
+     "category": "no-evidence",
+     "id": "R-A7",
+     "requirement": "Do not create evidence/receipts/E/envelope commits. The evidence path receipts/headless-lab-results-v3.10/lab-a-controller-evidence.json must be absent from C and R."
+    },
+    {
+     "category": "r-only",
+     "id": "R-A8",
+     "requirement": "Produce EXACTLY ONE implementation commit R_A with R_A^ == C, R_A != C, single parent, non-empty C..R_A. No intermediate/merge/fixup/cherry-pick/rebases."
+    },
+    {
+     "category": "topology",
+     "id": "R-A9",
+     "requirement": "R_A must be based on candidate C (509538784afc2b828f2d922f65cf8ca3a39b5ee7)."
+    },
+    {
+     "category": "cleanliness",
+     "id": "R-A10",
+     "requirement": "The R checkout must be clean: zero untracked files, zero unexpected ignored outputs, no __pycache__/build artifacts left behind."
+    }
+   ],
+   "true_leaf_commit_requirement": [
+    "You personally must produce exactly one R commit.",
+    "Before returning: tests complete; git status clean; git add only owned implementation; git commit exactly once; rev-parse HEAD == reported R.",
+    "If you cannot complete this yourself: report failure; do NOT leave work for controller completion."
+   ]
+  },
+  "LAB-B": {
+   "leaf_id": "LEAF-LAB-B-V3_10",
+   "lease_id": "LEASE-20260808T233306Z-LAB-B-V3_10",
+   "requirements": [
+    {
+     "category": "ownership",
+     "id": "R-B1",
+     "requirement": "Modify ONLY the owned paths: tests/__init__.py, tests/integration/__init__.py, tests/integration/headless_audio_lab/{audio_oracle.py, graph_assertions.py, runner.py, test_modules.py}, scenarios/D1_source_direct.yaml, D2_sl_passive.yaml, D3_osc_recording.yaml, fixtures/synthetic_source, fixtures/deterministic_capture, fixtures/.gitignore. changed_not_owned must be empty; forbidden paths unchanged."
+    },
+    {
+     "category": "required-apis",
+     "id": "R-B2",
+     "requirement": "Provide the contractual API per lab-api-contract-v3.10.json: analyze_wav(wav_path, expected_loop_frames, observed_loop_frames, tempo, numerator, sample_rate, silence_threshold=0.01, peak_threshold=0.9) -> AnalysisResult; AnalysisResult fields expected/observed/captured/analyzed + verification in {PASS,FAIL,ERROR} + to_dict(); analyze_loop_reproduction(source_wav, captured_wav, expected_loop_frames, tolerance_percent=10.0) -> dict; GraphAssertions (7 methods); LabRunner."
+    },
+    {
+     "category": "semantic-annotations",
+     "id": "R-B3",
+     "requirement": "Annotations are compared SEMANTICALLY: evaluated annotations and 'from __future__ import annotations' both accepted when they resolve to the same normative type (int, float, str|Path, AnalysisResult). Semantic type mismatches are rejected."
+    },
+    {
+     "category": "return-contracts",
+     "id": "R-B4",
+     "requirement": "analyze_wav must return AnalysisResult; analyze_loop_reproduction must return a non-empty dict for valid controlled WAV inputs with normative frame-ratio semantics."
+    },
+    {
+     "category": "silent-wav",
+     "id": "R-B5",
+     "requirement": "A silent WAV MUST produce verification == 'FAIL' (real NUL PCM analysis; no text substitution)."
+    },
+    {
+     "category": "zero-tracked-elf",
+     "id": "R-B6",
+     "requirement": "R_B MUST contain ZERO tracked ELF binaries anywhere (including under owned fixture paths). The controller ignores leaf-produced binaries; canonical compilation happens in the controller build into the build/ directory from candidate C sources. Any representation of fixture paths is acceptable as long as the required paths exist and zero tracked ELF holds."
+    },
+    {
+     "category": "controlled-build",
+     "id": "R-B7",
+     "requirement": "The canonical C helpers (tests/integration/virtual_studio/audio/synthetic_source.c and deterministic_capture.c, already in C) are compiled by the CONTROLLER into an empty build dir (gcc -std=c11 -O2 ... -ljack -lm -lpthread); the leaf does not need to commit binaries."
+    },
+    {
+     "category": "literal-tests",
+     "id": "R-B8",
+     "requirement": "Literal tests ft-b1..ft-b4 must be run exactly as defined in batch-manifest-v3.10.json (frozen argv; command_sha256 match; all exit 0). ft-b4 compiles both C helpers with gcc — run it, then remove build artifacts so the worktree is clean."
+    },
+    {
+     "category": "no-evidence",
+     "id": "R-B9",
+     "requirement": "Do not create evidence/receipts/E/envelope commits. receipts/headless-lab-results-v3.10/lab-b-controller-evidence.json must be absent from C and R."
+    },
+    {
+     "category": "r-only",
+     "id": "R-B10",
+     "requirement": "Produce EXACTLY ONE implementation commit R_B with R_B^ == C, R_B != C, single parent, non-empty C..R_B. No intermediate/merge/fixup/cherry-pick/rebases."
+    },
+    {
+     "category": "topology",
+     "id": "R-B11",
+     "requirement": "R_B must be based on candidate C (509538784afc2b828f2d922f65cf8ca3a39b5ee7)."
+    },
+    {
+     "category": "cleanliness",
+     "id": "R-B12",
+     "requirement": "The R checkout must be clean: zero untracked, zero unexpected ignored outputs, no __pycache__/build artifacts left behind."
+    }
+   ],
+   "true_leaf_commit_requirement": [
+    "You personally must produce exactly one R commit.",
+    "Before returning: tests complete; git status clean; git add only owned implementation; git commit exactly once; rev-parse HEAD == reported R.",
+    "If you cannot complete this yourself: report failure; do NOT leave work for controller completion."
+   ]
+  }
+ },
+ "note": "Read and satisfy leaf-requirements-v3.10.json. The controller is forbidden from completing or committing your implementation.",
+ "schema": "leaf-requirements/v3.10"
+}

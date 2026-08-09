@@ -1,0 +1,13 @@
+{
+ "accept_count": 3,
+ "all_payload_hashes_bound": true,
+ "blocking": 0,
+ "created_after_reviews": true,
+ "manifest_sha256": "4ca2f2686f36e5b3455d2ec4bb6b5edb4e22099e1e1b13f0cfbb4899160c550d",
+ "payload_file_count": 27,
+ "required": 0,
+ "schema": "review-binding-validation/v1",
+ "self_reviewed": false,
+ "status": "PASS",
+ "technical_dispatch_eligibility": "PASS"
+}

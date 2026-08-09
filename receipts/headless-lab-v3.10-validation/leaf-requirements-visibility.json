@@ -1,0 +1,11 @@
+{
+ "functional_requirements_copied_semantically": true,
+ "labs": [
+  "LAB-A",
+  "LAB-B"
+ ],
+ "prompt_text": "The controller is forbidden from completing or committing your implementation.",
+ "schema": "leaf-requirements-visibility/v1",
+ "status": "PASS",
+ "true_leaf_commit_requirement_visible": true
+}

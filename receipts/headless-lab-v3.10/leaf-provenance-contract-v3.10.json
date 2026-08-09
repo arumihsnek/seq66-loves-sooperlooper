@@ -1,0 +1,48 @@
+{
+ "allowed_controller_actions_after_leaf_start": [
+  "observe",
+  "read",
+  "hash",
+  "run validation after leaf termination"
+ ],
+ "batch_id": "BATCH-20260809T205317Z-DOGFOOD004-LAB-V3_10",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "forbidden_controller_actions": [
+  "implementation edit in leaf worktree",
+  "git add of leaf implementation",
+  "git commit creating R",
+  "git commit --amend creating/replacing R",
+  "cherry-pick/fixup/rebase of leaf R"
+ ],
+ "normative_principle": "THE LEAF MUST CREATE THE FINAL IMPLEMENTATION TREE AND COMMIT R. THE CONTROLLER MAY VALIDATE R BUT MAY NOT COMPLETE R.",
+ "package": "v3.10",
+ "required_artifacts": [
+  "durable leaf transcript/log",
+  "transcript sha256",
+  "controller command log",
+  "filesystem/Git evidence"
+ ],
+ "rules": {
+  "controller_rescue_forbidden": true,
+  "controller_validates_only": true,
+  "identity_name_not_proof": true,
+  "leaf_creates_R": true
+ },
+ "schema": "leaf-provenance-contract/v3.10",
+ "termination_rule": {
+  "controller_rescue_forbidden": true,
+  "dispatch_lab_result": "FAIL",
+  "if_any": [
+   "max_iterations",
+   "timeout",
+   "crash",
+   "tool failure",
+   "no final report",
+   "no commit",
+   "dirty worktree"
+  ],
+  "lease_consumed": true,
+  "replacement_under_same_authorization_forbidden": true,
+  "result": "LEAF_FAILED_TO_PRODUCE_R"
+ }
+}

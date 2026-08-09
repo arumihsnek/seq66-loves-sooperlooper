@@ -1,0 +1,14 @@
+{
+ "abstract_replay": {
+  "controller_created_R": true,
+  "controller_git_identity": "LEAF-*",
+  "controller_implementation_edit": true,
+  "leaf_git_actions": 0
+ },
+ "new_candidates_created": 0,
+ "required_code": "CONTROLLER_ACTED_AS_LEAF",
+ "schema": "v3.9-controller-as-leaf-replay/v1",
+ "source": "CP-077",
+ "status": "PASS",
+ "verifier_result": "REJECT"
+}

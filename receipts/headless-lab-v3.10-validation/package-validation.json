@@ -1,0 +1,8 @@
+{
+ "json_parse_all": true,
+ "new_provenance_artifacts_present": true,
+ "package_dir": "receipts/headless-lab-v3.10",
+ "python_compile_exit_code": 0,
+ "schema": "package-validation/v3.10",
+ "status": "PASS"
+}

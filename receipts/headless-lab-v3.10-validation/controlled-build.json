@@ -1,0 +1,7 @@
+{
+ "canonical_compile_commands_equal": true,
+ "no_build_executed": true,
+ "schema": "controlled-build/v3.10",
+ "status": "PASS",
+ "tracked_elf_prohibition_retained": true
+}

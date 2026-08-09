@@ -1,0 +1,118 @@
+{
+ "all_rejected": true,
+ "cases": [
+  {
+   "case": "N1",
+   "exit_code": 1,
+   "expected": "LEAF_DID_NOT_CREATE_R",
+   "mode": "N1",
+   "pass": true,
+   "primary_codes": [
+    "LEAF_GIT_ADD_MISSING",
+    "LEAF_DID_NOT_CREATE_R",
+    "LEAF_COMMIT_COUNT_INVALID",
+    "CONTROLLER_ACTED_AS_LEAF"
+   ],
+   "verdict": "REJECT"
+  },
+  {
+   "case": "N2",
+   "exit_code": 1,
+   "expected": "CONTROLLER_ACTED_AS_LEAF",
+   "mode": "N2",
+   "pass": true,
+   "primary_codes": [
+    "LEAF_DID_NOT_CREATE_R",
+    "LEAF_COMMIT_COUNT_INVALID",
+    "CONTROLLER_ACTED_AS_LEAF",
+    "CONTROLLER_ACTED_AS_LEAF",
+    "CONTROLLER_IMPLEMENTATION_EDIT_COUNT_NONZERO",
+    "CONTROLLER_GIT_MUTATION_COUNT_NONZERO",
+    "TRANSCRIPT_FINAL_HEAD_MISMATCH",
+    "LEAF_WORKTREE_DIRTY"
+   ],
+   "verdict": "REJECT"
+  },
+  {
+   "case": "N3",
+   "exit_code": 1,
+   "expected": "CONTROLLER_AMEND_AFTER_LEAF",
+   "mode": "N3",
+   "pass": true,
+   "primary_codes": [
+    "CONTROLLER_AMEND_AFTER_LEAF",
+    "LEAF_COMMIT_NOT_DECLARED_R",
+    "TRANSCRIPT_FINAL_HEAD_MISMATCH"
+   ],
+   "verdict": "REJECT"
+  },
+  {
+   "case": "N4",
+   "exit_code": 1,
+   "expected": "LEAF_FAILED_TO_PRODUCE_R",
+   "mode": "N4",
+   "pass": true,
+   "primary_codes": [
+    "LEAF_FAILED_TO_PRODUCE_R",
+    "LEAF_GIT_ADD_MISSING",
+    "LEAF_DID_NOT_CREATE_R",
+    "LEAF_COMMIT_COUNT_INVALID",
+    "LEAF_WORKTREE_DIRTY"
+   ],
+   "verdict": "REJECT"
+  },
+  {
+   "case": "N5",
+   "exit_code": 1,
+   "expected": "CONTROLLER_ACTED_AS_LEAF",
+   "mode": "N5",
+   "pass": true,
+   "primary_codes": [
+    "LEAF_GIT_ADD_MISSING",
+    "LEAF_DID_NOT_CREATE_R",
+    "LEAF_COMMIT_COUNT_INVALID",
+    "CONTROLLER_ACTED_AS_LEAF"
+   ],
+   "verdict": "REJECT"
+  },
+  {
+   "case": "N6",
+   "exit_code": 1,
+   "expected": "TRANSCRIPT_HASH_MISMATCH",
+   "mode": "N6",
+   "pass": true,
+   "primary_codes": [
+    "TRANSCRIPT_HASH_MISMATCH"
+   ],
+   "verdict": "REJECT"
+  },
+  {
+   "case": "N7",
+   "exit_code": 1,
+   "expected": "DECLARED_R_NOT_LEAF_FINAL_HEAD",
+   "mode": "N7",
+   "pass": true,
+   "primary_codes": [
+    "DECLARED_R_NOT_LEAF_FINAL_HEAD",
+    "LEAF_COMMIT_NOT_DECLARED_R",
+    "TRANSCRIPT_FINAL_HEAD_MISMATCH",
+    "R_TREE_MISMATCH"
+   ],
+   "verdict": "REJECT"
+  },
+  {
+   "case": "N8",
+   "exit_code": 1,
+   "expected": "R_CREATED_AFTER_LEAF_TERMINATION",
+   "mode": "N8",
+   "pass": true,
+   "primary_codes": [
+    "R_CREATED_AFTER_LEAF_TERMINATION"
+   ],
+   "verdict": "REJECT"
+  }
+ ],
+ "schema": "actor-provenance-negative-matrix/v1",
+ "status": "PASS",
+ "verifier_path": "transcript-bound-verifier-v3.10.py"
+}

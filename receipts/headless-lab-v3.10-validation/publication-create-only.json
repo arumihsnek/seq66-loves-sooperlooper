@@ -1,0 +1,8 @@
+{
+ "create_only": true,
+ "force_push": false,
+ "policy_copied": true,
+ "result_branches_v3_10": 0,
+ "schema": "publication-create-only/v3.10",
+ "status": "PASS"
+}

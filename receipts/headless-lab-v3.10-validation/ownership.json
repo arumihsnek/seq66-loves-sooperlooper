@@ -1,0 +1,8 @@
+{
+ "functional_owned_paths_unchanged": true,
+ "lab_a_equal": true,
+ "lab_b_equal": true,
+ "schema": "ownership/v3.10",
+ "source": "leaf-requirements-v3.10.json",
+ "status": "PASS"
+}

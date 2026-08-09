@@ -1,0 +1,27 @@
+{
+ "ambiguous_push_consequence": "PUBLISH_STATE_AMBIGUOUS -> STOP (no automatic retry)",
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_10",
+ "controller_sole_publisher": true,
+ "frozen_at_utc": "2026-08-06T23:45:54Z",
+ "required": [
+  "branch absent before creating E (real git ls-remote --exit-code; rc=2 empty => absent)",
+  "branch absent immediately before push (second real ls-remote)",
+  "prepublish-finalization PASS before push",
+  "single create-only push: git push <remote> <E>:refs/heads/<branch>",
+  "no --force, no --force-with-lease, no +<refspec>, no update-ref, no second push, no reused branch",
+  "capture push argv and transcript (hashes in A)",
+  "PUBLISH_STATE_AMBIGUOUS => STOP; no automatic retry",
+  "A created after push, outside E, strict binding"
+ ],
+ "schema": "publication-policy/v3.10",
+ "sequence": [
+  "real ls-remote absence (before E)",
+  "fail-closed finalize (no gate failure => E exists)",
+  "prepublish verifier PASS",
+  "real ls-remote absence (immediately before push)",
+  "create-only push",
+  "postpublish verifier (remote == E, strict binding)",
+  "A materialized outside E",
+  "full-completion PASS"
+ ]
+}

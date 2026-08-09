@@ -1,0 +1,23 @@
+{
+ "blocking_ap_gates": [
+  "AP-01",
+  "AP-02",
+  "AP-03",
+  "AP-04",
+  "AP-05",
+  "AP-06",
+  "AP-07",
+  "AP-08"
+ ],
+ "each_has": [
+  "normative_requirement",
+  "leaf_visible_requirement",
+  "verification_method",
+  "positive_fixture",
+  "negative_fixture"
+ ],
+ "orphan_gates": [],
+ "registry": "gate-traceability-v3.10.json",
+ "schema": "gate-traceability-validation/v1",
+ "status": "PASS"
+}
