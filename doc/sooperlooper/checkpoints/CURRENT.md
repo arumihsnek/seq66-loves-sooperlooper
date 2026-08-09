@@ -5,6 +5,7 @@ Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-09-CP-077-v3-9-post-
 Checkpoint ID: `CP-077`
 Checkpoint date: 2026-08-09
 Phase: `post-merge forensic recovery`
+Current phase: `phase-5-exact-recording`
 Active task: P5-005 (M5 exact musical recording — post-merge forensics)
 Status: `POST_MERGE_FORENSIC_RECOVERY — HUMAN_DECISION_PENDING`
 Branch: `recovery/v3-9-post-merge-forensics-20260809T…` (recovery PR → fork-main)
