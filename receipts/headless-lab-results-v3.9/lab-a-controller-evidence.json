@@ -1,0 +1,990 @@
+{
+  "C": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "R": "46bd5f526b9a6a90ee96093e1924d42b15cbc063",
+  "R_tree": "ba67a70130f444c7dcf3ba5caf400fbd93fa20aa",
+  "artifacts": {
+    "count": 5,
+    "files": [
+      {
+        "blob_oid": "25fb8426d8e8867525d4c804d68a2f518e25edef",
+        "path": "tests/integration/headless_audio_lab/process_supervisor.py",
+        "sha256": "b4ea4bdf9ce82759f57210194de8b4568d2b6e52eed26279a06cd0350afc3a0d",
+        "size": 4596
+      },
+      {
+        "blob_oid": "1a4226275ade4f7157344b293052b0f51d07d132",
+        "path": "tests/integration/headless_audio_lab/jack_server.py",
+        "sha256": "b0bb9fc93e23e41fe31ff8ec928b0428b84c122e04fbfc5a14a498686f89a8c5",
+        "size": 7204
+      },
+      {
+        "blob_oid": "614d67180d736add94f8fd96455afdd0325a3e38",
+        "path": "tests/integration/headless_audio_lab/osc_probe.py",
+        "sha256": "87384791c350d26bcdfe2c1d5d60902654e64e23c1a8f3456be5085e0929acb1",
+        "size": 1349
+      },
+      {
+        "blob_oid": "5bd9490c00ce3a7f12b89e01bb6c27b2555a1da5",
+        "path": "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+        "sha256": "c661c5b4e2d26fc69ebf358b9e1161761f107b61d3c49e788d7f467c293bfe39",
+        "size": 2358
+      },
+      {
+        "blob_oid": "e9371c5792d299182d0bea27cecb92fa2f891b49",
+        "path": "tests/integration/headless_audio_lab/__init__.py",
+        "sha256": "4f1217e6e646c9631e90cf5d85b8ed9e9925ade22ca55388f0e7b3c2b1e61cc5",
+        "size": 357
+      }
+    ],
+    "non_empty": true
+  },
+  "batch": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+  "build_provenance": {
+    "applicable": false,
+    "verdict": "not_applicable"
+  },
+  "cleanliness": {
+    "clean": true,
+    "dirty_lines": "",
+    "tracked_elf": [],
+    "unexpected_ignored_build_outputs": [],
+    "untracked": [],
+    "zero_tracked_elf": true,
+    "zero_unexpected_ignored": true,
+    "zero_untracked": true
+  },
+  "cleanliness_after": {
+    "clean": true,
+    "dirty_lines": "",
+    "tracked_build_restored": true
+  },
+  "command_hash_evidence": {
+    "all_match": true,
+    "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+    "lab": "LAB-A",
+    "schema": "command-hash-evidence/v3.8",
+    "tests": [
+      {
+        "canonical_argv": [
+          "python3",
+          "-m",
+          "py_compile",
+          "tests/integration/headless_audio_lab/process_supervisor.py",
+          "tests/integration/headless_audio_lab/jack_server.py",
+          "tests/integration/headless_audio_lab/osc_probe.py",
+          "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+          "tests/integration/headless_audio_lab/__init__.py"
+        ],
+        "canonical_serialization_sha256": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e",
+        "controller_recomputed_command_sha256": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e",
+        "cwd": "checkout-root",
+        "declared_command_sha256": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e",
+        "match": true,
+        "source_payload_path": "batch-manifest-v3.8.json/labs/LAB-A/literal_tests/ft-a1",
+        "test_id": "ft-a1",
+        "timeout_seconds": 180
+      },
+      {
+        "canonical_argv": [
+          "python3",
+          "-c",
+          "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor, ProcessInfo; from headless_audio_lab.jack_server import JackServer; from headless_audio_lab.osc_probe import OscProbe; from headless_audio_lab.sooperlooper_launcher import SooperLooperLauncher; print('ft-a2 imports ok')"
+        ],
+        "canonical_serialization_sha256": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88",
+        "controller_recomputed_command_sha256": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88",
+        "cwd": "checkout-root",
+        "declared_command_sha256": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88",
+        "match": true,
+        "source_payload_path": "batch-manifest-v3.8.json/labs/LAB-A/literal_tests/ft-a2",
+        "test_id": "ft-a2",
+        "timeout_seconds": 180
+      },
+      {
+        "canonical_argv": [
+          "python3",
+          "-c",
+          "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor; s=ProcessSupervisor(); assert s.get_owned_pids()==[], 'ledger not empty'; assert s.get_owned_pgids()==[], 'pgid ledger not empty'; print('ft-a3 ledger empty ok')"
+        ],
+        "canonical_serialization_sha256": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f",
+        "controller_recomputed_command_sha256": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f",
+        "cwd": "checkout-root",
+        "declared_command_sha256": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f",
+        "match": true,
+        "source_payload_path": "batch-manifest-v3.8.json/labs/LAB-A/literal_tests/ft-a3",
+        "test_id": "ft-a3",
+        "timeout_seconds": 180
+      },
+      {
+        "canonical_argv": [
+          "python3",
+          "-c",
+          "import os, subprocess, sys, time; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor; f=None\ntry:\n    with ProcessSupervisor() as sup:\n        i=sup.start_process('probe',['/bin/sleep','2'],{},'.','/dev/null','/dev/null')\n        assert i.pid>0 and i.pid in sup.get_owned_pids(), 'owned not registered'\n        try:\n            sup.start_process('bad',['/nonexistent/binary-xyz'],{},'.','/dev/null','/dev/null')\n            raise SystemExit('bad command did not propagate')\n        except Exception:\n            pass\n        f=subprocess.Popen(['/bin/sleep','3'],start_new_session=True,\n                           stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n        assert f.pid not in sup.get_owned_pids(), 'foreign registered'\n        sup.cleanup(timeout=5.0)\n        assert not os.path.exists('/proc/%d'%i.pid), 'owned survived cleanup'\n        assert sup.verify_cleanup()==[], 'verify_cleanup not empty'\n        assert os.path.exists('/proc/%d'%f.pid), 'foreign killed by supervisor'\nfinally:\n    if f is not None and f.poll() is None:\n        f.terminate()\n        try:\n            f.wait(timeout=5.0)\n        except subprocess.TimeoutExpired:\n            f.kill(); f.wait(timeout=5.0)\nprint('ft-a4 owned/foreign/cleanup ok')"
+        ],
+        "canonical_serialization_sha256": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408",
+        "controller_recomputed_command_sha256": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408",
+        "cwd": "checkout-root",
+        "declared_command_sha256": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408",
+        "match": true,
+        "source_payload_path": "batch-manifest-v3.8.json/labs/LAB-A/literal_tests/ft-a4",
+        "test_id": "ft-a4",
+        "timeout_seconds": 180
+      }
+    ]
+  },
+  "evidence_absent": {
+    "absent_from_both": true,
+    "evidence_in_C": false,
+    "evidence_in_R": false
+  },
+  "evidence_path": "receipts/headless-lab-results-v3.9/lab-a-controller-evidence.json",
+  "finalizer_sha256": "718e1b3b6a074e9048c5aad12300b3e6585e78c1d9910d2597c9a7e3cbd8bfc0",
+  "functional_acceptance": null,
+  "gates": {
+    "C and R exist": {
+      "detail": "",
+      "gate_id": "c-and-r-exist-26183b",
+      "pass": true
+    },
+    "C..R non-empty": {
+      "detail": "",
+      "gate_id": "c-r-non-empty-0dd609",
+      "pass": true
+    },
+    "C..R owned-only": {
+      "detail": "[]",
+      "gate_id": "c-r-owned-only-f6a7de",
+      "pass": true
+    },
+    "R != C": {
+      "detail": "",
+      "gate_id": "r-c-122b92",
+      "pass": true
+    },
+    "R exactly one parent": {
+      "detail": "parents=1",
+      "gate_id": "r-exactly-one-parent-2e900d",
+      "pass": true
+    },
+    "R^ == C": {
+      "detail": "",
+      "gate_id": "r-c-7bb3b6",
+      "pass": true
+    },
+    "all command hashes exact": {
+      "detail": "",
+      "gate_id": "all-command-hashes-exact-fb62f9",
+      "pass": true
+    },
+    "all test IDs exact": {
+      "detail": "",
+      "gate_id": "all-test-ids-exact-29e652",
+      "pass": true
+    },
+    "all tests exit 0": {
+      "detail": "",
+      "gate_id": "all-tests-exit-0-58e9d6",
+      "pass": true
+    },
+    "artifact verification PASS": {
+      "detail": "files=5",
+      "gate_id": "artifact-verification-pass-553a98",
+      "pass": true
+    },
+    "cleanliness_after PASS": {
+      "detail": "''",
+      "gate_id": "cleanliness-after-pass-74e6d4",
+      "pass": true
+    },
+    "controlled build PASS/not_applicable": {
+      "detail": "not_applicable",
+      "gate_id": "controlled-build-pass-not-applicable-a6e22d",
+      "pass": true
+    },
+    "detached checkout clean": {
+      "detail": "''",
+      "gate_id": "detached-checkout-clean-458a1e",
+      "pass": true
+    },
+    "evidence absent from C and R": {
+      "detail": "inC=False inR=False",
+      "gate_id": "evidence-absent-from-c-and-r-a8d4bf",
+      "pass": true
+    },
+    "identity: batch-manifest batch == authoritative batch": {
+      "detail": "",
+      "gate_id": "identity-batch-manifest-batch-authoritative-batch-69c705",
+      "pass": true
+    },
+    "identity: batch-manifest package == authoritative package": {
+      "detail": "",
+      "gate_id": "identity-batch-manifest-package-authoritative-package-0318d1",
+      "pass": true
+    },
+    "identity: candidate C == authoritative candidate": {
+      "detail": "",
+      "gate_id": "identity-candidate-c-authoritative-candidate-03a12b",
+      "pass": true
+    },
+    "identity: cli batch == authoritative batch": {
+      "detail": "",
+      "gate_id": "identity-cli-batch-authoritative-batch-1b2eb3",
+      "pass": true
+    },
+    "identity: evidence path exact": {
+      "detail": "",
+      "gate_id": "identity-evidence-path-exact-13b786",
+      "pass": true
+    },
+    "identity: lab registered in authority": {
+      "detail": "",
+      "gate_id": "identity-lab-registered-in-authority-4ac7a3",
+      "pass": true
+    },
+    "identity: leaf id exact": {
+      "detail": "",
+      "gate_id": "identity-leaf-id-exact-9cf75b",
+      "pass": true
+    },
+    "identity: lease batch == authoritative batch": {
+      "detail": "",
+      "gate_id": "identity-lease-batch-authoritative-batch-272127",
+      "pass": true
+    },
+    "identity: lease id exact": {
+      "detail": "",
+      "gate_id": "identity-lease-id-exact-505e81",
+      "pass": true
+    },
+    "identity: planned branch matches authoritative pattern": {
+      "detail": "",
+      "gate_id": "identity-planned-branch-matches-authoritative-pattern-6166e4",
+      "pass": true
+    },
+    "identity: scope batch == authoritative batch": {
+      "detail": "",
+      "gate_id": "identity-scope-batch-authoritative-batch-d067a3",
+      "pass": true
+    },
+    "identity: scope package == authoritative package": {
+      "detail": "",
+      "gate_id": "identity-scope-package-authoritative-package-5943f3",
+      "pass": true
+    },
+    "ownership diff evidence PASS": {
+      "detail": "changed=5 not_owned=[] forbidden=[]",
+      "gate_id": "ownership-diff-evidence-pass-acc8ed",
+      "pass": true
+    },
+    "remote absence (pre-evidence)": {
+      "detail": "branch result/20260809T090829Z-v3-9-authorized-lab-dispatch-lab-a-v3_9 ABSENT (rc=2, empty)",
+      "gate_id": "remote-absence-pre-evidence-c2da10",
+      "pass": true
+    },
+    "required paths complete": {
+      "detail": "[]",
+      "gate_id": "required-paths-complete-ca2265",
+      "pass": true
+    },
+    "runtime full contract PASS": {
+      "detail": "structural=PASS return_shape=PASS constraints_ok=True",
+      "gate_id": "runtime-full-contract-pass-c6c1d5",
+      "pass": true
+    },
+    "static source validation PASS": {
+      "detail": "[]",
+      "gate_id": "static-source-validation-pass-5405ab",
+      "pass": true
+    },
+    "traceability assertion PASS": {
+      "detail": "orphans=[] unresolved=[]",
+      "gate_id": "traceability-assertion-pass-73ff89",
+      "pass": true
+    },
+    "zero tracked ELF": {
+      "detail": "[]",
+      "gate_id": "zero-tracked-elf-cd7acc",
+      "pass": true
+    },
+    "zero unexpected ignored outputs": {
+      "detail": "[]",
+      "gate_id": "zero-unexpected-ignored-outputs-2eb9cd",
+      "pass": true
+    },
+    "zero untracked": {
+      "detail": "''",
+      "gate_id": "zero-untracked-0b3cb2",
+      "pass": true
+    }
+  },
+  "lab": "LAB-A",
+  "literal_tests": {
+    "all_command_hashes_match": true,
+    "all_exit_zero": true,
+    "all_ids_exact": true,
+    "test_build_artifact_removed": true,
+    "tests": [
+      {
+        "actual_sha": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e",
+        "argv": [
+          "python3",
+          "-m",
+          "py_compile",
+          "tests/integration/headless_audio_lab/process_supervisor.py",
+          "tests/integration/headless_audio_lab/jack_server.py",
+          "tests/integration/headless_audio_lab/osc_probe.py",
+          "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+          "tests/integration/headless_audio_lab/__init__.py"
+        ],
+        "declared_sha": "1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e",
+        "declared_sha_matches_argv": true,
+        "exit_code": 0,
+        "id": "ft-a1",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "actual_sha": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88",
+        "argv": [
+          "python3",
+          "-c",
+          "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor, ProcessInfo; from headless_audio_lab.jack_server import JackServer; from headless_audio_lab.osc_probe import OscProbe; from headless_audio_lab.sooperlooper_launcher import SooperLooperLauncher; print('ft-a2 imports ok')"
+        ],
+        "declared_sha": "95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88",
+        "declared_sha_matches_argv": true,
+        "exit_code": 0,
+        "id": "ft-a2",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "d082b6b49817b01178197ddcf796b63690a3364adc98f03f078c34761f51a982"
+      },
+      {
+        "actual_sha": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f",
+        "argv": [
+          "python3",
+          "-c",
+          "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor; s=ProcessSupervisor(); assert s.get_owned_pids()==[], 'ledger not empty'; assert s.get_owned_pgids()==[], 'pgid ledger not empty'; print('ft-a3 ledger empty ok')"
+        ],
+        "declared_sha": "d977a1fdd43ae04e90879886d08c7c424bfc55c2150da00d2960917c5093fd5f",
+        "declared_sha_matches_argv": true,
+        "exit_code": 0,
+        "id": "ft-a3",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "4a567ba3b87b9fd893211fd971279874bf0a78fb1bae2b716404400d2795a3ab"
+      },
+      {
+        "actual_sha": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408",
+        "argv": [
+          "python3",
+          "-c",
+          "import os, subprocess, sys, time; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor; f=None\ntry:\n    with ProcessSupervisor() as sup:\n        i=sup.start_process('probe',['/bin/sleep','2'],{},'.','/dev/null','/dev/null')\n        assert i.pid>0 and i.pid in sup.get_owned_pids(), 'owned not registered'\n        try:\n            sup.start_process('bad',['/nonexistent/binary-xyz'],{},'.','/dev/null','/dev/null')\n            raise SystemExit('bad command did not propagate')\n        except Exception:\n            pass\n        f=subprocess.Popen(['/bin/sleep','3'],start_new_session=True,\n                           stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n        assert f.pid not in sup.get_owned_pids(), 'foreign registered'\n        sup.cleanup(timeout=5.0)\n        assert not os.path.exists('/proc/%d'%i.pid), 'owned survived cleanup'\n        assert sup.verify_cleanup()==[], 'verify_cleanup not empty'\n        assert os.path.exists('/proc/%d'%f.pid), 'foreign killed by supervisor'\nfinally:\n    if f is not None and f.poll() is None:\n        f.terminate()\n        try:\n            f.wait(timeout=5.0)\n        except subprocess.TimeoutExpired:\n            f.kill(); f.wait(timeout=5.0)\nprint('ft-a4 owned/foreign/cleanup ok')"
+        ],
+        "declared_sha": "a90a4b0de0f6e94d66c9d98da59e4d9a4511bccdad966a7a3a2cfc96cf1e8408",
+        "declared_sha_matches_argv": true,
+        "exit_code": 0,
+        "id": "ft-a4",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "12550cf48e12512c497e94bd4e84ee89f71b3326d6204390c03b3afd46683302"
+      }
+    ]
+  },
+  "ownership_diff_evidence": {
+    "changed_not_owned": [],
+    "changed_paths": [
+      "tests/integration/headless_audio_lab/__init__.py",
+      "tests/integration/headless_audio_lab/jack_server.py",
+      "tests/integration/headless_audio_lab/osc_probe.py",
+      "tests/integration/headless_audio_lab/process_supervisor.py",
+      "tests/integration/headless_audio_lab/sooperlooper_launcher.py"
+    ],
+    "changed_paths_non_empty": true,
+    "diff_raw": "A\ttests/integration/headless_audio_lab/__init__.py\nA\ttests/integration/headless_audio_lab/jack_server.py\nA\ttests/integration/headless_audio_lab/osc_probe.py\nA\ttests/integration/headless_audio_lab/process_supervisor.py\nA\ttests/integration/headless_audio_lab/sooperlooper_launcher.py",
+    "forbidden_changed": [],
+    "ownership_diff_pass": true
+  },
+  "planned_branch": "result/20260809T090829Z-v3-9-authorized-lab-dispatch-lab-a-v3_9",
+  "prepublication_verdict": "PASS",
+  "recorded_at_utc": "2026-08-09T09:42:12Z",
+  "remote_absence_pre_evidence": {
+    "branch_exists": false,
+    "rc": 2,
+    "stderr": "",
+    "stdout": ""
+  },
+  "required_paths": {
+    "all_present": true,
+    "missing": []
+  },
+  "runtime_contract": {
+    "constraint_coverage": {
+      "all_pass_or_deferred": true,
+      "constraints": [
+        {
+          "constraint": "silent WAV MUST produce verification=FAIL",
+          "constraint_id": "c-01",
+          "evidence": "silent_wav verification=FAIL observed",
+          "normative_source": "audio_oracle.py:analyze_wav",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "runtime_return_shape_check"
+        },
+        {
+          "constraint": "no subprocess",
+          "constraint_id": "c-02",
+          "evidence": "module source scan: no subprocess usage",
+          "normative_source": "audio_oracle.py:analyze_wav",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "static_source_scan"
+        },
+        {
+          "constraint": "no absolute paths",
+          "constraint_id": "c-03",
+          "evidence": "module source scan: no os.path.abspath/absolute constants",
+          "normative_source": "audio_oracle.py:analyze_wav",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "static_source_scan"
+        },
+        {
+          "constraint": "frame ratio contract",
+          "constraint_id": "c-04",
+          "evidence": "analyze_loop_reproduction returns dict with frame_ratio_ok/silence_rejected",
+          "normative_source": "audio_oracle.py:analyze_loop_reproduction",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "runtime_return_shape_check"
+        },
+        {
+          "constraint": "silence rejected",
+          "constraint_id": "c-05",
+          "evidence": "analyze_loop_reproduction returns dict with frame_ratio_ok/silence_rejected",
+          "normative_source": "audio_oracle.py:analyze_loop_reproduction",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "runtime_return_shape_check"
+        },
+        {
+          "constraint": "verification in {PASS, FAIL, ERROR}",
+          "constraint_id": "c-06",
+          "evidence": "AnalysisResult.verification enum observed",
+          "normative_source": "audio_oracle.py:AnalysisResult",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "runtime_return_shape_check"
+        },
+        {
+          "constraint": "to_dict()",
+          "constraint_id": "c-07",
+          "evidence": "structural contract check",
+          "normative_source": "audio_oracle.py:AnalysisResult",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "structural_contract_check"
+        },
+        {
+          "constraint": "via jack_lsp with bounded timeout",
+          "constraint_id": "c-08",
+          "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+          "normative_source": "graph_assertions.py:GraphAssertions",
+          "phase": "dispatch",
+          "verdict": "deferred_by_design",
+          "verification_method": "dispatch_phase"
+        },
+        {
+          "constraint": "no process termination",
+          "constraint_id": "c-09",
+          "evidence": "structural contract check",
+          "normative_source": "graph_assertions.py:GraphAssertions",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "structural_contract_check"
+        },
+        {
+          "constraint": "launch jackd --name <server> --no-realtime -d dummy in own group",
+          "constraint_id": "c-10",
+          "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+          "normative_source": "jack_server.py:JackServer",
+          "phase": "dispatch",
+          "verdict": "deferred_by_design",
+          "verification_method": "dispatch_phase"
+        },
+        {
+          "constraint": "cleanup owned only",
+          "constraint_id": "c-11",
+          "evidence": "ownership_diff_evidence: changed_not_owned=[] forbidden_changed=[]",
+          "normative_source": "jack_server.py:JackServer",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "ownership_diff_evidence"
+        },
+        {
+          "constraint": "manual SooperLooper OSC protocol per doc/sooperlooper/OSC-CONTROL-AND-FEEDBACK.md",
+          "constraint_id": "c-12",
+          "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+          "normative_source": "osc_probe.py:OscProbe",
+          "phase": "dispatch",
+          "verdict": "deferred_by_design",
+          "verification_method": "dispatch_phase"
+        },
+        {
+          "constraint": "no process operations",
+          "constraint_id": "c-13",
+          "evidence": "structural contract check",
+          "normative_source": "osc_probe.py:OscProbe",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "structural_contract_check"
+        },
+        {
+          "constraint": "os.setsid to create own process group",
+          "constraint_id": "c-14",
+          "evidence": "ft-a4 owned/foreign/cleanup semantics executed",
+          "normative_source": "process_supervisor.py:ProcessSupervisor",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "runtime_literal_test"
+        },
+        {
+          "constraint": "termination only over owned PIDs/PGIDs",
+          "constraint_id": "c-15",
+          "evidence": "ownership_diff_evidence: changed_not_owned=[] forbidden_changed=[]",
+          "normative_source": "process_supervisor.py:ProcessSupervisor",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "ownership_diff_evidence"
+        },
+        {
+          "constraint": "SIGTERM -> wait -> SIGKILL bounded",
+          "constraint_id": "c-16",
+          "evidence": "structural contract check",
+          "normative_source": "process_supervisor.py:ProcessSupervisor",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "structural_contract_check"
+        },
+        {
+          "constraint": "no pkill/killall/pgrep/ipcrm/shell=True",
+          "constraint_id": "c-17",
+          "evidence": "forbidden process-tool names absent from module source",
+          "normative_source": "process_supervisor.py:ProcessSupervisor",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "static_source_scan"
+        },
+        {
+          "constraint": "processes created by start_process ARE owned",
+          "constraint_id": "c-18",
+          "evidence": "structural contract check",
+          "normative_source": "process_supervisor.py:ProcessSupervisor",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "structural_contract_check"
+        },
+        {
+          "constraint": "cleanup(timeout) MUST terminate all and only owned processes",
+          "constraint_id": "c-19",
+          "evidence": "ownership_diff_evidence: changed_not_owned=[] forbidden_changed=[]",
+          "normative_source": "process_supervisor.py:ProcessSupervisor",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "ownership_diff_evidence"
+        },
+        {
+          "constraint": "verify_cleanup() MUST report no remaining owned PIDs after cleanup",
+          "constraint_id": "c-20",
+          "evidence": "ft-a4 owned/foreign/cleanup semantics executed",
+          "normative_source": "process_supervisor.py:ProcessSupervisor",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "runtime_literal_test"
+        },
+        {
+          "constraint": "the acceptance harness MUST create foreign-survival probe processes OUTSIDE the supervisor via subprocess.Popen(start_new_session=True); foreign processes are NEVER registered as owned",
+          "constraint_id": "c-21",
+          "evidence": "ft-a4 foreign-survival probe created outside supervisor",
+          "normative_source": "process_supervisor.py:ProcessSupervisor",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "runtime_literal_test"
+        },
+        {
+          "constraint": "pid MUST be a real positive OS pid when a process is started",
+          "constraint_id": "c-22",
+          "evidence": "ft-a4 real process start observes positive OS pid",
+          "normative_source": "process_supervisor.py:ProcessInfo",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "runtime_literal_test"
+        },
+        {
+          "constraint": "CLI D0/D1 consuming ONLY the contractual API",
+          "constraint_id": "c-23",
+          "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+          "normative_source": "runner.py:LabRunner",
+          "phase": "dispatch",
+          "verdict": "deferred_by_design",
+          "verification_method": "dispatch_phase"
+        },
+        {
+          "constraint": "launch/readiness of SooperLooper in sooperlooper_launcher.py (LAB-A)",
+          "constraint_id": "c-24",
+          "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+          "normative_source": "runner.py:LabRunner",
+          "phase": "dispatch",
+          "verdict": "deferred_by_design",
+          "verification_method": "dispatch_phase"
+        },
+        {
+          "constraint": "no absolute paths",
+          "constraint_id": "c-25",
+          "evidence": "module source scan: no os.path.abspath/absolute constants",
+          "normative_source": "runner.py:LabRunner",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "static_source_scan"
+        },
+        {
+          "constraint": "run_dir repo-scoped",
+          "constraint_id": "c-26",
+          "evidence": "module source scan: no os.path.abspath/absolute constants",
+          "normative_source": "runner.py:LabRunner",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "static_source_scan"
+        },
+        {
+          "constraint": "termination only via owned",
+          "constraint_id": "c-27",
+          "evidence": "ownership_diff_evidence: changed_not_owned=[] forbidden_changed=[]",
+          "normative_source": "runner.py:LabRunner",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "ownership_diff_evidence"
+        },
+        {
+          "constraint": "launch via ProcessSupervisor owned",
+          "constraint_id": "c-28",
+          "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+          "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+          "phase": "dispatch",
+          "verdict": "deferred_by_design",
+          "verification_method": "dispatch_phase"
+        },
+        {
+          "constraint": "readiness via OSC ping",
+          "constraint_id": "c-29",
+          "evidence": "real JACK/SooperLooper execution belongs to dispatch; NOT claimed proven here",
+          "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+          "phase": "dispatch",
+          "verdict": "deferred_by_design",
+          "verification_method": "dispatch_phase"
+        },
+        {
+          "constraint": "stderr to run_dir",
+          "constraint_id": "c-30",
+          "evidence": "structural contract check",
+          "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "structural_contract_check"
+        },
+        {
+          "constraint": "cleanup owned",
+          "constraint_id": "c-31",
+          "evidence": "structural contract check",
+          "normative_source": "sooperlooper_launcher.py:SooperLooperLauncher",
+          "phase": "prepublication",
+          "verdict": "PASS",
+          "verification_method": "structural_contract_check"
+        }
+      ]
+    },
+    "external_runtime_semantics": {
+      "jack_sooperlooper": "deferred_by_design",
+      "note": "real JACK daemon / SooperLooper execution is NOT claimed proven here; it belongs to the dispatch phase"
+    },
+    "normative_source": "functional-contract-baseline-v3.8.json (single source of truth)",
+    "runtime_return_shape_check": "PASS",
+    "runtime_return_shape_checks": [
+      {
+        "name": "lab_a_return_shapes",
+        "note": "LAB-A has no normative runtime return-shape contract; owned-process runtime is covered by literal tests",
+        "ok": true
+      }
+    ],
+    "structural_contract_check": "PASS",
+    "structural_findings": {
+      "audio_oracle.py": {
+        "error": "module file missing in R",
+        "out_of_lab_scope": true
+      },
+      "graph_assertions.py": {
+        "error": "module file missing in R",
+        "out_of_lab_scope": true
+      },
+      "jack_server.py": {
+        "functions": {
+          "JackServer": {
+            "checks": [
+              {
+                "kind": "method",
+                "method": "start",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "readiness_probe",
+                "ok": true,
+                "params": [
+                  "timeout_s"
+                ]
+              },
+              {
+                "kind": "method",
+                "method": "get_ports",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "get_connections",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "verify_no_external_clients",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "cleanup",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "is_running",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "get_pid",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "get_pgid",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "snapshot",
+                "ok": true,
+                "params": []
+              }
+            ],
+            "class_exists": true
+          }
+        },
+        "module_sha256": "b0bb9fc93e23e41fe31ff8ec928b0428b84c122e04fbfc5a14a498686f89a8c5"
+      },
+      "osc_probe.py": {
+        "functions": {
+          "OscProbe": {
+            "checks": [
+              {
+                "kind": "method",
+                "method": "ping",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "get_control",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "set_control",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "hit_command",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "register_auto_update",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "unregister_auto_update",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "poll",
+                "ok": true,
+                "params": []
+              }
+            ],
+            "class_exists": true
+          }
+        },
+        "module_sha256": "87384791c350d26bcdfe2c1d5d60902654e64e23c1a8f3456be5085e0929acb1"
+      },
+      "process_supervisor.py": {
+        "functions": {
+          "ProcessInfo": {
+            "checks": [
+              {
+                "field": "pid",
+                "kind": "field",
+                "present_in_init_signature": true
+              },
+              {
+                "field": "pgid",
+                "kind": "field",
+                "present_in_init_signature": true
+              },
+              {
+                "field": "pgid",
+                "kind": "field_type_normative",
+                "normative_type": "int",
+                "verified_at_return_shape": true
+              },
+              {
+                "field": "pid",
+                "kind": "field_type_normative",
+                "normative_type": "int",
+                "verified_at_return_shape": true
+              }
+            ],
+            "class_exists": true
+          },
+          "ProcessSupervisor": {
+            "checks": [
+              {
+                "kind": "method",
+                "method": "start_process",
+                "ok": true,
+                "params": [
+                  "name",
+                  "cmd",
+                  "env",
+                  "cwd",
+                  "stdout_path",
+                  "stderr_path"
+                ]
+              },
+              {
+                "kind": "method",
+                "method": "cleanup",
+                "ok": true,
+                "params": [
+                  "timeout"
+                ]
+              },
+              {
+                "kind": "method",
+                "method": "verify_cleanup",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "get_owned_pids",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "get_owned_pgids",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "snapshot",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "get_process_info",
+                "ok": true,
+                "params": [
+                  "name"
+                ]
+              }
+            ],
+            "class_exists": true
+          }
+        },
+        "module_sha256": "b4ea4bdf9ce82759f57210194de8b4568d2b6e52eed26279a06cd0350afc3a0d"
+      },
+      "runner.py": {
+        "error": "module file missing in R",
+        "out_of_lab_scope": true
+      },
+      "sooperlooper_launcher.py": {
+        "functions": {
+          "SooperLooperLauncher": {
+            "checks": [
+              {
+                "kind": "method",
+                "method": "launch",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "readiness_ping",
+                "ok": true,
+                "params": []
+              },
+              {
+                "kind": "method",
+                "method": "cleanup",
+                "ok": true,
+                "params": []
+              }
+            ],
+            "class_exists": true
+          }
+        },
+        "module_sha256": "c661c5b4e2d26fc69ebf358b9e1161761f107b61d3c49e788d7f467c293bfe39"
+      }
+    }
+  },
+  "schema": "controller-evidence/v3.8",
+  "static_source_validation": {
+    "finalizer_ok": true,
+    "findings": [],
+    "verifier_ok": true
+  },
+  "topology_checks": {
+    "C_R_diff_non_empty": true,
+    "C_exists": true,
+    "R_equals_C": false,
+    "R_exists": true,
+    "R_parent_is_C": true,
+    "R_parents": 1,
+    "R_tree": "ba67a70130f444c7dcf3ba5caf400fbd93fa20aa",
+    "out_of_scope": [],
+    "owned_only": true
+  },
+  "verifier_sha256": "9639169de7b8e8898eb762e04cfe788e21d7163e68c6ca691043ba9fae144422"
+}
