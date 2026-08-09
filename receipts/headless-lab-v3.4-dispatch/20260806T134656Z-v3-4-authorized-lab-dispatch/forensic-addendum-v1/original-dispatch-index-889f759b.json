@@ -1,0 +1,27 @@
+{
+  "count": 20,
+  "files": {
+    "branch-binding-a.json": "a884939f26b451e7e7742efc5e82948e9200c046c7646a1e4070775006dd6a94",
+    "branch-binding-b.json": "d0cb132bb3ecc6099459f150f38f0fc750f96b1ba03160263bc7b28604eeb773",
+    "controller-literal-tests-a.json": "88a2f0b9321a8ae42ce8c54f9bfe9ff0e915d4e98a112e51ae12435eba82e5a5",
+    "controller-literal-tests-b.json": "ad14fad930980a027667f765abeb3ede8f05a1ef903a282a58566f2a5b92e48a",
+    "dispatch-verdict.json": "a710663a3c347e3635d4b66f952468fb3c7aba93be9331bec2541cf5b7defec5",
+    "freshness-checks.json": "41a45372783624bf9a90ca5f5dbe6c17dca9ac8483ef448612d3194774746ce6",
+    "human-authorization.json": "11b995b10e58a16a0089d52c861242a8c7be048ff11df81dd6263b98f5a55b84",
+    "lab-a-controlled-build-not-applicable.json": "9284a76897850f9767d5f3bafd0f84c1b3096482349cee1fc2cf8cd850d250f8",
+    "leaf-a-report.json": "8bde156aedcfebf7982bf866138fbaf70ec42798db46ad010d8906d88b9134a1",
+    "leaf-b-report.json": "29d975fe9f3903c4647e585c61847b35c020fda8267ab996a950a1989025b81c",
+    "lease-activation-lab-a.json": "08e70c3970de8a0cdc04b2bfd30bc267f27c04e1e982c548a78c7e6b5c71c8c5",
+    "lease-activation-lab-b.json": "fc304b7ab9fbee881500de368c611ae2eac50d05fce9765c003dc0eb10852b14",
+    "lease-terminal-a.json": "00e813353fd71b1f69ed11565671a6a088d5cf217644755d2a744b5439435aac",
+    "lease-terminal-b.json": "33de2e1eece395a8eaef53d325716ecde16ff58b883daf23b1fa5a8a243e964f",
+    "package-byte-validation.json": "b0b78bb90aec45b31a7d8844ba0717b7874362caee4c561ae488a88a6a9cf14d",
+    "source-state.json": "b62111f86efd6688fa7ebfed0c0ee996947bd2d8f9736762030c044ad9385b85",
+    "topology-a.json": "559f29a39b3228423ea1c2f054c66942559d0362868f32e8b379de2a94177fc8",
+    "topology-b.json": "04123ff704e213a0efbf2f05eb4e113f9ca51bb91c5310eebacbaae009fe9f64",
+    "worktree-inventory.json": "d1da4db1fb3952856bef7cd9247a089cbfef66a425fef9e58e0afd45eddce65e"
+  },
+  "recorded_at_utc": "2026-08-06T15:06:06Z",
+  "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
+  "schema": "dispatch-index/v1"
+}

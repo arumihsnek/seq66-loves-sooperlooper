@@ -1,0 +1,122 @@
+{
+ "author_committer_metadata": "Hermes Leaf LAB-B <hermes-leaf@nousresearch.com> 1786229110\nHermes Leaf LAB-B <hermes-leaf@nousresearch.com> 1786229110\n509538784afc2b828f2d922f65cf8ca3a39b5ee7\na1eb6cc140138240d0a917cad6dd874ad05576c8",
+ "blobs": [
+  {
+   "blob_oid": "aa5e165817ddc8c638c68e3b56981f716a480542",
+   "mode": "100644",
+   "path": "tests/__init__.py",
+   "sha256": "fab2b85599d25282f9fa56365ad48ad6f66e33d9f4ffd5f25d5eb1dac7eb05ab",
+   "size": 23,
+   "status": "A"
+  },
+  {
+   "blob_oid": "76e32747fc0509c4f6923dad9abd3d8e86f79cf2",
+   "mode": "100644",
+   "path": "tests/integration/__init__.py",
+   "sha256": "76537bd3d786ee9f7121c995dacabea2682a93d04cd3914c158684a6f34e6fed",
+   "size": 35,
+   "status": "A"
+  },
+  {
+   "blob_oid": "557c8ec895cbae43691ae1e082bd485ac98a43bb",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/audio_oracle.py",
+   "sha256": "8cf40ed17bbff89e2e9751dcd4758497fd0d38f9055196770301d9459e99716b",
+   "size": 4224,
+   "status": "A"
+  },
+  {
+   "blob_oid": "f49d0f1adf570e3a3636a943426eddaca27ee0f4",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/fixtures/.gitignore",
+   "sha256": "b70f0e86ae8620c21d4cdaf26442f5abf2437df02585b172892161dbf60ed765",
+   "size": 70,
+   "status": "A"
+  },
+  {
+   "blob_oid": "8c01dfcdda0c5d3ca59ea6b3902ec6ed197cc5fc",
+   "mode": "100755",
+   "path": "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+   "sha256": "fa3874b11d274e67fb425c3960c8b0149398eb907faf81dba02f33e71d327f29",
+   "size": 72408,
+   "status": "A"
+  },
+  {
+   "blob_oid": "4c86d1a6771aa34edabf6025fcfee0d19be23349",
+   "mode": "100755",
+   "path": "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+   "sha256": "054b8428810e24a3f435ac6579840918f6435ef61ac62069255c85faaedc6a81",
+   "size": 71864,
+   "status": "A"
+  },
+  {
+   "blob_oid": "f8add808692f44b02b000ef56f8cd0248a31d472",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/graph_assertions.py",
+   "sha256": "7db1963343c78d20a3e0e38de316d03df85343c609b55cf51b2284e4ee5ac9b1",
+   "size": 1914,
+   "status": "A"
+  },
+  {
+   "blob_oid": "9ff413d08e1196d87839579fd6913abaac9dc870",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/runner.py",
+   "sha256": "740153d306f471473e82c75c45e5bad2ab7d65f8a9cb6e41300a0f7cf380f4d1",
+   "size": 1172,
+   "status": "A"
+  },
+  {
+   "blob_oid": "311168b003c095a8c6a92541b3d5ce3b38a92ab4",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+   "sha256": "38e063aa2aa6a883eaa18b15e7446d226934e30e2a987bd67ddc3dc6d6e83174",
+   "size": 209,
+   "status": "A"
+  },
+  {
+   "blob_oid": "04c196a9673e873d22ad962553845e06d6a806f0",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+   "sha256": "4da52e27f9bab1809f700a57b8e63c1fb53a156765fae7e7ef97a8b85bd3194e",
+   "size": 275,
+   "status": "A"
+  },
+  {
+   "blob_oid": "9d25a698ee3b745c2b4b4334d786878c87e52b9f",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+   "sha256": "ce0a0567ac56e33d5d9f173105b050869978cd68dc8a85ecb68a44c033145eab",
+   "size": 240,
+   "status": "A"
+  },
+  {
+   "blob_oid": "f029554e5f995de5c133345655bdd76876cb51ef",
+   "mode": "100644",
+   "path": "tests/integration/headless_audio_lab/test_modules.py",
+   "sha256": "c4c07426c1efe309e0a836a75dfa5ad6ca7b6555676b0fba4b4608849d0b2267",
+   "size": 251,
+   "status": "A"
+  }
+ ],
+ "changed_paths": [
+  "tests/__init__.py",
+  "tests/integration/__init__.py",
+  "tests/integration/headless_audio_lab/audio_oracle.py",
+  "tests/integration/headless_audio_lab/fixtures/.gitignore",
+  "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+  "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+  "tests/integration/headless_audio_lab/graph_assertions.py",
+  "tests/integration/headless_audio_lab/runner.py",
+  "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+  "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+  "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+  "tests/integration/headless_audio_lab/test_modules.py"
+ ],
+ "commit_object_bytes": 344,
+ "commit_object_sha256": "3b7837e091afa3a461de4c4ab9a4832ccef0b11327fc5c087f86b26c73b20096",
+ "commit_sha": "357fe38983784c721e25ed2c8ae59a6303e2ef5d",
+ "diff_name_status_C_to_R": "A\ttests/__init__.py\nA\ttests/integration/__init__.py\nA\ttests/integration/headless_audio_lab/audio_oracle.py\nA\ttests/integration/headless_audio_lab/fixtures/.gitignore\nA\ttests/integration/headless_audio_lab/fixtures/deterministic_capture\nA\ttests/integration/headless_audio_lab/fixtures/synthetic_source\nA\ttests/integration/headless_audio_lab/graph_assertions.py\nA\ttests/integration/headless_audio_lab/runner.py\nA\ttests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml\nA\ttests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml\nA\ttests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml\nA\ttests/integration/headless_audio_lab/test_modules.py",
+ "parent": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "schema": "failed-r-preservation/v3.8",
+ "tree": "a1eb6cc140138240d0a917cad6dd874ad05576c8"
+}

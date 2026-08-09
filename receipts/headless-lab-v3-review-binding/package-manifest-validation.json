@@ -1,0 +1,182 @@
+{
+  "all_match_human_expected": true,
+  "all_sha256_exact": true,
+  "all_sizes_exact": true,
+  "batch_id_exact": true,
+  "batch_id_expected": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+  "batch_id_in_manifest": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+  "candidate_binding_exact": true,
+  "candidate_binding_from_artifacts": {
+    "batch-manifest-v3.json": {
+      "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "exact": true
+    },
+    "dispatch-plan-v3.json": {
+      "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "exact": true
+    },
+    "lease-plan-lab-a-v3.json": {
+      "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "exact": true
+    },
+    "lease-plan-lab-b-v3.json": {
+      "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "exact": true
+    },
+    "scope-freeze-v3.json": {
+      "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "exact": true
+    }
+  },
+  "candidate_exact": false,
+  "candidate_expected": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "candidate_in_manifest": null,
+  "files_expected": 12,
+  "files_extra_in_manifest": [],
+  "files_missing_from_manifest": [],
+  "files_present_in_manifest": 12,
+  "manifest_path": "receipts/headless-lab-v3/v3-package-manifest.json",
+  "manifest_sha256": "2114aa70a76ac23d70c374c1d5b042851d4c5eeec3b350e74cbfde1326c1c640",
+  "mismatches": [],
+  "note": "v3-package-manifest.json itself carries no candidate field; candidate binding verified from the package artifacts (scope-freeze, batch-manifest, dispatch-plan, lease plans).",
+  "per_file": [
+    {
+      "file": "acceptance-manifest-v3.json",
+      "manifest_entry": {
+        "entry_sha": "114bce617d98091e2b0be8d09b0fac39fd6f7a639ae4ccae15f9da6e2d83e084",
+        "entry_size": 1917,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "114bce617d98091e2b0be8d09b0fac39fd6f7a639ae4ccae15f9da6e2d83e084",
+      "size": 1917
+    },
+    {
+      "file": "acceptance-verifier-v3.py",
+      "manifest_entry": {
+        "entry_sha": "f6ee256dcb31c091492fcff17cc53f251293e76b3aa094559568e4fc36fffd78",
+        "entry_size": 22922,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "f6ee256dcb31c091492fcff17cc53f251293e76b3aa094559568e4fc36fffd78",
+      "size": 22922
+    },
+    {
+      "file": "batch-manifest-v3.json",
+      "manifest_entry": {
+        "entry_sha": "fbb9df63b055018969a3d41ba28014bc4ac8a99d1a624c5ec235221d3b48d689",
+        "entry_size": 8368,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "fbb9df63b055018969a3d41ba28014bc4ac8a99d1a624c5ec235221d3b48d689",
+      "size": 8368
+    },
+    {
+      "file": "build-provenance-policy-v3.json",
+      "manifest_entry": {
+        "entry_sha": "23f1aea291dc8164ff040aa3c14e38f89306c0f154d6d6127843dd3ec2e3c597",
+        "entry_size": 1730,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "23f1aea291dc8164ff040aa3c14e38f89306c0f154d6d6127843dd3ec2e3c597",
+      "size": 1730
+    },
+    {
+      "file": "dispatch-plan-v3.json",
+      "manifest_entry": {
+        "entry_sha": "a2934af1cf10934ff6625186de666731b43c4790590a3c3d7d1252bc4c62951e",
+        "entry_size": 1832,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "a2934af1cf10934ff6625186de666731b43c4790590a3c3d7d1252bc4c62951e",
+      "size": 1832
+    },
+    {
+      "file": "lab-api-contract-v3.json",
+      "manifest_entry": {
+        "entry_sha": "77b9572dd2e457b7b8eaee8d2c69d3040884ba157f47c92af84b040a0de5766e",
+        "entry_size": 6621,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "77b9572dd2e457b7b8eaee8d2c69d3040884ba157f47c92af84b040a0de5766e",
+      "size": 6621
+    },
+    {
+      "file": "lease-plan-lab-a-v3.json",
+      "manifest_entry": {
+        "entry_sha": "b2d735cf578a594349f17747fe990987f5a4aba907d277e01c4474beb8ab7c1b",
+        "entry_size": 2522,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "b2d735cf578a594349f17747fe990987f5a4aba907d277e01c4474beb8ab7c1b",
+      "size": 2522
+    },
+    {
+      "file": "lease-plan-lab-b-v3.json",
+      "manifest_entry": {
+        "entry_sha": "48b81f8aceaa8f32e3a5bce19a2c68fe534304a5fc3aadd18ca73c0a77449928",
+        "entry_size": 2522,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "48b81f8aceaa8f32e3a5bce19a2c68fe534304a5fc3aadd18ca73c0a77449928",
+      "size": 2522
+    },
+    {
+      "file": "port-plan-v3.json",
+      "manifest_entry": {
+        "entry_sha": "839835fba0451a74130169732c0deaeecc0f5fbfcf43614313a79872271f43d0",
+        "entry_size": 3465,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "839835fba0451a74130169732c0deaeecc0f5fbfcf43614313a79872271f43d0",
+      "size": 3465
+    },
+    {
+      "file": "predispatch-readiness-v3.json",
+      "manifest_entry": {
+        "entry_sha": "5fceb503c01a3af002dad12721d861de24d51b84cf86496f0d0e88bd9b7cb6db",
+        "entry_size": 1221,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "5fceb503c01a3af002dad12721d861de24d51b84cf86496f0d0e88bd9b7cb6db",
+      "size": 1221
+    },
+    {
+      "file": "result-envelope-schema-v3.json",
+      "manifest_entry": {
+        "entry_sha": "5a0d3147562dbf7d16638061e9246f4d7603fbbead7a0610a8ee075cb1f4a2f1",
+        "entry_size": 1872,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "5a0d3147562dbf7d16638061e9246f4d7603fbbead7a0610a8ee075cb1f4a2f1",
+      "size": 1872
+    },
+    {
+      "file": "scope-freeze-v3.json",
+      "manifest_entry": {
+        "entry_sha": "c84c0c6ddfbbd346a0953fe8f735e1adf7d7ee3b1940a1c9a72f8bfe9e0117ee",
+        "entry_size": 3346,
+        "status": "OK"
+      },
+      "matches_expected_human_hash": true,
+      "sha256": "c84c0c6ddfbbd346a0953fe8f735e1adf7d7ee3b1940a1c9a72f8bfe9e0117ee",
+      "size": 3346
+    }
+  ],
+  "schema": "package-manifest-validation/v1",
+  "source_commit": "66f2f0c8ced0b29ca579fd01eafda2daca51b75d",
+  "status": "MATCH",
+  "validated_at_utc": "2026-08-05T16:08:34Z",
+  "zero_extra": true,
+  "zero_missing": true
+}

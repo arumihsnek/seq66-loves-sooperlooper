@@ -1,0 +1,27 @@
+{
+  "count": 20,
+  "files": {
+    "amended-leaf-a-report-e88f6300.json": "1dfb196ee3d6b653783f7d6c5c1bab7f366f967eb54879935898241b1af72b8f",
+    "amended-leaf-b-report-e88f6300.json": "68697e2133333a83a738036a1f3f68a9337a6b3dd0ecdceb3419121ee23ea3c2",
+    "amended-snapshot-hashes.json": "9062e9a0944bba8ce2c03d365f1601bdfe8066292e804b3389b79fb8f4d44ecc",
+    "branch-live-state.json": "fb7d9dff15b5324d112d1b632f1b2fbea66c5bd2377fb534967c955f66c01f9a",
+    "commit-comparison.json": "af40aab5cb65dd7a2bc9f942abe28f3c68e2ed31653a9b4f2e7754adbb2a1d86",
+    "current-dispatch-index-e88f6300.json": "60c415ca2c54df9b352563339b127b974243c7705a4fca80b6356c8668cdf150",
+    "dispatch-verdict-revalidation.json": "fb7d9dff15b5324d112d1b632f1b2fbea66c5bd2377fb534967c955f66c01f9a",
+    "forensic-addendum-manifest.json": "78b57464250afc9d7c79df65f054240b8647d61fd2b301e7136d68ea7d424fc0",
+    "forensic-classification.json": "a7ac8e573abd1cf4447fcaef2c179c590d5a3ebebbab18dc06728a9dca347bbd",
+    "index-validation-at-889f759b.json": "6a470944ac0a9e6c23cd806fac9537d6ec555bb3684193c69621ec9cedd37c1e",
+    "index-validation-at-e88f6300.json": "94f6b663cb9876ba4bef067727b10702e2744af235788fe0659b74d0839c49f8",
+    "original-dispatch-index-889f759b.json": "60c415ca2c54df9b352563339b127b974243c7705a4fca80b6356c8668cdf150",
+    "original-leaf-a-report-889f759b.json": "8bde156aedcfebf7982bf866138fbaf70ec42798db46ad010d8906d88b9134a1",
+    "original-leaf-b-report-889f759b.json": "29d975fe9f3903c4647e585c61847b35c020fda8267ab996a950a1989025b81c",
+    "original-snapshot-hashes.json": "09549ac5083e9923ab318f8645412d3e22cb02eb1407e511ffca13de641cfbfb",
+    "senior-preflight.json": "e2a39ea27c86cf0a2ba0f10c33db354e8b4674e261a9684c684d2c77752b3cc5",
+    "senior-review-bundle.json": "38ac5ae249a65857c8e89eb91db7328d9c3bf8ef2b471b2866faee1285cb8c0b",
+    "senior-verdict.json": "20cbdb3382be97966875ecd39c589b876a6732ab2323d92f3208fc6af505fbaa",
+    "source-state.json": "3eddf03fff9f0591bd2a4cae956cb542d123ddcf196c318266501f1352988fa0"
+  },
+  "recorded_at_utc": "2026-08-06T19:50:00Z",
+  "run_id": "20260806T193343Z-v3-4-dispatch-evidence-forensic-closure",
+  "schema": "forensic-addendum-index/v1"
+}

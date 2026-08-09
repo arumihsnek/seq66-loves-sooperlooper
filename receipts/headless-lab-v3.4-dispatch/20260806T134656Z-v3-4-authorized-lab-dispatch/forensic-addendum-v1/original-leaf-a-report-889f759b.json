@@ -1,0 +1,19 @@
+{
+  "E": "a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3",
+  "R": "0fd104ef2187346b8c00014829857e11ee9539ec",
+  "branch": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-a-v3_4",
+  "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "controller_observed": {
+    "envelope_present_in_E": true,
+    "literal_tests_controller_reexec_all_zero": true,
+    "remote_pushed": true,
+    "worktree_clean_at_report": true
+  },
+  "lab": "LAB-A",
+  "leaf_id": "LEAF-LAB-A-V3_4",
+  "lease_id": "LEASE-20260806T020249Z-LAB-A-V3_4",
+  "note": "Controller-observed record. Leaf self-report (untrusted) delivered separately via delegation summary.",
+  "recorded_at_utc": "2026-08-06T15:04:49Z",
+  "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
+  "schema": "leaf-report/v1"
+}

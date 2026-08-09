@@ -1,0 +1,16 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "cases": {
+  "NA1_F_A1_relative_package_import_positive": true,
+  "NA2_F_B2_evaluated_annotation_positive": true,
+  "NA3_F_B2_future_annotation_positive": true,
+  "NA4_F_B3_valid_wav_positive": true,
+  "NA5_F_B1_tracked_elf_negative": true,
+  "NA6_orphan_gate_negative": true,
+  "NA7_hidden_leaf_requirement_negative": true
+ },
+ "group": "NORMATIVE_ALIGNMENT",
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "result": "PASS",
+ "schema": "validation/v3.9"
+}

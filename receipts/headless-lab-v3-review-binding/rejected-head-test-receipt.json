@@ -1,0 +1,83 @@
+{
+  "checks": [
+    {
+      "detail": "contract args=['wav_path', 'expected_loop_frames', 'observed_loop_frames', 'tempo', 'numerator', 'sample_rate', 'silence_threshold', 'peak_threshold']",
+      "evidence": {
+        "impl_sig": " wav_path: str | Path, expected_loop_frames: int, observed_loop_frames: int, tempo: float, numerator: int, sample_rate: int, silence_threshold: float = 0.01, peak_threshold: float = 0.9 ",
+        "missing": []
+      },
+      "name": "lab-b: analyze_wav signature",
+      "status": "PASS"
+    },
+    {
+      "detail": "hits=['pass-stub', 'trivial-assert-true', 'import-only-test-name', 'magic-mock-in-tests'] invokes_analyze_wav=False",
+      "evidence": {},
+      "name": "lab-b: test_modules negative gates",
+      "status": "FAIL"
+    },
+    {
+      "detail": "silent WAV must produce FAIL",
+      "evidence": {
+        "frame_count": 4800,
+        "malformed_result": "EXCEPTION:ValueError",
+        "silence_verification": "FAIL"
+      },
+      "name": "lab-b: silence always FAIL",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "malformed_result": "EXCEPTION:ValueError"
+      },
+      "name": "lab-b: malformed WAV FAIL/ERROR",
+      "status": "PASS"
+    },
+    {
+      "detail": "captured_wav_frames=4800 expected 4800",
+      "evidence": {},
+      "name": "lab-b: frame count contract",
+      "status": "PASS"
+    },
+    {
+      "detail": "literal '\\n' rejected; real newlines required",
+      "evidence": {
+        "repr": "'synthetic_source\\\\ndeterministic_capture\\\\n'"
+      },
+      "name": "lab-b: .gitignore byte-exact",
+      "status": "FAIL"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "elf_tracked": []
+      },
+      "name": "lab-b: no ELF tracked",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "bad": []
+      },
+      "name": "lab-b: scenarios parseable",
+      "status": "PASS"
+    },
+    {
+      "detail": "API hits: ['ProcessSupervisor', 'JackServer', 'OscProbe', 'SooperLooperLauncher', 'analyze_wav', 'GraphAssertions']",
+      "evidence": {},
+      "name": "lab-b: runner uses contractual APIs",
+      "status": "PASS"
+    }
+  ],
+  "contract": "receipts/headless-lab-v3/lab-api-contract-v3.json (tracked-export bytes)",
+  "exit_code": 1,
+  "expected_verdict": "REJECT",
+  "not_modified": true,
+  "recorded_at_utc": "2026-08-05T16:17:52Z",
+  "rejected_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+  "schema": "rejected-head-test-receipt/v1",
+  "tested_from": "clean detached worktree checkout of the exact rejected head (removed after test)",
+  "verdict": "REJECT",
+  "verifier": "receipts/headless-lab-v3/acceptance-verifier-v3.py (tracked-export bytes)"
+}

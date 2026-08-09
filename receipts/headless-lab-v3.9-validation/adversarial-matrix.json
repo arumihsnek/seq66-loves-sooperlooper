@@ -1,0 +1,99 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "cases": [
+  {
+   "description": "package-relative import valid -> PASS",
+   "expected": "PASS",
+   "id": "A1",
+   "result": "PASS",
+   "status": "CONFIRMED PASS (selftest NA1 exit 0)"
+  },
+  {
+   "description": "import resolves outside R -> REJECT",
+   "expected": "REJECT",
+   "id": "A2",
+   "result": "CONFIRMED structural __file__ guard",
+   "status": "CONFIRMED structural __file__ guard"
+  },
+  {
+   "description": "broken package import -> REJECT",
+   "expected": "REJECT",
+   "id": "A3",
+   "result": "REJECT",
+   "status": "CONFIRMED REJECT (CLI exit 1)"
+  },
+  {
+   "description": "evaluated annotations semantically correct -> PASS",
+   "expected": "PASS",
+   "id": "B1",
+   "result": "PASS",
+   "status": "CONFIRMED PASS (selftest NA2 exit 0)"
+  },
+  {
+   "description": "future annotations semantically correct -> PASS",
+   "expected": "PASS",
+   "id": "B2",
+   "result": "PASS",
+   "status": "CONFIRMED PASS (selftest NA3)"
+  },
+  {
+   "description": "semantically wrong annotation -> REJECT",
+   "expected": "REJECT",
+   "id": "B3",
+   "result": "REJECT",
+   "status": "CONFIRMED REJECT (selftest I2 exit 1)"
+  },
+  {
+   "description": "valid WAV reproduction returns dict -> PASS",
+   "expected": "PASS",
+   "id": "C1",
+   "result": "PASS",
+   "status": "CONFIRMED PASS (selftest NA4)"
+  },
+  {
+   "description": "valid WAV wrong return type -> REJECT",
+   "expected": "REJECT",
+   "id": "C2",
+   "result": "REJECT",
+   "status": "CONFIRMED REJECT (CLI exit 1)"
+  },
+  {
+   "description": "nonexistent paths cannot fail normal return-shape gate",
+   "expected": "no-block",
+   "id": "C3",
+   "result": "PASS",
+   "status": "CONFIRMED no-block (diagnostic)"
+  },
+  {
+   "description": "tracked ELF -> REJECT",
+   "expected": "REJECT",
+   "id": "D1",
+   "result": "REJECT",
+   "status": "CONFIRMED REJECT (selftest NA5 + replay R_B)"
+  },
+  {
+   "description": "non-ELF fixture representation satisfying requirements -> PASS",
+   "expected": "PASS",
+   "id": "D2",
+   "result": "PASS",
+   "status": "CONFIRMED PASS (selftest NA2 fixtures .gitkeep dirs)"
+  },
+  {
+   "description": "orphan blocking gate -> REJECT",
+   "expected": "REJECT",
+   "id": "T1",
+   "result": "REJECT",
+   "status": "CONFIRMED REJECT (selftest NA6 exit 3)"
+  },
+  {
+   "description": "hidden leaf implementation requirement -> REJECT",
+   "expected": "REJECT",
+   "id": "T2",
+   "result": "REJECT",
+   "status": "CONFIRMED REJECT (selftest NA7)"
+  }
+ ],
+ "principle": "every case runs the REAL v3.9 finalizer CLI via executable path; no policy-only auto-PASS",
+ "recorded_at_utc": "2026-08-08T23:50:31Z",
+ "schema": "adversarial-matrix/v3.9"
+}

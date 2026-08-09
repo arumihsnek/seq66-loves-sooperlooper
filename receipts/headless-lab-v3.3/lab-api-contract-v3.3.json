@@ -1,0 +1,98 @@
+{
+  "schema": "lab-api-contract/v3.3",
+  "batch": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "labs": {
+    "LAB-A": {
+      "leaf_id": "LEAF-LAB-A-V3_3",
+      "lease_id": "LEASE-20260806T011700Z-LAB-A-V3_3",
+      "envelope_path": "receipts/headless-lab-results-v3.3/lab-a-result.json",
+      "modules": [
+        "tests/integration/headless_audio_lab/__init__.py",
+        "tests/integration/headless_audio_lab/process_supervisor.py",
+        "tests/integration/headless_audio_lab/jack_server.py",
+        "tests/integration/headless_audio_lab/osc_probe.py",
+        "tests/integration/headless_audio_lab/sooperlooper_launcher.py"
+      ],
+      "ProcessSupervisor": {
+        "required": [
+          "start_process(name, cmd, env, cwd, so, se)",
+          "os.setsid to create own process group",
+          "termination only over owned PIDs/PGIDs",
+          "cleanup(timeout)",
+          "verify_cleanup()"
+        ],
+        "semantics": {
+          "process_created_by_start_process": "owned",
+          "cleanup_is_required_to_terminate_owned_processes": true,
+          "start_process_registers_every_created_process_as_owned": true,
+          "get_owned_pids_reports_registered_pids": true,
+          "cleanup_terminates_all_and_only_registered_owned_pids": true,
+          "verify_cleanup_returns_no_remaining_owned_pids": true,
+          "bad_command_propagates_error": true
+        },
+        "forbidden": [
+          "pid = 0 literal",
+          "pid = -1 literal",
+          "dummy / not-actually / placeholder comments",
+          "MagicMock in implementation",
+          "global cleanup (killpg/pkill over unowned PIDs)"
+        ]
+      },
+      "JackServer": {
+        "required": ["start(sample_rate, period_size)", "stop()"],
+        "semantics": "launches the managed JACK server for the lab run and stops it on teardown"
+      },
+      "OscProbe": {
+        "required": ["probe(host, port)"],
+        "semantics": "checks SooperLooper OSC reachability and returns machine-readable state"
+      },
+      "SooperLooperLauncher": {
+        "required": ["launch(loops, channels)"],
+        "semantics": "launches the managed SooperLooper engine under the lab server and returns a handle"
+      },
+      "literal_tests": {
+        "ft-a1": {
+          "description": "ProcessSupervisor owned-lifecycle probe: start_process creates an owned process; get_owned_pids reports it; cleanup terminates it; verify_cleanup returns []; a bad command propagates an error"
+        }
+      },
+      "build_claim": {
+        "status": "not_applicable",
+        "rule": "LAB-A declares leaf_build_claim.status=not_applicable; compiler/output/commands fields must be null/empty; invented compiler or output fields are REJECTED"
+      }
+    },
+    "LAB-B": {
+      "leaf_id": "LEAF-LAB-B-V3_3",
+      "lease_id": "LEASE-20260806T011700Z-LAB-B-V3_3",
+      "envelope_path": "receipts/headless-lab-results-v3.3/lab-b-result.json",
+      "modules": [
+        "tests/__init__.py",
+        "tests/integration/__init__.py",
+        "tests/integration/headless_audio_lab/audio_oracle.py",
+        "tests/integration/headless_audio_lab/graph_assertions.py",
+        "tests/integration/headless_audio_lab/runner.py",
+        "tests/integration/headless_audio_lab/test_modules.py",
+        "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+        "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+        "tests/integration/headless_audio_lab/fixtures/deterministic_capture"
+      ],
+      "audio_oracle": {
+        "required": ["analyze_wav(wav_bytes: bytes) -> dict"],
+        "semantics": {
+          "returns_keys": ["rate", "channels", "frames", "duration_sec", "rms", "peak", "silent"],
+          "silent_true_when_all_pcm_samples_zero": true
+        }
+      },
+      "literal_tests": {
+        "ft-b1": {
+          "description": "audio_oracle silent-WAV analysis probe: a generated silent mono 44100 Hz WAV must analyze with rate/channels/frames exact and silent=True"
+        }
+      },
+      "build_claim": {
+        "status": "claimed_built",
+        "rule": "LAB-B declares leaf_build_claim.status=claimed_built with sources, commands and outputs; the claim is verified by the CONTROLLER controlled rebuild in full-completion phase"
+      }
+    }
+  }
+}

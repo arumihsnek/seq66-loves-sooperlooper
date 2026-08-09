@@ -1,0 +1,40 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "forbidden_functional_change": true,
+ "frozen_at_utc": "2026-08-06T23:45:54Z",
+ "functional_drift_consequence": "FUNCTIONAL_CONTRACT_DRIFT -> PACKAGE_REJECTED",
+ "nature": "PROCESS CORRECTION PORT (fail-closed finalizer/verifier; functional surface unchanged)",
+ "ports": [
+  {
+   "change": "fail-closed: no gate failure => no E; prepublication FAIL => no write/add/commit; command-hash strict; static source validator rejects or True / if False else False / hardcoded PASS",
+   "from": "v3.5",
+   "kind": "finalizer semantics",
+   "to": "v3.9"
+  },
+  {
+   "change": "strict exact-value comparisons; real ls-remote absence; executable selftests; full-completion runs all phases and preserves results",
+   "from": "v3.5",
+   "kind": "verifier semantics",
+   "to": "v3.9"
+  },
+  {
+   "change": "source hash from R blobs required; output exists/size/ELF/ldd/JACK required; entries_before=[]; cleanup + cleanliness_after=PASS",
+   "from": "v3.5",
+   "kind": "build provenance",
+   "to": "v3.9"
+  },
+  {
+   "change": "unchanged R-only; leaf still has no push authority",
+   "from": "v3.5",
+   "kind": "leaf result model",
+   "to": "v3.9"
+  },
+  {
+   "change": "two real ls-remote absence checks (before E and before push); create-only; ambiguous => PUBLISH_STATE_AMBIGUOUS STOP",
+   "from": "v3.5",
+   "kind": "publication",
+   "to": "v3.9"
+  }
+ ],
+ "schema": "port-plan/v3.9"
+}

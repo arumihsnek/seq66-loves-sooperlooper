@@ -1,0 +1,25 @@
+{
+  "all_match": false,
+  "commit": "e88f630090acc877fcafdf3a9142c2f9a425f194",
+  "count_consistency_note": "publisher artifact: index 'count' field = 20 while files map has 19 keys (duplicate 'dispatch-verdict.json' key collapsed at publication); pre-existing at 889f759b; NOT a post-CP061 mutation",
+  "count_field_consistent": false,
+  "declared_count_field": 20,
+  "files_map_entries": 19,
+  "label": "at-e88f6300",
+  "matched": 17,
+  "mismatches": [
+    {
+      "actual": "1dfb196ee3d6b653783f7d6c5c1bab7f366f967eb54879935898241b1af72b8f",
+      "file": "leaf-a-report.json",
+      "indexed": "8bde156aedcfebf7982bf866138fbaf70ec42798db46ad010d8906d88b9134a1",
+      "size_at_commit": 2095
+    },
+    {
+      "actual": "68697e2133333a83a738036a1f3f68a9337a6b3dd0ecdceb3419121ee23ea3c2",
+      "file": "leaf-b-report.json",
+      "indexed": "29d975fe9f3903c4647e585c61847b35c020fda8267ab996a950a1989025b81c",
+      "size_at_commit": 2059
+    }
+  ],
+  "total": 19
+}

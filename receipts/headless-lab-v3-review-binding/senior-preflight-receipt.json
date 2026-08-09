@@ -1,0 +1,13 @@
+{
+  "bundle_input_path": "reviews/exact-bundle.json",
+  "bundle_input_sha256": "a7c26a0c4bd24ba1bebd3c043ac65ce74daf43d063db88520442ed29d4a0b784",
+  "mission_id": "seq66-lab-v3-exact-published-package",
+  "mode": "plan-review",
+  "model_processes_consumed": 0,
+  "normalized_bundle_path": "reviews/exact-bundle.normalized.json",
+  "normalized_bundle_sha256": "faffe2931f16c1ae1b318f85ff3b408e895be1523d97ba06edf90bbda665b464",
+  "recorded_at_utc": "2026-08-05T16:20:17Z",
+  "schema": "senior-preflight-receipt/v1",
+  "status": "PREFLIGHT_VALID",
+  "valid": true
+}

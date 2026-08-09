@@ -1,0 +1,63 @@
+{
+  "acceptance_harness": "acceptance-verifier-v3.2.py",
+  "base_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+  "completion_definition": {
+    "criteria": [
+      "exactly two commits over candidate per leaf: R then E",
+      "R non-empty",
+      "E non-empty",
+      "R published indirectly as parent of E",
+      "remote leaf branch points exactly to E",
+      "full R OID recorded",
+      "full E OID recorded",
+      "clean worktree at E",
+      "valid envelope in E",
+      "implementation diff C..R owned-only",
+      "envelope diff R..E envelope-only",
+      "all literal tests pass on exact R",
+      "controller clean-checkout acceptance PASS on exact R",
+      "external branch-binding receipt PASS"
+    ],
+    "id": "COMPLETION-V3_2",
+    "summary_can_never_substitute": true
+  },
+  "envelope_model": "result-envelope-schema-v3.2.json (two-commit C->R->E, non-self-referential)",
+  "reporting": {
+    "always_name_separately": [
+      "LAB_A_IMPLEMENTATION_RESULT_HEAD",
+      "LAB_A_ENVELOPE_CONTAINER_HEAD",
+      "LAB_B_IMPLEMENTATION_RESULT_HEAD",
+      "LAB_B_ENVELOPE_CONTAINER_HEAD"
+    ],
+    "integration_decision_reference": "the future integration decision may refer ONLY to the implementation result heads (R), never to the envelope container heads (E)"
+  },
+  "review_class": "R2",
+  "schema": "dispatch-plan/v3.2",
+  "stop_conditions": [
+    "no dispatch until human redispatch authorization",
+    "D0/D1/D2 NOT executed by this closure"
+  ],
+  "task_ids": [
+    "LAB-A",
+    "LAB-B"
+  ],
+  "worktree_branch_policy": {
+    "forbidden_reuse": [
+      "/home/ubuntu/code/music/worktrees/lab-a-dogfood004-recovery",
+      "/home/ubuntu/code/music/worktrees/lab-b-dogfood004-recovery",
+      "result/lab-a-dogfood004-recovery",
+      "result/lab-b-dogfood004-recovery"
+    ],
+    "future_naming": "branches and paths derived from the future RUN ID (e.g. result/<future-run-id>-lab-a-v3_2, worktrees/<future-run-id>-lab-a-v3_2)",
+    "predispatch_freshness_checks": [
+      "both result branches absent (remote + local)",
+      "both worktree paths absent",
+      "both new worktrees clean at exact candidate",
+      "acceptance harness SHA-256 verified against acceptance-manifest-v3.2.json",
+      "new lease plans in place (LEASE-20260805T224640Z-LAB-A-V3_2, LEASE-20260805T224640Z-LAB-B-V3_2)",
+      "zero active old leases",
+      "two-commit model enforced (R then E per leaf; envelope only in E)"
+    ]
+  }
+}

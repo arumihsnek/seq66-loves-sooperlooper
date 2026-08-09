@@ -1,0 +1,129 @@
+{
+  "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "checks": [
+    {
+      "detail": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-a-v3_4",
+      "name": "remote branch exists",
+      "ok": true
+    },
+    {
+      "detail": "a30e3c9d888c vs a30e3c9d888c",
+      "name": "remote resolved == E",
+      "ok": true
+    },
+    {
+      "detail": "a30e3c9d888c",
+      "name": "local branch == E",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "E exists",
+      "ok": true
+    },
+    {
+      "detail": "parents=1",
+      "name": "E has exactly one parent",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "E^ == R",
+      "ok": true
+    },
+    {
+      "detail": "parents=1",
+      "name": "R has exactly one parent",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "R^ == CANDIDATE",
+      "ok": true
+    },
+    {
+      "detail": "5 files",
+      "name": "R non-empty (diff C..R)",
+      "ok": true
+    },
+    {
+      "detail": [],
+      "name": "diff C..R owned-only",
+      "ok": true
+    },
+    {
+      "detail": [],
+      "name": "all owned present in R",
+      "ok": true
+    },
+    {
+      "detail": "['receipts/headless-lab-results-v3.4/lab-a-result.json']",
+      "name": "diff R..E envelope-only",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "envelope absent in C",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "envelope absent in R",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "envelope present in E",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "envelope absent in worktree HEAD before checkout",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "leaf worktree clean",
+      "ok": true
+    },
+    {
+      "detail": "VERDICT: REJECT (one or more FAIL)",
+      "name": "leaf-envelope verifier PASS",
+      "ok": false
+    },
+    {
+      "detail": "",
+      "name": "controller checkout HEAD == R",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "controller checkout clean",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "controller checkout detached",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "controller checkout no envelope",
+      "ok": true
+    }
+  ],
+  "checks_pass": false,
+  "controller_checkout": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/controller-acceptance/controller-checkout-LAB-A-R",
+  "controller_checkout_head": "0fd104ef2187346b8c00014829857e11ee9539ec",
+  "lab": "LAB-A",
+  "leaf_envelope_verifier_rc": 1,
+  "leaf_envelope_verifier_tail": [
+    "[PASS] env: leaf_build_claim.status allowed \u2014 ",
+    "[PASS] env: LAB-A build claim not_applicable (no invented fields) \u2014 ",
+    "VERDICT: REJECT (one or more FAIL)"
+  ],
+  "reported_E": "a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3",
+  "reported_R": "0fd104ef2187346b8c00014829857e11ee9539ec",
+  "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
+  "verified_at_utc": "2026-08-06T15:03:56Z"
+}

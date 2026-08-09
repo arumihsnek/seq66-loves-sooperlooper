@@ -1,0 +1,14 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "evidence": [
+  "NA2 selftest: evaluated annotations -> PASS (exit 0)",
+  "NA3: future annotations (semantically resolvable) -> PASS",
+  "I2: semantically wrong annotation (float->str) -> REJECT (exit 1)",
+  "I3: wrong return annotation (AnalysisResult->dict) -> REJECT (exit 1)",
+  "comparison via _resolve_annotation/_normative_type/_types_equivalent (supports types.UnionType and typing.Union)"
+ ],
+ "finding": "F-B2",
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "schema": "validation/v3.9",
+ "verdict": "PASS"
+}

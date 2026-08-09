@@ -1,0 +1,52 @@
+{
+ "blocking_findings": [],
+ "bound_manifest_sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+ "detailed_status": "VALID_ADVISORY_VERDICT",
+ "execution_id": "6b4b5dad-47f6-4c12-b7b9-a03f2d79e4db",
+ "findings": [],
+ "mission_id": "seq66-lab-v3-7-fail-closed-process-v3",
+ "mission_id_note": "original mission-id seq66-lab-v3-7-fail-closed-process exhausted its replacement allowance on protocol failures (NO verdict ever produced); retried under -v2 (changes_required, evidence-completion finding f1) then -v3 with corrected command-hash receipts; payload byte-identical across all attempts",
+ "model_processes_consumed": 1,
+ "question_answers": [
+  {
+   "answer": "S\u00ed. Los hashes se recomputan independientemente a partir de argv can\u00f3nico; 8/8 coinciden.",
+   "id": "q1"
+  },
+  {
+   "answer": "S\u00ed. La igualdad declared/recomputed es un gate obligatorio y los casos de mismatch rechazan sin crear E.",
+   "id": "q2"
+  },
+  {
+   "answer": "S\u00ed. C..R se compara \u00edntegramente contra ownership; ambos laboratorios pasan sin rutas no pose\u00eddas ni prohibidas.",
+   "id": "q3"
+  },
+  {
+   "answer": "S\u00ed. runtime_full_contract, command_hash_evidence y ownership_diff_evidence son gates prepublicaci\u00f3n fail-closed.",
+   "id": "q4"
+  },
+  {
+   "answer": "S\u00ed. Una falla fc-f1/f2/f3 impide E; las 8 pruebas fail-closed confirman E ausente y sin commit/evidencia.",
+   "id": "q5"
+  },
+  {
+   "answer": "S\u00ed. La publicaci\u00f3n es create-only, con ausencia previa, un push ordinario y rechazo de force push, ramas preexistentes y segundo push.",
+   "id": "q6"
+  },
+  {
+   "answer": "S\u00ed. La vinculaci\u00f3n postpublicaci\u00f3n exige coincidencia exacta de C, R, E, rama, remoto, evidencia y pruebas derivadas.",
+   "id": "q7"
+  },
+  {
+   "answer": "S\u00ed. Full completion ejecuta y conserva todas las fases, incluyendo binding, aceptaci\u00f3n y limpieza del worktree.",
+   "id": "q8"
+  }
+ ],
+ "recorded_at_utc": "2026-08-07T20:09:55Z",
+ "required_actions": [],
+ "response_fingerprint": "17ed4189c4c1c6d3b412e05c7a396bfc843fadba63a30d100372723e12be0823",
+ "review_label": "seq66-lab-v3-7-fail-closed-process",
+ "schema": "senior-verdict/v3.7",
+ "status": "COMPLETED",
+ "summary": "La evidencia suministrada respalda la aceptaci\u00f3n del paquete congelado v3.7 como fail-closed. La aceptaci\u00f3n no autoriza dispatch, integraci\u00f3n ni ejecuci\u00f3n.",
+ "verdict": "accept"
+}

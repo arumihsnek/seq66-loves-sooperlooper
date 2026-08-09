@@ -1,0 +1,32 @@
+{
+  "expected_verdict": "REJECT",
+  "harness": "acceptance-verifier-v3.2.py",
+  "observed": {
+    "lab_a": {
+      "exit_code": 1,
+      "failures": [
+        "model: E^ == R",
+        "model: envelope present in E",
+        "model: diff C..R owned-only",
+        "model: diff R..E envelope-only",
+        "model: envelope parses",
+        "lab-a: imports"
+      ]
+    },
+    "lab_b": {
+      "exit_code": 1,
+      "failures": [
+        "model: E^ == R",
+        "model: envelope present in E",
+        "model: diff C..R owned-only",
+        "model: diff R..E envelope-only",
+        "model: envelope parses",
+        "lab-b: test_modules negative gates",
+        "lab-b: .gitignore byte-exact"
+      ]
+    }
+  },
+  "recorded_at_utc": "2026-08-05T23:36:37Z",
+  "rejected_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+  "schema": "rejected-head-test-receipt/v3.2"
+}

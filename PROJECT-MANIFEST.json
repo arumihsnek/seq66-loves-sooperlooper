@@ -3,7 +3,7 @@
     "project_id": "seq66-loves-sooperlooper",
     "project_name": "Seq66 Loves SooperLooper",
     "status": "active",
-    "updated_at": "2026-08-03",
+    "updated_at": "2026-08-05",
     "repository": {
         "full_name": "arumihsnek/seq66-loves-sooperlooper",
         "default_branch": "fork-main",
@@ -11,10 +11,10 @@
         "default_branch_transition": "complete",
         "upstream_mirror_branch": "master",
         "integration_branch": "fork-main",
-        "active_branch": "feature/p5-recording-types",
-        "active_pull_request": 0,
+        "active_branch": "integration/baseline-qualification-20260805",
+        "active_pull_request": 34,
         "active_pull_request_base": "fork-main",
-        "active_pull_request_note": "Phase 5 types + scheduler"
+        "active_pull_request_note": "Baseline qualification: CP-051 validator compatibility + audio-core JACK dependency (NEW_SAFE_BASE 50953878)"
     },
     "upstreams": {
         "seq66": {
@@ -108,7 +108,7 @@
     "next_milestone": {
         "id": "M5",
         "name": "exact musical recording",
-        "active_task": "P5-007",
+        "active_task": "P5-005",
         "active_task_status": "in_progress",
         "definition_of_done": "ROADMAP Phase 5 DoD"
     },

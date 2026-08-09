@@ -1,0 +1,74 @@
+{
+  "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "closure_run": "20260805T224640Z-v3-2-envelope-binding-correction",
+  "frozen_at_utc": "2026-08-05T22:50:00Z",
+  "items": [
+    {
+      "notes": "ProcessSupervisor/JackServer/OscProbe/SooperLooperLauncher/__init__ (LAB-A implementation result commit R); envelope container commit E holds ONLY the envelope",
+      "owned_paths": [
+        "tests/integration/headless_audio_lab/process_supervisor.py",
+        "tests/integration/headless_audio_lab/jack_server.py",
+        "tests/integration/headless_audio_lab/osc_probe.py",
+        "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+        "tests/integration/headless_audio_lab/__init__.py"
+      ],
+      "envelope_path": "receipts/headless-lab-results-v3.2/lab-a-result.json",
+      "scope_id": "LAB-A",
+      "scope_type": "lab_a"
+    },
+    {
+      "notes": "oracle/graph/runner/tests/scenarios/fixtures + .gitignore (LAB-B implementation result commit R); envelope container commit E holds ONLY the envelope",
+      "owned_paths": [
+        "tests/__init__.py",
+        "tests/integration/__init__.py",
+        "tests/integration/headless_audio_lab/audio_oracle.py",
+        "tests/integration/headless_audio_lab/graph_assertions.py",
+        "tests/integration/headless_audio_lab/runner.py",
+        "tests/integration/headless_audio_lab/test_modules.py",
+        "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+        "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+        "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+        "tests/integration/headless_audio_lab/fixtures/.gitignore"
+      ],
+      "envelope_path": "receipts/headless-lab-results-v3.2/lab-b-result.json",
+      "scope_id": "LAB-B",
+      "scope_type": "lab_b"
+    },
+    {
+      "items": [
+        "fixtures/synthetic_source and fixtures/deterministic_capture REBUILD from tests/integration/virtual_studio/audio/*.c at candidate",
+        "compile: gcc -std=c11 -O2 -o <out> <src> -ljack -lm -lpthread",
+        "quarantined precanonical ELFs are FORBIDDEN inputs (never copy)",
+        "provenance receipt must capture source commit+blob sha, command, toolchain version, timestamps, output sha256"
+      ],
+      "scope_id": "FIXTURES-REBUILD",
+      "scope_type": "rebuild_policy"
+    },
+    {
+      "items": [
+        "TWO-COMMIT MODEL per leaf: C = candidate; R = implementation result head (parent(R)=C, NO envelope); E = envelope container head (parent(E)=R, EXACTLY the frozen envelope, no implementation change)",
+        "remote leaf branch points to E; E is evidence-only and never integrated as implementation",
+        "the ONLY integration-eligible commit is R",
+        "envelope declares candidate_commit_oid, implementation_result_commit_oid, implementation_result_tree_oid, git_object_format (NEVER E commit/tree/blob OID, envelope SHA-256 or resolved remote SHA)",
+        "external branch binding is recorded by the controller AFTER push in a separate receipt"
+      ],
+      "scope_id": "TWO-COMMIT-ENVELOPE-MODEL",
+      "scope_type": "envelope_model"
+    },
+    {
+      "items": [
+        "acceptance harness (acceptance-verifier-v3.2.py) belongs to the controller, not to any leaf",
+        "controller executes harness against a clean checkout of the exact R (never the ambiguous branch head)",
+        "selftest must PASS before the harness is used"
+      ],
+      "scope_id": "ACCEPTANCE-V3_2",
+      "scope_type": "acceptance"
+    }
+  ],
+  "normative_source": "doc/sooperlooper/checkpoints/2026-08-05-CP-058-v3-2-envelope-binding-correction.md (normative excerpts) + CP-057/CP-056/CP-055 + v3.1 scope-freeze items carried forward",
+  "receipt_container_head_sha": "BOUND_IN_EVIDENCE",
+  "schema": "scope-freeze/v3.2"
+}

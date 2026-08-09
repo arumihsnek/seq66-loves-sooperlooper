@@ -1,0 +1,42 @@
+{
+  "schema": "v3.1-envelope-defect-reproduction/v1",
+  "source_commit": "da89654e05d7014bf0720ed5517c362b7c4beacf",
+  "reproduced_at_utc": "2026-08-05T22:48:00Z",
+  "schema_path": "receipts/headless-lab-v3.1/result-envelope-schema-v3.1.json",
+  "verifier_path": "receipts/headless-lab-v3.1/acceptance-verifier-v3.1.py",
+  "observed_facts": {
+    "envelope_required_in_same_result_commit": "validation_rules[0]: 'envelope is committed BY THE LEAF at the frozen owned path in the SAME result commit'",
+    "envelope_result_tree_sha_required_to_equal_result_head_tree": "validation_rules[2]: 'controller verifies envelope.result_tree_sha == git rev-parse <result_head>^{tree}'",
+    "verifier_compares_envelope_result_tree_sha_with_rev_parse_head_tree": "acceptance-verifier-v3.1.py check_envelope: head_tree = run([git, -C, checkout, rev-parse, 'HEAD^{tree}']); 'result_tree_sha_matches': env.get('result_tree_sha') == head_tree",
+    "envelope_blob_is_an_input_of_head_tree": "the envelope is committed at the frozen owned path (receipts/headless-lab-results-v3.1/<lab>-result.json) inside the result commit; its blob is therefore a component of the result commit tree, so the tree OID that the envelope declares depends on the envelope's own bytes",
+    "hash_dependency_cycle": true
+  },
+  "semantics": {
+    "schema_labels_result_tree_sha_as_sha256": "required_fields.result_tree_sha: 'SHA-256 of the result commit tree (resolved externally as HEAD^{tree})'",
+    "verifier_obtains_git_object_id_via_rev_parse": "git rev-parse HEAD^{tree} returns a Git object ID (SHA-1 in sha1 object format), not a file SHA-256",
+    "algorithm_semantics_ambiguous": true
+  },
+  "classification": {
+    "id": "V3_1_ENVELOPE_BINDING_DEFECT",
+    "severity": "blocking_for_dispatch",
+    "affected_control": "result-envelope-binding",
+    "blocking_for_dispatch": true,
+    "operationally_non_constructible_under_normal_git_workflow": true,
+    "cryptographic_fixed_point_would_be_required": true,
+    "note": "Writing the envelope changes the tree OID the envelope is required to declare. A correct same-commit envelope would require the tree OID to be a fixed point of the commit-with-envelope mapping; no claim is made that such a fixed point is absolutely impossible, only that it is not constructible by the ordinary git workflow and would require a cryptographic fixed point."
+  },
+  "attribution": {
+    "no_malice_claim": true,
+    "no_fraud_claim": true,
+    "note": "This is a structural/semantic defect of the v3.1 envelope model, reproduced from exact tracked bytes. The v3.1 exact-byte review (CP-057) remains valid HISTORICAL evidence for the bytes reviewed."
+  },
+  "human_decision_state": {
+    "V3_STATUS": "IMMUTABLE_REJECTED_FOR_DISPATCH",
+    "V3_1_STATUS": "IMMUTABLE_REJECTED_FOR_DISPATCH",
+    "V3_1_EXACT_BYTE_REVIEW_VALID_AS_HISTORICAL_EVIDENCE": true,
+    "V3_1_DISPATCH_ELIGIBLE": false,
+    "V3_2_REDISPATCH_AUTHORIZED": false,
+    "INTEGRATION_AUTHORIZED": false,
+    "D0_D1_D2_AUTHORIZED": false
+  }
+}

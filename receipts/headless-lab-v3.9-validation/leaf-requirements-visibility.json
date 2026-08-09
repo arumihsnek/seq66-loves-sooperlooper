@@ -1,0 +1,9 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "covers_rejection_capable_requirements": true,
+ "future_prompt_text": "Read and satisfy leaf-requirements-v3.9.json. Anything not present there cannot become a new implementation rejection requirement during finalization unless it derives from another explicitly listed normative artifact.",
+ "lab_a_requirements": 10,
+ "lab_b_requirements": 12,
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "schema": "validation/v3.9"
+}

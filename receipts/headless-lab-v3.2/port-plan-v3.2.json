@@ -1,0 +1,99 @@
+{
+  "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+  "carried_from": "v3.1 port-plan reviewed in CP-057 (functional controls preserved) + v2/v3 port-plans",
+  "controller_owned": [
+    "receipts/headless-lab-v3/*",
+    "receipts/headless-lab-v3-review-binding/*",
+    "receipts/headless-lab-v3.1/*",
+    "receipts/headless-lab-v3.1-review-binding/*",
+    "receipts/headless-lab-v3.2/*",
+    "receipts/headless-lab-v3.2-review-binding/*",
+    "acceptance harness"
+  ],
+  "entries": [
+    {
+      "disposition": "rebuild_in_leaf",
+      "inputs": [
+        "tests/integration/virtual_studio/audio/synthetic_source.c"
+      ],
+      "path": "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+      "planned_owner": "LAB-B",
+      "quarantine_copy_forbidden": true,
+      "rebuild_required": true
+    },
+    {
+      "disposition": "rebuild_in_leaf",
+      "inputs": [
+        "tests/integration/virtual_studio/audio/deterministic_capture.c"
+      ],
+      "path": "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+      "planned_owner": "LAB-B",
+      "quarantine_copy_forbidden": true,
+      "rebuild_required": true
+    },
+    {
+      "disposition": "port_after_review",
+      "path": "tests/integration/headless_audio_lab/audio_oracle.py",
+      "planned_owner": "LAB-B",
+      "reason": "source text only, no runtime output, no destructive ops, no absolute paths, contract signature frozen in lab-api-contract-v3.2.json"
+    },
+    {
+      "disposition": "port_after_review",
+      "path": "tests/integration/headless_audio_lab/graph_assertions.py",
+      "planned_owner": "LAB-B",
+      "reason": "source text only, no destructive ops"
+    },
+    {
+      "disposition": "rewrite_in_leaf",
+      "path": "tests/integration/headless_audio_lab/runner.py",
+      "planned_owner": "LAB-B",
+      "reason": "must consume ONLY the contractual API; launch/readiness stays in LAB-A sooperlooper_launcher.py"
+    },
+    {
+      "disposition": "port_after_review",
+      "path": "tests/integration/headless_audio_lab/scenarios/*.yaml",
+      "planned_owner": "LAB-B",
+      "reason": "fixture text; schema per runner contract"
+    },
+    {
+      "disposition": "rewrite_in_leaf",
+      "path": "tests/integration/headless_audio_lab/process_supervisor.py",
+      "planned_owner": "LAB-A",
+      "reason": "must exercise real owned child lifecycle: cleanup(timeout) terminates ALL and ONLY owned processes; verify_cleanup() == []; foreign-survival is NEVER tested with a start_process-created process"
+    },
+    {
+      "disposition": "rewrite_in_leaf",
+      "path": "tests/integration/headless_audio_lab/jack_server.py",
+      "planned_owner": "LAB-A",
+      "reason": "must launch jackd owned with real readiness probe"
+    },
+    {
+      "disposition": "rewrite_in_leaf",
+      "path": "tests/integration/headless_audio_lab/osc_probe.py",
+      "planned_owner": "LAB-A",
+      "reason": "manual SooperLooper OSC protocol, no process operations"
+    },
+    {
+      "disposition": "rewrite_in_leaf",
+      "path": "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+      "planned_owner": "LAB-A",
+      "reason": "new destination; launch/readiness split from runner.py; launch via ProcessSupervisor owned"
+    },
+    {
+      "disposition": "leaf_committed_envelope_in_E",
+      "path": "receipts/headless-lab-results-v3.2/<lab>-result.json",
+      "planned_owner": "leaf-of-lab",
+      "note": "TWO-COMMIT MODEL: the envelope is committed in the SECOND commit E (envelope container) ONLY; it must be ABSENT from R. E^ == R; the remote leaf branch points to E; R is the only integration-eligible commit.",
+      "reason": "frozen exclusive envelope path in ownership (v3.2 results directory; v3/v3.1 result paths are NOT reused)"
+    }
+  ],
+  "quarantine_policy": {
+    "quarantined": [
+      "tests/integration/virtual_studio/audio/synthetic_source",
+      "tests/integration/virtual_studio/audio/deterministic_capture",
+      "all precanonical ELFs in .autonomy-recovery preservation trees"
+    ],
+    "rule": "keep in preservation bundles only; never copy into leaves; never use as build input"
+  },
+  "schema": "port-plan/v3.2"
+}

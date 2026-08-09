@@ -1,0 +1,22 @@
+{
+  "branch_live_state_vs_dispatch_verdict_revalidation_identical": true,
+  "duplicate_groups": [
+    {
+      "blob_oid": "6e51fc744065c2239ea8cc6ce3a2889c259e2ab3",
+      "filenames": [
+        "current-dispatch-index-e88f6300.json",
+        "original-dispatch-index-889f759b.json"
+      ],
+      "size": 2059
+    },
+    {
+      "blob_oid": "c4562a3839f171262b28f0c61a547079117f6ecd",
+      "filenames": [
+        "branch-live-state.json",
+        "dispatch-verdict-revalidation.json"
+      ],
+      "size": 1615
+    }
+  ],
+  "schema": "v1-duplicate-content-audit/v1"
+}

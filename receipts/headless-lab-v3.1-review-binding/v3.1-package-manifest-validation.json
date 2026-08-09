@@ -1,0 +1,118 @@
+{
+  "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+  "binding": {
+    "candidate_binding_exact": true,
+    "new_batch_exact": true,
+    "schema": true,
+    "supersedes_v3_declared": true
+  },
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "counts": {
+    "expected_files": 12,
+    "extra_in_frozen_set": [],
+    "missing": [],
+    "validated_files": 12
+  },
+  "manifest_path": "/home/ubuntu/.hermes/runs/20260805T165044Z-v3-1-acceptance-gate-correction/v3-1-package/v3.1-package-manifest.json",
+  "per_file": [
+    {
+      "expected_sha256": "ab2c2534b19e74f97bcd6c1a0dbf727600931a6e6eafcc069035e961ac337430",
+      "expected_size": 2317,
+      "file": "acceptance-manifest-v3.1.json",
+      "match": true,
+      "observed_sha256": "ab2c2534b19e74f97bcd6c1a0dbf727600931a6e6eafcc069035e961ac337430",
+      "observed_size": 2317
+    },
+    {
+      "expected_sha256": "3f3f36eea460b150fe50b53af27c8580bd82aad06cc561f1c997d058e8f687f0",
+      "expected_size": 39048,
+      "file": "acceptance-verifier-v3.1.py",
+      "match": true,
+      "observed_sha256": "3f3f36eea460b150fe50b53af27c8580bd82aad06cc561f1c997d058e8f687f0",
+      "observed_size": 39048
+    },
+    {
+      "expected_sha256": "e7c3f560192a9902614ba905f40dce4c7a707ed38d95ad81871163a641699ddc",
+      "expected_size": 10127,
+      "file": "batch-manifest-v3.1.json",
+      "match": true,
+      "observed_sha256": "e7c3f560192a9902614ba905f40dce4c7a707ed38d95ad81871163a641699ddc",
+      "observed_size": 10127
+    },
+    {
+      "expected_sha256": "c6161cbba2aadbab2f979e246b3c4db44175b5a784a78e4188ba3119f501b43b",
+      "expected_size": 1974,
+      "file": "build-provenance-policy-v3.1.json",
+      "match": true,
+      "observed_sha256": "c6161cbba2aadbab2f979e246b3c4db44175b5a784a78e4188ba3119f501b43b",
+      "observed_size": 1974
+    },
+    {
+      "expected_sha256": "b196b6422c2a348b5a3836e30603155e4a17d6e3eaeb8ba70d76ef4666a9e67f",
+      "expected_size": 1978,
+      "file": "dispatch-plan-v3.1.json",
+      "match": true,
+      "observed_sha256": "b196b6422c2a348b5a3836e30603155e4a17d6e3eaeb8ba70d76ef4666a9e67f",
+      "observed_size": 1978
+    },
+    {
+      "expected_sha256": "b9ecf9c528249a117e3851691e50e93957d2b16a464c75e8e14dd2dae29485a2",
+      "expected_size": 7323,
+      "file": "lab-api-contract-v3.1.json",
+      "match": true,
+      "observed_sha256": "b9ecf9c528249a117e3851691e50e93957d2b16a464c75e8e14dd2dae29485a2",
+      "observed_size": 7323
+    },
+    {
+      "expected_sha256": "2758c63628bf213996a316b526870d32bcd7b93f0c44d54bd0cd03c1c746efa9",
+      "expected_size": 2860,
+      "file": "lease-plan-lab-a-v3.1.json",
+      "match": true,
+      "observed_sha256": "2758c63628bf213996a316b526870d32bcd7b93f0c44d54bd0cd03c1c746efa9",
+      "observed_size": 2860
+    },
+    {
+      "expected_sha256": "6e1e24343323d84b3ac263977f46284390740c80954369d2c77169b626708ae3",
+      "expected_size": 2811,
+      "file": "lease-plan-lab-b-v3.1.json",
+      "match": true,
+      "observed_sha256": "6e1e24343323d84b3ac263977f46284390740c80954369d2c77169b626708ae3",
+      "observed_size": 2811
+    },
+    {
+      "expected_sha256": "72a87fc1aade47255d786f895f665cb35d13ff1e2172e7a294788a25fb78afbf",
+      "expected_size": 3858,
+      "file": "port-plan-v3.1.json",
+      "match": true,
+      "observed_sha256": "72a87fc1aade47255d786f895f665cb35d13ff1e2172e7a294788a25fb78afbf",
+      "observed_size": 3858
+    },
+    {
+      "expected_sha256": "4aa37696f2ae47a6997a39a6d646282c85d664e12c670ce48cf8bb095279667b",
+      "expected_size": 1576,
+      "file": "predispatch-readiness-v3.1.json",
+      "match": true,
+      "observed_sha256": "4aa37696f2ae47a6997a39a6d646282c85d664e12c670ce48cf8bb095279667b",
+      "observed_size": 1576
+    },
+    {
+      "expected_sha256": "92d613575059e8e195a41182d8a54ba9ae7e1398c6789b34d65fc0543119b92d",
+      "expected_size": 1913,
+      "file": "result-envelope-schema-v3.1.json",
+      "match": true,
+      "observed_sha256": "92d613575059e8e195a41182d8a54ba9ae7e1398c6789b34d65fc0543119b92d",
+      "observed_size": 1913
+    },
+    {
+      "expected_sha256": "70aad3de4706214a266b0fdb7f2d40c0791c915071d55d20bf961fbf6547fb84",
+      "expected_size": 4172,
+      "file": "scope-freeze-v3.1.json",
+      "match": true,
+      "observed_sha256": "70aad3de4706214a266b0fdb7f2d40c0791c915071d55d20bf961fbf6547fb84",
+      "observed_size": 4172
+    }
+  ],
+  "schema": "v3.1-package-manifest-validation/v1",
+  "validated_at_utc": "2026-08-05T17:01:37Z",
+  "verdict": "PASS"
+}

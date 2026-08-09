@@ -1,0 +1,17 @@
+{
+ "activation_timestamp_utc": "2026-08-08T22:39:16Z",
+ "authorization_source": "human",
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "consumed": false,
+ "controller_session": "hermes-v3.8-authorized-dispatch",
+ "dispatch_run_id": "20260808T223904Z-v3-8-authorized-lab-dispatch",
+ "leaf_id": "LEAF-LAB-B-V3_8",
+ "lease_id": "LEASE-20260808T132428Z-LAB-B-V3_8",
+ "package": "v3.8",
+ "package_manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+ "planned_branch": "result/20260808T223904Z-v3-8-authorized-lab-dispatch-lab-b-v3_8",
+ "result_path": "receipts/headless-lab-results-v3.8/lab-b-controller-evidence.json",
+ "schema": "lease-activation/v3.8/lab-b",
+ "single_use": true
+}

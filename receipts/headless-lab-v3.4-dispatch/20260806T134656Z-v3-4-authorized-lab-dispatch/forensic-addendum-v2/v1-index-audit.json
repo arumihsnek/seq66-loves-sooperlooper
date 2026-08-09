@@ -1,0 +1,11 @@
+{
+  "count_consistent": false,
+  "declared_count": 20,
+  "directory_file_count": 20,
+  "files_map_entries": 19,
+  "index_sha256": "b771e5d65756a3fcddfd84a6868c8624d7fd724e084dc0b7e07557046cc47196",
+  "schema": "v1-index-audit/v1",
+  "self_excluded_filename": null,
+  "self_exclusion_declared": "MISSING",
+  "self_exclusion_rule_explicit": false
+}

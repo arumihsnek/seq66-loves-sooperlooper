@@ -1,0 +1,25 @@
+{
+  "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "lab_a": {
+    "failing_checks": [
+      "model: E exactly one parent and E^ == R",
+      "model: envelope present in E",
+      "model: diff C..R owned-only",
+      "model: diff R..E envelope-only",
+      "model: envelope parses"
+    ],
+    "verdict": "REJECT"
+  },
+  "lab_b": {
+    "failing_checks": [
+      "model: E exactly one parent and E^ == R",
+      "model: envelope present in E",
+      "model: diff R..E envelope-only",
+      "model: envelope parses"
+    ],
+    "verdict": "REJECT"
+  },
+  "recorded_at_utc": "2026-08-06T01:39:45Z",
+  "rejected_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+  "schema": "rejected-head-v3.3-test/v1"
+}

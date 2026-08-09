@@ -1,0 +1,25 @@
+{
+ "batch_id_match": true,
+ "candidate_head_sha_match": true,
+ "canonical_source": "GitHub 4176fc85cdb9d573acd77eb01c310657d8c2bc8c (raw.githubusercontent.com)",
+ "cross_manifest_mismatches": [],
+ "cross_manifest_verdict": "PASS",
+ "len_files": 19,
+ "manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+ "manifest_sha256_match": true,
+ "operational_file_count": 19,
+ "payload_hashes_19_of_19_match_manifest": true,
+ "publication_binding": {
+  "byte_exact_copy": true,
+  "dispatch_authorized": false,
+  "effective_accept_count": 3,
+  "effective_blocking_count": 0,
+  "effective_required_actions": 0,
+  "payload_modification": false
+ },
+ "recorded_at_utc": "2026-08-08T22:41:37Z",
+ "schema": "package-byte-validation/v3.8",
+ "sha256_blob_oid_crosscheck_failures": [],
+ "zero_extra": true,
+ "zero_missing": true
+}

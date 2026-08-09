@@ -1,0 +1,20 @@
+{
+  "bundle_fingerprint": "6bb4722b95d9b519248657f3884723557545d17e62465926884578ca51bf28e5",
+  "bundle_path": "/home/ubuntu/.hermes/runs/20260805T165044Z-v3-1-acceptance-gate-correction/reviews/bundle.json",
+  "bundle_sha256": "4f2b9ff399f09ab5ad77016fb70fc7941e9a5dd44af4132000b6f5a126ee75de",
+  "checks": {
+    "bundle": true,
+    "ledger_cache": true,
+    "local_state": true,
+    "lock": true,
+    "replacement": true
+  },
+  "mission_id": "seq66-lab-v3-1-corrected-acceptance-package",
+  "mode": "plan-review",
+  "model_processes_consumed": 0,
+  "recorded_at_utc": "2026-08-05T17:05:45Z",
+  "schema": "senior-preflight-receipt/v3.1",
+  "snapshot_fingerprint": "1f5a5a273667cc4b589742c52911129f260e9a73996e7ebf079597beec35d367",
+  "status": "PREFLIGHT_VALID",
+  "valid": true
+}

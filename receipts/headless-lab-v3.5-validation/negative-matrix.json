@@ -1,0 +1,76 @@
+{
+  "all_negative_cases_rejected": true,
+  "cases": {
+    "E_wrong_parent_rejected": true,
+    "acceptance_inside_E_rejected": true,
+    "empty_R_rejected": true,
+    "evidence_forbidden_E_rejected": true,
+    "evidence_in_R_rejected": true,
+    "evidence_missing_field_rejected": true,
+    "extra_envelope_commit_rejected": true,
+    "force_push_detected_rejected": true,
+    "leaf_key_exit_code_rejected": true,
+    "multi_parent_rejected": true,
+    "out_of_scope_rejected": true,
+    "remote_ne_E_rejected": true,
+    "required_path_missing_rejected": true,
+    "silent_substitution_rejected": true,
+    "tracked_elf_rejected": true,
+    "wrong_parent_rejected": true,
+    "wrong_test_id_rejected": true
+  },
+  "recorded_at_utc": "2026-08-06T22:35:00Z",
+  "reproductions_of_v34_failures": [
+    {
+      "rejected": true,
+      "selftest_case": "leaf_key_exit_code_rejected",
+      "v34_failure": "leaf test fields 'exit code'"
+    },
+    {
+      "rejected": true,
+      "selftest_case": "leaf_key_exit_code_rejected (placeholder value)",
+      "v34_failure": "exit -2 placeholders"
+    },
+    {
+      "rejected": true,
+      "selftest_case": "force_push_detected_rejected",
+      "v34_failure": "force-push"
+    },
+    {
+      "rejected": true,
+      "selftest_case": "E_wrong_parent_rejected",
+      "v34_failure": "R misidentified / E^ != R"
+    },
+    {
+      "rejected": true,
+      "selftest_case": "extra_envelope_commit_rejected",
+      "v34_failure": "two envelope commits / extra E"
+    },
+    {
+      "rejected": true,
+      "selftest_case": "out_of_scope_rejected",
+      "v34_failure": "out-of-scope LAB-A path"
+    },
+    {
+      "rejected": true,
+      "selftest_case": "required_path_missing_rejected",
+      "v34_failure": "fixtures owned ausentes"
+    },
+    {
+      "rejected": true,
+      "selftest_case": "evidence_in_R_rejected (dirty evidence)",
+      "v34_failure": "dirty worktree"
+    },
+    {
+      "rejected": true,
+      "selftest_case": "remote_ne_E_rejected",
+      "v34_failure": "branch no publicada"
+    },
+    {
+      "rejected": true,
+      "selftest_case": "preexisting_branch_rejected_by_policy",
+      "v34_failure": "publicaci\u00f3n antes de PASS"
+    }
+  ],
+  "schema": "negative-matrix/v3.5"
+}

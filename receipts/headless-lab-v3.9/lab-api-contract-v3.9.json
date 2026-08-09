@@ -1,0 +1,267 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "frozen_note": "v3.9 is PROCESS CORRECTION ONLY. API surface is byte/deep-equal to v3.4/v3.5 (modules, functions, classes, methods, signatures, returns, silence verification=FAIL semantics, AnalysisResult, analyze_loop_reproduction, GraphAssertions, LabRunner, JACK/OSC/SooperLooper APIs, ProcessSupervisor owned/foreign semantics). No functional change is introduced.",
+ "modules": {
+  "audio_oracle.py": {
+   "functions": [
+    {
+     "args": [
+      {
+       "annotation": "str | Path",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "wav_path"
+      },
+      {
+       "annotation": "int",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "expected_loop_frames"
+      },
+      {
+       "annotation": "int",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "observed_loop_frames"
+      },
+      {
+       "annotation": "float",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "tempo"
+      },
+      {
+       "annotation": "int",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "numerator"
+      },
+      {
+       "annotation": "int",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "sample_rate"
+      },
+      {
+       "annotation": "float",
+       "default": "0.01",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "silence_threshold"
+      },
+      {
+       "annotation": "float",
+       "default": "0.9",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "peak_threshold"
+      }
+     ],
+     "constraints": [
+      "silent WAV MUST produce verification=FAIL",
+      "no subprocess",
+      "no absolute paths"
+     ],
+     "name": "analyze_wav",
+     "returns": "AnalysisResult"
+    },
+    {
+     "args": [
+      {
+       "annotation": "str | Path",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "source_wav"
+      },
+      {
+       "annotation": "str | Path",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "captured_wav"
+      },
+      {
+       "annotation": "int",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "expected_loop_frames"
+      },
+      {
+       "annotation": "float",
+       "default": "10.0",
+       "kind": "POSITIONAL_OR_KEYWORD",
+       "name": "tolerance_percent"
+      }
+     ],
+     "constraints": [
+      "frame ratio contract",
+      "silence rejected"
+     ],
+     "name": "analyze_loop_reproduction",
+     "returns": "dict"
+    },
+    {
+     "constraints": [
+      "verification in {PASS, FAIL, ERROR}",
+      "to_dict()"
+     ],
+     "field_types": {
+      "analyzed_segment_frames": "int",
+      "captured_wav_frames": "int",
+      "expected_loop_frames": "int",
+      "observed_loop_frames": "int",
+      "verification": "str(PASS|FAIL|ERROR)"
+     },
+     "fields": [
+      "expected_loop_frames",
+      "observed_loop_frames",
+      "captured_wav_frames",
+      "analyzed_segment_frames",
+      "verification"
+     ],
+     "kind": "class",
+     "name": "AnalysisResult"
+    }
+   ]
+  },
+  "graph_assertions.py": {
+   "functions": [
+    {
+     "constraints": [
+      "via jack_lsp with bounded timeout",
+      "no process termination"
+     ],
+     "kind": "class",
+     "methods": [
+      "get_graph()",
+      "get_clients()",
+      "get_ports()",
+      "get_connections()",
+      "assert_clean_graph()",
+      "snapshot()",
+      "diff_snapshots()"
+     ],
+     "name": "GraphAssertions"
+    }
+   ]
+  },
+  "jack_server.py": {
+   "functions": [
+    {
+     "constraints": [
+      "launch jackd --name <server> --no-realtime -d dummy in own group",
+      "cleanup owned only"
+     ],
+     "kind": "class",
+     "methods": [
+      "start()",
+      "readiness_probe(timeout_s)",
+      "get_ports()",
+      "get_connections()",
+      "verify_no_external_clients()",
+      "cleanup()",
+      "is_running()",
+      "get_pid()",
+      "get_pgid()",
+      "snapshot()"
+     ],
+     "name": "JackServer"
+    }
+   ]
+  },
+  "osc_probe.py": {
+   "functions": [
+    {
+     "constraints": [
+      "manual SooperLooper OSC protocol per doc/sooperlooper/OSC-CONTROL-AND-FEEDBACK.md",
+      "no process operations"
+     ],
+     "kind": "class",
+     "methods": [
+      "ping()",
+      "get_control()",
+      "set_control()",
+      "hit_command()",
+      "register_auto_update()",
+      "unregister_auto_update()",
+      "poll()"
+     ],
+     "name": "OscProbe"
+    }
+   ]
+  },
+  "process_supervisor.py": {
+   "functions": [
+    {
+     "constraints": [
+      "os.setsid to create own process group",
+      "termination only over owned PIDs/PGIDs",
+      "SIGTERM -> wait -> SIGKILL bounded",
+      "no pkill/killall/pgrep/ipcrm/shell=True",
+      "processes created by start_process ARE owned",
+      "cleanup(timeout) MUST terminate all and only owned processes",
+      "verify_cleanup() MUST report no remaining owned PIDs after cleanup",
+      "the acceptance harness MUST create foreign-survival probe processes OUTSIDE the supervisor via subprocess.Popen(start_new_session=True); foreign processes are NEVER registered as owned"
+     ],
+     "kind": "class",
+     "methods": [
+      "__enter__",
+      "__exit__",
+      "start_process(name, cmd, env, cwd, stdout_path, stderr_path)",
+      "cleanup(timeout)",
+      "verify_cleanup()",
+      "get_owned_pids()",
+      "get_owned_pgids()",
+      "snapshot()",
+      "get_process_info(name)"
+     ],
+     "name": "ProcessSupervisor"
+    },
+    {
+     "constraints": [
+      "pid MUST be a real positive OS pid when a process is started"
+     ],
+     "field_types": {
+      "pgid": "int",
+      "pid": "int"
+     },
+     "fields": [
+      "pid",
+      "pgid"
+     ],
+     "kind": "class",
+     "name": "ProcessInfo"
+    }
+   ]
+  },
+  "runner.py": {
+   "functions": [
+    {
+     "constraints": [
+      "CLI D0/D1 consuming ONLY the contractual API",
+      "launch/readiness of SooperLooper in sooperlooper_launcher.py (LAB-A)",
+      "no absolute paths",
+      "run_dir repo-scoped",
+      "termination only via owned"
+     ],
+     "kind": "class",
+     "methods": [
+      "run()",
+      "cli()"
+     ],
+     "name": "LabRunner"
+    }
+   ]
+  },
+  "sooperlooper_launcher.py": {
+   "functions": [
+    {
+     "constraints": [
+      "launch via ProcessSupervisor owned",
+      "readiness via OSC ping",
+      "stderr to run_dir",
+      "cleanup owned"
+     ],
+     "kind": "class",
+     "methods": [
+      "launch()",
+      "readiness_ping()",
+      "cleanup()"
+     ],
+     "name": "SooperLooperLauncher"
+    }
+   ]
+  }
+ },
+ "schema": "lab-api-contract/v3.9",
+ "version": "v3.9"
+}

@@ -1,0 +1,64 @@
+{
+  "model": "two-commit-non-self-referential",
+  "rationale": "A same-commit envelope cannot declare the tree OID of the commit that contains it (the envelope blob is an input of that tree; writing the envelope changes the tree). v3.2 splits the result into TWO commits per leaf: R (implementation result, parent = C) and E (envelope container, parent = R). The envelope lives ONLY in E, declares OIDs of C and R, and never its own identity. The remote leaf branch points to E; the external binding is recorded by the controller AFTER push in a separate receipt.",
+  "required_fields": {
+    "schema": "headless-lab-result-envelope/v3.2",
+    "lab": "LAB-A | LAB-B",
+    "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+    "leaf_id": "LEAF-<LAB>-V3_2",
+    "lease_id": "LEASE-20260805T224640Z-LAB-<LAB>-V3_2",
+    "candidate_commit_oid": "C (40/64 hex)",
+    "implementation_result_commit_oid": "R (40/64 hex)",
+    "implementation_result_tree_oid": "R^{tree} (40/64 hex)",
+    "git_object_format": "sha1 | sha256",
+    "external_branch_binding": {
+      "remote": "origin",
+      "planned_branch": "result/<future-run-id>-<lab>-v3_2"
+    },
+    "literal_tests": {
+      "ft-<n>": {
+        "evidence": "controller clean-checkout rerun on exact R",
+        "exit_code": 0
+      }
+    },
+    "build_provenance": "path to leaf provenance receipt (must match build-provenance-policy-v3.2.json)",
+    "artifacts": {
+      "<path>": {
+        "kind": "source|fixture",
+        "sha256": "...",
+        "size": 0
+      }
+    }
+  },
+  "schema": "result-envelope-schema/v3.2",
+  "validation_rules": [
+    "candidate_commit_oid == R^ (== C)",
+    "implementation_result_commit_oid == R",
+    "implementation_result_tree_oid == R^{tree}",
+    "E^ == R",
+    "envelope ABSENT from R; envelope PRESENT in E",
+    "diff C..R limited to implementation/provenance owned paths",
+    "diff R..E exactly the single frozen envelope path",
+    "envelope.git_object_format == git rev-parse --show-object-format",
+    "remote branch SHA == E after push (recorded externally by the controller; never inside the envelope)",
+    "no field may contain the E commit OID, the E tree OID, the envelope blob OID, the envelope SHA-256, or the resolved remote branch SHA"
+  ],
+  "forbidden_self_binding": {
+    "fields": [
+      "container_commit_oid",
+      "container_tree_oid",
+      "envelope_blob_oid",
+      "envelope_sha256",
+      "self_sha256",
+      "remote_branch_resolved_sha"
+    ],
+    "note": "These values are recorded externally by the controller AFTER push, in the external branch-binding receipt."
+  },
+  "naming_rule": "Git object IDs use the *_commit_oid / *_tree_oid / git_object_format naming; the term 'SHA-256' is NOT used for Git object IDs. Ordinary file hashes keep the suffix '_sha256'.",
+  "artifacts_rules": [
+    "artifacts may contain hashes of files present in R",
+    "artifacts may NOT contain the envelope itself",
+    "artifacts may NOT contain files added only in E",
+    "artifacts may NOT contain the container commit/tree OID"
+  ]
+}

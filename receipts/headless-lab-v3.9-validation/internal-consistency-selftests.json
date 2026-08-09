@@ -1,0 +1,11 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "cases": {
+  "I2_wrong_annotation_reject": true,
+  "I3_wrong_return_type_reject": true
+ },
+ "group": "INTERNAL_FAIL_CLOSED",
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "result": "PASS",
+ "schema": "validation/v3.9"
+}

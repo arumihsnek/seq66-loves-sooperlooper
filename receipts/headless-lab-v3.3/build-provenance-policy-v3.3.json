@@ -1,0 +1,36 @@
+{
+  "schema": "build-provenance-policy/v3.3",
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "package": "v3.3",
+  "principle": "Equality or difference of hashes is NEVER, by itself, sufficient proof of copy or rebuild. Provenance requires canonical sources, exact commands, captured compiler identity, environment allow-list, timestamps and transcripts; acceptance always uses CONTROLLER-built outputs.",
+  "controller_rules": [
+    "controller ignores leaf-produced binaries",
+    "controller uses an EMPTY build directory for every controlled rebuild",
+    "canonical source inputs come from the candidate (C..R owned paths)",
+    "source commit/blob OIDs recorded",
+    "source SHA-256 recorded",
+    "compiler absolute path (realpath) and version recorded",
+    "exact commands recorded (byte-frozen)",
+    "environment allow-list recorded",
+    "timestamps recorded",
+    "stdout/stderr transcript hashes recorded",
+    "output SHA-256 recorded",
+    "ELF metadata recorded where an ELF output exists",
+    "dynamic dependencies recorded where an ELF output exists",
+    "acceptance uses controller-built outputs (never leaf binaries)",
+    "tracked ELF rejected (binaries must not be tracked in R)"
+  ],
+  "lab_rules": {
+    "LAB-A": {
+      "leaf_build_claim_status": "not_applicable",
+      "rule": "LAB-A declares leaf_build_claim.status=not_applicable; compiler_path/compiler_version/commands/outputs must be null/empty; invented compiler or output fields are REJECTED",
+      "controlled_rebuild": "not_applicable (justified: no buildable output in LAB-A scope)"
+    },
+    "LAB-B": {
+      "leaf_build_claim_status": "claimed_built",
+      "rule": "LAB-B leaf_build_claim is a CLAIM ONLY: sources/commands/outputs/compiler_path/compiler_version/transcript_sha256 must be structurally present; the controller verifies the claim by controlled rebuild in full-completion phase",
+      "controlled_rebuild": "PASS required in full-completion; controller rebuilds from canonical sources in an empty build dir using the frozen build command and verifies output SHA-256 equals the claimed value"
+    }
+  },
+  "hash_policy": "hash equality/difference is supporting evidence only; never sufficient proof of copy or rebuild"
+}

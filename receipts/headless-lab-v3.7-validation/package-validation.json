@@ -1,0 +1,138 @@
+{
+ "PASS": true,
+ "expected_list_exact": [
+  "acceptance-verifier-v3.7.py",
+  "batch-manifest-v3.7.json",
+  "build-provenance-policy-v3.7.json",
+  "controller-acceptance-schema-v3.6.json",
+  "controller-evidence-schema-v3.6.json",
+  "dispatch-plan-v3.6.json",
+  "functional-contract-baseline-v3.7.json",
+  "lab-api-contract-v3.7.json",
+  "leaf-r-report-schema-v3.6.json",
+  "lease-plan-lab-a-v3.6.json",
+  "lease-plan-lab-b-v3.6.json",
+  "mechanical-finalizer-v3.7.py",
+  "port-plan-v3.6.json",
+  "predispatch-readiness-v3.6.json",
+  "process-hardening-contract-v3.6.json",
+  "publication-policy-v3.6.json",
+  "scope-freeze-v3.7.json"
+ ],
+ "extra": [],
+ "files": [
+  {
+   "json_parse": "OK",
+   "name": "scope-freeze-v3.7.json",
+   "sha256": "d16394e41b77dfdc188ba7b1d08a4526697969adf871099b6368e48a7f3c291c",
+   "size": 2709
+  },
+  {
+   "json_parse": "OK",
+   "name": "functional-contract-baseline-v3.7.json",
+   "sha256": "1badfced980776f7c08d426592bf798e5939b173f612cff52f834af3e4a03126",
+   "size": 9693
+  },
+  {
+   "json_parse": "OK",
+   "name": "lab-api-contract-v3.7.json",
+   "sha256": "0b59df8017d6f5ab47fb082f6a2a10a184237826d9bfd5f6647263f0d07ffe57",
+   "size": 6552
+  },
+  {
+   "json_parse": "OK",
+   "name": "process-hardening-contract-v3.6.json",
+   "sha256": "e878703cc94b3467816d7c8981bb57e6a4dd9cd398b356038adba006c2d3619d",
+   "size": 4246
+  },
+  {
+   "json_parse": "OK",
+   "name": "batch-manifest-v3.7.json",
+   "sha256": "710c76fef2ccf45d31d6f63488026df62076d22a8eb59d896b9565c29b0ff812",
+   "size": 10918
+  },
+  {
+   "json_parse": "OK",
+   "name": "dispatch-plan-v3.6.json",
+   "sha256": "db10d93c1b12b40466288ce31d8c533ad44cb00ad4c7e8979174f6d69042c67e",
+   "size": 1771
+  },
+  {
+   "json_parse": "OK",
+   "name": "port-plan-v3.6.json",
+   "sha256": "b6bfff13b885377fd4bce784bd6b6a6bd259cb80505177fa82dfa46a2c33fe2e",
+   "size": 1523
+  },
+  {
+   "json_parse": "OK",
+   "name": "lease-plan-lab-a-v3.6.json",
+   "sha256": "99cfcab8e01f9f947be0bc24ddac2144364ab0b60dad7f55325d4676faa108cc",
+   "size": 532
+  },
+  {
+   "json_parse": "OK",
+   "name": "lease-plan-lab-b-v3.6.json",
+   "sha256": "07ffecfe191c0c9d3229aab2342f2ee427e7e8a3642c082b6db922c04872b653",
+   "size": 532
+  },
+  {
+   "json_parse": "OK",
+   "name": "leaf-r-report-schema-v3.6.json",
+   "sha256": "84ff17bb6ba283309d643b8eb098928691ba3c9d0c4e7edaffde48de5c34a159",
+   "size": 724
+  },
+  {
+   "json_parse": "OK",
+   "name": "controller-evidence-schema-v3.6.json",
+   "sha256": "0f6c18198c347a9b0b7c9815a9af03da0b0f2cc7dbf2851dc4ba96367f565995",
+   "size": 1012
+  },
+  {
+   "json_parse": "OK",
+   "name": "controller-acceptance-schema-v3.6.json",
+   "sha256": "1a7c6c45e9bfa1152082fae3d1989bb0c6e42061470d8a02b02efb188a3b4ee6",
+   "size": 986
+  },
+  {
+   "name": "mechanical-finalizer-v3.7.py",
+   "py_syntax": "OK",
+   "sha256": "312fef8ea635293d8b2026f18568da7b2eabfa8fe614f8515a656ae694b8550f",
+   "size": 57862
+  },
+  {
+   "name": "acceptance-verifier-v3.7.py",
+   "py_syntax": "OK",
+   "sha256": "f31288ee4f4d095d45deda7b8066da3f48cf6cf6ec8a773d5aadbbdf4335e87c",
+   "size": 74321
+  },
+  {
+   "json_parse": "OK",
+   "name": "build-provenance-policy-v3.7.json",
+   "sha256": "d38cbb0e7e4aa204af58b21136481d26e3da844240b99d77a13843b4ad9fdb80",
+   "size": 2226
+  },
+  {
+   "json_parse": "OK",
+   "name": "publication-policy-v3.6.json",
+   "sha256": "7429856fd36773a671c7e30b9a0d11945e03d9af41afc1085f3ae12f926b6d19",
+   "size": 1196
+  },
+  {
+   "json_parse": "OK",
+   "name": "predispatch-readiness-v3.6.json",
+   "sha256": "757f754017019c40adc34b4ddf69f5b9655cdc8d63fb78c5b87485452ccc84cd",
+   "size": 499
+  }
+ ],
+ "frozen_copies_byte_exact_to_package_dir": true,
+ "len_files": 17,
+ "missing": [],
+ "operational_file_count": 17,
+ "recorded_at_utc": "2026-08-07T20:00:42Z",
+ "review_exclusion_rule": "senior-preflight/review-bundle/verdict/review-binding/publication-index nunca est\u00e1n en el payload",
+ "schema": "package-validation/v3.6",
+ "self_exclusion_rule": "package-payload-manifest-v3.6.json nunca est\u00e1 dentro del payload",
+ "validated_dir": "/home/ubuntu/.hermes/runs/20260807T161935Z-v3-7-runtime-contract-package/frozen-payload",
+ "zero_extra": true,
+ "zero_missing": true
+}

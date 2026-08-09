@@ -1,0 +1,57 @@
+{
+  "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+  "build_provenance_policy_ref": "build-provenance-policy-v3.2.json",
+  "completion_criteria": [
+    "exactly two commits over candidate per leaf: R then E",
+    "R non-empty",
+    "E non-empty",
+    "R published indirectly as parent of E",
+    "remote leaf branch points exactly to E",
+    "full R OID recorded",
+    "full E OID recorded",
+    "clean worktree at E",
+    "valid envelope in E",
+    "implementation diff C..R owned-only",
+    "envelope diff R..E envelope-only",
+    "all literal tests pass on exact R",
+    "controller clean-checkout acceptance PASS on exact R",
+    "external branch-binding receipt PASS"
+  ],
+  "envelope_schema_ref": "result-envelope-schema-v3.2.json",
+  "harness": {
+    "executed_by": "controller",
+    "execution_target": "clean checkout of the exact R (never the ambiguous branch head)",
+    "file": "acceptance-verifier-v3.2.py",
+    "owner": "controller (NOT LAB-A, NOT LAB-B; leaf modifications forbidden)",
+    "selftest_required_before_use": true,
+    "sha256": "a06684a0bdc03c3553b4fc201f473c4959b6b2940bdd93b9251e3f7824c67ce6"
+  },
+  "negative_gates_lab_a": [
+    "reject pass/TODO/NotImplemented placeholders",
+    "reject dummy ProcessInfo / pid=0 / pid=-1",
+    "reject MagicMock as process substitute",
+    "reject methods that always return success",
+    "reject tests that only verify importation",
+    "require owned child lifecycle, real positive PID, identity verification, bounded shutdown, failure propagation",
+    "require cleanup(timeout) to terminate ALL owned processes and verify_cleanup() == []",
+    "reject foreign-survival probe process created via sup.start_process() (foreign must be created OUTSIDE the supervisor via subprocess.Popen, start_new_session=True)",
+    "require foreign process to survive supervisor cleanup and be torn down by the controller via its Popen object (TERM, bounded wait, KILL exact fallback)",
+    "reject envelope committed in R (envelope belongs only in E)",
+    "reject implementation changes in E",
+    "reject envelopes carrying E commit/tree/blob OID, envelope SHA-256 or resolved remote SHA"
+  ],
+  "negative_gates_lab_b": [
+    "exact analyze_wav signature",
+    "real silence test (silence always FAIL)",
+    "malformed WAV FAIL/ERROR",
+    "contractual frame count",
+    "no empty tests",
+    "no trivial asserts",
+    ".gitignore byte-exact (no literal backslash-n)",
+    "scenarios parseable",
+    "runner uses the contractual APIs",
+    "reject envelope committed in R (envelope belongs only in E)",
+    "reject implementation changes in E"
+  ],
+  "schema": "acceptance-manifest/v3.2"
+}

@@ -1,0 +1,61 @@
+{
+  "accept_does_not_authorize_dispatch": true,
+  "blocking_findings": [],
+  "bound_artifact_hashes": {
+    "acceptance-manifest-v3.4.json": "fae0d201067c0148e71bc161d09644b5a46b46836b10c43498ff69120c392ea3",
+    "acceptance-verifier-v3.4.py": "2f49f2b1b40906b7e5a699ee821f2221f33998c09c5058276641e4c70e6a4c9c",
+    "batch-manifest-v3.4.json": "3d8c14084eb768e49668aa9c5a0955b4015a87ad9521805d811b2ba5b01ff108",
+    "build-provenance-policy-v3.4.json": "fe67eb6def2d1f8ddfa4dfdc75a6c9a247c34e4db9c78d8d6d27929a19b32439",
+    "controller-acceptance-schema-v3.4.json": "27b8acc89b12aa80452536a75cf7f91ade9b8b234e10c99b16351319d4240a8e",
+    "dispatch-plan-v3.4.json": "cc74e2114ba759e63099f766dce8fa120a2cc13a8bb0868a3b512fb9b44e8074",
+    "functional-contract-baseline-v3.4.json": "862798a6b0cb6bd3b6f57206aae4aaafb4b177d694268fc64fa92dfb6f3fd553",
+    "lab-api-contract-v3.4.json": "5097c6221a0edc21e2c72b5a7527bb842de6e8fbf9aa4066390098b5a8eb382b",
+    "lease-plan-lab-a-v3.4.json": "46e13d0035844b3cb99d375178923d2259c8372dcb55ce54d1cb4812e151cd28",
+    "lease-plan-lab-b-v3.4.json": "f2c596b8e4c65810e9e1e8157d168b8c8efbdd2a65705ef41447147e30784034",
+    "port-plan-v3.4.json": "862657b47c0ab7d0429439cb25dff87cb77dc9a900821956a2703ed8d7c37e9f",
+    "predispatch-readiness-v3.4.json": "c186fbacc1929e465c3b943a1d36006b98b4b504e11232cde99616320d5893d6",
+    "result-envelope-schema-v3.4.json": "f496adeb69358373f07e8dc8410648d8c2671ed0bede5e84dece7f7bc198cdac",
+    "scope-freeze-v3.4.json": "f038c7fcd4da0ed939147f6ab9aefe61f8a839699e891e9fa4611792c9655149"
+  },
+  "bound_manifest_sha256": "63c371ba70491fa546ce4f8d980568440845c74fbb5af3a93502ff9b8c0a4da7",
+  "detailed_status": "VALID_ADVISORY_VERDICT",
+  "execution_id": "6aa5ba00-a1a5-4174-a2b0-af913fc62b22",
+  "mission_id": "seq66-lab-v3-4-functional-continuity",
+  "mode": "plan-review",
+  "question_answers": [
+    {
+      "answer": "S\u00ed. La API v3.4 conserva \u00edntegramente la superficie estructural v3.2: m\u00f3dulos, funciones, clases, campos, m\u00e9todos, firmas y retornos; la continuidad funcional pas\u00f3.",
+      "id": "Q1"
+    },
+    {
+      "answer": "S\u00ed. La prueba con WAV silencioso real produce verification=FAIL; la sem\u00e1ntica silent=True simplificada es rechazada.",
+      "id": "Q2"
+    },
+    {
+      "answer": "S\u00ed. AnalysisResult con sus cinco campos, analyze_loop_reproduction, GraphAssertions y LabRunner permanecen con la superficie exacta v3.2.",
+      "id": "Q3"
+    },
+    {
+      "answer": "S\u00ed. Las method sets de JackServer, OscProbe, SooperLooperLauncher, ProcessSupervisor y las dem\u00e1s APIs permanecen completas e iguales a v3.2.",
+      "id": "Q4"
+    },
+    {
+      "answer": "S\u00ed. Se conservan cuatro pruebas literales por laboratorio, con IDs, comandos y hashes exactos; las pruebas debilitadas son rechazadas.",
+      "id": "Q5"
+    },
+    {
+      "answer": "S\u00ed. LAB-B usa las dos fuentes C can\u00f3nicas y reconstrucci\u00f3n real mediante gcc con libjack, lm y lpthread; la build JSON sint\u00e9tica es rechazada.",
+      "id": "Q6"
+    },
+    {
+      "answer": "S\u00ed. La ownership es consistente entre scope, batch, baseline, lease y verifier, incluyendo fixtures/.gitignore; no se detect\u00f3 drift.",
+      "id": "Q7"
+    }
+  ],
+  "recorded_at_utc": "2026-08-06T02:22:03Z",
+  "required_actions": [],
+  "response_fingerprint": "78119705a9869e1f24fdc24bd9bbd7b97e7d3dcfa7ad38cfc306e86518d1e824",
+  "schema": "senior-verdict/v1",
+  "status": "COMPLETED",
+  "verdict": "accept"
+}

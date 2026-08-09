@@ -1,0 +1,94 @@
+{
+  "controlled_fixture_cases": [
+    {
+      "case": "valid-leaf-envelope",
+      "expected": "PASS",
+      "observed": "PASS",
+      "ok": true
+    },
+    {
+      "case": "valid-full-completion",
+      "expected": "PASS",
+      "observed": "PASS",
+      "ok": true
+    },
+    {
+      "case": "v3.2-minimal-envelope",
+      "expected": "REJECT",
+      "observed": "REJECT",
+      "ok": true
+    },
+    {
+      "case": "r-empty",
+      "expected": "REJECT",
+      "observed": "REJECT",
+      "ok": true
+    },
+    {
+      "case": "wrong-artifact-hash",
+      "expected": "REJECT",
+      "observed": "REJECT",
+      "ok": true
+    },
+    {
+      "case": "missing-controller-receipt",
+      "expected": "REJECT",
+      "observed": "REJECT",
+      "ok": true
+    },
+    {
+      "case": "rejected-head-lab-a",
+      "expected": "REJECT",
+      "observed": "REJECT",
+      "ok": true
+    },
+    {
+      "case": "rejected-head-lab-b",
+      "expected": "REJECT",
+      "observed": "REJECT",
+      "ok": true
+    }
+  ],
+  "minimal_v3_2_envelope_rejected_by_v3_3": true,
+  "recorded_at_utc": "2026-08-06T01:39:45Z",
+  "schema": "strict-envelope-negative-matrix/v1",
+  "v3_2_false_accept_count": 13,
+  "v3_2_incidental_reject_count": 2,
+  "v3_3_selftest_negative_cases": {
+    "selftest: E merge commit REJECT": "REJECTED (selftest PASS)",
+    "selftest: R empty REJECT": "REJECTED (selftest PASS)",
+    "selftest: R merge commit REJECT": "REJECTED (selftest PASS)",
+    "selftest: acceptance harness failure REJECT": "REJECTED (selftest PASS)",
+    "selftest: artifact outside R REJECT": "REJECTED (selftest PASS)",
+    "selftest: artifact outside ownership REJECT": "REJECTED (selftest PASS)",
+    "selftest: artifact verification failure REJECT": "REJECTED (selftest PASS)",
+    "selftest: artifacts empty REJECT": "REJECTED (selftest PASS)",
+    "selftest: controller test failure REJECT": "REJECTED (selftest PASS)",
+    "selftest: dirty controller checkout REJECT": "REJECTED (selftest PASS)",
+    "selftest: envelope in R REJECT": "REJECTED (selftest PASS)",
+    "selftest: extra artifact REJECT": "REJECTED (selftest PASS)",
+    "selftest: extra test ID REJECT": "REJECTED (selftest PASS)",
+    "selftest: implementation change in E REJECT": "REJECTED (selftest PASS)",
+    "selftest: incomplete LAB-B build claim REJECT": "REJECTED (selftest PASS)",
+    "selftest: invalid LAB-A build claim REJECT": "REJECTED (selftest PASS)",
+    "selftest: invalid timestamp ordering REJECT": "REJECTED (selftest PASS)",
+    "selftest: missing artifact REJECT": "REJECTED (selftest PASS)",
+    "selftest: missing authoritative test ID REJECT": "REJECTED (selftest PASS)",
+    "selftest: missing leaf build claim REJECT": "REJECTED (selftest PASS)",
+    "selftest: missing leaf_literal_tests REJECT": "REJECTED (selftest PASS)",
+    "selftest: missing planned branch REJECT": "REJECTED (selftest PASS)",
+    "selftest: missing schema REJECT": "REJECTED (selftest PASS)",
+    "selftest: nonzero leaf test REJECT": "REJECTED (selftest PASS)",
+    "selftest: remote branch mismatch REJECT": "REJECTED (selftest PASS)",
+    "selftest: unknown top-level key REJECT": "REJECTED (selftest PASS)",
+    "selftest: wrong artifact hash REJECT": "REJECTED (selftest PASS)",
+    "selftest: wrong artifact size REJECT": "REJECTED (selftest PASS)",
+    "selftest: wrong batch REJECT": "REJECTED (selftest PASS)",
+    "selftest: wrong command hash REJECT": "REJECTED (selftest PASS)",
+    "selftest: wrong lab REJECT": "REJECTED (selftest PASS)",
+    "selftest: wrong leaf REJECT": "REJECTED (selftest PASS)",
+    "selftest: wrong lease REJECT": "REJECTED (selftest PASS)",
+    "selftest: wrong planned branch REJECT": "REJECTED (selftest PASS)",
+    "selftest: wrong schema REJECT": "REJECTED (selftest PASS)"
+  }
+}

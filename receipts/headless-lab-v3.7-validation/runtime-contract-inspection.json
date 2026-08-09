@@ -1,0 +1,293 @@
+{
+ "E": "0079e914da8b90aee99d808a0dda56ada5c0d9dd",
+ "R": "e6792c6ed6417a8bcf87dd15bd4b80f65627c11d",
+ "R_tree": "531fd6969e7fc8ad6089ff00d9fe5cc43b0136f3",
+ "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+ "external_runtime_semantics": {
+  "jack_sooperlooper": "deferred_by_design",
+  "note": "real JACK daemon / SooperLooper execution is NOT claimed proven here; it belongs to the dispatch phase"
+ },
+ "finalizer_exit": 0,
+ "inspection_argv": [
+  "python3",
+  "/home/ubuntu/.hermes/runs/20260807T161935Z-v3-7-runtime-contract-package/package/mechanical-finalizer-v3.7.py",
+  "--mode",
+  "finalize",
+  "--repo",
+  "/tmp/v37-harness-j6s8vqrj/s3-runtime",
+  "--c",
+  "4104633387c26138a19a3d2e4ff6e11310be28ab",
+  "--r",
+  "e6792c6ed6417a8bcf87dd15bd4b80f65627c11d",
+  "--lab",
+  "LAB-B",
+  "--batch",
+  "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+  "--planned-branch",
+  "result/x-lab-b-v3_7",
+  "--remote",
+  "",
+  "--scope-freeze",
+  "/home/ubuntu/.hermes/runs/20260807T161935Z-v3-7-runtime-contract-package/package/scope-freeze-v3.7.json",
+  "--batch-manifest",
+  "/home/ubuntu/.hermes/runs/20260807T161935Z-v3-7-runtime-contract-package/package/batch-manifest-v3.7.json",
+  "--functional-baseline",
+  "/home/ubuntu/.hermes/runs/20260807T161935Z-v3-7-runtime-contract-package/package/functional-contract-baseline-v3.7.json",
+  "--api-contract",
+  "/home/ubuntu/.hermes/runs/20260807T161935Z-v3-7-runtime-contract-package/package/lab-api-contract-v3.7.json",
+  "--build-policy",
+  "/home/ubuntu/.hermes/runs/20260807T161935Z-v3-7-runtime-contract-package/package/build-provenance-policy-v3.7.json",
+  "--controller-dir",
+  "/tmp/v37-harness-j6s8vqrj/s3-runtime",
+  "--evidence-path",
+  "receipts/headless-lab-results-v3.7/lab-b-controller-evidence.json",
+  "--verifier-path",
+  "/home/ubuntu/.hermes/runs/20260807T161935Z-v3-7-runtime-contract-package/package/acceptance-verifier-v3.7.py",
+  "--recorded-at-utc",
+  "2026-08-07T16:19:35Z"
+ ],
+ "module_import_real": {
+  "audio_oracle.py": {
+   "functions": {
+    "AnalysisResult": {
+     "checks": [
+      {
+       "field": "expected_loop_frames",
+       "kind": "field",
+       "present_in_init_signature": true
+      },
+      {
+       "field": "observed_loop_frames",
+       "kind": "field",
+       "present_in_init_signature": true
+      },
+      {
+       "field": "captured_wav_frames",
+       "kind": "field",
+       "present_in_init_signature": true
+      },
+      {
+       "field": "analyzed_segment_frames",
+       "kind": "field",
+       "present_in_init_signature": true
+      },
+      {
+       "field": "verification",
+       "kind": "field",
+       "present_in_init_signature": true
+      },
+      {
+       "field": "analyzed_segment_frames",
+       "kind": "field_type_normative",
+       "normative_type": "int",
+       "verified_at_return_shape": true
+      },
+      {
+       "field": "captured_wav_frames",
+       "kind": "field_type_normative",
+       "normative_type": "int",
+       "verified_at_return_shape": true
+      },
+      {
+       "field": "expected_loop_frames",
+       "kind": "field_type_normative",
+       "normative_type": "int",
+       "verified_at_return_shape": true
+      },
+      {
+       "field": "observed_loop_frames",
+       "kind": "field_type_normative",
+       "normative_type": "int",
+       "verified_at_return_shape": true
+      },
+      {
+       "field": "verification",
+       "kind": "field_type_normative",
+       "normative_type": "str(PASS|FAIL|ERROR)",
+       "verified_at_return_shape": true
+      }
+     ],
+     "class_exists": true
+    },
+    "analyze_loop_reproduction": {
+     "checks": [
+      {
+       "kind": "param_names_order",
+       "ok": true
+      },
+      {
+       "kind": "return_contract",
+       "ok": true
+      }
+     ],
+     "function_exists": true
+    },
+    "analyze_wav": {
+     "checks": [
+      {
+       "kind": "param_names_order",
+       "ok": true
+      },
+      {
+       "kind": "return_contract",
+       "ok": true
+      }
+     ],
+     "function_exists": true
+    }
+   },
+   "module_sha256": "9e72892212419b94d3a4195bd2d2b1c213c05c4a8db4dcd5fb109a489b72d700"
+  },
+  "graph_assertions.py": {
+   "functions": {
+    "GraphAssertions": {
+     "checks": [
+      {
+       "kind": "method",
+       "method": "get_graph",
+       "ok": true,
+       "params": []
+      },
+      {
+       "kind": "method",
+       "method": "get_clients",
+       "ok": true,
+       "params": []
+      },
+      {
+       "kind": "method",
+       "method": "get_ports",
+       "ok": true,
+       "params": []
+      },
+      {
+       "kind": "method",
+       "method": "get_connections",
+       "ok": true,
+       "params": []
+      },
+      {
+       "kind": "method",
+       "method": "assert_clean_graph",
+       "ok": true,
+       "params": []
+      },
+      {
+       "kind": "method",
+       "method": "snapshot",
+       "ok": true,
+       "params": []
+      },
+      {
+       "kind": "method",
+       "method": "diff_snapshots",
+       "ok": true,
+       "params": []
+      }
+     ],
+     "class_exists": true
+    }
+   },
+   "module_sha256": "c081dbde2e46e404195a121be967986d3fd396e51255674c457eec1f3adb1acb"
+  },
+  "jack_server.py": {
+   "error": "module file missing in R",
+   "out_of_lab_scope": true
+  },
+  "osc_probe.py": {
+   "error": "module file missing in R",
+   "out_of_lab_scope": true
+  },
+  "process_supervisor.py": {
+   "error": "module file missing in R",
+   "out_of_lab_scope": true
+  },
+  "runner.py": {
+   "functions": {
+    "LabRunner": {
+     "checks": [
+      {
+       "kind": "method",
+       "method": "run",
+       "ok": true,
+       "params": []
+      },
+      {
+       "kind": "method",
+       "method": "cli",
+       "ok": true,
+       "params": []
+      }
+     ],
+     "class_exists": true
+    }
+   },
+   "module_sha256": "7b9f91879296e45f0767880569fac574473aa3c644bd50a14af8fdfe7c9ef597"
+  },
+  "sooperlooper_launcher.py": {
+   "error": "module file missing in R",
+   "out_of_lab_scope": true
+  }
+ },
+ "module_paths": [
+  {
+   "blob_oid": "c2f002def49efb037efc612ffd725cd825ab12c9",
+   "path": "tests/integration/headless_audio_lab/audio_oracle.py",
+   "sha256": "9e72892212419b94d3a4195bd2d2b1c213c05c4a8db4dcd5fb109a489b72d700",
+   "size": 1471
+  },
+  {
+   "blob_oid": "1f0799007a93efc9cd48e19b1e0a5cbda0103112",
+   "path": "tests/integration/headless_audio_lab/graph_assertions.py",
+   "sha256": "c081dbde2e46e404195a121be967986d3fd396e51255674c457eec1f3adb1acb",
+   "size": 291
+  },
+  {
+   "blob_oid": "ccbaeb142aab9ca1287930a1dae5264ba3720484",
+   "path": "tests/integration/headless_audio_lab/runner.py",
+   "sha256": "7b9f91879296e45f0767880569fac574473aa3c644bd50a14af8fdfe7c9ef597",
+   "size": 89
+  },
+  {
+   "blob_oid": "4b55f14123980d34cb4baf72631c5b00bdcf3d84",
+   "path": "tests/integration/headless_audio_lab/test_modules.py",
+   "sha256": "df4b6e150972b753e35eb1eeebb3e49a9b1feebc7050f887392d64e7f118a027",
+   "size": 15
+  }
+ ],
+ "normative_source": "functional-contract-baseline-v3.7.json (single source of truth)",
+ "recorded_at_utc": "2026-08-07T20:00:28Z",
+ "runtime_return_shape_check": "PASS",
+ "runtime_return_shape_checks": [
+  {
+   "captured_wav_frames": 4800,
+   "name": "silent_wav",
+   "ok": true,
+   "pcm_nul_real": true,
+   "returns_AnalysisResult": true,
+   "verification": "FAIL"
+  },
+  {
+   "dict_ok": true,
+   "fields_ok": true,
+   "name": "AnalysisResult_fields_to_dict",
+   "ok": true
+  },
+  {
+   "name": "analyze_loop_reproduction_returns_dict",
+   "ok": true
+  },
+  {
+   "controlled": true,
+   "exc": "not a WAVE file",
+   "mode": "exception",
+   "name": "malformed_wav",
+   "ok": true
+  }
+ ],
+ "schema": "r-runtime-contract-inspection/v3.7",
+ "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+ "stdout_sha256": "034cfe10958c98497b664e122d7a2989226235ff5cd37b4a2db3bc6d1c9045db",
+ "structural_contract_check": "PASS",
+ "verdict": "PASS"
+}

@@ -1,0 +1,235 @@
+{
+  "checks": [
+    {
+      "detail": "",
+      "evidence": {
+        "bad": []
+      },
+      "name": "json-parse: all JSON files",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "manifest: schema/batch/candidate/supersedes",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "manifest: 14/14 files present with exact hashes/sizes",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "scope: schema/batch/candidate + 5/12 ownership",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "baseline: canonical source = v3.2 + manifest hash",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "func-continuity: v3.4 contract modules == v3.2 modules byte-equal",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "func-continuity: baseline canonical modules == v3.2 modules",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "func-continuity: silence semantics declared (verification=FAIL)",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "func-continuity: AnalysisResult fields canonical",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "func-continuity: analyze_loop_reproduction canonical",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "method-set: JackServer/OscProbe/SooperLooperLauncher/GraphAssertions/LabRunner/ProcessSupervisor equal",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "signature: analyze_wav + analyze_loop_reproduction exact (8-arg, defaults, returns)",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "signature: analyze_wav 6 required args",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "batch: schema/batch/candidate + supersedes v3.3 reason",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-A IDs complete (ft-a1,ft-a2,ft-a3,ft-a4)",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-A ft-a1 command_sha256 + argv array",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-A ft-a2 command_sha256 + argv array",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-A ft-a3 command_sha256 + argv array",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-A ft-a4 command_sha256 + argv array",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-B IDs complete (ft-b1,ft-b2,ft-b3,ft-b4)",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-B ft-b1 command_sha256 + argv array",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-B ft-b2 command_sha256 + argv array",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-B ft-b3 command_sha256 + argv array",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "literal-tests: LAB-B ft-b4 command_sha256 + argv array",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "escaping: all literal commands round-trip byte-exact as argv arrays (no shell strings)",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "canonical-sources: baseline == policy sources (blob OIDs + sha256)",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "canonical-compile: gcc -std=c11 -O2 -ljack -lm -lpthread preserved (no synthetic)",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "build-provenance: LAB-A not_applicable / LAB-B claimed_built + forbidden synthetic",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "ownership: LAB-A/LAB-B sets consistent across scope/batch/baseline/lease (incl. fixtures/.gitignore)",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "envelope-schema: v3.4 strict keys policy",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "controller-acceptance-schema: v3.4 + required verdicts",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "C-R-E model: dispatch plan declares R-only integration-eligible + auth false",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "lease LAB-A: new lease/leaf/envelope exact + planned/inactive",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "lease LAB-B: new lease/leaf/envelope exact + planned/inactive",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "leaks": []
+      },
+      "name": "old-id/path reuse: none of v3/v3.1/v3.2/v3.3 IDs/paths/schemas reused",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "predispatch: schema + dispatch_ready false",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": null,
+      "name": "verifier: compiles + 3 phases + selftest",
+      "status": "PASS"
+    }
+  ],
+  "count": 37,
+  "fail": 0,
+  "package_dir": "/home/ubuntu/.hermes/runs/20260806T020249Z-v3-4-functional-contract-restoration/v3-4-package",
+  "schema": "v3.4-package-validation/v1",
+  "verdict": "VALIDATION: PASS (37/37)"
+}

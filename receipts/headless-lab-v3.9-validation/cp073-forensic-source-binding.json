@@ -1,0 +1,15 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "classifications_verified": {
+  "F-A1": "FINALIZER_OVERCONSTRAINT",
+  "F-B1": "LEAF_CONTRACT_VIOLATION",
+  "F-B2": "FINALIZER_REPRESENTATION_OVERCONSTRAINT",
+  "F-B3": "FINALIZER_OVERCONSTRAINT"
+ },
+ "forensic_evidence_path": "receipts/headless-lab-v3.8-dispatch-forensic/20260808T223904Z-v3-8-authorized-lab-dispatch/",
+ "match": true,
+ "recorded_at_utc": "2026-08-08T23:44:31Z",
+ "schema": "validation/v3.9",
+ "senior_execution_id": "0631a805-a40b-44f4-836c-f2a194c2b43e",
+ "senior_verdict": "changes_required (Alternative B)"
+}

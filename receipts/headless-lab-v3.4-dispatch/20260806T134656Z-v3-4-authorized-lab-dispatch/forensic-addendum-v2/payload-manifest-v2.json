@@ -1,0 +1,80 @@
+{
+  "batch": null,
+  "files": {
+    "ci-source-state.json": {
+      "blob_oid": null,
+      "filename": "ci-source-state.json",
+      "role": "ci-source-state",
+      "sha256": "29554cc7d1b577773c005f1dc3c7293eb4482fee5a858e609be28ecc48a029e6",
+      "size": 812
+    },
+    "dispatch-state-revalidation.json": {
+      "blob_oid": null,
+      "filename": "dispatch-state-revalidation.json",
+      "role": "dispatch-state",
+      "sha256": "4113337eebeb574ef1c56fa248b1119cf6bceb2d36c4fe8b4eb552ac47a62e3a",
+      "size": 554
+    },
+    "forensic-v2-classification.json": {
+      "blob_oid": null,
+      "filename": "forensic-v2-classification.json",
+      "role": "classification",
+      "sha256": "b4df5496d8373c93ffe3752c96313f7300e6d436a8ef3fd5c67681229163635d",
+      "size": 837
+    },
+    "source-state.json": {
+      "blob_oid": null,
+      "filename": "source-state.json",
+      "role": "run-source-state",
+      "sha256": "d3c496cf72d73a7a1b75d76244eb17f4df08490ada106c678421267418e8ca41",
+      "size": 638
+    },
+    "v1-blob-oid-audit.json": {
+      "blob_oid": null,
+      "filename": "v1-blob-oid-audit.json",
+      "role": "v1-audit",
+      "sha256": "016acf6b82e0c8bf9dc59e8bb43465f06396becc1e1b7e1cb4d760f402c5cbb2",
+      "size": 2416
+    },
+    "v1-directory-inventory.json": {
+      "blob_oid": null,
+      "filename": "v1-directory-inventory.json",
+      "role": "v1-inventory",
+      "sha256": "440257a0cf4690fad6d34a0c97aa0a3b7124cd338997fc9e59b8e20a01d72822",
+      "size": 8258
+    },
+    "v1-duplicate-content-audit.json": {
+      "blob_oid": null,
+      "filename": "v1-duplicate-content-audit.json",
+      "role": "v1-audit",
+      "sha256": "05328ada97f9f91dc70f8009209483f65ca37b45bf481079a8b8ea5df530bed2",
+      "size": 570
+    },
+    "v1-index-audit.json": {
+      "blob_oid": null,
+      "filename": "v1-index-audit.json",
+      "role": "v1-audit",
+      "sha256": "849c39e4117552bdb1a3826ca83b4666f63de11855e1fb5d5ecf97e576fa2ca2",
+      "size": 346
+    },
+    "v1-manifest-audit.json": {
+      "blob_oid": null,
+      "filename": "v1-manifest-audit.json",
+      "role": "v1-audit",
+      "sha256": "ccdbf627de5a4ba58cc7ab79786abcec6888fec404245f65bfcb1dadfb324aab",
+      "size": 1741
+    },
+    "v1-review-generation-comparison.json": {
+      "blob_oid": null,
+      "filename": "v1-review-generation-comparison.json",
+      "role": "v1-audit",
+      "sha256": "470a9b2afb2e1476f4f186ddcfbbd31bdbab1a072defbbf50de090013345b5bd",
+      "size": 543
+    }
+  },
+  "frozen_at_utc": "2026-08-06T21:36:00Z",
+  "payload_file_count": 10,
+  "review_artifact_exclusion_rule": "senior-preflight-v2.json, senior-review-bundle-v2.json, senior-verdict-v2.json, review-binding-receipt-v2.json, publication-index-v2.json are review/binding artifacts created AFTER the senior review and are NEVER included in the payload reviewed by the senior.",
+  "schema": "payload-manifest-v2/v1",
+  "self_exclusion_rule": "payload-manifest-v2.json is NOT included in its own files-map; the manifest is bound externally by its SHA-256 after freeze."
+}

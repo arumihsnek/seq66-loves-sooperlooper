@@ -1,0 +1,17 @@
+{
+  "accept_does_not_authorize": [
+    "dispatch",
+    "integration",
+    "v3.5 execution"
+  ],
+  "blocking_findings": 0,
+  "bound_payload_manifest_sha256": "31b3fd5518153727bc51785553b0dd3ab9223f957ec5a2d270eca90186e946f6",
+  "detailed_status": "VALID_ADVISORY_VERDICT",
+  "execution_id": "8411b59c-20c7-408c-b81d-58805b2f90a6",
+  "recorded_at_utc": "2026-08-06T22:38:30Z",
+  "required_actions": 0,
+  "response_fingerprint": "4b2e444f229cbcda2f96870b8a06996ed52239a78894d69d4bcf282c0a38ea5e",
+  "schema": "senior-verdict/v3.5-functional",
+  "status": "COMPLETED",
+  "verdict": "accept"
+}

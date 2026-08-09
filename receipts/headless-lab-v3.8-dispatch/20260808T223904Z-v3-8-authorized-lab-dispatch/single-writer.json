@@ -1,0 +1,10 @@
+{
+ "concurrent_writer_detected": false,
+ "lock_file": "/home/ubuntu/.hermes/locks/seq66-loves-sooperlooper-pr34-controller.lock",
+ "lock_held": true,
+ "lock_method": "flock -n fd9",
+ "lock_pid": 2177972,
+ "recorded_at_utc": "2026-08-08T22:41:37Z",
+ "remote_race_checks": [],
+ "schema": "single-writer/v3.8"
+}

@@ -1,0 +1,186 @@
+{
+  "schema": "acceptance-verifier-v3.2",
+  "version": "3.2.0",
+  "lab": "B",
+  "repository": "/home/ubuntu/code/music/seq66-loves-sooperlooper",
+  "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "result_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+  "envelope_container_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+  "envelope_path": "receipts/headless-lab-results-v3.2/lab-b-result.json",
+  "checks": [
+    {
+      "name": "model: C commit exists",
+      "status": "PASS",
+      "detail": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "evidence": {}
+    },
+    {
+      "name": "model: R commit exists",
+      "status": "PASS",
+      "detail": "0769d150f4989b8331db8273aa7a771f7b929026",
+      "evidence": {}
+    },
+    {
+      "name": "model: E commit exists",
+      "status": "PASS",
+      "detail": "0769d150f4989b8331db8273aa7a771f7b929026",
+      "evidence": {}
+    },
+    {
+      "name": "model: R^ == C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "r_parent": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+        "c": "509538784afc2b828f2d922f65cf8ca3a39b5ee7"
+      }
+    },
+    {
+      "name": "model: E^ == R",
+      "status": "FAIL",
+      "detail": "",
+      "evidence": {
+        "e_parent": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+        "r": "0769d150f4989b8331db8273aa7a771f7b929026"
+      }
+    },
+    {
+      "name": "model: envelope absent from R",
+      "status": "PASS",
+      "detail": "envelope must NOT be committed in the implementation result commit",
+      "evidence": {}
+    },
+    {
+      "name": "model: envelope present in E",
+      "status": "FAIL",
+      "detail": "envelope must be committed in the envelope container commit",
+      "evidence": {}
+    },
+    {
+      "name": "model: diff C..R owned-only",
+      "status": "FAIL",
+      "detail": "",
+      "evidence": {
+        "changed": [
+          "tests/__init__.py",
+          "tests/integration/__init__.py",
+          "tests/integration/headless_audio_lab/audio_oracle.py",
+          "tests/integration/headless_audio_lab/fixtures/.gitignore",
+          "tests/integration/headless_audio_lab/graph_assertions.py",
+          "tests/integration/headless_audio_lab/runner.py",
+          "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+          "tests/integration/headless_audio_lab/test_modules.py"
+        ],
+        "out_of_scope": [
+          "tests/integration/headless_audio_lab/fixtures/.gitignore"
+        ]
+      }
+    },
+    {
+      "name": "model: diff R..E envelope-only",
+      "status": "FAIL",
+      "detail": "",
+      "evidence": {
+        "changed": [],
+        "expected": [
+          "receipts/headless-lab-results-v3.2/lab-b-result.json"
+        ]
+      }
+    },
+    {
+      "name": "model: envelope parses",
+      "status": "FAIL",
+      "detail": "invalid JSON: Expecting value: line 1 column 1 (char 0)",
+      "evidence": {}
+    },
+    {
+      "name": "model: clean worktree at R (on arrival)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    },
+    {
+      "name": "lab-b: analyze_wav signature",
+      "status": "PASS",
+      "detail": "contract args=['wav_path', 'expected_loop_frames', 'observed_loop_frames', 'tempo', 'numerator', 'sample_rate', 'silence_threshold', 'peak_threshold']",
+      "evidence": {
+        "impl_sig": " wav_path: str | Path, expected_loop_frames: int, observed_loop_frames: int, tempo: float, numerator: int, sample_rate: int, silence_threshold: float = 0.01, peak_threshold: float = 0.9 ",
+        "missing": []
+      }
+    },
+    {
+      "name": "lab-b: test_modules negative gates",
+      "status": "FAIL",
+      "detail": "hits=['pass-stub', 'trivial-assert-true', 'import-only-test-name', 'magic-mock-in-tests'] invokes_analyze_wav=False",
+      "evidence": {}
+    },
+    {
+      "name": "lab-b: silence always FAIL",
+      "status": "PASS",
+      "detail": "silent WAV must produce FAIL",
+      "evidence": {
+        "silence_verification": "FAIL",
+        "malformed_result": "EXCEPTION:ValueError",
+        "frame_count": 4800
+      }
+    },
+    {
+      "name": "lab-b: malformed WAV FAIL/ERROR",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "malformed_result": "EXCEPTION:ValueError"
+      }
+    },
+    {
+      "name": "lab-b: frame count contract",
+      "status": "PASS",
+      "detail": "captured_wav_frames=4800 expected 4800",
+      "evidence": {}
+    },
+    {
+      "name": "lab-b: .gitignore byte-exact",
+      "status": "FAIL",
+      "detail": "literal '\\\\n' rejected; real newlines required",
+      "evidence": {
+        "repr": "'synthetic_source\\\\ndeterministic_capture\\\\n'"
+      }
+    },
+    {
+      "name": "lab-b: no ELF tracked",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "elf_tracked": []
+      }
+    },
+    {
+      "name": "lab-b: scenarios parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "bad": []
+      }
+    },
+    {
+      "name": "lab-b: runner uses contractual APIs",
+      "status": "PASS",
+      "detail": "API hits: ['ProcessSupervisor', 'JackServer', 'OscProbe', 'SooperLooperLauncher', 'analyze_wav', 'GraphAssertions']",
+      "evidence": {}
+    },
+    {
+      "name": "model: clean worktree at R (after gates)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    }
+  ],
+  "env_notes": [],
+  "verdict": "REJECT"
+}

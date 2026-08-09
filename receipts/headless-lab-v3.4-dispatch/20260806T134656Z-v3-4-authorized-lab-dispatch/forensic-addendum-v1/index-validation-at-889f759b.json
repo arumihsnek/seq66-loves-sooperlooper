@@ -1,0 +1,12 @@
+{
+  "all_match": true,
+  "commit": "889f759b9774d877b950c0609d799c272f1c9923",
+  "count_consistency_note": "publisher artifact: index 'count' field = 20 while files map has 19 keys (duplicate 'dispatch-verdict.json' key collapsed at publication); pre-existing at 889f759b; NOT a post-CP061 mutation",
+  "count_field_consistent": false,
+  "declared_count_field": 20,
+  "files_map_entries": 19,
+  "label": "at-889f759b",
+  "matched": 19,
+  "mismatches": [],
+  "total": 19
+}

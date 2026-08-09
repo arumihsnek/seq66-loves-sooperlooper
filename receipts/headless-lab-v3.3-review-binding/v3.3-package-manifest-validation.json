@@ -1,0 +1,14 @@
+{
+  "batch_exact": true,
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "candidate_exact": true,
+  "expected_count": 13,
+  "frozen_file_count": 13,
+  "hash_or_size_mismatch": [],
+  "missing": [],
+  "recorded_at_utc": "2026-08-06T01:39:45Z",
+  "schema": "v3.3-package-manifest-validation/v1",
+  "supersedes_v3_2": true,
+  "supersession_reason": "incomplete runtime enforcement of required envelope, artifact, literal-test and provenance fields",
+  "verdict": "MANIFEST_VALIDATION: PASS"
+}

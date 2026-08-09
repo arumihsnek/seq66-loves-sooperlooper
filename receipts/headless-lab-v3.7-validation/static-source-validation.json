@@ -1,0 +1,19 @@
+{
+ "STATIC_VALIDATOR_GLOBAL": "PASS",
+ "debug_markers": 0,
+ "debug_markers_zero": true,
+ "finalizer_ok": true,
+ "findings": [],
+ "production_findings": 0,
+ "recorded_at_utc": "2026-08-07T20:00:42Z",
+ "sanity_bad_findings": [
+  "or True",
+  "if False else False",
+  "selftest policy-only auto-PASS",
+  "debug marker"
+ ],
+ "sanity_bad_snippet_rejected": true,
+ "schema": "static-source-validation/v3.6",
+ "self_scan_zero": true,
+ "verifier_ok": true
+}

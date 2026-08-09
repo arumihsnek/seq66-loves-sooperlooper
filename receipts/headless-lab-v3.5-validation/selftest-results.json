@@ -1,0 +1,29 @@
+{
+  "case_count": 20,
+  "cases": {
+    "E_wrong_parent_rejected": true,
+    "acceptance_inside_E_rejected": true,
+    "createonly_publication_passes": true,
+    "empty_R_rejected": true,
+    "evidence_forbidden_E_rejected": true,
+    "evidence_in_R_rejected": true,
+    "evidence_missing_field_rejected": true,
+    "extra_envelope_commit_rejected": true,
+    "force_push_detected_rejected": true,
+    "leaf_key_exit_code_rejected": true,
+    "multi_parent_rejected": true,
+    "out_of_scope_rejected": true,
+    "preexisting_branch_rejected_by_policy": true,
+    "remote_ne_E_rejected": true,
+    "required_path_missing_rejected": true,
+    "silent_substitution_rejected": true,
+    "tracked_elf_rejected": true,
+    "valid_LAB_A_R_only": true,
+    "wrong_parent_rejected": true,
+    "wrong_test_id_rejected": true
+  },
+  "exit_code": 0,
+  "global": "PASS",
+  "recorded_at_utc": "2026-08-06T22:35:00Z",
+  "schema": "selftest-results/v3.5"
+}

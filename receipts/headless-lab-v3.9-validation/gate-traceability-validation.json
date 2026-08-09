@@ -1,0 +1,11 @@
+{
+ "all_entries_have_normative_artifact": true,
+ "all_entries_have_requirement": true,
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "finalizer_assertion": "traceability assertion PASS gate present; orphan gates rejected (NA6)",
+ "gate_count": 25,
+ "leaf_visible_covered_in_leaf_requirements": true,
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "schema": "validation/v3.9",
+ "unique_gate_ids": 25
+}

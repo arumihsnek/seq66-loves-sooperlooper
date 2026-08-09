@@ -1,0 +1,7 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "note": "ownership matrix unchanged from v3.8 (LAB-A 5 paths, LAB-B 12 paths); intersection empty",
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "result": "PASS",
+ "schema": "validation/v3.9"
+}

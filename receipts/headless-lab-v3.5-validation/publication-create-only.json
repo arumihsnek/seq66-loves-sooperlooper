@@ -1,0 +1,25 @@
+{
+  "ambiguous_push_consequence": "PUBLISH_STATE_AMBIGUOUS -> STOP",
+  "controller_sole_publisher": true,
+  "create_only_evidence": {
+    "bare_remote_push_create_only": true,
+    "force_push_detected_rejected": true,
+    "preexisting_branch_rejected": true,
+    "remote_ne_E_rejected": true,
+    "selftest_case": "createonly_publication_passes"
+  },
+  "policy_sequence": [
+    "check remote branch absent",
+    "validate R",
+    "create E mechanically",
+    "prepublish-finalization PASS",
+    "re-check remote branch absent",
+    "push create-only E -> branch",
+    "resolve remote branch",
+    "require remote == E",
+    "create A outside E",
+    "postpublish-binding PASS"
+  ],
+  "recorded_at_utc": "2026-08-06T22:37:00Z",
+  "schema": "publication-create-only/v3.5"
+}

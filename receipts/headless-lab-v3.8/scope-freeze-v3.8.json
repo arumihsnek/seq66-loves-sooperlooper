@@ -1,0 +1,60 @@
+{
+  "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "forbidden": [
+    "reuse of v3.4 batch/lease/leaf IDs",
+    "reuse of v3.4 result paths or branches",
+    "reuse of rejected v3.4 R or E",
+    "leaf-created envelope or E",
+    "leaf push authority",
+    "leaf remote branch creation",
+    "cherry-pick/merge/rebase of results",
+    "D0/D1/D2 execution",
+    "modification of candidate"
+  ],
+  "frozen_at_utc": "2026-08-06T23:45:54Z",
+  "nature": "RUNTIME CONTRACT CORRECTION (v3.8 closes fc-f1/fc-f2/fc-f3; fail-closed finalizer/verifier; functional surface inherited from v3.6)",
+  "ownership": {
+    "LAB-A": [
+      "tests/integration/headless_audio_lab/process_supervisor.py",
+      "tests/integration/headless_audio_lab/jack_server.py",
+      "tests/integration/headless_audio_lab/osc_probe.py",
+      "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+      "tests/integration/headless_audio_lab/__init__.py"
+    ],
+    "LAB-B": [
+      "tests/__init__.py",
+      "tests/integration/__init__.py",
+      "tests/integration/headless_audio_lab/audio_oracle.py",
+      "tests/integration/headless_audio_lab/graph_assertions.py",
+      "tests/integration/headless_audio_lab/runner.py",
+      "tests/integration/headless_audio_lab/test_modules.py",
+      "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+      "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+      "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+      "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+      "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+      "tests/integration/headless_audio_lab/fixtures/.gitignore"
+    ]
+  },
+  "ownership_intersection": [],
+  "ownership_intersection_empty": true,
+  "package": "v3.8",
+  "result_branches": {
+    "lab_a": "result/<future-run-id>-lab-a-v3_8",
+    "lab_b": "result/<future-run-id>-lab-b-v3_8"
+  },
+  "result_paths": {
+    "lab_a_controller_evidence": "receipts/headless-lab-results-v3.8/lab-a-controller-evidence.json",
+    "lab_b_controller_evidence": "receipts/headless-lab-results-v3.8/lab-b-controller-evidence.json"
+  },
+  "rules": {
+    "R_only_leaf": "leaf produces exactly one R (R^==C, owned-only); NO envelope",
+    "controller_only_E": "E produced ONLY by fail-closed mechanical-finalizer-v3.8.py; no gate failure => no E",
+    "controller_only_publication": "create-only push; real ls-remote absence before E and before push; ambiguous => STOP",
+    "integration_only_from_R": true,
+    "no_dispatch_authorization": "v3.8 dispatch_authorized=false; leases planned only",
+    "v3_5_status": "EXACT_BYTES_REVIEWED_REJECTED_FOR_DISPATCH (BF-01..BF-18)"
+  },
+  "schema": "scope-freeze/v3.8"
+}

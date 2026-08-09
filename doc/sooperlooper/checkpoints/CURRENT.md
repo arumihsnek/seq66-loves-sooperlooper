@@ -1,45 +1,41 @@
-# Current checkpoint — v3.8 package identity coherence (frozen, not dispatched)
+# Current checkpoint — V3.9 authorized lab dispatch completed (CP-075)
 
-Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-08-CP-068-v3-8-package-identity-coherence.md`
+Immutable checkpoint: `doc/sooperlooper/checkpoints/2026-08-09-CP-075-v3-9-authorized-lab-dispatch.md`
 
-Checkpoint ID: `CP-068`
-Checkpoint date: 2026-08-08
+Checkpoint ID: `CP-075`
+Checkpoint date: 2026-08-09
 Phase: `phase-5-exact-recording`
-Active task: P5-007 (M5 exact musical recording); sub-task: v3.8 review-binding + publication (controller-owned, STOP gate)
-Status: `v3.8 EXACT_BYTES_REVIEWED_NOT_DISPATCHED — HUMAN_DECISION_PENDING`
-Branch: `fork-main`
-Exact head (PR #34): `3090f2e078ca29762f7654b9e5a872f58ad4ac5b`
+Active task: P5-005 (M5 exact musical recording — v3.9 authorized lab dispatch)
+Status: `V3.9 DISPATCH COMPLETED — exact-head senior merge review pending`
+Branch: `integration/baseline-qualification-20260805`
+
+Published source head: resolved externally after publication.
+Exact-head CI: required on resulting PR head (Project control plane +
+Audio integration core, head_sha == new PR head).
 
 ## Verification summary
 
-- v3.7 byte-exact preserved (manifest SHA-256 `7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3`).
-- v3.7 dispatch eligibility REVOKED (`v3_7_status=EXACT_BYTES_REVIEWED_REJECTED_FOR_DISPATCH`).
-- v3.8 operational payload frozen: 19/19 files, manifest SHA-256 `bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18`, zero missing, zero extra.
-- Cross-manifest coherence: 59 sources checked, 0 mismatches, verdict PASS.
-- Selftest: 32/32 (declared=executed=passed, failed=0, skipped=0).
-- Identity negative matrix: 15/15 + control PASS (real CLI per case).
-- S1-S11 harness: all PASS (fail-closed 8/8, runtime contract PASS, controlled build PASS, publication create-only PASS, postpublish binding PASS, full completion PASS, inherited negative matrix 29/29, static source PASS, package validation 19/19, functional continuity PASS).
-- Part3: command hashes 8/8 (4 LAB-A + 4 LAB-B), ownership diff LAB-A + LAB-B PASS, runtime contract negatives 12/12.
-- Triple senior review (frozen manifest + 19 payload hashes):
-  - functional-continuity (final-review): `accept`, 0 blocking, 0 required.
-  - package-identity-coherence (integrated-review): `accept`, 0 blocking, 0 required.
-  - adversarial-identity-validity (risk-audit): `continue`, 0 blocking, 0 required (all 6 Q answered SÍ, residual risks acknowledged, controls enumerated).
-- Review binding (`package-review-binding-v3.8.json`): `three_accepts=True`, `blocking=0`, `required_actions_total=0`.
-- CI runs 31226194220 (control plane) + 31226194221 (audio integration core) on PR #34 head `3090f2e0…`: completed / success / exact head.
+- v3.9 dispatch executed with frozen package `71596b84…` (3×accept binding):
+  leaves LAB-A/LAB-B → R_A `46bd5f52…` / R_B `122303ee…` (both R^==C, clean,
+  zero tracked ELF, 8/8 frozen literal tests exit 0).
+- Finalizer v3.9: prepublication_verdict PASS for both (zero gate failures).
+- Result branches published (create-only) at E commits
+  `7db1a1b7…` (lab-a) / `71a63065…` (lab-b); postpublish binding PASS.
+- D0/D1/D2 complete: dispatch, postpublish binding + evidence publication,
+  checkpoint/PR/CI.
+- v3_9_dispatch_authorized=true (human) — consumed; leases active; leaves=2;
+  remote_result_branches=2.
 
 ## Authorization scope (this checkpoint)
 
-- `v3_7_dispatch_authorized = false` (REVOKED).
-- `v3_8_dispatch_authorized = false`.
-- `leases = planned`, `leases_activated = false`.
-- `leaves = 0`, `lab_execution_worktrees = 0`, `remote_result_branches = 0`.
-- `integration_authorized = false`, `D0_D1_D2_authorized = false`, `PR_merge_authorized = false`.
-- Single-writer lease: PID `1915047` holds FD 9 on
-  `/home/ubuntu/.hermes/locks/seq66-loves-sooperlooper-pr34-controller.lock`
-  (reacquired 2026-08-08T20:27:33Z).
+- integration_authorized=true, D0_D1_D2_authorized=true (consumed),
+  PR_merge_authorized=true (pending exact-head senior merge review).
+- force_push=false; worktree_deletion=false.
+- Single-writer lock held for this session.
 
 ## Next action
 
-HUMAN_DECISION_PENDING: authorize or reject **exactly one** fresh v3.8 LAB-A/LAB-B
-dispatch. No leaves, no worktrees, no integration, no D0/D1/D2, no PR merge
-authorized by this checkpoint. See `CP-068` for full context.
+1. Exact-head senior merge review (merge-gate) on the new control-plane head.
+2. On accept (blocking=0): merge PR #34 to fork-main with expected-head
+   protection per AUTONOMOUS-MERGE.md.
+3. Post-transition checkpoint.

@@ -1,0 +1,30 @@
+{
+ "ORIGINAL_REVIEW_BINDING_VALID": false,
+ "RB-F1_VERDICT_COUNT_MISREPRESENTATION": "BLOCKING",
+ "actual_accept_count": 2,
+ "actual_continue_count": 1,
+ "claimed_accept_count": 3,
+ "note": "A 'continue' verdict is NOT normalized or converted to 'accept'. VALID_ADVISORY_VERDICT demonstrates the verdict is valid, not that its value is 'accept'.",
+ "original_binding_claimed_three_accepts": true,
+ "original_binding_path": "receipts/headless-lab-v3.8-review-binding/package-review-binding-v3.8.json",
+ "original_binding_sha256": "7c3486db9275eee1fa9f8ed14817727b3f8d4763fdc30fe9e73dd027ea21e459",
+ "original_verdicts": {
+  "adversarial-identity-validity": {
+   "blocking_findings": null,
+   "required_actions": null,
+   "verdict": "continue"
+  },
+  "functional-continuity": {
+   "blocking_findings": null,
+   "required_actions": null,
+   "verdict": "accept"
+  },
+  "package-identity-coherence": {
+   "blocking_findings": null,
+   "required_actions": null,
+   "verdict": "accept"
+  }
+ },
+ "recorded_at_utc": "2026-08-08T21:12:13Z",
+ "schema": "correction-v1/original-review-binding-audit"
+}

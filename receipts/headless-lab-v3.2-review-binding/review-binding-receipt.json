@@ -1,0 +1,30 @@
+{
+  "d0_d1_d2_authorized": false,
+  "d0_d1_d2_executed": false,
+  "evidence_parent_head": "da89654e05d7014bf0720ed5517c362b7c4beacf",
+  "external_branch_binding": {
+    "model": "remote leaf branch points to E; verified via git ls-remote AFTER push",
+    "never_inside_envelope": true,
+    "receipt": "created by the controller at dispatch time (post-push), recording: implementation_result_commit_oid (R), implementation_result_tree_oid (R^{tree}), envelope_container_commit_oid (E), envelope blob OID, envelope SHA-256, remote branch SHA"
+  },
+  "integration_authorized": false,
+  "leases_v3_2_activated": [],
+  "leases_v3_2_planned": [
+    "LEASE-20260805T224640Z-LAB-A-V3_2",
+    "LEASE-20260805T224640Z-LAB-B-V3_2"
+  ],
+  "leaves_v3_2": 0,
+  "recorded_at_utc": "2026-08-05T23:36:37Z",
+  "redispatch_authorized": false,
+  "schema": "review-binding-receipt/v3.2",
+  "senior_execution_id": "a4a74e23-b260-48ee-ba82-9b358966ec4f",
+  "senior_response_fingerprint": "3bf4941861cdcd4bcde356dbc0bc5c266c8993e4c911fc4c62e344b867e236cf",
+  "v3_1_dispatch_eligible": false,
+  "v3_1_exact_review_remains_historical": true,
+  "v3_1_status": "IMMUTABLE_REJECTED_FOR_DISPATCH",
+  "v3_2_dispatched": false,
+  "v3_2_exact_bytes_reviewed": true,
+  "v3_2_package_manifest_sha256": "441d04d4eb812b5c2738372205ae244691386cec2c2c4fe8011889486bf9ec27",
+  "v3_2_status": "EXACT_BYTES_REVIEWED_NOT_DISPATCHED",
+  "worktrees_v3_2": 0
+}

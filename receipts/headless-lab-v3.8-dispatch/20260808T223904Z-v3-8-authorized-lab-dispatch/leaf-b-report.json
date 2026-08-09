@@ -1,0 +1,17 @@
+{
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "candidate_commit_oid": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "dispatch_run_id": "20260808T223904Z-v3-8-authorized-lab-dispatch",
+ "implementation_result_commit_oid": "357fe38983784c721e25ed2c8ae59a6303e2ef5d",
+ "implementation_result_tree_oid": "a1eb6cc140138240d0a917cad6dd874ad05576c8",
+ "lab": "LAB-B",
+ "leaf_id": "LEAF-LAB-B-V3_8",
+ "lease_id": "LEASE-20260808T132428Z-LAB-B-V3_8",
+ "local_test_observations": "ft-b1..ft-b4 exit 0 (leaf self-report; controller re-verified separately)",
+ "note": "UNTRUSTED self-report; controller verified independently",
+ "package": "v3.8",
+ "recorded_at_utc": "2026-08-08T22:58:09Z",
+ "schema": "leaf-r-report-schema/v3.8",
+ "worktree_clean_claim": true
+}

@@ -1,0 +1,60 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "entries": [
+  {
+   "finding": "F-A1",
+   "type": "finalizer overconstraint removal + normative loader alignment",
+   "v3_8_behavior": "finalizer loads modules with importlib.util.spec_from_file_location(synthetic top-level name); relative/package imports fail; standalone loading effectively required (no normative authority)",
+   "v3_9_behavior": "finalizer inspects modules in the contractual package import context (tests/integration on sys.path, import headless_audio_lab.<module>); verifies resolved __file__ == exact R checkout file; relative package imports work"
+  },
+  {
+   "finding": "F-B2",
+   "type": "finalizer representation overconstraint removal; semantic annotation comparison",
+   "v3_8_behavior": "finalizer compares str(inspect.Parameter.annotation) literally to baseline strings; evaluated annotations fail ('<class 'int'>' != 'int')",
+   "v3_9_behavior": "finalizer compares semantic types via typing.get_type_hints() with correct namespace; accepts evaluated and future-annotations representations when they resolve to the same normative type; rejects genuine type mismatches"
+  },
+  {
+   "finding": "F-B3",
+   "type": "finalizer overconstraint removal; valid-input verification",
+   "v3_8_behavior": "finalizer calls analyze_loop_reproduction('x.wav','y.wav',4800) with nonexistent paths; any exception fails the return-shape gate",
+   "v3_9_behavior": "return-shape gate creates two real controlled WAV fixtures and calls analyze_loop_reproduction(valid_source, valid_capture, expected_frames, ...); requires dict + normative frame-ratio/silence semantics; missing-file behavior out_of_contract (diagnostic only, never blocks E)"
+  },
+  {
+   "finding": "F-B1",
+   "type": "leaf-visibility reinforcement of an existing normative requirement",
+   "v3_8_behavior": "tracked ELF rejected (normative in build-provenance-policy/dispatch-plan) but not listed in the leaf-required reading material; fixture representation (.gitkeep dirs) existed only in selftest",
+   "v3_9_behavior": "zero tracked ELF requirement remains normative AND is made leaf-visible via leaf-requirements-v3.9.json; no mandatory .gitkeep-dir representation"
+  },
+  {
+   "finding": "traceability",
+   "type": "new normative-gate traceability artifact",
+   "v3_8_behavior": "no machine-readable registry linking blocking gates to normative artifacts",
+   "v3_9_behavior": "gate-traceability-v3.9.json maps every blocking gate to normative artifact/json-pointer/requirement/leaf_visible/verification method/negative fixture; finalizer asserts no orphan gates"
+  },
+  {
+   "finding": "leaf-requirements",
+   "type": "new leaf requirement visibility artifact",
+   "v3_8_behavior": "leaf-visible requirements not enumerated in one artifact; leaves could not predict finalizer rejections",
+   "v3_9_behavior": "leaf-requirements-v3.9.json enumerates ALL implementation-affecting rejection requirements per lab; future leaf prompt must reference it"
+  }
+ ],
+ "recorded_at_utc": "2026-08-08T23:33:26Z",
+ "schema": "v3.8-v3.9-semantic-diff/v3.9",
+ "unchanged_semantics": [
+  "functional product API (modules, functions, classes, methods, signatures, returns)",
+  "ownership (LAB-A 5 paths, LAB-B 12 paths)",
+  "literal test argv (ft-a1..a4, ft-b1..b4 byte-identical commands)",
+  "R-only leaf model (C -> R -> E -> A)",
+  "identity coherence (batch/candidate/leaf/lease/result paths)",
+  "command hash enforcement (sha256 canonical serialization)",
+  "cleanliness (clean checkout, zero untracked, zero unexpected ignored)",
+  "tracked ELF rejection (R must contain zero tracked ELF)",
+  "controlled build (canonical compile into empty build dir from candidate C sources)",
+  "remote absence (real ls-remote --exit-code; rc=2 absent)",
+  "create-only publication (no force, no reuse, no second push)",
+  "postpublication binding",
+  "full completion (accumulated gates)",
+  "process ownership safety (no pkill/killall; owned-only termination)"
+ ],
+ "v3_8_manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18"
+}

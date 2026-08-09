@@ -1,0 +1,37 @@
+{
+  "artifact_hashes": {
+    "acceptance-manifest-v3.3.json": "2ff451fcaa374c28a25b17866e865eaeae25c87fefca7f445aa4b6a3caabdebb",
+    "acceptance-verifier-v3.3.py": "ecb3fba491d40c4bca0382accf44081eb24863231b64d64537a143393dbee895",
+    "batch-manifest-v3.3.json": "4d1ce39ffb9af5de8601638ff4d15cbba82ad804da046973d14eaada3781a8d8",
+    "build-provenance-policy-v3.3.json": "a36c8ac77a582bea91513ece0bfe2c6ecb7ce40175397f72689be1b645c661b2",
+    "controller-acceptance-schema-v3.3.json": "9026cf98f02560c7fd9a08df44863114ea8c76f4d0350e73bfaebff8056c14ee",
+    "dispatch-plan-v3.3.json": "084cf4d57cb7619caec9bdc1e9c72e796d73f8d4b353066fa7867112049b3943",
+    "lab-api-contract-v3.3.json": "94ce7696ff6114cc248a4214addec95c5aedb668011085c01a4a1286ac620614",
+    "lease-plan-lab-a-v3.3.json": "b7e19e62afeea93b3f32f24ec934b706317d92e2469489cd7cfcf8c016cd09cd",
+    "lease-plan-lab-b-v3.3.json": "cfc52bace81b46d4e9c78b7839d1ae20d794bcefc8bde469d11a98b0fa1f096a",
+    "port-plan-v3.3.json": "a84df36ae51ec56b961a01f2699690a1e4f718b3a68bac01741b2dbfa35830c5",
+    "predispatch-readiness-v3.3.json": "fb5372c4e03327b039b836e1a23819315b0dd4063a3c7ae0c699ebabe2b77632",
+    "result-envelope-schema-v3.3.json": "8da16c319db3f9e85b6eac4da242fe96b190bf1fcec8431d44f6b6cdefbf2752",
+    "scope-freeze-v3.3.json": "318b280df03f0040659dacdd4d6e85ab066497550973328c327077e90e301c67"
+  },
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "bundle_sha256": "bacab04c3e933c273a33b5308857a7c7074f1e05cf3e49697c97e024dfc8a8ea",
+  "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "evidence_parent_head": "01d27c58330ab753c3499c6fb67336e0f91b961a",
+  "label": "seq66-lab-v3-3-strict-envelope-package",
+  "mission_id": "seq66-lab-v3-3-strict-envelope-package",
+  "mode": "plan-review",
+  "package_manifest_sha256": "ef17ecd1ba36be6597fe0279890d6e730144df7eaede7960167d3a5eaba2aefc",
+  "questions": [
+    "Q1. \u00bfEl verifier exige todos los campos normativos del envelope, no s\u00f3lo los OIDs? (schema/lab/batch/leaf/lease/external branch/literal tests/build claim/artifacts; unknown keys rechazadas; claves self-binding y controller-future rechazadas)",
+    "Q2. \u00bfVerifica hashes, tama\u00f1os y set exacto de artifacts desde los blobs de R? (artifacts == diff C..R; sha256/size por blob; artifacts nunca vac\u00edo; R non-empty)",
+    "Q3. \u00bfDistingue correctamente claims de leaf (envelope E) y evidencia posterior del controller (receipt A)? (A nunca dentro de E; A creado tras el push)",
+    "Q4. \u00bfLos tests literales est\u00e1n ligados byte-exactamente a los comandos congelados? (command_sha256 == sha256(bytes del comando en batch-manifest); sin doble-escaping; exit 0; timestamps ordenados)",
+    "Q5. \u00bfR vac\u00edo, merges, metadatos incorrectos y provenance incompleta son rechazados? (R==C REJECT; R/E merge REJECT; OIDs/object format exactos; LAB-A claim inventado REJECT; LAB-B claim incompleto REJECT)",
+    "Q6. \u00bfFull completion exige branch binding, clean checkout, harness y controlled rebuild? (remote branch == expected; remote OID == E; literal tests reejecutados; harness PASS en R; rebuild con salidas == claim; worktree clean before/after; completion criteria)",
+    "Q7. \u00bfS\u00f3lo R contin\u00faa siendo integration-eligible y E evidence-only? (modelo C->R->E conservado de v3.2)",
+    "Q8. \u00bfEl paquete exacto puede congelarse para decisi\u00f3n humana separada? (manifest byte-exacto; 13 artifacts; supersedes v3.2 con raz\u00f3n declarada)"
+  ],
+  "recorded_at_utc": "2026-08-06T01:43:47Z",
+  "schema": "senior-review-bundle/v1"
+}

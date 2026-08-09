@@ -1,0 +1,47 @@
+{
+  "acceptance_harness": "acceptance-verifier-v3.1.py",
+  "base_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+  "completion_definition": {
+    "criteria": [
+      "non-empty commit exists on the result branch",
+      "branch published (remote ref present)",
+      "full result-head SHA recorded",
+      "clean worktree at result head (no tracked modifications, no required-untracked outputs)",
+      "valid result envelope at the frozen owned path",
+      "owned-path-only diff (no forbidden paths changed)",
+      "all literal focused tests executed with exit code 0 on the exact result head",
+      "controller clean-checkout verification PASS (acceptance-verifier-v3.1.py on clean checkout)"
+    ],
+    "id": "COMPLETION-V3_1",
+    "summary_can_never_substitute": true
+  },
+  "envelope_model": "result-envelope-schema-v3.1.json",
+  "review_class": "R2",
+  "schema": "dispatch-plan/v3.1",
+  "stop_conditions": [
+    "no dispatch until human redispatch authorization",
+    "D0/D1/D2 NOT executed by this closure"
+  ],
+  "task_ids": [
+    "LAB-A",
+    "LAB-B"
+  ],
+  "worktree_branch_policy": {
+    "forbidden_reuse": [
+      "/home/ubuntu/code/music/worktrees/lab-a-dogfood004-recovery",
+      "/home/ubuntu/code/music/worktrees/lab-b-dogfood004-recovery",
+      "result/lab-a-dogfood004-recovery",
+      "result/lab-b-dogfood004-recovery"
+    ],
+    "future_naming": "branches and paths derived from the future RUN ID (e.g. result/<future-run-id>-lab-a-v3_1, worktrees/<future-run-id>-lab-a-v3_1)",
+    "predispatch_freshness_checks": [
+      "both result branches absent (remote + local)",
+      "both worktree paths absent",
+      "both new worktrees clean at exact candidate",
+      "acceptance harness SHA-256 verified against acceptance-manifest-v3.1.json",
+      "new lease plans in place (LEASE-20260805T165044Z-LAB-A-V3_1, LEASE-20260805T165044Z-LAB-B-V3_1)",
+      "zero active old leases"
+    ]
+  }
+}

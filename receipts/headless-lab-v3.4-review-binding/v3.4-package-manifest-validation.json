@@ -1,0 +1,14 @@
+{
+  "batch_exact": true,
+  "batch_id": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+  "candidate_exact": true,
+  "expected_count": 14,
+  "frozen_file_count": 14,
+  "hash_or_size_mismatch": [],
+  "missing": [],
+  "recorded_at_utc": "2026-08-06T02:19:47Z",
+  "schema": "v3.4-package-manifest-validation/v1",
+  "supersedes_v3_3": true,
+  "supersession_reason": "v3.3 strict workflow was internally valid but introduced unauthorized functional-contract and build-provenance regression",
+  "verdict": "MANIFEST_VALIDATION: PASS"
+}

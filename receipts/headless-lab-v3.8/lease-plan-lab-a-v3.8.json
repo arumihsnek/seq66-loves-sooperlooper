@@ -1,0 +1,14 @@
+{
+  "activated": false,
+  "authorization": false,
+  "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "frozen_at_utc": "2026-08-06T23:45:54Z",
+  "leaf_id": "LEAF-LAB-A-V3_8",
+  "lease_id": "LEASE-20260808T132428Z-LAB-A-V3_8",
+  "note": "lease is PLANNED ONLY. Activation requires a separate human dispatch authorization (v3.8).",
+  "planned_result_branch": "result/<future-run-id>-lab-a-v3_8",
+  "result_path": "receipts/headless-lab-results-v3.8/lab-a-controller-evidence.json",
+  "schema": "lease-plan/v3.8",
+  "status": "planned"
+}

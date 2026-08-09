@@ -1,0 +1,440 @@
+{
+  "acceptance_criteria": {
+    "blocking_findings": 0,
+    "bound_manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+    "bound_payload_count": 19,
+    "required_actions": 0,
+    "verdict_must_equal": "accept"
+  },
+  "alternatives": [
+    {
+      "cons": [
+        "requires human authorization for dispatch"
+      ],
+      "name": "accept",
+      "pros": [
+        "frozen payload verified byte-exact",
+        "all identity gates fail-closed",
+        "0 blocking/0 required in prior reviews"
+      ]
+    },
+    {
+      "cons": [
+        "would require v3.9 + CP-070; payload frozen"
+      ],
+      "name": "changes_required",
+      "pros": [
+        "forces explicit gap"
+      ]
+    }
+  ],
+  "candidate_decision": {
+    "decision_type": "final_review",
+    "description": "Accept the frozen v3.8 package as technically eligible for a single human-authorized dispatch",
+    "options": [
+      "accept",
+      "changes_required"
+    ],
+    "recommendation": "accept (subject to evidence)"
+  },
+  "code_excerpts": [
+    {
+      "excerpt": "def finalize(...):\n    if not identity_match(args, scope, batch_manifest, lease, candidate, lab, planned_branch, evidence_path):\n        print('IDENTITY_MISMATCH'); sys.exit(3)",
+      "file": "frozen-payload/mechanical-finalizer-v3.8.py",
+      "note": "fail-closed identity gate before any checkout/evidence/E; no fail-open",
+      "significance": "PROVES finalizer rejects any identity mismatch before creating E"
+    },
+    {
+      "excerpt": "def run_full_completion(...):\n    # independent cross-check of evidence vs package identity, scope, batch manifest, lease, C, R, E, A, branch, remote\n    if not independent_identity_cross_check(...): return REJECT",
+      "file": "frozen-payload/acceptance-verifier-v3.8.py",
+      "note": "verifier independently rebuilds identity graph; does not trust evidence.batch alone; full-completion requires identity coherence",
+      "significance": "PROVES verifier cross-checks independently"
+    },
+    {
+      "excerpt": "sources = {...}  # 59 sources\nmismatches = []\nfor k, v in sources.items():\n    if v != AUTHORITY[k]: mismatches.append(...)\nverdict = 'PASS' if not mismatches else 'FAIL'",
+      "file": "frozen-payload/cross-manifest-coherence-validator.py",
+      "note": "identity coherence across 59 sources; supersedes package/manifest/batch included",
+      "significance": "PROVES cross-manifest coherence PASS"
+    }
+  ],
+  "constraints": [
+    "Single pass",
+    "No tools",
+    "No workspace reads",
+    "Advisory only",
+    "Bind to manifest_sha256=bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+    "Bind to 19 payload hashes",
+    "v3.7 byte-exact preservation",
+    "No payload mutation (frozen)",
+    "verdict MUST equal accept"
+  ],
+  "current_plan": {
+    "current_phase": "fresh-adversarial-acceptance",
+    "phases": [
+      "source-gate",
+      "lock",
+      "payload-immutability",
+      "audits",
+      "fresh-adversarial-acceptance",
+      "correction-v1",
+      "cp-069",
+      "publish-source-branch",
+      "ci",
+      "stop"
+    ],
+    "version": "v3.8-cp069"
+  },
+  "decision_needed": "Return verdict=accept with blocking_findings=0 and required_actions=0 if the frozen package is technically acceptable; otherwise return changes_required.",
+  "diff": {
+    "byte_size": 34,
+    "files_changed": "0 (frozen payload; no edits allowed)",
+    "risk": "low (frozen + immutable)",
+    "scope": "Review of frozen v3.8 payload (no mutation). This gate replaces the original adversarial 'continue' with an explicit acceptance determination.",
+    "sha256": "bd9288cb10c4783c521913ae1310d3a0e45d6d75171302937bf92919bfbce2e3",
+    "summary": "19 frozen artifacts, manifest bb4182ad\u2026, supersedes v3.7 (7ce97518\u2026). Identity graph cross-bound across 59 sources. 15/15 identity mutations REJECT + valid control PASS."
+  },
+  "escalation": {
+    "justified": true,
+    "local_deterministic_checks": [
+      "identity negative matrix 15/15 + control PASS (real CLI, exit 3)",
+      "inherited negative matrix 29/29",
+      "runtime contract negatives 12/12",
+      "selftest 32/32 (declared=executed=passed, failed=0, skipped=0)",
+      "cross-manifest 59 sources, 0 mismatches",
+      "command hashes 8/8",
+      "ownership diff 2/2 PASS",
+      "package validation 19/19 PASS",
+      "fail-closed 8/8",
+      "v3.7 manifest 7ce97518\u2026 MATCH (byte-exact preserved)"
+    ],
+    "material_impact": "corrected review binding for v3.8; enables a single human-authorized dispatch later; no integration/D0/D1/D2/merge",
+    "reasons": [
+      "adversarial acceptance gate is a hard review gate for the corrected binding"
+    ]
+  },
+  "invalidated_assumptions": [
+    "Original review binding claimed three_accepts=true but actual verdicts were accept/accept/continue \u2014 this gate replaces the adversarial 'continue' with a fresh explicit acceptance review.",
+    "A 'continue' verdict is valid advisory evidence but does not constitute 'accept'; it is never normalized or converted."
+  ],
+  "mission_id": "hermes-v38-adversarial-final-acceptance",
+  "mode": "final-review",
+  "objective": "Confirm as an adversarial acceptance gate that the frozen v3.8 package can be technically accepted for a single later dispatch subject to explicit human authorization, using the exact same frozen payload, and that no blocking finding or required action remains.",
+  "observed_facts": [
+    "PR #34 open, draft=true, head=3090f2e078ca29762f7654b9e5a872f58ad4ac5b MATCH",
+    "PR mergeable=CONFLICTING because fork-main advanced to a14c3f6c (documented unauthorized base publication)",
+    "fork-main remote head = a14c3f6c4acf89fc24602576ceb7806e81c830a1 (contains a14c3f6c)",
+    "PR source branch integration/baseline-qualification-20260805 remote head = 3090f2e0 (de585b39 never published)",
+    "CI 31226194220 + 31226194221 on 3090f2e0: completed/success exact-head",
+    "merge-base(fork-main, PR source) = 3585334c07accc6f6036d04a7487bea6c6610894",
+    "V3.8 payload frozen: manifest bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18, 19/19 hashes, PAYLOAD_BYTE_DRIFT=false",
+    "v3.7 manifest 7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3 byte-exact preserved",
+    "Original review verdicts: functional=accept, identity=accept, adversarial=continue; original binding claimed three_accepts=true (RB-F1 BLOCKING)",
+    "identity-negative-matrix: 15/15 REJECT + control PASS, real CLI, exit 3 IDENTITY_MISMATCH",
+    "cross-manifest-coherence: verdict=PASS, 59 sources, 0 mismatches",
+    "selftest 32/32 (declared=executed=passed, failed=0, skipped=0)",
+    "inherited negative matrix 29/29; runtime negatives 12/12; command hashes 8/8; ownership 2/2 PASS",
+    "single-writer lock reacquired PID=2138684 FD=9",
+    "dispatch_authorized=false; leases=planned not activated; leaves=0; integration/D0/D1/D2/merge=false"
+  ],
+  "original_adversarial_verdict": {
+    "blocking_findings": null,
+    "bound_manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+    "execution_id": "576c2d81-b0de-46af-8ac1-2e6ee0bc86bc",
+    "required_actions": null,
+    "response_fingerprint": "b98697762f5bd74ba647e8085978793f6d8cef17f5fdb64ff92493964888eac3",
+    "verdict": "continue"
+  },
+  "payload_hashes_evidence": {
+    "files": [
+      {
+        "name": "acceptance-verifier-v3.8.py",
+        "sha256": "8d60f66733eaf6b6c1f2fed8921a578b07a3afc62dd01578a03eb0485bef4c98"
+      },
+      {
+        "name": "batch-manifest-v3.8.json",
+        "sha256": "24a1446e13add0541f765a0135a76400e3784a6f08c518097c15aa6bfc8facb0"
+      },
+      {
+        "name": "build-provenance-policy-v3.8.json",
+        "sha256": "6d386ffafd1c2e640179537b694b6d2d2ff1ebd966964a7533570ab3906eada9"
+      },
+      {
+        "name": "controller-acceptance-schema-v3.8.json",
+        "sha256": "5797214909f3e9d7263e6093f366c841196327cee203546ebd03cc21ce01b028"
+      },
+      {
+        "name": "controller-evidence-schema-v3.8.json",
+        "sha256": "8155a94b2fddf1295582e7df0db46dfeb9ce2b30606e951d58033cfc9c9364de"
+      },
+      {
+        "name": "cross-manifest-coherence-validator.py",
+        "sha256": "02dc9ef667f888c4104781328b2bd726a248f4c378fb8cecd560ad7e7cd67411"
+      },
+      {
+        "name": "dispatch-plan-v3.8.json",
+        "sha256": "5a7f10db1ee780ebea526ac1f7a5e10c8300cabb7006e55f52aed233b368efbd"
+      },
+      {
+        "name": "functional-contract-baseline-v3.8.json",
+        "sha256": "2a32f2af4eceeeafd559dc050424352271fe5fdc6b5ff3b7ae11788fa1c2071b"
+      },
+      {
+        "name": "lab-api-contract-v3.8.json",
+        "sha256": "2099b6d596463c226eee959060e09ae2ca4dc4952dae29817094980c45f64894"
+      },
+      {
+        "name": "leaf-r-report-schema-v3.8.json",
+        "sha256": "1788c10145cce7ce4cf669b69c9994c07c40c766d254166fc7bd1f224667de35"
+      },
+      {
+        "name": "lease-plan-lab-a-v3.8.json",
+        "sha256": "cde2da1dd7e9486169f42d55625e8f5bdbb80e17502f355d5266b5515149fc28"
+      },
+      {
+        "name": "lease-plan-lab-b-v3.8.json",
+        "sha256": "5b258cb4ee78d4fc215fe841acf80316380b45882281e823e4f0867852af8b6c"
+      },
+      {
+        "name": "mechanical-finalizer-v3.8.py",
+        "sha256": "c853af00712a5e3de34671c8fec8a7a992d6a801eb7b423d6807faa760bc10c8"
+      },
+      {
+        "name": "package-identity-v3.8.json",
+        "sha256": "5151df8c9aaf2176fcd8fd07017f2bd76a2bc31b75d4c735aa49d5f1925bd92d"
+      },
+      {
+        "name": "port-plan-v3.8.json",
+        "sha256": "bd93c73cf306059cb49b5ad1fa6287e4bfe9de79feba8d2bd605e5f22030625a"
+      },
+      {
+        "name": "predispatch-readiness-v3.8.json",
+        "sha256": "acdbd1eb24d1c752b45db448c8ea6fa9a6e416e3957b5cc9e8c945934b47edcf"
+      },
+      {
+        "name": "process-hardening-contract-v3.8.json",
+        "sha256": "9481a11e33928cbd5655ab292ad17054647708c04bcea9ebabcc4dbecd4e62e1"
+      },
+      {
+        "name": "publication-policy-v3.8.json",
+        "sha256": "dae4d775c38360d2a1d57ffa62cbf20c60ce8e31034639774330d8a863554b37"
+      },
+      {
+        "name": "scope-freeze-v3.8.json",
+        "sha256": "77d1f09e5b03e6f625fa938b71a8357fa2432d69863b70035242341aa418b446"
+      }
+    ],
+    "manifest_sha256": "bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+    "operational_file_count": 19
+  },
+  "progress": {
+    "completed": [
+      "Source-state gate PASS (PR #34 open/draft, head 3090f2e0 MATCH; CI exact-head success; zero v3_8 result branches)",
+      "Single-writer lock reacquired PID=2138684 FD=9",
+      "Payload immutability: manifest bb4182ad\u2026 MATCH, 19/19 hashes, PAYLOAD_BYTE_DRIFT=false",
+      "Publication audit: PUB-F1..F6 (a14c3f6c on fork-main preserved; no history rewrite)",
+      "Original review-binding audit: RB-F1 BLOCKING (actual accept/accept/continue, claimed three_accepts)",
+      "Original adversarial verdict (continue, 0/0) preserved byte-exact"
+    ],
+    "current": "Run fresh adversarial acceptance gate against exact frozen payload"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "Q1. \u00bfLas 15 identity mutations son REJECT reales mediante CLI? (identity-negative-matrix: 15 cases, real_cli=True, exit 3 IDENTITY_MISMATCH con check nombrado; N12-N14 v\u00eda cross-manifest validator exit 1 con check supersedes nombrado)"
+    },
+    {
+      "id": "Q2",
+      "text": "Q2. \u00bfEl control v\u00e1lido demuestra que el harness no rechaza todo? (control_correct_identity_PASS=True, E artifact creado con C real)"
+    },
+    {
+      "id": "Q3",
+      "text": "Q3. \u00bfLa reproducci\u00f3n exacta del v3.7 mixed-batch mismatch es REJECT? (N15: scope=20260806T234554Z vs package=20260807T161935Z \u2192 REJECT)"
+    },
+    {
+      "id": "Q4",
+      "text": "Q4. \u00bfLa cobertura v3.7 funcional/adversarial permanece intacta? (inherited negative matrix 29/29, runtime negatives 12/12, command hashes 8/8, ownership 2/2, selftest 32/32, functional-continuity PASS)"
+    },
+    {
+      "id": "Q5",
+      "text": "Q5. \u00bfEl package congelado puede aceptarse t\u00e9cnicamente para un \u00fanico dispatch posterior sujeto a autorizaci\u00f3n humana? (dispatch_authorized=false; eligibility PASS; payload frozen manifest bb4182ad\u2026, 19 hashes)"
+    },
+    {
+      "id": "Q6",
+      "text": "Q6. \u00bfExiste alg\u00fan blocking finding o required action pendiente? (previous reviews: functional accept 0/0, identity accept 0/0, original adversarial continue 0/0 \u2014 this gate must confirm 0/0)"
+    }
+  ],
+  "receipts_digest": {
+    "command-hash-a": {
+      "sha256": "16f6d6620d0ff8ea2b2049a2f77891a129a5a0103f4dab82f5cd121add056005",
+      "verdict": null
+    },
+    "command-hash-b": {
+      "sha256": "c158f02a56a72a60509837aa54b4a1e3513516066f4707b803b766a47689d860",
+      "verdict": null
+    },
+    "cross-manifest-coherence": {
+      "sha256": "f46a8e736ec2a8f122b42c36db62d75f8f3815e942d0e0009c9c7d285c5052dd",
+      "verdict": "PASS"
+    },
+    "finalizer-fail-closed": {
+      "sha256": "5ecb61e3dc9090cde76490d8e0957a2d9301b43e6b81779e3f856ac7fcc2680b",
+      "verdict": null
+    },
+    "full-completion": {
+      "sha256": "e071e2b32f3ebb869d071e414970fbd4dc8176f93693ea324ecb510bb826b782",
+      "verdict": null
+    },
+    "functional-continuity": {
+      "sha256": "ed4bf5e184e841c9ad47cb9281f86394d8e0147cb2dfb8e4bcd109187f7d07ee",
+      "verdict": "PASS"
+    },
+    "identity-negative-matrix": {
+      "sha256": "00a846aaf25762f172a9e6a69826193b38abdc780112dac5fce001b90d9668db",
+      "verdict": "PASS"
+    },
+    "negative-matrix": {
+      "sha256": "dd9e426fa27b31bcea8c07b3411170c9e2171ee604b2b8e7d11cf24d85e2a585",
+      "verdict": null
+    },
+    "ownership-a": {
+      "sha256": "7ba540777668f1ff2df6eaf8e490bde1d45e193e644f5c4b4b5a1cf8a7433287",
+      "verdict": null
+    },
+    "ownership-b": {
+      "sha256": "0dd4591f0bc6fb00dee8f6596a9901a5403bcd8d9a7ff199cecb861fb6570095",
+      "verdict": null
+    },
+    "package-validation": {
+      "sha256": "67d0d6833f25a58a0f90d42e3e0a5362cd9b3192d3fb51ccf7b8445a1c8c61bc",
+      "verdict": true
+    },
+    "postpublication-binding": {
+      "sha256": "8bb06b0ff88f8d8857bcca0a17b1d8b3e16aa5c88d11fee4210d22b570010824",
+      "verdict": null
+    },
+    "publication-create-only": {
+      "sha256": "81b5afd9db7b8d29bc1ac2db96d6d5befbc896260cc1205b7d9750c36025e96a",
+      "verdict": null
+    },
+    "runtime-contract-negative-matrix": {
+      "sha256": "562fbfa8854351d0513b30c3cf17b80a6b8ee11fe9942a23207092e3b6c19baf",
+      "verdict": null
+    },
+    "selftest-results": {
+      "sha256": "10cc0c1f53a9fc04dc871fea309a02c2b64c6f5c2ead98ed4ae702b1fdc9be54",
+      "verdict": "PASS"
+    },
+    "static-source-validation": {
+      "sha256": "033065ab5331f3f0ce499020ca36b023bda9e941f177df4e18041cadb9a188cc",
+      "verdict": null
+    }
+  },
+  "relevant_contracts": [
+    "senior-consult: advisory only, no tools, single pass",
+    "v3.8 payload self_exclusion_rule: manifest is NEVER inside operational payload",
+    "v3.8 payload review_exclusion_rule: preflight/bundle/verdict/binding/publication-index are NEVER inside operational payload",
+    "v3.7 byte-exact preservation: manifest_sha256=7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+    "v3.8 frozen manifest: bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18",
+    "dispatch remains unauthorized: v3_8_dispatch_authorized=false"
+  ],
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    "dispatch must remain unauthorized until human authorizes exactly one fresh v3.8 LAB-A/LAB-B dispatch",
+    "frozen payload must not be modified (any change forces v3.9)",
+    "PR #34 head must remain 3090f2e0 until the source branch is published; REMOTE_WRITER_RACE gate"
+  ],
+  "runtime_evidence": [
+    {
+      "result": "IDENTITY_MATRIX_GLOBAL=PASS, 15/15 REJECT + control PASS, real CLI per case, exit 3 IDENTITY_MISMATCH",
+      "source": "identity-negative-matrix.json"
+    },
+    {
+      "result": "all_negative_cases_rejected=True (29/29)",
+      "source": "negative-matrix.json"
+    },
+    {
+      "result": "all_rejected=True (12/12)",
+      "source": "runtime-contract-negative-matrix.json"
+    },
+    {
+      "result": "SELFTEST_GLOBAL=PASS, 32/32 declared=executed=passed, failed=0, skipped=0",
+      "source": "selftest-results.json"
+    },
+    {
+      "result": "verdict=PASS, sources_checked=59, mismatches=0",
+      "source": "cross-manifest-coherence-resumed.json"
+    },
+    {
+      "result": "8/8 PASS (exit 3 identity gate, no side effects)",
+      "source": "finalizer-fail-closed.json"
+    },
+    {
+      "result": "PASS, 19/19 files, all parse+compile, byte-exact",
+      "source": "package-validation.json"
+    },
+    {
+      "result": "STATIC_VALIDATOR_GLOBAL=PASS, 0 findings",
+      "source": "static-source-validation.json"
+    },
+    {
+      "result": "4/4 match (declared=recomputed)",
+      "source": "command-hash-verification-lab-a.json"
+    },
+    {
+      "result": "4/4 match",
+      "source": "command-hash-verification-lab-b.json"
+    },
+    {
+      "result": "ownership_diff_pass=True",
+      "source": "ownership-diff-verification-lab-a.json"
+    },
+    {
+      "result": "ownership_diff_pass=True",
+      "source": "ownership-diff-verification-lab-b.json"
+    },
+    {
+      "result": "verdict=PASS",
+      "source": "functional-continuity.json"
+    },
+    {
+      "result": "continue, blocking_findings=0, required_actions=0 (preserved byte-exact; this gate replaces it with explicit acceptance)",
+      "source": "original adversarial verdict"
+    }
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "8a1d7c10e747095529274f0b16b2a1feb5abe5c4cf938ab1e1ce8e51c137a662",
+    "plan_fingerprint": "2d892afe14a60aa406408a0edd6bcb62762f5ca70c1fad9c697ec3886275c636",
+    "repository_head": "3090f2e078ca29762f7654b9e5a872f58ad4ac5b",
+    "working_tree_fingerprint": "ee79b683738ff2d419f6bdb8b6b7491cd7c7d067f41402324883a25d289f8063"
+  },
+  "tests": [
+    {
+      "command": "python3 identity-negative-matrix.py",
+      "exit_code": 0,
+      "summary": "15/15 + control PASS"
+    },
+    {
+      "command": "python3 cross-manifest-coherence-validator.py --package-dir <frozen> --json",
+      "exit_code": 0,
+      "summary": "verdict=PASS 59 sources 0 mismatches"
+    },
+    {
+      "command": "python3 harness_v38_part1.py",
+      "exit_code": 0,
+      "summary": "fail-closed 8/8"
+    },
+    {
+      "command": "python3 harness_v38_part2.py",
+      "exit_code": 0,
+      "summary": "S2-S11 PASS"
+    },
+    {
+      "command": "python3 harness_v38_part3.py",
+      "exit_code": 0,
+      "summary": "hashes 8/8, ownership 2/2, runtime negatives 12/12, selftest 32/32"
+    }
+  ]
+}

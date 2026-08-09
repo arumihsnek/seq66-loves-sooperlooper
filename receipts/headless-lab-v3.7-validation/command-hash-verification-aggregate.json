@@ -1,0 +1,10 @@
+{
+ "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+ "lab_a_all_match": true,
+ "lab_a_tests": 4,
+ "lab_b_all_match": true,
+ "lab_b_tests": 4,
+ "recorded_at_utc": "2026-08-07T20:08:55Z",
+ "schema": "command-hash-verification-aggregate/v3.7",
+ "total_8_of_8_match": true
+}

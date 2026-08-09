@@ -1,0 +1,14 @@
+{
+  "schema": "lease-plan/v3.3",
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "lease": "LEASE-20260806T011700Z-LAB-A-V3_3",
+  "lab": "LAB-A",
+  "leaf_id": "LEAF-LAB-A-V3_3",
+  "envelope_path": "receipts/headless-lab-results-v3.3/lab-a-result.json",
+  "planned_branch_pattern": "result/<run-id>-lab-a-v3_3",
+  "status": "planned",
+  "activated": false,
+  "authorization_required": true,
+  "authorization": false,
+  "new_ids_rule": "lease ID, result path and schema names are NEW for v3.3; no reuse of v3/v3.1/v3.2 IDs or paths"
+}

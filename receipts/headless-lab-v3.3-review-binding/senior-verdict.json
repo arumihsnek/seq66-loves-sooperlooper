@@ -1,0 +1,64 @@
+{
+  "accept_does_not_authorize_dispatch": true,
+  "blocking_findings": [],
+  "bound_artifact_hashes": {
+    "acceptance-manifest-v3.3.json": "2ff451fcaa374c28a25b17866e865eaeae25c87fefca7f445aa4b6a3caabdebb",
+    "acceptance-verifier-v3.3.py": "ecb3fba491d40c4bca0382accf44081eb24863231b64d64537a143393dbee895",
+    "batch-manifest-v3.3.json": "4d1ce39ffb9af5de8601638ff4d15cbba82ad804da046973d14eaada3781a8d8",
+    "build-provenance-policy-v3.3.json": "a36c8ac77a582bea91513ece0bfe2c6ecb7ce40175397f72689be1b645c661b2",
+    "controller-acceptance-schema-v3.3.json": "9026cf98f02560c7fd9a08df44863114ea8c76f4d0350e73bfaebff8056c14ee",
+    "dispatch-plan-v3.3.json": "084cf4d57cb7619caec9bdc1e9c72e796d73f8d4b353066fa7867112049b3943",
+    "lab-api-contract-v3.3.json": "94ce7696ff6114cc248a4214addec95c5aedb668011085c01a4a1286ac620614",
+    "lease-plan-lab-a-v3.3.json": "b7e19e62afeea93b3f32f24ec934b706317d92e2469489cd7cfcf8c016cd09cd",
+    "lease-plan-lab-b-v3.3.json": "cfc52bace81b46d4e9c78b7839d1ae20d794bcefc8bde469d11a98b0fa1f096a",
+    "port-plan-v3.3.json": "a84df36ae51ec56b961a01f2699690a1e4f718b3a68bac01741b2dbfa35830c5",
+    "predispatch-readiness-v3.3.json": "fb5372c4e03327b039b836e1a23819315b0dd4063a3c7ae0c699ebabe2b77632",
+    "result-envelope-schema-v3.3.json": "8da16c319db3f9e85b6eac4da242fe96b190bf1fcec8431d44f6b6cdefbf2752",
+    "scope-freeze-v3.3.json": "318b280df03f0040659dacdd4d6e85ab066497550973328c327077e90e301c67"
+  },
+  "bound_manifest_sha256": "ef17ecd1ba36be6597fe0279890d6e730144df7eaede7960167d3a5eaba2aefc",
+  "detailed_status": "VALID_ADVISORY_VERDICT",
+  "execution_id": "d9128f8f-a4c5-4c59-a3e3-23505af8567e",
+  "mission_id": "seq66-lab-v3-3-strict-envelope-package",
+  "mode": "plan-review",
+  "question_answers": [
+    {
+      "answer": "S\u00ed. La evidencia de v3.3 demuestra enforcement de todos los campos normativos, rechazo de claves desconocidas y rechazo de campos de self-binding o claims futuros del controller.",
+      "id": "Q1"
+    },
+    {
+      "answer": "S\u00ed. Verifica el conjunto exacto C..R, hashes SHA-256 y tama\u00f1os desde los blobs de R, exige artifacts no vac\u00edos y rechaza R vac\u00edo.",
+      "id": "Q2"
+    },
+    {
+      "answer": "S\u00ed. Mantiene E como envelope de leaf y A como receipt separado de aceptaci\u00f3n del controller; A no se incluye dentro de E y se valida en full-completion.",
+      "id": "Q3"
+    },
+    {
+      "answer": "S\u00ed. Los command_sha256 est\u00e1n ligados a los comandos congelados byte a byte; las pruebas de escaping, NUL reales, exit 0 y orden temporal pasan.",
+      "id": "Q4"
+    },
+    {
+      "answer": "S\u00ed. Rechaza R vac\u00edo, merges en R o E, OIDs/metadatos incorrectos y provenance o claims incompletos, seg\u00fan el selftest y la matriz controlada.",
+      "id": "Q5"
+    },
+    {
+      "answer": "S\u00ed, con la distinci\u00f3n contractual correcta: branch binding, checkout limpio, harness y reejecuci\u00f3n literal son exigidos; el controlled rebuild es obligatorio para LAB-B y not_applicable para LAB-A.",
+      "id": "Q6"
+    },
+    {
+      "answer": "S\u00ed. Se conserva el modelo C->R->E: s\u00f3lo R es integration-eligible y E es evidence-only.",
+      "id": "Q7"
+    },
+    {
+      "answer": "S\u00ed. El paquete puede congelarse para una decisi\u00f3n humana separada: el manifest ef17ecd1ba36be6597fe0279890d6e730144df7eaede7960167d3a5eaba2aefc y los 13 hashes pasan validaci\u00f3n, y v3.3 declara que supersede v3.2 por sus defectos de enforcement.",
+      "id": "Q8"
+    }
+  ],
+  "recorded_at_utc": "2026-08-06T01:43:47Z",
+  "required_actions": [],
+  "response_fingerprint": "cfda9d4a833b568455f740d46bf3a76817666776e49f3a6d2ff84e78eedca709",
+  "schema": "senior-verdict/v1",
+  "status": "COMPLETED",
+  "verdict": "accept"
+}

@@ -1,0 +1,37 @@
+{
+ "C": "865cb4918e71b17cd48d070b61dd983bcc5bcd8d",
+ "R": "91077aacd5c6bd8a97be46d11783e4d579f13e7a",
+ "R_tree": "718887b7ee7948063db1079eee724ac6807a1390",
+ "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+ "changed_not_owned": [],
+ "changed_paths": [
+  "tests/integration/headless_audio_lab/audio_oracle.py"
+ ],
+ "changed_paths_non_empty": true,
+ "diff_raw": "M\ttests/integration/headless_audio_lab/audio_oracle.py",
+ "forbidden_changed": [],
+ "lab": "LAB-B",
+ "negative_fixtures": {
+  "N22_out_of_scope_path_reject": true,
+  "note": "N22 adds doc/sooperlooper/UNTOUCHABLE.md in R -> forbidden_changed -> REJECT (real CLI)"
+ },
+ "owned_paths": [
+  "tests/__init__.py",
+  "tests/integration/__init__.py",
+  "tests/integration/headless_audio_lab/audio_oracle.py",
+  "tests/integration/headless_audio_lab/graph_assertions.py",
+  "tests/integration/headless_audio_lab/runner.py",
+  "tests/integration/headless_audio_lab/test_modules.py",
+  "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+  "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+  "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+  "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+  "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+  "tests/integration/headless_audio_lab/fixtures/.gitignore"
+ ],
+ "ownership_diff_pass": true,
+ "recorded_at_utc": "2026-08-07T20:00:48Z",
+ "required_paths_missing": [],
+ "required_paths_satisfied": true,
+ "schema": "ownership-diff-verification/v3.7"
+}

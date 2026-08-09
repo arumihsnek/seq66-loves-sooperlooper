@@ -1,0 +1,12 @@
+{
+  "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "lab_a": {
+    "verdict": "REJECT"
+  },
+  "lab_b": {
+    "verdict": "REJECT"
+  },
+  "recorded_at_utc": "2026-08-06T02:19:47Z",
+  "rejected_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+  "schema": "rejected-head-v3.4-test/v1"
+}

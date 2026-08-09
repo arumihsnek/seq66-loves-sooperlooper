@@ -1,0 +1,30 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "description": "External leaf report about R. NOT included in R, NOT included in E, NOT authoritative, NO remote binding, NO E, NO final verdict. Controller treats the whole report as untrusted until verified.",
+ "fields": [
+  "schema",
+  "lab",
+  "batch",
+  "leaf_id",
+  "lease_id",
+  "candidate_commit_oid",
+  "implementation_result_commit_oid",
+  "implementation_result_tree_oid",
+  "owned_paths",
+  "local_test_observations",
+  "worktree_path",
+  "worktree_clean_claim",
+  "recorded_at_utc"
+ ],
+ "forbidden_fields": [
+  "remote_branch",
+  "remote_binding",
+  "E_oid",
+  "E_tree_oid",
+  "final_verdict",
+  "controller_acceptance"
+ ],
+ "package": "v3.9",
+ "schema": "leaf-r-report-schema/v3.9"
+}

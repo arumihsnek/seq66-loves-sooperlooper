@@ -1,0 +1,165 @@
+{
+  "head": "8aeb935854c9147b367e826d0fedb2a9778832fb",
+  "records": [
+    {
+      "blob_oid": "305a88721f2e2083e36617999d035eb6bf029d26",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/v3.4-package-manifest.json",
+      "path": "receipts/headless-lab-v3.4/v3.4-package-manifest.json",
+      "sha256": "63c371ba70491fa546ce4f8d980568440845c74fbb5af3a93502ff9b8c0a4da7",
+      "size": 2551,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "26feef51103477fae7ddcb1d89f439c3e951fbf0",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/acceptance-manifest-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/acceptance-manifest-v3.4.json",
+      "sha256": "fae0d201067c0148e71bc161d09644b5a46b46836b10c43498ff69120c392ea3",
+      "size": 664,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "4977bc3ee72fd6d78f2db15aef9fe8201ddaa41b",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/acceptance-verifier-v3.4.py",
+      "path": "receipts/headless-lab-v3.4/acceptance-verifier-v3.4.py",
+      "sha256": "2f49f2b1b40906b7e5a699ee821f2221f33998c09c5058276641e4c70e6a4c9c",
+      "size": 83982,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "ce5509aa93db74482bd87f350ff24ee3dc72028a",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/batch-manifest-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/batch-manifest-v3.4.json",
+      "sha256": "3d8c14084eb768e49668aa9c5a0955b4015a87ad9521805d811b2ba5b01ff108",
+      "size": 10228,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "b55323b33dc2813b5625da322f3851feb7a07dcc",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/build-provenance-policy-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/build-provenance-policy-v3.4.json",
+      "sha256": "fe67eb6def2d1f8ddfa4dfdc75a6c9a247c34e4db9c78d8d6d27929a19b32439",
+      "size": 2603,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "ecb5d131210d4719a5e27ecf89cde71ac33154dc",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/controller-acceptance-schema-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/controller-acceptance-schema-v3.4.json",
+      "sha256": "27b8acc89b12aa80452536a75cf7f91ade9b8b234e10c99b16351319d4240a8e",
+      "size": 1516,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "b2ab4364c5d0a357984733acfce5155c356a9bb6",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/dispatch-plan-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/dispatch-plan-v3.4.json",
+      "sha256": "cc74e2114ba759e63099f766dce8fa120a2cc13a8bb0868a3b512fb9b44e8074",
+      "size": 1002,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "e9868b8cddf43e74ede63f39e00c7efa68a32ff3",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/functional-contract-baseline-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/functional-contract-baseline-v3.4.json",
+      "sha256": "862798a6b0cb6bd3b6f57206aae4aaafb4b177d694268fc64fa92dfb6f3fd553",
+      "size": 10074,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "a19ba7f5e2673403205fb39d4d4d9fbd288ae8a6",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/lab-api-contract-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/lab-api-contract-v3.4.json",
+      "sha256": "5097c6221a0edc21e2c72b5a7527bb842de6e8fbf9aa4066390098b5a8eb382b",
+      "size": 6987,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "fdf4c25a20b06a791d3fcd32366c29950da96ccc",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/lease-plan-lab-a-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/lease-plan-lab-a-v3.4.json",
+      "sha256": "46e13d0035844b3cb99d375178923d2259c8372dcb55ce54d1cb4812e151cd28",
+      "size": 871,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "1fe89c13b2eaef661ede84b0e828d4542c77cfd6",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/lease-plan-lab-b-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/lease-plan-lab-b-v3.4.json",
+      "sha256": "f2c596b8e4c65810e9e1e8157d168b8c8efbdd2a65705ef41447147e30784034",
+      "size": 1298,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "0d45bb1f5d646f68d670422dcac4fe35e1295b1c",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/port-plan-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/port-plan-v3.4.json",
+      "sha256": "862657b47c0ab7d0429439cb25dff87cb77dc9a900821956a2703ed8d7c37e9f",
+      "size": 1526,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "1f66f0bb3b9f154d52a1681991b47b9f3e9e3c2a",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/predispatch-readiness-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/predispatch-readiness-v3.4.json",
+      "sha256": "c186fbacc1929e465c3b943a1d36006b98b4b504e11232cde99616320d5893d6",
+      "size": 395,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "38c1728f4e87c7cfb1628f8d273671a670daeb63",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/result-envelope-schema-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/result-envelope-schema-v3.4.json",
+      "sha256": "f496adeb69358373f07e8dc8410648d8c2671ed0bede5e84dece7f7bc198cdac",
+      "size": 1986,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "7c02d9fd50373b406a9d7f8354ffd332f13377c9",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/scope-freeze-v3.4.json",
+      "path": "receipts/headless-lab-v3.4/scope-freeze-v3.4.json",
+      "sha256": "f038c7fcd4da0ed939147f6ab9aefe61f8a839699e891e9fa4611792c9655149",
+      "size": 2360,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "8f8354028d4017e7882773a9adae20fb49c0fda5",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/review-binding-receipt.json",
+      "path": "receipts/headless-lab-v3.4-review-binding/review-binding-receipt.json",
+      "sha256": "8160638d5cafd5f45e55405f4bb738f81b17fbddbc87dae28dc8bbd62cc9ed6e",
+      "size": 1739,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "36e8e76e4ba16af3715e9a80841c2bd31c50c5a0",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/senior-functional-verdict.json",
+      "path": "receipts/headless-lab-v3.4-review-binding/senior-functional-verdict.json",
+      "sha256": "6a16c0bb246169a7204066989a4725eee095417e957b776abb85db1b25475115",
+      "size": 3521,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "de57f81bbe31c953b347dddc567cebd0dd63847c",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/senior-workflow-verdict.json",
+      "path": "receipts/headless-lab-v3.4-review-binding/senior-workflow-verdict.json",
+      "sha256": "d01a663b9aee7a6079e3f3b2064ddd756bd040b4c1879bede27d4e03affd55d2",
+      "size": 3271,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "90d7374553f4ddb1faba9ba4a405197f46746827",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/2026-08-06-CP-060-v3-4-functional-contract-restoration.md",
+      "path": "doc/sooperlooper/checkpoints/2026-08-06-CP-060-v3-4-functional-contract-restoration.md",
+      "sha256": "1fab0d3f97a09825586f3a3097c4c6c315003a9b76259461082df971402cd172",
+      "size": 7606,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    },
+    {
+      "blob_oid": "79bf03e45c0a651df99b261830dd4f0a4e4f9f2f",
+      "exported_to": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/frozen-package/CURRENT.md",
+      "path": "doc/sooperlooper/checkpoints/CURRENT.md",
+      "sha256": "7e1af15189c97c2d674fe8e8bde1279560238bfb4dd0d510273c58495666d1c1",
+      "size": 1747,
+      "source_commit": "8aeb935854c9147b367e826d0fedb2a9778832fb"
+    }
+  ]
+}

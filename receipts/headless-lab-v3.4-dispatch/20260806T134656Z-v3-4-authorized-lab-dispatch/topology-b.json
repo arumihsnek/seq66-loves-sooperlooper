@@ -1,0 +1,134 @@
+{
+  "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "checks": [
+    {
+      "detail": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-b-v3_4",
+      "name": "remote branch exists",
+      "ok": false
+    },
+    {
+      "detail": " vs 2906dc4fd77e",
+      "name": "remote resolved == E",
+      "ok": false
+    },
+    {
+      "detail": "2906dc4fd77e",
+      "name": "local branch == E",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "E exists",
+      "ok": true
+    },
+    {
+      "detail": "parents=1",
+      "name": "E has exactly one parent",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "E^ == R",
+      "ok": false
+    },
+    {
+      "detail": "parents=1",
+      "name": "R has exactly one parent",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "R^ == CANDIDATE",
+      "ok": true
+    },
+    {
+      "detail": "11 files",
+      "name": "R non-empty (diff C..R)",
+      "ok": true
+    },
+    {
+      "detail": [
+        "tests/integration/headless_audio_lab/__init__.py"
+      ],
+      "name": "diff C..R owned-only",
+      "ok": false
+    },
+    {
+      "detail": [
+        "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+        "tests/integration/headless_audio_lab/fixtures/synthetic_source"
+      ],
+      "name": "all owned present in R",
+      "ok": false
+    },
+    {
+      "detail": "['receipts/headless-lab-results-v3.4/lab-b-result.json']",
+      "name": "diff R..E envelope-only",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "envelope absent in C",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "envelope absent in R",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "envelope present in E",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "envelope absent in worktree HEAD before checkout",
+      "ok": true
+    },
+    {
+      "detail": "?? tests/integration/headless_audio_lab/fixtures/deterministic_capture.c\n?? tests/integration/headless_audio_lab/fixtures/synthetic_source.c",
+      "name": "leaf worktree clean",
+      "ok": false
+    },
+    {
+      "detail": "VERDICT: REJECT (one or more FAIL)",
+      "name": "leaf-envelope verifier PASS",
+      "ok": false
+    },
+    {
+      "detail": "",
+      "name": "controller checkout HEAD == R",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "controller checkout clean",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "controller checkout detached",
+      "ok": true
+    },
+    {
+      "detail": "",
+      "name": "controller checkout no envelope",
+      "ok": true
+    }
+  ],
+  "checks_pass": false,
+  "controller_checkout": "/home/ubuntu/.hermes/runs/20260806T134656Z-v3-4-authorized-lab-dispatch/controller-acceptance/controller-checkout-LAB-B-R",
+  "controller_checkout_head": "608cefef3a270a2ea6859b8d48ee931c636743f8",
+  "lab": "LAB-B",
+  "leaf_envelope_verifier_rc": 1,
+  "leaf_envelope_verifier_tail": [
+    "[PASS] env: leaf_build_claim.status allowed \u2014 ",
+    "[FAIL] env: LAB-B build claim structurally valid (sources/commands/outputs) \u2014 ",
+    "VERDICT: REJECT (one or more FAIL)"
+  ],
+  "reported_E": "2906dc4fd77e2d7455060c3248db73aabdeb010b",
+  "reported_R": "608cefef3a270a2ea6859b8d48ee931c636743f8",
+  "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
+  "verified_at_utc": "2026-08-06T15:03:57Z"
+}

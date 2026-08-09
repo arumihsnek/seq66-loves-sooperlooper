@@ -1,0 +1,28 @@
+{
+  "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+  "closure_summary": {
+    "d0_d1_d2_executed": false,
+    "integration_candidate_set": [],
+    "v3_1_package": "IMMUTABLE; REJECTED_FOR_DISPATCH (same-commit envelope/tree-OID circularity, V3_1_ENVELOPE_BINDING_DEFECT); exact-byte review remains valid historical evidence (CP-057)",
+    "v3_1_leases": "planned, never activated",
+    "v3_2_package": "created with new IDs/hashes; two-commit C->R->E envelope model; frozen; not dispatched",
+    "v3_2_leases": "planned (LEASE-20260805T224640Z-LAB-A-V3_2, LEASE-20260805T224640Z-LAB-B-V3_2); zero worktrees; zero leaves; D0/D1/D2 NOT executed"
+  },
+  "d0_d1_d2_authorized": false,
+  "human_redispatch_authorized": false,
+  "integration_authorized": false,
+  "predispatch_checks": [
+    "both result branches absent (result/<future-run-id>-lab-a-v3_2, result/<future-run-id>-lab-b-v3_2)",
+    "both worktree paths absent",
+    "both new worktrees clean at exact candidate 50953878...",
+    "acceptance harness SHA-256 verified against acceptance-manifest-v3.2.json",
+    "new lease plans planned (LEASE-20260805T224640Z-LAB-A-V3_2, LEASE-20260805T224640Z-LAB-B-V3_2)",
+    "zero active old leases",
+    "no reuse of the four forbidden v2 paths/branches",
+    "two-commit model satisfiable (selftest PASS on real temporary git repositories)",
+    "controlled Git-model experiment demonstrates same-commit binding instability (T1 != T2 != T3)"
+  ],
+  "required_authorization": "HUMAN_DECISION_PENDING: authorize or reject a NEW LAB-A/LAB-B dispatch using EXACTLY package v3.2, new branches, new worktrees, new leases",
+  "schema": "predispatch-readiness/v3.2",
+  "status": "FROZEN_NOT_DISPATCHED"
+}

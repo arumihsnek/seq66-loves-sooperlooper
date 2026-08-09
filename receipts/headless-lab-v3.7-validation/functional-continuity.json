@@ -1,0 +1,9 @@
+{
+ "recorded_at_utc": "2026-08-07T20:00:42Z",
+ "schema": "functional-continuity/v3.6",
+ "stderr_tail": "",
+ "stdout_sha256": "874496fbef1a1feb2f60d44457e2c4baaca25e6fc747aa6d439a09d3ee5b9130",
+ "stdout_tail": "== functional-continuity ==\n  [PASS] modules deep-equal v3.4/v3.5\n  [PASS] api version v3.7\n  [PASS] candidate binding\n  [PASS] silence semantics verification=FAIL\n  [PASS] four literal tests per lab\n  [PASS] ownership intersection empty\n  [PASS] baseline normative arg kinds present\n  [PASS] analyze_wav return contract AnalysisResult\n  [PASS] baseline supersedes v3.6\n  [PASS] supersedes v3.6 recorded\n",
+ "verdict": "PASS",
+ "verifier_exit": 0
+}

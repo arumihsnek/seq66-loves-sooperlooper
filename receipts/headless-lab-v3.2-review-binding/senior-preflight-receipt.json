@@ -1,0 +1,20 @@
+{
+  "bundle_fingerprint": "2a2f1bb753df2ae32adff1219ab446906ea155afdd797836ea9fd3dc294d4aeb",
+  "bundle_path": "/home/ubuntu/.hermes/runs/20260805T224640Z-v3-2-envelope-binding-correction/reviews/bundle.json",
+  "bundle_sha256": "36997380aa6222449eec27792af97668a3416a095226c439ecdda1dd8e9dd05a",
+  "checks": {
+    "bundle": true,
+    "ledger_cache": true,
+    "local_state": true,
+    "lock": true,
+    "replacement": true
+  },
+  "mission_id": "seq66-lab-v3-2-two-commit-envelope-package",
+  "mode": "plan-review",
+  "model_processes_consumed": 0,
+  "recorded_at_utc": "2026-08-05T23:36:37Z",
+  "schema": "senior-preflight-receipt/v3.2",
+  "snapshot_fingerprint": "e5cd1273900c98c781fb0c45a641504bb02112dd8fb31dca09092bbb05067f3d",
+  "status": "PREFLIGHT_VALID",
+  "valid": true
+}

@@ -1,0 +1,53 @@
+{
+  "entries": [
+    {
+      "blob_exists": null,
+      "declared_blob_oid": "e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-e88f6300.json",
+      "filename": "amended-leaf-a-report-e88f6300.json",
+      "valid": false,
+      "valid_oid_format": false
+    },
+    {
+      "blob_exists": null,
+      "declared_blob_oid": "e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-e88f6300.json",
+      "filename": "amended-leaf-b-report-e88f6300.json",
+      "valid": false,
+      "valid_oid_format": false
+    },
+    {
+      "blob_exists": null,
+      "declared_blob_oid": "e88f630090acc877fcafdf3a9142c2f9a425f194:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-e88f6300.json",
+      "filename": "current-dispatch-index-e88f6300.json",
+      "valid": false,
+      "valid_oid_format": false
+    },
+    {
+      "blob_exists": null,
+      "declared_blob_oid": "889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/dispatch-index-889f759b.json",
+      "filename": "original-dispatch-index-889f759b.json",
+      "valid": false,
+      "valid_oid_format": false
+    },
+    {
+      "blob_exists": null,
+      "declared_blob_oid": "889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report-889f759b.json",
+      "filename": "original-leaf-a-report-889f759b.json",
+      "valid": false,
+      "valid_oid_format": false
+    },
+    {
+      "blob_exists": null,
+      "declared_blob_oid": "889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-889f759b.json",
+      "filename": "original-leaf-b-report-889f759b.json",
+      "resolved_blob_from_commit_path": "889f759b9774d877b950c0609d799c272f1c9923:receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report-889f759b.json",
+      "resolved_ok": false,
+      "valid": false,
+      "valid_oid_format": false
+    }
+  ],
+  "entries_invalid_commit_path_format": 6,
+  "entries_non_null": 6,
+  "entries_valid_oid_format": 0,
+  "entries_with_blob_oid_field": 18,
+  "schema": "v1-blob-oid-audit/v1"
+}

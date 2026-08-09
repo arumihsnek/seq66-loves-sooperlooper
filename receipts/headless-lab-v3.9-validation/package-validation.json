@@ -1,0 +1,12 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "json_parse": true,
+ "manifest_count": 21,
+ "python_compile": true,
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "result": "PASS",
+ "schema": "validation/v3.9",
+ "static_validate": true,
+ "zero_extra": true,
+ "zero_missing": true
+}

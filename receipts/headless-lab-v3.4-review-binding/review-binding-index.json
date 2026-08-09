@@ -1,0 +1,29 @@
+{
+  "batch_id": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+  "count": 21,
+  "files": {
+    "acceptance-v3.4-selftest-receipt.json": "1db6b8f3dfc083e3b48fc6e616c76cbeb8ed2454ffc46184c68206092d48000e",
+    "api-structural-diff.json": "08aec2da2115a25f4274febfdca0a48b40cf36a5d376673b7b87106a65c0edc1",
+    "canonical-build-test.json": "f2257f9613100d40ba9ec05322afa07d89d0b87e6b71221453b8d6648a4c33ae",
+    "functional-contract-continuity.json": "39d1351c58963bc0f94b83ad52e5f18f82683bb0e280e7ede423485a09aefd0c",
+    "literal-command-escaping-test.json": "4e24313b9b20c51fd3a2194b9888d0207b2a1c076661d51bf6eadd34da0f7d11",
+    "ownership-consistency.json": "1296aef1e8fa78932997dc31bc751fccda46b8fe5294c0a51870ace61caf06ae",
+    "rejected-head-v3.4-test-receipt.json": "cf9c18ea23c55f1dfbf5667ad06a991d45c86ba8f1e0b3137e6998beee10a728",
+    "review-binding-receipt.json": "8160638d5cafd5f45e55405f4bb738f81b17fbddbc87dae28dc8bbd62cc9ed6e",
+    "senior-functional-bundle.json": "c42fc77cbc154930f34f22e927a1556bc2f504df34da63e62b2dc5c54ea0e551",
+    "senior-functional-preflight.json": "5855e2af4d44909904509e22f2ce5efbdd078362b2170ac6e9c4ef1ca043a24f",
+    "senior-functional-verdict.json": "6a16c0bb246169a7204066989a4725eee095417e957b776abb85db1b25475115",
+    "senior-workflow-bundle.json": "2f43a93663350fa2f119e065b445a073187e0eaa97ab0e33c49813b59e3c4795",
+    "senior-workflow-preflight.json": "295eb6cd5ad76ed255055a00ebf69beb90c4609cd463fd7eaec0c7b1da93bc76",
+    "senior-workflow-verdict.json": "d01a663b9aee7a6079e3f3b2064ddd756bd040b4c1879bede27d4e03affd55d2",
+    "strict-negative-matrix.json": "def389e9dd392accea7e03cb2b6489f8440e9be6391b2fa423fe40a360bb0d5c",
+    "tracked-v3.4-hashes.json": "86633d840b0b78ad469e395cb9a887d1f34c029d0d8b97d015e257361b02f1c3",
+    "v3.3-functional-regression-reproduction.json": "7030b944226bb9517adc566b4c4929d6239276e92e19e1e5cde3200df7c89eac",
+    "v3.4-package-manifest-validation.json": "e2ee4651d828b23c7b965a4a2faed68e306156ef0101de32352b56073e474832",
+    "v3.4-package-validation.json": "7f2c86d05ec57479354b5700c250c6f3815d7f9b5db2c33dbaf607540ca59766",
+    "valid-full-completion-test.json": "366cb9e877e4bc37dac1f227c2050e810ce1a39a8f6da9ecfdbaea0c5b4b48f4",
+    "valid-leaf-envelope-test.json": "7ea3a19911ea405beec86dd336c2a70f20ef07022f2a9b188cfd5658abaf5181"
+  },
+  "recorded_at_utc": "2026-08-06T02:22:03Z",
+  "schema": "review-binding-index/v1"
+}

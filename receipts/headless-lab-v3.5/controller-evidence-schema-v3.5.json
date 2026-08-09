@@ -1,0 +1,31 @@
+{
+  "description": "E evidence document produced by mechanical-finalizer-v3.5.py into receipts/headless-lab-results-v3.5/<lab>-controller-evidence.json",
+  "forbidden": [
+    "E OID",
+    "E tree OID",
+    "evidence blob OID",
+    "remote resolved OID",
+    "post-publication verdict",
+    "self hash"
+  ],
+  "includes": [
+    "schema",
+    "lab",
+    "batch",
+    "C",
+    "R",
+    "R tree",
+    "finalizer SHA-256",
+    "verifier SHA-256",
+    "planned branch",
+    "controller literal test receipts",
+    "functional acceptance",
+    "artifact set",
+    "artifact hashes/sizes",
+    "controlled build provenance",
+    "clean before/after",
+    "prepublication verdict",
+    "recorded_at_utc"
+  ],
+  "schema": "controller-evidence-schema/v3.5"
+}

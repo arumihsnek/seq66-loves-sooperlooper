@@ -1,0 +1,318 @@
+{
+  "alternatives": [
+    {
+      "cons": [
+        "One more review round before any dispatch"
+      ],
+      "name": "Freeze v3.2 without dispatch",
+      "pros": [
+        "Eliminates the envelope/tree-OID circularity",
+        "Selftest on real git repos + invalid fixtures REJECT",
+        "Human retains the dispatch decision"
+      ]
+    },
+    {
+      "cons": [
+        "No dispatchable package; the envelope circularity remains unresolved",
+        "Contradicts the demonstrated two-commit model PASS"
+      ],
+      "name": "Reject v3.2",
+      "pros": [
+        "Avoids further investment"
+      ]
+    },
+    {
+      "cons": [
+        "NOT AUTHORIZED: human redispatch decision is pending and mandatory",
+        "D0/D1/D2 authorization is false"
+      ],
+      "name": "Dispatch v3.2 now",
+      "pros": [
+        "Fastest path to lab execution"
+      ]
+    }
+  ],
+  "caller_required": [
+    "/alternatives",
+    "/candidate_decision",
+    "/code_excerpts",
+    "/constraints",
+    "/current_plan",
+    "/decision_needed",
+    "/diff",
+    "/escalation",
+    "/invalidated_assumptions",
+    "/objective",
+    "/observed_facts",
+    "/progress",
+    "/questions",
+    "/relevant_contracts",
+    "/risks_already_identified",
+    "/runtime_evidence",
+    "/snapshot/checkpoint_fingerprint",
+    "/snapshot/plan_fingerprint",
+    "/tests"
+  ],
+  "candidate_decision": {
+    "decision_type": "plan_review",
+    "description": "Freeze the corrected v3.2 package (two-commit envelope model) as exact-byte reviewed evidence; do NOT dispatch.",
+    "options": [
+      "accept_freeze",
+      "request_changes"
+    ],
+    "recommendation": "accept_freeze"
+  },
+  "code_excerpts": [
+    {
+      "excerpt": "validation_rules[0]: 'envelope is committed BY THE LEAF at the frozen owned path in the SAME result commit'\nvalidation_rules[2]: 'controller verifies envelope.result_tree_sha == git rev-parse <result_head>^{tree}'\nverifier: head_tree = git rev-parse HEAD^{tree}; result_tree_sha_matches = env['result_tree_sha'] == head_tree",
+      "file": "receipts/headless-lab-v3.1/result-envelope-schema-v3.1.json",
+      "note": "THE DEFECT: same-commit envelope required to declare the tree OID of the commit that contains it.",
+      "significance": "hash_dependency_cycle: the envelope blob is an input of HEAD^{tree}; writing the envelope changes the OID it must declare."
+    },
+    {
+      "excerpt": "C = candidate; R = implementation result (parent(R)=C, NO envelope);\nE = envelope container (parent(E)=R, EXACTLY the envelope);\nremote branch -> E; only R is integration-eligible;\nenvelope fields: candidate_commit_oid, implementation_result_commit_oid,\nimplementation_result_tree_oid, git_object_format (never E's own identity)",
+      "file": "receipts/headless-lab-v3.2/result-envelope-schema-v3.2.json",
+      "note": "CORRECTED: two-commit C->R->E model; envelope declares only C/R OIDs and git_object_format; self-binding forbidden.",
+      "significance": "The envelope no longer depends on its own commit/tree/blob; the binding is constructible and externally recorded."
+    },
+    {
+      "excerpt": "checks: R^==C; E^==R; envelope absent from R; envelope present in E; diff C..R owned-only; diff R..E envelope-only; candidate_commit_oid==C; implementation_result_commit_oid==R; implementation_result_tree_oid==R^{tree}; git_object_format matches; no forbidden self-binding fields; artifacts safe",
+      "file": "receipts/headless-lab-v3.2/acceptance-verifier-v3.2.py (verify_envelope_model)",
+      "note": "The verifier rejects same-commit envelopes, wrong OIDs, implementation changes in E and self-referential fields.",
+      "significance": "Non-vacuous negative gates over the exact defect fixed in v3.2; proven by selftest on real temp git repos."
+    },
+    {
+      "excerpt": "PASS v3.1 same-commit model rejected | PASS two-commit C->R->E accepted |\nPASS wrong candidate OID rejected | PASS wrong result commit OID rejected |\nPASS wrong result tree OID rejected | PASS E parent != R rejected |\nPASS envelope present in R rejected | PASS implementation change in E rejected |\nPASS missing envelope in E rejected | PASS self container commit field rejected |\nPASS self tree field rejected | PASS envelope self-SHA256 rejected |\nPASS remote branch mismatch rejected | PASS correct external branch binding accepted |\nPASS zero residual directories",
+      "file": "receipts/headless-lab-v3.2/acceptance-verifier-v3.2.py (selftest)",
+      "note": "14 required checks + zero residual dirs; remote binding verified via bare origin + git ls-remote (no network).",
+      "significance": "Every negative gate has a live repository fixture; the two-commit model is demonstrated satisfiable."
+    }
+  ],
+  "constraints": [
+    "Single pass",
+    "No tools",
+    "No workspace reads",
+    "Advisory only",
+    "Accept does NOT authorize dispatch",
+    "Review binds the exact bytes: PR #34 head da89654e..., v3.2 package manifest SHA-256, and all twelve artifact SHA-256 values",
+    "Verdict accept requires 0 blocking findings and 0 required actions",
+    "v3.1 package is immutable historical evidence; do not propose mutating it",
+    "Only R (implementation result heads) may ever be integration candidates; E is evidence-only"
+  ],
+  "current_plan": {
+    "fingerprint": "f403d216dd4abb3bb6b6a2e662ed981462fd7ecb369a3353435c8658e92b53d0",
+    "phases": [
+      "defect reproduction",
+      "controlled Git model",
+      "two-commit model design",
+      "package creation",
+      "selftest (real temp git repos)",
+      "valid/invalid fixtures",
+      "rejected-head test",
+      "manifest byte-exact",
+      "senior plan-review",
+      "evidence publication",
+      "CP-058 checkpoint",
+      "PR push + exact-head CI",
+      "stop gate"
+    ],
+    "plan": "# v3.2 two-commit envelope correction (headless-lab LAB-A/LAB-B)\n\n## Context\n- v3 (BATCH-...-V3): IMMUTABLE_REJECTED_FOR_DISPATCH (LAB-A foreign-process acceptance-gate contradiction, CP-056/CP-057).\n- v3.1 (BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1): exact-byte review remains valid HISTORICAL evidence (CP-057), but the package is REJECTED for dispatch due to V3_1_ENVELOPE_BINDING_DEFECT (severity=blocking_for_dispatch, affected_control=result-envelope-binding).\n\n## The v3.1 envelope defect (reproduced from exact tracked bytes)\nresult-envelope-schema-v3.1.json validation_rules:\n  [0] 'envelope is committed BY THE LEAF at the frozen owned path in the SAME result commit'\n  [2] 'controller verifies envelope.result_tree_sha == git rev-parse <result_head>^{tree}'\nacceptance-verifier-v3.1.py check_envelope:\n  head_tree = git rev-parse HEAD^{tree}; 'result_tree_sha_matches': env.get('result_tree_sha') == head_tree\nFacts:\n  - envelope required in SAME result commit\n  - envelope.result_tree_sha required to equal result_head^{tree}\n  - verifier compares envelope result_tree_sha with git rev-parse HEAD^{tree}\n  - the envelope blob is an INPUT of HEAD^{tree} -> hash_dependency_cycle=true\n  - schema labels result_tree_sha as 'SHA-256'; verifier obtains a Git object ID via rev-parse -> algorithm_semantics_ambiguous=true\n  - operationally_non_constructible_under_normal_git_workflow=true; cryptographic_fixed_point_would_be_required=true (no claim that a fixed point is absolutely impossible)\nControlled Git experiment (T1->T2->T3): writing the envelope declaring T1 changes the tree to T2; declaring T2 changes it to T3; T1 != T2 != T3 -> same_commit_binding_not_stable=true.\n\n## The v3.2 correction (TWO-COMMIT MODEL)\nPer leaf, EXACTLY two commits over the candidate:\n  C = candidate head (CANDIDATE_HEAD 50953878...)\n  R = IMPLEMENTATION_RESULT_HEAD: parent(R)=C; contains owned implementation, tests, tracked provenance; NO envelope.\n  E = ENVELOPE_CONTAINER_HEAD: parent(E)=R; contains EXACTLY the frozen envelope; NO implementation change.\n  The remote leaf branch points to E. The ONLY integration-eligible commit is R. E is evidence and never integrated.\nThe v3.2 envelope declares: schema (headless-lab-result-envelope/v3.2), lab, batch_id, leaf_id, lease_id,\n  candidate_commit_oid (== R^), implementation_result_commit_oid (== R), implementation_result_tree_oid (== R^{tree}),\n  git_object_format (== git rev-parse --show-object-format), external_branch_binding (planned only),\n  literal_tests, build_provenance, artifacts (files present in R only).\nForbidden self-binding: E commit OID, E tree OID, envelope blob OID, envelope SHA-256, resolved remote branch SHA\n  are recorded EXTERNALLY by the controller after push. Git object IDs are named *_commit_oid/*_tree_oid/git_object_format;\n  'SHA-256' is reserved for ordinary file hashes (_sha256).\n\n## Verification performed\n- v3.2 package validators: PASS 15/15 (incl. old-ID reuse scan and self-reference field scan).\n- v3.2-package-manifest validation: PASS 12/12 files/sizes/SHA-256; zero missing; zero extra; candidate exact; batch exact; supersedes v3.1 with reason 'same-commit envelope/tree-OID circularity'.\n- acceptance-verifier-v3.2.py --selftest: PASS 15/15 (real temporary git repositories, no network):\n  v3.1 same-commit model rejected; two-commit C->R->E accepted; wrong candidate/result/tree OIDs rejected;\n  E parent != R rejected; envelope in R rejected; implementation change in E rejected; missing envelope in E rejected;\n  self container commit field rejected; self tree field rejected; envelope self-SHA256 rejected;\n  remote branch mismatch rejected; correct external branch binding accepted (bare origin + git ls-remote); zero residual dirs.\n- Valid C->R->E repository (controller-built, contract-conformant supervisor): verifier v3.2 PASS (22 checks, exit 0).\n- Invalid fixtures: same-commit envelope REJECT; wrong tree OID REJECT; implementation change in E REJECT (all exit 1).\n- Rejected-head test on clean checkout of 0769d150... (REJECTED_LAB_B_HEAD): REJECT both labs (exit 1).\n- v3.1 immutability: 30 artifacts preserved read-only from exact PR head; 12/12 v3.1 hashes match manifest d6ebac8e...\n\n## Freeze semantics requested\n- v3.2 is FROZEN for review, NOT dispatched. Accept does NOT authorize dispatch.\n- Leases planned only (LEASE-20260805T224640Z-LAB-A-V3_2, LEASE-20260805T224640Z-LAB-B-V3_2);\n  zero LAB worktrees; zero leaves; D0/D1/D2 NOT executed; redispatch_authorized=false; integration_authorized=false.\n- The only subsequent human decision: authorize or reject a NEW LAB-A/LAB-B dispatch using EXACTLY the reviewed\n  v3.2 package, new branches, new worktrees and new leases. Integration may refer ONLY to the R heads.",
+    "version": "v3.2"
+  },
+  "decision_needed": "Is the v3.2 package semantically correct and complete, with only R integration-eligible and the envelope binding external and non-self-referential? Verdict accept requires 0 blocking findings and 0 required actions, bound to the exact v3.2 package manifest SHA-256 and all twelve artifact SHA-256 values.",
+  "diff": {
+    "byte_size": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "summary": "v3.2 package (13 artifacts under receipts/headless-lab-v3.2/) + pre-review binding receipts under receipts/headless-lab-v3.2-review-binding/; staged in isolated worktree from exact PR head da89654e; no changes to candidate, v3/v3.1 packages, CP-048..CP-057, or LAB branches"
+  },
+  "escalation": {
+    "local_deterministic_checks": [
+      "PR #34 head == da89654e (gh api + git fetch)",
+      "exact-head CI success on da89654e (runs 31028638773, 31028638751)",
+      "v3.1 12/12 hash match vs manifest from tracked blobs",
+      "controlled Git model experiment exit 0 (T1 != T2 != T3)",
+      "v3.2 selftest exit 0 (15/15)",
+      "valid C->R->E verifier run exit 0",
+      "invalid fixtures exit 1 (same-commit, wrong tree, impl-in-E)",
+      "rejected-head test exit 1 (both labs)",
+      "15/15 package validators exit 0",
+      "manifest validation 12/12 exit 0"
+    ],
+    "material_impact": "The result envelope is the binding that makes any LAB-A/LAB-B result verifiable and integration-eligible. A same-commit envelope cannot be constructed by the ordinary workflow (its content changes the tree OID it declares), so the envelope model is the acceptance gate for dispatch; the two-commit correction must be independently reviewed before freezing the package as exact-byte evidence for the human dispatch decision."
+  },
+  "invalidated_assumptions": [
+    "A same-commit envelope can declare the tree OID of its own commit (shown non-constructible under the ordinary git workflow)",
+    "v3.1 envelope binding was dispatch-safe (REJECTED: V3_1_ENVELOPE_BINDING_DEFECT)"
+  ],
+  "mission_id": "seq66-lab-v3-2-two-commit-envelope-package",
+  "mode": "plan-review",
+  "objective": "Review whether the headless-lab v3.2 package (two-commit C->R->E envelope model) eliminates the v3.1 same-commit envelope/tree-OID circularity, keeps the corrected functional controls intact, and is safe to FREEZE (not dispatch) pending a separate human dispatch decision.",
+  "observed_facts": [
+    "PR #34 OPEN, draft=true, mergeable=MERGEABLE, head==da89654e... (EXPECTED_PR_HEAD)",
+    "Project control plane run 31028638773 conclusion=success head_sha==da89654e...",
+    "Audio integration core run 31028638751 conclusion=success head_sha==da89654e...",
+    "9678ff50..da89654e diff contains ONLY CP-057, CURRENT, receipts/headless-lab-v3.1/*, receipts/headless-lab-v3.1-review-binding/*",
+    "receipts/headless-lab-v3/* and receipts/headless-lab-v3-review-binding/* byte-identical across heads",
+    "v3.1 preserved read-only (30 artifacts); 12/12 hashes match v3.1-package-manifest.json (d6ebac8e...)",
+    "v3.1 envelope defect reproduced: same-commit envelope + result_tree_sha == HEAD^{tree} -> hash_dependency_cycle=true",
+    "Controlled Git experiment: T1 != T2 != T3 -> same_commit_binding_not_stable=true",
+    "v3.2 selftest PASS 15/15 (real temp git repos, bare origin + ls-remote for remote binding)",
+    "Valid C->R->E repository: verifier PASS (22 checks); invalid fixtures (same-commit, wrong tree, impl-in-E) REJECT",
+    "Rejected-head test on 0769d150... REJECT (exit 1 both labs)",
+    "v3.2 package validators 15/15 PASS; manifest validation 12/12 PASS (zero missing/extra, candidate+batch exact)",
+    "D0/D1/D2 NOT executed; leases planned only; zero worktrees; zero leaves"
+  ],
+  "progress": {
+    "completed": [
+      "identity verification (PR #34, CI, diff scope, v3/v3.1 byte-identity)",
+      "v3.1 preservation + 12-hash validation",
+      "v3.1 envelope defect reproduction + controlled Git model (T1/T2/T3)",
+      "v3.2 package creation (13 artifacts, two-commit model, new IDs/hashes)",
+      "selftest PASS 15/15, valid C->R->E PASS, invalid fixtures REJECT, rejected-head REJECT",
+      "package validators 15/15, manifest validation 12/12",
+      "evidence staged in isolated worktree from exact PR head"
+    ],
+    "current": "senior plan-review of the frozen v3.2 package"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "\u00bfEl modelo C\u2192R\u2192E elimina toda dependencia del envelope sobre su propio commit, tree o blob? (el envelope vive solo en E, declara OIDs de C/R y el binding externo se registra tras el push)."
+    },
+    {
+      "id": "Q2",
+      "text": "\u00bfEst\u00e1 inequ\u00edvocamente definido que s\u00f3lo R es candidato de integraci\u00f3n? (E es evidence-only; la decisi\u00f3n futura de integraci\u00f3n solo puede referirse a los implementation result heads)."
+    },
+    {
+      "id": "Q3",
+      "text": "\u00bfEl branch remoto apunta a E y su binding se registra externamente sin autorreferencia? (ls-remote == E tras el push, receipt externo, campos prohibidos en el envelope)."
+    },
+    {
+      "id": "Q4",
+      "text": "\u00bfEl verifier rechaza envelopes en R, cambios de implementaci\u00f3n en E y OIDs incorrectos? (selftest 15/15 con repos git reales; fixtures inv\u00e1lidas REJECT)."
+    },
+    {
+      "id": "Q5",
+      "text": "\u00bfLos controles funcionales, provenance, ownership y clean-checkout de v3.1 permanecen intactos? (LAB-A owned/foreign, LAB-B silence/malformed/frames, .gitignore byte-exact, no ELF, controlled rebuild, validators 15/15)."
+    },
+    {
+      "id": "Q6",
+      "text": "\u00bfEl paquete exacto puede congelarse para una decisi\u00f3n humana separada? (sin dispatch, leases planned, cero worktrees/leaves, D0/D1/D2 no ejecutados, redispatch_authorized=false)."
+    }
+  ],
+  "relevant_contracts": [
+    "result-envelope-schema-v3.2.json (two-commit non-self-referential model)",
+    "lab-api-contract-v3.2.json (ProcessSupervisor ownership semantics)",
+    "dispatch-plan-v3.2.json (COMPLETION-V3_2 criteria; R/E naming; summary never substitutes)",
+    "build-provenance-policy-v3.2.json (hash equality never proves copy/rebuild)",
+    "scope-freeze-v3.2.json (TWO-COMMIT-ENVELOPE-MODEL scope)",
+    "acceptance-manifest-v3.2.json (harness owned by controller; selftest required before use)",
+    "AGENTS.md senior-consultation and merge-gate contracts"
+  ],
+  "repository": {
+    "dirty": true,
+    "identity_fingerprint": "315b49cfc8b027f0d6d49ec8cf91ed50629e954947f13c46a0ce1a48c5783b25",
+    "name": "seq66-loves-sooperlooper"
+  },
+  "requested_output": {
+    "schema_version": "codex-senior-consult-response/v3"
+  },
+  "risks_already_identified": [
+    "The senior verdict is bound to exact bytes; any post-freeze byte change invalidates it",
+    "Accept does not authorize dispatch; human authorization remains mandatory",
+    "The controlled Git experiment demonstrates the ordinary-procedure circularity; it is not a formal proof over the whole hash space",
+    "A future regression to the same-commit envelope model must be caught by the model checks and selftest"
+  ],
+  "runtime_evidence": [
+    {
+      "result": "PASS 15/15: PASS v3.1 same-commit model rejected | PASS two-commit C->R->E accepted |\nPASS wrong candidate OID rejected | PASS wrong result commit OID rejected |\nPASS wrong result tree OID rejected | PASS E parent != R rejected |\nPASS envelope present in R rejected | PASS implementation change in E rejected |\nPASS missing envelope in E rejected | PASS self container commit field rejected |\nPASS self tree field rejected | PASS envelope self-SHA256 rejected |\nPASS remote branch mismatch rejected | PASS correct external branch binding accepted |\nPASS zero residual directories",
+      "source": "acceptance-verifier-v3.2.py --selftest"
+    },
+    {
+      "result": "PASS 22/22 checks (model C/R/E, R^==C, E^==R, envelope absent in R / present in E, diff scopes, OID fields, no self-binding, clean worktree, LAB-A gates on exact R)",
+      "source": "valid C->R->E repository (verifier main mode)"
+    },
+    {
+      "result": "REJECT x3: same-commit envelope, wrong tree OID, implementation change in E (all exit 1)",
+      "source": "invalid fixtures"
+    },
+    {
+      "result": "REJECT both labs (LAB-A imports fail; LAB-B placeholder tests + broken .gitignore)",
+      "source": "rejected-head test on 0769d150..."
+    },
+    {
+      "result": "PASS 15/15",
+      "source": "v3.2 package validators"
+    },
+    {
+      "result": "PASS 12/12 files/sizes/SHA-256; zero missing; zero extra; candidate exact; batch exact; supersedes v3.1",
+      "source": "v3.2-package-manifest validation"
+    },
+    {
+      "result": "PASS: T1=bc726effecb7e7a9c0776bd75e6ea9b82326eb79 T2=5646f00e3f2dedd88b6bf6366256ea831fba42b0 T3=6798adeaafeffc1c3c5567e23459f687be626031; T1!=T2, T2!=T3; same_commit_binding_not_stable=true",
+      "source": "controlled Git model experiment"
+    },
+    {
+      "result": "30 artifacts read-only; 12/12 hashes match manifest d6ebac8e...; v3/v3.1-review-binding byte-identical",
+      "source": "v3.1 preservation"
+    },
+    {
+      "result": "evidence parent/head=da89654e...; candidate=50953878...; batch=BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2; manifest_sha256=441d04d4eb812b5c2738372205ae244691386cec2c2c4fe8011889486bf9ec27; twelve artifact hashes={'acceptance-manifest-v3.2.json': 'cdeb1212800b9238e078a74b43565b999c1decf4ee1ffc42086a5ef9db8c424e', 'acceptance-verifier-v3.2.py': 'a06684a0bdc03c3553b4fc201f473c4959b6b2940bdd93b9251e3f7824c67ce6', 'batch-manifest-v3.2.json': 'c32a1e2b71261d8b042a15f5ed90381275521788cf543d8bc0c8870d6a5344bb', 'build-provenance-policy-v3.2.json': '0a26321a1ea455a580e144f0c33fda6f0a2dd5c6a73b25f411c914fdae582baf', 'dispatch-plan-v3.2.json': 'd307b3a46b2d5c1849402f30f4365ab7c72648e8e1715d72f8cb12869cd5e3f9', 'lab-api-contract-v3.2.json': 'ed8dafdffcdad457c3fb235ef25de059eec870991a73ce02c97f95f6faf058af', 'lease-plan-lab-a-v3.2.json': 'e4a48ad84d7d7ac7fb50f5ffbcc567de24697df3729fdc8123b17cc4649a83b2', 'lease-plan-lab-b-v3.2.json': '2864100eb982dc51c7bfcdfee375f7ce439e17fb1f193d74c12c5b07e68e9567', 'port-plan-v3.2.json': 'de6faed10fdeeb17a7f5ae2f01d5f9322d8b7759bb478e31c22806fcfda4b098', 'predispatch-readiness-v3.2.json': '58477d65379ce221d1ef343146fdae8df2c9d037d359cee9e313e776c19ab286', 'result-envelope-schema-v3.2.json': '272eae704e420d1dfc813c6b71151d9b45573e23bb8f3dec9c839fba9caae8ac', 'scope-freeze-v3.2.json': 'b7bd7a2e33b2c052a2f2ab3c675b8a19dae6be38868361246e0a9144e17135b6'}",
+      "source": "bundle identities"
+    }
+  ],
+  "schema_version": "codex-senior-consult/v1",
+  "snapshot": {
+    "checkpoint_fingerprint": "6b38601c211f9936eae93a747349354d0c1123014643c40db05d765d8eaa6116",
+    "plan_fingerprint": "f403d216dd4abb3bb6b6a2e662ed981462fd7ecb369a3353435c8658e92b53d0",
+    "repository_head": "da89654e05d7014bf0720ed5517c362b7c4beacf",
+    "working_tree_fingerprint": "d0a0b4a5606121aa11f1659bd87a75f0d92f9789b6a65775b7dcf9bbdaad024c"
+  },
+  "tests": [
+    {
+      "command": "python3 receipts/headless-lab-v3.2/acceptance-verifier-v3.2.py --selftest",
+      "exit_code": 0,
+      "summary": "15/15 PASS (real temp git repos)"
+    },
+    {
+      "command": "acceptance-verifier-v3.2.py --lab a --repository <valid C->R->E> --candidate-head C --result-head R --envelope-container-head E ...",
+      "exit_code": 0,
+      "summary": "22/22 PASS"
+    },
+    {
+      "command": "acceptance-verifier-v3.2.py ... bad-same-commit ...",
+      "exit_code": 1,
+      "summary": "REJECT as expected"
+    },
+    {
+      "command": "acceptance-verifier-v3.2.py ... bad-wrong-tree ...",
+      "exit_code": 1,
+      "summary": "REJECT as expected"
+    },
+    {
+      "command": "acceptance-verifier-v3.2.py ... bad-impl-in-e ...",
+      "exit_code": 1,
+      "summary": "REJECT as expected"
+    },
+    {
+      "command": "acceptance-verifier-v3.2.py --lab a/b --result-head 0769d150 ...",
+      "exit_code": 1,
+      "summary": "REJECT both labs"
+    },
+    {
+      "command": "validate_v32_package.py",
+      "exit_code": 0,
+      "summary": "15/15 validators PASS"
+    },
+    {
+      "command": "validate_v32_manifest.py",
+      "exit_code": 0,
+      "summary": "12/12 manifest PASS"
+    },
+    {
+      "command": "run_git_model_experiment.py",
+      "exit_code": 0,
+      "summary": "T1!=T2!=T3; same-commit binding unstable"
+    }
+  ]
+}

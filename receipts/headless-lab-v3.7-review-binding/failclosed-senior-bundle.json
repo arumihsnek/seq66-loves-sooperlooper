@@ -1,0 +1,299 @@
+{
+ "alternatives": [
+  {
+   "cons": [
+    "blocks validated work"
+   ],
+   "name": "Reject",
+   "pros": [
+    "conservative"
+   ],
+   "recommendation": "only if a fail-open path exists"
+  },
+  {
+   "cons": [
+    "accept is not dispatch authorization"
+   ],
+   "name": "Accept",
+   "pros": [
+    "evidence-backed"
+   ],
+   "recommendation": "accept if Q1..Q8 resolve affirmatively"
+  }
+ ],
+ "caller_required": [
+  "/alternatives",
+  "/candidate_decision",
+  "/code_excerpts",
+  "/constraints",
+  "/current_plan",
+  "/decision_needed",
+  "/diff",
+  "/escalation",
+  "/invalidated_assumptions",
+  "/objective",
+  "/observed_facts",
+  "/progress",
+  "/questions",
+  "/relevant_contracts",
+  "/risks_already_identified",
+  "/runtime_evidence",
+  "/snapshot/checkpoint_fingerprint",
+  "/snapshot/plan_fingerprint",
+  "/tests"
+ ],
+ "candidate_decision": {
+  "decision_type": "frozen_package_review",
+  "description": "Review of the frozen v3.7 package; ACCEPT does NOT authorize dispatch/integration/execution",
+  "options": [
+   "accept",
+   "changes_required",
+   "blocked"
+  ],
+  "recommendation": "accept if the evidence supports it"
+ },
+ "code_excerpts": [
+  {
+   "excerpt": "def gate(self, name, ok, detail=\"\"):\n        self.result.setdefault(\"gates\", {})[name] = {\"pass\": bool(ok), \"detail\": detail}\n        if not ok:\n            self.gate_failures.append({\"gate\": name, \"detail\": detail})\n        return ok",
+   "file": "mechanical-finalizer-v3.7.py",
+   "note": "gate registry"
+  },
+  {
+   "excerpt": "def prepass_ok(self):\n        return len(self.gate_failures) == 0",
+   "file": "mechanical-finalizer-v3.7.py",
+   "note": "fail-closed: E only when zero failures"
+  },
+  {
+   "excerpt": "def create_E(self, evidence_json):\n        ev_path = os.path.join(self.wt, self.evidence_rel)\n        os.makedirs(os.path.dirname(ev_path), exist_ok=True)\n        with open(ev_path, \"w\") as f:\n            f.write(evidence_json)\n        sh([\"git\", \"-C\", self.wt, \"add\", self.evidence_rel])\n        r = sh([\"git\", \"-C\", self.wt, \"commit\", \"-m\",\n                f\"evidence(v3.7): {self.lab} controller evidence container (fail-closed mechanical finalizer)\"],\n               timeout=120)\n        if r.returncode != 0:\n            raise RuntimeError(\"finalizer commit failed: \" + r.stderr[-400:])\n        e_oid = git(self.wt, \"rev-parse\", \"HEAD\")\n        e_tree = git(self.wt, \"rev-parse\", \"HEAD^{tree}\")\n        diff = git(self.repo, \"diff\", \"--name-only\", self.R, e_oid).splitlines()\n        if diff != [self.evidence_rel]:\n            raise RuntimeError(f\"diff R..E not evidence-only: {diff}\")\n        return e_oid, e_tree, ev_path",
+   "file": "mechanical-finalizer-v3.7.py",
+   "note": "E creation conditional on prepass"
+  },
+  {
+   "excerpt": "def run_literal_tests(self):\n        e = self.result.setdefault(\"literal_tests\", {})\n        e[\"tests\"] = []\n        all_zero = True\n        all_hashes_ok = True\n        all_ids_ok = True\n        canonical_ids = sorted(self.literal_tests.keys())\n        for tid, t in sorted(self.literal_tests.items()):\n            rec = {\"id\": tid}\n            actual_sha = canonical_command_sha256(t[\"command\"])\n            declared = t.get(\"command_sha256\")\n            rec[\"declared_sha\"] = declared\n            rec[\"actual_sha\"] = actual_sha\n            rec[\"declared_sha_matches_argv\"] = (declared is not None and actual_sha == declared)\n            if not rec[\"declared_sha_matches_argv\"]:\n                all_hashes_ok = False\n            rec[\"argv\"] = t[\"command\"]\n            env = dict(os.environ)\n            env[\"PYTHONDONTWRITEBYTECODE\"] = \"1\"\n            try:\n                r = sh(t[\"command\"], cwd=self.wt, timeout=t.get(\"timeout_seconds\", 180), env=env)\n                rec[\"exit_code\"] = r.returncode\n                rec[\"stdout_sha256\"] = sha256_bytes(r.stdout.encode(\"utf-8\"))\n                rec[\"stderr_sha256\"] = sha256_bytes(r.stderr.encode(\"utf-8\"))\n                if r.returncode != 0:\n                    all_zero = False\n                    rec[\"error\"] = r.stderr[-300:]\n            except Exception as ex:\n                rec[\"exit_code\"] = -2\n                rec[\"error\"] = str(ex)[-300:]\n                all_zero = False\n            e[\"tests\"].append(rec)\n        e[\"all_exit_zero\"] = all_zero\n        e[\"all_command_hashes_match\"] = all_hashes_ok\n        e[\"all_ids_exact\"] = sorted(r[\"id\"] for r in e[\"tests\"]) == canonical_ids\n        # FC-F2: command hash evidence \u2014 independent recomputation, one entry\n        # per literal test (never recomputed = declared by policy).\n        che = {\"schema\": \"command-hash-evidence/v3.7\", \"batch_id\": self.batch, \"lab\": self.lab, \"tests\": []}\n        for rec in e[\"tests\"]:\n            t = self.literal_tests[rec[\"id\"]]\n            canon_argv = t[\"command\"]\n            canon_bytes = json.dumps(canon_argv, separators=(\",\", \":\"), sort_keys=True).encode(\"utf-8\")\n            che[\"tests\"].append({\n                \"test_id\": rec[\"id\"],\n                \"canonical_argv\": canon_argv,\n                \"canonical_serialization_sha256\": sha256_bytes(canon_bytes),\n                \"declared_command_sha256\": rec[\"declared_sha\"],\n                \"controller_recomputed_command_sha256\": rec[\"actual_sha\"],\n                \"match\": rec[\"declared_sha_matches_argv\"],\n                \"cwd\": t.get(\"cwd\", \"checkout-root\"),\n                \"timeout_secon\n    # ...(truncated)",
+   "file": "mechanical-finalizer-v3.7.py",
+   "note": "command hash enforcement + FC-F2 evidence"
+  },
+  {
+   "excerpt": "def ownership_diff(self):\n        e = self.result.setdefault(\"ownership_diff_evidence\", {})\n        diff_raw = git(self.repo, \"diff\", \"--name-status\", self.C, self.R)\n        e[\"diff_raw\"] = diff_raw\n        changed = []\n        for line in diff_raw.splitlines():\n            parts = line.split(\"\\t\")\n            if len(parts) >= 2:\n                changed.append({\"status\": parts[0], \"path\": parts[-1]})\n        e[\"changed_paths\"] = [c[\"path\"] for c in changed]\n        owned = set(self.owned)\n        def under(p, o):\n            return p == o or p.startswith(o.rstrip(\"/\") + \"/\")\n        changed_not_owned = [p for p in e[\"changed_paths\"] if not any(under(p, o) for o in owned)]\n        forbidden = [\"PROJECT-MANIFEST.json\", \"CURRENT.md\", \"WORK-QUEUE.md\",\n                     \"doc/\", \"receipts/\", \".github/\", \"scripts/\", \"tools/\"]\n        forbidden_changed = [p for p in e[\"changed_paths\"]\n                             if any(p == fp or p.startswith(fp.rstrip(\"/\") + \"/\") for fp in forbidden)]\n        e[\"changed_not_owned\"] = changed_not_owned\n        e[\"forbidden_changed\"] = forbidden_changed\n        e[\"changed_paths_non_empty\"] = len(changed) > 0\n        e[\"ownership_diff_pass\"] = (e[\"changed_paths_non_empty\"] and not changed_not_owned\n                                    and not forbidden_changed)\n        self.gate(\"ownership diff evidence PASS\", e[\"ownership_diff_pass\"],\n                  \"changed=\" + str(len(changed)) + \" not_owned=\" + str(changed_not_owned)\n                  + \" forbidden=\" + str(forbidden_changed))",
+   "file": "mechanical-finalizer-v3.7.py",
+   "note": "FC-F3 complete ownership diff gate"
+  },
+  {
+   "excerpt": "def controlled_build(self):\n        e = self.result.setdefault(\"build_provenance\", {})\n        e[\"applicable\"] = self.lab == \"LAB-B\"\n        if self.lab != \"LAB-B\":\n            e[\"verdict\"] = \"not_applicable\"\n            self.gate(\"controlled build PASS/not_applicable\", True, \"not_applicable\")\n            return\n        build_dir = os.path.join(self.wt, \"build\")\n        # BF-12 fix: capture entries_before BEFORE any compilation\n        if os.path.exists(build_dir):\n            e[\"entries_before\"] = sorted(os.listdir(build_dir))\n            e[\"build_dir_empty_before\"] = False\n        else:\n            e[\"entries_before\"] = []\n            e[\"build_dir_empty_before\"] = True\n            os.makedirs(build_dir, exist_ok=True)\n        self.gate(\"empty build dir (entries_before=[])\", e[\"build_dir_empty_before\"],\n                  str(e[\"entries_before\"]))\n        sources = self.func_baseline[\"canonical_sources\"]\n        compiles = []\n        all_outputs_ok = True\n        for src in sources:\n            src_rel = src[\"path\"]\n            expected_sha = src[\"sha256\"]\n            blob_oid = git(self.repo, \"rev-parse\", f\"{self.R}:{src_rel}\")\n            raw = subprocess.run([\"git\", \"-C\", self.repo, \"cat-file\", \"blob\", blob_oid],\n                                 capture_output=True).stdout\n            actual_sha = sha256_bytes(raw)\n            out_name = os.path.basename(src_rel).replace(\".c\", \"\")\n            out = os.path.join(build_dir, out_name)\n            argv = [\"gcc\", \"-std=c11\", \"-O2\", \"-o\", out, src_rel, \"-ljack\", \"-lm\", \"-lpthread\"]\n            argv_norm = [(\"<build-dir>/\" + os.path.basename(a)) if a == out else a for a in argv]\n            start_utc = now_utc()\n            env_allowlist = {k: v for k, v in sorted(os.environ.items())\n                             if k in (\"PATH\", \"HOME\", \"LANG\", \"CC\", \"CFLAGS\", \"PKG_CONFIG_PATH\", \"LD_LIBRARY_PATH\")}\n            r = sh(argv, cwd=self.wt, timeout=300)\n            end_utc = now_utc()\n            exists = os.path.exists(out)\n            size = os.path.getsize(out) if exists else None\n            elf_magic = None\n            ldd_exit = None\n            ldd_libs = []\n            if exists and size and size > 0:\n                with open(out, \"rb\") as fh:\n                    head = fh.read(4)\n                elf_magic = head == b\"\\x7fELF\"\n                ldd = sh([\"ldd\", out], timeout=60)\n                ldd_exit = ldd.returncode\n                for line in ldd.stdout.splitlines():\n                    if \"=>\" in line:\n                        ldd_libs.append(line.split(\"=>\")[0].strip())\n                    elif \"linu\n    # ...(truncated)",
+   "file": "mechanical-finalizer-v3.7.py",
+   "note": "strict build provenance key checks"
+  },
+  {
+   "excerpt": "def static_validate_source(path):\n    \"\"\"Reject forbidden bypass patterns in controller source (code lines only;\n    docstrings and comments are skipped so policy prose is not self-flagging).\n\n    Banned pattern literals are assembled by concatenation so the checker's own\n    source never contains the exact forbidden tokens (no self-matching).\"\"\"\n    with open(path, \"rb\") as f:\n        data = f.read()\n    text = data.decode(\"utf-8\", errors=\"replace\")\n    lines = text.splitlines()\n\n    # assemble pattern fragments so literals do not appear verbatim here\n    OR_T = \"or \" + \"True\"\n    AND_T = \"and \" + \"True\"\n    FFF = \"if False else \" + \"False\"\n    IFT = \"if True \" + \"else\"\n    GETM = \".g\" + \"et(\"\n    IST = \"is \" + \"True\"\n    EQT = \"== \" + \"True\"\n    RESM = 're' + 'sults[\"'\n    PST = '= \"PA' + 'SS\"'\n    FLT = '= \"FA' + 'IL\"'\n    DBGM = \"DB\" + \"G-\"\n    TMPD = \"TEMP \" + \"DEBUG\"\n\n    # collect code-only line numbers (skip docstrings and full-line comments)\n    in_doc = None\n    code_lines = {}\n    for i, ln in enumerate(lines, start=1):\n        stripped = ln.strip()\n        if in_doc:\n            code_lines[i] = False\n            if in_doc in stripped:\n                idx = stripped.find(in_doc)\n                tail = stripped[idx + 3:]\n                if '\"\"\"' in tail or \"'''\" in tail:\n                    in_doc = None\n                else:\n                    in_doc = None\n            continue\n        if stripped.startswith(\"#\"):\n            code_lines[i] = False\n            continue\n        if stripped.startswith('\"\"\"') or stripped.startswith(\"'''\"):\n            delim = stripped[:3]\n            rest = stripped[3:]\n            if delim in rest:\n                code_lines[i] = False\n            else:\n                in_doc = delim\n                code_lines[i] = False\n            continue\n        code_lines[i] = True\n\n    findings = []\n    for i in range(1, len(lines) + 1):\n        if not code_lines.get(i, False):\n            continue\n        ln = lines[i - 1]\n        for pat, why in [(OR_T, \"boolean short-circuit bypass\"),\n                         (AND_T, \"boolean short-circuit bypass\"),\n                         (FFF, \"hardcoded false branch\"),\n                         (IFT, \"hardcoded true branch\")]:\n            if pat in ln:\n                findings.append({\"pattern\": pat, \"why\": why, \"file\": path, \"line\": i})\n        if GETM in ln and (IST in ln or EQT in ln):\n            findings.append({\"pattern\": \"policy-only boolean\", \"why\": \"dict .get() boolean asserted as evidence\", \"file\": path, \"line\": i})\n        if RESM in ln and \"= True\" in ln:\n            find\n    # ...(truncated)",
+   "file": "mechanical-finalizer-v3.7.py",
+   "note": "anti-self-matching static validator"
+  },
+  {
+   "excerpt": "def phase_postpublish(self, repo, C, R, E, branch, remote, expected_E, acceptance,\n                          evidence_path, workdir, expected_C=None, expected_R=None,\n                          expected_evidence_sha=None):\n        # REAL remote resolution via ls-remote (never local refs as substitute)\n        if remote:\n            ls = sh([\"git\", \"-C\", repo, \"ls-remote\", remote, f\"refs/heads/{branch}\"], timeout=120).stdout.strip()\n            self.require(ls != \"\", \"remote branch exists (ls-remote)\", repr(ls[:120]))\n            resolved = ls.split(\"\\t\")[0] if ls else \"\"\n            self.require(resolved == expected_E, \"remote == E\", f\"{resolved} vs {expected_E}\")\n        # EXACT A binding (BF-06/BF-07/BF-08 fix)\n        if acceptance:\n            self.require(os.path.exists(acceptance), \"acceptance receipt exists\")\n            a = load_json(acceptance)\n            self.require(a.get(\"C\") == expected_C, \"A binds exact C\", f\"{a.get('C')} vs {expected_C}\")\n            self.require(a.get(\"R\") == expected_R, \"A binds exact R\", f\"{a.get('R')} vs {expected_R}\")\n            self.require(a.get(\"E\") == E, \"A binds exact E\", f\"{a.get('E')} vs {E}\")\n            self.require(a.get(\"branch\") == branch, \"A binds exact branch\", f\"{a.get('branch')} vs {branch}\")\n            self.require(a.get(\"remote\") == remote, \"A binds exact remote\", f\"{a.get('remote')} vs {remote}\")\n            self.require(a.get(\"remote_resolved_oid\") == expected_E, \"A remote resolved == E\")\n            self.require(a.get(\"evidence_path\") == evidence_path, \"A binds exact evidence path\")\n            if expected_evidence_sha:\n                self.require(a.get(\"evidence_sha256\") == expected_evidence_sha,\n                             \"A binds exact evidence sha256\", f\"{a.get('evidence_sha256')} vs {expected_evidence_sha}\")\n            # create-only proof MUST be derived (BF-07 fix): receipts + push argv hash + transcript hash\n            proof = a.get(\"create_only_proof\")\n            self.require(isinstance(proof, dict), \"create_only_proof is derived dict, not bare bool\",\n                         str(type(proof)))\n            self.require(proof.get(\"push_argv_hash\"), \"push argv hash present in derived proof\")\n            self.require(proof.get(\"push_transcript_hash\"), \"push transcript hash present in derived proof\")\n            self.require(proof.get(\"pre_absence_receipt\"), \"pre-absence receipt present\")\n            self.require(proof.get(\"prepush_absence_receipt\"), \"immediate-prepush absence receipt present\")\n            derived_flag = proof.get(\"derived_from_receipts\")\n            self.require(derive\n    # ...(truncated)",
+   "file": "acceptance-verifier-v3.7.py",
+   "note": "EXACT postpublish binding"
+  },
+  {
+   "excerpt": "def phase_full(self, repo, C, R, E, evidence_path, acceptance, owned, batch_manifest,\n                   planned_branch, finalizer_cmd, finalizer_args, verifier_path, lab, workdir,\n                   remote=None, expected_E=None, expected_C=None, expected_R=None,\n                   expected_evidence_sha=None):\n        # Every phase executes and its results are PRESERVED in self.phase_results.\n        # PASS only if ALL phases pass (accumulated errors never cleared).\n        print(\"== full-completion: functional-continuity (inputs assumed validated) ==\")\n        # functional-continuity is package-level; called separately by controller\n        self.snapshot_phase(\"pre_full_start\")\n        print(\"== full-completion: r-only-leaf-result ==\")\n        self.phase_r_only(repo, C, R, owned, evidence_path, batch_manifest)\n        print(\"== full-completion: prepublish-finalization ==\")\n        self.phase_prepublish(repo, C, R, E, evidence_path, planned_branch, finalizer_cmd,\n                              finalizer_args, verifier_path, lab, owned, batch_manifest, workdir,\n                              remote=remote, absence_required=False)\n        print(\"== full-completion: postpublish-binding ==\")\n        self.phase_postpublish(repo, C, R, E, planned_branch, remote, expected_E or E, acceptance,\n                               evidence_path, workdir, expected_C=expected_C, expected_R=expected_R,\n                               expected_evidence_sha=expected_evidence_sha)\n        print(\"== full-completion: controller acceptance final ==\")\n        if acceptance and os.path.exists(acceptance):\n            a = load_json(acceptance)\n            self.require(a.get(\"final_verdict\") == \"PASS\", \"controller acceptance final verdict PASS\")\n        print(\"== full-completion: worktree cleanliness ==\")\n        wt = tempfile.mkdtemp(prefix=\"verifier-v36-full-\")\n        try:\n            sh([\"git\", \"-C\", repo, \"worktree\", \"add\", \"--detach\", wt, E], timeout=300)\n            st = sh([\"git\", \"-C\", wt, \"status\", \"--porcelain\"]).stdout\n            self.require(st == \"\", \"worktree clean at E\", repr(st[:100]))\n        finally:\n            sh([\"git\", \"-C\", repo, \"worktree\", \"remove\", \"--force\", wt], timeout=120)\n        self.snapshot_phase(\"full_completion\")\n        return not self.errors",
+   "file": "acceptance-verifier-v3.7.py",
+   "note": "full-completion preserves all phases"
+  }
+ ],
+ "constraints": [
+  "Single pass",
+  "No tools",
+  "No workspace reads",
+  "Advisory only",
+  "Accept does NOT authorize dispatch/integration/execution/D0-D2"
+ ],
+ "current_plan": {
+  "phases": [
+   "preserve-v36",
+   "delta",
+   "runtime-contract",
+   "validation",
+   "freeze",
+   "reviews",
+   "binding",
+   "publication"
+  ],
+  "version": "v3.7"
+ },
+ "decision_needed": "Answer Q1..Q8 affirmatively with evidence, bound to manifest 7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3?",
+ "diff": {
+  "sha256": "42e7472ee931d1556d4956431bb1e0811a06caf3d2d18d26f3fc5eceb4aefdbf",
+  "summary": "v3.7 fail-closed correction (fc-f1/f2/f3 closed); supersedes v3.6"
+ },
+ "escalation": {
+  "local_deterministic_checks": [
+   "finalizer-fail-closed 8/8",
+   "command-hash 8/8",
+   "ownership diff pass both labs",
+   "postpublish exact binding PASS",
+   "full-completion PASS",
+   "selftest 32/32"
+  ],
+  "material_impact": "v3.7 package preparation ONLY; no dispatch/integration/execution is authorized by this review"
+ },
+ "invalidated_assumptions": [],
+ "mission_id": "seq66-lab-v3-7-fail-closed-process-v3",
+ "mode": "integrated-review",
+ "objective": "Verify the frozen v3.7 package is FAIL-CLOSED: the three new controls (runtime_full_contract, command_hash_evidence, ownership_diff_evidence) are mandatory prepublication gates; no E on any failure; create-only publication; exact postpublish binding; full-completion preserves all phases.",
+ "observed_facts": [
+  "PR #34 open/draft/mergeable head=55b028cc; v3.6 rejected (fc-f1/f2/f3); v3.7 frozen at manifest 7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+  "finalizer-fail-closed.json: 8/8 precondition failures -> exit!=0, E absent, no evidence, no commit",
+  "ownership-diff-verification-lab-a/b.json: complete C..R diff, changed_not_owned=[], forbidden_changed=[]",
+  "runtime_full_contract + ownership_diff + command_hash_evidence are prepublication gates (fail-closed: any failure -> exit!=0, no E)",
+  "verifier phase_r_only recomputes complete ownership diff; phase_prepublish independently recomputes command hashes from evidence argv",
+  "publication create-only; postpublish EXACT binding; full-completion executes ALL phases preserving results",
+  "selftest 32/32 SELFTEST_GLOBAL=PASS; static validator 0 findings debug_markers=0",
+  "dispatch_authorized=false; integration_authorized=false; D0_D1_D2_authorized=false; leases=planned",
+  "command-hash-verification-lab-a/b.json (CORRECTED): all_tests_match_in_this_lab=true (4/4 each); aggregate receipt total_8_of_8_match=true",
+  "f1 (v2 finding): receipt aggregate fields now match individual records exactly"
+ ],
+ "progress": {
+  "completed": [
+   "FC-F1/F2/F3 implementation",
+   "selftest 32/32",
+   "fail-closed 8/8",
+   "freeze"
+  ],
+  "current": "senior review 2"
+ },
+ "questions": [
+  {
+   "id": "q1",
+   "text": "Q1: \u00bfLos command hashes se recomputan independientemente?"
+  },
+  {
+   "id": "q2",
+   "text": "Q2: \u00bfLa igualdad declared/recomputed es un gate obligatorio?"
+  },
+  {
+   "id": "q3",
+   "text": "Q3: \u00bfC..R se compara \u00edntegramente contra ownership?"
+  },
+  {
+   "id": "q4",
+   "text": "Q4: \u00bfLos tres nuevos receipts son fail-closed?"
+  },
+  {
+   "id": "q5",
+   "text": "Q5: \u00bfNing\u00fan E puede crearse si falla fc-f1/f2/f3?"
+  },
+  {
+   "id": "q6",
+   "text": "Q6: \u00bfLa publicaci\u00f3n contin\u00faa create-only?"
+  },
+  {
+   "id": "q7",
+   "text": "Q7: \u00bfPostpublication binding sigue exacto?"
+  },
+  {
+   "id": "q8",
+   "text": "Q8: \u00bfFull completion conserva todas las fases?"
+  }
+ ],
+ "relevant_contracts": [
+  "Frozen payload manifest SHA 7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+  "v3.6 rejection fc-f1/fc-f2/fc-f3",
+  "batch-manifest v3.7"
+ ],
+ "repository": {
+  "dirty": false,
+  "identity_fingerprint": "0d73b832ddbf93c79e8027d2539fcc48f8e850772b43e356fb15a0074fdcdf7f",
+  "name": "review-worktree"
+ },
+ "requested_output": {
+  "schema_version": "codex-senior-consult-response/v3"
+ },
+ "risks_already_identified": [
+  "Bundle is a lean snapshot; full receipts live in the review worktree"
+ ],
+ "runtime_evidence": [
+  {
+   "artifact": "package-payload-manifest-v3.7.json",
+   "content": "{\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"candidate_head_sha\": \"509538784afc2b828f2d922f65cf8ca3a39b5ee7\",\n \"extra\": [],\n \"files\": [\n  {\n   \"name\": \"scope-freeze-v3.7.json\",\n   \"sha256\": \"d16394e41b77dfdc188ba7b1d08a4526697969adf871099b6368e48a7f3c291c\",\n   \"size\": 2709\n  },\n  {\n   \"name\": \"functional-contract-baseline-v3.7.json\",\n   \"sha256\": \"1badfced980776f7c08d426592bf798e5939b173f612cff52f834af3e4a03126\",\n   \"size\": 9693\n  },\n  {\n   \"name\": \"lab-api-contract-v3.7.json\",\n   \"sha256\": \"0b59df8017d6f5ab47fb082f6a2a10a184237826d9bfd5f6647263f0d07ffe57\",\n   \"size\": 6552\n  },\n  {\n   \"name\": \"process-hardening-contract-v3.7.json\",\n   \"sha256\": \"4d0629ebc877366ed080a2085bba892e5d09a2915d77fb6a6a12ca1c1f7b731a\",\n   \"size\": 3968\n  },\n  {\n   \"name\": \"batch-manifest-v3.7.json\",\n   \"sha256\": \"710c76fef2ccf45d31d6f63488026df62076d22a8eb59d896b9565c29b0ff812\",\n   \"size\": 10918\n  },\n  {\n   \"name\": \"dispatch-plan-v3.7.json\",\n   \"sha256\": \"b16bbe7437da806af8b4fcc41bcf958bfdbdcea2a9eaaac54f1ab88e13de31ac\",\n   \"size\": 1643\n  },\n  {\n   \"name\": \"port-plan-v3.7.json\",\n   \"sha256\": \"0422c02f00fe0116e7ba5fa1f368a680799c7348d07998434d2d8edca51ffd4f\",\n   \"size\": 1435\n  },\n  {\n   \"name\": \"lease-plan-lab-a-v3.7.json\",\n   \"sha256\": \"5b65e9b64cd2ea2c6ee2ce8fff05a0ea97a3140329d55efb27febd0a6554e442\",\n   \"size\": 600\n  },\n  {\n   \"name\": \"lease-plan-lab-b-v3.7.json\",\n   \"sha256\": \"db73480d9e839dc989505d5c13eec66bedc12bfc66bf5cf07ed4418947b0096c\",\n   \"size\": 600\n  },\n  {\n   \"name\": \"leaf-r-report-schema-v3.7.json\",\n   \"sha256\": \"9b52946a9d8d2a847e24f83658d67c83d5d04ccf55e0be7f55e870a2a0bde29f\",\n   \"size\": 680\n  },\n  {\n   \"name\": \"controller-evidence-schema-v3.7.json\",\n   \"sha256\": \"03aace2c23666cf362c35744db4181fd8fdf9cb301e0c74d74fa6ebc48fe3f9a\",\n   \"size\": 1041\n  },\n  {\n   \"name\": \"controller-acceptance-schema-v3.7.json\",\n   \"sha256\": \"499657ef8f1318da48b9b33369b802d09b7c6b8eaf621232d81603e229325100\",\n   \"size\": 927\n  },\n  {\n   \"name\": \"mechanical-finalizer-v3.7.py\",\n   \"sha256\": \"312fef8ea635293d8b2026f18568da7b2eabfa8fe614f8515a656ae694b8550f\",\n   \"size\": 57862\n  },\n  {\n   \"name\": \"acceptance-verifier-v3.7.py\",\n   \"sha256\": \"f31288ee4f4d095d45deda7b8066da3f48cf6cf6ec8a773d5aadbbdf4335e87c\",\n   \"size\": 74321\n  },\n  {\n   \"name\": \"build-provenance-policy-v3.7.json\",\n   \"sha256\": \"d38cbb0e7e4aa204af58b21136481d26e3da844240b99d77a13843b4ad9fdb80\",\n   \"size\": 2226\n  },\n  {\n   \"name\": \"publication-policy-v3.7.json\",\n   \"sha256\": \"0d528c51946716de0718340ea142c2ed5a6d71835429104d958bad41e5c4110b\",\n   \"size\": 1155\n  },\n  {\n   \"name\": \"predispatch-readiness-v3.7.json\",\n   \"sha256\": \"6e3855ed7ba4f860a8b2cb027deb22be8d17fc46921616e43fc05feed81330fc\",\n   \"size\": 488\n  }\n ],\n \"frozen_at_utc\": \"2026-08-07T20:01:15Z\",\n \"git_object_format\": \"sha1\",\n \"len_files\": 17,\n \"missing\": [],\n \"operational_file_count\": 17,\n \"review_exclusion_rule\": \"senior-preflight / senior-review-bundle / senior-verdict / review-binding / publication-index are NEVER inside the operational payloa",
+   "sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3"
+  },
+  {
+   "artifact": "finalizer-fail-closed.json",
+   "content": "{\n \"all_cases_fail_closed\": true,\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"case_count\": 8,\n \"cases\": {\n  \"fc-branch-preexisting\": {\n   \"E_absent\": true,\n   \"PASS\": true,\n   \"description\": \"remote branch preexistente (ls-remote rc=0)\",\n   \"exit_code\": 1,\n   \"rejected\": true,\n   \"side_effects_after\": {\n    \"branches\": \"* master\\n  remotes/origin/result/x-lab-a-v3_6\",\n    \"commit_count\": 1,\n    \"evidence_file_exists\": false,\n    \"head\": \"56f16e1184c335fcf1fe396b325a358fb3c53706\",\n    \"log\": \"56f16e1 R\\n8f4950b C\"\n   },\n   \"side_effects_before\": {\n    \"branches\": \"* master\\n  remotes/origin/result/x-lab-a-v3_6\",\n    \"commit_count\": 1,\n    \"evidence_file_exists\": false,\n    \"head\": \"56f16e1184c335fcf1fe396b325a358fb3c53706\",\n    \"log\": \"56f16e1 R\\n8f4950b C\"\n   },\n   \"stderr_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n   \"stdout_sha256\": \"2d80f20a626fcbf62cf8bfdcb6e59daa6250d16a794130981f41c0fb32cddc92\",\n   \"stdout_tail\": \"{\\n  \\\"E_created\\\": false,\\n  \\\"evidence_written\\\": false,\\n  \\\"gate_failures\\\": [\\n    \\\"remote absence (pre-evidence) | branch result/x-lab-a-v3_6 EXISTS on remote\\\"\\n  ],\\n  \\\"git_add_committed\\\": false,\\n  \\\"mode\\\": \\\"finalize\\\",\\n  \\\"prepublication_verdict\\\": \\\"FAIL\\\"\\n}\\n\"\n  },\n  \"fc-command-hash-mismatch\": {\n   \"E_absent\": true,\n   \"PASS\": true,\n   \"description\": \"command hash mismatch aunque test exit=0 (BF-01/BF-02 fix)\",\n   \"exit_code\": 1,\n   \"rejected\": true,\n   \"side_effects_after\": {\n    \"branches\": \"* master\",\n    \"commit_count\": 1,\n    \"evidence_file_exists\": false,\n    \"head\": \"dac4de23805104130ff5c8b3362b5b2e56ff25de\",\n    \"log\": \"dac4de2 R\\n41a5e12 C\"\n   },\n   \"side_effects_before\": {\n    \"branches\": \"* master\",\n    \"commit_count\": 1,\n    \"evidence_file_exists\": false,\n    \"head\": \"dac4de23805104130ff5c8b3362b5b2e56ff25de\",\n    \"log\": \"dac4de2 R\\n41a5e12 C\"\n   },\n   \"stderr_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n   \"stdout_sha256\": \"1050caf39100c61b8f8aa245571289338e482555599acf855eaa1e365e0518d8\",\n   \"stdout_tail\": \"{\\n  \\\"E_created\\\": false,\\n  \\\"evidence_written\\\": false,\\n  \\\"gate_failures\\\": [\\n    \\\"all command hashes exact\\\"\\n  ],\\n  \n...#(truncated)",
+   "sha256": "baa2d9fd247c10145abd1c2add5a6d919edf1099921b75d88019cb8272ea0a0d"
+  },
+  {
+   "artifact": "command-hash-verification-lab-a.json",
+   "content": "{\n \"aggregate_across_labs\": \"8 literal tests total (4 per lab); the paired receipt completes the 8/8\",\n \"all_tests_match_in_this_lab\": true,\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"count\": 4,\n \"lab\": \"LAB-A\",\n \"note\": \"recomputed independently; never recomputed = declared by policy\",\n \"recomputation_algorithm\": \"sha256(json.dumps(argv, separators=(',', ':'), sort_keys=True).encode('utf-8'))\",\n \"recorded_at_utc\": \"2026-08-07T20:08:55Z\",\n \"schema\": \"command-hash-verification/v3.7\",\n \"tests\": [\n  {\n   \"canonical_argv\": [\n    \"python3\",\n    \"-m\",\n    \"py_compile\",\n    \"tests/integration/headless_audio_lab/process_supervisor.py\",\n    \"tests/integration/headless_audio_lab/jack_server.py\",\n    \"tests/integration/headless_audio_lab/osc_probe.py\",\n    \"tests/integration/headless_audio_lab/sooperlooper_launcher.py\",\n    \"tests/integration/headless_audio_lab/__init__.py\"\n   ],\n   \"canonical_serialization_bytes_sha256\": \"1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e\",\n   \"controller_recomputed_command_sha256\": \"1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e\",\n   \"cwd\": \"checkout-root\",\n   \"declared_command_sha256\": \"1d35fdee527996c1ced0de305328f651c24e05f11a84d563758923fbbbeab50e\",\n   \"match\": true,\n   \"source_payload_path\": \"batch-manifest-v3.7.json/labs/LAB-A/literal_tests/ft-a1\",\n   \"test_id\": \"ft-a1\",\n   \"timeout_seconds\": 180\n  },\n  {\n   \"canonical_argv\": [\n    \"python3\",\n    \"-c\",\n    \"import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.process_supervisor import ProcessSupervisor, ProcessInfo; from headless_audio_lab.jack_server import JackServer; from headless_audio_lab.osc_probe import OscProbe; from headless_audio_lab.sooperlooper_launcher import SooperLooperLauncher; print('ft-a2 imports ok')\"\n   ],\n   \"canonical_serialization_bytes_sha256\": \"95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88\",\n   \"controller_recomputed_command_sha256\": \"95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88\",\n   \"cwd\": \"checkout-root\",\n   \"declared_command_sha256\": \"95584c4c05c9ab4233e3fae30f2a87990d490500c51ebcf3f9cad65c448e2e88\",\n   \"match\": true,\n   \"source_payload_path\": \n...#(truncated)",
+   "sha256": "9bd9d83bb4bdfc1b53ef71a243fce473d2185e79d4932f676069e77b111e4194"
+  },
+  {
+   "artifact": "command-hash-verification-lab-b.json",
+   "content": "{\n \"aggregate_across_labs\": \"8 literal tests total (4 per lab); the paired receipt completes the 8/8\",\n \"all_tests_match_in_this_lab\": true,\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"count\": 4,\n \"lab\": \"LAB-B\",\n \"note\": \"recomputed independently; never recomputed = declared by policy\",\n \"recomputation_algorithm\": \"sha256(json.dumps(argv, separators=(',', ':'), sort_keys=True).encode('utf-8'))\",\n \"recorded_at_utc\": \"2026-08-07T20:08:55Z\",\n \"schema\": \"command-hash-verification/v3.7\",\n \"tests\": [\n  {\n   \"canonical_argv\": [\n    \"python3\",\n    \"-m\",\n    \"py_compile\",\n    \"tests/integration/headless_audio_lab/audio_oracle.py\",\n    \"tests/integration/headless_audio_lab/graph_assertions.py\",\n    \"tests/integration/headless_audio_lab/runner.py\",\n    \"tests/integration/headless_audio_lab/test_modules.py\",\n    \"tests/__init__.py\",\n    \"tests/integration/__init__.py\"\n   ],\n   \"canonical_serialization_bytes_sha256\": \"e8019f25f064bdc76c4989cd244ad4826c32fb0b437697c47e0443cd9d08f558\",\n   \"controller_recomputed_command_sha256\": \"e8019f25f064bdc76c4989cd244ad4826c32fb0b437697c47e0443cd9d08f558\",\n   \"cwd\": \"checkout-root\",\n   \"declared_command_sha256\": \"e8019f25f064bdc76c4989cd244ad4826c32fb0b437697c47e0443cd9d08f558\",\n   \"match\": true,\n   \"source_payload_path\": \"batch-manifest-v3.7.json/labs/LAB-B/literal_tests/ft-b1\",\n   \"test_id\": \"ft-b1\",\n   \"timeout_seconds\": 180\n  },\n  {\n   \"canonical_argv\": [\n    \"python3\",\n    \"-c\",\n    \"import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.audio_oracle import analyze_wav, analyze_loop_reproduction, AnalysisResult; from headless_audio_lab.graph_assertions import GraphAssertions; from headless_audio_lab.runner import LabRunner; print('ft-b2 imports ok')\"\n   ],\n   \"canonical_serialization_bytes_sha256\": \"f03678d5fdfb5698e784ced6a512af3d38c498c54b97a1ab449ca9bd4a9fe3c3\",\n   \"controller_recomputed_command_sha256\": \"f03678d5fdfb5698e784ced6a512af3d38c498c54b97a1ab449ca9bd4a9fe3c3\",\n   \"cwd\": \"checkout-root\",\n   \"declared_command_sha256\": \"f03678d5fdfb5698e784ced6a512af3d38c498c54b97a1ab449ca9bd4a9fe3c3\",\n   \"match\": true,\n   \"source_payload_path\": \"batch-manifest-v3.7.json/labs/LAB-B/literal_tests/ft-b2\n...#(truncated)",
+   "sha256": "1575195b2a8569a650fd583749db3a554f2c990b7d5c9aeb1000849ca0df4154"
+  },
+  {
+   "artifact": "ownership-diff-verification-lab-a.json",
+   "content": "{\n \"C\": \"de4b9582650a90faf899a207ea6e3bf7faff5116\",\n \"R\": \"57a2df9f0af5c53317f2c65ca049e9e3b85f61ff\",\n \"R_tree\": \"245a214c0ba78675b6af4cc10e30c8d3bdbfd4cb\",\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"changed_not_owned\": [],\n \"changed_paths\": [\n  \"tests/integration/headless_audio_lab/process_supervisor.py\"\n ],\n \"changed_paths_non_empty\": true,\n \"diff_raw\": \"M\\ttests/integration/headless_audio_lab/process_supervisor.py\",\n \"forbidden_changed\": [],\n \"lab\": \"LAB-A\",\n \"negative_fixtures\": {\n  \"N22_out_of_scope_path_reject\": true,\n  \"note\": \"N22 adds doc/sooperlooper/UNTOUCHABLE.md in R -> forbidden_changed -> REJECT (real CLI)\"\n },\n \"owned_paths\": [\n  \"tests/integration/headless_audio_lab/process_supervisor.py\",\n  \"tests/integration/headless_audio_lab/jack_server.py\",\n  \"tests/integration/headless_audio_lab/osc_probe.py\",\n  \"tests/integration/headless_audio_lab/sooperlooper_launcher.py\",\n  \"tests/integration/headless_audio_lab/__init__.py\"\n ],\n \"ownership_diff_pass\": true,\n \"recorded_at_utc\": \"2026-08-07T20:00:48Z\",\n \"required_paths_missing\": [],\n \"required_paths_satisfied\": true,\n \"schema\": \"ownership-diff-verification/v3.7\"\n}",
+   "sha256": "ece3782cb37a316ed9e8ffcb847dd309d4a6587f7aff002169ef1ed0acff3f7e"
+  },
+  {
+   "artifact": "ownership-diff-verification-lab-b.json",
+   "content": "{\n \"C\": \"865cb4918e71b17cd48d070b61dd983bcc5bcd8d\",\n \"R\": \"91077aacd5c6bd8a97be46d11783e4d579f13e7a\",\n \"R_tree\": \"718887b7ee7948063db1079eee724ac6807a1390\",\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"changed_not_owned\": [],\n \"changed_paths\": [\n  \"tests/integration/headless_audio_lab/audio_oracle.py\"\n ],\n \"changed_paths_non_empty\": true,\n \"diff_raw\": \"M\\ttests/integration/headless_audio_lab/audio_oracle.py\",\n \"forbidden_changed\": [],\n \"lab\": \"LAB-B\",\n \"negative_fixtures\": {\n  \"N22_out_of_scope_path_reject\": true,\n  \"note\": \"N22 adds doc/sooperlooper/UNTOUCHABLE.md in R -> forbidden_changed -> REJECT (real CLI)\"\n },\n \"owned_paths\": [\n  \"tests/__init__.py\",\n  \"tests/integration/__init__.py\",\n  \"tests/integration/headless_audio_lab/audio_oracle.py\",\n  \"tests/integration/headless_audio_lab/graph_assertions.py\",\n  \"tests/integration/headless_audio_lab/runner.py\",\n  \"tests/integration/headless_audio_lab/test_modules.py\",\n  \"tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml\",\n  \"tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml\",\n  \"tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml\",\n  \"tests/integration/headless_audio_lab/fixtures/synthetic_source\",\n  \"tests/integration/headless_audio_lab/fixtures/deterministic_capture\",\n  \"tests/integration/headless_audio_lab/fixtures/.gitignore\"\n ],\n \"ownership_diff_pass\": true,\n \"recorded_at_utc\": \"2026-08-07T20:00:48Z\",\n \"required_paths_missing\": [],\n \"required_paths_satisfied\": true,\n \"schema\": \"ownership-diff-verification/v3.7\"\n}",
+   "sha256": "d180907a9da52d758081ba925b4e52dfb3709014f2ca4dcc87c34935fff4736d"
+  },
+  {
+   "artifact": "controlled-build.json",
+   "content": "{\n \"R\": \"e6792c6ed6417a8bcf87dd15bd4b80f65627c11d\",\n \"applicable\": true,\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"build_dir_empty_before\": true,\n \"clean_after_build\": true,\n \"cleanliness_after\": true,\n \"compiler_realpath\": \"/usr/bin/aarch64-linux-gnu-gcc-13\",\n \"compiler_version\": \"gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\",\n \"compiles\": [\n  {\n   \"argv\": [\n    \"gcc\",\n    \"-std=c11\",\n    \"-O2\",\n    \"-o\",\n    \"<build-dir>/synthetic_source\",\n    \"tests/integration/virtual_studio/audio/synthetic_source.c\",\n    \"-ljack\",\n    \"-lm\",\n    \"-lpthread\"\n   ],\n   \"cwd\": \"/tmp/finalizer-v36-k2wl8kl2\",\n   \"elf_magic\": true,\n   \"end_utc\": \"2026-08-07T20:00:28Z\",\n   \"env_allowlist\": {\n    \"HOME\": \"/home/ubuntu\",\n    \"LANG\": \"C.UTF-8\",\n    \"PATH\": \"/home/ubuntu/.local/node-current/bin:/home/ubuntu/.kimi-code/bin:/home/ubuntu/.local/bin:/home/ubuntu/.local/node-v22.20.0-linux-arm64/bin:/home/ubuntu/.local/node-v22.20.0-linux-arm64/bin:/home/ubuntu/.local/bin:/usr/local/bin:/home/ubuntu/hermes-agent/venv/bin:/home/ubuntu/hermes-agent/node_modules/.bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"\n   },\n   \"exit_code\": 0,\n   \"jack_dependency_visible\": true,\n   \"ldd_exit\": 0,\n   \"ldd_libraries\": [\n    \"/lib/ld-linux-aarch64.so.1\",\n    \"libc.so.6\",\n    \"libdb-5.3.so\",\n    \"libgcc_s.so.1\",\n    \"libjack.so.0\",\n    \"libm.so.6\",\n    \"libstdc++.so.6\",\n    \"linux-vdso.so.1\"\n   ],\n   \"output_exists\": true,\n   \"output_matrix_pass\": true,\n   \"output_sha256\": \"054b8428810e24a3f435ac6579840918f6435ef61ac62069255c85faaedc6a81\",\n   \"output_size\": 71864,\n   \"source_blob_oid\": \"6f07457cd38a81c425b4ab080aeee46bf0c0e7de\",\n   \"source_hash_matches\": true,\n   \"source_path\": \"tests/integration/virtual_studio/audio/synthetic_source.c\",\n   \"source_sha256_actual\": \"da688d3931a1b4a2dddbe788dc3e69c31ae86a35823d0391b6c97da17f3fd6b5\",\n   \"source_sha256_expected\": \"da688d3931a1b4a2dddbe788dc3e69c31ae86a35823d0391b6c97da17f3fd6b5\",\n   \"start_utc\": \"2026-08-07T20:00:28Z\",\n   \"stderr_sha256\": \"b7299bfded6ea8334f30d13c83a5af13595cd738eb71b4865d03cacb9de70eda\",\n   \"stdout_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n  },\n  {\n \n...#(truncated)",
+   "sha256": "b8bc63b0df410e8554656a2fd5aad92275bb27da382d8fd3532a6322232c75d0"
+  },
+  {
+   "artifact": "publication-create-only.json",
+   "content": "{\n \"all_publication_cases\": true,\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"cases\": {\n  \"ambiguous_lsremote_REJECT\": {\n   \"PASS\": true,\n   \"ambiguous\": true,\n   \"rc\": 128,\n   \"stdout_empty\": true\n  },\n  \"create_only_PASS\": {\n   \"E\": \"1b44010e54d26808060507c519c3e1d8b88cc04f\",\n   \"PASS\": true,\n   \"absence_pre_push\": {\n    \"absent\": true,\n    \"rc\": 2,\n    \"stdout\": \"\"\n   },\n   \"remote_equals_E\": true,\n   \"remote_resolved_oid\": \"1b44010e54d26808060507c519c3e1d8b88cc04f\",\n   \"single_ordinary_push\": {\n    \"argv\": [\n     \"git\",\n     \"-C\",\n     \"/tmp/v37-harness-j6s8vqrj/s5-pass\",\n     \"push\",\n     \"origin\",\n     \"1b44010e54d26808060507c519c3e1d8b88cc04f:refs/heads/result/ctl-lab-a-v3_6\"\n    ],\n    \"exit_code\": 0,\n    \"stderr_sha256\": \"4d6b6109a074241cfc561b4f4116f0eb7ed93c86b7468833c2050eed83fbdb16\",\n    \"stdout_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n   }\n  },\n  \"force_push_REJECT\": {\n   \"E\": \"8f1e74a8b05eeb6571b59c60b52ae983e500a1a4\",\n   \"PASS\": true,\n   \"force_push_argv\": [\n    \"git\",\n    \"-C\",\n    \"/tmp/v37-harness-j6s8vqrj/s5-force\",\n    \"push\",\n    \"-f\",\n    \"origin\",\n    \"9a0cc48556758581587d8e27da1e29f5a0398fbb:refs/heads/result/ctl-lab-a-v3_6\"\n   ],\n   \"force_push_exit\": 0,\n   \"remote_no_longer_E\": true,\n   \"remote_now\": \"9a0cc48556758581587d8e27da1e29f5a0398fbb\"\n  },\n  \"preexisting_branch_REJECT\": {\n   \"PASS\": true,\n   \"rejected\": true,\n   \"verifier_exit\": 1\n  },\n  \"second_push_REJECT\": {\n   \"E\": \"842f68bf3153822a8213b05e67b72693892b2bf6\",\n   \"PASS\": true,\n   \"refused_non_ff\": true,\n   \"remote_now\": \"842f68bf3153822a8213b05e67b72693892b2bf6\",\n   \"remote_stays_E\": true,\n   \"second_push_argv\": [\n    \"git\",\n    \"-C\",\n    \"/tmp/v37-harness-j6s8vqrj/s5-second\",\n    \"push\",\n    \"origin\",\n    \"359f68361ff25eb9a4f032f0b802d16226883fbc:refs/heads/result/ctl-lab-a-v3_6\"\n   ],\n   \"second_push_exit\": 1\n  }\n },\n \"policy_sequence\": [\n  \"check remote branch absent (ls-remote rc=2)\",\n  \"validate R\",\n  \"create E mechanically\",\n  \"prepublish-finalization PASS\",\n  \"re-check remote branch absent\",\n  \"push create-only E -> branch\",\n  \"resolve remote branch\",\n  \"require remote == E\",\n  \"create A outside E\",\n  \"postpublish-bin\n...#(truncated)",
+   "sha256": "eeacf1699f19516b49605b87ded0752bc4dee2739215be3cc421d071e33e3193"
+  },
+  {
+   "artifact": "postpublication-binding.json",
+   "content": "{\n \"all_binding_cases\": true,\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"cases\": {\n  \"create_only_proof_bool_REJECT\": {\n   \"PASS\": true,\n   \"verifier_exit\": 1\n  },\n  \"exact_A_PASS\": {\n   \"PASS\": true,\n   \"verifier_exit\": 0\n  },\n  \"wrong_C_REJECT\": {\n   \"PASS\": true,\n   \"verifier_exit\": 1\n  },\n  \"wrong_R_REJECT\": {\n   \"PASS\": true,\n   \"verifier_exit\": 1\n  },\n  \"wrong_branch_REJECT\": {\n   \"PASS\": true,\n   \"verifier_exit\": 1\n  },\n  \"wrong_evidence_sha256_REJECT\": {\n   \"PASS\": true,\n   \"verifier_exit\": 1\n  },\n  \"wrong_remote_REJECT\": {\n   \"PASS\": true,\n   \"verifier_exit\": 1\n  }\n },\n \"exact_fields\": [\n  \"C\",\n  \"R\",\n  \"E\",\n  \"E_tree\",\n  \"lab\",\n  \"batch\",\n  \"remote\",\n  \"branch\",\n  \"remote_resolved_oid\",\n  \"evidence_path\",\n  \"evidence_blob_oid\",\n  \"evidence_sha256\",\n  \"push_argv_hash\",\n  \"push_transcript_hash\",\n  \"pre_absence_receipt\",\n  \"prepush_absence_receipt\",\n  \"functional_result\",\n  \"test_result\",\n  \"build_result\",\n  \"clean_before\",\n  \"clean_after\",\n  \"final_verdict\"\n ],\n \"recorded_at_utc\": \"2026-08-07T20:00:30Z\",\n \"schema\": \"postpublication-binding/v3.6\"\n}",
+   "sha256": "ac190042b94e090121a38c562a6f07065f63e6a341f331fbd9aba7cf675e7c3e"
+  },
+  {
+   "artifact": "full-completion.json",
+   "content": "{\n \"all_full_completion_cases\": true,\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"cases\": {\n  \"valid_full_completion_PASS\": {\n   \"PASS\": true,\n   \"stdout_tail\": \" [PASS] push transcript hash present in derived proof\\n  [PASS] pre-absence receipt present\\n  [PASS] immediate-prepush absence receipt present\\n  [PASS] create-only proof derived from receipts\\n  [PASS] A final verdict PASS\\n== full-completion: controller acceptance final ==\\n  [PASS] controller acceptance final verdict PASS\\n== full-completion: worktree cleanliness ==\\n  [PASS] worktree clean at E | ''\\n\",\n   \"verifier_exit\": 0\n  },\n  \"without_acceptance_REJECT\": {\n   \"PASS\": true,\n   \"verifier_exit\": 1\n  },\n  \"without_postpublish_REJECT\": {\n   \"PASS\": true,\n   \"verifier_exit\": 1\n  }\n },\n \"phases\": [\n  \"functional-continuity\",\n  \"r-only-leaf-result\",\n  \"prepublish-finalization\",\n  \"postpublish-binding\",\n  \"controller acceptance\",\n  \"worktree cleanliness\"\n ],\n \"recorded_at_utc\": \"2026-08-07T20:00:37Z\",\n \"rule\": \"every phase EXECUTES and results are PRESERVED (no clearing between phases)\",\n \"schema\": \"full-completion/v3.6\"\n}",
+   "sha256": "711d538094e679c81c0f9fcae57290c230ed5d36e676770b397c267f372f5294"
+  },
+  {
+   "artifact": "command-hash-verification-aggregate.json",
+   "content": "{\n \"batch_id\": \"BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7\",\n \"lab_a_all_match\": true,\n \"lab_a_tests\": 4,\n \"lab_b_all_match\": true,\n \"lab_b_tests\": 4,\n \"recorded_at_utc\": \"2026-08-07T20:08:55Z\",\n \"schema\": \"command-hash-verification-aggregate/v3.7\",\n \"total_8_of_8_match\": true\n}",
+   "sha256": "5ea98f15939bd8cc795e22614156dcc441cedcc8626a80d111cc0cc28f888f56"
+  }
+ ],
+ "schema_version": "codex-senior-consult/v1",
+ "snapshot": {
+  "checkpoint_fingerprint": "392c05e31d1705733f01f0af05fbe7f5a7be74eb9464a1b578e67916bc37bc0d",
+  "plan_fingerprint": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+  "repository_head": "443e37822cd2cd4d4c1305e66009e94ec5e60ff4",
+  "working_tree_fingerprint": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+ },
+ "tests": [
+  {
+   "command": "finalizer-fail-closed 8/8",
+   "exit_code": 1,
+   "summary": "every precondition failure -> reject + E absent"
+  },
+  {
+   "command": "command-hash 8/8 recompute match",
+   "exit_code": 0,
+   "summary": "declared == controller-recomputed"
+  },
+  {
+   "command": "ownership diff both labs",
+   "exit_code": 0,
+   "summary": "changed_not_owned=[] forbidden_changed=[]"
+  },
+  {
+   "command": "selftest 32/32",
+   "exit_code": 0,
+   "summary": "SELFTEST_GLOBAL=PASS"
+  }
+ ]
+}

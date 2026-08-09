@@ -1,0 +1,17 @@
+{
+ "all_command_hashes_match_declared": true,
+ "all_exit_0": true,
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "dispatch_run_id": "20260808T223904Z-v3-8-authorized-lab-dispatch",
+ "lab": "LAB-B",
+ "package": "v3.8",
+ "recorded_at_utc": "2026-08-08T22:58:09Z",
+ "tests": {
+  "ft-b1": true,
+  "ft-b2": true,
+  "ft-b3": true,
+  "ft-b4": true
+ },
+ "verdict": "PASS"
+}

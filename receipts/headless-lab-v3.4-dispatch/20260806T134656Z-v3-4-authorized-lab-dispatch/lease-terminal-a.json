@@ -1,0 +1,17 @@
+{
+  "E": "a30e3c9d888cc55b9d4d7e92bf6250dca4f3ebb3",
+  "R": "0fd104ef2187346b8c00014829857e11ee9539ec",
+  "branch_preserved": true,
+  "closed_at_utc": "2026-08-06T15:04:49Z",
+  "consumed": true,
+  "failure_gate": "leaf-envelope verifier REJECT: envelope leaf_literal_tests records 'exit code'=-2 placeholders (key with space, tests not actually executed) instead of exit_code==0; verifier required exit 0 for ft-a1..ft-a4. Topology otherwise PASS (remote==E, E^==R, R^==C, owned-only, envelope-only).",
+  "lab": "LAB-A",
+  "leaf_id": "LEAF-LAB-A-V3_4",
+  "lease_id": "LEASE-20260806T020249Z-LAB-A-V3_4",
+  "note": "leases v3.4 cannot be reused after this RUN",
+  "remote_branch": "result/20260806T134656Z-v3-4-authorized-lab-dispatch-lab-a-v3_4",
+  "run_id": "20260806T134656Z-v3-4-authorized-lab-dispatch",
+  "schema": "lease-terminal-receipt/v1",
+  "status": "failed_validation",
+  "worktree_preserved": true
+}

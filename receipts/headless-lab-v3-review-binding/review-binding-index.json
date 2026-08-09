@@ -1,0 +1,45 @@
+{
+  "artifacts": {
+    "acceptance-selftest-receipt.json": {
+      "sha256": "117645c5c3dc7a5ea70a233967e43a1afd17b7b8303be35fc53fdb8a65fb7574",
+      "size": 1214
+    },
+    "historical-hash-discrepancy.json": {
+      "sha256": "ece873bf8d946495c8274ba122aaf5e605d441d7ebb22c866ecc686f07b4d28e",
+      "size": 5101
+    },
+    "package-manifest-validation.json": {
+      "sha256": "6bd8cb68bdae6e1f41c4d6ca5ac18979533dfb72291dc299b59eb0a4f4b3311e",
+      "size": 6334
+    },
+    "rejected-head-test-receipt.json": {
+      "sha256": "dd4d739e9a0c1c6d6d69a374a5856d1d3c28dba2e077ec96b3cd31721025a9ea",
+      "size": 2721
+    },
+    "review-binding-receipt.json": {
+      "sha256": "2c46e0516f459b0a2f8dc8d43946814eae5315a4a6dabca472cf299727f2eae2",
+      "size": 2138
+    },
+    "senior-preflight-receipt.json": {
+      "sha256": "3af169b935b3f17b7c48479b78d0cdfd38ce90ac4a7751271230adb83264da1c",
+      "size": 563
+    },
+    "senior-review-bundle.json": {
+      "sha256": "a7c26a0c4bd24ba1bebd3c043ac65ce74daf43d063db88520442ed29d4a0b784",
+      "size": 16499
+    },
+    "senior-verdict.json": {
+      "sha256": "09146941c4b18744547b6847daace6ad56c8922c4235edda4c1129aeba899d15",
+      "size": 4934
+    },
+    "tracked-package-hashes.json": {
+      "sha256": "eefa3ed881e1cdab535c9186fd0558fb467468e0059a05d57baaca7772799e4d",
+      "size": 2210
+    }
+  },
+  "batch_id": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+  "generated_at_utc": "2026-08-05T16:20:17Z",
+  "note": "All files generated from tracked-export bytes at the exact PR head; v3 package under receipts/headless-lab-v3/ UNCHANGED.",
+  "pr_head_reviewed": "66f2f0c8ced0b29ca579fd01eafda2daca51b75d",
+  "schema": "headless-lab-v3-review-binding-index/v1"
+}

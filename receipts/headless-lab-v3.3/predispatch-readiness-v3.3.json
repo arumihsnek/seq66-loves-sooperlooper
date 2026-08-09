@@ -1,0 +1,19 @@
+{
+  "schema": "predispatch-readiness/v3.3",
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "package": "v3.3",
+  "readiness_checks": {
+    "package_validation": "PENDING (run before freeze)",
+    "manifest_validation": "PENDING (run before freeze)",
+    "selftest": "PENDING (run before freeze)",
+    "controlled_fixtures": "PENDING (run before freeze)",
+    "rejected_head_test": "PENDING (run before freeze)",
+    "senior_review": "PENDING (run before freeze)"
+  },
+  "dispatch_ready": false,
+  "redispatch_authorized": false,
+  "integration_authorized": false,
+  "D0_D1_D2_authorized": false,
+  "human_decision": "PENDING",
+  "note": "This file is frozen with the package; readiness results are recorded in receipts/headless-lab-v3.3-review-binding/."
+}

@@ -1,0 +1,30 @@
+{
+ "all_full_completion_cases": true,
+ "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+ "cases": {
+  "valid_full_completion_PASS": {
+   "PASS": true,
+   "stdout_tail": " [PASS] push transcript hash present in derived proof\n  [PASS] pre-absence receipt present\n  [PASS] immediate-prepush absence receipt present\n  [PASS] create-only proof derived from receipts\n  [PASS] A final verdict PASS\n== full-completion: controller acceptance final ==\n  [PASS] controller acceptance final verdict PASS\n== full-completion: worktree cleanliness ==\n  [PASS] worktree clean at E | ''\n",
+   "verifier_exit": 0
+  },
+  "without_acceptance_REJECT": {
+   "PASS": true,
+   "verifier_exit": 1
+  },
+  "without_postpublish_REJECT": {
+   "PASS": true,
+   "verifier_exit": 1
+  }
+ },
+ "phases": [
+  "functional-continuity",
+  "r-only-leaf-result",
+  "prepublish-finalization",
+  "postpublish-binding",
+  "controller acceptance",
+  "worktree cleanliness"
+ ],
+ "recorded_at_utc": "2026-08-07T20:00:37Z",
+ "rule": "every phase EXECUTES and results are PRESERVED (no clearing between phases)",
+ "schema": "full-completion/v3.6"
+}

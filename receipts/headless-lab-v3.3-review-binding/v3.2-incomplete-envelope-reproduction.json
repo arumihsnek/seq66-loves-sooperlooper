@@ -1,0 +1,238 @@
+{
+  "candidate_head": "8f454ada2cbc6bd717b224f4655368466f256998",
+  "checks": [
+    {
+      "detail": "8f454ada2cbc6bd717b224f4655368466f256998",
+      "evidence": {},
+      "name": "model: C commit exists",
+      "status": "PASS"
+    },
+    {
+      "detail": "07eaa990a72b3ec733021830f8819d4a84858db8",
+      "evidence": {},
+      "name": "model: R commit exists",
+      "status": "PASS"
+    },
+    {
+      "detail": "1a6f42d8c3730ae33a35d8644dd95771bc20dc35",
+      "evidence": {},
+      "name": "model: E commit exists",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "c": "8f454ada2cbc6bd717b224f4655368466f256998",
+        "r_parent": "8f454ada2cbc6bd717b224f4655368466f256998"
+      },
+      "name": "model: R^ == C",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "e_parent": "07eaa990a72b3ec733021830f8819d4a84858db8",
+        "r": "07eaa990a72b3ec733021830f8819d4a84858db8"
+      },
+      "name": "model: E^ == R",
+      "status": "PASS"
+    },
+    {
+      "detail": "envelope must NOT be committed in the implementation result commit",
+      "evidence": {},
+      "name": "model: envelope absent from R",
+      "status": "PASS"
+    },
+    {
+      "detail": "envelope must be committed in the envelope container commit",
+      "evidence": {},
+      "name": "model: envelope present in E",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "changed": [
+          "tests/integration/headless_audio_lab/__init__.py",
+          "tests/integration/headless_audio_lab/jack_server.py",
+          "tests/integration/headless_audio_lab/osc_probe.py",
+          "tests/integration/headless_audio_lab/process_supervisor.py",
+          "tests/integration/headless_audio_lab/sooperlooper_launcher.py"
+        ],
+        "out_of_scope": []
+      },
+      "name": "model: diff C..R owned-only",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "changed": [
+          "receipts/headless-lab-results-v3.2/lab-a-result.json"
+        ],
+        "expected": [
+          "receipts/headless-lab-results-v3.2/lab-a-result.json"
+        ]
+      },
+      "name": "model: diff R..E envelope-only",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "expected": "8f454ada2cbc6bd717b224f4655368466f256998",
+        "observed": "8f454ada2cbc6bd717b224f4655368466f256998"
+      },
+      "name": "model: candidate_commit_oid == C",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "expected": "07eaa990a72b3ec733021830f8819d4a84858db8",
+        "observed": "07eaa990a72b3ec733021830f8819d4a84858db8"
+      },
+      "name": "model: implementation_result_commit_oid == R",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "expected": "0ed5aa6a1be425942b09c279575e488673ada342",
+        "observed": "0ed5aa6a1be425942b09c279575e488673ada342"
+      },
+      "name": "model: implementation_result_tree_oid == R^{tree}",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "expected": "sha1",
+        "observed": "sha1"
+      },
+      "name": "model: git_object_format matches",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "bad_self": [],
+        "e_blob_oid": "ebed3bc7f9692b1761d7791970cef7f2d79f2db7",
+        "e_tree_oid": "01810c8383b216829b5754596f7cebcd01fc2fa0"
+      },
+      "name": "model: no forbidden self-binding fields",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "bad_art": []
+      },
+      "name": "model: artifacts safe (no envelope self-hash, R-only)",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      },
+      "name": "model: clean worktree at R (on arrival)",
+      "status": "PASS"
+    },
+    {
+      "detail": "all 4 modules import cleanly",
+      "evidence": {},
+      "name": "lab-a: imports",
+      "status": "PASS"
+    },
+    {
+      "detail": "no placeholder patterns in owned sources",
+      "evidence": {},
+      "name": "lab-a: placeholder scan",
+      "status": "PASS"
+    },
+    {
+      "detail": "shipped corrected probe must not contain the v3 foreign-survival contradiction",
+      "evidence": {
+        "detected": []
+      },
+      "name": "lab-a: harness probe pattern integrity",
+      "status": "PASS"
+    },
+    {
+      "detail": "owned PID>0, owned terminated after cleanup, verify_cleanup()==[], foreign survives supervisor cleanup, foreign created outside supervisor",
+      "evidence": {
+        "cleanup_ok": {
+          "observed": true,
+          "satisfied": true
+        },
+        "failure_propagation": {
+          "observed": true,
+          "satisfied": true
+        },
+        "foreign_alive_after_supervisor_cleanup": {
+          "observed": true,
+          "satisfied": true
+        },
+        "foreign_registered_in_supervisor": {
+          "observed": false,
+          "satisfied": true
+        },
+        "foreign_terminated_by_controller": {
+          "observed": true,
+          "satisfied": true
+        },
+        "owned_child_alive_after_cleanup": {
+          "observed": false,
+          "satisfied": true
+        },
+        "owned_child_alive_before_cleanup": {
+          "observed": true,
+          "satisfied": true
+        },
+        "owned_pid_positive": {
+          "observed": true,
+          "satisfied": true
+        }
+      },
+      "name": "lab-a: functional lifecycle",
+      "status": "PASS"
+    },
+    {
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      },
+      "name": "model: clean worktree at R (after gates)",
+      "status": "PASS"
+    }
+  ],
+  "envelope_container_head": "1a6f42d8c3730ae33a35d8644dd95771bc20dc35",
+  "envelope_content": {
+    "artifacts": {},
+    "candidate_commit_oid": "8f454ada2cbc6bd717b224f4655368466f256998",
+    "git_object_format": "sha1",
+    "implementation_result_commit_oid": "07eaa990a72b3ec733021830f8819d4a84858db8",
+    "implementation_result_tree_oid": "0ed5aa6a1be425942b09c279575e488673ada342"
+  },
+  "envelope_path": "receipts/headless-lab-results-v3.2/lab-a-result.json",
+  "failing_checks": [],
+  "omitted_required_fields": [
+    "schema",
+    "lab",
+    "batch_id",
+    "leaf_id",
+    "lease_id",
+    "external_branch_binding",
+    "literal_tests",
+    "build_provenance"
+  ],
+  "recorded_at_utc": "2026-08-06T01:20:21Z",
+  "result_head": "07eaa990a72b3ec733021830f8819d4a84858db8",
+  "schema": "v3.2-false-accept-reproduction/v1",
+  "stderr_tail": "",
+  "stdout_tail": "[PASS] model: C commit exists \u2014 8f454ada2cbc6bd717b224f4655368466f256998\n[PASS] model: R commit exists \u2014 07eaa990a72b3ec733021830f8819d4a84858db8\n[PASS] model: E commit exists \u2014 1a6f42d8c3730ae33a35d8644dd95771bc20dc35\n[PASS] model: R^ == C \u2014 \n[PASS] model: E^ == R \u2014 \n[PASS] model: envelope absent from R \u2014 envelope must NOT be committed in the implementation result commit\n[PASS] model: envelope present in E \u2014 envelope must be committed in the envelope container commit\n[PASS] model: diff C..R owned-only \u2014 \n[PASS] model: diff R..E envelope-only \u2014 \n[PASS] model: candidate_commit_oid == C \u2014 \n[PASS] model: implementation_result_commit_oid == R \u2014 \n[PASS] model: implementation_result_tree_oid == R^{tree} \u2014 \n[PASS] model: git_object_format matches \u2014 \n[PASS] model: no forbidden self-binding fields \u2014 \n[PASS] model: artifacts safe (no envelope self-hash, R-only) \u2014 \n[PASS] model: clean worktree at R (on arrival) \u2014 \n[PASS] lab-a: imports \u2014 all 4 modules import cleanly\n[PASS] lab-a: placeholder scan \u2014 no placeholder patterns in owned sources\n[PASS] lab-a: harness probe pattern integrity \u2014 shipped corrected probe must not contain the v3 foreign-survival contradiction\n[PASS] lab-a: functional lifecycle \u2014 owned PID>0, owned terminated after cleanup, verify_cleanup()==[], foreign survives supervisor cleanup, foreign created outside supervisor\n[PASS] model: clean worktree at R (after gates) \u2014 \nVERDICT: PASS\n",
+  "v3_2_verifier_incorrectly_accepts_incomplete_envelope": true,
+  "verifier_exit_code": 0,
+  "verifier_verdict": "PASS"
+}

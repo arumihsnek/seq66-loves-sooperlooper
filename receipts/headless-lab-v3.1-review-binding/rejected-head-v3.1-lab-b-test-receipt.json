@@ -1,0 +1,79 @@
+{
+  "schema": "acceptance-verifier-v3.1",
+  "version": "3.1.0",
+  "lab": "B",
+  "checkout": "/home/ubuntu/.hermes/runs/20260805T165044Z-v3-1-acceptance-gate-correction/validation/checkout-0769d150",
+  "checks": [
+    {
+      "name": "lab-b: analyze_wav signature",
+      "status": "PASS",
+      "detail": "contract args=['wav_path', 'expected_loop_frames', 'observed_loop_frames', 'tempo', 'numerator', 'sample_rate', 'silence_threshold', 'peak_threshold']",
+      "evidence": {
+        "impl_sig": " wav_path: str | Path, expected_loop_frames: int, observed_loop_frames: int, tempo: float, numerator: int, sample_rate: int, silence_threshold: float = 0.01, peak_threshold: float = 0.9 ",
+        "missing": []
+      }
+    },
+    {
+      "name": "lab-b: test_modules negative gates",
+      "status": "FAIL",
+      "detail": "hits=['pass-stub', 'trivial-assert-true', 'import-only-test-name', 'magic-mock-in-tests'] invokes_analyze_wav=False",
+      "evidence": {}
+    },
+    {
+      "name": "lab-b: silence always FAIL",
+      "status": "PASS",
+      "detail": "silent WAV must produce FAIL",
+      "evidence": {
+        "silence_verification": "FAIL",
+        "malformed_result": "EXCEPTION:ValueError",
+        "frame_count": 4800
+      }
+    },
+    {
+      "name": "lab-b: malformed WAV FAIL/ERROR",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "malformed_result": "EXCEPTION:ValueError"
+      }
+    },
+    {
+      "name": "lab-b: frame count contract",
+      "status": "PASS",
+      "detail": "captured_wav_frames=4800 expected 4800",
+      "evidence": {}
+    },
+    {
+      "name": "lab-b: .gitignore byte-exact",
+      "status": "FAIL",
+      "detail": "literal '\\\\n' rejected; real newlines required",
+      "evidence": {
+        "repr": "'synthetic_source\\\\ndeterministic_capture\\\\n'"
+      }
+    },
+    {
+      "name": "lab-b: no ELF tracked",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "elf_tracked": []
+      }
+    },
+    {
+      "name": "lab-b: scenarios parseable",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "bad": []
+      }
+    },
+    {
+      "name": "lab-b: runner uses contractual APIs",
+      "status": "PASS",
+      "detail": "API hits: ['ProcessSupervisor', 'JackServer', 'OscProbe', 'SooperLooperLauncher', 'analyze_wav', 'GraphAssertions']",
+      "evidence": {}
+    }
+  ],
+  "env_notes": [],
+  "verdict": "REJECT"
+}

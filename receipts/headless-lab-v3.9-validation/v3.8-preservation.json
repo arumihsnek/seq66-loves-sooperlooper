@@ -1,0 +1,20 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "frozen_package": "receipts/headless-lab-v3.8/ (unchanged, manifest bb4182ada0f1bf449741c05a749d91d4433e6fb09bf281d3f61c4268dc509c18)",
+ "recorded_at_utc": "2026-08-08T23:44:31Z",
+ "schema": "validation/v3.9",
+ "untouched": [
+  "v3.8 package",
+  "v3.8 validation/review binding",
+  "v3.8 dispatch receipts",
+  "v3.8 forensic receipts",
+  "CP-071",
+  "CP-072",
+  "CP-073",
+  "R_A",
+  "R_B"
+ ],
+ "v3_8_immutable": true,
+ "v3_8_status": "REJECTED_AND_FORENSICALLY_CLOSED",
+ "v3_8_technical_dispatch_eligibility": "REVOKED"
+}

@@ -1,0 +1,33 @@
+{
+  "controlled_fixture_rejects": [
+    "v3.3-simplified-api",
+    "v3.3-synthetic-build",
+    "rejected-head-lab-a",
+    "rejected-head-lab-b"
+  ],
+  "recorded_at_utc": "2026-08-06T02:19:47Z",
+  "schema": "strict-negative-matrix/v1",
+  "selftest_negative_cases": [
+    "selftest: v3.3 analyze_wav(wav_bytes)->dict REJECT",
+    "selftest: v3.3 silent=True without verification FAIL REJECT",
+    "selftest: AnalysisResult removed REJECT",
+    "selftest: analyze_loop_reproduction missing REJECT",
+    "selftest: GraphAssertions API reduced REJECT",
+    "selftest: LabRunner API reduced REJECT",
+    "selftest: JackServer API reduced REJECT",
+    "selftest: OscProbe API reduced REJECT",
+    "selftest: SooperLooperLauncher API reduced REJECT",
+    "selftest: a LAB-A literal test missing REJECT",
+    "selftest: a LAB-B literal test missing REJECT",
+    "selftest: synthetic JSON build command REJECT",
+    "selftest: canonical source path changed REJECT",
+    "selftest: .gitignore absent from ownership manifest REJECT",
+    "selftest: ownership drift between artifacts REJECT",
+    "selftest: minimal v3.2 envelope REJECT",
+    "selftest: R empty REJECT",
+    "selftest: wrong artifact hash REJECT",
+    "selftest: missing controller receipt REJECT",
+    "selftest: remote mismatch REJECT",
+    "selftest: dirty checkout REJECT"
+  ]
+}

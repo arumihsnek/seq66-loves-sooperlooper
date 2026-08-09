@@ -1,0 +1,43 @@
+{
+ "leaf_prompts_instruction_summary": "Each leaf was instructed to read lab-api-contract-v3.8.json, functional-contract-baseline-v3.8.json, scope-freeze-v3.8.json, batch-manifest-v3.8.json (literal tests). NOT mentioned: build-provenance-policy, process-hardening-contract, dispatch-plan, mechanical-finalizer, acceptance-verifier, selftest fixtures.",
+ "recorded_at_utc": "2026-08-08T23:14:18Z",
+ "rows": [
+  {
+   "gate": "F-A1 standalone import",
+   "in_layer1": "NOT FOUND (no standalone/relative-import requirement in Layer 1 artifacts)",
+   "leaf_could_predict_rejection": "No",
+   "leaf_instructed": "No (not in any listed artifact; reference v3.4 uses relative import)",
+   "literal_tests_exercise": "No (ft-a2 uses package import which passes)",
+   "requirement": "module must load via spec_from_file_location / relative imports forbidden",
+   "verdict": "IMPLICIT_ONLY_IN_FINALIZER"
+  },
+  {
+   "gate": "F-B1 tracked ELF",
+   "in_layer1": "EXPLICIT (build-provenance-policy policy; dispatch-plan gate)",
+   "leaf_could_predict_rejection": "Unlikely: prompt contradicted the policy (told leaf to track binaries)",
+   "leaf_instructed": "Partially misinstructed: controller prompt explicitly said compile and copy binaries to fixtures/; leaf was not pointed at build-provenance-policy",
+   "literal_tests_exercise": "Partially (ft-b4 compiles to build/; does not test fixtures representation)",
+   "requirement": "tracked ELF rejected; controller ignores leaf-produced binaries; canonical compile into build dir",
+   "verdict": "EXPLICIT_BUT_NOT_DELIVERED"
+  },
+  {
+   "gate": "F-B2 annotation representation",
+   "in_layer1": "NOT EXPLICIT (baseline declares annotation strings but never requires runtime string representation; semantic equivalence holds)",
+   "leaf_could_predict_rejection": "No",
+   "leaf_instructed": "No",
+   "literal_tests_exercise": "No (ft-b1..b3 do not compare annotation strings)",
+   "requirement": "str(inspect annotation) == literal string declared in baseline",
+   "verdict": "IMPLICIT_ONLY_IN_FINALIZER"
+  },
+  {
+   "gate": "F-B3 analyze_loop_reproduction missing files",
+   "in_layer1": "NOT FOUND (Layer 1 declares returns=dict + frame ratio + silence rejected for valid inputs; no missing-file behavior prescribed)",
+   "leaf_could_predict_rejection": "No",
+   "leaf_instructed": "No",
+   "literal_tests_exercise": "No (no literal test calls it with nonexistent paths)",
+   "requirement": "must not raise when called with nonexistent 'x.wav'/'y.wav'",
+   "verdict": "IMPLICIT_ONLY_IN_FINALIZER"
+  }
+ ],
+ "schema": "leaf-contract-visibility-matrix/v3.8"
+}

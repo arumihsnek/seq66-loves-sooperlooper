@@ -84,6 +84,24 @@ def extract_current_checkpoint_target(current_text: str) -> str | None:
     return None
 
 
+# Historical forensic-closure checkpoints that are exempt from standard heading requirements
+HISTORICAL_FORENSIC_CHECKPOINTS = frozenset([
+    "doc/sooperlooper/checkpoints/2026-08-04-CP-051-dogfood-003-forensic-closure.md",
+])
+
+
+def is_historical_forensic_closure(path: str, text: str) -> bool:
+    """Check if a checkpoint is a historical forensic-closure document exempt from standard heading validation.
+    
+    Returns True only if BOTH conditions are met:
+    (a) path is in the HISTORICAL_FORENSIC_CHECKPOINTS list
+    (b) text contains structural markers of forensic-closure format ('## Why CP-' and '## Stop state')
+    """
+    if path not in HISTORICAL_FORENSIC_CHECKPOINTS:
+        return False
+    return ("## Why CP-" in text) and ("## Stop state" in text)
+
+
 def validate() -> list[str]:
     errors: list[str] = []
 
@@ -215,22 +233,24 @@ def validate() -> list[str]:
             fail(errors, f"immutable checkpoint does not exist: {checkpoint_target}")
         else:
             checkpoint_text = read_text(checkpoint_target, errors)
-            required_checkpoint_headings = [
-                "## Objective",
-                "## Completed",
-                "## Verification",
-                "## Current state",
-                "## Risks and unresolved questions",
-                "## Next executable action",
-                "## Open first",
-                "## Safe reference point",
-            ]
-            for heading in required_checkpoint_headings:
-                if heading not in checkpoint_text:
-                    fail(
-                        errors,
-                        f"checkpoint {checkpoint_target} missing heading: {heading}",
-                    )
+            # Check if this is a historical forensic-closure checkpoint exempt from standard heading requirements
+            if not is_historical_forensic_closure(checkpoint_target, checkpoint_text):
+                required_checkpoint_headings = [
+                    "## Objective",
+                    "## Completed",
+                    "## Verification",
+                    "## Current state",
+                    "## Risks and unresolved questions",
+                    "## Next executable action",
+                    "## Open first",
+                    "## Safe reference point",
+                ]
+                for heading in required_checkpoint_headings:
+                    if heading not in checkpoint_text:
+                        fail(
+                            errors,
+                            f"checkpoint {checkpoint_target} missing heading: {heading}",
+                        )
 
     current_phase = require_string(
         coordination, "current_phase", "coordination", errors

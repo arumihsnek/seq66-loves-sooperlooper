@@ -1,0 +1,202 @@
+{
+ "all_cases_fail_closed": true,
+ "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+ "case_count": 8,
+ "cases": {
+  "fc-branch-preexisting": {
+   "E_absent": true,
+   "PASS": true,
+   "description": "remote branch preexistente (ls-remote rc=0)",
+   "exit_code": 1,
+   "rejected": true,
+   "side_effects_after": {
+    "branches": "* master\n  remotes/origin/result/x-lab-a-v3_6",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "56f16e1184c335fcf1fe396b325a358fb3c53706",
+    "log": "56f16e1 R\n8f4950b C"
+   },
+   "side_effects_before": {
+    "branches": "* master\n  remotes/origin/result/x-lab-a-v3_6",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "56f16e1184c335fcf1fe396b325a358fb3c53706",
+    "log": "56f16e1 R\n8f4950b C"
+   },
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "2d80f20a626fcbf62cf8bfdcb6e59daa6250d16a794130981f41c0fb32cddc92",
+   "stdout_tail": "{\n  \"E_created\": false,\n  \"evidence_written\": false,\n  \"gate_failures\": [\n    \"remote absence (pre-evidence) | branch result/x-lab-a-v3_6 EXISTS on remote\"\n  ],\n  \"git_add_committed\": false,\n  \"mode\": \"finalize\",\n  \"prepublication_verdict\": \"FAIL\"\n}\n"
+  },
+  "fc-command-hash-mismatch": {
+   "E_absent": true,
+   "PASS": true,
+   "description": "command hash mismatch aunque test exit=0 (BF-01/BF-02 fix)",
+   "exit_code": 1,
+   "rejected": true,
+   "side_effects_after": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "dac4de23805104130ff5c8b3362b5b2e56ff25de",
+    "log": "dac4de2 R\n41a5e12 C"
+   },
+   "side_effects_before": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "dac4de23805104130ff5c8b3362b5b2e56ff25de",
+    "log": "dac4de2 R\n41a5e12 C"
+   },
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "1050caf39100c61b8f8aa245571289338e482555599acf855eaa1e365e0518d8",
+   "stdout_tail": "{\n  \"E_created\": false,\n  \"evidence_written\": false,\n  \"gate_failures\": [\n    \"all command hashes exact\"\n  ],\n  \"git_add_committed\": false,\n  \"mode\": \"finalize\",\n  \"prepublication_verdict\": \"FAIL\"\n}\n"
+  },
+  "fc-controlled-build-failure": {
+   "E_absent": true,
+   "PASS": true,
+   "description": "controlled build output no es ELF (BF-10/11 fix)",
+   "exit_code": 1,
+   "rejected": true,
+   "side_effects_after": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "2f1c6f6ba7f5687748b00467a86857cd095e0f37",
+    "log": "2f1c6f6 R\n821d666 C"
+   },
+   "side_effects_before": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "2f1c6f6ba7f5687748b00467a86857cd095e0f37",
+    "log": "2f1c6f6 R\n821d666 C"
+   },
+   "stderr_sha256": "3d869644318c3eb12d2de5106f44d64e59b7776a34e849a3acd97eb9cbfb99a1",
+   "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_tail": ""
+  },
+  "fc-dirty-after-build": {
+   "E_absent": true,
+   "PASS": true,
+   "description": "worktree sucio tras el build (untracked leftover)",
+   "exit_code": 1,
+   "rejected": true,
+   "side_effects_after": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "2d0bf45b07347f96e6521c30480b611eb53e22b5",
+    "log": "2d0bf45 R\ndd7e7f2 C"
+   },
+   "side_effects_before": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "2d0bf45b07347f96e6521c30480b611eb53e22b5",
+    "log": "2d0bf45 R\ndd7e7f2 C"
+   },
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "d2c6d552a67c2e83d3f3a38ffd7a50648040d3be1465c5c77c4149aabd74ef93",
+   "stdout_tail": "{\n  \"E_created\": false,\n  \"evidence_written\": false,\n  \"gate_failures\": [\n    \"controlled build PASS/not_applicable | outputs_ok=True clean_after=False\",\n    \"cleanliness_after PASS | '?? tests/integration/virtual_studio/audio/leftover.o\\\\n'\"\n  ],\n  \"git_add_committed\": false,\n  \"mode\": \"finalize\",\n  \"prepublication_verdict\": \"FAIL\"\n}\n"
+  },
+  "fc-functional-runtime-failure": {
+   "E_absent": true,
+   "PASS": true,
+   "description": "functional runtime failure (R API drift: required methods missing)",
+   "exit_code": 1,
+   "rejected": true,
+   "side_effects_after": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "50fa94f1b90b4f07df9bcebf573759b5f66a4f00",
+    "log": "50fa94f R\n657fde8 C"
+   },
+   "side_effects_before": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "50fa94f1b90b4f07df9bcebf573759b5f66a4f00",
+    "log": "50fa94f R\n657fde8 C"
+   },
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "82c338c9976541dd1acf5feddbb1134d53ae46a2f0428534c312eea2c0871531",
+   "stdout_tail": "{\n  \"E_created\": false,\n  \"evidence_written\": false,\n  \"gate_failures\": [\n    \"runtime full contract PASS | structural=FAIL return_shape=PASS constraints_ok=False\"\n  ],\n  \"git_add_committed\": false,\n  \"mode\": \"finalize\",\n  \"prepublication_verdict\": \"FAIL\"\n}\n"
+  },
+  "fc-ignored-build-output": {
+   "E_absent": true,
+   "PASS": true,
+   "description": "ignored build output presente (BF-14 fix)",
+   "exit_code": 1,
+   "rejected": true,
+   "side_effects_after": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "acbc16a75dac5cf284afd2554712548eb2675aa2",
+    "log": "acbc16a R\n974cf7f R\ne4c3bb7 C"
+   },
+   "side_effects_before": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "acbc16a75dac5cf284afd2554712548eb2675aa2",
+    "log": "acbc16a R\n974cf7f R\ne4c3bb7 C"
+   },
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "de002684733dc5a7583b879ddefdbe478d50df4e2324d55ce3c3cf81981c5b43",
+   "stdout_tail": "e_failures\": [\n    \"R^ == C\",\n    \"C..R owned-only | ['build/out.bin']\",\n    \"ownership diff evidence PASS | changed=2 not_owned=['build/out.bin'] forbidden=[]\",\n    \"runtime full contract PASS | structural=PASS return_shape=PASS constraints_ok=False\",\n    \"cleanliness_after PASS | ' D build/out.bin\\\\n'\"\n  ],\n  \"git_add_committed\": false,\n  \"mode\": \"finalize\",\n  \"prepublication_verdict\": \"FAIL\"\n}\n"
+  },
+  "fc-lsremote-ambiguous": {
+   "E_absent": true,
+   "PASS": true,
+   "description": "ls-remote error ambiguo (remote inexistente)",
+   "exit_code": 1,
+   "rejected": true,
+   "side_effects_after": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "8d1daf1f2f89079ad32c9364cd7d2c4f236c61ea",
+    "log": "8d1daf1 R\nde4b958 C"
+   },
+   "side_effects_before": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "8d1daf1f2f89079ad32c9364cd7d2c4f236c61ea",
+    "log": "8d1daf1 R\nde4b958 C"
+   },
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "9a6015698e3013657984101055db7f8247aa5ff20f486b614f8a45b765fdd9ae",
+   "stdout_tail": "{\n  \"E_created\": false,\n  \"evidence_written\": false,\n  \"gate_failures\": [\n    \"remote absence (pre-evidence) | PUBLISH_STATE_AMBIGUOUS rc=128 stdout=\"\n  ],\n  \"git_add_committed\": false,\n  \"mode\": \"finalize\",\n  \"prepublication_verdict\": \"FAIL\"\n}\n"
+  },
+  "fc-source-hash-mismatch": {
+   "E_absent": true,
+   "PASS": true,
+   "description": "actual source SHA != frozen expected (BF-09 fix)",
+   "exit_code": 1,
+   "rejected": true,
+   "side_effects_after": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "e6fe9e37c93043a19884347b4242fa2aa538d6d4",
+    "log": "e6fe9e3 R\ne0d5414 C"
+   },
+   "side_effects_before": {
+    "branches": "* master",
+    "commit_count": 1,
+    "evidence_file_exists": false,
+    "head": "e6fe9e37c93043a19884347b4242fa2aa538d6d4",
+    "log": "e6fe9e3 R\ne0d5414 C"
+   },
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "9519c2a898ea470a01045df5322566e2b57152100cc635df45ef2e2917318a94",
+   "stdout_tail": "\",\n    \"ownership diff evidence PASS | changed=2 not_owned=['tests/integration/virtual_studio/audio/synthetic_source.c'] forbidden=[]\",\n    \"runtime full contract PASS | structural=PASS return_shape=PASS constraints_ok=False\",\n    \"controlled build PASS/not_applicable | outputs_ok=False clean_after=True\"\n  ],\n  \"git_add_committed\": false,\n  \"mode\": \"finalize\",\n  \"prepublication_verdict\": \"FAIL\"\n}\n"
+  }
+ },
+ "recorded_at_utc": "2026-08-07T20:00:48Z",
+ "rule": "any precondition failure -> exit != 0, E absent, evidence not written, no commit",
+ "schema": "finalizer-fail-closed/v3.6"
+}

@@ -1,0 +1,29 @@
+{
+  "bad_impl_in_e": {
+    "C": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5",
+    "E": "65396e8b41d9f34e097675fc516736292355fb5f",
+    "R": "2d7db442c384798de1e9d4da577e5fbf744302db"
+  },
+  "bad_same_commit": {
+    "C": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5",
+    "E": "78012e218793400f013df482bb75c9e105148b9c",
+    "R": "78012e218793400f013df482bb75c9e105148b9c"
+  },
+  "bad_wrong_tree": {
+    "C": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5",
+    "E": "98fda736841b631c024e3fdcfd4ab1ca73a2a4ac",
+    "R": "2d7db442c384798de1e9d4da577e5fbf744302db"
+  },
+  "repos": {
+    "bad_impl_in_e": "/home/ubuntu/.hermes/runs/20260805T224640Z-v3-2-envelope-binding-correction/validation/test-repos/bad-impl-in-e",
+    "bad_same_commit": "/home/ubuntu/.hermes/runs/20260805T224640Z-v3-2-envelope-binding-correction/validation/test-repos/bad-same-commit",
+    "bad_wrong_tree": "/home/ubuntu/.hermes/runs/20260805T224640Z-v3-2-envelope-binding-correction/validation/test-repos/bad-wrong-tree",
+    "valid": "/home/ubuntu/.hermes/runs/20260805T224640Z-v3-2-envelope-binding-correction/validation/test-repos/valid"
+  },
+  "schema": "valid-two-commit-envelope-test/v1",
+  "valid": {
+    "C": "215ff1af1ffce6ab1022a4780d82e5835a70a7c5",
+    "E": "db3b32582b09e020816977db5ed326f4f8e00ef9",
+    "R": "2d7db442c384798de1e9d4da577e5fbf744302db"
+  }
+}

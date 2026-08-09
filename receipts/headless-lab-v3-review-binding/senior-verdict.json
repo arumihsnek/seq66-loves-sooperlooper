@@ -1,0 +1,40 @@
+{
+  "blocking_findings": [],
+  "detailed_status": "VALID_ADVISORY_VERDICT",
+  "execution_id": "e2cd5958-702e-46c5-b1f2-1ed0323ba40c",
+  "mission_id": "seq66-lab-v3-exact-published-package",
+  "mode": "plan-review",
+  "next_safe_step": "Persist this exact-byte-bound verdict in the planned review-binding evidence and CP-056, validate and commit only the permitted review-record paths, obtain exact-head CI, and keep redispatch_authorized=false pending a separate human dispatch decision.",
+  "note": "Advisory and actionable (VALID_ADVISORY_VERDICT). Binds only to the exact published manifest + 12 artifact hashes at PR head 66f2f0c8. Confers NO dispatch authorization.",
+  "operational_usability": true,
+  "question_answers": [
+    {
+      "answer": "Yes. For this bounded review, the published package is bound to PR head 66f2f0c8ced0b29ca579fd01eafda2daca51b75d, package-manifest blob 6a7292b53ef22a9857d5cb1442c90097836ddfa8, package-manifest SHA-256 2114aa70a76ac23d70c374c1d5b042851d4c5eeec3b350e74cbfde1326c1c640, and the twelve listed artifact SHA-256 values. The supplied evidence reports exact agreement for all files, sizes, hashes, batch identity, and candidate bindings, with 10/10 validators and exact-head CI passing. These bytes are internally consistent and fit to remain frozen for a possible future dispatch that is separately human-authorized.",
+      "id": "Q1"
+    },
+    {
+      "answer": "Yes, within the supplied evidence. Per-control evaluation: (1) completion\u2014PASS: requires a non-empty commit, published branch, full result-head SHA, clean worktree, valid envelope, owned-path-only diff, literal test execution, and controller verification; summaries cannot substitute. (2) envelope\u2014PASS: tested parent, result tree, and external branch binding avoid self-reference, with the container commit resolved after push. (3) clean-checkout verification\u2014PASS: the controller must verify the exact result head in a clean checkout. (4) acceptance ownership\u2014PASS: the controller owns verification and neither lab may self-accept. (5) negative placeholder gates\u2014PASS: explicit LAB-A and LAB-B rejection rules are present, and the known rejected head was rejected as expected. (6) reproducible provenance\u2014PASS: empty-directory build, canonical inputs, compiler/command/output capture, and rejection of non-reproducible provenance are required. (7) no tracked ELF\u2014PASS: tracked ELF output is rejected. (8) fresh branches/worktrees\u2014PASS: v2 worktrees and result branches are forbidden; future names derive from a future run ID. (9) new lease IDs\u2014PASS: distinct V3 lease IDs are planned and remain inactive. (10) v2 terminal lease state\u2014PASS: v2 leases are terminal failed_validation. (11) D0/D1/D2 prohibition\u2014PASS: predispatch state forbids these phases. (12) no controller-as-leaf\u2014PASS: controller acceptance ownership is separated from leaf work, ownership-overlap validation passed, and the reported state has zero V3 leaves/worktrees. Dispatch-time selftest and clean-checkout verification remain execution obligations, not defects in the frozen package.",
+      "id": "Q2"
+    },
+    {
+      "answer": "Yes. The evidence consistently distinguishes stale first-generation hashes recorded in the audit document from the post-patch bytes actually published and covered by the manifest. Because the tracked blobs at the exact PR head validate 12/12 against that manifest, the discrepancy does not show mutation of the reviewed package and does not block acceptance. The precise origin of the unrecoverable old byte values remains unresolved, but that is an accepted historical limitation rather than a defect in the exact-byte binding.",
+      "id": "Q3"
+    },
+    {
+      "answer": "Yes. The correct post-review state is FROZEN_NOT_DISPATCHED with redispatch_authorized=false. Acceptance closes only the exact-byte review gap; it does not activate leases, create branches or worktrees, authorize D0/D1/D2, or authorize dispatch.",
+      "id": "Q4"
+    }
+  ],
+  "recorded_at_utc": "2026-08-05T16:20:17Z",
+  "required_actions": [],
+  "response_artifact": {
+    "artifact_schema": "codex-senior-consult-response-artifact/v1",
+    "fingerprint": "54a77623ae817a6799827a103286c178228d7f5e4ff6573dfa509d3df69017c3",
+    "relative_path": "responses/54a77623ae817a6799827a103286c178228d7f5e4ff6573dfa509d3df69017c3.json"
+  },
+  "response_fingerprint": "54a77623ae817a6799827a103286c178228d7f5e4ff6573dfa509d3df69017c3",
+  "schema": "senior-verdict-receipt/v1",
+  "status": "COMPLETED",
+  "summary": "Accept the exact published V3 package at PR head 66f2f0c8ced0b29ca579fd01eafda2daca51b75d as internally consistent and adequately enforcing the twelve required controls. This verdict is bound only to the supplied manifest and listed artifact hashes. The package remains FROZEN_NOT_DISPATCHED, and this review grants no dispatch authority.",
+  "verdict": "accept"
+}

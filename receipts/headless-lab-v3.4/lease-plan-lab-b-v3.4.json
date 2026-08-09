@@ -1,0 +1,28 @@
+{
+  "activated": false,
+  "authorization": false,
+  "authorization_required": true,
+  "batch_id": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+  "envelope_path": "receipts/headless-lab-results-v3.4/lab-b-result.json",
+  "lab": "LAB-B",
+  "leaf_id": "LEAF-LAB-B-V3_4",
+  "lease": "LEASE-20260806T020249Z-LAB-B-V3_4",
+  "new_ids_rule": "lease ID, result path and schema names are NEW for v3.4; no reuse of previous IDs or paths",
+  "owned_paths": [
+    "tests/__init__.py",
+    "tests/integration/__init__.py",
+    "tests/integration/headless_audio_lab/audio_oracle.py",
+    "tests/integration/headless_audio_lab/graph_assertions.py",
+    "tests/integration/headless_audio_lab/runner.py",
+    "tests/integration/headless_audio_lab/test_modules.py",
+    "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+    "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+    "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+    "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+    "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+    "tests/integration/headless_audio_lab/fixtures/.gitignore"
+  ],
+  "planned_branch_pattern": "result/<run-id>-lab-b-v3_4",
+  "schema": "lease-plan/v3.4",
+  "status": "planned"
+}

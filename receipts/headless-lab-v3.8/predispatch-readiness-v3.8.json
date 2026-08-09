@@ -1,0 +1,14 @@
+{
+  "D0_D1_D2_authorized": false,
+  "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+  "dispatch_authorized": false,
+  "frozen_at_utc": "2026-08-06T23:45:54Z",
+  "integration_authorized": false,
+  "lab_worktrees": 0,
+  "leases_activated": false,
+  "leaves": 0,
+  "schema": "predispatch-readiness/v3.8",
+  "technical_readiness": "PENDING_REVIEW",
+  "update_rule": "after reviews, this file may be updated ONLY via an external binding receipt; never by modifying the frozen package payload",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7"
+}

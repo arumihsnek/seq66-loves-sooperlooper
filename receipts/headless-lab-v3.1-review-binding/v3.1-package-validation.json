@@ -1,0 +1,81 @@
+{
+  "batch_id": "BATCH-20260805T165044Z-DOGFOOD004-LAB-V3_1",
+  "failed": 0,
+  "package_dir": "/home/ubuntu/.hermes/runs/20260805T165044Z-v3-1-acceptance-gate-correction/v3-1-package",
+  "passed": 14,
+  "schema": "v3.1-package-validation/v1",
+  "total": 14,
+  "validators": [
+    {
+      "detail": "parsed 12 JSON artifacts; failures=[]",
+      "status": "PASS",
+      "validator": "json-parse"
+    },
+    {
+      "detail": "batch/candidate/schema/BOUND_IN_EVIDENCE/lab scopes/corrected-probe scope",
+      "status": "PASS",
+      "validator": "scope-validator"
+    },
+    {
+      "detail": "batch/candidate/leaves/ids/envelopes/supersedes",
+      "status": "PASS",
+      "validator": "batch-manifest-validator"
+    },
+    {
+      "detail": "harness/envelope/completion-8/stop-conditions/forbidden-reuse",
+      "status": "PASS",
+      "validator": "dispatch-plan-validator"
+    },
+    {
+      "detail": "batch/schema/entries/quarantine/v3.1 results path",
+      "status": "PASS",
+      "validator": "port-plan-validator"
+    },
+    {
+      "detail": "both leases planned, v3.1 IDs, activation/release conditions",
+      "status": "PASS",
+      "validator": "lease-validator"
+    },
+    {
+      "detail": "LAB-A\u2229LAB-B owned paths empty; scope==lease sets; overlap=set()",
+      "status": "PASS",
+      "validator": "ownership-overlap-validator"
+    },
+    {
+      "detail": "glob hits=[]",
+      "status": "PASS",
+      "validator": "no-globs-validator"
+    },
+    {
+      "detail": "4 forbidden v2 paths listed; future branches are placeholders; live reuse hits=['+ result/lab-a-dogfood004-recovery', '+ result/lab-b-dogfood004-recovery', 'remotes/origin/result/lab-b-dogfood004-recovery']",
+      "status": "PASS",
+      "validator": "forbidden-branch-worktree-reuse-validator"
+    },
+    {
+      "detail": "schema/model/required fields/non-self-reference",
+      "status": "PASS",
+      "validator": "result-envelope-schema-validator"
+    },
+    {
+      "detail": "canonical sources/hash-equality caveat/rebuild-only",
+      "status": "PASS",
+      "validator": "build-provenance-policy-validator"
+    },
+    {
+      "detail": "FROZEN_NOT_DISPATCHED/all auth false/v3.1 required",
+      "status": "PASS",
+      "validator": "predispatch-readiness-validator"
+    },
+    {
+      "detail": "active field hits=[] stray=[]",
+      "status": "PASS",
+      "validator": "v2-v3-id-reuse-scan"
+    },
+    {
+      "detail": "hits=[]",
+      "status": "PASS",
+      "validator": "harness-forbidden-token-scan"
+    }
+  ],
+  "verdict": "PASS"
+}

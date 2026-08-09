@@ -1,0 +1,24 @@
+{
+  "commit_count": 1,
+  "commits": [
+    "e88f6300 docs(receipts): record leaf self-reports + controller verification in dispatch evidence (CP-061)"
+  ],
+  "expected": {
+    "commit_count": 1,
+    "paths": [
+      "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report.json",
+      "receipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report.json"
+    ]
+  },
+  "from": "889f759b9774d877b950c0609d799c272f1c9923",
+  "name_status": [
+    "M\treceipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-a-report.json",
+    "M\treceipts/headless-lab-v3.4-dispatch/20260806T134656Z-v3-4-authorized-lab-dispatch/leaf-b-report.json"
+  ],
+  "stat": [
+    ".../leaf-a-report.json                             | 22 +++++++++++++++++++++-",
+    " .../leaf-b-report.json                             | 22 +++++++++++++++++++++-",
+    " 2 files changed, 42 insertions(+), 2 deletions(-)"
+  ],
+  "to": "e88f630090acc877fcafdf3a9142c2f9a425f194"
+}

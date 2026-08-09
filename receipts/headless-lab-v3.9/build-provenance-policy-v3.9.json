@@ -1,0 +1,61 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "canonical_compile_commands": [
+  [
+   "gcc",
+   "-std=c11",
+   "-O2",
+   "-o",
+   "<empty-build-dir>/synthetic_source",
+   "tests/integration/virtual_studio/audio/synthetic_source.c",
+   "-ljack",
+   "-lm",
+   "-lpthread"
+  ],
+  [
+   "gcc",
+   "-std=c11",
+   "-O2",
+   "-o",
+   "<empty-build-dir>/deterministic_capture",
+   "tests/integration/virtual_studio/audio/deterministic_capture.c",
+   "-ljack",
+   "-lm",
+   "-lpthread"
+  ]
+ ],
+ "canonical_sources": [
+  {
+   "blob_oid_at_candidate": "6f07457cd38a81c425b4ab080aeee46bf0c0e7de",
+   "path": "tests/integration/virtual_studio/audio/synthetic_source.c",
+   "sha256": "da688d3931a1b4a2dddbe788dc3e69c31ae86a35823d0391b6c97da17f3fd6b5"
+  },
+  {
+   "blob_oid_at_candidate": "c6dd79fae6c49aea907b1e4814b0cc9d8d9f0994",
+   "path": "tests/integration/virtual_studio/audio/deterministic_capture.c",
+   "sha256": "3c36f74f9881e9349f79d0485e0196e0ab4b989f96a73afe8044bf339ae56c4a"
+  }
+ ],
+ "controller_owned": true,
+ "hash_policy": "hash equality/difference is supporting evidence only; never sufficient proof of copy or rebuild",
+ "lab_rules": {
+  "LAB-A": "controlled build not_applicable; literal test ft-b4 is LAB-B-only",
+  "LAB-B": "strict controlled build for both canonical C sources; PASS requires full output matrix + cleanup"
+ },
+ "leaf_binaries_ignored": true,
+ "policy": [
+  "controller ignores leaf-produced binaries",
+  "empty build directory (entries_before=[]) before compiling",
+  "canonical source inputs from candidate (resolved from R blobs; actual source SHA-256 == expected)",
+  "compiler absolute path and version captured",
+  "commands and environment captured (allow-list)",
+  "output hashes and timestamps captured",
+  "tracked ELF rejected",
+  "each output requires exit_code==0 AND output_exists AND size>0 AND ELF magic AND ldd exit==0 AND required JACK dependency visible",
+  "after build: delete outputs, delete build dir, zero ignored build outputs, git status clean, zero untracked, cleanliness_after=PASS",
+  "any build failure blocks E"
+ ],
+ "schema": "build-provenance-policy/v3.9",
+ "tracked_elf_rejected": true
+}

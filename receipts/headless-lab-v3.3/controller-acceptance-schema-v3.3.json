@@ -1,0 +1,69 @@
+{
+  "schema": "controller-acceptance-schema/v3.3",
+  "receipt_schema": "controller-acceptance-receipt/v3.3",
+  "rationale": "The leaf envelope E is a declaration of the LEAF and cannot assert future facts of the controller. The controller acceptance receipt A is created by the CONTROLLER after E is pushed, binds the remote branch to E, independently reruns literal tests on a clean R, runs the acceptance harness on clean R, independently verifies artifacts, performs a controlled rebuild, and records the final completion verdict. A is never included inside E.",
+  "required_fields": {
+    "schema": "controller-acceptance-receipt/v3.3",
+    "batch_id": "<exact-v3.3-batch>",
+    "lab": "LAB-A | LAB-B",
+    "candidate_commit_oid": "<C>",
+    "implementation_result_commit_oid": "<R>",
+    "implementation_result_tree_oid": "<R_TREE>",
+    "envelope_container_commit_oid": "<E>",
+    "envelope_container_tree_oid": "<E^{tree}>",
+    "envelope_blob_oid": "<E:path>",
+    "envelope_sha256": "<sha256 of exact envelope blob bytes>",
+    "remote": "origin",
+    "branch": "<exact pushed branch>",
+    "remote_resolved_oid": "<remote branch OID == E>",
+    "controller_clean_checkout_path_or_receipt": "<path|receipt of the clean checkout used>",
+    "controller_literal_tests": {
+      "ft-<n>": {
+        "command_sha256": "<sha256 of authoritative command bytes>",
+        "exit_code": 0,
+        "stdout_sha256": "<recomputed>",
+        "stderr_sha256": "<recomputed>",
+        "started_at_utc": "<timestamp>",
+        "ended_at_utc": "<timestamp>"
+      }
+    },
+    "acceptance_harness_sha256": "<sha256 of the acceptance harness that ran>",
+    "acceptance_harness_verdict": "PASS",
+    "artifact_verification": "PASS",
+    "controlled_rebuild": "PASS | not_applicable",
+    "build_provenance_verdict": "demonstrated | not_applicable",
+    "worktree_clean_before": true,
+    "worktree_clean_after": true,
+    "completion_criteria": {
+      "non_empty_commit": true,
+      "published_branch": true,
+      "full_result_head_sha": true,
+      "clean_worktree": true,
+      "valid_result_envelope": true,
+      "owned_path_only_diff": true,
+      "literal_focused_tests_exit_0": true,
+      "controller_clean_checkout_acceptance_pass": true
+    },
+    "final_verdict": "PASS",
+    "recorded_at_utc": "<timestamp>"
+  },
+  "required_equalities": [
+    "remote_resolved_oid == E",
+    "E^ == R",
+    "R^ == C",
+    "envelope_container_tree_oid == E^{tree}",
+    "envelope_blob_oid == E:<envelope path>",
+    "envelope_sha256 == sha256(envelope blob bytes)"
+  ],
+  "required_verdicts": [
+    "all controller literal tests exit 0 (controller REEXECUTES each exact command on clean R; leaf-declared exit codes are NOT trusted)",
+    "acceptance harness PASS on exact R",
+    "artifact verification PASS",
+    "controlled rebuild PASS where applicable",
+    "build provenance demonstrated",
+    "clean checkout before and after",
+    "all completion criteria true",
+    "final verdict PASS"
+  ],
+  "ownership": "The leaf does NOT create or modify this receipt. Only the controller writes A, after E is pushed."
+}

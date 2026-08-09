@@ -1,0 +1,16 @@
+{
+ "conclusion": "SELFTEST_GLOBAL=PASS proves INTERNAL_CONSISTENCY. It does NOT prove NORMATIVE_ALIGNMENT. Recorded explicitly.",
+ "internal_consistency": {
+  "claim": "finalizer rejects its adversarial fixtures and accepts its own valid fixture",
+  "evidence": "N1..N24 negative cases all true; valid_LAB_A_finalize, valid_LAB_B_controlled_build_finalize, finalize_created_E all true",
+  "proven": true
+ },
+ "normative_alignment": {
+  "claim": "finalizer's definition of valid exactly matches Layer 1 normative contract",
+  "evidence": "The selftest's own 'valid' fixtures encode the finalizer's loader semantics (standalone import), annotation string representation (from __future__ import annotations) and fixtures-as-.gitkeep-dirs \u2014 none of which are explicit Layer 1 requirements; Layer 1 only declares annotated types, returns, and 'tracked ELF rejected'.",
+  "proven": false
+ },
+ "recorded_at_utc": "2026-08-08T23:14:18Z",
+ "schema": "selftest-interpretation/v3.8",
+ "selftest_result": "SELFTEST_GLOBAL=PASS (24/24, exit 0)"
+}

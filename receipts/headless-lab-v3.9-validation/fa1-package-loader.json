@@ -1,0 +1,13 @@
+{
+ "batch_id": "20260808T233306Z-DOGFOOD004-LAB-V3_9",
+ "evidence": [
+  "NA1 selftest: package-relative import fixture -> finalizer PASS (exit 0)",
+  "replay R_A: relative import no longer a rejection cause",
+  "finalizer inspects modules via package import context; resolved __file__ must equal R checkout"
+ ],
+ "finding": "F-A1",
+ "loader": "tests/integration on sys.path; import headless_audio_lab.<module>; __file__ equality guard",
+ "recorded_at_utc": "2026-08-08T23:51:59Z",
+ "schema": "validation/v3.9",
+ "verdict": "PASS"
+}

@@ -1,0 +1,28 @@
+{
+  "D0_D1_D2_authorized": false,
+  "batch_id": "BATCH-20260806T020249Z-DOGFOOD004-LAB-V3_4",
+  "dispatch_authorization": false,
+  "integration_authorized": false,
+  "leaf_ids": {
+    "LAB-A": "LEAF-LAB-A-V3_4",
+    "LAB-B": "LEAF-LAB-B-V3_4"
+  },
+  "leases": {
+    "LAB-A": "LEASE-20260806T020249Z-LAB-A-V3_4",
+    "LAB-B": "LEASE-20260806T020249Z-LAB-B-V3_4"
+  },
+  "leaves": 0,
+  "model": "two-commit-C-R-E",
+  "model_definition": {
+    "C": "candidate",
+    "E": "leaf envelope container (parent R, exactly the frozen envelope; evidence-only)",
+    "R": "implementation result (parent C, no envelope, ONLY R integration-eligible)",
+    "controller_acceptance_receipt_A": "separate receipt created after E is pushed; NEVER inside E",
+    "remote_branch": "-> E; external binding recorded by controller AFTER push"
+  },
+  "note": "frozen; NOT executable without explicit human authorization",
+  "package": "v3.4",
+  "redispatch_authorized": false,
+  "schema": "dispatch-plan/v3.4",
+  "worktrees": 0
+}

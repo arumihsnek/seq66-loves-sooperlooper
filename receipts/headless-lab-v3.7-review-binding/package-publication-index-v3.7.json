@@ -1,0 +1,28 @@
+{
+ "dispatched": false,
+ "manifest_sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+ "payload_files": [
+  "acceptance-verifier-v3.7.py",
+  "batch-manifest-v3.7.json",
+  "build-provenance-policy-v3.7.json",
+  "controller-acceptance-schema-v3.7.json",
+  "controller-evidence-schema-v3.7.json",
+  "dispatch-plan-v3.7.json",
+  "functional-contract-baseline-v3.7.json",
+  "lab-api-contract-v3.7.json",
+  "leaf-r-report-schema-v3.7.json",
+  "lease-plan-lab-a-v3.7.json",
+  "lease-plan-lab-b-v3.7.json",
+  "mechanical-finalizer-v3.7.py",
+  "port-plan-v3.7.json",
+  "predispatch-readiness-v3.7.json",
+  "process-hardening-contract-v3.7.json",
+  "publication-policy-v3.7.json",
+  "scope-freeze-v3.7.json"
+ ],
+ "payload_files_count": 17,
+ "recorded_at_utc": "2026-08-07T20:13:53Z",
+ "review_exclusion_rule": "the three senior bundles embed payload excerpts/hashes but are REVIEW artifacts, excluded from the payload",
+ "schema": "package-publication-index/v3.7",
+ "self_exclusion_rule": "THIS INDEX, package-review-binding-v3.7.json, all senior-* receipts, all validation receipts and CP-066 are CONTROLLER/GENERATED artifacts; they are NOT part of the frozen operational payload and are excluded from payload hashes by construction"
+}

@@ -1,0 +1,13 @@
+{
+ "batch_id": "BATCH-20260808T132428Z-DOGFOOD004-LAB-V3_8",
+ "candidate": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+ "dispatch_run_id": "20260808T223904Z-v3-8-authorized-lab-dispatch",
+ "finalizer_findings": "sooperlooper_launcher.py import failed: attempted relative import with no known parent package (module not standalone-loadable); jack_server/osc_probe/process_supervisor OK",
+ "finalizer_runtime_full_contract": "FAIL",
+ "lab": "LAB-A",
+ "package": "v3.8",
+ "recorded_at_utc": "2026-08-08T22:58:09Z",
+ "verdict": "FAIL",
+ "verifier_functional_continuity": "PASS",
+ "verifier_identity_coherence": "PASS"
+}

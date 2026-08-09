@@ -1,0 +1,42 @@
+{
+  "schema": "port-plan/v3.3",
+  "batch_id": "BATCH-20260806T011700Z-DOGFOOD004-LAB-V3_3",
+  "package": "v3.3",
+  "source_package": {
+    "package": "v3.2",
+    "batch_id": "BATCH-20260805T224640Z-DOGFOOD004-LAB-V3_2",
+    "supersession_reason": "incomplete runtime enforcement of required envelope, artifact, literal-test and provenance fields"
+  },
+  "ported_forward": {
+    "two_commit_C_R_E_model": true,
+    "envelope_absent_from_R_present_in_E": true,
+    "diff_R_E_envelope_only": true,
+    "diff_C_R_owned_only": true,
+    "no_forbidden_self_binding_in_envelope": true,
+    "remote_binding_external_after_push": true,
+    "functional_gates_lab_a_probe": true,
+    "functional_gates_lab_b_oracle": true,
+    "clean_worktree_checks": true
+  },
+  "new_in_v3_3": {
+    "strict_envelope_schema_enforcement": true,
+    "exact_lab_batch_leaf_lease_binding": true,
+    "literal_test_command_sha256_binding": true,
+    "literal_test_reexecution_by_controller": true,
+    "artifact_set_exact_match_C_R": true,
+    "artifact_sha256_and_size_verified_from_R_blobs": true,
+    "R_non_empty_enforcement": true,
+    "artifacts_never_empty": true,
+    "leaf_build_claim_structure_validation": true,
+    "controller_acceptance_receipt_schema": true,
+    "phase_leaf_envelope_vs_full_completion": true,
+    "unknown_top_level_key_rejection": true,
+    "controller_future_claims_forbidden_in_E": true
+  },
+  "not_ported": [
+    "same-commit envelope model (v3.1, defective)",
+    "self-referential envelope fields",
+    "acceptance of incomplete envelopes (v3.2 defect)"
+  ],
+  "identity_rule": "No v2/v3/v3.1/v3.2 IDs, leases, result paths or schema names are reused in v3.3."
+}

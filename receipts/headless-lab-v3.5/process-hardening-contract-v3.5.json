@@ -1,0 +1,98 @@
+{
+  "batch_id": "BATCH-20260806T222325Z-DOGFOOD004-LAB-V3_5",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "controller_authority": {
+    "may": [
+      "validate R",
+      "re-execute tests",
+      "run functional gates",
+      "perform controlled build",
+      "create E via the frozen finalizer",
+      "verify E before push",
+      "publish E via create-only push",
+      "verify remote branch",
+      "create A"
+    ],
+    "may_not": [
+      "edit implementation",
+      "fix R",
+      "add owned files to R",
+      "act as leaf",
+      "transform an invalid R into a valid one"
+    ]
+  },
+  "execution_model": {
+    "A": {
+      "constraint": "created after push, binds C/R/E/branch exact",
+      "description": "post-publication controller acceptance receipt, OUTSIDE E",
+      "producer": "controller"
+    },
+    "C": {
+      "description": "candidate (existing)",
+      "producer": "controller/repository"
+    },
+    "E": {
+      "constraint": "E^ == R, diff R..E == evidence path only",
+      "description": "controller evidence container produced MECHANICALLY by mechanical-finalizer-v3.5.py",
+      "producer": "controller (finalizer)"
+    },
+    "R": {
+      "constraint": "R^ == C, R != C, R non-empty, owned-only",
+      "description": "unique implementation result commit produced by the leaf",
+      "producer": "leaf"
+    }
+  },
+  "failure_model_anchored": {
+    "LAB-A": [
+      "leaf test fields incorrect (key 'exit code' instead of exit_code)",
+      "exit -2 placeholders",
+      "invalid envelope",
+      "publication before PASS",
+      "force-push (branch rewrite)"
+    ],
+    "LAB-B": [
+      "R misidentified (reported envelope commit as R)",
+      "two envelope commits",
+      "E^ != R",
+      "out-of-scope LAB-A path in C..R",
+      "owned fixtures absent from R",
+      "untracked .c",
+      "dirty worktree",
+      "branch not published",
+      "invalid build claim"
+    ]
+  },
+  "frozen_at_utc": "20260806T222325ZZ",
+  "leaf_authority": {
+    "may": [
+      "edit owned paths",
+      "run local tests",
+      "create exactly one R",
+      "return full R SHA",
+      "preserve its worktree"
+    ],
+    "may_not": [
+      "create envelope or E",
+      "write under receipts/headless-lab-results-v3.5/",
+      "push",
+      "force-push",
+      "create a remote branch",
+      "declare remote binding",
+      "declare controller acceptance",
+      "create post-publication receipts"
+    ]
+  },
+  "leaf_isolation": {
+    "note": "publication controller-owned environment is separate from leaf environments; leaf does not need remote access to produce R; controller imports/resolves the R object from the preserved local environment.",
+    "required": [
+      "two isolated git environments",
+      "exact candidate",
+      "exclusive ownership",
+      "no shared implementation worktree",
+      "no GitHub write credentials inside the leaf",
+      "no usable pushurl",
+      "no credential helper with write permission"
+    ]
+  },
+  "schema": "process-hardening-contract/v3.5"
+}

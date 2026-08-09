@@ -1,0 +1,132 @@
+{
+  "schema": "acceptance-verifier-v3.2",
+  "version": "3.2.0",
+  "lab": "A",
+  "repository": "/home/ubuntu/code/music/seq66-loves-sooperlooper",
+  "candidate_head": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "result_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+  "envelope_container_head": "0769d150f4989b8331db8273aa7a771f7b929026",
+  "envelope_path": "receipts/headless-lab-results-v3.2/lab-a-result.json",
+  "checks": [
+    {
+      "name": "model: C commit exists",
+      "status": "PASS",
+      "detail": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+      "evidence": {}
+    },
+    {
+      "name": "model: R commit exists",
+      "status": "PASS",
+      "detail": "0769d150f4989b8331db8273aa7a771f7b929026",
+      "evidence": {}
+    },
+    {
+      "name": "model: E commit exists",
+      "status": "PASS",
+      "detail": "0769d150f4989b8331db8273aa7a771f7b929026",
+      "evidence": {}
+    },
+    {
+      "name": "model: R^ == C",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "r_parent": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+        "c": "509538784afc2b828f2d922f65cf8ca3a39b5ee7"
+      }
+    },
+    {
+      "name": "model: E^ == R",
+      "status": "FAIL",
+      "detail": "",
+      "evidence": {
+        "e_parent": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+        "r": "0769d150f4989b8331db8273aa7a771f7b929026"
+      }
+    },
+    {
+      "name": "model: envelope absent from R",
+      "status": "PASS",
+      "detail": "envelope must NOT be committed in the implementation result commit",
+      "evidence": {}
+    },
+    {
+      "name": "model: envelope present in E",
+      "status": "FAIL",
+      "detail": "envelope must be committed in the envelope container commit",
+      "evidence": {}
+    },
+    {
+      "name": "model: diff C..R owned-only",
+      "status": "FAIL",
+      "detail": "",
+      "evidence": {
+        "changed": [
+          "tests/__init__.py",
+          "tests/integration/__init__.py",
+          "tests/integration/headless_audio_lab/audio_oracle.py",
+          "tests/integration/headless_audio_lab/fixtures/.gitignore",
+          "tests/integration/headless_audio_lab/graph_assertions.py",
+          "tests/integration/headless_audio_lab/runner.py",
+          "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+          "tests/integration/headless_audio_lab/test_modules.py"
+        ],
+        "out_of_scope": [
+          "tests/__init__.py",
+          "tests/integration/__init__.py",
+          "tests/integration/headless_audio_lab/audio_oracle.py",
+          "tests/integration/headless_audio_lab/fixtures/.gitignore",
+          "tests/integration/headless_audio_lab/graph_assertions.py",
+          "tests/integration/headless_audio_lab/runner.py",
+          "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+          "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+          "tests/integration/headless_audio_lab/test_modules.py"
+        ]
+      }
+    },
+    {
+      "name": "model: diff R..E envelope-only",
+      "status": "FAIL",
+      "detail": "",
+      "evidence": {
+        "changed": [],
+        "expected": [
+          "receipts/headless-lab-results-v3.2/lab-a-result.json"
+        ]
+      }
+    },
+    {
+      "name": "model: envelope parses",
+      "status": "FAIL",
+      "detail": "invalid JSON: Expecting value: line 1 column 1 (char 0)",
+      "evidence": {}
+    },
+    {
+      "name": "model: clean worktree at R (on arrival)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    },
+    {
+      "name": "lab-a: imports",
+      "status": "FAIL",
+      "detail": "import failure: No module named 'headless_audio_lab.process_supervisor'",
+      "evidence": {}
+    },
+    {
+      "name": "model: clean worktree at R (after gates)",
+      "status": "PASS",
+      "detail": "",
+      "evidence": {
+        "dirty": []
+      }
+    }
+  ],
+  "env_notes": [],
+  "verdict": "REJECT"
+}

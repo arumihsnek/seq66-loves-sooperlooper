@@ -1,0 +1,52 @@
+{
+ "blocking_findings": [],
+ "bound_manifest_sha256": "7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3",
+ "detailed_status": "VALID_ADVISORY_VERDICT",
+ "execution_id": "eedfae43-446a-496a-962d-edabe5fbfb5e",
+ "findings": [],
+ "mission_id": "seq66-lab-v3-7-full-runtime-contract",
+ "model_processes_consumed": 1,
+ "question_answers": [
+  {
+   "answer": "S\u00ed. La inspecci\u00f3n estructural y la matriz negativa 12/12 verifican orden, kinds, defaults y anotaciones normativas.",
+   "id": "q1"
+  },
+  {
+   "answer": "S\u00ed. Se valida el contrato de retorno de analyze_wav como AnalysisResult y de analyze_loop_reproduction como dict; las mutaciones negativas fueron rechazadas.",
+   "id": "q2"
+  },
+  {
+   "answer": "S\u00ed. AnalysisResult valida campos y tipos; las APIs de clases y firmas de m\u00e9todos fueron inspeccionadas, con drift rechazado.",
+   "id": "q3"
+  },
+  {
+   "answer": "S\u00ed. Los runtime return-shape tests importan y ejecutan m\u00f3dulos reales del checkout R.",
+   "id": "q4"
+  },
+  {
+   "answer": "S\u00ed. AnalysisResult queda validado estructural y din\u00e1micamente, incluyendo campos, tipos, to_dict() y sem\u00e1ntica de WAV silencioso.",
+   "id": "q5"
+  },
+  {
+   "answer": "S\u00ed. analyze_loop_reproduction fue validado como funci\u00f3n existente con contrato de retorno dict y checks de frame ratio/silencio.",
+   "id": "q6"
+  },
+  {
+   "answer": "S\u00ed. JACK/SooperLooper est\u00e1n expl\u00edcitamente marcados como deferred_by_design y no se presentan como sem\u00e1ntica probada.",
+   "id": "q7"
+  },
+  {
+   "answer": "S\u00ed. FC-F1 queda cerrado seg\u00fan la evidencia suministrada: inspecci\u00f3n estructural PASS, return-shape PASS, cobertura 31/31 PASS o deferred y negativos 12/12 rechazados.",
+   "id": "q8"
+  }
+ ],
+ "recorded_at_utc": "2026-08-07T20:03:44Z",
+ "required_actions": [],
+ "response_fingerprint": "83fc75b97c278985392fc81ae67c56c09f55e34c66d2bd8bb4ee06d9e80bb668",
+ "review_label": "seq66-lab-v3-7-functional-continuity",
+ "review_label_note": "mission-id seq66-lab-v3-7-full-runtime-contract covers functional continuity under FULL RUNTIME CONTRACT ENFORCEMENT",
+ "schema": "senior-verdict/v3.7",
+ "status": "COMPLETED",
+ "summary": "El paquete v3.7 congelado est\u00e1 respaldado por evidencia suficiente para aceptaci\u00f3n consultiva y est\u00e1 ligado al manifiesto SHA-256 7ce975187bee7503dc43959a11cacdbc90f51cb6072860215af40d99a4a441d3.",
+ "verdict": "accept"
+}

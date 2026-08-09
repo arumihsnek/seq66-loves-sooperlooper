@@ -1,0 +1,11 @@
+{
+  "matches_v1_reviewed": true,
+  "published_exactly_reviewed": false,
+  "published_manifest_sha256": "78b57464250afc9d7c79df65f054240b8647d61fd2b301e7136d68ea7d424fc0",
+  "reviewed_manifest_sha256": "6131be045b23369d32d3c0277ad32128eea98fa80e61918d92c4cb116d7a2d50",
+  "schema": "v1-review-generation-comparison/v1",
+  "senior_bundle_repository_dirty": true,
+  "verdict": "accept",
+  "verdict_execution_id": "bd930aae-f912-4c5b-8b47-eba053d84dea",
+  "verdict_fingerprint": "3c3f33926d1bb6c5b2e4ce0ecc466bb8a8d38de458a9cd20d54d5ee69cc665ef"
+}

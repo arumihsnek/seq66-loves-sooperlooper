@@ -1,0 +1,80 @@
+{
+ "aggregate_across_labs": "8 literal tests total (4 per lab); the paired receipt completes the 8/8",
+ "all_tests_match_in_this_lab": true,
+ "batch_id": "BATCH-20260807T161935Z-DOGFOOD004-LAB-V3_7",
+ "count": 4,
+ "lab": "LAB-B",
+ "note": "recomputed independently; never recomputed = declared by policy",
+ "recomputation_algorithm": "sha256(json.dumps(argv, separators=(',', ':'), sort_keys=True).encode('utf-8'))",
+ "recorded_at_utc": "2026-08-07T20:08:55Z",
+ "schema": "command-hash-verification/v3.7",
+ "tests": [
+  {
+   "canonical_argv": [
+    "python3",
+    "-m",
+    "py_compile",
+    "tests/integration/headless_audio_lab/audio_oracle.py",
+    "tests/integration/headless_audio_lab/graph_assertions.py",
+    "tests/integration/headless_audio_lab/runner.py",
+    "tests/integration/headless_audio_lab/test_modules.py",
+    "tests/__init__.py",
+    "tests/integration/__init__.py"
+   ],
+   "canonical_serialization_bytes_sha256": "e8019f25f064bdc76c4989cd244ad4826c32fb0b437697c47e0443cd9d08f558",
+   "controller_recomputed_command_sha256": "e8019f25f064bdc76c4989cd244ad4826c32fb0b437697c47e0443cd9d08f558",
+   "cwd": "checkout-root",
+   "declared_command_sha256": "e8019f25f064bdc76c4989cd244ad4826c32fb0b437697c47e0443cd9d08f558",
+   "match": true,
+   "source_payload_path": "batch-manifest-v3.7.json/labs/LAB-B/literal_tests/ft-b1",
+   "test_id": "ft-b1",
+   "timeout_seconds": 180
+  },
+  {
+   "canonical_argv": [
+    "python3",
+    "-c",
+    "import sys; sys.path.insert(0,'tests/integration'); from headless_audio_lab.audio_oracle import analyze_wav, analyze_loop_reproduction, AnalysisResult; from headless_audio_lab.graph_assertions import GraphAssertions; from headless_audio_lab.runner import LabRunner; print('ft-b2 imports ok')"
+   ],
+   "canonical_serialization_bytes_sha256": "f03678d5fdfb5698e784ced6a512af3d38c498c54b97a1ab449ca9bd4a9fe3c3",
+   "controller_recomputed_command_sha256": "f03678d5fdfb5698e784ced6a512af3d38c498c54b97a1ab449ca9bd4a9fe3c3",
+   "cwd": "checkout-root",
+   "declared_command_sha256": "f03678d5fdfb5698e784ced6a512af3d38c498c54b97a1ab449ca9bd4a9fe3c3",
+   "match": true,
+   "source_payload_path": "batch-manifest-v3.7.json/labs/LAB-B/literal_tests/ft-b2",
+   "test_id": "ft-b2",
+   "timeout_seconds": 180
+  },
+  {
+   "canonical_argv": [
+    "python3",
+    "-c",
+    "import os, struct, sys, tempfile, wave; sys.path.insert(0,'tests/integration'); from headless_audio_lab.audio_oracle import analyze_wav, AnalysisResult; rate=48000; n=4800\nfd,p=tempfile.mkstemp(suffix='.wav'); os.close(fd)\nw=wave.open(p,'wb'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(rate); w.writeframes(b'\\x00\\x00'*n); w.close()\ndata=open(p,'rb').read()\nassert b'\\x00' in data[44:], 'no real NUL PCM'\nassert b'\\\\x00' not in data[44:], 'escaped text found in PCM'\nr=analyze_wav(p, n, n, 120.0, 4, rate)\nassert isinstance(r, AnalysisResult), 'not AnalysisResult'\nassert r.verification == 'FAIL', 'silent WAV must FAIL, got %r' % r.verification\nassert r.captured_wav_frames == n, 'captured frames mismatch'\nos.unlink(p)\nprint('ft-b3 silent FAIL ok')"
+   ],
+   "canonical_serialization_bytes_sha256": "faf07d52b3ce809c7cb37c315a09b1928d57831e03ec57db365f28f7fbc18908",
+   "controller_recomputed_command_sha256": "faf07d52b3ce809c7cb37c315a09b1928d57831e03ec57db365f28f7fbc18908",
+   "cwd": "checkout-root",
+   "declared_command_sha256": "faf07d52b3ce809c7cb37c315a09b1928d57831e03ec57db365f28f7fbc18908",
+   "match": true,
+   "source_payload_path": "batch-manifest-v3.7.json/labs/LAB-B/literal_tests/ft-b3",
+   "test_id": "ft-b3",
+   "timeout_seconds": 180
+  },
+  {
+   "canonical_argv": [
+    "python3",
+    "-c",
+    "import os, subprocess, sys\nos.makedirs('build', exist_ok=True)\ncmds = [\n  ['gcc','-std=c11','-O2','-o','build/synthetic_source','tests/integration/virtual_studio/audio/synthetic_source.c','-ljack','-lm','-lpthread'],\n  ['gcc','-std=c11','-O2','-o','build/deterministic_capture','tests/integration/virtual_studio/audio/deterministic_capture.c','-ljack','-lm','-lpthread'],\n]\nfor c in cmds:\n    r = subprocess.run(c, capture_output=True, text=True)\n    if r.returncode != 0:\n        sys.stderr.write(r.stderr); sys.exit(r.returncode)\nprint('ft-b4 canonical helpers built ok')"
+   ],
+   "canonical_serialization_bytes_sha256": "ac05151a23248cb6f5f1777a97b9aa4919737d412f5fcb1ac166b503ee02ca0f",
+   "controller_recomputed_command_sha256": "ac05151a23248cb6f5f1777a97b9aa4919737d412f5fcb1ac166b503ee02ca0f",
+   "cwd": "checkout-root",
+   "declared_command_sha256": "ac05151a23248cb6f5f1777a97b9aa4919737d412f5fcb1ac166b503ee02ca0f",
+   "match": true,
+   "source_payload_path": "batch-manifest-v3.7.json/labs/LAB-B/literal_tests/ft-b4",
+   "test_id": "ft-b4",
+   "timeout_seconds": 180
+  }
+ ],
+ "tests_in_this_lab": 4
+}

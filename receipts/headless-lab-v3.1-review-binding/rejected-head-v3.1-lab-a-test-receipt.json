@@ -1,0 +1,16 @@
+{
+  "schema": "acceptance-verifier-v3.1",
+  "version": "3.1.0",
+  "lab": "A",
+  "checkout": "/home/ubuntu/.hermes/runs/20260805T165044Z-v3-1-acceptance-gate-correction/validation/checkout-0769d150",
+  "checks": [
+    {
+      "name": "lab-a: imports",
+      "status": "FAIL",
+      "detail": "import failure: No module named 'headless_audio_lab.process_supervisor'",
+      "evidence": {}
+    }
+  ],
+  "env_notes": [],
+  "verdict": "REJECT"
+}

@@ -1,0 +1,71 @@
+{
+  "batch_id": "BATCH-20260805T143214Z-DOGFOOD004-LAB-V3",
+  "candidate_head_sha": "509538784afc2b828f2d922f65cf8ca3a39b5ee7",
+  "closure_run": "20260805T143214Z-failed-lab-dispatch-closure",
+  "frozen_at_utc": "2026-08-05T14:46:27Z",
+  "items": [
+    {
+      "notes": "ProcessSupervisor/JackServer/OscProbe/SooperLooperLauncher/__init__ + envelope path",
+      "owned_paths": [
+        "tests/integration/headless_audio_lab/process_supervisor.py",
+        "tests/integration/headless_audio_lab/jack_server.py",
+        "tests/integration/headless_audio_lab/osc_probe.py",
+        "tests/integration/headless_audio_lab/sooperlooper_launcher.py",
+        "tests/integration/headless_audio_lab/__init__.py",
+        "receipts/headless-lab-results-v3/lab-a-result.json"
+      ],
+      "scope_id": "LAB-A",
+      "scope_type": "lab_a"
+    },
+    {
+      "notes": "oracle/graph/runner/tests/scenarios/fixtures + .gitignore + envelope path",
+      "owned_paths": [
+        "tests/__init__.py",
+        "tests/integration/__init__.py",
+        "tests/integration/headless_audio_lab/audio_oracle.py",
+        "tests/integration/headless_audio_lab/graph_assertions.py",
+        "tests/integration/headless_audio_lab/runner.py",
+        "tests/integration/headless_audio_lab/test_modules.py",
+        "tests/integration/headless_audio_lab/scenarios/D1_source_direct.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D2_sl_passive.yaml",
+        "tests/integration/headless_audio_lab/scenarios/D3_osc_recording.yaml",
+        "tests/integration/headless_audio_lab/fixtures/synthetic_source",
+        "tests/integration/headless_audio_lab/fixtures/deterministic_capture",
+        "tests/integration/headless_audio_lab/fixtures/.gitignore",
+        "receipts/headless-lab-results-v3/lab-b-result.json"
+      ],
+      "scope_id": "LAB-B",
+      "scope_type": "lab_b"
+    },
+    {
+      "items": [
+        "fixtures/synthetic_source and fixtures/deterministic_capture REBUILD from tests/integration/virtual_studio/audio/*.c at candidate",
+        "compile: gcc -std=c11 -O2 -o <out> <src> -ljack -lm -lpthread",
+        "quarantined precanonical ELFs are FORBIDDEN inputs (never copy)",
+        "provenance receipt must capture source commit+blob sha, command, toolchain version, timestamps, output sha256"
+      ],
+      "scope_id": "FIXTURES-REBUILD",
+      "scope_type": "rebuild_policy"
+    },
+    {
+      "items": [
+        "LAB-A envelope path: receipts/headless-lab-results-v3/lab-a-result.json",
+        "LAB-B envelope path: receipts/headless-lab-results-v3/lab-b-result.json",
+        "paths are part of each leaf's owned_paths; envelope model per result-envelope-schema-v3.json"
+      ],
+      "scope_id": "RESULT-ENVELOPES",
+      "scope_type": "envelope"
+    },
+    {
+      "items": [
+        "acceptance harness (acceptance-verifier-v3.py) belongs to the controller, not to any leaf",
+        "controller executes harness against clean checkout of the exact result head"
+      ],
+      "scope_id": "ACCEPTANCE-V3",
+      "scope_type": "acceptance"
+    }
+  ],
+  "normative_source": "doc/sooperlooper/checkpoints/2026-08-05-CP-055-headless-lab-dispatch-rejected.md (normative excerpts) + v2 scope-freeze items carried forward",
+  "receipt_container_head_sha": "32494cf00b446142fe24effd149894453b3b3ddd",
+  "schema": "scope-freeze/v3"
+}
